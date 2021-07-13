@@ -382,26 +382,36 @@ def is_create_objects_diag(sl):
         'M537V': tmp_m537v,
         'M557D': tmp_m557d,
         'M557O': tmp_m557d,
-        'M932C_2N': tmp_m537v
+        'M932C_2N': tmp_m537v,
+        'M548A': tmp_m547a,
+        'M538V': tmp_m537v,
+        'M558D': tmp_m557d,
+        'M558O': tmp_m557d,
     }
     sl_type_modules = {
-        'M903E': 'Types.DIAG_CPU.DIAG_CPU_PLC_View',
-        'M991E': 'Types.DIAG_CPU.DIAG_CPU_PLC_View',
-        'M547A': 'Types.DIAG_M547A.DIAG_M547A_PLC_View',
-        'M537V': 'Types.DIAG_M537V.DIAG_M537V_PLC_View',
-        'M932C_2N': 'Types.DIAG_M932C2_N.DIAG_M932C2_N_PLC_View',
-        'M557D': 'Types.DIAG_M557D.DIAG_M557D_PLC_View',
-        'M557O': 'Types.DIAG_M557O.DIAG_M557O_PLC_View'
+        'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
+        'M991E': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
+        'M547A': 'Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View',
+        'M548A': 'Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View',
+        'M537V': 'Types.DIAG_M537(8)V.DIAG_M537(8)V_PLC_View',
+        'M538V': 'Types.DIAG_M537(8)V.DIAG_M537(8)V_PLC_View',
+        'M932C_2N': 'Types.DIAG_M932C_2N.DIAG_M932C2_N_PLC_View',
+        'M557D': 'Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View',
+        'M558D': 'Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View',
+        'M557O': 'Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View',
+        'M558O': 'Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View',
+        'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
+        'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View'
     }
     tmp_line_object = ''
     for key, value in sl.items():
-        if value[0] in ('M903E', 'M991E'):
+        if value[0] in ('M903E', 'M991E', 'M915E', 'M501E'):
             tmp_line_object += Template(template_text_cpu).substitute(object_name=key,
                                                                       object_type=sl_type_modules[value[0]],
                                                                       object_aspect='Types.PLC_Aspect',
                                                                       text_description=f'Диагностика мастер-модуля {key} ({value[0]})',
                                                                       short_name=key)
-        elif value[0] in ('M547A',):
+        elif value[0] in ('M547A', 'M548A'):
             tmp_line_object += Template(sl_modules_temp[value[0]]).substitute(object_name=key,
                                                                               object_type=sl_type_modules[value[0]],
                                                                               object_aspect='Types.PLC_Aspect',
@@ -423,7 +433,7 @@ def is_create_objects_diag(sl):
                                                                               Channel_14=value[1][13],
                                                                               Channel_15=value[1][14],
                                                                               Channel_16=value[1][15])
-        elif value[0] in ('M537V', 'M932C_2N'):
+        elif value[0] in ('M537V', 'M932C_2N', 'M538V'):
             tmp_line_object += Template(sl_modules_temp[value[0]]).substitute(object_name=key,
                                                                               object_type=sl_type_modules[value[0]],
                                                                               object_aspect='Types.PLC_Aspect',
@@ -437,7 +447,7 @@ def is_create_objects_diag(sl):
                                                                               Channel_6=value[1][5],
                                                                               Channel_7=value[1][6],
                                                                               Channel_8=value[1][7])
-        elif value[0] in ('M557D', 'M557O'):
+        elif value[0] in ('M557D', 'M557O', 'M558D', 'M558O'):
             tmp_line_object += Template(sl_modules_temp[value[0]]).substitute(object_name=key,
                                                                               object_type=sl_type_modules[value[0]],
                                                                               object_aspect='Types.PLC_Aspect',

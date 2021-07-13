@@ -44,8 +44,14 @@ try:
         'M557D': ['Резерв'] * 32,
         'M557O': ['Резерв'] * 32,
         'M932C_2N': ['Резерв'] * 8,
-        'M903E': 'CPU',
-        'M991E': 'CPU'
+        'M903E': 'CPU', 'M991E': 'CPU', 'M915E': 'CPU', 'M501E': 'CPU',
+        'M548A': ['Резерв'] * 16,
+        'M538V': ['Резерв'] * 8,
+        'M558D': ['Резерв'] * 32,
+        'M558O': ['Резерв'] * 32,
+        'M531I': ['Резерв'] * 8,
+        'M543G': ['Резерв'] * 8,
+        'M5571': ['Резерв'] * 32,
     }
     # Считываем файл-шаблон для AI  AE SET
     with open(os.path.join('Template', 'Temp_AIAESET'), 'r', encoding='UTF-8') as f:
@@ -181,7 +187,7 @@ try:
             # далее проходим по локальному словарю и для каждого модуля грузим {алг.имя модуля: тип модуля}
             for jj in sl_modules_cpu:
                 # в случае CPU - {CPU: алг.имя модуля}
-                if sl_modules_cpu[jj][0] in ('M903E', 'M991E'):
+                if sl_modules_cpu[jj][0] in ('M903E', 'M991E', 'M915E', 'M501E'):
                     sl_for_diag[i].update({'CPU': jj})
                 else:
                     sl_for_diag[i].update({jj: sl_modules_cpu[jj][0]})
@@ -559,7 +565,9 @@ try:
                         list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет':
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') +
-                                                                          '.Value', par[eunit_ind].value)}
+                                                                          '.Value',
+                                                                          ('-' if list_config == 'Входные' else
+                                                                           par[eunit_ind].value))}
                     # добавляем словарь параметра в словарь узла
                     sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
                 # при условии, что парсим лист ИМов
@@ -747,7 +755,7 @@ try:
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = \
                         {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') + '.fValue',
-                                                              par[eunit_ind].value)}
+                                                              '-')}
                     # добавляем словарь параметра в словарь узла
                     sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 

@@ -1,17 +1,17 @@
 <omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
   <trei:trei name="PLC_GTU1" >
-    <trei:master-module name="m903e" >
+    <trei:master-module name="CPU" >
       <trei:ethernet-adapter name="Eth1" address="192.168.003.010" />
       <trei:ethernet-adapter name="Eth2" address="192.168.004.010" />
-      <trei:unet-server name="UnetServer" address-map="PLC_GTU1.m903e.Tree.UnetAddressMap" port="6001"/>
+      <trei:unet-server name="UnetServer" address-map="PLC_GTU1.CPU.Tree.UnetAddressMap" port="6001"/>
       <dp:application-object name="Tree" access-level="public" >
         <ct:object name="Diag" access-level="public" >
         <ct:object name="HW" access-level="public" >
-            <ct:object name="AD100" base-type="Types.DIAG_CPU.DIAG_CPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="AD100" base-type="Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика мастер-модуля AD100 (M903E)" />
               <attribute type="Attributes.ShortName" value="AD100" />
             </ct:object>
-            <ct:object name="AD101" base-type="Types.DIAG_M932C2_N.DIAG_M932C2_N_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="AD101" base-type="Types.DIAG_M932C_2N.DIAG_M932C2_N_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD101 (M932C_2N)" />
               <attribute type="Attributes.ShortName" value="AD101" />
               <attribute type="Attributes.Channel_1" value="Частота вращения ротора КВД (т.1)" />
@@ -22,6 +22,394 @@
               <attribute type="Attributes.Channel_6" value="Частота вращения ротора СТ (т.2)" />
               <attribute type="Attributes.Channel_7" value="Резерв" />
               <attribute type="Attributes.Channel_8" value="Резерв" />
+            </ct:object>
+            <ct:object name="AD111" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD111 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD111" />
+              <attribute type="Attributes.Channel_1" value="Температура воздуха на входе в двигатель" />
+              <attribute type="Attributes.Channel_10" value="Температура топливного газа на входе в диффузионный коллектор" />
+              <attribute type="Attributes.Channel_11" value="Температура топливного газа на входе в диффузионный коллектор" />
+              <attribute type="Attributes.Channel_12" value="Температура топливного газа на входе в гомогенный коллектор" />
+              <attribute type="Attributes.Channel_13" value="Температура топливного газа на входе в центральный модуль" />
+              <attribute type="Attributes.Channel_14" value="Температура воздуха на выходе из теплообменника" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Температура топливного газа перед дозатором" />
+              <attribute type="Attributes.Channel_3" value="Температура масла на входе в Д" />
+              <attribute type="Attributes.Channel_4" value="Температура масла на выходе из опоры ш/п КВД" />
+              <attribute type="Attributes.Channel_5" value="Температура масла на выходе из опоры р/п ТВД" />
+              <attribute type="Attributes.Channel_6" value="Температура масла на выходе из опоры р/п ТНД" />
+              <attribute type="Attributes.Channel_7" value="Температура масла на выходе из опор СТ" />
+              <attribute type="Attributes.Channel_8" value="Температура воздуха после ВВТ 1 агрегата БВВТ-25" />
+              <attribute type="Attributes.Channel_9" value="Температура топливного газа на входе в СК" />
+            </ct:object>
+            <ct:object name="AD112" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD112 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD112" />
+              <attribute type="Attributes.Channel_1" value="Температура воздуха за КВД" />
+              <attribute type="Attributes.Channel_10" value="Температура газа за СТ (канал 1)" />
+              <attribute type="Attributes.Channel_11" value="Температура газа за СТ (канал 2)" />
+              <attribute type="Attributes.Channel_12" value="Температура газа за СТ (канал 3)" />
+              <attribute type="Attributes.Channel_13" value="Температура газа за СТ (канал 4)" />
+              <attribute type="Attributes.Channel_14" value="Температура газа за СТ (канал 5)" />
+              <attribute type="Attributes.Channel_15" value="Температура газа за СТ (канал 6)" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Температура газа за ТВД на запуске (т.1)" />
+              <attribute type="Attributes.Channel_3" value="Температура газа за ТВД на запуске (т.2)" />
+              <attribute type="Attributes.Channel_4" value="Температура газа за ТВД (канал 1)" />
+              <attribute type="Attributes.Channel_5" value="Температура газа за ТВД (канал 2)" />
+              <attribute type="Attributes.Channel_6" value="Температура газа за ТВД (канал 3)" />
+              <attribute type="Attributes.Channel_7" value="Температура газа за ТВД (канал 4)" />
+              <attribute type="Attributes.Channel_8" value="Температура газа за ТВД (канал 5)" />
+              <attribute type="Attributes.Channel_9" value="Температура газа за ТВД (канал 6)" />
+            </ct:object>
+            <ct:object name="AD113" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD113 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD113" />
+              <attribute type="Attributes.Channel_1" value="Температура газа за ТВД (канал 7)" />
+              <attribute type="Attributes.Channel_10" value="Температура газа за СТ (канал 10)" />
+              <attribute type="Attributes.Channel_11" value="Температура газа за СТ (канал 11)" />
+              <attribute type="Attributes.Channel_12" value="Температура газа за СТ (канал 12)" />
+              <attribute type="Attributes.Channel_13" value="Резерв" />
+              <attribute type="Attributes.Channel_14" value="Резерв" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Температура газа за ТВД (канал 8)" />
+              <attribute type="Attributes.Channel_3" value="Температура газа за ТВД (канал 9)" />
+              <attribute type="Attributes.Channel_4" value="Температура газа за ТВД (канал 10)" />
+              <attribute type="Attributes.Channel_5" value="Температура газа за ТВД (канал 11)" />
+              <attribute type="Attributes.Channel_6" value="Температура газа за ТВД (канал 12)" />
+              <attribute type="Attributes.Channel_7" value="Температура газа за СТ (канал 7)" />
+              <attribute type="Attributes.Channel_8" value="Температура газа за СТ (канал 8)" />
+              <attribute type="Attributes.Channel_9" value="Температура газа за СТ (канал 9)" />
+            </ct:object>
+            <ct:object name="AD114" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD114 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD114" />
+              <attribute type="Attributes.Channel_1" value="Перепад между Ратм. и полным Рв" />
+              <attribute type="Attributes.Channel_10" value="Давление масла на входе в Д" />
+              <attribute type="Attributes.Channel_11" value="Давление суфлирования" />
+              <attribute type="Attributes.Channel_12" value="Давление топливного газа на входе в СК" />
+              <attribute type="Attributes.Channel_13" value="Давление топливного газа на входе в ДГ гомогенного коллектора" />
+              <attribute type="Attributes.Channel_14" value="Давление топливного газа на входе в ДГ диффузионных коллекторов" />
+              <attribute type="Attributes.Channel_15" value="Давление топливного газа на входе в центральный модуль" />
+              <attribute type="Attributes.Channel_16" value="Давление топливного газа на выходе ДГ гомогенного коллектора" />
+              <attribute type="Attributes.Channel_2" value="Перепад между Ратм. и статическим Рв" />
+              <attribute type="Attributes.Channel_3" value="Полное давление воздуха за КНД" />
+              <attribute type="Attributes.Channel_4" value="Давление воздуха за КВД" />
+              <attribute type="Attributes.Channel_5" value="Перепад между Ратм. и полным Р" />
+              <attribute type="Attributes.Channel_6" value="Давление воздуха в разгрузочной полости КВД" />
+              <attribute type="Attributes.Channel_7" value="Давление воздуха в разгрузочной полости СТ" />
+              <attribute type="Attributes.Channel_8" value="Давление воздуха охлаждения ТНД" />
+              <attribute type="Attributes.Channel_9" value="Давление воздуха после ВВТ 1 агрегата БВВТ-25" />
+            </ct:object>
+            <ct:object name="AD115" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD115 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD115" />
+              <attribute type="Attributes.Channel_1" value="Давление топливного газа на выходе ДГ диффузионных коллекторов" />
+              <attribute type="Attributes.Channel_10" value="Виброскорость корпуса двигателя в зоне задней подвески " />
+              <attribute type="Attributes.Channel_11" value="Пульсация давления в ЖТ №1 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_12" value="Пульсация давления в ЖТ №2 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_13" value="Пульсация давления в ЖТ №3 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_14" value="Пульсация давления в ЖТ №4 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_15" value="Пульсация давления в ЖТ №5 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_16" value="Пульсация давления в ЖТ №6 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_2" value="Давление топливного газа на входе в дифузионный коллектор №2" />
+              <attribute type="Attributes.Channel_3" value="Давление топливного газа на выходе ДГ центрального контура" />
+              <attribute type="Attributes.Channel_4" value="Давление воздуха отбираемого из-за КВД на охлаждение" />
+              <attribute type="Attributes.Channel_5" value="Давление топливного газа на входе в гомогенный коллектор" />
+              <attribute type="Attributes.Channel_6" value="Давление топливного газа на входе в дифузионный коллектор №1" />
+              <attribute type="Attributes.Channel_7" value="Давление топливного газа на входе в ДГ центрального модуля" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_9" value="Виброскорость корпуса двигателя в зоне передней подвески" />
+            </ct:object>
+            <ct:object name="AD116" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD116 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD116" />
+              <attribute type="Attributes.Channel_1" value="Давление в ЖТ №1 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_10" value="Пульсация давления в ЖТ №10 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_11" value="Пульсация давления в ЖТ №11 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_12" value="Пульсация давления в ЖТ №12 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_13" value="Давление в КС №7 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_14" value="Давление в КС №8 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_15" value="Давление в КС №9 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_16" value="Давление в КС №10 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_2" value="Давление в ЖТ №2 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_3" value="Давление в ЖТ №3 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_4" value="Давление в ЖТ №4 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_5" value="Давление в ЖТ №5 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_6" value="Давление в ЖТ №6 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_7" value="Пульсация давления в ЖТ №7 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_8" value="Пульсация давления в ЖТ №8 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_9" value="Пульсация давления в ЖТ №9 (размах пульсаций)" />
+            </ct:object>
+            <ct:object name="AD117" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD117 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD117" />
+              <attribute type="Attributes.Channel_1" value="Давление в КС №11 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_10" value="Расход топливного газа через диффузионный коллектор" />
+              <attribute type="Attributes.Channel_11" value="Полное давление газа за ТВД" />
+              <attribute type="Attributes.Channel_12" value="Резерв" />
+              <attribute type="Attributes.Channel_13" value="Резерв" />
+              <attribute type="Attributes.Channel_14" value="Резерв" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Давление в КС №12 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_3" value="Положение дозатора газа дифузионных коллекторов" />
+              <attribute type="Attributes.Channel_4" value="Положение дозатора газа гомогенного коллектора" />
+              <attribute type="Attributes.Channel_5" value="Положение дозатора газа центрального контура" />
+              <attribute type="Attributes.Channel_6" value="Положение крана № 6р (АПК)" />
+              <attribute type="Attributes.Channel_7" value="Суммарный расход топливного газа" />
+              <attribute type="Attributes.Channel_8" value="Расход топливного газа через коллектор центрального модуля" />
+              <attribute type="Attributes.Channel_9" value="Расход топливного газа через гомогенный коллектор" />
+            </ct:object>
+            <ct:object name="AD118" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD118 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD118" />
+              <attribute type="Attributes.Channel_1" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="Положение катушки ВНА Sin (канал 2)" />
+              <attribute type="Attributes.Channel_11" value="Положение катушки ВНА Cos (канал 2)" />
+              <attribute type="Attributes.Channel_12" value="Контроль катушки 1 ВНА" />
+              <attribute type="Attributes.Channel_13" value="Контроль катушки 2 ВНА" />
+              <attribute type="Attributes.Channel_14" value="Общий контроль выходов ВНА" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Резерв" />
+              <attribute type="Attributes.Channel_3" value="Резерв" />
+              <attribute type="Attributes.Channel_4" value="Резерв" />
+              <attribute type="Attributes.Channel_5" value="Резерв" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Положение катушки ВНА Sin (канал 1)" />
+              <attribute type="Attributes.Channel_8" value="Положение катушки ВНА Cos (канал 1)" />
+              <attribute type="Attributes.Channel_9" value="Резерв" />
+            </ct:object>
+            <ct:object name="AD121" base-type="Types.DIAG_M537(8)V.DIAG_M537(8)V_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD121 (M538V)" />
+              <attribute type="Attributes.ShortName" value="AD121" />
+              <attribute type="Attributes.Channel_1" value="Управление краном 6Р" />
+              <attribute type="Attributes.Channel_2" value="Управление КПВВ" />
+              <attribute type="Attributes.Channel_3" value="Управление дозатором ДГ1 диффузионного контура" />
+              <attribute type="Attributes.Channel_4" value="Управление дозатором ДГ2 гомогенного контура" />
+              <attribute type="Attributes.Channel_5" value="Управление дозатором ДГ3 центрального контура" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Резерв" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+            </ct:object>
+            <ct:object name="AD131" base-type="Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD131 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD131" />
+              <attribute type="Attributes.Channel_1" value="АО от БЗД" />
+              <attribute type="Attributes.Channel_2" value="КЦ: АО от БЗД" />
+              <attribute type="Attributes.Channel_3" value="Резерв" />
+              <attribute type="Attributes.Channel_4" value="Резерв" />
+              <attribute type="Attributes.Channel_5" value="Резерв" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Резерв" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="Стружка в масле КП" />
+              <attribute type="Attributes.Channel_11" value="Стружка в масле откачки от ш/п КВД" />
+              <attribute type="Attributes.Channel_12" value="Стружка в масле откачки от р/п ТНД" />
+              <attribute type="Attributes.Channel_13" value="Стружка в масле откачки от р/п ТВД" />
+              <attribute type="Attributes.Channel_14" value="Стружка в масле откачки от СТ" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Кран № 6р открыт" />
+              <attribute type="Attributes.Channel_9" value="Стружка в масле ФС" />
+              <attribute type="Attributes.Channel_17" value="Кран № 6р закрыт" />
+              <attribute type="Attributes.Channel_18" value="ЗПВ КНД 1 гр. открыты" />
+              <attribute type="Attributes.Channel_19" value="ЗПВ КНД 2 гр. открыты" />
+              <attribute type="Attributes.Channel_20" value="КПВ КВД открыты" />
+              <attribute type="Attributes.Channel_21" value="КПВЗ и КПГ ТВД открыты" />
+              <attribute type="Attributes.Channel_22" value="ПОС включена" />
+              <attribute type="Attributes.Channel_23" value="Опасная вибрация корпуса двигателя " />
+              <attribute type="Attributes.Channel_24" value="Повышнная вибрация корпуса двигателя " />
+              <attribute type="Attributes.Channel_25" value="Повышнная пульсация давления в ЖТ1" />
+              <attribute type="Attributes.Channel_26" value="Опасная пульсация давления в ЖТ1" />
+              <attribute type="Attributes.Channel_27" value="Повышнная пульсация давления в ЖТ2" />
+              <attribute type="Attributes.Channel_28" value="Опасная пульсация давления в ЖТ2" />
+              <attribute type="Attributes.Channel_29" value="Повышнная пульсация давления в ЖТ3" />
+              <attribute type="Attributes.Channel_30" value="Опасная пульсация давления в ЖТ3" />
+              <attribute type="Attributes.Channel_31" value="Повышнная пульсация давления в ЖТ4" />
+              <attribute type="Attributes.Channel_32" value="Опасная пульсация давления в ЖТ4" />
+            </ct:object>
+            <ct:object name="AD132" base-type="Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD132 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD132" />
+              <attribute type="Attributes.Channel_1" value="Повышнная пульсация давления в ЖТ5" />
+              <attribute type="Attributes.Channel_2" value="Опасная пульсация давления в ЖТ5" />
+              <attribute type="Attributes.Channel_3" value="Повышнная пульсация давления в ЖТ6" />
+              <attribute type="Attributes.Channel_4" value="Опасная пульсация давления в ЖТ6" />
+              <attribute type="Attributes.Channel_5" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)" />
+              <attribute type="Attributes.Channel_6" value="Повышнная пульсация давления в ЖТ7" />
+              <attribute type="Attributes.Channel_7" value="Опасная пульсация давления в ЖТ7" />
+              <attribute type="Attributes.Channel_8" value="Повышнная пульсация давления в ЖТ8" />
+              <attribute type="Attributes.Channel_10" value="Повышнная пульсация давления в ЖТ9" />
+              <attribute type="Attributes.Channel_11" value="Опасная пульсация давления в ЖТ9" />
+              <attribute type="Attributes.Channel_12" value="Повышнная пульсация давления в ЖТ10" />
+              <attribute type="Attributes.Channel_13" value="Опасная пульсация давления в ЖТ10" />
+              <attribute type="Attributes.Channel_14" value="Повышнная пульсация давления в ЖТ11" />
+              <attribute type="Attributes.Channel_15" value="Опасная пульсация давления в ЖТ11" />
+              <attribute type="Attributes.Channel_16" value="Повышнная пульсация давления в ЖТ12" />
+              <attribute type="Attributes.Channel_9" value="Опасная пульсация давления в ЖТ8" />
+              <attribute type="Attributes.Channel_17" value="Опасная пульсация давления в ЖТ12" />
+              <attribute type="Attributes.Channel_18" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)" />
+              <attribute type="Attributes.Channel_19" value="Повышенный перепад давления масла на фильтрах БВМФ-84" />
+              <attribute type="Attributes.Channel_20" value="СК диффузионного контура №1 открыт" />
+              <attribute type="Attributes.Channel_21" value="СК диффузионного контура №1 закрыт" />
+              <attribute type="Attributes.Channel_22" value="СК диффузионного контура №2 открыт" />
+              <attribute type="Attributes.Channel_23" value="СК диффузионного контура №2 закрыт" />
+              <attribute type="Attributes.Channel_24" value="СК гомогенного контура открыт" />
+              <attribute type="Attributes.Channel_25" value="СК гомогенного контура закрыт" />
+              <attribute type="Attributes.Channel_26" value="СК центрального контура открыт" />
+              <attribute type="Attributes.Channel_27" value="СК центрального контура закрыт" />
+              <attribute type="Attributes.Channel_28" value="Клапан КС1 стравливания газа КСГ открыт" />
+              <attribute type="Attributes.Channel_29" value="Клапан КС1 стравливания газа КСГ закрыт" />
+              <attribute type="Attributes.Channel_30" value="Кран сброса воздуха из системы продувки ДК открыт" />
+              <attribute type="Attributes.Channel_31" value="Кран сброса воздуха из системы продувки ДК закрыт" />
+              <attribute type="Attributes.Channel_32" value="Кран сброса воздуха из системы продувки ДК неисправность" />
+            </ct:object>
+            <ct:object name="AD133" base-type="Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD133 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD133" />
+              <attribute type="Attributes.Channel_1" value="Кран подвода воздуха на продувку ДК открыт" />
+              <attribute type="Attributes.Channel_2" value="Кран подвода воздуха на продувку ДК закрыт" />
+              <attribute type="Attributes.Channel_3" value="Кран подвода воздуха на продувку ДК ограничение момента" />
+              <attribute type="Attributes.Channel_4" value="Кран подвода воздуха на продувку ДК местное управление" />
+              <attribute type="Attributes.Channel_5" value="Кран подвода воздуха на продувку ДК неисправность" />
+              <attribute type="Attributes.Channel_6" value="Клапан продувки диффузионного коллектора №1 открыт" />
+              <attribute type="Attributes.Channel_7" value="Клапан продувки диффузионного коллектора №2 открыт" />
+              <attribute type="Attributes.Channel_8" value="Дозатор газа ДГ1 диффузионного контура включен" />
+              <attribute type="Attributes.Channel_10" value="Дозатор газа ДГ3 центрального контура включен" />
+              <attribute type="Attributes.Channel_11" value="Высокие обороты стартера" />
+              <attribute type="Attributes.Channel_12" value="Стружка в масле СтВ" />
+              <attribute type="Attributes.Channel_13" value="Перекрывная заслонка перед СтВ открыта" />
+              <attribute type="Attributes.Channel_14" value="СК0  закрыт" />
+              <attribute type="Attributes.Channel_15" value="Нажата кнопка &quot;РО &gt;&quot; на ПРУ" />
+              <attribute type="Attributes.Channel_16" value="Нажата кнопка &quot;PO &lt;&quot; на ПРУ" />
+              <attribute type="Attributes.Channel_9" value="Дозатор газа ДГ2 гомогенного контура включен" />
+              <attribute type="Attributes.Channel_17" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_18" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_19" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_20" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2" />
+              <attribute type="Attributes.Channel_21" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2" />
+              <attribute type="Attributes.Channel_22" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2" />
+              <attribute type="Attributes.Channel_23" value="Резерв" />
+              <attribute type="Attributes.Channel_24" value="Резерв" />
+              <attribute type="Attributes.Channel_25" value="Резерв" />
+              <attribute type="Attributes.Channel_26" value="Резерв" />
+              <attribute type="Attributes.Channel_27" value="Резерв" />
+              <attribute type="Attributes.Channel_28" value="Резерв" />
+              <attribute type="Attributes.Channel_29" value="Резерв" />
+              <attribute type="Attributes.Channel_30" value="Резерв" />
+              <attribute type="Attributes.Channel_31" value="Резерв" />
+              <attribute type="Attributes.Channel_32" value="Резерв" />
+            </ct:object>
+            <ct:object name="AD134" base-type="Types.DIAG_M557(8)D.DIAG_M557(8)D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD134 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD134" />
+              <attribute type="Attributes.Channel_1" value="Резерв" />
+              <attribute type="Attributes.Channel_2" value="Резерв" />
+              <attribute type="Attributes.Channel_3" value="Резерв" />
+              <attribute type="Attributes.Channel_4" value="Питание БЭАО и сторожевого таймера в норме" />
+              <attribute type="Attributes.Channel_5" value="БЭАО сработал (от AD100) " />
+              <attribute type="Attributes.Channel_6" value="Авария ПЛК 2 (AD200)" />
+              <attribute type="Attributes.Channel_7" value="Контроль ПЛК 2" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="КЦ: Открыть КПВЗ" />
+              <attribute type="Attributes.Channel_11" value="КЦ: Открыть ЗПВ КНД 1 гр." />
+              <attribute type="Attributes.Channel_12" value="КЦ: Открыть ЗПВ КНД 2 гр." />
+              <attribute type="Attributes.Channel_13" value="КЦ: Открыть ЗПОС ПОС Д" />
+              <attribute type="Attributes.Channel_14" value="Резерв" />
+              <attribute type="Attributes.Channel_15" value="КЦ: Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_9" value="КЦ: Открыть КПВ (выключить РЗК и РЗТ)" />
+              <attribute type="Attributes.Channel_17" value="КЦ: Управление ВНА " />
+              <attribute type="Attributes.Channel_18" value="КЦ: Управление ВНА " />
+              <attribute type="Attributes.Channel_19" value="Резерв" />
+              <attribute type="Attributes.Channel_20" value="Резерв" />
+              <attribute type="Attributes.Channel_21" value="Резерв" />
+              <attribute type="Attributes.Channel_22" value="Резерв" />
+              <attribute type="Attributes.Channel_23" value="Резерв" />
+              <attribute type="Attributes.Channel_24" value="Резерв" />
+              <attribute type="Attributes.Channel_25" value="Резерв" />
+              <attribute type="Attributes.Channel_26" value="Резерв" />
+              <attribute type="Attributes.Channel_27" value="Резерв" />
+              <attribute type="Attributes.Channel_28" value="Резерв" />
+              <attribute type="Attributes.Channel_29" value="Резерв" />
+              <attribute type="Attributes.Channel_30" value="Резерв" />
+              <attribute type="Attributes.Channel_31" value="Резерв" />
+              <attribute type="Attributes.Channel_32" value="Резерв" />
+            </ct:object>
+            <ct:object name="AD141" base-type="Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD141 (M558O)" />
+              <attribute type="Attributes.ShortName" value="AD141" />
+              <attribute type="Attributes.Channel_1" value="Открыть КПВ (выключить РЗК и РЗТ)" />
+              <attribute type="Attributes.Channel_2" value="Открыть КПВЗ" />
+              <attribute type="Attributes.Channel_3" value="Открыть ЗПВ КНД 1 гр." />
+              <attribute type="Attributes.Channel_4" value="Открыть ЗПВ КНД 2 гр." />
+              <attribute type="Attributes.Channel_5" value="Открыть ЗПОС ПОС Д" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="Управление ВНА " />
+              <attribute type="Attributes.Channel_11" value="Включить АЗ 1 канал" />
+              <attribute type="Attributes.Channel_12" value="Включить АЗ 2 канал" />
+              <attribute type="Attributes.Channel_13" value="Контроль аппаратуры вибраций и пульсаций ГТУ ИВ-ТА-8-10МПО)" />
+              <attribute type="Attributes.Channel_14" value="Включить МНДЭ" />
+              <attribute type="Attributes.Channel_15" value="Включить МНЭ" />
+              <attribute type="Attributes.Channel_16" value="Включить АВО" />
+              <attribute type="Attributes.Channel_9" value="Управление ВНА " />
+              <attribute type="Attributes.Channel_17" value="Открыть СК диффузионного контура №1" />
+              <attribute type="Attributes.Channel_18" value="Открыть СК диффузионного контура №2" />
+              <attribute type="Attributes.Channel_19" value="Открыть СК гомогенного контура " />
+              <attribute type="Attributes.Channel_20" value="Открыть СК центрального контура " />
+              <attribute type="Attributes.Channel_21" value="Закрыть Кс1 клапан стравливания газа" />
+              <attribute type="Attributes.Channel_22" value="Открыть кран Кс2 сброса газа с системы продувки диффузионных контуров" />
+              <attribute type="Attributes.Channel_23" value="Закрыть кран Кс2 сброса газа с системы продувки диффузионных контуров" />
+              <attribute type="Attributes.Channel_24" value="Акт ДУ/СТОП крана сброса воздуха с системы продувки диффузионных контуров" />
+              <attribute type="Attributes.Channel_25" value="Открыть кран Кт0 подвода воздуха на продувку диффузионных контуров" />
+              <attribute type="Attributes.Channel_26" value="Закрыть кран Кт0 подвода воздуха на продувку диффузионных контуров" />
+              <attribute type="Attributes.Channel_27" value="Аварийное управление краном Кт0 подвода воздуха на продувку диффузионных контуров" />
+              <attribute type="Attributes.Channel_28" value="Стоп кран Кт0 подвода воздуха на продувку диффузионных контуров" />
+              <attribute type="Attributes.Channel_29" value="Открыть перекрывную ЗСтВ" />
+              <attribute type="Attributes.Channel_30" value="Открыть ВЗСтВ" />
+              <attribute type="Attributes.Channel_31" value="Открыть клапан Кт1 продувки диффузионного коллектора №1" />
+              <attribute type="Attributes.Channel_32" value="Открыть клапан Кт1 продувки диффузионного коллектора №2" />
+            </ct:object>
+            <ct:object name="AD142" base-type="Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD142 (M558O)" />
+              <attribute type="Attributes.ShortName" value="AD142" />
+              <attribute type="Attributes.Channel_1" value="Контроль ПЛК (в AD200)" />
+              <attribute type="Attributes.Channel_2" value="Резерв" />
+              <attribute type="Attributes.Channel_3" value="Резерв" />
+              <attribute type="Attributes.Channel_4" value="Резерв" />
+              <attribute type="Attributes.Channel_5" value="Резерв" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Резерв" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="Резерв" />
+              <attribute type="Attributes.Channel_11" value="Резерв" />
+              <attribute type="Attributes.Channel_12" value="Резерв" />
+              <attribute type="Attributes.Channel_13" value="Резерв" />
+              <attribute type="Attributes.Channel_14" value="Резерв" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_9" value="Резерв" />
+              <attribute type="Attributes.Channel_17" value="Резерв" />
+              <attribute type="Attributes.Channel_18" value="Резерв" />
+              <attribute type="Attributes.Channel_19" value="Резерв" />
+              <attribute type="Attributes.Channel_20" value="Резерв" />
+              <attribute type="Attributes.Channel_21" value="Резерв" />
+              <attribute type="Attributes.Channel_22" value="Резерв" />
+              <attribute type="Attributes.Channel_23" value="Резерв" />
+              <attribute type="Attributes.Channel_24" value="Резерв" />
+              <attribute type="Attributes.Channel_25" value="Резерв" />
+              <attribute type="Attributes.Channel_26" value="Резерв" />
+              <attribute type="Attributes.Channel_27" value="Резерв" />
+              <attribute type="Attributes.Channel_28" value="Резерв" />
+              <attribute type="Attributes.Channel_29" value="Резерв" />
+              <attribute type="Attributes.Channel_30" value="Резерв" />
+              <attribute type="Attributes.Channel_31" value="Резерв" />
+              <attribute type="Attributes.Channel_32" value="Резерв" />
             </ct:object>
         </ct:object>
         </ct:object>
