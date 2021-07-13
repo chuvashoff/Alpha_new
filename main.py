@@ -227,20 +227,24 @@ try:
         # Дискретные
         sheet = book['Входные']  # .worksheets[6]
         cells = sheet['A1': 'AC' + str(sheet.max_row)]
-        sl_CPU_one, sl_wrn = is_load_di(i, cells, is_f_ind(cells[0], 'Алгоритмическое имя'),
-                                        is_f_ind(cells[0], 'ИМ'),
-                                        is_f_ind(cells[0], 'Наименование параметра'),
-                                        is_f_ind(cells[0], 'Цвет при наличии'),
-                                        is_f_ind(cells[0], 'Цвет при отсутствии'),
-                                        is_f_ind(cells[0], 'Предупреждение'),
-                                        is_f_ind(cells[0], 'Текст предупреждения'),
-                                        is_f_ind(cells[0], 'CPU'))
-
+        sl_CPU_one, sl_wrn, sl_di_ai = is_load_di(i, cells, is_f_ind(cells[0], 'Алгоритмическое имя'),
+                                                  is_f_ind(cells[0], 'ИМ'),
+                                                  is_f_ind(cells[0], 'Наименование параметра'),
+                                                  is_f_ind(cells[0], 'Цвет при наличии'),
+                                                  is_f_ind(cells[0], 'Цвет при отсутствии'),
+                                                  is_f_ind(cells[0], 'Предупреждение'),
+                                                  is_f_ind(cells[0], 'Текст предупреждения'),
+                                                  is_f_ind(cells[0], 'CPU'))
+        tmp_line_di, tmp_line_ai_di = '', ''
         if len(sl_CPU_one) != 0:
-            tmp_line_ = is_create_objects_di(sl_CPU_one, tmp_object_DI, 'Types.DI.DI_PLC_View')
+            tmp_line_di = is_create_objects_di(sl_CPU_one, tmp_object_DI, 'Types.DI.DI_PLC_View')
+        if len(sl_di_ai) != 0:
+            tmp_line_ai_di = is_create_objects_di(sl_di_ai, tmp_object_DI, 'Types.DI_AI.DI_AI_PLC_View')
 
+        if tmp_line_di or tmp_line_ai_di:
             with open('file_out_group.txt', 'a', encoding='UTF-8') as f:
-                f.write(Template(tmp_group).substitute(name_group='DI', objects=tmp_line_))
+                f.write(Template(tmp_group).substitute(name_group='DI',
+                                                       objects=f'{tmp_line_di}\n{tmp_line_ai_di}'.rstrip()))
 
         # ИМ
         sheet = book['ИМ']  # .worksheets[9]

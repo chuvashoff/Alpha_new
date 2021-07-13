@@ -5,14 +5,15 @@ import re
 from my_func import *
 
 
-def create_sl(text, str_check):
+def create_sl(text, str_check, str_check_block):
     sl_tmp = {}
-    for i in text:
-        if str_check in i and '//' not in i and str_check.replace('_', '|') not in i:
-            if 'FAST|' in i:
+    str_ch = str_check.replace('_', '|')
+    for i in text:  # and str_check.replace('_', '|') not in i:
+        if (str_check in i or str_ch in i) and '//' not in i and '(' not in i:
+            if 'FAST|' in i and str_check_block in i:
                 sl_tmp[i[:i.find(':=')].strip()] = int(i[i.rfind('[') + 1:i.rfind(']')])
-            else:
-                sl_tmp[i[:i.find('(')].strip()] = int(i[i.rfind('(') + 1:i.rfind(')')])
+            elif str_ch in i and str_check_block in i and not (f'B{str_ch}' in i or f'{str_ch}Brk' in i):
+                sl_tmp[i[:i.find(':=')].strip().replace('|', '_')] = int(i[i.rfind('[') + 1:i.rfind(']')])
 
     sl_tmp = {key: value for key, value in sl_tmp.items() if f'FAST|{key}' not in sl_tmp}
     # В словаре sl_tmp лежит индекс массива: алг имя (в том числе FAST|+)
@@ -425,19 +426,19 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             if os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
                 with open(os.path.join(line_source[1], '0_par_A.st'), 'rt') as f_par_a:
                     text = f_par_a.read().split('\n')
-                sl_tmp_ai = create_sl(text, 'AI_')
+                sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|')
 
             # Если есть файл расчётных
             if os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
                 with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
                     text = f_par_evl.read().split('\n')
-                sl_tmp_ae = create_sl(text, 'AE_')
+                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|')
 
             # Если есть файл дискретных
             if os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
                 with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
                     text = f_par_d.read().split('\n')
-                sl_tmp_di = create_sl(text, 'DI_')
+                sl_tmp_di = create_sl(text, 'DI_', 'D_INP|')
 
             # Если есть файл ИМ_1x0
             if os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
@@ -488,7 +489,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             if os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
                 with open(os.path.join(line_source[1], '0_Par_Set.st'), 'rt') as f_set:
                     text = f_set.read().split('\n')
-                sl_tmp_set = create_sl(text, 'SP_')
+                sl_tmp_set = create_sl(text, 'SP_', 'A_SET|')
 
             # Если есть глобальный словарь
             if os.path.exists(os.path.join(line_source[1], 'global0.var')):

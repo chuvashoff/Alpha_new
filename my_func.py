@@ -70,19 +70,26 @@ def is_load_ai_ae_set(controller, cell, alg_name, name_par, eunit, short_name, f
 # Также собираем словарь ПС -  текст сообщения и держим тип сообщения
 
 def is_load_di(controller, cell, alg_name, im, name_par, c_on, c_off, ps, ps_msg, cpu):
-    tmp = {}
+    tmp, tmp_di_ai = {}, {}
     tmp_wrn = {}
     reserve_cel = is_f_ind(cell[0], 'Резервный')
+    contr_cel = is_f_ind(cell[0], 'Контроль цепи')
     for par in cell:
         if par[name_par].value is None:
             break
         if par[cpu].value == controller and par[im].value == 'Нет' and par[reserve_cel].value == 'Нет':
-            tmp['_'.join(par[alg_name].value.split('|'))] = (is_cor_chr(par[name_par].value),
-                                                             par[c_on].fill.start_color.index,
-                                                             par[c_off].fill.start_color.index)
+            if par[contr_cel].value != 'AI':
+                tmp['_'.join(par[alg_name].value.split('|'))] = (is_cor_chr(par[name_par].value),
+                                                                 par[c_on].fill.start_color.index,
+                                                                 par[c_off].fill.start_color.index)
+            else:
+                tmp_di_ai['_'.join(par[alg_name].value.split('|'))] = (is_cor_chr(par[name_par].value),
+                                                                       par[c_on].fill.start_color.index,
+                                                                       par[c_off].fill.start_color.index)
+
             if par[ps].value != 'Нет':
                 tmp_wrn['_'.join(par[alg_name].value.split('|'))] = (is_cor_chr(par[ps_msg].value), par[ps].value)
-    return tmp, tmp_wrn
+    return tmp, tmp_wrn, tmp_di_ai
 
 # добавлена функция для чтения дискретов НКУ
 

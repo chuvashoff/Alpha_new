@@ -7,6 +7,10 @@
       <dp:application-object name="Tree" access-level="public" >
         <ct:object name="Diag" access-level="public" >
         <ct:object name="HW" access-level="public" >
+            <ct:object name="AD200" base-type="Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика мастер-модуля AD200 (M501E)" />
+              <attribute type="Attributes.ShortName" value="AD200" />
+            </ct:object>
             <ct:object name="AD211" base-type="Types.DIAG_M547(8)A.DIAG_M547(8)A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD211 (M548A)" />
               <attribute type="Attributes.ShortName" value="AD211" />
@@ -37,7 +41,7 @@
               <attribute type="Attributes.Channel_13" value="Резерв" />
               <attribute type="Attributes.Channel_14" value="Резерв" />
               <attribute type="Attributes.Channel_15" value="Резерв" />
-              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_16" value="Тестовый сигнал 7-14" />
               <attribute type="Attributes.Channel_2" value="Температура масла после АВОМ ГТУ" />
               <attribute type="Attributes.Channel_3" value="Температура воды на выходе утилизатора" />
               <attribute type="Attributes.Channel_4" value="Резерв" />
@@ -1617,6 +1621,10 @@
           </ct:object>
           <ct:object name="DI_BZD_Nst_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая частота вращения ротора СТ (БЗА)" />
+            <attribute type="Attributes.sColorOff" value="0" />
+            <attribute type="Attributes.sColorOn" value="3" />
+          </ct:object>          <ct:object name="DI_testt" base-type="Types.DI_AI.DI_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Тестовый сигнал 7-14" />
             <attribute type="Attributes.sColorOff" value="0" />
             <attribute type="Attributes.sColorOn" value="3" />
           </ct:object>
