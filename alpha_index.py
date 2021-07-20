@@ -321,14 +321,14 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
     lst_im1x0 = (
         'coOn', 'coOff', 'Message.msg_fwcOn', 'Message.msg_fwsDu', 'Message.msg_qbiDu', 'Message.msg_qboOn', 'oOff',
         'oOn', 'fFlt', 'fwcOn', 'pcoMan', 'pcoOff', 'pcoOn', 'pMan', 'qbiDu', 'qboOn', 'Repair', 'fwsDu', 'wbcaOff',
-        'wbcaOn', 'wMU', 'wRU', 'TRepair', 'coRepair', 'sTRepair', 'coUpdRepair', 'coMan'
+        'wbcaOn', 'wMU', 'wRU', 'TRepair', 'coRepair', 'sTRepair', 'coUpdRepair', 'coMan', 'coSim'
     )
     lst_im1x1 = (
         'coOn', 'coOff', 'coRst', 'Message.msg_fwcOn', 'Message.msg_qbiOn', 'Message.msg_fwsOn', 'Message.msg_fwsDu',
         'Message.msg_qbiDu', 'Message.msg_qboOn', 'fwcOn', 'pcoMan', 'pcoOff', 'pcoOn', 'pcoRst', 'pMan', 'qbiDu',
         'qbiOn', 'qboOn', 'stOn', 'stOff', 'stOng', 'stOffg', 'fwsDu', 'fwsOn', 'wNotOn', 'wNotOff', 'TRepair',
         'oOn', 'oOff', 'fFlt', 'Repair', 'wbcaOff', 'wbcaOn', 'wMU', 'wRU', 'sTOn_Off', 'sTRepair', 'coRepair',
-        'coUpdRepair', 'coMan'
+        'coUpdRepair', 'coMan', 'coSim'
     )
     lst_im1x2 = lst_im1x1 + ('wUnkw', 'wDbl', 'Message.msg_fwsOff', 'Message.msg_qbiOff', 'fwsOff', 'qbiOff')
     lst_im2x2 = lst_im1x2 + ('coStop', 'Message.msg_fwcOff', 'Message.msg_qboOff', 'fwcOff', 'pcoStop', 'qboOff',
@@ -363,7 +363,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                      'U5_C01', 'U5_C01', 'U6_C01', 'U7_C01', 'U8_C01', 'Work_Ti', 'Reset_co', 'Timeo')
     }
     sl_diag_cpu_sig = {
-        'CHECK_SUM': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+        'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
         'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
         'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8', 'ReadErr': 'System44_1_9',
         'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0', 'LowBatteryPower': 'System44_5_1',
@@ -376,7 +376,8 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
         'LAN1_Error': 'LAN1_Error', 'LAN2_Error': 'LAN2_Error', 'LAN3_Error': 'LAN3_Error', 'LAN4_Error': 'LAN4_Error',
         'SFP1_Error': 'SFP1_Error', 'SFP2_Error': 'SFP2_Error',
         'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-        'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink'
+        'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink',
+        'CheckSumChange': 'CheckSumChange'
     }
 
     with open('Source_list_plc.txt', 'r', encoding='UTF-8') as f_source:
