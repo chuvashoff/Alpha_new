@@ -156,11 +156,6 @@ def is_load_pz(controller, cell, num_pz, name_par, type_protect, eunit, cpu):
         if par[type_protect].value not in 'АОссАОбсВОссВОбсАОНО':
             continue
         elif par[cpu].value == controller and par[type_protect].value in 'АОссАОбсВОссВОбсАОНО':
-            '''обработка спецсимволов html в русском наименовании'''
-            '''
-            tmp_name = par[par_name].value.replace('<', '&lt;')
-            tmp_name = tmp_name.replace('>', '&gt;')
-            '''
             if par[eunit].value == '-999.0':
                 tmp_eunit = str(par[eunit].comment)[str(par[eunit].comment).find(' ')+1:
                                                     str(par[eunit].comment).find('by')]
@@ -394,6 +389,8 @@ def is_create_objects_diag(sl):
         'M538V': tmp_m537v,
         'M558D': tmp_m557d,
         'M558O': tmp_m557d,
+        'M531I': tmp_m537v,
+        'M543G': tmp_m547a
     }
     sl_type_modules = {
         'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
@@ -408,7 +405,9 @@ def is_create_objects_diag(sl):
         'M557O': 'Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View',
         'M558O': 'Types.DIAG_M557(8)O.DIAG_M557(8)O_PLC_View',
         'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
-        'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View'
+        'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View',
+        'M531I': 'Types.DIAG_M531I.DIAG_CPU_M531I_PLC_View',
+        'M543G': 'Types.DIAG_M543G.DIAG_CPU_M543G_PLC_View'
     }
     tmp_line_object = ''
     for key, value in sl.items():
@@ -418,7 +417,7 @@ def is_create_objects_diag(sl):
                                                                       object_aspect='Types.PLC_Aspect',
                                                                       text_description=f'Диагностика мастер-модуля {key} ({value[0]})',
                                                                       short_name=key)
-        elif value[0] in ('M547A', 'M548A'):
+        elif value[0] in ('M547A', 'M548A', 'M543G'):
             tmp_line_object += Template(sl_modules_temp[value[0]]).substitute(object_name=key,
                                                                               object_type=sl_type_modules[value[0]],
                                                                               object_aspect='Types.PLC_Aspect',
@@ -440,7 +439,7 @@ def is_create_objects_diag(sl):
                                                                               Channel_14=value[1][13],
                                                                               Channel_15=value[1][14],
                                                                               Channel_16=value[1][15])
-        elif value[0] in ('M537V', 'M932C_2N', 'M538V'):
+        elif value[0] in ('M537V', 'M932C_2N', 'M538V', 'M531I'):
             tmp_line_object += Template(sl_modules_temp[value[0]]).substitute(object_name=key,
                                                                               object_type=sl_type_modules[value[0]],
                                                                               object_aspect='Types.PLC_Aspect',

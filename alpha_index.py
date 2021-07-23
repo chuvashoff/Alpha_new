@@ -351,16 +351,28 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
     sl_module_diag_sig = {
         'M547A': ('Canal_', 'Err_Canal_', 'Err_izm_AC', 'Err_kalib_AC', 'Err_line_AC', 'Err_voltage_AC', 'Line1_E',
                   'Line2_E', 'Err_lin', 'Metro_Canal_', 'No_powe', 'Parameter_Canal_', 'Work_Ti', 'Reset_co', 'Timeo'),
+        'M548A': ('Canal_', 'Err_Canal_', 'Err_izm_AC', 'Err_kalib_AC', 'Err_line_AC', 'Err_voltage_AC', 'Line1_E',
+                  'Line2_E', 'Err_lin', 'Metro_Canal_', 'No_powe', 'Parameter_Canal_', 'Work_Ti', 'Reset_co', 'Timeo'),
         'M537V': ('Canal_', 'Err_Canal_', 'Metro_Canal_', 'Err_lin', 'Line1_E', 'Line2_E', 'Parameter_Canal_',
                   'Work_Ti', 'Reset_co', 'Timeo', 'Err_C', 'No_powe', 'Default_Canal_'),
+        'M538V': ('Canal_', 'Err_Canal_', 'Metro_Canal_', 'Err_lin', 'Line1_E', 'Line2_E', 'Parameter_Canal_',
+                  'Work_Ti', 'Reset_co', 'Timeo', 'Err_C', 'No_powe', 'Default_Canal_'),
         'M557D': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'No_powe'),
+        'M558D': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'No_powe'),
         'M557O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
+                  'No_Canal_pow', 'No_powe'),
+        'M558O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
                   'No_Canal_pow', 'No_powe'),
         'M932C_2N': ('Err_lin', 'Line1_E', 'Line2_E', 'Err_U1_C01', 'Err_U2_C01', 'Err_U3_C01',
                      'Err_U4_C01', 'Err_U5_C01', 'Err_U6_C01', 'Err_U7_C01', 'Err_U8_C01', 'Err_ha', 'Metro_Unit_01',
                      'Metro_Unit_02', 'Metro_Unit_03', 'Metro_Unit_04', 'Metro_Unit_05', 'Metro_Unit_06',
                      'Metro_Unit_07', 'Metro_Unit_08', 'U1_C01', 'U2_C01', 'U2_C01', 'U3_C01', 'U4_C01', 'U4_C01',
-                     'U5_C01', 'U5_C01', 'U6_C01', 'U7_C01', 'U8_C01', 'Work_Ti', 'Reset_co', 'Timeo')
+                     'U5_C01', 'U5_C01', 'U6_C01', 'U7_C01', 'U8_C01', 'Work_Ti', 'Reset_co', 'Timeo'),
+        'M531I': ('Energy_save', 'Err_hard', 'Err_lin', 'Ext_conn_err', 'Line1_Err', 'Line2_Err', 'Mode_CH_',
+                  'Not_Ready', 'Power_hig', 'Power_lo', 'Reset_co', 'Timeo', 'Work_Ti', 'Freq_CH_', 'Err_CH',
+                  'Metro_CH_'),
+        'M543G': ('Duration_CH_', 'Err_CH_', 'Err_lin', 'Line1_Err', 'Line2_Err', 'Not_Ready', 'Power_hig', 'Power_lo',
+                  'Period_CH_', 'Reset_co', 'Timeo', 'Work_Ti')
     }
     sl_diag_cpu_sig = {
         'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
@@ -383,6 +395,8 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
     with open('Source_list_plc.txt', 'r', encoding='UTF-8') as f_source:
         while 8:
             line_source = f_source.readline().strip().split(',')
+            if '#' in ''.join(line_source):  # если закоментировано, то пропускаем
+                continue
             if line_source == ['']:
                 break
             sl_global_ai, sl_tmp_ai = {}, {}
@@ -649,13 +663,13 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                                 signal_name = sl_diag_cpu_sig[line[0][line[0].find('|')+1:]]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, signal_name)] = [max(int(line[9]), int(line[10])), line[1]]
-                            elif 'MODSTAT' in line[0][line[0].find('|')+1:] or \
-                                    'MODERR' in line[0][line[0].find('|')+1:]:
+                            elif re.match(r'MODSTAT|MODERR|ERR_Power', line[0][line[0].find('|')+1:]):
                                 tmp_obr = line[0][line[0].find('|')+1:]
-                                curr_module = tmp_obr[tmp_obr.find('_')+1:]
+                                curr_module = tmp_obr[tmp_obr.replace('ERR_Power', '').find('_')+1:]
                                 # доп проверка наличия модуля во входном словаре
                                 if curr_module in sl_diag[line_source[0]]:
-                                    signal_name = tmp_obr[:tmp_obr.find('_')]
+                                    signal_name = (tmp_obr[:tmp_obr.find('_')] if 'ERR_Power' not in tmp_obr
+                                                   else 'ERR_Power')
                                     sl_global_diag[(curr_module, signal_name)] = [max(int(line[9]),
                                                                                       int(line[10])), line[1]]
 
