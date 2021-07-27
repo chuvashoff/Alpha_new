@@ -318,6 +318,11 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
         'Message.msg_qbiValue', 'Message.msg_kz', 'qbiValue', 'Repair', 'sBlkPar', 'Sim', 'sSimValue', 'TRepair',
         'sTRepair'
     )
+    lst_ai_di = (
+        'coSim', 'coRepair', 'coUpdRepair', 'Message.msg_brk', 'Message.msg_qbiValue', 'Message.msg_kz', 'sHys',
+        'sSimValue', 'sTRepair', 'sValueBreak', 'sValueFalse', 'sValueKz', 'sValueTrue', 'fBreak', 'fKz', 'fParam',
+        'fValue', 'qbiValue', 'Repair', 'Sim', 'TRepair', 'Value', 'iValue'
+    )
     lst_im1x0 = (
         'coOn', 'coOff', 'Message.msg_fwcOn', 'Message.msg_fwsDu', 'Message.msg_qbiDu', 'Message.msg_qboOn', 'oOff',
         'oOn', 'fFlt', 'fwcOn', 'pcoMan', 'pcoOff', 'pcoOn', 'pMan', 'qbiDu', 'qboOn', 'Repair', 'fwsDu', 'wbcaOff',
@@ -402,6 +407,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             sl_global_ai, sl_tmp_ai = {}, {}
             sl_global_ae, sl_tmp_ae = {}, {}
             sl_global_di, sl_tmp_di, sl_wrn_di = {}, {}, {}  # sl_wrn_di - для сбора ПС по Дискретам
+            sl_global_ai_di, sl_tmp_ai_di = {}, {}
             sl_global_im1x0, sl_tmp_im1x0 = {}, {}
             sl_global_im1x1, sl_tmp_im1x1 = {}, {}
             sl_global_im1x2, sl_tmp_im1x2 = {}, {}
@@ -454,6 +460,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                 with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
                     text = f_par_d.read().split('\n')
                 sl_tmp_di = create_sl(text, 'DI_', 'D_INP|')
+                sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|')
 
             # Если есть файл ИМ_1x0
             if os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
@@ -539,6 +546,15 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                                 sl_global_di['Message.' + line[0][line[0].find('|') + 1:]] = [max(int(line[9]),
                                                                                                   int(line[10])),
                                                                                               line[1]]
+                        elif 'D_INP_AI|' in line and len(line.split(',')) >= 10:
+                            line = line.split(',')
+                            if 'msg' not in line[0]:
+                                sl_global_ai_di[line[0][line[0].find('|')+1:]] = [max(int(line[9]), int(line[10])),
+                                                                                  line[1]]
+                            else:
+                                sl_global_ai_di['Message.' + line[0][line[0].find('|') + 1:]] = [max(int(line[9]),
+                                                                                                     int(line[10])),
+                                                                                                 line[1]]
                         elif 'IM_1x0|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
                             if 'msg' not in line[0]:
@@ -700,8 +716,14 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                     var_ = sl_tmp_di.get(int(key[key.find('[')+1:key.find(']')]), 'bla')
                     if f"DI_{var_[var_.find('_')+1:]}" in lst_wrn:
                         sl_wrn_di[f"DI_{var_[var_.find('_')+1:]}"] = value
+            for key, value in sl_global_ai_di.items():
+                if 'ValueAlg' == key[:key.find('[')]:
+                    var_ = sl_tmp_ai_di.get(int(key[key.find('[')+1:key.find(']')]), 'bla')
+                    if f"DI_{var_[var_.find('_')+1:]}" in lst_wrn:
+                        sl_wrn_di[f"DI_{var_[var_.find('_')+1:]}"] = value
 
             sl_global_di = {key: value for key, value in sl_global_di.items() if key[:key.find('[')] in lst_di}
+            sl_global_ai_di = {key: value for key, value in sl_global_ai_di.items() if key[:key.find('[')] in lst_ai_di}
             sl_global_im1x0 = {key: value for key, value in sl_global_im1x0.items() if key[:key.find('[')] in lst_im1x0}
             sl_global_im1x1 = {key: value for key, value in sl_global_im1x1.items() if key[:key.find('[')] in lst_im1x1}
             sl_global_im1x2 = {key: value for key, value in sl_global_im1x2.items() if key[:key.find('[')] in lst_im1x2}
@@ -740,6 +762,11 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             # Обработка и запись в карту дискретных
             if sl_global_di and sl_tmp_di:
                 s_all += create_group_par(sl_global_di, sl_tmp_di, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
+                                          'DI', line_source[0])
+
+            # Обработка и запись в карту дискретных аналогов (ai_di)
+            if sl_global_ai_di and sl_tmp_ai_di:
+                s_all += create_group_par(sl_global_ai_di, sl_tmp_ai_di, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
                                           'DI', line_source[0])
 
             # Обработка и запись в карту ИМ1x0
