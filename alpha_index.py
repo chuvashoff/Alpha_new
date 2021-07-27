@@ -380,21 +380,60 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
                   'Period_CH_', 'Reset_co', 'Timeo', 'Work_Ti')
     }
     sl_diag_cpu_sig = {
-        'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-        'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-        'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8', 'ReadErr': 'System44_1_9',
-        'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0', 'LowBatteryPower': 'System44_5_1',
-        'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1', 'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4',
-        'RSErr': 'System44_6_5', 'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7',
-        'RuntimeErr': 'System44_7_0', 'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5',
-        'HWConfErr': 'System44_7_6', 'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11',
-        'IntComErr': 'System44_7_12', 'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0',
-        'SoftStop': 'System44_9_3', 'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5',
-        'LAN1_Error': 'LAN1_Error', 'LAN2_Error': 'LAN2_Error', 'LAN3_Error': 'LAN3_Error', 'LAN4_Error': 'LAN4_Error',
-        'SFP1_Error': 'SFP1_Error', 'SFP2_Error': 'SFP2_Error',
-        'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-        'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink',
-        'CheckSumChange': 'CheckSumChange'
+        'M915E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
+                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
+                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
+                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
+                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
+                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
+                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
+                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
+                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
+                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+
+        'M991E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
+                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
+                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
+                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
+                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
+                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
+                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
+                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
+                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
+                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+
+        'M903E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
+                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
+                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
+                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
+                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
+                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
+                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
+                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
+                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
+                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange',
+                  'LAN1_Error': 'LAN1_Error', 'LAN2_Error': 'LAN2_Error', 'LAN3_Error': 'LAN3_Error',
+                  'LAN4_Error': 'LAN4_Error',
+                  'SFP1_Error': 'SFP1_Error', 'SFP2_Error': 'SFP2_Error',
+                  'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
+                  'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink'},
+
+        'M501E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
+                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
+                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
+                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
+                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
+                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
+                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
+                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
+                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
+                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange',
+                  'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
+                  'LAN4_NoLink': 'LAN4_NoLink'}
     }
 
     with open('Source_list_plc.txt', 'r', encoding='UTF-8') as f_source:
@@ -674,9 +713,10 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
 
                         elif 'DIAG|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
-                            if line[0][line[0].find('|')+1:] in sl_diag_cpu_sig:
-                                module_cpu = sl_diag[line_source[0]]['CPU']
-                                signal_name = sl_diag_cpu_sig[line[0][line[0].find('|')+1:]]
+                            if line[0][line[0].find('|')+1:] in sl_diag_cpu_sig[sl_diag[line_source[0]]['CPU'][1]]:
+                                module_cpu = sl_diag[line_source[0]]['CPU'][0]
+                                signal_name = \
+                                    sl_diag_cpu_sig[sl_diag[line_source[0]]['CPU'][1]][line[0][line[0].find('|')+1:]]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, signal_name)] = [max(int(line[9]), int(line[10])), line[1]]
                             elif re.match(r'MODSTAT|MODERR|ERR_Power', line[0][line[0].find('|')+1:]):

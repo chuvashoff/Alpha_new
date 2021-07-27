@@ -186,9 +186,9 @@ try:
             sl_for_diag[i] = {}
             # далее проходим по локальному словарю и для каждого модуля грузим {алг.имя модуля: тип модуля}
             for jj in sl_modules_cpu:
-                # в случае CPU - {CPU: алг.имя модуля}
+                # в случае CPU - {CPU: (алг.имя модуля, тип CPU)}
                 if sl_modules_cpu[jj][0] in ('M903E', 'M991E', 'M915E', 'M501E'):
-                    sl_for_diag[i].update({'CPU': jj})
+                    sl_for_diag[i].update({'CPU': (jj, sl_modules_cpu[jj][0])})
                 else:
                     sl_for_diag[i].update({jj: sl_modules_cpu[jj][0]})
 
