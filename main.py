@@ -117,7 +117,7 @@ try:
                 if p[i].value == 'ON':
                     tmp0.append(p[i - 10].value)
                     tmp1.append(p[i - 5].value)
-            sl_object_all[p[0].value] = [tmp0, tmp1]
+            sl_object_all[p[0].value] = (tmp0, tmp1)
     # Мониторинг ТР и АПР в контроллере
     cells = sheet['B1':'L21']
     for p in cells:
@@ -556,6 +556,7 @@ try:
             node_name_ind = is_f_ind(cells_name[0], 'Узел')
             eunit_drv_ind = is_f_ind(cells_name[0], 'Единица измерения')
             t_sig_drv_ind = is_f_ind(cells_name[0], 'Тип')
+            cpu_par = is_f_ind(cells_name[0], 'CPU')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -565,8 +566,10 @@ try:
                 if par[rus_par_ind].value is None:
                     break
                 # при условии, что находимся на листе 'Измеряемые', 'Расчетные' или на Входные и сигнал не привязан к ИМ
-                if list_config in ('Измеряемые', 'Расчетные') or \
-                        list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет':
+                # и параметр принадлежит контроллеру объекта
+                if (list_config in ('Измеряемые', 'Расчетные') or
+                    list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
+                        par[cpu_par].value in sl_object_all[obj][0]:
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') +
                                                                           '.Value',
@@ -575,7 +578,8 @@ try:
                     # добавляем словарь параметра в словарь узла
                     sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
                 # при условии, что парсим лист ИМов
-                elif list_config in ('ИМ',):
+                # и параметр принадлежит контроллеру объекта
+                elif list_config in ('ИМ',) and par[cpu_par].value in sl_object_all[obj][0]:
                     # если 'ИМ1Х0', 'ИМ1Х0и'
                     if par[is_f_ind(cells_name[0], 'Тип ИМ')].value in ('ИМ1Х0', 'ИМ1Х0и'):
                         move_ = par[is_f_ind(cells_name[0], 'Вкл./откр.')].value  # определяем тип открытия
@@ -630,7 +634,9 @@ try:
                             # добавляем словарь параметра в словарь узла
                             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
                 # при условии, что парсим лист ИМ(АО) и выделена как ИМ
-                elif list_config in ('ИМ(АО)',) and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Да':
+                # и параметр принадлежит контроллеру объекта
+                elif list_config in ('ИМ(АО)',) and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Да' and \
+                        par[cpu_par].value in sl_object_all[obj][0]:
                     # sl_tmp  промежуточный словарь с возможными префиксами сигналов
                     sl_tmp = {'.Set': 'Задание', '.iPos': 'Положение'}
                     for par_pref in sl_tmp:
@@ -643,7 +649,8 @@ try:
                         sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
                 # при условии, что парсим лист Сигналы
-                elif list_config in ('Сигналы', ):
+                # и параметр принадлежит контроллеру объекта
+                elif list_config in ('Сигналы', ) and par[cpu_par].value in sl_object_all[obj][0]:
                     type_prot = par[is_f_ind(cells_name[0], 'Тип защиты')].value
                     # Если увидели аварию
                     if type_prot in 'АОссАОбсВОссВОбсАОНО':
@@ -662,7 +669,8 @@ try:
                         sl_node_modes[f_ind_json(par[rus_par_ind].value)] = \
                             (par[alg_name_ind].value.replace('MOD|', '') + '.Value', '-')
                 # при условии, что парсим лист Драйверов
-                elif list_config in ('Драйвера',):
+                # и параметр принадлежит контроллеру объекта
+                elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj][0]:
                     sl_type_unit = {'BOOL': '-', 'INT': par[eunit_drv_ind].value, 'FLOAT': par[eunit_drv_ind].value,
                                     'IEC': '-', 'Daily': '-'}
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
@@ -677,7 +685,12 @@ try:
                         sl_node_drv[drv_].update(sl_drv_trends)
             # на этапе парсинга листа ИМАО добавляем в тренды АПР
             if list_config == 'ИМ(АО)':
-                if 'АПР' in [item for sublist in [i for i in sl_CPU_spec.values() if i] for item in sublist]:
+                # создаём множество пересечений контроллеров АПР и контроллеров объекта
+                # чтобы далее проверить, не пустое ли оно и в объект загрузить апр
+                set_check_apr = set([key for key, value in sl_CPU_spec.items() if 'АПР' in value]) & \
+                                set(sl_object_all[obj][0])
+                if 'АПР' in [item for sublist in [i for i in sl_CPU_spec.values() if i] for item in sublist] and \
+                        set_check_apr:
                     sl_tmp = {'Set': 'Задание', 'Pos': 'Положение'}
                     for par_pref in sl_tmp:
                         lst_json.append(

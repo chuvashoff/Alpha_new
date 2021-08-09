@@ -228,8 +228,9 @@ def is_create_objects_di(sl_cpu, template_text, object_type):
     for key, value in sl_cpu.items():
         tmp_line_object += Template(template_text).substitute(object_name=key, object_type=object_type,
                                                               object_aspect='Types.PLC_Aspect',
-                                                              text_description=value[0], color_on=sl_color_di[value[1]],
-                                                              color_off=sl_color_di[value[2]])
+                                                              text_description=value[0],
+                                                              color_on=sl_color_di.get(value[1], '404'),
+                                                              color_off=sl_color_di.get(value[2], '404'))
 
     return tmp_line_object.rstrip()
 
@@ -244,8 +245,9 @@ def is_create_objects_di_nku(sl_cpu, template_text, object_type, sl_wrn_nku):
             text_msg = sl_wrn_nku[key][0]
         tmp_line_object += Template(template_text).substitute(object_name=key, object_type=object_type,
                                                               object_aspect='Types.PLC_Aspect',
-                                                              text_description=value[0], color_on=sl_color_di[value[1]],
-                                                              color_off=sl_color_di[value[2]],
+                                                              text_description=value[0],
+                                                              color_on=sl_color_di.get(value[1], '404'),
+                                                              color_off=sl_color_di.get(value[2], '404'),
                                                               text_msg=text_msg,
                                                               type_wrn=sl_wrn_nku[key][1])
 
@@ -510,7 +512,7 @@ def check_diff_file(check_path, file_name, new_data, message_print):
             # Переносим старую файл в папку Old
             os.replace(os.path.join(check_path, file_name),
                        os.path.join(check_path, 'Old', file_name))
-            sleep(0.1)
+            sleep(0.3)
             # Записываем новый файл
             with open(os.path.join(check_path, file_name), 'w', encoding='UTF-8') as f_wr:
                 f_wr.write(new_data)
