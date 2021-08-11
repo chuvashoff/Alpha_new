@@ -57,6 +57,10 @@ while p != 'STOP':
             sl_dop_par_fragdigits_tmp = {}
             step_dop_par_out_tmp = ()
             step_dop_par_fragdigits_out_tmp = ()
+            # конструкции для обратных таймеров
+            sl_rev_timer_tmp = {}
+            step_rev_timer_out_tmp = ()
+            tuple_rev_timer_rus = ()
             if p is not None:
                 # sheet[j + 1][4].value - русское условие
                 # sheet[j + 1][3].value - алгоритмическое условие
@@ -107,19 +111,33 @@ while p != 'STOP':
                                  for a in sheet[j + 1][5].value.split('\n')]
                     sl_dop_par_fragdigits_tmp.update(dict(zip(sheet[j + 1][4].value.split('\n'), tuple_tmp)))
 
+                # Если на шаге указан хотя бы один обратный таймер
+                if sheet[j + 1][6].value is not None and sheet[j + 1][6].value.replace('\n', ''):
+                    # формируем словарь соответствий условие перехода: обратный таймер,
+                    # чтобы правильно сформировать префиксы на конце
+                    sl_rev_timer_tmp.update(dict(zip(sheet[j + 1][4].value.split('\n'),
+                                                     tuple(sheet[j + 1][6].value.split('\n')))))
+
             # Формируем алгоритмические имена шагов по правилам добавления префиксов на конце
             for a in range(len(tuple_rus_step)):
                 for b in range(len(tuple_rus_step[a])):
                     step_out_tmp += (f"GRH|{mod_name}_Cmd_In_{p}_{a + 1}_{b + 1}",)
-                    # если есть в словаре соответствий
+                    # если есть в словаре соответствий допонительных параметров
                     if sl_dop_par_tmp.get(tuple_rus_step[a][b]):
                         # то формируем кортеж алгоритмических имён
                         # дополнительных параметров по правилам добавления префиксов,
                         step_dop_par_out_tmp += (f"GRH|{mod_name}_Par_In_{p}_{a + 1}_{b + 1}",)
                         # также формируем кортеж с русским описанием дополнительных параметров
                         tuple_dop_par_rus += (f"Дополнительный параметр режима {mod_name} шага {p}",)
-                        # также формируем кортеж с количеством знаков после запятой
+                        # также формируем кортеж с количеством знаков после запятой дополнительных параметров
                         step_dop_par_fragdigits_out_tmp += (sl_dop_par_fragdigits_tmp[tuple_rus_step[a][b]],)
+                    # если есть в словаре соответствий обратных таймеров
+                    if sl_rev_timer_tmp.get(tuple_rus_step[a][b]):
+                        # формируем кортеж алгоритмических имён обратных таймеров
+                        # по правилам добавления префиксов
+                        step_rev_timer_out_tmp += (f"GRH|{mod_name}_Tmv_Rev_{p}_{a + 1}_{b + 1}",)
+                        # также формируем кортеж с русским описанием обратных таймеров
+                        tuple_rev_timer_rus += (f"Обратный таймер режима {mod_name} шага {p}",)
 
             # Формируем алгоритмические имена шагов для таймеров
             for a in range(len(tuple_step_timer_value)):
@@ -134,9 +152,16 @@ while p != 'STOP':
             # Если в шаге только одно условие, то "убиваем" два последние цифры иначе оставляем
             step_out_tmp = ((step_out_tmp[0][:-4],) if len(step_out_tmp) == 1 else step_out_tmp)
 
-            # Если в дополнительном параметре только один, то "убиваем" два последние цифры иначе оставляем
+            # Если в словаре дополнительных параметров только один,
+            # то "убиваем" два последние цифры иначе оставляем
             step_dop_par_out_tmp = ((step_dop_par_out_tmp[0][:-4],) if len(sl_dop_par_tmp) == 1
                                     else step_dop_par_out_tmp)
+
+            # Если в словаре обратных таймеров только один,
+            # то "убиваем" два последние цифры иначе оставляем
+            step_rev_timer_out_tmp = ((step_rev_timer_out_tmp[0][:-4],) if len(sl_rev_timer_tmp) == 1
+                                      else step_rev_timer_out_tmp)
+
             # Пока просто выводим в консоль для контроля, потом сформируем выход
             '''
             # Условия перехода
@@ -147,11 +172,15 @@ while p != 'STOP':
             print(f"{p} {tuple_rus_step_timer}" if tuple_rus_step_timer else '')
             print(f"{p} {tuple_step_timer_value}" if tuple_step_timer_value else '')
             print(f"{p} {step_timer_out_tmp}" if step_timer_out_tmp else '')
-            print()'''
+            print()
             # Дополнительный параметры
             print(f"{p} {tuple_dop_par_rus}" if tuple_dop_par_rus else '')
             print(f"{p} {step_dop_par_out_tmp}" if step_dop_par_out_tmp else '')
             print(f"{p} {step_dop_par_fragdigits_out_tmp}" if step_dop_par_fragdigits_out_tmp else '')
+            print()'''
+            # Обратные таймера
+            print(f"{p} {tuple_rev_timer_rus}" if tuple_rev_timer_rus else '')
+            print(f"{p} {step_rev_timer_out_tmp}" if step_rev_timer_out_tmp else '')
             print()
 
         # print()
