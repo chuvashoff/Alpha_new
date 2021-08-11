@@ -403,7 +403,7 @@
               <attribute type="Attributes.Channel_23" value="КЦ: Включить вентилятор №1 обдува двигателя" />
               <attribute type="Attributes.Channel_24" value="КЦ: Включить вентилятор №2 обдува двигателя" />
               <attribute type="Attributes.Channel_25" value="КЦ: Включить вентилятор №1 обдува трансмиссии" />
-              <attribute type="Attributes.Channel_26" value="КЦ: Включить венитлятор №2 обдува трансмиссии" />
+              <attribute type="Attributes.Channel_26" value="КЦ: Включить вентилятор №2 обдува трансмиссии" />
               <attribute type="Attributes.Channel_27" value="КЦ: Открыть задвижку подогрева циклового воздуха" />
               <attribute type="Attributes.Channel_28" value="КЦ: Закрыть задвижку подогрева циклового воздуха" />
               <attribute type="Attributes.Channel_29" value="КЦ: Открыть заслонку № 1 системы обдува двигателя" />
@@ -490,7 +490,7 @@
               <attribute type="Attributes.Channel_2" value="Включить вентилятор №1 обдува двигателя" />
               <attribute type="Attributes.Channel_3" value="Включить вентилятор №2 обдува двигателя" />
               <attribute type="Attributes.Channel_4" value="Включить вентилятор №1 обдува трансмиссии" />
-              <attribute type="Attributes.Channel_5" value="Включить венитлятор №2 обдува трансмиссии" />
+              <attribute type="Attributes.Channel_5" value="Включить вентилятор №2 обдува трансмиссии" />
               <attribute type="Attributes.Channel_6" value="Открыть задвижку подогрева циклового воздуха" />
               <attribute type="Attributes.Channel_7" value="Закрыть задвижку подогрева циклового воздуха" />
               <attribute type="Attributes.Channel_8" value="Открыть заслонку № 1 системы обдува двигателя" />
@@ -2083,17 +2083,17 @@
             <attribute type="Attributes.StartView" value="3" />
             <attribute type="Attributes.Gender" value="1" />
           </ct:object>
-          <ct:object name="EnMN" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+          <ct:object name="HeatMBN" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="ТЭН МБН" />
             <attribute type="Attributes.StartView" value="5" />
             <attribute type="Attributes.Gender" value="1" />
           </ct:object>
-          <ct:object name="EnMD" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+          <ct:object name="HeatMBD" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="ТЭН МБД" />
             <attribute type="Attributes.StartView" value="5" />
             <attribute type="Attributes.Gender" value="1" />
           </ct:object>
-          <ct:object name="ERGTU" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+          <ct:object name="HeatGTU" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="ТЭН под кожухом ГТУ" />
             <attribute type="Attributes.StartView" value="5" />
             <attribute type="Attributes.Gender" value="1" />
@@ -2102,16 +2102,6 @@
             <attribute type="unit.System.Attributes.Description" value="Сирена перед пуском" />
             <attribute type="Attributes.StartView" value="0" />
             <attribute type="Attributes.Gender" value="2" />
-          </ct:object>
-          <ct:object name="DeblockBZD" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Деблокировка БЗД" />
-            <attribute type="Attributes.StartView" value="0" />
-            <attribute type="Attributes.Gender" value="2" />
-          </ct:object>
-          <ct:object name="CheckBZD" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль БЗД" />
-            <attribute type="Attributes.StartView" value="0" />
-            <attribute type="Attributes.Gender" value="1" />
           </ct:object>
           <ct:object name="VODr1" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="ПЧ ВОД1" />
@@ -2156,8 +2146,11 @@
             <ct:object name="BTN_KPK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="КПК" />
             </ct:object>
-            <ct:object name="BTN_PZM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ПЗМ" />
+            <ct:object name="BTN_PZMS" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗМС" />
+            </ct:object>
+            <ct:object name="BTN_PZBS" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗБС" />
             </ct:object>
             <ct:object name="BTN_HP" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ХП" />
@@ -2171,10 +2164,10 @@
             <ct:object name="BTN_APM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АПМ" />
             </ct:object>
-            <ct:object name="BTN_M" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="BTN_KM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="К-М" />
             </ct:object>
-            <ct:object name="BTN_K" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="BTN_MK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="М-К" />
             </ct:object>
             <ct:object name="BTN_AOss" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -2192,11 +2185,8 @@
             <ct:object name="BTN_SKN" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стравливание нагнетателя" />
             </ct:object>
-            <ct:object name="BTN_ControlBZD" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Контроль БЗД" />
-            </ct:object>
-            <ct:object name="BTN_ControlVIB" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Контроль виброаппаратуры" />
+            <ct:object name="BTN_CheckControl" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ" />
             </ct:object>
             <ct:object name="BTN_ResetFG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Сброс суммарного расхода топливного газа" />
@@ -2209,12 +2199,6 @@
             </ct:object>
             <ct:object name="BTN_ResetCR" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Сброс количества счетчиков" />
-            </ct:object>
-            <ct:object name="BTN_VOD1_main" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВОД1 основной" />
-            </ct:object>
-            <ct:object name="BTN_VOD2_main" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВОД2 основной" />
             </ct:object>
             <ct:object name="BTN_VOT1_main" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОТ1 основной" />
@@ -2251,6 +2235,12 @@
             </ct:object>
             <ct:object name="BTN_SARR_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отключить регулирование от САР" />
+            </ct:object>
+            <ct:object name="BTN_PNU_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключить" />
+            </ct:object>
+            <ct:object name="BTN_PNS_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключить" />
             </ct:object>
         </ct:object>
         <ct:object name="SET" access-level="public" >
@@ -2704,6 +2694,12 @@
             <attribute type="Attributes.FracDigits" value="2" />
             <attribute type="Attributes.ShortName" value="dZ " />
           </ct:object>
+          <ct:object name="SP_Pin_Nagn" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Уставка заполнения контура Н" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
         </ct:object>
         <ct:object name="CNT" access-level="public" >
             <ct:object name="OGK_Swap" base-type="Types.CNT.CNT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -2938,34 +2934,30 @@
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
           <ct:object name="A162" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="ВОсс. НО от кнопки на ПРУ" />
-            <attribute type="Attributes.EUnit" value="-" />
-          </ct:object>
-          <ct:object name="A163" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. БЭАО сработал (от AD200)" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A164" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A163" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Авария ПЛК AD100" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A165" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A164" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Нет связи с ПЛК AD100" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A166" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A165" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс по команде оператора" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A167" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A166" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. АОбс по команде оператора" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A168" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A167" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс по команде оператора с ПРУ" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A169" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A168" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. АОбс по команде оператора с ПРУ" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
@@ -3256,8 +3248,14 @@
             <ct:object name="NoCheckVIB" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Виброаппаратура не прошла контроль" />
             </ct:object>
+            <ct:object name="BZD_nUnlock" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АО от БЗД не деблокирован" />
+            </ct:object>
             <ct:object name="GNS_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ГНС неисправен" />
+            </ct:object>
+            <ct:object name="GNU_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ГНУ неисправен" />
             </ct:object>
             <ct:object name="Nst_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Nst (Локальная САР)" />
@@ -3301,8 +3299,23 @@
             <ct:object name="PruNoLink" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обрыв связи с ПРУ" />
             </ct:object>
+            <ct:object name="VOT1_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность основного ВОТ" />
+            </ct:object>
+            <ct:object name="VOT2_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность резервного ВОТ" />
+            </ct:object>
+            <ct:object name="Vibr_GTU_flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность виброаппаратуры ГТУ" />
+            </ct:object>
+            <ct:object name="BZD_flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность СПО (БЗД)" />
+            </ct:object>
         </ct:object>
         <ct:object name="TS" access-level="public" >
+            <ct:object name="icingVOU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Условия облединения ВОУ" />
+            </ct:object>
             <ct:object name="AOss_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОсс завершен" />
             </ct:object>
@@ -3321,11 +3334,35 @@
             <ct:object name="VObs_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОбс завершен" />
             </ct:object>
-            <ct:object name="PZM_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ПЗМ завершена" />
+            <ct:object name="APK_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АПК завершен" />
             </ct:object>
-            <ct:object name="CoolGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГТУ" />
+            <ct:object name="APM_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АПМ завершен" />
+            </ct:object>
+            <ct:object name="KM_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="К-М завершен" />
+            </ct:object>
+            <ct:object name="MK_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="М-К завершен" />
+            </ct:object>
+            <ct:object name="KPK_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="КПК завершена" />
+            </ct:object>
+            <ct:object name="PZMS_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗМС завершена" />
+            </ct:object>
+            <ct:object name="PZBS_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗБС завершена" />
+            </ct:object>
+            <ct:object name="CoolGPA" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="StopGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ГТУ остановлена" />
+            </ct:object>
+            <ct:object name="Unlocking" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Деблокировка" />
             </ct:object>
             <ct:object name="HP_GO" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Идет ХП" />
@@ -3339,10 +3376,10 @@
             <ct:object name="PM_END" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Окончание Промывки" />
             </ct:object>
-            <ct:object name="PMS" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="PMSN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск маслосистемы нагнетателя" />
             </ct:object>
-            <ct:object name="OMS" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="OMSN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Останов маслосистемы нагнетателя" />
             </ct:object>
             <ct:object name="ZKN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -3350,9 +3387,6 @@
             </ct:object>
             <ct:object name="SKN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стравливание контура нагнетателя" />
-            </ct:object>
-            <ct:object name="OHL" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
             </ct:object>
             <ct:object name="StabPG" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация пускового газа" />
@@ -3369,62 +3403,11 @@
             <ct:object name="Heat" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Прогрев" />
             </ct:object>
-            <ct:object name="KIP_Stab" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Стабилизация давления воздуха КИП" />
-            </ct:object>
             <ct:object name="Prod" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Продувка контура Н" />
             </ct:object>
             <ct:object name="Stab" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация контура Н" />
-            </ct:object>
-            <ct:object name="CoolGPA" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
-            </ct:object>
-            <ct:object name="ReservSKN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Стравливание контура нагнетателя на режимах резерва" />
-            </ct:object>
-            <ct:object name="StopGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ГТУ остановлена" />
-            </ct:object>
-            <ct:object name="Unlocking" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Деблокировка" />
-            </ct:object>
-            <ct:object name="GasInN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Газ в контуре компрессора" />
-            </ct:object>
-            <ct:object name="NoGinN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нет газа в контуре компрессора" />
-            </ct:object>
-            <ct:object name="FillN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
-            </ct:object>
-            <ct:object name="ZH_Tmsd" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по температуре масла смазки двигателя взведена" />
-            </ct:object>
-            <ct:object name="ZH_Pmsd" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по давлению масла смазки двигателя взведена" />
-            </ct:object>
-            <ct:object name="ZH_Tmsn" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по температуре масла смазки нагнетателя взведена" />
-            </ct:object>
-            <ct:object name="ZH_Pmsn" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по давлению масла смазки нагнетателя взведена" />
-            </ct:object>
-            <ct:object name="ZH_dPmg" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по перепаду давления масло-газ" />
-            </ct:object>
-            <ct:object name="ZH_Kr1" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по закрытию крана 1 взведена" />
-            </ct:object>
-            <ct:object name="ZH_Kr2" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по закрытию крана 2 взведена" />
-            </ct:object>
-            <ct:object name="Qv_KSHT" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по расходу воздуха КШТ" />
-            </ct:object>
-            <ct:object name="icingVOU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Условия облединения ВОУ" />
             </ct:object>
             <ct:object name="SAR_Unlock" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Деблокировка (От САР КЦ)" />
@@ -3477,11 +3460,47 @@
             <ct:object name="PZMN_Start" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отключение ПНУ/ПНС/ВОТ/КБВ на ПЗМН" />
             </ct:object>
+            <ct:object name="VOT1_Main" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ 1 основной" />
+            </ct:object>
+            <ct:object name="VOT2_Main" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ 2 основной" />
+            </ct:object>
+            <ct:object name="ZH_Ptg" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по давлению топливного газа взведена" />
+            </ct:object>
+            <ct:object name="ZH_Pmsn" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по давлению масла смазки нагнетателя взведена" />
+            </ct:object>
+            <ct:object name="ZH_dPmg" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по перепаду давления масло-газ" />
+            </ct:object>
+            <ct:object name="Qv_KSHT" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по расходу воздуха КШТ" />
+            </ct:object>
+            <ct:object name="NagnFull" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
+            </ct:object>
+            <ct:object name="CheckSAU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ" />
+            </ct:object>
+            <ct:object name="Control_End" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль завершен" />
+            </ct:object>
+            <ct:object name="AO_Vibr_block" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блокировка АО по вибрации двигателя" />
+            </ct:object>
+            <ct:object name="AO_BZD_Block" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блокировка АО по сигналу от БЗД" />
+            </ct:object>
+            <ct:object name="Check_Vibr_oOn" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль вибрации" />
+            </ct:object>
             <ct:object name="CheckBZD" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Контроль БЗД" />
             </ct:object>
-            <ct:object name="CheckVIB" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Контроль виброаппаратуры" />
+            <ct:object name="Check_control_flt" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ не пройден" />
             </ct:object>
             <ct:object name="CheckHR" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Контроль условий ХР" />
@@ -3509,6 +3528,84 @@
             </ct:object>
             <ct:object name="SAR_REG" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Включено цеховое регулирование" />
+            </ct:object>
+            <ct:object name="GasInN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Газ в контуре компрессора" />
+            </ct:object>
+            <ct:object name="NoGInN" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет газа в контуре компрессора" />
+            </ct:object>
+            <ct:object name="AOss_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АОсс начата" />
+            </ct:object>
+            <ct:object name="AObs_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АОбс начата" />
+            </ct:object>
+            <ct:object name="NOss_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию Носс начата" />
+            </ct:object>
+            <ct:object name="NObs_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию НОбс начата" />
+            </ct:object>
+            <ct:object name="VOss_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ВОсс начата" />
+            </ct:object>
+            <ct:object name="VObs_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ВОбс начата" />
+            </ct:object>
+            <ct:object name="APK_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АПК начата" />
+            </ct:object>
+            <ct:object name="APM_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АПМ начата" />
+            </ct:object>
+            <ct:object name="KM_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию КМ начата" />
+            </ct:object>
+            <ct:object name="MK_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию МК начата" />
+            </ct:object>
+            <ct:object name="User_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию Пользовательский начата" />
+            </ct:object>
+            <ct:object name="HP_archiveSTART" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ХП начата" />
+            </ct:object>
+            <ct:object name="AOss_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АОсс завершена" />
+            </ct:object>
+            <ct:object name="AObs_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АОбс завершена" />
+            </ct:object>
+            <ct:object name="NOss_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию НОсс завершена" />
+            </ct:object>
+            <ct:object name="NObs_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию НОбс завершена" />
+            </ct:object>
+            <ct:object name="VOss_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ВОсс завершена" />
+            </ct:object>
+            <ct:object name="VObs_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ВОбс завершена" />
+            </ct:object>
+            <ct:object name="APK_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АПК завершена" />
+            </ct:object>
+            <ct:object name="APM_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию АПМ завершена" />
+            </ct:object>
+            <ct:object name="KM_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию КМ завершена" />
+            </ct:object>
+            <ct:object name="MK_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию МК завершена" />
+            </ct:object>
+            <ct:object name="User_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию Пользовательский завершена" />
+            </ct:object>
+            <ct:object name="HP_archiveEND" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запись архива по событию ХП завершена" />
             </ct:object>
         </ct:object>
         <ct:object name="PPU" access-level="public" >
@@ -3868,9 +3965,6 @@
             <ct:object name="BTN_EO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОсс. ЭО от кнопки на ПРУ" />
             </ct:object>
-            <ct:object name="BTN_NO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВОсс. НО от кнопки на ПРУ" />
-            </ct:object>
             <ct:object name="GPA_BEO_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОсс. БЭАО сработал (от AD200)" />
             </ct:object>
@@ -3989,8 +4083,11 @@
             </ct:object>
         </ct:object>
         <ct:object name="ALG" access-level="public" >
-            <ct:object name="ALG_GTU_NoLink" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD100" />
+            <ct:object name="ALG_Check_Break" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ не пройден" />
+            </ct:object>
+            <ct:object name="ALG_SubModeRes" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Подрежимы резерва" />
             </ct:object>
             <ct:object name="ALG_Reserv" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Режимы резерва" />
@@ -4028,9 +4125,6 @@
             <ct:object name="ALG_wasHeat" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Был прогрев" />
             </ct:object>
-            <ct:object name="ALG_FillN" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
-            </ct:object>
             <ct:object name="ALG_coAOss" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка АОсс" />
             </ct:object>
@@ -4049,9 +4143,6 @@
             <ct:object name="ALG_coRepair" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Ремонт" />
             </ct:object>
-            <ct:object name="ALG_coReserv" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Резерв" />
-            </ct:object>
             <ct:object name="ALG_coHR" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ХР" />
             </ct:object>
@@ -4064,8 +4155,11 @@
             <ct:object name="ALG_coCancel" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Отмена" />
             </ct:object>
-            <ct:object name="ALG_coPZM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ПЗМ" />
+            <ct:object name="ALG_coPZMS" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ПЗМС" />
+            </ct:object>
+            <ct:object name="ALG_coPZBS" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ПЗБС" />
             </ct:object>
             <ct:object name="ALG_coHP" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ХП" />
@@ -4088,35 +4182,17 @@
             <ct:object name="ALG_coMK" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка М-К" />
             </ct:object>
+            <ct:object name="ALG_DoCheckSAU" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выполнить контроль САУ" />
+            </ct:object>
             <ct:object name="ALG_VOT1_Main" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОТ1 основной" />
             </ct:object>
             <ct:object name="ALG_VOT2_Main" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОТ2 основной" />
             </ct:object>
-            <ct:object name="ALG_NotdPKr1" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нет перепада на кране 1 в течении 60 с" />
-            </ct:object>
             <ct:object name="ALG_Qmd_wH" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Высокий расход масла в маслобаке двигателя" />
-            </ct:object>
-            <ct:object name="ALG_ZH_Pbv_off" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Сигнал на включение задержки по снятию защиты Рбв" />
-            </ct:object>
-            <ct:object name="ALG_BLOCK_BZD" base-type="Types.ALG.ALG_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Таймер БЗД" />
-            </ct:object>
-            <ct:object name="ALG_BLOCK_VIB" base-type="Types.ALG.ALG_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Таймер виброаппаратуры" />
-            </ct:object>
-            <ct:object name="ALG_Time_ZH_Pbv_off" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Таймер отключения защиты по Рбв" />
-            </ct:object>
-            <ct:object name="ALG_Time_KBV_stOff" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Таймер отключения КБВ" />
-            </ct:object>
-            <ct:object name="ALG_Time_VOD_stOff" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Таймер отключения ВОД" />
             </ct:object>
             <ct:object name="ALG_DI_GPA_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков" />
@@ -4129,6 +4205,12 @@
             </ct:object>
             <ct:object name="ALG_OHL_START" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГТУ" />
+            </ct:object>
+            <ct:object name="ALG_ShowPPU" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отображение ППУ" />
+            </ct:object>
+            <ct:object name="ALG_NullRPM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нулевые обороты" />
             </ct:object>
         </ct:object>
         <ct:object name="GRH" access-level="public" >
@@ -4178,7 +4260,7 @@
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
             </ct:object>
             <ct:object name="AOss_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АО завершен" />
+              <attribute type="unit.System.Attributes.Description" value="АОсс завершен" />
             </ct:object>
             <ct:object name="AObs_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима АОбс" />
@@ -4220,7 +4302,7 @@
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
             </ct:object>
             <ct:object name="AObs_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АО завершен" />
+              <attribute type="unit.System.Attributes.Description" value="АОбс завершен" />
             </ct:object>
             <ct:object name="NOss_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима НОсс" />
@@ -4258,6 +4340,9 @@
             <ct:object name="NOss_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
             </ct:object>
+            <ct:object name="NOss_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОсс завершен" />
+            </ct:object>
             <ct:object name="NObs_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима НОбс" />
             </ct:object>
@@ -4290,6 +4375,9 @@
             </ct:object>
             <ct:object name="NObs_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
+            </ct:object>
+            <ct:object name="NObs_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОбс завершен" />
             </ct:object>
             <ct:object name="VOss_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима ВОсс" />
@@ -4328,7 +4416,7 @@
               <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
             </ct:object>
             <ct:object name="VOss_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВО завершен" />
+              <attribute type="unit.System.Attributes.Description" value="ВОсс завершен" />
             </ct:object>
             <ct:object name="VObs_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима ВОбс" />
@@ -4364,7 +4452,7 @@
               <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
             </ct:object>
             <ct:object name="VObs_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВО завершен" />
+              <attribute type="unit.System.Attributes.Description" value="ВОбс завершен" />
             </ct:object>
             <ct:object name="PZBS_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима ПЗБС" />
@@ -4462,9 +4550,6 @@
             <ct:object name="HP_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
             </ct:object>
-            <ct:object name="HP_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Окончание ХП" />
-            </ct:object>
             <ct:object name="HP_VOD_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отключить ВОД" />
             </ct:object>
@@ -4473,6 +4558,9 @@
             </ct:object>
             <ct:object name="HP_OMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Останов МСН" />
+            </ct:object>
+            <ct:object name="HP_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Окончание ХП" />
             </ct:object>
             <ct:object name="PM_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима Промывка" />
@@ -4513,9 +4601,6 @@
             <ct:object name="PM_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
             </ct:object>
-            <ct:object name="PM_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Окончание промывки" />
-            </ct:object>
             <ct:object name="PM_VOD_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отключить ВОД" />
             </ct:object>
@@ -4524,6 +4609,9 @@
             </ct:object>
             <ct:object name="PM_OMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Останов МСН" />
+            </ct:object>
+            <ct:object name="PM_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Окончание промывки" />
             </ct:object>
             <ct:object name="KPK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима КПК" />
@@ -4590,6 +4678,9 @@
             </ct:object>
             <ct:object name="KPK_Kr6r_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р открыть" />
+            </ct:object>
+            <ct:object name="KPK_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="КПК завершена" />
             </ct:object>
             <ct:object name="APK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Старт режима АПК" />
@@ -4769,7 +4860,7 @@
               <attribute type="unit.System.Attributes.Description" value="Старт режима К-М" />
             </ct:object>
             <ct:object name="KM_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Оконачание режима К-М" />
+              <attribute type="unit.System.Attributes.Description" value="КМ завершен" />
             </ct:object>
             <ct:object name="KM_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Шаг режима К-М" />
@@ -4784,7 +4875,7 @@
               <attribute type="unit.System.Attributes.Description" value="Старт режима М-К" />
             </ct:object>
             <ct:object name="MK_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Оконачание режима М-К" />
+              <attribute type="unit.System.Attributes.Description" value="МК завершен" />
             </ct:object>
             <ct:object name="MK_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Шаг режима М-К" />
@@ -4876,20 +4967,6 @@
             <ct:object name="AOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
-            <ct:object name="AOss_Par_In_1_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 1" />
-              <attribute type="Attributes.FracDigits" value="0" />
-            </ct:object>
-            <ct:object name="AOss_Par_In_1_2_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 1" />
-              <attribute type="Attributes.FracDigits" value="0" />
-            </ct:object>
-            <ct:object name="AOss_Tmv_Rev_1_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Обратный таймер режима АОсс шага 1" />
-            </ct:object>
-            <ct:object name="AOss_Tmv_Rev_1_2_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Обратный таймер режима АОсс шага 1" />
-            </ct:object>
             <ct:object name="AOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
             </ct:object>
@@ -4912,9 +4989,6 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
-            </ct:object>
-            <ct:object name="AOss_Tmv_Rev_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Обратный таймер режима АОсс шага 3" />
             </ct:object>
             <ct:object name="AOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
@@ -5071,6 +5145,12 @@
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс шага 6" />
               <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
+            <ct:object name="NOss_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОсс завершен" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
             <ct:object name="NObs_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
             </ct:object>
@@ -5144,6 +5224,12 @@
             <ct:object name="NObs_Par_In_5_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс шага 5" />
               <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОбс завершен" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
             <ct:object name="VOss_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
@@ -5478,6 +5564,12 @@
             <ct:object name="HP_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
+            <ct:object name="HP_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ХП завершена" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
             <ct:object name="PM_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
             </ct:object>
@@ -5566,6 +5658,12 @@
               <attribute type="unit.System.Attributes.Description" value="Газ в контуре Н" />
             </ct:object>
             <ct:object name="PM_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
+            <ct:object name="PM_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Промывка завершена" />
+            </ct:object>
+            <ct:object name="PM_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -5668,6 +5766,12 @@
               <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_14" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="КПК завершена" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
             <ct:object name="APK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -6043,6 +6147,12 @@
             <ct:object name="KM_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
+            <ct:object name="KM_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="КМ Завершен" />
+            </ct:object>
+            <ct:object name="KM_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
             <ct:object name="MK_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
             </ct:object>
@@ -6059,6 +6169,12 @@
               <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыт" />
             </ct:object>
             <ct:object name="MK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+            </ct:object>
+            <ct:object name="MK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="МК Завершен" />
+            </ct:object>
+            <ct:object name="MK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >

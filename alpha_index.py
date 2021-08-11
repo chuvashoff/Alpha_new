@@ -298,7 +298,8 @@ def create_group_drv(drv_sl, template_no_arc_index, source):
     return s_out
 
 
-def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_spec, sl_diag, sl_cpu_drv_signal):
+def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_spec, sl_diag, sl_cpu_drv_signal,
+                 tuple_grh):
     # Считываем шаблоны для карты
     with open(os.path.join('Template', 'Temp_map_index_Arc'), 'r', encoding='UTF-8') as f_arc:
         tmp_ind_arc = f_arc.read()
@@ -474,6 +475,8 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             sl_global_apr = {}
             sl_global_diag = {}
             sl_global_drv = {}
+
+            sl_global_grh = {}
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'None'):
                 with open(os.path.join('Template', 'TR_par'), 'r', encoding='UTF-8') as f_tr:
@@ -661,8 +664,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
 
                         elif 'GRH|' in line and len(line.split(',')) >= 10:  # в новом конфигураторе - в ветку GRH.
                             line = line.split(',')
-                            sl_global_alg[f"GRH_{line[0][line[0].find('|')+1:]}"] = [max(int(line[9]), int(line[10])),
-                                                                                     line[1]]
+                            sl_global_grh[f"{line[0][1:]}"] = [max(int(line[9]), int(line[10])), line[1]]
 
                         elif 'MOD|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -775,6 +777,8 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             # отсуда и далее до нар ориентируемся на то, что есть в конфигураторе, так как в проекте может быть "мусор"
             # в данных словарях лежит alg имя: [индекс переменной, тип переменной(I, B, R)]
             sl_global_alg = {key: value for key, value in sl_global_alg.items() if key in lst_alg}
+            # формирование словаря sl_global_grh добавлено позже для создания алгоритма в новом конифигураторе
+            sl_global_grh = {key[key.find('|') + 1:]: value for key, value in sl_global_grh.items() if key in tuple_grh}
             sl_global_mod = {key: value for key, value in sl_global_mod.items() if key in lst_mod}
             sl_global_ppu = {key: value for key, value in sl_global_ppu.items() if key in lst_ppu}
             sl_global_ts = {key: value for key, value in sl_global_ts.items() if key in lst_ts}
@@ -850,6 +854,10 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
             # Обработка и запись в карту ALG
             if sl_global_alg:
                 s_all += create_group_system_sig('ALG', sl_global_alg, tmp_ind_no_arc, line_source[0])
+
+            # Обработка и запись в карту GRH
+            if sl_global_grh:
+                s_all += create_group_system_sig('GRH', sl_global_grh, tmp_ind_no_arc, line_source[0])
 
             # Обработка и запись в карту Режимы
             if sl_global_mod:

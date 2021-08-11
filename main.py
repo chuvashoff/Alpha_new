@@ -38,6 +38,7 @@ try:
     sl_all_pz = {}
     sl_for_diag = {}
     sl_cpu_drv_signal = {}
+    tuple_all_grh = ()
     '''Словарь модулей'''
     sl_modules = {
         'M547A': ['Резерв'] * 16,
@@ -436,6 +437,7 @@ try:
             tmp_line_ = is_create_objects_alogritm(sl_alogritm=sl_CPU_one, template_text=tmp_object_BTN_CNT_sig,
                                                    template_text_dop_par=tmp_grh_dop_par)
             tmp_subgroup += Template(tmp_group).substitute(name_group='GRH', objects=tmp_line_)
+            tuple_all_grh += tuple(sl_CPU_one.keys())
 
         # Формируем подгруппу
         if tmp_subgroup != '':
@@ -863,7 +865,7 @@ try:
     if os.path.exists('Source_list_plc.txt'):
         create_index(lst_alg=lst_all_alg, lst_mod=lst_all_mod, lst_ppu=lst_all_ppu, lst_ts=lst_all_ts,
                      lst_wrn=lst_all_wrn, sl_pz_anum=sl_all_pz, sl_cpu_spec=sl_CPU_spec, sl_diag=sl_for_diag,
-                     sl_cpu_drv_signal=sl_cpu_drv_signal)
+                     sl_cpu_drv_signal=sl_cpu_drv_signal, tuple_grh=tuple_all_grh)
     print(datetime.datetime.now(), 'Окончание сборки карт индексов')
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):

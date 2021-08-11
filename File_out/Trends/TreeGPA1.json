@@ -4251,7 +4251,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Маслосистема Д/ТЭН МБД. Включен",
-    "OpcTag": "GPA1.IM.EnMD.stOn",
+    "OpcTag": "GPA1.IM.HeatMBD.stOn",
     "EUnit": "-",
     "Description": "ТЭН МБД. Включен"
    }
@@ -4259,7 +4259,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Маслосистема Д/ТЭН МБД. Включить",
-    "OpcTag": "GPA1.IM.EnMD.oOn",
+    "OpcTag": "GPA1.IM.HeatMBD.oOn",
     "EUnit": "-",
     "Description": "ТЭН МБД. Включить"
    }
@@ -4315,7 +4315,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Маслосистема Н/ТЭН МБН. Включен",
-    "OpcTag": "GPA1.IM.EnMN.stOn",
+    "OpcTag": "GPA1.IM.HeatMBN.stOn",
     "EUnit": "-",
     "Description": "ТЭН МБН. Включен"
    }
@@ -4323,7 +4323,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Маслосистема Н/ТЭН МБН. Включить",
-    "OpcTag": "GPA1.IM.EnMN.oOn",
+    "OpcTag": "GPA1.IM.HeatMBN.oOn",
     "EUnit": "-",
     "Description": "ТЭН МБН. Включить"
    }
@@ -4771,7 +4771,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Отсеки/ТЭН под кожухом ГТУ. Включен",
-    "OpcTag": "GPA1.IM.ERGTU.stOn",
+    "OpcTag": "GPA1.IM.HeatGTU.stOn",
     "EUnit": "-",
     "Description": "ТЭН под кожухом ГТУ. Включен"
    }
@@ -4779,7 +4779,7 @@
   {
    "Signal": {
     "UserTree": "Исполнительные механизмы/Отсеки/ТЭН под кожухом ГТУ. Включить",
-    "OpcTag": "GPA1.IM.ERGTU.oOn",
+    "OpcTag": "GPA1.IM.HeatGTU.oOn",
     "EUnit": "-",
     "Description": "ТЭН под кожухом ГТУ. Включить"
    }
@@ -4794,26 +4794,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Исполнительные механизмы/Диагностика/Деблокировка БЗД. Включить",
-    "OpcTag": "GPA1.IM.DeblockBZD.oOn",
-    "EUnit": "-",
-    "Description": "Деблокировка БЗД. Включить"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Исполнительные механизмы/Диагностика/Деблокировка СПО (БЗД). Включить",
     "OpcTag": "GPA1.IM.Unlock_BZD.oOn",
     "EUnit": "-",
     "Description": "Деблокировка СПО (БЗД). Включить"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Диагностика/Контроль БЗД. Включить",
-    "OpcTag": "GPA1.IM.CheckBZD.oOn",
-    "EUnit": "-",
-    "Description": "Контроль БЗД. Включить"
    }
   },
   {
@@ -6154,10 +6138,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/ВОбс/ВОбс. Низкое давление воздуха охлаждения ТНД",
+    "UserTree": "Аварии/ВОбс/ВОбс. Низкое давление воздуха охлажения ТНД",
     "OpcTag": "GPA1.System.ALR.N_OhlTnd.Value",
     "EUnit": "-",
-    "Description": "ВОбс. Низкое давление воздуха охлаждения ТНД"
+    "Description": "ВОбс. Низкое давление воздуха охлажения ТНД"
    }
   },
   {
@@ -6318,14 +6302,6 @@
     "OpcTag": "GPA1.System.ALR.N_StrRPT.Value",
     "EUnit": "-",
     "Description": "ВОбс. Стружка в масле откачки от РП ТВД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аварии/ВОсс/ВОсс. НО от кнопки на ПРУ",
-    "OpcTag": "GPA1.System.ALR.BTN_NO.Value",
-    "EUnit": "-",
-    "Description": "ВОсс. НО от кнопки на ПРУ"
    }
   },
   {
