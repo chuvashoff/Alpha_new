@@ -4,6 +4,7 @@ import openpyxl
 import logging
 # from my_func import *
 from alpha_index import *
+from algroritm import *
 import warnings
 from json import dumps as json_dumps
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
@@ -89,6 +90,9 @@ try:
     # Считываем файл-шаблон для драйверных параметров
     with open(os.path.join('Template', 'Temp_drv_par'), 'r', encoding='UTF-8') as f:
         tmp_drv_par = f.read()
+    # Считываем файл-шаблон для дополнительных параметров алгоритма (нужен fracdig)
+    with open(os.path.join('Template', 'Temp_GRH_dop_par'), 'r', encoding='UTF-8') as f:
+        tmp_grh_dop_par = f.read()
 
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
     # читаем список всех контроллеров
@@ -423,6 +427,15 @@ try:
                 tmp_sub_drv += Template(tmp_group).substitute(name_group=drv[0], objects=tmp_line_)
 
             tmp_subgroup += Template(tmp_group).substitute(name_group='DRV', objects=tmp_sub_drv.rstrip())
+
+        # Переменные для хода алгоритма (в составе System)
+        sheet = book['Алгоритмы']
+        sl_CPU_one = is_load_algoritm(controller=i, cells=sheet['A1': 'A' + str(sheet.max_row)], sheet=sheet)
+
+        if sl_CPU_one:
+            tmp_line_ = is_create_objects_alogritm(sl_alogritm=sl_CPU_one, template_text=tmp_object_BTN_CNT_sig,
+                                                   template_text_dop_par=tmp_grh_dop_par)
+            tmp_subgroup += Template(tmp_group).substitute(name_group='GRH', objects=tmp_line_)
 
         # Формируем подгруппу
         if tmp_subgroup != '':
