@@ -2341,7 +2341,7 @@
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
           <ct:object name="A042" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха охлаждения ТНД" />
+            <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха охлажения ТНД" />
             <attribute type="Attributes.EUnit" value="МПа" />
           </ct:object>
           <ct:object name="A043" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -2805,12 +2805,6 @@
             </ct:object>
         </ct:object>
         <ct:object name="TS" access-level="public" >
-            <ct:object name="Ptg_min" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по низкому давлению ТГ взведена" />
-            </ct:object>
-            <ct:object name="Ppg_min" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Защита по низкому давлению ТГ взведена" />
-            </ct:object>
             <ct:object name="icingGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Условия облединения ГТУ" />
             </ct:object>
@@ -3068,7 +3062,7 @@
               <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика давления воздуха за компрессором ВД" />
             </ct:object>
             <ct:object name="N_OhlTnd" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха охлаждения ТНД" />
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха охлажения ТНД" />
             </ct:object>
             <ct:object name="N_LowPBBT1" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха после ВВТ1" />
@@ -3327,9 +3321,6 @@
             </ct:object>
         </ct:object>
         <ct:object name="ALG" access-level="public" >
-            <ct:object name="ALG_GPA_NoLink" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD200" />
-            </ct:object>
             <ct:object name="ALG_POS_ON" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Включение ПОС по кнопке" />
             </ct:object>

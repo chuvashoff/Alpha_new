@@ -368,7 +368,7 @@ def create_index(lst_alg, lst_mod, lst_ppu, lst_ts, lst_wrn, sl_pz_anum, sl_cpu_
         'M557O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
                   'No_Canal_pow', 'No_powe'),
         'M558O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
-                  'No_Canal_pow', 'No_powe'),
+                  'No_powe'),
         'M932C_2N': ('Err_lin', 'Line1_E', 'Line2_E', 'Err_U1_C01', 'Err_U2_C01', 'Err_U3_C01',
                      'Err_U4_C01', 'Err_U5_C01', 'Err_U6_C01', 'Err_U7_C01', 'Err_U8_C01', 'Err_ha', 'Metro_Unit_01',
                      'Metro_Unit_02', 'Metro_Unit_03', 'Metro_Unit_04', 'Metro_Unit_05', 'Metro_Unit_06',
