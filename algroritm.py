@@ -167,8 +167,12 @@ def is_load_algoritm(controller, cells, sheet):
                 sl_algoritm.update(dict(zip(step_out_tmp, step_tmp)))
 
                 # Таймера
-                # В выходной словарь функции грузим алг.имя: (Русское текст таймера, тип сигнала-FLOAT)
-                sl_algoritm.update(dict(zip(step_timer_out_tmp, [(*a, 'FLOAT') for a in tuple_rus_step_timer])))
+                # В выходной словарь функции грузим алг.имя: (Русское текст таймера, тип сигнала-FLOAT, frag_dig=0)
+                # [(*a, 'FLOAT') for a in tuple_rus_step_timer]
+                sl_algoritm.update(dict(zip(step_timer_out_tmp,
+                                            tuple(zip([a[0] for a in tuple_rus_step_timer],
+                                                      ('FLOAT',)*len(tuple_rus_step_timer),
+                                                      ('0',)*len(tuple_rus_step_timer))))))
 
                 # Дополнительный параметры
                 # В выходной словарь функции грузим алг.имя: (Русское текст доп.параметра, тип сигнала-FLOAT, frag_dig)
@@ -177,8 +181,12 @@ def is_load_algoritm(controller, cells, sheet):
                                                       step_dop_par_fragdigits_out_tmp)))))
 
                 # Обратные таймера
-                # В выходной словарь функции грузим алг.имя: (Русское текст обратного таймера, тип сигнала-FLOAT)
-                sl_algoritm.update(dict(zip(step_rev_timer_out_tmp, [(a, 'FLOAT') for a in tuple_rev_timer_rus])))
+                # В выходной словарь функции грузим алг.имя:
+                # (Русское текст обратного таймера, тип сигнала-FLOAT, frag_dig=0)
+                # [(a, 'FLOAT') for a in tuple_rev_timer_rus]
+                sl_algoritm.update(dict(zip(step_rev_timer_out_tmp,
+                                            tuple(zip(tuple_rev_timer_rus, ('FLOAT',) * len(tuple_rev_timer_rus),
+                                                      ('0',) * len(tuple_rev_timer_rus))))))
 
     return sl_algoritm
 
@@ -193,7 +201,9 @@ def is_create_objects_alogritm(sl_alogritm, template_text, template_text_dop_par
     }
     tmp_line_object = ''
     for key, value in sl_alogritm.items():
-        if 'Дополнительный параметр режима' in value[0] and 'Par' in key:
+        if 'Дополнительный параметр режима' in value[0] and '_Par_' in key or \
+                'Обратный таймер режима' in value[0] and '_Rev_' in key or \
+                '_Tmv_In_' in key or '_Tmv_Out_' in key:
             tmp_line_object += Template(template_text_dop_par).substitute(object_name=key[key.find('|') + 1:],
                                                                           object_type=sl_type_alogritm[value[1]],
                                                                           object_aspect='Types.PLC_Aspect',

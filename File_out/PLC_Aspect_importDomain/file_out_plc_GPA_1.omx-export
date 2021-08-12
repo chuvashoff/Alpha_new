@@ -4966,6 +4966,7 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
@@ -4975,6 +4976,7 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AOss_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 2" />
@@ -4989,6 +4991,7 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
@@ -4998,6 +5001,7 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AOss_Par_In_4_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 4" />
@@ -5012,6 +5016,7 @@
             </ct:object>
             <ct:object name="AOss_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AObs_Cmd_In_1_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="СК0 закрыт" />
@@ -5024,6 +5029,7 @@
             </ct:object>
             <ct:object name="AObs_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AObs_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
@@ -5045,6 +5051,7 @@
             </ct:object>
             <ct:object name="AObs_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AObs_Par_In_2_1_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 2" />
@@ -5062,6 +5069,7 @@
             </ct:object>
             <ct:object name="AObs_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="AObs_Par_In_3_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 3" />
@@ -5076,12 +5084,14 @@
             </ct:object>
             <ct:object name="AObs_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
             </ct:object>
             <ct:object name="NOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
@@ -5091,6 +5101,7 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс шага 2" />
@@ -5104,6 +5115,7 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
@@ -5113,6 +5125,7 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Par_In_4_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс шага 4" />
@@ -5127,6 +5140,7 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Cmd_In_6_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
@@ -5136,6 +5150,7 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NOss_Par_In_6_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс шага 6" />
@@ -5150,12 +5165,14 @@
             </ct:object>
             <ct:object name="NOss_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
             </ct:object>
             <ct:object name="NObs_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
@@ -5165,6 +5182,7 @@
             </ct:object>
             <ct:object name="NObs_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс шага 2" />
@@ -5178,6 +5196,7 @@
             </ct:object>
             <ct:object name="NObs_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
@@ -5199,6 +5218,7 @@
             </ct:object>
             <ct:object name="NObs_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Par_In_4_1_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс шага 4" />
@@ -5216,6 +5236,7 @@
             </ct:object>
             <ct:object name="NObs_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="NObs_Par_In_5_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс шага 5" />
@@ -5230,12 +5251,14 @@
             </ct:object>
             <ct:object name="NObs_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
             </ct:object>
             <ct:object name="VOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
@@ -5245,6 +5268,7 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОсс шага 2" />
@@ -5258,6 +5282,7 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
@@ -5267,6 +5292,7 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Par_In_4_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОсс шага 4" />
@@ -5281,6 +5307,7 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Cmd_In_6_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
@@ -5290,6 +5317,7 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VOss_Par_In_6_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОсс шага 6" />
@@ -5304,12 +5332,14 @@
             </ct:object>
             <ct:object name="VOss_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
             </ct:object>
             <ct:object name="VObs_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
@@ -5319,6 +5349,7 @@
             </ct:object>
             <ct:object name="VObs_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОбс шага 2" />
@@ -5332,6 +5363,7 @@
             </ct:object>
             <ct:object name="VObs_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
@@ -5353,6 +5385,7 @@
             </ct:object>
             <ct:object name="VObs_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Par_In_4_1_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОбс шага 4" />
@@ -5370,6 +5403,7 @@
             </ct:object>
             <ct:object name="VObs_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="VObs_Par_In_5_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ВОбс шага 5" />
@@ -5384,60 +5418,73 @@
             </ct:object>
             <ct:object name="VObs_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
             </ct:object>
             <ct:object name="PZBS_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Работа ВОД" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Tmv_Out_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Работа ВОД-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Низкий Q воздуха в БС" />
             </ct:object>
             <ct:object name="PZBS_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZBS_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
             </ct:object>
             <ct:object name="PZBS_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
             </ct:object>
             <ct:object name="PZMS_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНУ отключен" />
             </ct:object>
             <ct:object name="PZMS_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНС отключен" />
             </ct:object>
             <ct:object name="PZMS_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Cmd_In_5_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Аварийно-низкое Рмсн &lt; 0.07" />
@@ -5447,6 +5494,7 @@
             </ct:object>
             <ct:object name="PZMS_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Par_In_5_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ПЗМС шага 5" />
@@ -5467,18 +5515,22 @@
             </ct:object>
             <ct:object name="PZMS_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PZMS_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кноманда &quot;Деблокировка&quot;" />
             </ct:object>
             <ct:object name="PZMS_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
@@ -5488,12 +5540,14 @@
             </ct:object>
             <ct:object name="HP_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
             </ct:object>
             <ct:object name="HP_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыт" />
@@ -5503,24 +5557,29 @@
             </ct:object>
             <ct:object name="HP_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Tmv_Out_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Готовность к ХП" />
             </ct:object>
             <ct:object name="HP_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Окончание ХП" />
             </ct:object>
             <ct:object name="HP_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Par_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП шага 7" />
@@ -5540,6 +5599,7 @@
             </ct:object>
             <ct:object name="HP_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Par_In_8_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП шага 8" />
@@ -5554,6 +5614,7 @@
             </ct:object>
             <ct:object name="HP_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_10_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Останов МСН завершен" />
@@ -5563,18 +5624,22 @@
             </ct:object>
             <ct:object name="HP_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="HP_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ХП завершена" />
             </ct:object>
             <ct:object name="HP_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
@@ -5584,12 +5649,14 @@
             </ct:object>
             <ct:object name="PM_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
             </ct:object>
             <ct:object name="PM_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыт" />
@@ -5599,24 +5666,29 @@
             </ct:object>
             <ct:object name="PM_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Tmv_Out_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Готовность к промывке" />
             </ct:object>
             <ct:object name="PM_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Окончание промывки" />
             </ct:object>
             <ct:object name="PM_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Par_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Промывка шага 7" />
@@ -5636,6 +5708,7 @@
             </ct:object>
             <ct:object name="PM_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Par_In_8_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Промывка шага 8" />
@@ -5650,6 +5723,7 @@
             </ct:object>
             <ct:object name="PM_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_10_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Останов МСН завершен" />
@@ -5659,18 +5733,22 @@
             </ct:object>
             <ct:object name="PM_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PM_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Промывка завершена" />
             </ct:object>
             <ct:object name="PM_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
@@ -5680,6 +5758,7 @@
             </ct:object>
             <ct:object name="KPK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение Н завершено" />
@@ -5689,30 +5768,35 @@
             </ct:object>
             <ct:object name="KPK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 12 открыт" />
@@ -5728,15 +5812,18 @@
             </ct:object>
             <ct:object name="KPK_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_9" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Tmv_Out_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_11_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
@@ -5752,6 +5839,7 @@
             </ct:object>
             <ct:object name="KPK_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_12_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
@@ -5761,24 +5849,29 @@
             </ct:object>
             <ct:object name="KPK_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_13" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KPK_Cmd_In_14" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="КПК завершена" />
             </ct:object>
             <ct:object name="KPK_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
@@ -5788,6 +5881,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение Н завершено" />
@@ -5797,30 +5891,35 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
             </ct:object>
             <ct:object name="APK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
             </ct:object>
             <ct:object name="APK_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
             </ct:object>
             <ct:object name="APK_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
             </ct:object>
             <ct:object name="APK_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 12 открыт" />
@@ -5836,6 +5935,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Par_In_8_1_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК шага 8" />
@@ -5853,15 +5953,18 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_10" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="" />
             </ct:object>
             <ct:object name="APK_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Tmv_Out_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Cmd_In_11_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Готовность к запуску" />
@@ -5874,6 +5977,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Par_In_11_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК шага 11" />
@@ -5888,6 +5992,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Par_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК шага 12" />
@@ -5898,6 +6003,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Par_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК шага 13" />
@@ -5908,6 +6014,7 @@
             </ct:object>
             <ct:object name="APK_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APK_Par_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК шага 14" />
@@ -5915,9 +6022,11 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
@@ -5927,6 +6036,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение Н завершено" />
@@ -5936,30 +6046,35 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
             </ct:object>
             <ct:object name="APM_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
             </ct:object>
             <ct:object name="APM_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
             </ct:object>
             <ct:object name="APM_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
             </ct:object>
             <ct:object name="APM_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 12 открыт" />
@@ -5975,6 +6090,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Par_In_8_1_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПМ шага 8" />
@@ -5992,15 +6108,18 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_10" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="" />
             </ct:object>
             <ct:object name="APM_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Tmv_Out_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Cmd_In_11_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Готовность к запуску" />
@@ -6013,6 +6132,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Par_In_11_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПМ шага 11" />
@@ -6027,6 +6147,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Par_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПМ шага 12" />
@@ -6037,6 +6158,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Par_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПМ шага 13" />
@@ -6047,6 +6169,7 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="APM_Par_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПМ шага 14" />
@@ -6057,27 +6180,32 @@
             </ct:object>
             <ct:object name="APM_Tmv_In_15" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ВОТ 1/2 включен" />
             </ct:object>
             <ct:object name="PMSN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНС включен" />
             </ct:object>
             <ct:object name="PMSN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Рмсн &gt; 0,18 МПа" />
             </ct:object>
             <ct:object name="PMSN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение маслосистемы Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Tmv_Out_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение маслосистемы Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Par_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Пуск МСН шага 3" />
@@ -6085,24 +6213,29 @@
             </ct:object>
             <ct:object name="PMSN_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация Рмсн" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Tmv_Out_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация Рмсн-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНУ включен" />
             </ct:object>
             <ct:object name="PMSN_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="dРмг &gt; 0,18 МПа" />
             </ct:object>
             <ct:object name="PMSN_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение маслоуплотнений" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Tmv_Out_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заполнение маслоуплотнений-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Par_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Пуск МСН шага 6" />
@@ -6110,9 +6243,11 @@
             </ct:object>
             <ct:object name="PMSN_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация dPмг" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Tmv_Out_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилизация dPмг-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="PMSN_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по dPмг взведена" />
@@ -6122,96 +6257,114 @@
             </ct:object>
             <ct:object name="PMSN_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OMSN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНУ отключен" />
             </ct:object>
             <ct:object name="OMSN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OMSN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="ПНС отключен" />
             </ct:object>
             <ct:object name="OMSN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KM_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 2 открыт" />
             </ct:object>
             <ct:object name="KM_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KM_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
             </ct:object>
             <ct:object name="KM_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="KM_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="КМ Завершен" />
             </ct:object>
             <ct:object name="KM_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="MK_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
             </ct:object>
             <ct:object name="MK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="MK_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Снижение оборотов Nst в ТР" />
             </ct:object>
             <ct:object name="MK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="MK_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыт" />
             </ct:object>
             <ct:object name="MK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="MK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="МК Завершен" />
             </ct:object>
             <ct:object name="MK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 4 открыт" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Продувка контура Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Tmv_Out_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Продувка контура Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 5 закрыт" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилиз. контура Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Tmv_Out_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Стабилиз. контура Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_7_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
@@ -6221,12 +6374,14 @@
             </ct:object>
             <ct:object name="ZKN_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="ZKN_Cmd_In_8" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
             </ct:object>
             <ct:object name="ZKN_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="SKN_Cmd_In_1_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
@@ -6242,12 +6397,14 @@
             </ct:object>
             <ct:object name="SKN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="SKN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Нет газа в нагнетателе" />
             </ct:object>
             <ct:object name="SKN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="SKN_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита Pмсн снята" />
@@ -6257,30 +6414,36 @@
             </ct:object>
             <ct:object name="SKN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OHL_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Не было прогрева" />
             </ct:object>
             <ct:object name="OHL_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА после прогрева" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OHL_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА после прогрева-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OHL_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Был прогрев" />
             </ct:object>
             <ct:object name="OHL_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА без прогрева" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OHL_Tmv_Out_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА без прогрева-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
             <ct:object name="OHL_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт снята" />
             </ct:object>
             <ct:object name="OHL_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
             </ct:object>
         </ct:object>
         </ct:object>
