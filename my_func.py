@@ -401,7 +401,7 @@ def is_create_objects_diag(sl):
         'M548A': 'Types.DIAG_M548A.DIAG_M548A_PLC_View',
         'M537V': 'Types.DIAG_M537V.DIAG_M537V_PLC_View',
         'M538V': 'Types.DIAG_M538V.DIAG_M538V_PLC_View',
-        'M932C_2N': 'Types.DIAG_M932C_2N.DIAG_M932C2_N_PLC_View',
+        'M932C_2N': 'Types.DIAG_M932C_2N.DIAG_M932C_2N_PLC_View',
         'M557D': 'Types.DIAG_M557D.DIAG_M557D_PLC_View',
         'M558D': 'Types.DIAG_M558D.DIAG_M558D_PLC_View',
         'M557O': 'Types.DIAG_M557O.DIAG_M557O_PLC_View',
