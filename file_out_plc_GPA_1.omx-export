@@ -1,0 +1,586 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
+  <trei:trei name="PLC_GPA_1" >
+    <trei:master-module name="CPU" >
+      <trei:ethernet-adapter name="Eth1" address="192.168.003.011" />
+      <trei:ethernet-adapter name="Eth2" address="192.168.004.011" />
+      <trei:unet-server name="UnetServer" address-map="PLC_GPA_1.CPU.Tree.UnetAddressMap" port="6001"/>
+      <dp:application-object name="Tree" access-level="public" >
+        <ct:object name="AI" access-level="public" >
+          <ct:object name="AI_Tmbd" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла в маслобаке ГТУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_TpopN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура переднего опорного подшипника Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_TzopN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура заднего опорного подшипника Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_TpupN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура передней колодки упорного подшипника Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_TzupN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура задней колодки упорного подшипника Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tg_inN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура газа на входе Н " />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tg_outN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура газа на выходе Н " />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tvod_inTO" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воды на входе теплобоменника" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tvod_outTO" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воды на выходе теплобоменника" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tv_inKGTU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воздуха под кожухом ГТУ (в выходном воздуховоде)" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tv_inOG" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воздуха в отсеке ГТУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tv_inON" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воздуха в отсеке Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tv_inBNKU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воздуха в блоке НКУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tm_inAVOMN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла на входе АВОМ Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tm_outAVOMN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла на выходе АВОМ Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tm_inAVOMD" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла на входе АВОМ ГТУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tm_outAVOMD" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла на выходе АВОМ ГТУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Tvod_outUt" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воды на выходе утилизатора" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_POS_ZsTUT" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение ЗсТУТ" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_POS_ZsBUT" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение ЗсБУТ" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_Tv_inBB" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура воздуха в блок-боксе" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Lmbd" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке ГТУ" />
+            <attribute type="Attributes.EUnit" value="мм" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="L" />
+          </ct:object>
+          <ct:object name="AI_Vpon" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Векторная сумма виброперемещений передней опоры Н" />
+            <attribute type="Attributes.EUnit" value="мкм" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="V" />
+          </ct:object>
+          <ct:object name="AI_Vzon" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Векторная сумма виброперемещений задней опоры Н" />
+            <attribute type="Attributes.EUnit" value="мкм" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="V" />
+          </ct:object>
+          <ct:object name="AI_Lmbn" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке Н" />
+            <attribute type="Attributes.EUnit" value="мм" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="L" />
+          </ct:object>
+          <ct:object name="AI_Qtg" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="AI_Vlag" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Относительная влажность наружного воздуха" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="VLAG" />
+          </ct:object>
+          <ct:object name="AI_Tair" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура наружного воздуха " />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_V_VOD1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Частота вращения ВОД1" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_V_VOD2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Частота вращения ВОД2" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_Pg_outTnd" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Полное давление газа за ТНД" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Ttg_outMSH" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура топливного газа после измерительной диафрагмы" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_dPtg_MSH" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад давления топливного газа на измерительной диафрагме" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Ptg_inMSH" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление топливного газа перед измерительной диафрагмой" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pm_outGTU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление масла на выходе из ГТУ" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pg_inN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление газа перед Н" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pmsn" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление масла на смазку подшипников нагнетателя" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_dPmg_N" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад давления масло-газ в системе уплотнений Н" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Tmbn" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура масла в маслобаке Н" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_Pms_inAVOM" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление масла на входе АВОМ (Н)" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Lmacc" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Уровень масла в аккумуляторе масла" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_dPatm_Pzv" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад Рв между атмосферой и зоной обдува трансмиссии" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pvod_inTO" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление воды на входе теплообменника" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pvod_outTO" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление воды на выходе теплообменника" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_dPtg_FO" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад давления на фильтрах топливного газа" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Patm" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Атмосферное давление наружного воздуха" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_dPv_VOU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад Рв на фильтрах воздушных в блоке ВОУ" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Tv_NKU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Температура в НКУ" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="T" />
+          </ct:object>
+          <ct:object name="AI_U1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль напряжения САУ Ввод 1 (~220)" />
+            <attribute type="Attributes.EUnit" value="В" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="U" />
+          </ct:object>
+          <ct:object name="AI_U2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль напряжения САУ Ввод 2 (=220)" />
+            <attribute type="Attributes.EUnit" value="В" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="U" />
+          </ct:object>
+          <ct:object name="AI_U3" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль напряжения САУ Ввод 3 (=27)" />
+            <attribute type="Attributes.EUnit" value="В" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="U" />
+          </ct:object>
+          <ct:object name="AI_U4" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль напряжения САУ Ввод 4 (=220)" />
+            <attribute type="Attributes.EUnit" value="В" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="U" />
+          </ct:object>
+        </ct:object>
+        <ct:object name="AE" access-level="public" >
+          <ct:object name="AE_QTGM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Массовый рассход топливного газа" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qтг" />
+          </ct:object>
+          <ct:object name="AE_QTG" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Объемный рассход топливного газа" />
+            <attribute type="Attributes.EUnit" value="м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qтг" />
+          </ct:object>
+          <ct:object name="AE_NARNOM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Наработка на номинальном режиме" />
+            <attribute type="Attributes.EUnit" value="ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Ti" />
+          </ct:object>
+          <ct:object name="AE_NARMAX" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Наработка на максимальном режиме" />
+            <attribute type="Attributes.EUnit" value="ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Ti" />
+          </ct:object>
+          <ct:object name="AE_NARSUM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Суммарная наработка" />
+            <attribute type="Attributes.EUnit" value="ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Ti" />
+          </ct:object>
+          <ct:object name="AE_NAREQV" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Эквивалентная наработка" />
+            <attribute type="Attributes.EUnit" value="ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Ti" />
+          </ct:object>
+          <ct:object name="AE_NUMSTART" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Количество запусков" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="n" />
+          </ct:object>
+          <ct:object name="AE_NUMHP" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Количество ХП" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="n" />
+          </ct:object>
+          <ct:object name="AE_NUMNO" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Количество НО" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="n" />
+          </ct:object>
+          <ct:object name="AE_NUMVO" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Количество ВО" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="n" />
+          </ct:object>
+          <ct:object name="AE_NUMAO" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Количество АО" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="n" />
+          </ct:object>
+          <ct:object name="AE_QCOMM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Коммерческая произв.ЦБН" />
+            <attribute type="Attributes.EUnit" value="КВт" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="AE_N" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Внутренняя мощность ЦБН" />
+            <attribute type="Attributes.EUnit" value="КВт" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="AE_NE" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Мощность на валу ГТУ-ЦБН" />
+            <attribute type="Attributes.EUnit" value="КВт" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="AE_GGAS_CH" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за текущий час" />
+            <attribute type="Attributes.EUnit" value="тыс.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_LH" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за предыдущий час" />
+            <attribute type="Attributes.EUnit" value="тыс.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_CD" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за текущие сутки" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_LD" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за предыдущие сутки" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_CM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за текущий месяц" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_LM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за предыдущий месяц" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_CY" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за текущий год" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_GGAS_LY" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход технологического газа за предыдущий год" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_CH" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за текущий час" />
+            <attribute type="Attributes.EUnit" value="тыс.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_LH" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за предыдущий час" />
+            <attribute type="Attributes.EUnit" value="тыс.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_CD" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за текущие сутки" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_LD" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за предыдущие сутки" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_CM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за текущий месяц" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_LM" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за предыдущий месяц" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_CY" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за текущий год" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_TGGAS_LY" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход топливного газа за предыдущий год" />
+            <attribute type="Attributes.EUnit" value="млн.м3/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_Gn" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Массовый расход технологического газа" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Qг" />
+          </ct:object>
+          <ct:object name="AE_Kpde" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Эффективный КПД ГТУ" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AE_Qmd" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход масла двигателя за час" />
+            <attribute type="Attributes.EUnit" value="л/ч" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="L" />
+          </ct:object>
+          <ct:object name="AE_Nst_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте СТ до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Ngg_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте ТК до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Tst_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте Тст до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Pk_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте Р за КВД до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Pg_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте Рг на выходе Н до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_E_UP_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте степени сжатия до верхнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Nst_DN_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте СТ до нижнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Ngg_DN_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по частоте ТК до нижнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_PZ_DN_Z" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Запас по ПЗ до нижнего ограничения" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="ЗП" />
+          </ct:object>
+          <ct:object name="AE_Nst_set" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Задание частоты СТ от регулятора (Рг. Qг. Ст.Сж.)" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Зад N" />
+          </ct:object>
+        </ct:object>
+	    <trei:unet-address-map name="UnetAddressMap" />
+      </dp:application-object>
+    </trei:master-module>
+  </trei:trei>
+</omx>

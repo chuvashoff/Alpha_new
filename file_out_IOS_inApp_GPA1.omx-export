@@ -1,0 +1,785 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
+    <ct:object name="GPA1" access-level="public">
+      <attribute type="unit.System.Attributes.Description" value="ГПА №1" />
+      <ct:object name="AI" aspect="Types.IOS_Aspect" access-level="public">
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="AI_Nkvd_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nkvd_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nkvd_1" />
+        </ct:object>
+        <ct:object name="AI_Nknd_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nknd_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nknd_1" />
+        </ct:object>
+        <ct:object name="AI_Nst_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nst_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nst_1" />
+        </ct:object>
+        <ct:object name="AI_Nkvd_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nkvd_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nkvd_2" />
+        </ct:object>
+        <ct:object name="AI_Nknd_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nknd_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nknd_2" />
+        </ct:object>
+        <ct:object name="AI_Nst_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Nst_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Nst_2" />
+        </ct:object>
+        <ct:object name="AI_Tv_inK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tv_inK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tv_inK" />
+        </ct:object>
+        <ct:object name="AI_TginDG" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginDG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginDG" />
+        </ct:object>
+        <ct:object name="AI_Tm_inGTU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tm_inGTU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tm_inGTU" />
+        </ct:object>
+        <ct:object name="AI_Tm_outSPK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outSPK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outSPK" />
+        </ct:object>
+        <ct:object name="AI_Tm_outRPTvd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outRPTvd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outRPTvd" />
+        </ct:object>
+        <ct:object name="AI_Tm_outRPTnd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outRPTnd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outRPTnd" />
+        </ct:object>
+        <ct:object name="AI_Tm_outST" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outST" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tm_outST" />
+        </ct:object>
+        <ct:object name="AI_Tv_outVVT" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outVVT" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outVVT" />
+        </ct:object>
+        <ct:object name="AI_TginSK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginSK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginSK" />
+        </ct:object>
+        <ct:object name="AI_TginDK1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginDK1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginDK1" />
+        </ct:object>
+        <ct:object name="AI_TginDK2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginDK2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginDK2" />
+        </ct:object>
+        <ct:object name="AI_TginGK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginGK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginGK" />
+        </ct:object>
+        <ct:object name="AI_TginCM" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_TginCM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_TginCM" />
+        </ct:object>
+        <ct:object name="AI_Tv_outTO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outTO" />
+        </ct:object>
+        <ct:object name="AI_Tv_outK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tv_outK" />
+        </ct:object>
+        <ct:object name="AI_Tzap_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tzap_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tzap_1" />
+        </ct:object>
+        <ct:object name="AI_Tzap_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tzap_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tzap_2" />
+        </ct:object>
+        <ct:object name="AI_Tt_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_1" />
+        </ct:object>
+        <ct:object name="AI_Tt_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_2" />
+        </ct:object>
+        <ct:object name="AI_Tt_3" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_3" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_3" />
+        </ct:object>
+        <ct:object name="AI_Tt_4" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_4" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_4" />
+        </ct:object>
+        <ct:object name="AI_Tt_5" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_5" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_5" />
+        </ct:object>
+        <ct:object name="AI_Tt_6" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_6" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_6" />
+        </ct:object>
+        <ct:object name="AI_Tt_7" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_7" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_7" />
+        </ct:object>
+        <ct:object name="AI_Tt_8" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_8" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_8" />
+        </ct:object>
+        <ct:object name="AI_Tt_9" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_9" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_9" />
+        </ct:object>
+        <ct:object name="AI_Tt_10" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_10" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_10" />
+        </ct:object>
+        <ct:object name="AI_Tt_11" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_11" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_11" />
+        </ct:object>
+        <ct:object name="AI_Tt_12" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tt_12" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tt_12" />
+        </ct:object>
+        <ct:object name="AI_Tst_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_1" />
+        </ct:object>
+        <ct:object name="AI_Tst_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_2" />
+        </ct:object>
+        <ct:object name="AI_Tst_3" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_3" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_3" />
+        </ct:object>
+        <ct:object name="AI_Tst_4" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_4" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_4" />
+        </ct:object>
+        <ct:object name="AI_Tst_5" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_5" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_5" />
+        </ct:object>
+        <ct:object name="AI_Tst_6" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_6" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_6" />
+        </ct:object>
+        <ct:object name="AI_Tst_7" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_7" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_7" />
+        </ct:object>
+        <ct:object name="AI_Tst_8" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_8" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_8" />
+        </ct:object>
+        <ct:object name="AI_Tst_9" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_9" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_9" />
+        </ct:object>
+        <ct:object name="AI_Tst_10" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_10" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_10" />
+        </ct:object>
+        <ct:object name="AI_Tst_11" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_11" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_11" />
+        </ct:object>
+        <ct:object name="AI_Tst_12" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Tst_12" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Tst_12" />
+        </ct:object>
+        <ct:object name="AI_dPinGTU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_dPinGTU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_dPinGTU" />
+        </ct:object>
+        <ct:object name="AI_dPinGTUstat" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_dPinGTUstat" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_dPinGTUstat" />
+        </ct:object>
+        <ct:object name="AI_Pv_outKnd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Pv_outKnd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Pv_outKnd" />
+        </ct:object>
+        <ct:object name="AI_Pv_outKvd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Pv_outKvd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Pv_outKvd" />
+        </ct:object>
+        <ct:object name="AI_dPatm_Pst" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_dPatm_Pst" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_dPatm_Pst" />
+        </ct:object>
+        <ct:object name="AI_PvRPK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PvRPK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PvRPK" />
+        </ct:object>
+        <ct:object name="AI_P_inSTrazg" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_inSTrazg" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_inSTrazg" />
+        </ct:object>
+        <ct:object name="AI_P_ohlTND" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ohlTND" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ohlTND" />
+        </ct:object>
+        <ct:object name="AI_Pm_inGTU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Pm_inGTU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Pm_inGTU" />
+        </ct:object>
+        <ct:object name="AI_Psufl" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Psufl" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Psufl" />
+        </ct:object>
+        <ct:object name="AI_PinSK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinSK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinSK" />
+        </ct:object>
+        <ct:object name="AI_PinDGgk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinDGgk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinDGgk" />
+        </ct:object>
+        <ct:object name="AI_PinDGdk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinDGdk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinDGdk" />
+        </ct:object>
+        <ct:object name="AI_PinCM" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinCM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinCM" />
+        </ct:object>
+        <ct:object name="AI_PoutDGgk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PoutDGgk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PoutDGgk" />
+        </ct:object>
+        <ct:object name="AI_PoutDGdk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PoutDGdk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PoutDGdk" />
+        </ct:object>
+        <ct:object name="AI_PinDK2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinDK2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinDK2" />
+        </ct:object>
+        <ct:object name="AI_PoutCK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PoutCK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PoutCK" />
+        </ct:object>
+        <ct:object name="AI_Pv_KVDohlDK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Pv_KVDohlDK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Pv_KVDohlDK" />
+        </ct:object>
+        <ct:object name="AI_PinGK" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinGK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinGK" />
+        </ct:object>
+        <ct:object name="AI_PinDK1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinDK1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinDK1" />
+        </ct:object>
+        <ct:object name="AI_PinDGcm" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinDGcm" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinDGcm" />
+        </ct:object>
+        <ct:object name="AI_Vpp" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Vpp" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Vpp" />
+        </ct:object>
+        <ct:object name="AI_Vzp" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Vzp" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Vzp" />
+        </ct:object>
+        <ct:object name="AI_Ivna_1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_1" />
+        </ct:object>
+        <ct:object name="AI_Ivna_2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_2" />
+        </ct:object>
+        <ct:object name="AI_Ivna_0" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_0" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Ivna_0" />
+        </ct:object>
+        <ct:object name="AI_VNA1_Isin" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_VNA1_Isin" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_VNA1_Isin" />
+        </ct:object>
+        <ct:object name="AI_VNA1_Icos" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_VNA1_Icos" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_VNA1_Icos" />
+        </ct:object>
+        <ct:object name="AI_VNA2_Isin" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_VNA2_Isin" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_VNA2_Isin" />
+        </ct:object>
+        <ct:object name="AI_VNA2_Icos" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_VNA2_Icos" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_VNA2_Icos" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT1" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT2" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT3" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT3" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT3" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT4" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT4" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT4" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT5" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT5" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT5" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT6" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT6" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT6" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT1" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT2" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT3" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT3" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT3" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT4" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT4" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT4" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT5" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT5" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT5" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT6" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT6" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT6" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT7" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT7" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT7" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT8" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT8" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT8" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT9" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT9" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT9" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT10" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT10" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT10" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT11" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT11" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT11" />
+        </ct:object>
+        <ct:object name="AI_PP_ZHT12" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT12" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PP_ZHT12" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT7" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT7" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT7" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT8" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT8" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT8" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT9" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT9" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT9" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT10" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT10" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT10" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT11" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT11" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT11" />
+        </ct:object>
+        <ct:object name="AI_P_ZHT12" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT12" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_ZHT12" />
+        </ct:object>
+        <ct:object name="AI_POS_DGdk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGdk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGdk" />
+        </ct:object>
+        <ct:object name="AI_POS_DGgk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGgk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGgk" />
+        </ct:object>
+        <ct:object name="AI_POS_DGck" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGck" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_POS_DGck" />
+        </ct:object>
+        <ct:object name="AI_Qtg_sum" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_sum" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_sum" />
+        </ct:object>
+        <ct:object name="AI_Qtg_Kcm" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_Kcm" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_Kcm" />
+        </ct:object>
+        <ct:object name="AI_Qtg_gk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_gk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_gk" />
+        </ct:object>
+        <ct:object name="AI_Qtg_dk" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_dk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Qtg_dk" />
+        </ct:object>
+        <ct:object name="AI_PgoutTVD" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PgoutTVD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PgoutTVD" />
+        </ct:object>
+        <ct:object name="AI_APK_POS" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_APK_POS" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_APK_POS" />
+        </ct:object>
+        <ct:object name="AI_P_outVVT" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_P_outVVT" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_P_outVVT" />
+        </ct:object>
+        <ct:object name="AI_Pg_outN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_Pg_outN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_Pg_outN" />
+        </ct:object>
+        <ct:object name="AI_dP_Conf" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_dP_Conf" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_dP_Conf" />
+        </ct:object>
+        <ct:object name="AI_PinStV" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_PinStV" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_PinStV" />
+        </ct:object>
+        <ct:object name="AI_POS_KPVV" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AI.AI_POS_KPVV" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AI.AI_POS_KPVV" />
+        </ct:object>
+        <ct:object name="AI_Tmbd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tmbd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tmbd" />
+        </ct:object>
+        <ct:object name="AI_TpopN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_TpopN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_TpopN" />
+        </ct:object>
+        <ct:object name="AI_TzopN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_TzopN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_TzopN" />
+        </ct:object>
+        <ct:object name="AI_TpupN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_TpupN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_TpupN" />
+        </ct:object>
+        <ct:object name="AI_TzupN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_TzupN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_TzupN" />
+        </ct:object>
+        <ct:object name="AI_Tg_inN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tg_inN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tg_inN" />
+        </ct:object>
+        <ct:object name="AI_Tg_outN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tg_outN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tg_outN" />
+        </ct:object>
+        <ct:object name="AI_Tvod_inTO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_inTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_inTO" />
+        </ct:object>
+        <ct:object name="AI_Tvod_outTO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_outTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_outTO" />
+        </ct:object>
+        <ct:object name="AI_Tv_inKGTU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inKGTU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inKGTU" />
+        </ct:object>
+        <ct:object name="AI_Tv_inOG" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inOG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inOG" />
+        </ct:object>
+        <ct:object name="AI_Tv_inON" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inON" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inON" />
+        </ct:object>
+        <ct:object name="AI_Tv_inBNKU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inBNKU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inBNKU" />
+        </ct:object>
+        <ct:object name="AI_Tm_inAVOMN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tm_inAVOMN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tm_inAVOMN" />
+        </ct:object>
+        <ct:object name="AI_Tm_outAVOMN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tm_outAVOMN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tm_outAVOMN" />
+        </ct:object>
+        <ct:object name="AI_Tm_inAVOMD" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tm_inAVOMD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tm_inAVOMD" />
+        </ct:object>
+        <ct:object name="AI_Tm_outAVOMD" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tm_outAVOMD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tm_outAVOMD" />
+        </ct:object>
+        <ct:object name="AI_Tvod_outUt" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_outUt" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tvod_outUt" />
+        </ct:object>
+        <ct:object name="AI_POS_ZsTUT" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_POS_ZsTUT" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_POS_ZsTUT" />
+        </ct:object>
+        <ct:object name="AI_POS_ZsBUT" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_POS_ZsBUT" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_POS_ZsBUT" />
+        </ct:object>
+        <ct:object name="AI_Tv_inBB" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inBB" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_inBB" />
+        </ct:object>
+        <ct:object name="AI_Lmbd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Lmbd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Lmbd" />
+        </ct:object>
+        <ct:object name="AI_Vpon" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Vpon" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Vpon" />
+        </ct:object>
+        <ct:object name="AI_Vzon" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Vzon" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Vzon" />
+        </ct:object>
+        <ct:object name="AI_Lmbn" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Lmbn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Lmbn" />
+        </ct:object>
+        <ct:object name="AI_Qtg" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Qtg" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Qtg" />
+        </ct:object>
+        <ct:object name="AI_Vlag" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Vlag" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Vlag" />
+        </ct:object>
+        <ct:object name="AI_Tair" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tair" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tair" />
+        </ct:object>
+        <ct:object name="AI_V_VOD1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_V_VOD1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_V_VOD1" />
+        </ct:object>
+        <ct:object name="AI_V_VOD2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_V_VOD2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_V_VOD2" />
+        </ct:object>
+        <ct:object name="AI_Pg_outTnd" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pg_outTnd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pg_outTnd" />
+        </ct:object>
+        <ct:object name="AI_Ttg_outMSH" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Ttg_outMSH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Ttg_outMSH" />
+        </ct:object>
+        <ct:object name="AI_dPtg_MSH" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_dPtg_MSH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_dPtg_MSH" />
+        </ct:object>
+        <ct:object name="AI_Ptg_inMSH" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Ptg_inMSH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Ptg_inMSH" />
+        </ct:object>
+        <ct:object name="AI_Pm_outGTU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pm_outGTU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pm_outGTU" />
+        </ct:object>
+        <ct:object name="AI_Pg_inN" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pg_inN" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pg_inN" />
+        </ct:object>
+        <ct:object name="AI_Pmsn" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pmsn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pmsn" />
+        </ct:object>
+        <ct:object name="AI_dPmg_N" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_dPmg_N" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_dPmg_N" />
+        </ct:object>
+        <ct:object name="AI_Tmbn" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tmbn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tmbn" />
+        </ct:object>
+        <ct:object name="AI_Pms_inAVOM" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pms_inAVOM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pms_inAVOM" />
+        </ct:object>
+        <ct:object name="AI_Lmacc" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Lmacc" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Lmacc" />
+        </ct:object>
+        <ct:object name="AI_dPatm_Pzv" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_dPatm_Pzv" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_dPatm_Pzv" />
+        </ct:object>
+        <ct:object name="AI_Pvod_inTO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pvod_inTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pvod_inTO" />
+        </ct:object>
+        <ct:object name="AI_Pvod_outTO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Pvod_outTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Pvod_outTO" />
+        </ct:object>
+        <ct:object name="AI_dPtg_FO" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_dPtg_FO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_dPtg_FO" />
+        </ct:object>
+        <ct:object name="AI_Patm" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Patm" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Patm" />
+        </ct:object>
+        <ct:object name="AI_dPv_VOU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_dPv_VOU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_dPv_VOU" />
+        </ct:object>
+        <ct:object name="AI_Tv_NKU" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_Tv_NKU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_Tv_NKU" />
+        </ct:object>
+        <ct:object name="AI_U1" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_U1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_U1" />
+        </ct:object>
+        <ct:object name="AI_U2" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_U2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_U2" />
+        </ct:object>
+        <ct:object name="AI_U3" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_U3" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_U3" />
+        </ct:object>
+        <ct:object name="AI_U4" base-type="Types.AI.AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AI.AI_U4" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_U4" />
+        </ct:object>
+      </ct:object>
+      <ct:object name="AE" aspect="Types.IOS_Aspect" access-level="public">
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="AE_Ngg" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Ngg" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Ngg" />
+        </ct:object>
+        <ct:object name="AE_Nknd" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nknd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nknd" />
+        </ct:object>
+        <ct:object name="AE_NGG_MG" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_NGG_MG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_NGG_MG" />
+        </ct:object>
+        <ct:object name="AE_TstMax" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_TstMax" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_TstMax" />
+        </ct:object>
+        <ct:object name="AE_TtzapMax" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_TtzapMax" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_TtzapMax" />
+        </ct:object>
+        <ct:object name="AE_Gt_zap" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_zap" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_zap" />
+        </ct:object>
+        <ct:object name="AE_Gt_roz_min" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz_min" />
+        </ct:object>
+        <ct:object name="AE_Gt_roz_max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz_max" />
+        </ct:object>
+        <ct:object name="AE_Gt_roz" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_roz" />
+        </ct:object>
+        <ct:object name="AE_nvdOpenKP" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_nvdOpenKP" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_nvdOpenKP" />
+        </ct:object>
+        <ct:object name="AE_nvdCloseKP" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_nvdCloseKP" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_nvdCloseKP" />
+        </ct:object>
+        <ct:object name="AE_nvdOpenKPG" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_nvdOpenKPG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_nvdOpenKPG" />
+        </ct:object>
+        <ct:object name="AE_nvdCloseKPG" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_nvdCloseKPG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_nvdCloseKPG" />
+        </ct:object>
+        <ct:object name="AE_Ngg_Max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_Max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_Max" />
+        </ct:object>
+        <ct:object name="AE_GT_max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_GT_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_GT_max" />
+        </ct:object>
+        <ct:object name="AE_GtdivPk" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_GtdivPk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_GtdivPk" />
+        </ct:object>
+        <ct:object name="AE_Pk_ogr_nom" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Pk_ogr_nom" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Pk_ogr_nom" />
+        </ct:object>
+        <ct:object name="AE_dNgg_CTB" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_dNgg_CTB" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_dNgg_CTB" />
+        </ct:object>
+        <ct:object name="AE_dNgg" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_dNgg" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_dNgg" />
+        </ct:object>
+        <ct:object name="AE_dGtStart" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_dGtStart" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_dGtStart" />
+        </ct:object>
+        <ct:object name="AE_Nst" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nst" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nst" />
+        </ct:object>
+        <ct:object name="AE_LowLimitSR" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_LowLimitSR" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_LowLimitSR" />
+        </ct:object>
+        <ct:object name="AE_HighLimitP" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_HighLimitP" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_HighLimitP" />
+        </ct:object>
+        <ct:object name="AE_HighLimitE" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_HighLimitE" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_HighLimitE" />
+        </ct:object>
+        <ct:object name="AE_Nst_otn" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nst_otn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nst_otn" />
+        </ct:object>
+        <ct:object name="AE_Qn" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Qn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Qn" />
+        </ct:object>
+        <ct:object name="AE_Nst_ogr" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nst_ogr" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nst_ogr" />
+        </ct:object>
+        <ct:object name="AE_Nst_max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nst_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nst_max" />
+        </ct:object>
+        <ct:object name="AE_Skvaz" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Skvaz" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Skvaz" />
+        </ct:object>
+        <ct:object name="AE_Ngg_norm" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_norm" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_norm" />
+        </ct:object>
+        <ct:object name="AE_Tt" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Tt" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Tt" />
+        </ct:object>
+        <ct:object name="AE_Ttzap" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Ttzap" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Ttzap" />
+        </ct:object>
+        <ct:object name="AE_VNA1_POS" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_VNA1_POS" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_VNA1_POS" />
+        </ct:object>
+        <ct:object name="AE_VNA2_POS" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_VNA2_POS" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_VNA2_POS" />
+        </ct:object>
+        <ct:object name="AE_contur" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_contur" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_contur" />
+        </ct:object>
+        <ct:object name="AE_condition" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_condition" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_condition" />
+        </ct:object>
+        <ct:object name="AE_DG_POS" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_DG_POS" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_DG_POS" />
+        </ct:object>
+        <ct:object name="AE_PressRatio" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_PressRatio" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_PressRatio" />
+        </ct:object>
+        <ct:object name="AE_Pk" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Pk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Pk" />
+        </ct:object>
+        <ct:object name="AE_SurgeRes" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_SurgeRes" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_SurgeRes" />
+        </ct:object>
+        <ct:object name="AE_Tst" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Tst" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Tst" />
+        </ct:object>
+        <ct:object name="AE_Ngg_set" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_set" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Ngg_set" />
+        </ct:object>
+        <ct:object name="AE_Gt_tek" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tek" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tek" />
+        </ct:object>
+        <ct:object name="AE_VibegGGTimer" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_VibegGGTimer" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_VibegGGTimer" />
+        </ct:object>
+        <ct:object name="AE_VibegSTTimer" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_VibegSTTimer" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_VibegSTTimer" />
+        </ct:object>
+        <ct:object name="AE_QTGM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_QTGM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_QTGM" />
+        </ct:object>
+        <ct:object name="AE_QTG" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_QTG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_QTG" />
+        </ct:object>
+        <ct:object name="AE_NARNOM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NARNOM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NARNOM" />
+        </ct:object>
+        <ct:object name="AE_NARMAX" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NARMAX" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NARMAX" />
+        </ct:object>
+        <ct:object name="AE_NARSUM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NARSUM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NARSUM" />
+        </ct:object>
+        <ct:object name="AE_NAREQV" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NAREQV" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NAREQV" />
+        </ct:object>
+        <ct:object name="AE_NUMSTART" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NUMSTART" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NUMSTART" />
+        </ct:object>
+        <ct:object name="AE_NUMHP" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NUMHP" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NUMHP" />
+        </ct:object>
+        <ct:object name="AE_NUMNO" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NUMNO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NUMNO" />
+        </ct:object>
+        <ct:object name="AE_NUMVO" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NUMVO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NUMVO" />
+        </ct:object>
+        <ct:object name="AE_NUMAO" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NUMAO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NUMAO" />
+        </ct:object>
+        <ct:object name="AE_QCOMM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_QCOMM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_QCOMM" />
+        </ct:object>
+        <ct:object name="AE_N" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_N" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_N" />
+        </ct:object>
+        <ct:object name="AE_NE" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_NE" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_NE" />
+        </ct:object>
+        <ct:object name="AE_GGAS_CH" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CH" />
+        </ct:object>
+        <ct:object name="AE_GGAS_LH" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LH" />
+        </ct:object>
+        <ct:object name="AE_GGAS_CD" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CD" />
+        </ct:object>
+        <ct:object name="AE_GGAS_LD" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LD" />
+        </ct:object>
+        <ct:object name="AE_GGAS_CM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CM" />
+        </ct:object>
+        <ct:object name="AE_GGAS_LM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LM" />
+        </ct:object>
+        <ct:object name="AE_GGAS_CY" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CY" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_CY" />
+        </ct:object>
+        <ct:object name="AE_GGAS_LY" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LY" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_GGAS_LY" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_CH" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CH" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_LH" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LH" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LH" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_CD" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CD" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_LD" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LD" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_CM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CM" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_LM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LM" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LM" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_CY" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CY" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_CY" />
+        </ct:object>
+        <ct:object name="AE_TGGAS_LY" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LY" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_TGGAS_LY" />
+        </ct:object>
+        <ct:object name="AE_Gn" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Gn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Gn" />
+        </ct:object>
+        <ct:object name="AE_Kpde" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Kpde" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Kpde" />
+        </ct:object>
+        <ct:object name="AE_Qmd" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Qmd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Qmd" />
+        </ct:object>
+        <ct:object name="AE_Nst_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Nst_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Nst_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_Ngg_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Ngg_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Ngg_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_Tst_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Tst_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Tst_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_Pk_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Pk_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Pk_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_Pg_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Pg_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Pg_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_E_UP_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_E_UP_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_E_UP_Z" />
+        </ct:object>
+        <ct:object name="AE_Nst_DN_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Nst_DN_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Nst_DN_Z" />
+        </ct:object>
+        <ct:object name="AE_Ngg_DN_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Ngg_DN_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Ngg_DN_Z" />
+        </ct:object>
+        <ct:object name="AE_PZ_DN_Z" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_PZ_DN_Z" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_PZ_DN_Z" />
+        </ct:object>
+        <ct:object name="AE_Nst_set" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_Nst_set" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Nst_set" />
+        </ct:object>
+      </ct:object>
+    </ct:object>
+</omx>
