@@ -974,52 +974,54 @@ def create_index_nku(name_plc_nku, sl_signal_nku):
     with open('Source_list_plc.txt', 'r', encoding='UTF-8') as f_source:
         while 8:
             line_source_nku = f_source.readline().strip().split(',')
+            if '#' in ''.join(line_source_nku):  # если закоментировано, то пропускаем
+                continue
             if line_source_nku[0] == name_plc_nku:
                 break
             if line_source_nku == ['']:
                 print(f'В списке источников не найден контроллер, в котором должны быть сигналы нку - {name_plc_nku}')
                 break
-        sl_global_nku, sl_tmp_nku = {}, {}
+            sl_global_nku, sl_tmp_nku = {}, {}
 
-        # Если есть файл обработки НКУ
-        if os.path.exists(os.path.join(line_source_nku[1], '0_Par_D_NKU.st')):
-            with open(os.path.join(line_source_nku[1], '0_Par_D_NKU.st'), 'rt') as f_par_nku:
-                text = f_par_nku.read().split('\n')
-            sl_tmp_nku = create_sl_nku(text, 'DI|', sl_signal_nku)
+            # Если есть файл обработки НКУ
+            if os.path.exists(os.path.join(line_source_nku[1], '0_Par_D_NKU.st')):
+                with open(os.path.join(line_source_nku[1], '0_Par_D_NKU.st'), 'rt') as f_par_nku:
+                    text = f_par_nku.read().split('\n')
+                sl_tmp_nku = create_sl_nku(text, 'DI|', sl_signal_nku)
 
-    # Если есть глобальный словарь
-    if os.path.exists(os.path.join(line_source_nku[1], 'global0.var')):
-        with open(os.path.join(line_source_nku[1], 'global0.var'), 'rt') as f_global:
-            for line in f_global:
-                line = line.strip()
-                if 'D_INP_NKU|' in line and len(line.split(',')) >= 10:
-                    line = line.split(',')
-                    sl_global_nku[line[0][line[0].find('|')+1:]] = [max(int(line[9]), int(line[10])),
-                                                                    line[1]]
-    # В словаре лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
-    sl_global_nku = {key: value for key, value in sl_global_nku.items() if key[:key.find('[')] in lst_signal_nku}
-    # доп обработка словаря, отсекам те, которые не указаны в локальном
-    sl_global_nku = {key: value for key, value in sl_global_nku.items()
-                     if int(key[key.find('[')+1:key.find(']')]) in sl_tmp_nku}
+            # Если есть глобальный словарь
+            if os.path.exists(os.path.join(line_source_nku[1], 'global0.var')):
+                with open(os.path.join(line_source_nku[1], 'global0.var'), 'rt') as f_global:
+                    for line in f_global:
+                        line = line.strip()
+                        if 'D_INP_NKU|' in line and len(line.split(',')) >= 10:
+                            line = line.split(',')
+                            sl_global_nku[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])), line[1]]
 
-    # Обработка и запись в карту наработок
-    if sl_global_nku:
-        s_all = create_group_nku(sl_global_par=sl_global_nku,
-                                 sl_local_par=sl_tmp_nku,
-                                 template_no_arc_index=tmp_ind_no_arc,
-                                 pref_par='NKU',
-                                 source=line_source_nku[0])
-    # Если нет папки File_out, то создадим её
-    if not os.path.exists('File_out'):
-        os.mkdir('File_out')
-    # Если нет папки File_out/Maps, то создадим её
-    if not os.path.exists(os.path.join('File_out', 'Maps')):
-        os.mkdir(os.path.join('File_out', 'Maps'))
-    check_diff_file(check_path=os.path.join('File_out', 'Maps'),
-                    file_name=f'trei_map_NKU_{line_source_nku[0]}.xml',
-                    new_data='<root format-version=\"0\">\n' + s_all.rstrip() + '\n</root>',
-                    message_print=f'Требуется заменить карту адресов НКУ контроллера {line_source_nku[0]}')
+            # В словаре лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
+            sl_global_nku = {key: value for key, value in sl_global_nku.items() if
+                             key[:key.find('[')] in lst_signal_nku}
+            # доп обработка словаря, отсекам те, которые не указаны в локальном
+            sl_global_nku = {key: value for key, value in sl_global_nku.items()
+                             if int(key[key.find('[') + 1:key.find(']')]) in sl_tmp_nku}
 
+            # Обработка и запись в карту наработок
+            if sl_global_nku:
+                s_all = create_group_nku(sl_global_par=sl_global_nku,
+                                         sl_local_par=sl_tmp_nku,
+                                         template_no_arc_index=tmp_ind_no_arc,
+                                         pref_par='NKU',
+                                         source=line_source_nku[0])
+            # Если нет папки File_out, то создадим её
+            if not os.path.exists('File_out'):
+                os.mkdir('File_out')
+            # Если нет папки File_out/Maps, то создадим её
+            if not os.path.exists(os.path.join('File_out', 'Maps')):
+                os.mkdir(os.path.join('File_out', 'Maps'))
+            check_diff_file(check_path=os.path.join('File_out', 'Maps'),
+                            file_name=f'trei_map_NKU_{line_source_nku[0]}.xml',
+                            new_data='<root format-version=\"0\">\n' + s_all.rstrip() + '\n</root>',
+                            message_print=f'Требуется заменить карту адресов НКУ контроллера {line_source_nku[0]}')
 
 def create_group_nku(sl_global_par, sl_local_par, template_no_arc_index, pref_par, source):
     sl_data_cat = {

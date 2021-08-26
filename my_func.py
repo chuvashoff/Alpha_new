@@ -408,8 +408,8 @@ def is_create_objects_diag(sl):
         'M558O': 'Types.DIAG_M558O.DIAG_M558O_PLC_View',
         'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
         'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View',
-        'M531I': 'Types.DIAG_M531I.DIAG_CPU_M531I_PLC_View',
-        'M543G': 'Types.DIAG_M543G.DIAG_CPU_M543G_PLC_View'
+        'M531I': 'Types.DIAG_M531I.DIAG_M531I_PLC_View',
+        'M543G': 'Types.DIAG_M543G.DIAG_M543G_PLC_View'
     }
     tmp_line_object = ''
     for key, value in sl.items():
