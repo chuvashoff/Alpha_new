@@ -7,7 +7,7 @@ from func_for_v3 import *
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
-    all_CPU = ()  # кортеж контроллеров
+    # all_CPU = ()  # кортеж контроллеров
     pref_IP = ()  # кортеж префиксов IP
     sl_object_all = {}  # {(Объект, рус имя объекта, индекс объекта):
     # {контроллер: (ip основной, ip резервный, индекс объекта)} }
@@ -33,14 +33,21 @@ try:
     # Считываем файл-шаблон для AI  AE SET
     with open(os.path.join('Template', 'Temp_AIAESET'), 'r', encoding='UTF-8') as f:
         tmp_object_AIAESET = f.read()
+    # Считываем файл-шаблон для DI
+    with open(os.path.join('Template', 'Temp_DI'), 'r', encoding='UTF-8') as f:
+        tmp_object_DI = f.read()
 
+    print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
     # читаем список всех контроллеров
+    print(datetime.datetime.now(), '- Начало 2')
     sheet = book['Настройки']  # worksheets[1]
+    '''
     cells = sheet['B2': 'B22']
     for p in cells:
         if p[0].value is not None:
             all_CPU += (p[0].value,)
+    '''
     # Читаем префиксы IP адреса ПЛК(нужно продумать про новые конфигураторы)
     cells = sheet['A1': 'B' + str(sheet.max_row)]
     for p in cells:
@@ -98,6 +105,19 @@ try:
                     'xmlns:ct="automation.control">\n')
             f.write(f'    <ct:object name="{objects[0]}" access-level="public">\n')
             f.write(f'      <attribute type="unit.System.Attributes.Description" value="{objects[1]}" />\n')
+            # Добавляем агрегаторы
+            f.write(f'      <ct:object name="Agregator_Important_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'      <ct:object name="Agregator_LessImportant_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'      <ct:object name="Agregator_N_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'      <ct:object name="Agregator_Repair_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
 
     # Измеряемые
     write_ai_ae(sheet=book['Измеряемые'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
@@ -105,6 +125,9 @@ try:
     # Расчетные
     write_ai_ae(sheet=book['Расчетные'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
                 tmp_ios=tmp_ios, group_objects='AE')
+    # Дискретные
+    write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
+             tmp_ios=tmp_ios, group_objects='DI')
 
     # Для каждого объекта...
     for objects in sl_object_all:
