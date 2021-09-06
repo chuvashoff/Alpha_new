@@ -1267,7 +1267,172 @@
             <attribute type="Attributes.sColorOn" value="404" />
           </ct:object>
         </ct:object>
-	    <trei:unet-address-map name="UnetAddressMap" />
+      <ct:object name="APR" access-level="public" >
+        <ct:object name="IM" base-type="Types.APR_IM.APR_IM_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+          <attribute type="unit.System.Attributes.Description" value="АПР" />
+        </ct:object>
+        <ct:object name="Tuning" access-level="public" >
+          <ct:object name="Decline_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Линия снижения степени сжатия для снятия ограничения" />
+          </ct:object>
+          <ct:object name="Decline_P" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Линия снижения выходного давления для снятия ограничения, МПа" />
+          </ct:object>
+          <ct:object name="Dv" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Относительная плотность газа по воздуху" />
+          </ct:object>
+          <ct:object name="DZ_APK" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Зона нечувствительности АПК, %" />
+          </ct:object>
+          <ct:object name="DZ_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Зона нечувствительности регулирования ограничения по ПЗ, %" />
+          </ct:object>
+          <ct:object name="K0main" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 0-й степени основной системы координат" />
+          </ct:object>
+          <ct:object name="K0res1" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 0-й степени 1-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="K0res2" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 0-й степени 2-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="K1main" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 1-й степени основной системы координат" />
+          </ct:object>
+          <ct:object name="K1res1" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 1-й степени 1-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="K1res2" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 1-й степени 2-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="K2main" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 2-й степени основной системы координат" />
+          </ct:object>
+          <ct:object name="K2res1" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 2-й степени 1-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="K2res2" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент при 2-й степени 2-й резервной системы координат" />
+          </ct:object>
+          <ct:object name="Kconf" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Коэффициент конфузора нагнетателя" />
+          </ct:object>
+          <ct:object name="Kp_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Пропорциональный коэффициент регулирования ограничения по степени сжатия" />
+          </ct:object>
+          <ct:object name="Kp_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Пропорциональный коэффициент регулирования ограничения по выходному давлению" />
+          </ct:object>
+          <ct:object name="Kp_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Пропорциональный коэффициент регулирования ограничения по помпажному запасу" />
+          </ct:object>
+          <ct:object name="MaxDropSR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальная скорость падения помпажного запаса, %/с" />
+          </ct:object>
+          <ct:object name="MaxLowSR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальное снижение ПЗ ниже линии регулирования, %" />
+          </ct:object>
+          <ct:object name="MaxNstNorm" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальные относительные обороты Nст для ГДХ" />
+          </ct:object>
+          <ct:object name="MaxNstRiseUp" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальные обороты СТ при автоматическом подъеме, об/мин" />
+          </ct:object>
+          <ct:object name="MaxRaisePout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальная скорость роста выходного давления, МПа/с" />
+          </ct:object>
+          <ct:object name="MaxRatedPconf" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальная скорость падения dP на конфузоре, кПа/с" />
+          </ct:object>
+          <ct:object name="MaxRateNst" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальная скорость нарастания Nст, (об/мин)/с" />
+          </ct:object>
+          <ct:object name="MinNstNorm" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Минимальные относительные обороты Nст для ГДХ" />
+          </ct:object>
+          <ct:object name="Mv" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Молярная масса" />
+          </ct:object>
+          <ct:object name="Nnom" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Номинальная Nст, об/мин" />
+          </ct:object>
+          <ct:object name="Nst_MIN" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Минимальные оброты Nст при автоматическом снижении, об/мин" />
+          </ct:object>
+          <ct:object name="RiseUpZone" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Ширина зоны автоматического подъема, % ПЗ" />
+          </ct:object>
+          <ct:object name="Set_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальная степень сжатия" />
+          </ct:object>
+          <ct:object name="Set_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Максимальное давление на выходе Н, МПа" />
+          </ct:object>
+          <ct:object name="Set_SurgeRes" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Минимальный помпажный запас,%" />
+          </ct:object>
+          <ct:object name="Step1APK_LowSR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 1 открытия АПК (снижение ПЗ ниже линии ограничения), %" />
+          </ct:object>
+          <ct:object name="Step1APK_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 1 открытия АПК (Превышение максимальной скорости роста Рвых), %" />
+          </ct:object>
+          <ct:object name="Step1APK_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 1 открытия АПК (Превышение максимальной скорости падения ПЗ), %" />
+          </ct:object>
+          <ct:object name="Step2APK_LowSR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 2 открытия АПК (снижение ПЗ ниже линии ограничения), %" />
+          </ct:object>
+          <ct:object name="Step2APK_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 2 открытия АПК (Превышение максимальной скорости роста Рвых), %" />
+          </ct:object>
+          <ct:object name="Step2APK_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Шаг 2 открытия АПК (Превышение максимальной скорости падения ПЗ), %" />
+          </ct:object>
+          <ct:object name="Td_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Дифференциальный коэффициент регулирования ограничения по степени сжатия" />
+          </ct:object>
+          <ct:object name="Td_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Дифференциальный коэффициент регулирования ограничения по выходному давлению" />
+          </ct:object>
+          <ct:object name="Td_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Дифференциальный коэффициент регулирования ограничения по помпажному запасу" />
+          </ct:object>
+          <ct:object name="Ti_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Интегральный коэффициент регулирования ограничения по степени сжатия" />
+          </ct:object>
+          <ct:object name="Ti_Pout" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Интегральный коэффициент регулирования ограничения по выходному давлению" />
+          </ct:object>
+          <ct:object name="Ti_SR" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Интегральный коэффициент регулирования ограничения по помпажному запасу" />
+          </ct:object>
+          <ct:object name="TimeCloseAuto" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время закрытия АПК в автоматическом режиме, с" />
+          </ct:object>
+          <ct:object name="TimeCloseRiseUp" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время закрытия АПК в режиме автоматического подъема, с" />
+          </ct:object>
+          <ct:object name="TimeCloseRU" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время закрытия АПК в режиме РУ, с" />
+          </ct:object>
+          <ct:object name="TimeCloseTest" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время закрытия в режиме помпажного тестирования, с" />
+          </ct:object>
+          <ct:object name="TimeOpenAuto" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время открытия АПК в автоматическом режиме, с" />
+          </ct:object>
+          <ct:object name="TimeOpenRU" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Время открытия АПК в режиме РУ, с" />
+          </ct:object>
+          <ct:object name="UpDZ_E" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Мертвая зона регулирования ограничения по степени сжатия (верхнее ограничение)" />
+          </ct:object>
+          <ct:object name="UpDZ_P" base-type="Types.APR_tuning.APR_tuning_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Мертвая зона регулирования ограничения по выходному давлению (верхнее ограничение)" />
+          </ct:object>
+        </ct:object>
+      </ct:object>	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
     </trei:master-module>
   </trei:trei>

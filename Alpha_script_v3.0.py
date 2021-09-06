@@ -36,6 +36,12 @@ try:
     # Считываем файл-шаблон для DI
     with open(os.path.join('Template', 'Temp_DI'), 'r', encoding='UTF-8') as f:
         tmp_object_DI = f.read()
+    # Считываем файл-шаблон для АПР ПЛК-аспекта
+    with open(os.path.join('Template', 'Temp_APR'), 'r', encoding='UTF-8') as f:
+        tmp_apr = f.read()
+    # Считываем файл-шаблон для АПР IOS-аспекта
+    with open(os.path.join('Template', 'Temp_APR_IOs'), 'r', encoding='UTF-8') as f:
+        tmp_apr_ios = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -70,6 +76,19 @@ try:
                     tmp_dig_ip2 = (last_dig_ip if '(' not in last_dig_ip else last_dig_ip[last_dig_ip.find('(') + 1:-1])
                     sl_tmp[p[i - 10].value] = (tmp_dig_ip1, tmp_dig_ip2)
             sl_object_all[p[1].value, p[2].value, p[0].value.replace('Объект', '').strip()] = sl_tmp
+
+    # Мониторинг ТР и АПР в контроллере
+    sl_CPU_spec = {}
+    cells = sheet['B1':'L21']
+    for p in cells:
+        if p[0].value is None:
+            break
+        else:
+            sl_CPU_spec[p[0].value] = ()
+            if p[is_f_ind(cells[0], 'FLR')].value == 'ON' and p[is_f_ind(cells[0], 'Тип ТР')].value == 'ПС90':
+                sl_CPU_spec[p[0].value] += ('ТР',)
+            if p[is_f_ind(cells[0], 'APR')].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('АПР',)
 
     # Чистим файлы с прошлой сборки
     # Для каждого объекта...
@@ -128,6 +147,20 @@ try:
     # Дискретные
     write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
              tmp_ios=tmp_ios, group_objects='DI')
+    # АПР, если он есть в контроллере
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Если есть АПР в данном контроллере...
+            if 'АПР' in sl_CPU_spec[cpu]:
+                # ...то записываем в нужный файл ПЛК-аспект АПР
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(tmp_apr.rstrip())
+                # ...записываем в нужный файл IOS-аспект АПР
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_apr_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.APR",
+                                                             target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
 
     # Для каждого объекта...
     for objects in sl_object_all:
