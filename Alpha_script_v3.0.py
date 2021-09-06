@@ -42,6 +42,9 @@ try:
     # Считываем файл-шаблон для АПР IOS-аспекта
     with open(os.path.join('Template', 'Temp_APR_IOs'), 'r', encoding='UTF-8') as f:
         tmp_apr_ios = f.read()
+    # Считываем файл-шаблон для IM
+    with open(os.path.join('Template', 'Temp_IM'), 'r', encoding='UTF-8') as f:
+        tmp_object_IM = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -156,11 +159,14 @@ try:
             if 'АПР' in sl_CPU_spec[cpu]:
                 # ...то записываем в нужный файл ПЛК-аспект АПР
                 with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(tmp_apr.rstrip())
+                    f.write(tmp_apr)
                 # ...записываем в нужный файл IOS-аспект АПР
                 with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write(Template(tmp_apr_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.APR",
                                                              target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
+    # ИМ
+    write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all, tmp_object_im=tmp_object_IM,
+             tmp_ios=tmp_ios, group_objects='IM')
 
     # Для каждого объекта...
     for objects in sl_object_all:

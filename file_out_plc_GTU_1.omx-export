@@ -1432,7 +1432,155 @@
             <attribute type="unit.System.Attributes.Description" value="Мертвая зона регулирования ограничения по выходному давлению (верхнее ограничение)" />
           </ct:object>
         </ct:object>
-      </ct:object>	    <trei:unet-address-map name="UnetAddressMap" />
+      </ct:object>
+        <ct:object name="IM" access-level="public" >
+          <ct:object name="KPV" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КПВ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KPG" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КПВЗ и КПГ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="ZPV1" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ЗПВ1" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="ZPV2" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ЗПВ2" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="POS" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ПОС ГТУ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="SK0" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="СК0" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="AZ1" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="АЗ №1" />
+            <attribute type="Attributes.StartView" value="6" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="AZ2" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="АЗ №2" />
+            <attribute type="Attributes.StartView" value="6" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="Vibr" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль ИВ-ТА-8-10МПО" />
+            <attribute type="Attributes.StartView" value="0" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="MNDE" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="МНДЭ" />
+            <attribute type="Attributes.StartView" value="2" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="MNE" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="МНЭ" />
+            <attribute type="Attributes.StartView" value="2" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="AVO" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="АВО" />
+            <attribute type="Attributes.StartView" value="3" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SKDK1" base-type="Types.IM1x2.IM1x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="СКДК1" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SKDK2" base-type="Types.IM1x2.IM1x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="СКДК2" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SKGK" base-type="Types.IM1x2.IM1x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="СКГК" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SKCK" base-type="Types.IM1x2.IM1x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="СКЦК" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KS1" base-type="Types.IM1x2.IM1x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КС1" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KS2" base-type="Types.IM2x2.IM2x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КС2" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KT0" base-type="Types.IM2x2.IM2x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КТ0" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="PZStV" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ПЗСтВ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="VzStV" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ВЗСтВ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="KT1" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КТ1" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KT2" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КТ2" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SHIM" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Блокировка ШИМ ВНА" />
+            <attribute type="Attributes.StartView" value="0" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="VNA" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Задание на ВНА" />
+            <attribute type="Attributes.StartView" value="4" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="KPVV" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="КПВВ" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="DG1" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ДГ1 диффузионного контура" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="DG2" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ДГ2 гомогенного контура" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="DG3" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="ДГ3 центрального контура" />
+            <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+        </ct:object>
+	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
     </trei:master-module>
   </trei:trei>
