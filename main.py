@@ -469,15 +469,17 @@ try:
                     last_dig_ip = sl_object_all[obj][1][index_tmp]
                     tmp_dig_ip1 = (last_dig_ip if '(' not in last_dig_ip else last_dig_ip[:last_dig_ip.find('(')])
                     tmp_dig_ip2 = (last_dig_ip if '(' not in last_dig_ip else last_dig_ip[last_dig_ip.find('(') + 1:-1])
-                    f.write(Template(tmp_trei).substitute(plc_name='PLC_' + i + str(num_obj_plc), plc_name_type='CPU',
-                                                          ip_eth1=pref_IP[0] + tmp_dig_ip1,
-                                                          ip_eth2=pref_IP[1] + tmp_dig_ip2,
-                                                          dp_app=tmp_line_))
+                    f.write(Template(tmp_trei).substitute(
+                        plc_name='PLC_' + i + str(num_obj_plc), plc_name_type='CPU',
+                        ip_eth1='.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{tmp_dig_ip1}'.split('.')]),
+                        ip_eth2='.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{tmp_dig_ip2}'.split('.')]),
+                        dp_app=tmp_line_))
                 # Для каждого контроллера создадим отдельный файл для импорта только его одного
-                tmp_plc = Template(tmp_trei).substitute(plc_name='PLC_' + i + str(num_obj_plc), plc_name_type='CPU',
-                                                        ip_eth1=pref_IP[0] + tmp_dig_ip1,
-                                                        ip_eth2=pref_IP[1] + tmp_dig_ip2,
-                                                        dp_app=tmp_line_)
+                tmp_plc = Template(tmp_trei).substitute(
+                    plc_name='PLC_' + i + str(num_obj_plc), plc_name_type='CPU',
+                    ip_eth1='.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{tmp_dig_ip1}'.split('.')]),
+                    ip_eth2='.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{tmp_dig_ip2}'.split('.')]),
+                    dp_app=tmp_line_)
                 # Проверка изменений, и если есть изменения, то запись
                 check_diff_file(check_path=os.path.join('File_out', 'PLC_Aspect_importDomain'),
                                 file_name=f'file_out_plc_{i}_{num_obj_plc}.omx-export',

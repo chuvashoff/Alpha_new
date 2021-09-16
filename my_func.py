@@ -42,7 +42,7 @@ def is_f_ind(cell, name_col):
 
 def is_cor_chr(st):
     sl_chr = {'<': '&lt;', '>': '&gt;', '"': '&quot;'}
-    tmp = list()
+    tmp = []
     tmp.extend(st)
     for i in range(len(tmp)):
         if tmp[i] in sl_chr:
@@ -270,8 +270,8 @@ def is_create_objects_drv(sl_drv_cpu, tuple_name_drv, template_text):
             unit = par[3]
             f_dig = par[4]
         elif par[2] == 'BOOL':
-            s_on = sl_color_di[par[6]]
-            s_off = sl_color_di[par[5]]
+            s_on = sl_color_di[par[5]]
+            s_off = sl_color_di[par[6]]
             typ_msg = par[7]
             unit = '-'
             f_dig = '0'
