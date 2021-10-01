@@ -1,8 +1,8 @@
 <omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
   <trei:trei name="PLC_GTU1" >
     <trei:master-module name="CPU" >
-      <trei:ethernet-adapter name="Eth1" address="192.168.003.010" />
-      <trei:ethernet-adapter name="Eth2" address="192.168.004.010" />
+      <trei:ethernet-adapter name="Eth1" address="192.168.3.231" />
+      <trei:ethernet-adapter name="Eth2" address="192.168.4.10" />
       <trei:unet-server name="UnetServer" address-map="PLC_GTU1.CPU.Tree.UnetAddressMap" port="6001"/>
       <dp:application-object name="Tree" access-level="public" >
         <ct:object name="Diag" access-level="public" >
@@ -11,7 +11,7 @@
               <attribute type="unit.System.Attributes.Description" value="Диагностика мастер-модуля AD100 (M903E)" />
               <attribute type="Attributes.ShortName" value="AD100" />
             </ct:object>
-            <ct:object name="AD101" base-type="Types.DIAG_M932C_2N.DIAG_M932C2_N_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="AD101" base-type="Types.DIAG_M932C_2N.DIAG_M932C_2N_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD101 (M932C_2N)" />
               <attribute type="Attributes.ShortName" value="AD101" />
               <attribute type="Attributes.Channel_1" value="Частота вращения ротора КВД (т.1)" />
@@ -87,13 +87,13 @@
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD114 (M548A)" />
               <attribute type="Attributes.ShortName" value="AD114" />
               <attribute type="Attributes.Channel_1" value="Перепад между Ратм. и полным Рв" />
-              <attribute type="Attributes.Channel_10" value="Давление масла на входе в Д" />
-              <attribute type="Attributes.Channel_11" value="Давление суфлирования" />
-              <attribute type="Attributes.Channel_12" value="Давление топливного газа на входе в СК0" />
-              <attribute type="Attributes.Channel_13" value="Давление топливного газа на входе в ДГ гомогенного коллектора" />
-              <attribute type="Attributes.Channel_14" value="Давление топливного газа на входе в ДГ диффузионных коллекторов" />
-              <attribute type="Attributes.Channel_15" value="Давление топливного газа на входе в центральный модуль" />
-              <attribute type="Attributes.Channel_16" value="Давление топливного газа на выходе ДГ гомогенного коллектора" />
+              <attribute type="Attributes.Channel_10" value="Давление суфлирования" />
+              <attribute type="Attributes.Channel_11" value="Давление топливного газа на входе в СК0" />
+              <attribute type="Attributes.Channel_12" value="Давление топливного газа на входе в ДГ гомогенного коллектора" />
+              <attribute type="Attributes.Channel_13" value="Давление топливного газа на входе в ДГ диффузионных коллекторов" />
+              <attribute type="Attributes.Channel_14" value="Давление топливного газа на входе в центральный модуль" />
+              <attribute type="Attributes.Channel_15" value="Давление топливного газа на выходе ДГ гомогенного коллектора" />
+              <attribute type="Attributes.Channel_16" value="Давление топливного газа на выходе ДГ диффузионных коллекторов" />
               <attribute type="Attributes.Channel_2" value="Перепад между Ратм. и статическим Рв" />
               <attribute type="Attributes.Channel_3" value="Полное давление воздуха за КНД" />
               <attribute type="Attributes.Channel_4" value="Давление воздуха за КВД" />
@@ -101,86 +101,86 @@
               <attribute type="Attributes.Channel_6" value="Давление воздуха в разгрузочной полости КВД" />
               <attribute type="Attributes.Channel_7" value="Давление воздуха в разгрузочной полости СТ" />
               <attribute type="Attributes.Channel_8" value="Давление воздуха охлаждения ТНД" />
-              <attribute type="Attributes.Channel_9" value="Давление воздуха после ВВТ 1 агрегата БВВТ-25" />
+              <attribute type="Attributes.Channel_9" value="Давление масла на входе в Д" />
             </ct:object>
             <ct:object name="AD115" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD115 (M548A)" />
               <attribute type="Attributes.ShortName" value="AD115" />
-              <attribute type="Attributes.Channel_1" value="Давление топливного газа на выходе ДГ диффузионных коллекторов" />
-              <attribute type="Attributes.Channel_10" value="Виброскорость корпуса двигателя в зоне задней подвески " />
-              <attribute type="Attributes.Channel_11" value="Пульсация давления в ЖТ №1 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_12" value="Пульсация давления в ЖТ №2 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_13" value="Пульсация давления в ЖТ №3 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_14" value="Пульсация давления в ЖТ №4 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_15" value="Пульсация давления в ЖТ №5 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_16" value="Пульсация давления в ЖТ №6 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_2" value="Давление топливного газа на входе в дифузионный коллектор №2" />
-              <attribute type="Attributes.Channel_3" value="Давление топливного газа на выходе ДГ центрального контура" />
-              <attribute type="Attributes.Channel_4" value="Давление воздуха отбираемого из-за КВД на охлаждение" />
-              <attribute type="Attributes.Channel_5" value="Давление топливного газа на входе в гомогенный коллектор" />
-              <attribute type="Attributes.Channel_6" value="Давление топливного газа на входе в дифузионный коллектор №1" />
-              <attribute type="Attributes.Channel_7" value="Давление топливного газа на входе в ДГ центрального модуля" />
-              <attribute type="Attributes.Channel_8" value="Резерв" />
-              <attribute type="Attributes.Channel_9" value="Виброскорость корпуса двигателя в зоне передней подвески" />
+              <attribute type="Attributes.Channel_1" value="Давление топливного газа на входе в дифузионный коллектор №2" />
+              <attribute type="Attributes.Channel_10" value="Контроль катушки 2 ВНА" />
+              <attribute type="Attributes.Channel_11" value="Общий контроль выходов ВНА" />
+              <attribute type="Attributes.Channel_12" value="Резерв" />
+              <attribute type="Attributes.Channel_13" value="Положение катушки ВНА Sin (канал 1)" />
+              <attribute type="Attributes.Channel_14" value="Положение катушки ВНА Cos (канал 1)" />
+              <attribute type="Attributes.Channel_15" value="Положение катушки ВНА Sin (канал 2)" />
+              <attribute type="Attributes.Channel_16" value="Положение катушки ВНА Cos (канал 2)" />
+              <attribute type="Attributes.Channel_2" value="Давление топливного газа на выходе ДГ центрального контура" />
+              <attribute type="Attributes.Channel_3" value="Давление воздуха отбираемого из-за КВД на охлаждение" />
+              <attribute type="Attributes.Channel_4" value="Давление топливного газа на входе в гомогенный коллектор" />
+              <attribute type="Attributes.Channel_5" value="Давление топливного газа на входе в дифузионный коллектор №1" />
+              <attribute type="Attributes.Channel_6" value="Давление топливного газа на входе в ДГ центрального модуля" />
+              <attribute type="Attributes.Channel_7" value="Виброскорость корпуса двигателя в зоне передней подвески" />
+              <attribute type="Attributes.Channel_8" value="Виброскорость корпуса двигателя в зоне задней подвески " />
+              <attribute type="Attributes.Channel_9" value="Контроль катушки 1 ВНА" />
             </ct:object>
             <ct:object name="AD116" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD116 (M548A)" />
               <attribute type="Attributes.ShortName" value="AD116" />
-              <attribute type="Attributes.Channel_1" value="Давление в ЖТ №1 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_10" value="Пульсация давления в ЖТ №10 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_11" value="Пульсация давления в ЖТ №11 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_12" value="Пульсация давления в ЖТ №12 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_13" value="Давление в КС №7 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_14" value="Давление в КС №8 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_15" value="Давление в КС №9 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_16" value="Давление в КС №10 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_2" value="Давление в ЖТ №2 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_3" value="Давление в ЖТ №3 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_4" value="Давление в ЖТ №4 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_5" value="Давление в ЖТ №5 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_6" value="Давление в ЖТ №6 (СКЗ пульсаций)" />
-              <attribute type="Attributes.Channel_7" value="Пульсация давления в ЖТ №7 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_8" value="Пульсация давления в ЖТ №8 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_9" value="Пульсация давления в ЖТ №9 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_1" value="Пульсация давления в ЖТ №1 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_10" value="Давление в ЖТ №4 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_11" value="Давление в ЖТ №5 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_12" value="Давление в ЖТ №6 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_13" value="Пульсация давления в ЖТ №7 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_14" value="Пульсация давления в ЖТ №8 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_15" value="Пульсация давления в ЖТ №9 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_16" value="Пульсация давления в ЖТ №10 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_2" value="Пульсация давления в ЖТ №2 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_3" value="Пульсация давления в ЖТ №3 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_4" value="Пульсация давления в ЖТ №4 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_5" value="Пульсация давления в ЖТ №5 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_6" value="Пульсация давления в ЖТ №6 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_7" value="Давление в ЖТ №1 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_8" value="Давление в ЖТ №2 (СКЗ пульсаций)" />
+              <attribute type="Attributes.Channel_9" value="Давление в ЖТ №3 (СКЗ пульсаций)" />
             </ct:object>
             <ct:object name="AD117" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD117 (M548A)" />
               <attribute type="Attributes.ShortName" value="AD117" />
-              <attribute type="Attributes.Channel_1" value="Давление в КС №11 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_10" value="Расход топливного газа через диффузионный коллектор" />
-              <attribute type="Attributes.Channel_11" value="Полное давление газа за ТВД" />
+              <attribute type="Attributes.Channel_1" value="Пульсация давления в ЖТ №11 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_10" value="Положение дозатора газа гомогенного коллектора" />
+              <attribute type="Attributes.Channel_11" value="Положение дозатора газа центрального контура" />
+              <attribute type="Attributes.Channel_12" value="Суммарный расход топливного газа" />
+              <attribute type="Attributes.Channel_13" value="Расход топливного газа через коллектор центрального модуля" />
+              <attribute type="Attributes.Channel_14" value="Расход топливного газа через гомогенный коллектор" />
+              <attribute type="Attributes.Channel_15" value="Расход топливного газа через диффузионный коллектор" />
+              <attribute type="Attributes.Channel_16" value="Полное давление воздуха за ТВД" />
+              <attribute type="Attributes.Channel_2" value="Пульсация давления в ЖТ №12 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_3" value="Давление в КС №7 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_4" value="Давление в КС №8 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_5" value="Давление в КС №9 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_6" value="Давление в КС №10 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_7" value="Давление в КС №11 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_8" value="Давление в КС №12 (размах пульсаций)" />
+              <attribute type="Attributes.Channel_9" value="Положение дозатора газа дифузионных коллекторов" />
+            </ct:object>
+            <ct:object name="AD118" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD118 (M548A)" />
+              <attribute type="Attributes.ShortName" value="AD118" />
+              <attribute type="Attributes.Channel_1" value="Положение крана № 6р (АПК)" />
+              <attribute type="Attributes.Channel_10" value="Резерв" />
+              <attribute type="Attributes.Channel_11" value="Резерв" />
               <attribute type="Attributes.Channel_12" value="Резерв" />
               <attribute type="Attributes.Channel_13" value="Резерв" />
               <attribute type="Attributes.Channel_14" value="Резерв" />
               <attribute type="Attributes.Channel_15" value="Резерв" />
               <attribute type="Attributes.Channel_16" value="Резерв" />
-              <attribute type="Attributes.Channel_2" value="Давление в КС №12 (размах пульсаций)" />
-              <attribute type="Attributes.Channel_3" value="Положение дозатора газа дифузионных коллекторов" />
-              <attribute type="Attributes.Channel_4" value="Положение дозатора газа гомогенного коллектора" />
-              <attribute type="Attributes.Channel_5" value="Положение дозатора газа центрального контура" />
-              <attribute type="Attributes.Channel_6" value="Положение крана № 6р (АПК)" />
-              <attribute type="Attributes.Channel_7" value="Суммарный расход топливного газа" />
-              <attribute type="Attributes.Channel_8" value="Расход топливного газа через коллектор центрального модуля" />
-              <attribute type="Attributes.Channel_9" value="Расход топливного газа через гомогенный коллектор" />
-            </ct:object>
-            <ct:object name="AD118" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD118 (M548A)" />
-              <attribute type="Attributes.ShortName" value="AD118" />
-              <attribute type="Attributes.Channel_1" value="Резерв" />
-              <attribute type="Attributes.Channel_10" value="Положение катушки ВНА Sin (канал 2)" />
-              <attribute type="Attributes.Channel_11" value="Положение катушки ВНА Cos (канал 2)" />
-              <attribute type="Attributes.Channel_12" value="Контроль катушки 1 ВНА" />
-              <attribute type="Attributes.Channel_13" value="Контроль катушки 2 ВНА" />
-              <attribute type="Attributes.Channel_14" value="Общий контроль выходов ВНА" />
-              <attribute type="Attributes.Channel_15" value="Резерв" />
-              <attribute type="Attributes.Channel_16" value="Резерв" />
-              <attribute type="Attributes.Channel_2" value="Резерв" />
-              <attribute type="Attributes.Channel_3" value="Резерв" />
-              <attribute type="Attributes.Channel_4" value="Резерв" />
-              <attribute type="Attributes.Channel_5" value="Резерв" />
-              <attribute type="Attributes.Channel_6" value="Резерв" />
-              <attribute type="Attributes.Channel_7" value="Положение катушки ВНА Sin (канал 1)" />
-              <attribute type="Attributes.Channel_8" value="Положение катушки ВНА Cos (канал 1)" />
+              <attribute type="Attributes.Channel_2" value="Давление воздуха после ВВТ 1 агрегата БВВТ-25" />
+              <attribute type="Attributes.Channel_3" value="Давление газа после Н" />
+              <attribute type="Attributes.Channel_4" value="Перепад давления газа на конфузоре" />
+              <attribute type="Attributes.Channel_5" value="Давление пускового газа перед заслонкой СтВ" />
+              <attribute type="Attributes.Channel_6" value="Положение КПВВ" />
+              <attribute type="Attributes.Channel_7" value="Резерв" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
               <attribute type="Attributes.Channel_9" value="Резерв" />
             </ct:object>
             <ct:object name="AD121" base-type="Types.DIAG_M538V.DIAG_M538V_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -198,132 +198,24 @@
             <ct:object name="AD131" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD131 (M558D)" />
               <attribute type="Attributes.ShortName" value="AD131" />
-              <attribute type="Attributes.Channel_1" value="АО от БЗД" />
-              <attribute type="Attributes.Channel_2" value="КЦ: АО от БЗД" />
-              <attribute type="Attributes.Channel_3" value="Резерв" />
-              <attribute type="Attributes.Channel_4" value="Резерв" />
-              <attribute type="Attributes.Channel_5" value="Резерв" />
-              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_1" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_2" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_3" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1" />
+              <attribute type="Attributes.Channel_4" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2" />
+              <attribute type="Attributes.Channel_5" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2" />
+              <attribute type="Attributes.Channel_6" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2" />
               <attribute type="Attributes.Channel_7" value="Резерв" />
               <attribute type="Attributes.Channel_8" value="Резерв" />
-              <attribute type="Attributes.Channel_10" value="Стружка в масле КП" />
-              <attribute type="Attributes.Channel_11" value="Стружка в масле откачки от ш/п КВД" />
-              <attribute type="Attributes.Channel_12" value="Стружка в масле откачки от р/п ТНД" />
-              <attribute type="Attributes.Channel_13" value="Стружка в масле откачки от р/п ТВД" />
-              <attribute type="Attributes.Channel_14" value="Стружка в масле откачки от СТ" />
-              <attribute type="Attributes.Channel_15" value="Резерв" />
-              <attribute type="Attributes.Channel_16" value="Кран № 6р открыт" />
-              <attribute type="Attributes.Channel_9" value="Стружка в масле ФС" />
-              <attribute type="Attributes.Channel_17" value="Кран № 6р закрыт" />
-              <attribute type="Attributes.Channel_18" value="ЗПВ КНД 1 гр. открыты" />
-              <attribute type="Attributes.Channel_19" value="ЗПВ КНД 2 гр. открыты" />
-              <attribute type="Attributes.Channel_20" value="КПВ КВД открыты" />
-              <attribute type="Attributes.Channel_21" value="КПВЗ и КПГ ТВД открыты" />
-              <attribute type="Attributes.Channel_22" value="ПОС включена" />
-              <attribute type="Attributes.Channel_23" value="Опасная вибрация корпуса двигателя " />
-              <attribute type="Attributes.Channel_24" value="Повышенная вибрация корпуса двигателя " />
-              <attribute type="Attributes.Channel_25" value="Повышенная пульсация давления в ЖТ1" />
-              <attribute type="Attributes.Channel_26" value="Опасная пульсация давления в ЖТ1" />
-              <attribute type="Attributes.Channel_27" value="Повышенная пульсация давления в ЖТ2" />
-              <attribute type="Attributes.Channel_28" value="Опасная пульсация давления в ЖТ2" />
-              <attribute type="Attributes.Channel_29" value="Повышенная пульсация давления в ЖТ3" />
-              <attribute type="Attributes.Channel_30" value="Опасная пульсация давления в ЖТ3" />
-              <attribute type="Attributes.Channel_31" value="Повышенная пульсация давления в ЖТ4" />
-              <attribute type="Attributes.Channel_32" value="Опасная пульсация давления в ЖТ4" />
-            </ct:object>
-            <ct:object name="AD132" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD132 (M558D)" />
-              <attribute type="Attributes.ShortName" value="AD132" />
-              <attribute type="Attributes.Channel_1" value="Повышенная пульсация давления в ЖТ5" />
-              <attribute type="Attributes.Channel_2" value="Опасная пульсация давления в ЖТ5" />
-              <attribute type="Attributes.Channel_3" value="Повышенная пульсация давления в ЖТ6" />
-              <attribute type="Attributes.Channel_4" value="Опасная пульсация давления в ЖТ6" />
-              <attribute type="Attributes.Channel_5" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)" />
-              <attribute type="Attributes.Channel_6" value="Повышенная пульсация давления в ЖТ7" />
-              <attribute type="Attributes.Channel_7" value="Опасная пульсация давления в ЖТ7" />
-              <attribute type="Attributes.Channel_8" value="Повышенная пульсация давления в ЖТ8" />
-              <attribute type="Attributes.Channel_10" value="Повышенная пульсация давления в ЖТ9" />
-              <attribute type="Attributes.Channel_11" value="Опасная пульсация давления в ЖТ9" />
-              <attribute type="Attributes.Channel_12" value="Повышенная пульсация давления в ЖТ10" />
-              <attribute type="Attributes.Channel_13" value="Опасная пульсация давления в ЖТ10" />
-              <attribute type="Attributes.Channel_14" value="Повышенная пульсация давления в ЖТ11" />
-              <attribute type="Attributes.Channel_15" value="Опасная пульсация давления в ЖТ11" />
-              <attribute type="Attributes.Channel_16" value="Повышенная пульсация давления в ЖТ12" />
-              <attribute type="Attributes.Channel_9" value="Опасная пульсация давления в ЖТ8" />
-              <attribute type="Attributes.Channel_17" value="Опасная пульсация давления в ЖТ12" />
-              <attribute type="Attributes.Channel_18" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)" />
-              <attribute type="Attributes.Channel_19" value="Повышенный перепад давления масла на фильтрах БВМФ-84" />
-              <attribute type="Attributes.Channel_20" value="СК диффузионного контура №1 открыт" />
-              <attribute type="Attributes.Channel_21" value="СК диффузионного контура №1 закрыт" />
-              <attribute type="Attributes.Channel_22" value="СК диффузионного контура №2 открыт" />
-              <attribute type="Attributes.Channel_23" value="СК диффузионного контура №2 закрыт" />
-              <attribute type="Attributes.Channel_24" value="СК гомогенного контура открыт" />
-              <attribute type="Attributes.Channel_25" value="СК гомогенного контура закрыт" />
-              <attribute type="Attributes.Channel_26" value="СК центрального контура открыт" />
-              <attribute type="Attributes.Channel_27" value="СК центрального контура закрыт" />
-              <attribute type="Attributes.Channel_28" value="Клапан КС1 стравливания газа КСГ открыт" />
-              <attribute type="Attributes.Channel_29" value="Клапан КС1 стравливания газа КСГ закрыт" />
-              <attribute type="Attributes.Channel_30" value="Кран сброса воздуха из системы продувки ДК открыт" />
-              <attribute type="Attributes.Channel_31" value="Кран сброса воздуха из системы продувки ДК закрыт" />
-              <attribute type="Attributes.Channel_32" value="Кран сброса воздуха из системы продувки ДК неисправность" />
-            </ct:object>
-            <ct:object name="AD133" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD133 (M558D)" />
-              <attribute type="Attributes.ShortName" value="AD133" />
-              <attribute type="Attributes.Channel_1" value="Кран подвода воздуха на продувку ДК открыт" />
-              <attribute type="Attributes.Channel_2" value="Кран подвода воздуха на продувку ДК закрыт" />
-              <attribute type="Attributes.Channel_3" value="Кран подвода воздуха на продувку ДК ограничение момента" />
-              <attribute type="Attributes.Channel_4" value="Кран подвода воздуха на продувку ДК местное управление" />
-              <attribute type="Attributes.Channel_5" value="Кран подвода воздуха на продувку ДК неисправность" />
-              <attribute type="Attributes.Channel_6" value="Клапан продувки диффузионного коллектора №1 открыт" />
-              <attribute type="Attributes.Channel_7" value="Клапан продувки диффузионного коллектора №2 открыт" />
-              <attribute type="Attributes.Channel_8" value="Дозатор газа ДГ1 диффузионного контура включен" />
-              <attribute type="Attributes.Channel_10" value="Дозатор газа ДГ3 центрального контура включен" />
-              <attribute type="Attributes.Channel_11" value="Высокие обороты стартера" />
-              <attribute type="Attributes.Channel_12" value="Стружка в масле СтВ" />
-              <attribute type="Attributes.Channel_13" value="Перекрывная заслонка перед СтВ открыта" />
-              <attribute type="Attributes.Channel_14" value="СК0 открыт" />
-              <attribute type="Attributes.Channel_15" value="Нажата кнопка &quot;РО &gt;&quot; на ПРУ" />
-              <attribute type="Attributes.Channel_16" value="Нажата кнопка &quot;PO &lt;&quot; на ПРУ" />
-              <attribute type="Attributes.Channel_9" value="Дозатор газа ДГ2 гомогенного контура включен" />
-              <attribute type="Attributes.Channel_17" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1" />
-              <attribute type="Attributes.Channel_18" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1" />
-              <attribute type="Attributes.Channel_19" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1" />
-              <attribute type="Attributes.Channel_20" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2" />
-              <attribute type="Attributes.Channel_21" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2" />
-              <attribute type="Attributes.Channel_22" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2" />
-              <attribute type="Attributes.Channel_23" value="Резерв" />
-              <attribute type="Attributes.Channel_24" value="Резерв" />
-              <attribute type="Attributes.Channel_25" value="Резерв" />
-              <attribute type="Attributes.Channel_26" value="Резерв" />
-              <attribute type="Attributes.Channel_27" value="Резерв" />
-              <attribute type="Attributes.Channel_28" value="Резерв" />
-              <attribute type="Attributes.Channel_29" value="Резерв" />
-              <attribute type="Attributes.Channel_30" value="Резерв" />
-              <attribute type="Attributes.Channel_31" value="Резерв" />
-              <attribute type="Attributes.Channel_32" value="Резерв" />
-            </ct:object>
-            <ct:object name="AD134" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD134 (M558D)" />
-              <attribute type="Attributes.ShortName" value="AD134" />
-              <attribute type="Attributes.Channel_1" value="Резерв" />
-              <attribute type="Attributes.Channel_2" value="Резерв" />
-              <attribute type="Attributes.Channel_3" value="Резерв" />
-              <attribute type="Attributes.Channel_4" value="Питание БЭАО и сторожевого таймера ПЛК 1 в норме" />
-              <attribute type="Attributes.Channel_5" value="БЭАО сработал (от AD100) " />
-              <attribute type="Attributes.Channel_6" value="Авария ПЛК 2 (AD200)" />
-              <attribute type="Attributes.Channel_7" value="Контроль ПЛК 2" />
-              <attribute type="Attributes.Channel_8" value="Резерв" />
-              <attribute type="Attributes.Channel_10" value="КЦ: Открыть КПВЗ" />
-              <attribute type="Attributes.Channel_11" value="КЦ: Открыть ЗПВ КНД 1 гр." />
-              <attribute type="Attributes.Channel_12" value="КЦ: Открыть ЗПВ КНД 2 гр." />
-              <attribute type="Attributes.Channel_13" value="КЦ: Открыть ЗПОС ПОС Д" />
+              <attribute type="Attributes.Channel_10" value="БЭАО сработал (от AD100) " />
+              <attribute type="Attributes.Channel_11" value="Авария ПЛК 2 (AD200)" />
+              <attribute type="Attributes.Channel_12" value="Контроль ПЛК 2" />
+              <attribute type="Attributes.Channel_13" value="Резерв" />
               <attribute type="Attributes.Channel_14" value="Резерв" />
-              <attribute type="Attributes.Channel_15" value="КЦ: Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_15" value="Резерв" />
               <attribute type="Attributes.Channel_16" value="Резерв" />
-              <attribute type="Attributes.Channel_9" value="КЦ: Открыть КПВ (выключить РЗК и РЗТ)" />
-              <attribute type="Attributes.Channel_17" value="КЦ: Управление ВНА " />
-              <attribute type="Attributes.Channel_18" value="КЦ: Управление ВНА " />
+              <attribute type="Attributes.Channel_9" value="Питание БЭАО и сторожевого таймера ПЛК 1 в норме" />
+              <attribute type="Attributes.Channel_17" value="Резерв" />
+              <attribute type="Attributes.Channel_18" value="Резерв" />
               <attribute type="Attributes.Channel_19" value="Резерв" />
               <attribute type="Attributes.Channel_20" value="Резерв" />
               <attribute type="Attributes.Channel_21" value="Резерв" />
@@ -339,25 +231,133 @@
               <attribute type="Attributes.Channel_31" value="Резерв" />
               <attribute type="Attributes.Channel_32" value="Резерв" />
             </ct:object>
+            <ct:object name="AD132" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD132 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD132" />
+              <attribute type="Attributes.Channel_1" value="АО от БЗД" />
+              <attribute type="Attributes.Channel_2" value="КЦ: АО от БЗД" />
+              <attribute type="Attributes.Channel_3" value="Резерв" />
+              <attribute type="Attributes.Channel_4" value="Резерв" />
+              <attribute type="Attributes.Channel_5" value="Резерв" />
+              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_7" value="Резерв" />
+              <attribute type="Attributes.Channel_8" value="Резерв" />
+              <attribute type="Attributes.Channel_10" value="Стружка в масле КП" />
+              <attribute type="Attributes.Channel_11" value="Стружка в масле откачки от ш/п КВД" />
+              <attribute type="Attributes.Channel_12" value="Стружка в масле откачки от р/п ТНД" />
+              <attribute type="Attributes.Channel_13" value="Стружка в масле откачки от р/п ТВД" />
+              <attribute type="Attributes.Channel_14" value="Стружка в масле откачки от СТ" />
+              <attribute type="Attributes.Channel_15" value="Стружка в масле СтВ" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_9" value="Стружка в ФС" />
+              <attribute type="Attributes.Channel_17" value="Кран № 6р открыт" />
+              <attribute type="Attributes.Channel_18" value="Кран № 6р закрыт" />
+              <attribute type="Attributes.Channel_19" value="ЗПВ КНД 1 гр. открыты" />
+              <attribute type="Attributes.Channel_20" value="ЗПВ КНД 2 гр. открыты" />
+              <attribute type="Attributes.Channel_21" value="КПВ КВД открыты" />
+              <attribute type="Attributes.Channel_22" value="КПВЗ и КПГ ТВД открыты" />
+              <attribute type="Attributes.Channel_23" value="ПОС включена" />
+              <attribute type="Attributes.Channel_24" value="Опасная вибрация корпуса двигателя " />
+              <attribute type="Attributes.Channel_25" value="Повышенная вибрация корпуса двигателя " />
+              <attribute type="Attributes.Channel_26" value="Повышенная пульсация давления в ЖТ1" />
+              <attribute type="Attributes.Channel_27" value="Опасная пульсация давления в ЖТ1" />
+              <attribute type="Attributes.Channel_28" value="Повышенная пульсация давления в ЖТ2" />
+              <attribute type="Attributes.Channel_29" value="Опасная пульсация давления в ЖТ2" />
+              <attribute type="Attributes.Channel_30" value="Повышенная пульсация давления в ЖТ3" />
+              <attribute type="Attributes.Channel_31" value="Опасная пульсация давления в ЖТ3" />
+              <attribute type="Attributes.Channel_32" value="Повышенная пульсация давления в ЖТ4" />
+            </ct:object>
+            <ct:object name="AD133" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD133 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD133" />
+              <attribute type="Attributes.Channel_1" value="Опасная пульсация давления в ЖТ4" />
+              <attribute type="Attributes.Channel_2" value="Повышенная пульсация давления в ЖТ5" />
+              <attribute type="Attributes.Channel_3" value="Опасная пульсация давления в ЖТ5" />
+              <attribute type="Attributes.Channel_4" value="Повышенная пульсация давления в ЖТ6" />
+              <attribute type="Attributes.Channel_5" value="Опасная пульсация давления в ЖТ6" />
+              <attribute type="Attributes.Channel_6" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)" />
+              <attribute type="Attributes.Channel_7" value="Повышенная пульсация давления в ЖТ7" />
+              <attribute type="Attributes.Channel_8" value="Опасная пульсация давления в ЖТ7" />
+              <attribute type="Attributes.Channel_10" value="Опасная пульсация давления в ЖТ8" />
+              <attribute type="Attributes.Channel_11" value="Повышенная пульсация давления в ЖТ9" />
+              <attribute type="Attributes.Channel_12" value="Опасная пульсация давления в ЖТ9" />
+              <attribute type="Attributes.Channel_13" value="Повышенная пульсация давления в ЖТ10" />
+              <attribute type="Attributes.Channel_14" value="Опасная пульсация давления в ЖТ10" />
+              <attribute type="Attributes.Channel_15" value="Повышенная пульсация давления в ЖТ11" />
+              <attribute type="Attributes.Channel_16" value="Опасная пульсация давления в ЖТ11" />
+              <attribute type="Attributes.Channel_9" value="Повышенная пульсация давления в ЖТ8" />
+              <attribute type="Attributes.Channel_17" value="Повышенная пульсация давления в ЖТ12" />
+              <attribute type="Attributes.Channel_18" value="Опасная пульсация давления в ЖТ12" />
+              <attribute type="Attributes.Channel_19" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)" />
+              <attribute type="Attributes.Channel_20" value="Повышенный перепад давления масла на фильтрах БВМФ-84" />
+              <attribute type="Attributes.Channel_21" value="СК диффузионного контура №1 открыт" />
+              <attribute type="Attributes.Channel_22" value="СК диффузионного контура №1 закрыт" />
+              <attribute type="Attributes.Channel_23" value="СК диффузионного контура №2 открыт" />
+              <attribute type="Attributes.Channel_24" value="СК диффузионного контура №2 закрыт" />
+              <attribute type="Attributes.Channel_25" value="СК гомогенного контура открыт" />
+              <attribute type="Attributes.Channel_26" value="СК гомогенного контура закрыт" />
+              <attribute type="Attributes.Channel_27" value="СК центрального контура открыт" />
+              <attribute type="Attributes.Channel_28" value="СК центрального контура закрыт" />
+              <attribute type="Attributes.Channel_29" value="Клапан КС1 стравливания газа КСГ открыт" />
+              <attribute type="Attributes.Channel_30" value="Клапан КС1 стравливания газа КСГ закрыт" />
+              <attribute type="Attributes.Channel_31" value="Кран сброса воздуха из системы продувки ДК открыт" />
+              <attribute type="Attributes.Channel_32" value="Кран сброса воздуха из системы продувки ДК закрыт" />
+            </ct:object>
+            <ct:object name="AD134" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD134 (M558D)" />
+              <attribute type="Attributes.ShortName" value="AD134" />
+              <attribute type="Attributes.Channel_1" value="Кран сброса воздуха из системы продувки ДК неисправность" />
+              <attribute type="Attributes.Channel_2" value="Кран подвода воздуха на продувку ДК открыт" />
+              <attribute type="Attributes.Channel_3" value="Кран подвода воздуха на продувку ДК закрыт" />
+              <attribute type="Attributes.Channel_4" value="Кран подвода воздуха на продувку ДК ограничение момента" />
+              <attribute type="Attributes.Channel_5" value="Кран подвода воздуха на продувку ДК местное управление" />
+              <attribute type="Attributes.Channel_6" value="Кран подвода воздуха на продувку ДК неисправность" />
+              <attribute type="Attributes.Channel_7" value="Клапан продувки диффузионного коллектора №1 открыт" />
+              <attribute type="Attributes.Channel_8" value="Клапан продувки диффузионного коллектора №2 открыт" />
+              <attribute type="Attributes.Channel_10" value="Дозатор газа ДГ2 гомогенного контура включен" />
+              <attribute type="Attributes.Channel_11" value="Дозатор газа ДГ3 центрального контура включен" />
+              <attribute type="Attributes.Channel_12" value="Высокие обороты стартера" />
+              <attribute type="Attributes.Channel_13" value="Резерв" />
+              <attribute type="Attributes.Channel_14" value="Перекрывная заслонка перед СтВ открыта" />
+              <attribute type="Attributes.Channel_15" value="СК0 открыт" />
+              <attribute type="Attributes.Channel_16" value="Резерв" />
+              <attribute type="Attributes.Channel_9" value="Дозатор газа ДГ1 диффузионного контура включен" />
+              <attribute type="Attributes.Channel_17" value="Нажата кнопка &quot;РО &gt;&quot; на ПРУ" />
+              <attribute type="Attributes.Channel_18" value="Нажата кнопка &quot;PO &lt;&quot; на ПРУ" />
+              <attribute type="Attributes.Channel_19" value="КЦ: Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_20" value="КЦ: Открыть КПВ (выключить РЗК и РЗТ)" />
+              <attribute type="Attributes.Channel_21" value="КЦ: Открыть КПВЗ" />
+              <attribute type="Attributes.Channel_22" value="КЦ: Открыть ЗПВ КНД 1 гр." />
+              <attribute type="Attributes.Channel_23" value="КЦ: Открыть ЗПВ КНД 2 гр." />
+              <attribute type="Attributes.Channel_24" value="КЦ: Открыть ЗПОС ПОС Д" />
+              <attribute type="Attributes.Channel_25" value="Резерв" />
+              <attribute type="Attributes.Channel_26" value="Резерв" />
+              <attribute type="Attributes.Channel_27" value="Резерв" />
+              <attribute type="Attributes.Channel_28" value="Резерв" />
+              <attribute type="Attributes.Channel_29" value="Резерв" />
+              <attribute type="Attributes.Channel_30" value="Резерв" />
+              <attribute type="Attributes.Channel_31" value="Резерв" />
+              <attribute type="Attributes.Channel_32" value="Резерв" />
+            </ct:object>
             <ct:object name="AD141" base-type="Types.DIAG_M558O.DIAG_M558O_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD141 (M558O)" />
               <attribute type="Attributes.ShortName" value="AD141" />
-              <attribute type="Attributes.Channel_1" value="Открыть КПВ (выключить РЗК и РЗТ)" />
-              <attribute type="Attributes.Channel_2" value="Открыть КПВЗ" />
-              <attribute type="Attributes.Channel_3" value="Открыть ЗПВ КНД 1 гр." />
-              <attribute type="Attributes.Channel_4" value="Открыть ЗПВ КНД 2 гр." />
-              <attribute type="Attributes.Channel_5" value="Открыть ЗПОС ПОС Д" />
-              <attribute type="Attributes.Channel_6" value="Резерв" />
-              <attribute type="Attributes.Channel_7" value="Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_1" value="Открыть стопорный клапан СК0 на входе ГТУ" />
+              <attribute type="Attributes.Channel_2" value="Резерв" />
+              <attribute type="Attributes.Channel_3" value="Открыть КПВ (выключить РЗК и РЗТ)" />
+              <attribute type="Attributes.Channel_4" value="Открыть КПВЗ" />
+              <attribute type="Attributes.Channel_5" value="Открыть ЗПВ КНД 1 гр." />
+              <attribute type="Attributes.Channel_6" value="Открыть ЗПВ КНД 2 гр." />
+              <attribute type="Attributes.Channel_7" value="Открыть ЗПОС ПОС Д" />
               <attribute type="Attributes.Channel_8" value="Резерв" />
-              <attribute type="Attributes.Channel_10" value="Управление ВНА " />
+              <attribute type="Attributes.Channel_10" value="Резерв" />
               <attribute type="Attributes.Channel_11" value="Включить АЗ 1 канал" />
               <attribute type="Attributes.Channel_12" value="Включить АЗ 2 канал" />
               <attribute type="Attributes.Channel_13" value="Контроль аппаратуры вибраций и пульсаций ГТУ ИВ-ТА-8-10МПО)" />
               <attribute type="Attributes.Channel_14" value="Включить МНДЭ" />
               <attribute type="Attributes.Channel_15" value="Включить МНЭ" />
               <attribute type="Attributes.Channel_16" value="Включить АВО" />
-              <attribute type="Attributes.Channel_9" value="Управление ВНА " />
+              <attribute type="Attributes.Channel_9" value="Резерв" />
               <attribute type="Attributes.Channel_17" value="Открыть СК диффузионного контура №1" />
               <attribute type="Attributes.Channel_18" value="Открыть СК диффузионного контура №2" />
               <attribute type="Attributes.Channel_19" value="Открыть СК гомогенного контура " />
@@ -370,20 +370,20 @@
               <attribute type="Attributes.Channel_26" value="Закрыть кран Кт0 подвода воздуха на продувку диффузионных контуров" />
               <attribute type="Attributes.Channel_27" value="Аварийное управление краном Кт0 подвода воздуха на продувку диффузионных контуров" />
               <attribute type="Attributes.Channel_28" value="Стоп кран Кт0 подвода воздуха на продувку диффузионных контуров" />
-              <attribute type="Attributes.Channel_29" value="Открыть перекрывную ЗСтВ" />
-              <attribute type="Attributes.Channel_30" value="Открыть ВЗСтВ" />
-              <attribute type="Attributes.Channel_31" value="Открыть клапан Кт1 продувки диффузионного коллектора №1" />
-              <attribute type="Attributes.Channel_32" value="Открыть клапан Кт1 продувки диффузионного коллектора №2" />
+              <attribute type="Attributes.Channel_29" value="Открыть клапан Кт1 продувки диффузионного коллектора №1" />
+              <attribute type="Attributes.Channel_30" value="Открыть клапан Кт1 продувки диффузионного коллектора №2" />
+              <attribute type="Attributes.Channel_31" value="Открыть перекрывную ЗСтВ" />
+              <attribute type="Attributes.Channel_32" value="Открыть воздушную ЗСтВ" />
             </ct:object>
             <ct:object name="AD142" base-type="Types.DIAG_M558O.DIAG_M558O_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD142 (M558O)" />
               <attribute type="Attributes.ShortName" value="AD142" />
-              <attribute type="Attributes.Channel_1" value="Контроль ПЛК (в AD200)" />
+              <attribute type="Attributes.Channel_1" value="Резерв" />
               <attribute type="Attributes.Channel_2" value="Резерв" />
               <attribute type="Attributes.Channel_3" value="Резерв" />
               <attribute type="Attributes.Channel_4" value="Резерв" />
-              <attribute type="Attributes.Channel_5" value="Резерв" />
-              <attribute type="Attributes.Channel_6" value="Резерв" />
+              <attribute type="Attributes.Channel_5" value="Контроль ПЛК (в AD200)" />
+              <attribute type="Attributes.Channel_6" value="Запрет питания команд ШИМ ВНА 48В" />
               <attribute type="Attributes.Channel_7" value="Резерв" />
               <attribute type="Attributes.Channel_8" value="Резерв" />
               <attribute type="Attributes.Channel_10" value="Резерв" />
@@ -744,12 +744,6 @@
             <attribute type="Attributes.FracDigits" value="3" />
             <attribute type="Attributes.ShortName" value="P" />
           </ct:object>
-          <ct:object name="AI_P_outVVT" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Давление воздуха после ВВТ 1 агрегата БВВТ-25" />
-            <attribute type="Attributes.EUnit" value="МПа" />
-            <attribute type="Attributes.FracDigits" value="3" />
-            <attribute type="Attributes.ShortName" value="P" />
-          </ct:object>
           <ct:object name="AI_Pm_inGTU" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Давление масла на входе в Д" />
             <attribute type="Attributes.EUnit" value="МПа" />
@@ -845,6 +839,48 @@
             <attribute type="Attributes.EUnit" value="мм/с" />
             <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="V" />
+          </ct:object>
+          <ct:object name="AI_Ivna_1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль катушки 1 ВНА" />
+            <attribute type="Attributes.EUnit" value="Нет" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="I" />
+          </ct:object>
+          <ct:object name="AI_Ivna_2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Контроль катушки 2 ВНА" />
+            <attribute type="Attributes.EUnit" value="Нет" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="I" />
+          </ct:object>
+          <ct:object name="AI_Ivna_0" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Общий контроль выходов ВНА" />
+            <attribute type="Attributes.EUnit" value="Нет" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="I" />
+          </ct:object>
+          <ct:object name="AI_VNA1_Isin" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Sin (канал 1)" />
+            <attribute type="Attributes.EUnit" value="мА" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_VNA1_Icos" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Cos (канал 1)" />
+            <attribute type="Attributes.EUnit" value="мА" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_VNA2_Isin" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Sin (канал 2)" />
+            <attribute type="Attributes.EUnit" value="мА" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
+          </ct:object>
+          <ct:object name="AI_VNA2_Icos" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Cos (канал 2)" />
+            <attribute type="Attributes.EUnit" value="мА" />
+            <attribute type="Attributes.FracDigits" value="2" />
+            <attribute type="Attributes.ShortName" value="POS" />
           </ct:object>
           <ct:object name="AI_PP_ZHT1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №1 (размах пульсаций)" />
@@ -1008,12 +1044,6 @@
             <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="POS" />
           </ct:object>
-          <ct:object name="AI_APK_POS" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Положение крана № 6р (АПК)" />
-            <attribute type="Attributes.EUnit" value="%" />
-            <attribute type="Attributes.FracDigits" value="1" />
-            <attribute type="Attributes.ShortName" value="POS" />
-          </ct:object>
           <ct:object name="AI_Qtg_sum" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Суммарный расход топливного газа" />
             <attribute type="Attributes.EUnit" value="кг/ч" />
@@ -1039,52 +1069,46 @@
             <attribute type="Attributes.ShortName" value="Q" />
           </ct:object>
           <ct:object name="AI_PgoutTVD" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Полное давление газа за ТВД" />
+            <attribute type="unit.System.Attributes.Description" value="Полное давление воздуха за ТВД" />
             <attribute type="Attributes.EUnit" value="МПа" />
             <attribute type="Attributes.FracDigits" value="2" />
             <attribute type="Attributes.ShortName" value="P" />
           </ct:object>
-          <ct:object name="AI_VNA_Isin1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Sin (канал 1)" />
-            <attribute type="Attributes.EUnit" value="мА" />
-            <attribute type="Attributes.FracDigits" value="2" />
+          <ct:object name="AI_APK_POS" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение крана № 6р (АПК)" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="POS" />
           </ct:object>
-          <ct:object name="AI_VNA_Icos1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Cos (канал 1)" />
-            <attribute type="Attributes.EUnit" value="мА" />
-            <attribute type="Attributes.FracDigits" value="2" />
+          <ct:object name="AI_P_outVVT" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление воздуха после ВВТ 1 агрегата БВВТ-25" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_Pg_outN" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление газа после Н" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_dP_Conf" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Перепад давления газа на конфузоре" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_PinStV" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление пускового газа перед заслонкой СтВ" />
+            <attribute type="Attributes.EUnit" value="МПа" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="P" />
+          </ct:object>
+          <ct:object name="AI_POS_KPVV" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Положение КПВВ" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="POS" />
-          </ct:object>
-          <ct:object name="AI_VNA_Isin2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Sin (канал 2)" />
-            <attribute type="Attributes.EUnit" value="мА" />
-            <attribute type="Attributes.FracDigits" value="2" />
-            <attribute type="Attributes.ShortName" value="POS" />
-          </ct:object>
-          <ct:object name="AI_VNA_Icos2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Положение катушки ВНА Cos (канал 2)" />
-            <attribute type="Attributes.EUnit" value="мА" />
-            <attribute type="Attributes.FracDigits" value="2" />
-            <attribute type="Attributes.ShortName" value="POS" />
-          </ct:object>
-          <ct:object name="AI_Ivna_1" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Контроль катушки 1 ВНА" />
-            <attribute type="Attributes.EUnit" value="Нет" />
-            <attribute type="Attributes.FracDigits" value="2" />
-            <attribute type="Attributes.ShortName" value="I" />
-          </ct:object>
-          <ct:object name="AI_Ivna_2" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Контроль катушки 2 ВНА" />
-            <attribute type="Attributes.EUnit" value="Нет" />
-            <attribute type="Attributes.FracDigits" value="2" />
-            <attribute type="Attributes.ShortName" value="I" />
-          </ct:object>
-          <ct:object name="AI_Ivna_0" base-type="Types.AI.AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Общий контроль выходов ВНА" />
-            <attribute type="Attributes.EUnit" value="Нет" />
-            <attribute type="Attributes.FracDigits" value="2" />
-            <attribute type="Attributes.ShortName" value="I" />
           </ct:object>
         </ct:object>
         <ct:object name="AE" access-level="public" >
@@ -1280,8 +1304,14 @@
             <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="Tзг" />
           </ct:object>
-          <ct:object name="AE_VNA_POS" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="ВНА. Положение" />
+          <ct:object name="AE_VNA1_POS" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="ВНА1. Положение" />
+            <attribute type="Attributes.EUnit" value="%" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Пол" />
+          </ct:object>
+          <ct:object name="AE_VNA2_POS" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="ВНА2. Положение" />
             <attribute type="Attributes.EUnit" value="%" />
             <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="Пол" />
@@ -1354,13 +1384,63 @@
           </ct:object>
         </ct:object>
         <ct:object name="DI" access-level="public" >
+          <ct:object name="DI_KC1_VNA1" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_KC1_VNA2" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_KC1_VNA3" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_KC2_VNA1" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_KC2_VNA2" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_KC2_VNA3" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_UGTU_BEO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Питание БЭАО и сторожевого таймера ПЛК 1 в норме" />
+            <attribute type="Attributes.sColorOff" value="2" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
+          <ct:object name="DI_GTU_BEO_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="БЭАО сработал (от AD100) " />
+            <attribute type="Attributes.sColorOff" value="0" />
+            <attribute type="Attributes.sColorOn" value="3" />
+          </ct:object>
+          <ct:object name="DI_GTU_PLC_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Авария ПЛК 2 (AD200)" />
+            <attribute type="Attributes.sColorOff" value="0" />
+            <attribute type="Attributes.sColorOn" value="3" />
+          </ct:object>
+          <ct:object name="DI_PLC_GPA_OK" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Контроль ПЛК 2" />
+            <attribute type="Attributes.sColorOff" value="3" />
+            <attribute type="Attributes.sColorOn" value="1" />
+          </ct:object>
           <ct:object name="DI_BZD_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="АО от БЗД" />
             <attribute type="Attributes.sColorOff" value="0" />
             <attribute type="Attributes.sColorOn" value="3" />
           </ct:object>
           <ct:object name="DI_Chip_FS" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Стружка в масле ФС" />
+            <attribute type="unit.System.Attributes.Description" value="Стружка в ФС" />
             <attribute type="Attributes.sColorOff" value="0" />
             <attribute type="Attributes.sColorOn" value="3" />
           </ct:object>
@@ -1388,6 +1468,11 @@
             <attribute type="unit.System.Attributes.Description" value="Стружка в масле откачки от СТ" />
             <attribute type="Attributes.sColorOff" value="0" />
             <attribute type="Attributes.sColorOn" value="2" />
+          </ct:object>
+          <ct:object name="DI_Chip_StV" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Стружка в масле СтВ" />
+            <attribute type="Attributes.sColorOff" value="0" />
+            <attribute type="Attributes.sColorOn" value="3" />
           </ct:object>
           <ct:object name="DI_APK_stOn" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="Кран № 6р открыт" />
@@ -1579,11 +1664,6 @@
             <attribute type="Attributes.sColorOff" value="0" />
             <attribute type="Attributes.sColorOn" value="3" />
           </ct:object>
-          <ct:object name="DI_Chip_StV" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Стружка в масле СтВ" />
-            <attribute type="Attributes.sColorOff" value="0" />
-            <attribute type="Attributes.sColorOn" value="3" />
-          </ct:object>
           <ct:object name="DI_BtnUP" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="Нажата кнопка &quot;РО &gt;&quot; на ПРУ" />
             <attribute type="Attributes.sColorOff" value="0" />
@@ -1592,56 +1672,6 @@
           <ct:object name="DI_BtnDN" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="Нажата кнопка &quot;PO &lt;&quot; на ПРУ" />
             <attribute type="Attributes.sColorOff" value="0" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC1_VNA1" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC1_VNA2" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC1_VNA3" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC2_VNA1" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC2_VNA2" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_KC2_VNA3" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2" />
-            <attribute type="Attributes.sColorOff" value="3" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_UGTU_BEO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Питание БЭАО и сторожевого таймера ПЛК 1 в норме" />
-            <attribute type="Attributes.sColorOff" value="2" />
-            <attribute type="Attributes.sColorOn" value="1" />
-          </ct:object>
-          <ct:object name="DI_GTU_BEO_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="БЭАО сработал (от AD100) " />
-            <attribute type="Attributes.sColorOff" value="0" />
-            <attribute type="Attributes.sColorOn" value="3" />
-          </ct:object>
-          <ct:object name="DI_GTU_PLC_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Авария ПЛК 2 (AD200)" />
-            <attribute type="Attributes.sColorOff" value="0" />
-            <attribute type="Attributes.sColorOn" value="3" />
-          </ct:object>
-          <ct:object name="DI_PLC_GPA_OK" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="Контроль ПЛК 2" />
-            <attribute type="Attributes.sColorOff" value="3" />
             <attribute type="Attributes.sColorOn" value="1" />
           </ct:object>
         </ct:object>
@@ -1674,16 +1704,6 @@
           <ct:object name="SK0" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="СК0" />
             <attribute type="Attributes.StartView" value="1" />
-            <attribute type="Attributes.Gender" value="1" />
-          </ct:object>
-          <ct:object name="VNA1" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="ВНА1" />
-            <attribute type="Attributes.StartView" value="0" />
-            <attribute type="Attributes.Gender" value="1" />
-          </ct:object>
-          <ct:object name="VNA2" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-            <attribute type="unit.System.Attributes.Description" value="ВНА2" />
-            <attribute type="Attributes.StartView" value="0" />
             <attribute type="Attributes.Gender" value="1" />
           </ct:object>
           <ct:object name="AZ1" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -1769,6 +1789,16 @@
           <ct:object name="KT2" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
             <attribute type="unit.System.Attributes.Description" value="КТ2" />
             <attribute type="Attributes.StartView" value="1" />
+            <attribute type="Attributes.Gender" value="1" />
+          </ct:object>
+          <ct:object name="SHIM" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Блокировка ШИМ ВНА" />
+            <attribute type="Attributes.StartView" value="0" />
+            <attribute type="Attributes.Gender" value="2" />
+          </ct:object>
+          <ct:object name="VNA" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <attribute type="unit.System.Attributes.Description" value="Задание на ВНА" />
+            <attribute type="Attributes.StartView" value="4" />
             <attribute type="Attributes.Gender" value="1" />
           </ct:object>
           <ct:object name="KPVV" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -1969,10 +1999,10 @@
               <attribute type="unit.System.Attributes.Description" value="Стабилизацию СТ отключить" />
             </ct:object>
             <ct:object name="BTN_MaxReg_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Максиамльный режим включить" />
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим включить" />
             </ct:object>
             <ct:object name="BTN_MaxReg_OFF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Максиамльный режим отключить" />
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим отключить" />
             </ct:object>
             <ct:object name="BTN_TurnDown" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="РЧВ вниз" />
@@ -1983,11 +2013,8 @@
             <ct:object name="BTN_ReadTun" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Считать настройки АПР" />
             </ct:object>
-            <ct:object name="BTN_POS_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Включить ПОС" />
-            </ct:object>
-            <ct:object name="BTN_POS_OFF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Отключить ПОС" />
+            <ct:object name="BTN_READ_TUN" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Считать настройки ТР" />
             </ct:object>
         </ct:object>
         <ct:object name="SET" access-level="public" >
@@ -2015,7 +2042,7 @@
             <attribute type="Attributes.FracDigits" value="0" />
             <attribute type="Attributes.ShortName" value="N" />
           </ct:object>
-          <ct:object name="SP_R_TstMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="SP_R_TtMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Регулировка максимальной температуры газа за турбиной на режиме" />
             <attribute type="Attributes.EUnit" value="°С" />
             <attribute type="Attributes.FracDigits" value="0" />
@@ -2029,6 +2056,12 @@
           </ct:object>
           <ct:object name="SP_R_Nst_Ogr" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Регулировка максимальных оборотов СТ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Nknd" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ограничения максимальных оборотов КНД" />
             <attribute type="Attributes.EUnit" value="об/мин" />
             <attribute type="Attributes.FracDigits" value="0" />
             <attribute type="Attributes.ShortName" value="N" />
@@ -2100,7 +2133,7 @@
             <attribute type="Attributes.ShortName" value="-" />
           </ct:object>
           <ct:object name="SP_R_Gt_roz_min" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Регулировка миниммального расхода на розжиге" />
+            <attribute type="unit.System.Attributes.Description" value="Регулировка минимального расхода на розжиге" />
             <attribute type="Attributes.EUnit" value="кг/ч" />
             <attribute type="Attributes.FracDigits" value="3" />
             <attribute type="Attributes.ShortName" value="-" />
@@ -2128,6 +2161,18 @@
             <attribute type="Attributes.EUnit" value="°С" />
             <attribute type="Attributes.FracDigits" value="1" />
             <attribute type="Attributes.ShortName" value="Т" />
+          </ct:object>
+          <ct:object name="SP_R_ZPV1" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка закрытия ЗПВ1" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_ZPV2" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка закрытия ЗПВ2" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
           </ct:object>
         </ct:object>
         <ct:object name="CNT" access-level="public" >
@@ -2493,205 +2538,183 @@
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
           <ct:object name="A080" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ГК" />
-            <attribute type="Attributes.EUnit" value="-" />
-          </ct:object>
-          <ct:object name="A081" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ДК1" />
-            <attribute type="Attributes.EUnit" value="-" />
-          </ct:object>
-          <ct:object name="A082" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ДК2" />
-            <attribute type="Attributes.EUnit" value="-" />
-          </ct:object>
-          <ct:object name="A083" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ГК" />
-            <attribute type="Attributes.EUnit" value="-" />
-          </ct:object>
-          <ct:object name="A084" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВ КВД" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A085" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A081" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВЗ и КПГ ТВД" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A086" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по функциональному контролю" />
+          <ct:object name="A082" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по функц-му контролю" />
             <attribute type="Attributes.EUnit" value="°" />
           </ct:object>
-          <ct:object name="A087" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A083" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A088" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A084" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ДК по допусковому контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A089" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A085" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ДК по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A090" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по функциональному контролю" />
+          <ct:object name="A086" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по функц-му контролю" />
             <attribute type="Attributes.EUnit" value="°" />
           </ct:object>
-          <ct:object name="A091" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A087" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A092" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A088" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ГК по допусковому контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A093" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A089" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ГК по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A094" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по функциональному контролю" />
+          <ct:object name="A090" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по функц-му контролю" />
             <attribute type="Attributes.EUnit" value="°" />
           </ct:object>
-          <ct:object name="A095" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A091" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A096" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A092" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ЦМ по допусковому контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A097" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A093" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ЦМ по аппаратному контролю" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A098" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A094" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ВОбс. Опасная вибрация двигателя" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A099" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A095" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Повышенное давление пускового газа за СтВ" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A100" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A096" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в ФС" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A101" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A097" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в масле КП" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A102" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A098" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в масле откачки от РП ТВД" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A103" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A099" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Время запуска велико" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A104" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A100" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность СТ" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A105" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A101" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Самопроизвольная раскрутка ротора СТ без смазки" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A106" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A102" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ВОбс. Входной тракт двигателя засорен" />
             <attribute type="Attributes.EUnit" value="кПа" />
           </ct:object>
-          <ct:object name="A107" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A103" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Помпаж двигателя" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A108" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A104" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Погасание КС после розжига" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A109" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A105" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Обобщенный АОбс от ТР" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A110" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A106" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Обобщенный АОсс от ТР" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A111" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A107" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Помпаж нагнетателя" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A112" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A108" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Кран 6р не открылся на пуске" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A113" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A109" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ1" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A114" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A110" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ2" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A115" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A111" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ3" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A116" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A112" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ4" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A117" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A113" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ5" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A118" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A114" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ6" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A119" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A115" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ7" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A120" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A116" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ8" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A121" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A117" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ9" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A122" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A118" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ10" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A123" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A119" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ11" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A124" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A120" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ12" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A125" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A121" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. БЭАО сработал (от AD100)" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A126" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A122" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Авария ПЛК AD200" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
-          <ct:object name="A127" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="A123" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="АОсс. Нет связи с ПЛК AD200" />
             <attribute type="Attributes.EUnit" value="-" />
           </ct:object>
         </ct:object>
         <ct:object name="WRN" access-level="public" >
-            <ct:object name="DI_dPmf1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления масла на фильтрах БВМФ ГТУ" />
-            </ct:object>
-            <ct:object name="DI_Nstart_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Высокие обороты стартёра" />
-            </ct:object>
             <ct:object name="DI_KC1_VNA1" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 1 ДБСКТ датчика угла ВНА" />
             </ct:object>
@@ -2713,6 +2736,15 @@
             <ct:object name="DI_UGTU_BEO" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отсутствие питания БЭАО ПЛК 1" />
             </ct:object>
+            <ct:object name="DI_dPmf1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления масла на фильтрах БВМФ ГТУ" />
+            </ct:object>
+            <ct:object name="DI_Nstart_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокие обороты стартёра" />
+            </ct:object>
+            <ct:object name="P_TotkMin" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкая температура масла в откачках от опор двигателя" />
+            </ct:object>
             <ct:object name="P_SKBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК0" />
             </ct:object>
@@ -2726,7 +2758,7 @@
               <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ДК2" />
             </ct:object>
             <ct:object name="P_SKCmBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ГК" />
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ЦК" />
             </ct:object>
             <ct:object name="APK_notOff" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АПК не закрыт на режиме Магистраль" />
@@ -2748,6 +2780,9 @@
             </ct:object>
             <ct:object name="R_kt_GtPk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимального Gт/Р*к" />
+            </ct:object>
+            <ct:object name="MNDE_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ МНДЭ" />
             </ct:object>
             <ct:object name="PPzht1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ1" />
@@ -2808,6 +2843,15 @@
             <ct:object name="icingGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Условия облединения ГТУ" />
             </ct:object>
+            <ct:object name="FirePresent" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Есть розжиг" />
+            </ct:object>
+            <ct:object name="ZH_Ptg" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по давлению топливного газа взведена" />
+            </ct:object>
+            <ct:object name="Ppg_min" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по низкому давлению ПГ взведена" />
+            </ct:object>
         </ct:object>
         <ct:object name="PPU" access-level="public" >
             <ct:object name="Ngg_100h" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -2834,14 +2878,11 @@
             <ct:object name="SKCK_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="СКЦК не закрыт" />
             </ct:object>
-            <ct:object name="ZPCV_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Задвижка подогрева циклового воздуха не закрыта" />
+            <ct:object name="AI_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков ГТУ" />
             </ct:object>
             <ct:object name="DI_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков ГТУ" />
-            </ct:object>
-            <ct:object name="AI_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков ГТУ" />
             </ct:object>
             <ct:object name="IM_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов ГТУ" />
@@ -2858,7 +2899,7 @@
             <ct:object name="P_TstBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ 9-ти и более каналов измерения Тст" />
             </ct:object>
-            <ct:object name="P_TmvhDBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="Tv_inK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения температуры воздуха на входе в двигатель" />
             </ct:object>
             <ct:object name="Tm_inGTUBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -2879,7 +2920,7 @@
             <ct:object name="P_PkBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ датчика давления воздуха за компрессором ВД" />
             </ct:object>
-            <ct:object name="PgoutGGBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+            <ct:object name="PgoutTVDBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ датчика полного давления газа за турбиной ВД" />
             </ct:object>
             <ct:object name="P_PmvhDBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
@@ -2929,9 +2970,6 @@
             </ct:object>
             <ct:object name="POS_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Заслонка ПОС ГТУ не закрыта" />
-            </ct:object>
-            <ct:object name="DoorVOU_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Двери ВОУ не закрыты" />
             </ct:object>
         </ct:object>
         <ct:object name="ALR" access-level="public" >
@@ -3175,18 +3213,6 @@
             <ct:object name="A_SKIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК0" />
             </ct:object>
-            <ct:object name="A_SKGIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ГК" />
-            </ct:object>
-            <ct:object name="A_SKD1IMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ДК1" />
-            </ct:object>
-            <ct:object name="A_SKD2IMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ДК2" />
-            </ct:object>
-            <ct:object name="A_SKCmIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК ГК" />
-            </ct:object>
             <ct:object name="A_KPVIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВ КВД" />
             </ct:object>
@@ -3194,7 +3220,7 @@
               <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВЗ и КПГ ТВД" />
             </ct:object>
             <ct:object name="A_DozBrkD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по функциональному контролю" />
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по функц-му контролю" />
             </ct:object>
             <ct:object name="A_DozUprBrkD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по аппаратному контролю" />
@@ -3206,7 +3232,7 @@
               <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ДК по аппаратному контролю" />
             </ct:object>
             <ct:object name="A_DozBrkG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по функциональному контролю" />
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по функц-му контролю" />
             </ct:object>
             <ct:object name="A_DozUprBrkG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по аппаратному контролю" />
@@ -3218,7 +3244,7 @@
               <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ГК по аппаратному контролю" />
             </ct:object>
             <ct:object name="A_DozBrkCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по функциональному контролю" />
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по функц-му контролю" />
             </ct:object>
             <ct:object name="A_DozUprBrkCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по аппаратному контролю" />
@@ -3321,14 +3347,11 @@
             </ct:object>
         </ct:object>
         <ct:object name="ALG" access-level="public" >
-            <ct:object name="ALG_POS_ON" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Включение ПОС по кнопке" />
+            <ct:object name="ALG_MSD_Ready" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Маслосистема двигателя готова к пуску" />
             </ct:object>
             <ct:object name="ALG_ConturLim" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Срабатывание верхних ограничительных контуров" />
-            </ct:object>
-            <ct:object name="ALG_CheckVIB" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="Виброаппаратура прошла контроль" />
             </ct:object>
             <ct:object name="ALG_TimeHP" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Время ХП" />
@@ -3342,6 +3365,12 @@
             <ct:object name="ALG_TimeHeat" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Время прогрева" />
             </ct:object>
+            <ct:object name="ALG_TimeGZ" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время запуска" />
+            </ct:object>
+            <ct:object name="ALG_MAXREG" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим " />
+            </ct:object>
             <ct:object name="ALG_DI_GTU_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков" />
             </ct:object>
@@ -3350,6 +3379,9 @@
             </ct:object>
             <ct:object name="ALG_IM_GTU_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
               <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов" />
+            </ct:object>
+            <ct:object name="ALG_GPA_NoLink" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD200" />
             </ct:object>
         </ct:object>
         <ct:object name="TR" access-level="public" >
