@@ -210,14 +210,29 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
     index_type_im = is_f_ind(cells[0], 'Тип ИМ')
     index_gender = is_f_ind(cells[0], 'Род')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
-    index_work_time = is_f_ind(cells[0], 'Считать наработку'),
+    index_work_time = is_f_ind(cells[0], 'Считать наработку')
     index_swap = is_f_ind(cells[0], 'Считать перестановки')
 
     cells = sheet['A2': 'T' + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
+    sl_cnt = {}
     for par in cells:
         set_par_cpu.add(par[index_cpu_name].value)
+        # Если считаем наработку, то добавляем в словарь sl_cnt = {CPU: {алг.имя : русское имя}}
+        if par[index_work_time].value == 'Да':
+            if par[index_cpu_name].value not in sl_cnt:
+                sl_cnt[par[index_cpu_name].value] = {par[index_alg_name].value + '_WorkTime': par[index_rus_name].value}
+            else:
+                sl_cnt[par[index_cpu_name].value].update(
+                    {par[index_alg_name].value + '_WorkTime': par[index_rus_name].value})
+        # Если считаем перестановки, то добавляем в словарь sl_cnt = {CPU: {алг.имя : русское имя}}
+        if par[index_swap].value == 'Да':
+            if par[index_cpu_name].value not in sl_cnt:
+                sl_cnt[par[index_cpu_name].value] = {par[index_alg_name].value + '_Swap': par[index_rus_name].value}
+            else:
+                sl_cnt[par[index_cpu_name].value].update(
+                    {par[index_alg_name].value + '_Swap': par[index_rus_name].value})
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -371,6 +386,7 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         if set(sl_object_all[objects].keys()) & set_par_cpu or set(sl_object_all[objects].keys()) & set_par_cpu_imao:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write('      </ct:object>\n')
+    return sl_cnt
 
 
 def is_create_objects_diag(sl):
@@ -830,3 +846,42 @@ def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write('      </ct:object>\n')
+
+
+def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objects):
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # В ПЛК-аспекте открываем узел CNT
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('        <ct:object name="СNT" access-level="public" >\n')
+                for nar in sl_cnt[cpu]:
+                    f.write(Template(tmp_object_btn_cnt_sig).substitute(
+                        object_name=nar,
+                        object_type='Types.CNT.CNT_PLC_View',
+                        object_aspect='Types.PLC_Aspect',
+                        text_description=is_cor_chr(sl_cnt[cpu][nar])))
+        # В IOS-аспекте открываем узел CNT
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            f.write('      <ct:object name="CNT" access-level="public" >\n')
+            for cpu_nar in sl_cnt:
+                for nar in sl_cnt[cpu_nar]:
+                    f.write(Template(tmp_ios).substitute(
+                        object_name=nar,
+                        object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                        object_aspect='Types.IOS_Aspect',
+                        original_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.СNT.{nar}",
+                        target_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.СNT.{nar}"))
+
+    # Закрываем группу наработок
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Закрываем узел CNT в ПЛК-аспекте
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('        </ct:object>\n')
+        # Закрываем узел CNT в IOS-аспекте
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            f.write('      </ct:object>\n')

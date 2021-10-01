@@ -170,8 +170,8 @@ try:
                     f.write(Template(tmp_apr_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.APR",
                                                              target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # ИМ
-    write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all, tmp_object_im=tmp_object_IM,
-             tmp_ios=tmp_ios, group_objects='IM')
+    sl_cnt = write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all,
+                      tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM')
 
     # Диагностика
     write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
@@ -213,6 +213,10 @@ try:
     # Защиты
     write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
              tmp_ios=tmp_ios, group_objects='PZ')
+
+    # Наработки и перестановки
+    write_cnt(sl_cnt=sl_cnt, sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
+              tmp_ios=tmp_ios, group_objects='CNT')
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...
