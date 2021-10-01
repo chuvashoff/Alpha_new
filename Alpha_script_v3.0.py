@@ -2,7 +2,6 @@ import datetime
 import openpyxl
 import logging
 import warnings
-import os
 from func_for_v3 import *
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
@@ -167,6 +166,9 @@ try:
     # ИМ
     write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all, tmp_object_im=tmp_object_IM,
              tmp_ios=tmp_ios, group_objects='IM')
+
+    # Диагностика
+    write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Для каждого объекта...
     for objects in sl_object_all:
