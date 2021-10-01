@@ -71,14 +71,14 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
                         short_name=par[index_short_name].value,
                         text_fracdigits=par[index_frag_dig].value))
                 # Записываем параметры в IOS-аспект, если канал не резервный
+                group_objects_ios = (f'System.{group_objects}' if group_objects == 'SET' else group_objects)
                 with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_ios).substitute(object_name=alg_par,
-                                                         object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
-                                                         object_aspect='Types.IOS_Aspect',
-                                                         original_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                                                         f".CPU.Tree.{group_objects}.{alg_par}",
-                                                         target_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                                                       f".CPU.Tree.{group_objects}.{alg_par}"))
+                    f.write(Template(tmp_ios).substitute(
+                        object_name=alg_par,
+                        object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                        object_aspect='Types.IOS_Aspect',
+                        original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
+                        target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
 
     # Для каждого объекта...
     for objects in sl_object_all:

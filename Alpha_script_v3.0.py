@@ -170,6 +170,49 @@ try:
     # Диагностика
     write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
+    # ПЕРЕХОДИМ К SYSTEM
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # В ПЛК-аспекте открываем узел System
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('        <ct:object name="System" access-level="public" >\n')
+        # В IOS-аспекте открываем узел System
+        # и записываем агрегаторы
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            f.write('      <ct:object name="System" access-level="public" >\n')
+            # Добавляем агрегаторы
+            f.write(f'        <ct:object name="Agregator_Important_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'        <ct:object name="Agregator_N_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(f'        <ct:object name="Agregator_Repair_IOS" '
+                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+
+    # Уставки
+    write_ai_ae(sheet=book['Уставки'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
+                tmp_ios=tmp_ios, group_objects='SET')
+
+    # ЗАКРЫВАЕМ ГРУППУ SYSTEM
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Закрываем узел System в ПЛК-аспекте
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('        </ct:object>\n')
+        # Закрываем узел System в IOS-аспекте
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            f.write('      </ct:object>\n')
+
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...для каждого контроллера...

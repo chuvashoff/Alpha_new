@@ -1915,5 +1915,308 @@
         </ct:object>
         </ct:object>
       </ct:object>
+      <ct:object name="System" access-level="public" >
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="SET" aspect="Types.IOS_Aspect" access-level="public">
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="SP_R_TtzapMax" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtzapMax" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtzapMax" />
+        </ct:object>
+        <ct:object name="SP_R_Ngg_Max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Ngg_Max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Ngg_Max" />
+        </ct:object>
+        <ct:object name="SP_R_Ngg_MG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Ngg_MG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Ngg_MG" />
+        </ct:object>
+        <ct:object name="SP_R_Pk_ogr" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Pk_ogr" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Pk_ogr" />
+        </ct:object>
+        <ct:object name="SP_R_TtMax" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtMax" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtMax" />
+        </ct:object>
+        <ct:object name="SP_R_PK_OgR_Max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_PK_OgR_Max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_PK_OgR_Max" />
+        </ct:object>
+        <ct:object name="SP_R_Nst_Ogr" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nst_Ogr" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nst_Ogr" />
+        </ct:object>
+        <ct:object name="SP_R_Nknd" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nknd" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nknd" />
+        </ct:object>
+        <ct:object name="SP_R_Nst_SZTR" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nst_SZTR" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Nst_SZTR" />
+        </ct:object>
+        <ct:object name="SP_R_KPV_ON" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPV_ON" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPV_ON" />
+        </ct:object>
+        <ct:object name="SP_R_KPV_OFF" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPV_OFF" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPV_OFF" />
+        </ct:object>
+        <ct:object name="SP_R_KPG_ON" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPG_ON" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPG_ON" />
+        </ct:object>
+        <ct:object name="SP_R_KPG_OFF" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPG_OFF" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_KPG_OFF" />
+        </ct:object>
+        <ct:object name="SP_R_Gt_roz" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz" />
+        </ct:object>
+        <ct:object name="SP_R_Gt_zap" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_zap" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_zap" />
+        </ct:object>
+        <ct:object name="SP_R_GT_max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_GT_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_GT_max" />
+        </ct:object>
+        <ct:object name="SP_R_GtdivPk" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_GtdivPk" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_GtdivPk" />
+        </ct:object>
+        <ct:object name="SP_R_dNgg_CTB" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dNgg_CTB" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dNgg_CTB" />
+        </ct:object>
+        <ct:object name="SP_R_dNgg" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dNgg" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dNgg" />
+        </ct:object>
+        <ct:object name="SP_R_Gt_roz_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz_min" />
+        </ct:object>
+        <ct:object name="SP_R_Gt_roz_max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_Gt_roz_max" />
+        </ct:object>
+        <ct:object name="SP_R_dGtStart" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dGtStart" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_dGtStart" />
+        </ct:object>
+        <ct:object name="SP_NST" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_NST" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_NST" />
+        </ct:object>
+        <ct:object name="SP_TinK_PermMR" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_TinK_PermMR" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_TinK_PermMR" />
+        </ct:object>
+        <ct:object name="SP_R_ZPV1" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_ZPV1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_ZPV1" />
+        </ct:object>
+        <ct:object name="SP_R_ZPV2" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_ZPV2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_ZPV2" />
+        </ct:object>
+        <ct:object name="SP_Metan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Metan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Metan" />
+        </ct:object>
+        <ct:object name="SP_Etan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Etan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Etan" />
+        </ct:object>
+        <ct:object name="SP_Propan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Propan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Propan" />
+        </ct:object>
+        <ct:object name="SP_N_butan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_N_butan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_N_butan" />
+        </ct:object>
+        <ct:object name="SP_I_butan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_I_butan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_I_butan" />
+        </ct:object>
+        <ct:object name="SP_N_pentan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_N_pentan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_N_pentan" />
+        </ct:object>
+        <ct:object name="SP_I_pentan" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_I_pentan" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_I_pentan" />
+        </ct:object>
+        <ct:object name="SP_Azot" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Azot" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Azot" />
+        </ct:object>
+        <ct:object name="SP_Co2" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Co2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Co2" />
+        </ct:object>
+        <ct:object name="SP_H2S" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_H2S" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_H2S" />
+        </ct:object>
+        <ct:object name="SP_Diam" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Diam" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Diam" />
+        </ct:object>
+        <ct:object name="SP_Diam_diaf" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Diam_diaf" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Diam_diaf" />
+        </ct:object>
+        <ct:object name="SP_Radius_kromki" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Radius_kromki" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Radius_kromki" />
+        </ct:object>
+        <ct:object name="SP_typeSU" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_typeSU" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_typeSU" />
+        </ct:object>
+        <ct:object name="SP_typeOtbor" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_typeOtbor" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_typeOtbor" />
+        </ct:object>
+        <ct:object name="SP_Ro_s_1" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Ro_s_1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Ro_s_1" />
+        </ct:object>
+        <ct:object name="SP_Ra" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Ra" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Ra" />
+        </ct:object>
+        <ct:object name="SP_N_nom" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_N_nom" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_N_nom" />
+        </ct:object>
+        <ct:object name="SP_N_max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_N_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_N_max" />
+        </ct:object>
+        <ct:object name="SP_Nst_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_min" />
+        </ct:object>
+        <ct:object name="SP_Ngg_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_min" />
+        </ct:object>
+        <ct:object name="SP_Tst_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Tst_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Tst_min" />
+        </ct:object>
+        <ct:object name="SP_Pk_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Pk_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Pk_min" />
+        </ct:object>
+        <ct:object name="SP_Pg_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Pg_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Pg_min" />
+        </ct:object>
+        <ct:object name="SP_E_min" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_E_min" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_E_min" />
+        </ct:object>
+        <ct:object name="SP_Nst_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_Nst_DN_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_DN_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Nst_DN_minZ" />
+        </ct:object>
+        <ct:object name="SP_Ngg_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_Ngg_DN_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_DN_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Ngg_DN_minZ" />
+        </ct:object>
+        <ct:object name="SP_Tst_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Tst_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Tst_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_Pk_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Pk_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Pk_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_Pg_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Pg_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Pg_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_E_UP_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_E_UP_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_E_UP_minZ" />
+        </ct:object>
+        <ct:object name="SP_PZ_DN_minZ" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_PZ_DN_minZ" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_PZ_DN_minZ" />
+        </ct:object>
+        <ct:object name="SP_TimeALR" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_TimeALR" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_TimeALR" />
+        </ct:object>
+        <ct:object name="SP_MAXRATE" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_MAXRATE" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_MAXRATE" />
+        </ct:object>
+        <ct:object name="SP_SET_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_PG" />
+        </ct:object>
+        <ct:object name="SP_SET_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_QG" />
+        </ct:object>
+        <ct:object name="SP_SET_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_SET_EG" />
+        </ct:object>
+        <ct:object name="SP_DEL_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_PG" />
+        </ct:object>
+        <ct:object name="SP_DEL_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_QG" />
+        </ct:object>
+        <ct:object name="SP_DEL_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DEL_EG" />
+        </ct:object>
+        <ct:object name="SP_WORK_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_PG" />
+        </ct:object>
+        <ct:object name="SP_WORK_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_QG" />
+        </ct:object>
+        <ct:object name="SP_WORK_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_WORK_EG" />
+        </ct:object>
+        <ct:object name="SP_KP_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_PG" />
+        </ct:object>
+        <ct:object name="SP_KP_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_QG" />
+        </ct:object>
+        <ct:object name="SP_KP_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_EG" />
+        </ct:object>
+        <ct:object name="SP_KI_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_PG" />
+        </ct:object>
+        <ct:object name="SP_KI_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_QG" />
+        </ct:object>
+        <ct:object name="SP_KI_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_EG" />
+        </ct:object>
+        <ct:object name="SP_KD_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_PG" />
+        </ct:object>
+        <ct:object name="SP_KD_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_QG" />
+        </ct:object>
+        <ct:object name="SP_KD_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_EG" />
+        </ct:object>
+        <ct:object name="SP_DZ_PG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_PG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_PG" />
+        </ct:object>
+        <ct:object name="SP_DZ_QG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_QG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_QG" />
+        </ct:object>
+        <ct:object name="SP_DZ_EG" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_EG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_EG" />
+        </ct:object>
+        <ct:object name="SP_PinKr1" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_PinKr1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_PinKr1" />
+        </ct:object>
+        <ct:object name="SP_VOD_sTswitch" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTswitch" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTswitch" />
+        </ct:object>
+        <ct:object name="SP_VOD_sTload" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTload" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTload" />
+        </ct:object>
+        <ct:object name="SP_VOD_sTsl" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTsl" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOD_sTsl" />
+        </ct:object>
+        <ct:object name="SP_VOT_sTswitch" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTswitch" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTswitch" />
+        </ct:object>
+        <ct:object name="SP_VOT_sTload" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTload" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTload" />
+        </ct:object>
+        <ct:object name="SP_VOT_sTsl" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTsl" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_VOT_sTsl" />
+        </ct:object>
+        <ct:object name="SP_Toksht" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Toksht" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Toksht" />
+        </ct:object>
+        <ct:object name="SP_KP_TK" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_TK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KP_TK" />
+        </ct:object>
+        <ct:object name="SP_KI_TK" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_TK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KI_TK" />
+        </ct:object>
+        <ct:object name="SP_KD_TK" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_TK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_KD_TK" />
+        </ct:object>
+        <ct:object name="SP_DZ_TK" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_TK" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_DZ_TK" />
+        </ct:object>
+        <ct:object name="SP_Pin_Nagn" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Pin_Nagn" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Pin_Nagn" />
+        </ct:object>
+        <ct:object name="SP_Tout_UTO" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.SET.SP_Tout_UTO" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Tout_UTO" />
+        </ct:object>
+      </ct:object>
+      </ct:object>
     </ct:object>
 </omx>

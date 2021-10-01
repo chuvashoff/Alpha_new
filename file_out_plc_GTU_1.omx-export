@@ -2000,6 +2000,166 @@
             </ct:object>
           </ct:object>
         </ct:object>
+        <ct:object name="System" access-level="public" >
+        <ct:object name="SET" access-level="public" >
+          <ct:object name="SP_R_TtzapMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимальной температуры газа за турбиной на запуске" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Ngg_Max" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимальных оборотов" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Ngg_MG" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов МГ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Pk_ogr" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ограничения по давлению воздуха за КВД" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_TtMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимальной температуры газа за турбиной на режиме" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_PK_OgR_Max" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка давления воздуха за КВД при максимальном режиме" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Т" />
+          </ct:object>
+          <ct:object name="SP_R_Nst_Ogr" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимальных оборотов СТ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Nknd" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ограничения максимальных оборотов КНД" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_Nst_SZTR" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов раскрутки СТ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="N/Ti" />
+          </ct:object>
+          <ct:object name="SP_R_KPV_ON" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов открытия клапанов КПВ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="SP_R_KPV_OFF" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов закрытия клапанов КПВ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="SP_R_KPG_ON" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов открытия клапанов КПВЗ-КПГ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Р" />
+          </ct:object>
+          <ct:object name="SP_R_KPG_OFF" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка оборотов закрытия клапанов КПВЗ-КПГ" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_Gt_roz" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка расхода на розжиге" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_Gt_zap" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка расхода на запуске" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_GT_max" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимального расхода" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_GtdivPk" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ограничения по контуру Gт/Pк" />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_dNgg_CTB" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ускорения на старте при включенном стартере" />
+            <attribute type="Attributes.EUnit" value="(об/мин)/с" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_dNgg" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ускорения на старте при отлюченном стартере" />
+            <attribute type="Attributes.EUnit" value="(об/мин)/с" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_Gt_roz_min" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка минимального расхода на розжиге" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_Gt_roz_max" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимального расхода на розжиге" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_R_dGtStart" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка ограничения скорости расхода на запуске" />
+            <attribute type="Attributes.EUnit" value="кг/ч*с" />
+            <attribute type="Attributes.FracDigits" value="3" />
+            <attribute type="Attributes.ShortName" value="-" />
+          </ct:object>
+          <ct:object name="SP_NST" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Задание оборотов Nст" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="SP_TinK_PermMR" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Уставка на включение максимального режима" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Т" />
+          </ct:object>
+          <ct:object name="SP_R_ZPV1" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка закрытия ЗПВ1" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_ZPV2" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка закрытия ЗПВ2" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+        </ct:object>
+        </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
     </trei:master-module>
