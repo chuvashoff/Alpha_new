@@ -1786,5 +1786,134 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.IM.VODr2" />
         </ct:object>
       </ct:object>
+      <ct:object name="Diag" aspect="Types.IOS_Aspect" access-level="public">
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="HW" aspect="Types.IOS_Aspect" access-level="public">
+          <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="AD100" base-type="Types.DIAG_CPU.DIAG_CPU_M903E_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD100" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD100" />
+        </ct:object>
+        <ct:object name="AD101" base-type="Types.DIAG_M531I.DIAG_M531I_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD101" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD101" />
+        </ct:object>
+        <ct:object name="AD102" base-type="Types.DIAG_M531I.DIAG_M531I_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD102" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD102" />
+        </ct:object>
+        <ct:object name="AD111" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD111" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD111" />
+        </ct:object>
+        <ct:object name="AD112" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD112" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD112" />
+        </ct:object>
+        <ct:object name="AD113" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD113" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD113" />
+        </ct:object>
+        <ct:object name="AD114" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD114" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD114" />
+        </ct:object>
+        <ct:object name="AD115" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD115" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD115" />
+        </ct:object>
+        <ct:object name="AD116" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD116" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD116" />
+        </ct:object>
+        <ct:object name="AD117" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD117" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD117" />
+        </ct:object>
+        <ct:object name="AD118" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD118" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD118" />
+        </ct:object>
+        <ct:object name="AD121" base-type="Types.DIAG_M538V.DIAG_M538V_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD121" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD121" />
+        </ct:object>
+        <ct:object name="AD131" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD131" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD131" />
+        </ct:object>
+        <ct:object name="AD132" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD132" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD132" />
+        </ct:object>
+        <ct:object name="AD133" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD133" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD133" />
+        </ct:object>
+        <ct:object name="AD134" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD134" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD134" />
+        </ct:object>
+        <ct:object name="AD141" base-type="Types.DIAG_M558O.DIAG_M558O_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD141" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD141" />
+        </ct:object>
+        <ct:object name="AD142" base-type="Types.DIAG_M558O.DIAG_M558O_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD142" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD142" />
+        </ct:object>
+        <ct:object name="AD200" base-type="Types.DIAG_CPU.DIAG_CPU_M903E_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD200" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD200" />
+        </ct:object>
+        <ct:object name="AD211" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD211" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD211" />
+        </ct:object>
+        <ct:object name="AD212" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD212" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD212" />
+        </ct:object>
+        <ct:object name="AD213" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD213" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD213" />
+        </ct:object>
+        <ct:object name="AD214" base-type="Types.DIAG_M548A.DIAG_M548A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD214" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD214" />
+        </ct:object>
+        <ct:object name="AD215" base-type="Types.DIAG_M547A.DIAG_M547A_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD215" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD215" />
+        </ct:object>
+        <ct:object name="AD221" base-type="Types.DIAG_M538V.DIAG_M538V_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD221" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD221" />
+        </ct:object>
+        <ct:object name="AD231" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD231" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD231" />
+        </ct:object>
+        <ct:object name="AD232" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD232" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD232" />
+        </ct:object>
+        <ct:object name="AD233" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD233" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD233" />
+        </ct:object>
+        <ct:object name="AD234" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD234" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD234" />
+        </ct:object>
+        <ct:object name="AD235" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD235" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD235" />
+        </ct:object>
+        <ct:object name="AD236" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD236" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD236" />
+        </ct:object>
+        <ct:object name="AD237" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD237" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD237" />
+        </ct:object>
+        <ct:object name="AD238" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD238" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD238" />
+        </ct:object>
+        <ct:object name="AD239" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD239" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD239" />
+        </ct:object>
+        <ct:object name="AD241" base-type="Types.DIAG_M558O.DIAG_M558O_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD241" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD241" />
+        </ct:object>
+        <ct:object name="AD242" base-type="Types.DIAG_M558O.DIAG_M558O_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD242" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD242" />
+        </ct:object>
+        <ct:object name="AD243" base-type="Types.DIAG_M558O.DIAG_M558O_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD243" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD243" />
+        </ct:object>
+        <ct:object name="AD301" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD301" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD301" />
+        </ct:object>
+        <ct:object name="AD302" base-type="Types.DIAG_M558D.DIAG_M558D_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD302" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD302" />
+        </ct:object>
+        </ct:object>
+      </ct:object>
     </ct:object>
 </omx>
