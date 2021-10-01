@@ -731,3 +731,102 @@ def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objec
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write('      </ct:object>\n')
+
+
+def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
+    cells = sheet['A1': 'N' + str(sheet.max_row)]
+    index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
+    index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
+    index_cpu_name = is_f_ind(cells[0], 'CPU')
+    index_type_protect = is_f_ind(cells[0], 'Тип защиты')
+    index_unit = is_f_ind(cells[0], 'Единица измерения')
+
+    cells = sheet['A2': 'N' + str(sheet.max_row)]
+    # Соствялем множество контроллеров, у которых есть данные параметры
+    set_par_cpu = set()
+    for par in cells:
+        set_par_cpu.add(par[index_cpu_name].value)
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Записываем стартовую информацию группы параметров
+            # При условии, что у данного котроллера есть параметры загруженного листа
+            if cpu in set_par_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a',
+                          encoding='UTF-8') as f:
+                    f.write(f'        <ct:object name="{group_objects}" access-level="public" >\n')
+        # Записываем стартовую информацию IOS-аспекта для группы параметров
+        # При условии, что есть пересечение между множеством контроллеров с параметрами и контроллеров в данном объекте,
+        # то есть наличие данные параметров у объектов
+        if set(sl_object_all[objects].keys()) & set_par_cpu:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'        <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+
+    # Для каждого параметра на листе ...
+    num_pz = 0
+    for par in cells:
+        # Узнаём к какому контроллеру принадлежит параметр
+        cpu_name_par = par[index_cpu_name].value
+        # Если встретили пустую строку, то прервываем
+        if cpu_name_par is None:
+            break
+        if par[index_type_protect].value not in 'АОссАОбсВОссВОбсАОНО':
+            continue
+        else:
+            if par[index_unit].value == '-999.0':
+                tmp_eunit = str(par[index_unit].comment)[str(par[index_unit].comment).find(' ')+1:
+                                                         str(par[index_unit].comment).find('by')]
+            else:
+                tmp_eunit = par[index_unit].value
+        alg_par = 'A' + str(num_pz).zfill(3)
+
+        # ...для каждого объекта...
+        for objects in sl_object_all:
+            # Записываем параметры в нужный файл PLC-аспект, если канал не резервный
+            with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write(Template(tmp_object_pz).substitute(
+                    object_name=alg_par,
+                    object_type='Types.PZ.PZ_PLC_View',
+                    object_aspect='Types.PLC_Aspect',
+                    text_description=is_cor_chr(par[index_rus_name].value),
+                    text_eunit=tmp_eunit.strip()))
+            # Записываем параметры в IOS-аспект
+            group_objects_ios = f'System.{group_objects}'
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write(Template(tmp_ios).substitute(
+                    object_name=alg_par,
+                    object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                    object_aspect='Types.IOS_Aspect',
+                    original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
+                    target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
+        num_pz += 1
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Закрываем группу объектов
+            # При условии, что у данного котроллера есть параметры загруженного листа
+            if cpu in set_par_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a',
+                          encoding='UTF-8') as f:
+                    f.write('        </ct:object>\n')
+        # Закрываем в IOS-аспекте
+        # Если в контроллерах объекта есть параметры загруженного листа
+        if set(sl_object_all[objects].keys()) & set_par_cpu:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('      </ct:object>\n')

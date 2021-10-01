@@ -47,6 +47,9 @@ try:
     # Считываем файл-шаблон для BTN CNT
     with open(os.path.join('Template', 'Temp_BTN_CNT_sig'), 'r', encoding='UTF-8') as f:
         tmp_object_BTN_CNT_sig = f.read()
+    # Считываем файл-шаблон для PZ
+    with open(os.path.join('Template', 'Temp_PZ'), 'r', encoding='UTF-8') as f:
+        tmp_object_PZ = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -206,6 +209,10 @@ try:
     # Кнопки
     write_btn(sheet=book['Кнопки'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
               tmp_ios=tmp_ios, group_objects='BTN')
+
+    # Защиты
+    write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
+             tmp_ios=tmp_ios, group_objects='PZ')
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...
