@@ -2566,6 +2566,131 @@
             <attribute type="Attributes.ShortName" value="T" />
           </ct:object>
         </ct:object>
+        <ct:object name="BTN" access-level="public" >
+            <ct:object name="BTN_Unlock" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Деблокировка" />
+            </ct:object>
+            <ct:object name="BTN_Cancel" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отмена" />
+            </ct:object>
+            <ct:object name="BTN_Start" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск" />
+            </ct:object>
+            <ct:object name="BTN_ResetPZ" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сброс ПЗ" />
+            </ct:object>
+            <ct:object name="BTN_Repair" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Ремонт" />
+            </ct:object>
+            <ct:object name="BTN_HR" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ХР" />
+            </ct:object>
+            <ct:object name="BTN_GR" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ГР" />
+            </ct:object>
+            <ct:object name="BTN_PZ" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗ" />
+            </ct:object>
+            <ct:object name="BTN_KPK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="КПК" />
+            </ct:object>
+            <ct:object name="BTN_PZMS" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗМС" />
+            </ct:object>
+            <ct:object name="BTN_PZBS" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗБС" />
+            </ct:object>
+            <ct:object name="BTN_HP" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ХП" />
+            </ct:object>
+            <ct:object name="BTN_PM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Промывка" />
+            </ct:object>
+            <ct:object name="BTN_APK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АПК" />
+            </ct:object>
+            <ct:object name="BTN_APM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АПМ" />
+            </ct:object>
+            <ct:object name="BTN_KM" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="К-М" />
+            </ct:object>
+            <ct:object name="BTN_MK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="М-К" />
+            </ct:object>
+            <ct:object name="BTN_AOss" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс" />
+            </ct:object>
+            <ct:object name="BTN_AObs" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс" />
+            </ct:object>
+            <ct:object name="BTN_NOss" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОсс" />
+            </ct:object>
+            <ct:object name="BTN_NObs" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОбс" />
+            </ct:object>
+            <ct:object name="BTN_CheckControl" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ" />
+            </ct:object>
+            <ct:object name="BTN_ResetFG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сброс суммарного расхода топливного газа" />
+            </ct:object>
+            <ct:object name="BTN_ResetTG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сброс суммарного расхода технологического газа" />
+            </ct:object>
+            <ct:object name="BTN_ResetTW" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сброс наработки ГПА" />
+            </ct:object>
+            <ct:object name="BTN_ResetCR" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сброс количества счетчиков" />
+            </ct:object>
+            <ct:object name="BTN_VOT1_main" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ1 основной" />
+            </ct:object>
+            <ct:object name="BTN_VOT2_main" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ2 основной" />
+            </ct:object>
+            <ct:object name="BTN_REG_WORK" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Включить регулятор (Рг. Qг. Ст.Сж.)" />
+            </ct:object>
+            <ct:object name="BTN_REG_STOP" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить регулятор (Рг. Qг. Ст.Сж.)" />
+            </ct:object>
+            <ct:object name="BTN_CMD_PG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Регулирование Рг на выходе нагнетателя" />
+            </ct:object>
+            <ct:object name="BTN_CMD_QG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Регулирование Qг" />
+            </ct:object>
+            <ct:object name="BTN_CMD_EG" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Регулирование степени сжатия" />
+            </ct:object>
+            <ct:object name="BTN_CMD_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить регулирование" />
+            </ct:object>
+            <ct:object name="BTN_SARC_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Включить управление от САР" />
+            </ct:object>
+            <ct:object name="BTN_SARC_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить управление от САР" />
+            </ct:object>
+            <ct:object name="BTN_SARR_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Включить регулирование от САР" />
+            </ct:object>
+            <ct:object name="BTN_SARR_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить регулирование от САР" />
+            </ct:object>
+            <ct:object name="BTN_PNU_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключить" />
+            </ct:object>
+            <ct:object name="BTN_PNS_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключить" />
+            </ct:object>
+            <ct:object name="BTN_UTO_OF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выключить УТО" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

@@ -44,6 +44,9 @@ try:
     # Считываем файл-шаблон для IM
     with open(os.path.join('Template', 'Temp_IM'), 'r', encoding='UTF-8') as f:
         tmp_object_IM = f.read()
+    # Считываем файл-шаблон для BTN CNT
+    with open(os.path.join('Template', 'Temp_BTN_CNT_sig'), 'r', encoding='UTF-8') as f:
+        tmp_object_BTN_CNT_sig = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -200,6 +203,9 @@ try:
     # Уставки
     write_ai_ae(sheet=book['Уставки'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
                 tmp_ios=tmp_ios, group_objects='SET')
+    # Кнопки
+    write_btn(sheet=book['Кнопки'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
+              tmp_ios=tmp_ios, group_objects='BTN')
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...

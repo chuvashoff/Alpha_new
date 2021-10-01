@@ -2159,6 +2159,35 @@
             <attribute type="Attributes.ShortName" value="N" />
           </ct:object>
         </ct:object>
+        <ct:object name="BTN" access-level="public" >
+            <ct:object name="BTN_UpdateTun" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сохранить настройки ТР" />
+            </ct:object>
+            <ct:object name="BTN_Stab_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизацию СТ включить" />
+            </ct:object>
+            <ct:object name="BTN_Stab_OFF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизацию СТ отключить" />
+            </ct:object>
+            <ct:object name="BTN_MaxReg_ON" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим включить" />
+            </ct:object>
+            <ct:object name="BTN_MaxReg_OFF" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим отключить" />
+            </ct:object>
+            <ct:object name="BTN_TurnDown" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="РЧВ вниз" />
+            </ct:object>
+            <ct:object name="BTN_TurnUp" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="РЧВ вверх" />
+            </ct:object>
+            <ct:object name="BTN_ReadTun" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Считать настройки АПР" />
+            </ct:object>
+            <ct:object name="BTN_READ_TUN" base-type="Types.BTN.BTN_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Считать настройки ТР" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
