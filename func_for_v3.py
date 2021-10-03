@@ -35,7 +35,7 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
         # то есть наличие данные параметров у объектов
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
                 f.write(f'        <ct:object name="Agregator_Important_IOS" '
                         f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                         f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -134,7 +134,7 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
         # то есть наличие данные параметров у объектов
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
                 f.write(f'        <ct:object name="Agregator_Important_IOS" '
                         f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                         f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -249,7 +249,7 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         # то есть наличие данные параметров у объектов
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
                 f.write(f'        <ct:object name="Agregator_Important_IOS" '
                         f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                         f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -326,7 +326,7 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         if not (set(sl_object_all[objects].keys()) & set_par_cpu) and \
                 set(sl_object_all[objects].keys()) & set_par_cpu_imao:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
                 f.write(f'        <ct:object name="Agregator_Important_IOS" '
                         f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                         f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -609,7 +609,7 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
         # Записываем стартовую информацию IOS-аспекта для диагностики
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             # узел Diag
-            f.write(f'      <ct:object name="Diag" aspect="Types.IOS_Aspect" access-level="public">\n')
+            f.write(f'      <ct:object name="Diag" access-level="public">\n')
             f.write(f'        <ct:object name="Agregator_Important_IOS" '
                     f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                     f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -623,7 +623,7 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
                     f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
                     f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
             # подузел HW
-            f.write(f'        <ct:object name="HW" aspect="Types.IOS_Aspect" access-level="public">\n')
+            f.write(f'        <ct:object name="HW" access-level="public">\n')
             f.write(f'          <ct:object name="Agregator_Important_IOS" '
                     f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                     f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
@@ -703,7 +703,7 @@ def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objec
         # то есть наличие данные параметров у объектов
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
 
     # Для каждого параметра на листе ...
     for par in cells:
@@ -778,7 +778,7 @@ def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
         # то есть наличие данные параметров у объектов
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(f'      <ct:object name="{group_objects}" aspect="Types.IOS_Aspect" access-level="public">\n')
+                f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
                 f.write(f'        <ct:object name="Agregator_Important_IOS" '
                         f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
                         f'aspect="Types.IOS_Aspect" access-level="public"/>\n')

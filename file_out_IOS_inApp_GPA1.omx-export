@@ -5,7 +5,7 @@
       <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
       <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
       <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-      <ct:object name="AI" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="AI" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -515,7 +515,7 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AI.AI_U4" />
         </ct:object>
       </ct:object>
-      <ct:object name="AE" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="AE" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -785,7 +785,7 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_Nst_set" />
         </ct:object>
       </ct:object>
-      <ct:object name="DI" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="DI" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -1540,7 +1540,7 @@
           </ct:object>
         </ct:object>
       </ct:object>
-      <ct:object name="IM" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="IM" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -1786,12 +1786,12 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.IM.VODr2" />
         </ct:object>
       </ct:object>
-      <ct:object name="Diag" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="Diag" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="HW" aspect="Types.IOS_Aspect" access-level="public">
+        <ct:object name="HW" access-level="public">
           <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
           <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
           <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -1920,7 +1920,7 @@
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-      <ct:object name="SET" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="SET" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -2217,7 +2217,7 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.SET.SP_Tout_UTO" />
         </ct:object>
       </ct:object>
-      <ct:object name="BTN" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="BTN" access-level="public">
         <ct:object name="BTN_UpdateTun" base-type="Types.BTN.BTN_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.BTN.BTN_UpdateTun" access-level="public">
           <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.BTN.BTN_UpdateTun" />
         </ct:object>
@@ -2369,7 +2369,7 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.BTN.BTN_UTO_OF" />
         </ct:object>
       </ct:object>
-      <ct:object name="PZ" aspect="Types.IOS_Aspect" access-level="public">
+      <ct:object name="PZ" access-level="public">
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
         <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
