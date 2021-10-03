@@ -218,6 +218,10 @@ try:
     write_cnt(sl_cnt=sl_cnt, sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
               tmp_ios=tmp_ios, group_objects='CNT')
 
+    # Сигналы остальные
+    write_signal(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
+                 tmp_ios=tmp_ios)
+
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...
     for objects in sl_object_all:

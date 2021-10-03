@@ -885,3 +885,132 @@ def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_obje
         # Закрываем узел CNT в IOS-аспекте
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             f.write('      </ct:object>\n')
+
+
+def is_read_sig(controller, cell, alg_name, par_name, type_protect, cpu):
+    tmp_wrn = {}
+    tmp_ts = {}
+    tmp_ppu = {}
+    tmp_alr = {}
+    tmp_modes = {}
+    tmp_alg = {}
+    for par in cell:
+        if par[par_name].value is None:
+            break
+        if par[cpu].value == controller:
+            if 'ПС' in par[type_protect].value:
+                tmp_wrn[par[alg_name].value[par[alg_name].value.find('|')+1:]] = (is_cor_chr(par[par_name].value),
+                                                                                  'Да (по наличию)')
+            elif par[type_protect].value in 'АОссАОбсВОссВОбсАОНО' or 'АС' in par[type_protect].value:
+                if 'АС' in par[type_protect].value:
+                    tmp_alr[par[alg_name].value[par[alg_name].value.find('|') + 1:]] = ('АС. ' +
+                                                                                        is_cor_chr(par[par_name].value),
+                                                                                        'АС')
+                else:
+                    tmp_alr[par[alg_name].value[par[alg_name].value.find('|') + 1:]] = (par[type_protect].value + '. ' +
+                                                                                        is_cor_chr(par[par_name].value),
+                                                                                        'Защита')
+            elif 'ТС' in par[type_protect].value:
+                tmp_ts[par[alg_name].value[par[alg_name].value.find('|')+1:]] = (is_cor_chr(par[par_name].value), 'ТС')
+            elif par[type_protect].value in ('ГР', 'ХР'):
+                tmp_ppu[par[alg_name].value[par[alg_name].value.find('|') + 1:]] = (is_cor_chr(par[par_name].value),
+                                                                                    'ППУ')
+            elif 'Режим' in par[type_protect].value:
+                tmp_modes[par[alg_name].value[par[alg_name].value.find('|') + 1:]] = ('Режим &quot;' +
+                                                                                      is_cor_chr(par[par_name].value) +
+                                                                                      '&quot;', 'Режим')
+                tmp_modes['regNum'] = ['Номер режима', 'Номер режима']
+            elif par[type_protect].value in ['BOOL', 'INT', 'FLOAT']:
+                tmp_alg['_'.join(par[alg_name].value.split('|'))] = (is_cor_chr(par[par_name].value),
+                                                                     'ALG_' + par[type_protect].value)
+    return tmp_wrn, tmp_ts, tmp_ppu, tmp_alr, tmp_modes, tmp_alg
+
+
+def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
+    set_global_ts = set()
+    # Словарь типов ПЛК-аспектов для сигналов
+    sl_type_sig = {
+        'Да (по наличию)': 'Types.WRN_On.WRN_On_PLC_View',
+        'Да (по отсутствию)': 'Types.WRN_Off.WRN_Off_PLC_View',
+        'ТС': 'Types.TS.TS_PLC_View',
+        'ППУ': 'Types.PPU.PPU_PLC_View',
+        'Защита': 'Types.ALR.ALR_PLC_View',
+        'АС': 'Types.ALR.ALR_PLC_View',
+        'Режим': 'Types.MODES.MODES_PLC_View',
+        'Номер режима': 'Types.MODES.regNum_PLC_View',
+        'ALG_BOOL': 'Types.ALG.ALG_BOOL_PLC_View',
+        'ALG_INT': 'Types.ALG.ALG_INT_PLC_View',
+        'ALG_FLOAT': 'Types.ALG.ALG_FLOAT_PLC_View'
+    }
+    cells = sheet['A1': 'N' + str(sheet.max_row)]
+    index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
+    index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
+    index_cpu_name = is_f_ind(cells[0], 'CPU')
+    index_type_protect = is_f_ind(cells[0], 'Тип защиты')
+    index_unit = is_f_ind(cells[0], 'Единица измерения')
+
+    cells = sheet['A2': 'N' + str(sheet.max_row)]
+
+    # Соствялем множество контроллеров, у которых есть данные параметры параметры
+    # Составляем словарь, где ключ - возможный тип сигнала(защиты), а значение - множество контроллеров
+    sl_set_par_cpu = {}
+    for par in cells:
+        if par[index_type_protect].value not in sl_set_par_cpu:
+            sl_set_par_cpu[par[index_type_protect].value] = set()
+        sl_set_par_cpu[par[index_type_protect].value].add(par[index_cpu_name].value)
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # Записываем стартовую информацию IOS-аспекта для группы параметров
+        # При условии, что есть пересечение между множеством контроллеров с параметрами и контроллеров в данном объекте,
+        # то есть наличие данные параметров у объектов
+        if set(sl_object_all[objects].keys()) & sl_set_par_cpu['ТС']:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write(f'      <ct:object name="TS" access-level="public">\n')
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # ...вызываем функцию чтения параметров-сигналов
+            tmp_wrn, tmp_ts, tmp_ppu, tmp_alr, tmp_modes, tmp_alg = is_read_sig(controller=cpu,
+                                                                                cell=cells, alg_name=index_alg_name,
+                                                                                par_name=index_rus_name,
+                                                                                type_protect=index_type_protect,
+                                                                                cpu=index_cpu_name)
+            # Если в котроллере есть ТС...
+            if tmp_ts:
+                set_global_ts.add(cpu)
+                # ...то открываем группу ТС в ПЛК-аспекте
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(f'        <ct:object name="TS" access-level="public" >\n')
+                    # для каждой ТС в текущем контроллере прописываем структуру ПЛК-аспекта
+                    for sig, value in tmp_ts.items():
+                        f.write(Template(tmp_object_btn_cnt_sig).substitute(object_name=sig,
+                                                                            object_type=sl_type_sig[value[1]],
+                                                                            object_aspect='Types.PLC_Aspect',
+                                                                            text_description=value[0]))
+
+                # В IOS-аспекте
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    for sig, value in tmp_ts.items():
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=sig,
+                            object_type=sl_type_sig[value[1]].replace('PLC_View', 'IOS_View'),
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.TS.{sig}",
+                            target_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.TS.{sig}"))
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Закрываем группу объектов ТС в ПЛК-аспекте
+            # При условии, что у данного котроллера есть ТС
+            if cpu in set_global_ts:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write('        </ct:object>\n')
+        # Закрываем группу ТС в IOS-аспекте
+        if set(sl_object_all[objects].keys()) & sl_set_par_cpu['ТС']:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('      </ct:object>\n')

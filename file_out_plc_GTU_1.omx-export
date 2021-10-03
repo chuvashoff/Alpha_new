@@ -2727,6 +2727,20 @@
               <attribute type="unit.System.Attributes.Description" value="КТ2" />
             </ct:object>
         </ct:object>
+        <ct:object name="TS" access-level="public" >
+            <ct:object name="icingGTU" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Условия облединения ГТУ" />
+            </ct:object>
+            <ct:object name="FirePresent" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Есть розжиг" />
+            </ct:object>
+            <ct:object name="ZH_Ptg" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по давлению топливного газа взведена" />
+            </ct:object>
+            <ct:object name="Ppg_min" base-type="Types.TS.TS_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по низкому давлению ПГ взведена" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
