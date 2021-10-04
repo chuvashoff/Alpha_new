@@ -3513,6 +3513,128 @@
               <attribute type="unit.System.Attributes.Description" value="Ручное управление на ЩРУ включено" />
             </ct:object>
         </ct:object>
+        <ct:object name="ALR" access-level="public" >
+            <ct:object name="Vpon_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Опасная вибрация ротора Н в передней опоре" />
+            </ct:object>
+            <ct:object name="Vzon_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Опасная вибрация ротора Н в задней опоре" />
+            </ct:object>
+            <ct:object name="OS_frw" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийный осевой сдвиг ротора нагнетателя вперед к двигателю" />
+            </ct:object>
+            <ct:object name="OS_bkw" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийный осевой сдвиг ротора нагнетателя назад к двигателю" />
+            </ct:object>
+            <ct:object name="Pmsn_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-низкое давление масла смазки нагнетателя" />
+            </ct:object>
+            <ct:object name="TpupN_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая Т передней колодки упорного подшипника Н" />
+            </ct:object>
+            <ct:object name="TzupN_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая Т задней колодки упорного подшипника Н" />
+            </ct:object>
+            <ct:object name="TpopN_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая Т переднего опорного подшипника Н" />
+            </ct:object>
+            <ct:object name="TzopN_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая Т заднего опорного подшипника Н" />
+            </ct:object>
+            <ct:object name="Tg_outN_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая Т газа на выходе нагнетателя" />
+            </ct:object>
+            <ct:object name="Lmbd_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкий уровень масла в МБД" />
+            </ct:object>
+            <ct:object name="Lm_MBD_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Минимальный уровень масла в маслобаке ГТУ" />
+            </ct:object>
+            <ct:object name="Lm_MBN_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-низкий уровень масла в МБН" />
+            </ct:object>
+            <ct:object name="Tmbn_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Холодное масло в МБН" />
+            </ct:object>
+            <ct:object name="dPmg_N_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Низкий перепад масло-газ" />
+            </ct:object>
+            <ct:object name="Kr1_nstOn" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Самопроизвольное закрытие крана №1" />
+            </ct:object>
+            <ct:object name="Kr2_nstOn" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Самопроизвольное закрытие крана №2" />
+            </ct:object>
+            <ct:object name="Tv_inKGTU_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Аварийно-высокая температура воздуха под кожухом ГТУ" />
+            </ct:object>
+            <ct:object name="VOT_off" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОсс. Не включены ВОТы на режиме" />
+            </ct:object>
+            <ct:object name="Qv_aL" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкий расход воздуха продувки" />
+            </ct:object>
+            <ct:object name="Qv_aL_Zag" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Низкий расход воздуха продувки И загазованность под КШТ" />
+            </ct:object>
+            <ct:object name="Qv_aL_fAKZ" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Низкий расход воздуха продувки И неисправность АКЗ" />
+            </ct:object>
+            <ct:object name="Fire" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Пожар ГПА" />
+            </ct:object>
+            <ct:object name="ZAG_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Опасная концентрация газа под кожухом ГТУ" />
+            </ct:object>
+            <ct:object name="ZAG_ON_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Опасная концентрация газа в отсеке нагнетателя" />
+            </ct:object>
+            <ct:object name="ZAG_OD_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Опасная концентрация газа в отсеке ГТУ" />
+            </ct:object>
+            <ct:object name="ZAG_KG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Повышенная концентрация газа под кожухом ГТУ" />
+            </ct:object>
+            <ct:object name="ASPTKZ_OK" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. АСПТиКЗ в ОД и ОН неисправна" />
+            </ct:object>
+            <ct:object name="PRU_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОcc от кнопки на ПРУ" />
+            </ct:object>
+            <ct:object name="OD_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОcc от кнопки в отсеке двигателя" />
+            </ct:object>
+            <ct:object name="BB_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс от кнопки в блок-боксе" />
+            </ct:object>
+            <ct:object name="KC_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс от кнопки в цеху" />
+            </ct:object>
+            <ct:object name="BTN_EO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. ЭО от кнопки на ПРУ" />
+            </ct:object>
+            <ct:object name="GPA_BEO_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. БЭАО сработал (от AD200)" />
+            </ct:object>
+            <ct:object name="GPA_PLC_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Авария ПЛК AD100" />
+            </ct:object>
+            <ct:object name="GTU_NoLink" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Нет связи с ПЛК AD100" />
+            </ct:object>
+            <ct:object name="CO_AOss" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс по команде оператора" />
+            </ct:object>
+            <ct:object name="CO_AObs" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. АОбс по команде оператора" />
+            </ct:object>
+            <ct:object name="PRU_AOss" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. АОсс по команде оператора с ПРУ" />
+            </ct:object>
+            <ct:object name="PRU_AObs" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. АОбс по команде оператора с ПРУ" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

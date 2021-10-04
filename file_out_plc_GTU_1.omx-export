@@ -2860,6 +2860,380 @@
               <attribute type="unit.System.Attributes.Description" value="Заслонка ПОС ГТУ не закрыта" />
             </ct:object>
         </ct:object>
+        <ct:object name="ALR" access-level="public" >
+            <ct:object name="A_NggHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Высокая частота вращения ротора КВД" />
+            </ct:object>
+            <ct:object name="A_NggLim" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая частота вращения ротора КВД" />
+            </ct:object>
+            <ct:object name="A_NvdDistort" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокое рассогласование оборотов КВД" />
+            </ct:object>
+            <ct:object name="A_NggLow" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-низкая частота вращения ротора КВД" />
+            </ct:object>
+            <ct:object name="A_NvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ всех каналов измерения Nквд" />
+            </ct:object>
+            <ct:object name="A_NngHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Высокая частота вращения ротора КНД" />
+            </ct:object>
+            <ct:object name="BZD_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийный останов от БЗД" />
+            </ct:object>
+            <ct:object name="A_NstHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Раскрутка ротора СТ" />
+            </ct:object>
+            <ct:object name="A_NstLim" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Аварийно-высокая частота вращения ротора СТ" />
+            </ct:object>
+            <ct:object name="A_NstBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ всех каналов измерения Nст" />
+            </ct:object>
+            <ct:object name="A_PompazZap" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Срыв компрессора" />
+            </ct:object>
+            <ct:object name="N_TtHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура газа за турбиной ГГ" />
+            </ct:object>
+            <ct:object name="A_TtHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно высокая температура газа за турбиной ГГ" />
+            </ct:object>
+            <ct:object name="A_NstDistort" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокое рассогласование оборотов СТ" />
+            </ct:object>
+            <ct:object name="N_TstHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура газа за СТ" />
+            </ct:object>
+            <ct:object name="A_TstHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокая температура газа за СТ" />
+            </ct:object>
+            <ct:object name="A_TstBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ всех каналов измерения Тст" />
+            </ct:object>
+            <ct:object name="N_TstBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ 9-ти каналов измерения Тст" />
+            </ct:object>
+            <ct:object name="A_Ttzap" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокая температура газа за турбиной ВД на запуске" />
+            </ct:object>
+            <ct:object name="A_TtvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Одновременный отказ датчиков ТТЗАП и ТТ" />
+            </ct:object>
+            <ct:object name="A_TvhBrkzap" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала измерения Тв на входе в двигатель на запуске" />
+            </ct:object>
+            <ct:object name="N_TvhBrkRezhim" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ канала измерения Тв на входе в двигатель" />
+            </ct:object>
+            <ct:object name="A_TmvhDmin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Низкая температура масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="Tm_inGTU_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Повышенная температура масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="N_TmspKvdMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика Тм на выходе из опоры ШП КВД" />
+            </ct:object>
+            <ct:object name="A_TmspKvdMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ датчика Тм на выходе из опоры ШП КВД на запуске" />
+            </ct:object>
+            <ct:object name="N_TmspKvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура масла откачки от ШП КВД" />
+            </ct:object>
+            <ct:object name="A_TmspKvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокая температура масла откачки от ШП КВД" />
+            </ct:object>
+            <ct:object name="N_TmrpTvdMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика Тм на выходе из опоры РП ТВД" />
+            </ct:object>
+            <ct:object name="A_TmrpTvdMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ датчика Тм на выходе из опоры РП ТВД на запуске" />
+            </ct:object>
+            <ct:object name="N_TmrpTvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура масла на откачки от опоры РП ТВД" />
+            </ct:object>
+            <ct:object name="A_TmrpTvdBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокая температура масла откачки от опоры РП ТВД" />
+            </ct:object>
+            <ct:object name="N_TmrpTndMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика Тм на выходе из опоры РП ТНД" />
+            </ct:object>
+            <ct:object name="A_TmrpTndMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ датчика Тм на выходе из опоры РП ТНД на запуске" />
+            </ct:object>
+            <ct:object name="N_TmrpTndBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура масла на откачки от опоры РП ТНД" />
+            </ct:object>
+            <ct:object name="A_TmrpTndBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокая температура масла откачки от опоры РП ТНД" />
+            </ct:object>
+            <ct:object name="A_TotkMin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Низкая температура масла в откачках от опор двигателя" />
+            </ct:object>
+            <ct:object name="N_TmopStMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика Тм на выходе из опор СТ" />
+            </ct:object>
+            <ct:object name="A_TmopStMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ датчика Тм на выходе из опор СТ на запуске" />
+            </ct:object>
+            <ct:object name="N_TmoutStBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокая температура масла откачки от СТ" />
+            </ct:object>
+            <ct:object name="A_TmoutStBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокая температура масла откачки от СТ" />
+            </ct:object>
+            <ct:object name="N_PkBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ датчика давления воздуха за компрессором ВД" />
+            </ct:object>
+            <ct:object name="N_OhlTnd" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха охлажения ТНД" />
+            </ct:object>
+            <ct:object name="N_LowPBBT1" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление воздуха после ВВТ1" />
+            </ct:object>
+            <ct:object name="A_PgInStVmin_proval" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Нет давления пускового газа перед СтВ" />
+            </ct:object>
+            <ct:object name="A_PgInStVmin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Низкое давление пускового газа перед СтВ" />
+            </ct:object>
+            <ct:object name="A_PgInStVhigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокое давление пускового газа перед СтВ" />
+            </ct:object>
+            <ct:object name="A_PgInStVmax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокое давление пускового газа перед СтВ" />
+            </ct:object>
+            <ct:object name="A_PgInStVBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала измерения давления газа перед СтВ" />
+            </ct:object>
+            <ct:object name="A_TgInSK0" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Пониженная температура топливного газа на входе в СК0 на запуске" />
+            </ct:object>
+            <ct:object name="A_PtgMinZap" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Давление топливного газа перед СК0 пониженное на пуске" />
+            </ct:object>
+            <ct:object name="A_PtgMin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-низкое давление топливного газа перед СК0" />
+            </ct:object>
+            <ct:object name="A_PtgLow" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление топливного газа перед СК0" />
+            </ct:object>
+            <ct:object name="N_PtgHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокое давление топливного газа перед СК0" />
+            </ct:object>
+            <ct:object name="A_PtgMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-высокое давление топливного газа перед СК0" />
+            </ct:object>
+            <ct:object name="A_Ptg_inDGSKbrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Одновременный отказ каналов измерения и РТГВХ и РТГПД" />
+            </ct:object>
+            <ct:object name="A_PmvhDno" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Нет давления масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="N_PmvhDmin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Низкое давление масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="A_PmvhDmin" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Аварийно-низкое давление масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="A_PmvhDBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала измерения Рм на входе в двигатель на запуске" />
+            </ct:object>
+            <ct:object name="N_PmvhDBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Отказ канала измерения Рм на входе в двигатель" />
+            </ct:object>
+            <ct:object name="N_PsufMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Высокое давление суфлирования" />
+            </ct:object>
+            <ct:object name="A_VibPpBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала вибрации двигателя в зоне ПП" />
+            </ct:object>
+            <ct:object name="N_VibPpMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Опасная вибрация двигателя в зоне ПП" />
+            </ct:object>
+            <ct:object name="A_RateVibPpMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокий рост вибрации ПП" />
+            </ct:object>
+            <ct:object name="A_VibZpBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала вибрации двигателя в зоне ЗП" />
+            </ct:object>
+            <ct:object name="N_VibZpMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Опасная вибрация двигателя в зоне ЗП" />
+            </ct:object>
+            <ct:object name="A_RateVibZpMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокий рост вибрации ЗП" />
+            </ct:object>
+            <ct:object name="N_osSTHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Опасная осевая сила ротора СТ" />
+            </ct:object>
+            <ct:object name="A_KPVV_Brk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала упр-ия КПВВ. Аппаратный контроль" />
+            </ct:object>
+            <ct:object name="A_KPVV_IMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала упр-ия КПВВ. Функциональный контроль" />
+            </ct:object>
+            <ct:object name="A_ZPV1_IMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением ЗПВ КНД 1 гр." />
+            </ct:object>
+            <ct:object name="A_ZPV2_IMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением ЗПВ КНД 2 гр." />
+            </ct:object>
+            <ct:object name="A_VNABrk_Pos" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность ВНА (ВНА_зад - ВНА) &gt; 20 °" />
+            </ct:object>
+            <ct:object name="A_VNABrk_Neg" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность ВНА (ВНА_зад - ВНА) &lt; -7 °" />
+            </ct:object>
+            <ct:object name="A_SetVNABrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Цепь управления ВНА неисправна" />
+            </ct:object>
+            <ct:object name="A_VNABrkDop" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ КИ положения ВНА обнаруженный допусковым контролем" />
+            </ct:object>
+            <ct:object name="A_CVStVMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Высокие обороты стартёра" />
+            </ct:object>
+            <ct:object name="A_StrMStV" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Стружка в масле СтВ" />
+            </ct:object>
+            <ct:object name="A_SKIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ электрической части канала управления СК0" />
+            </ct:object>
+            <ct:object name="A_KPVIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВ КВД" />
+            </ct:object>
+            <ct:object name="A_KPGIMBrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления положением КПВЗ и КПГ ТВД" />
+            </ct:object>
+            <ct:object name="A_DozBrkD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по функц-му контролю" />
+            </ct:object>
+            <ct:object name="A_DozUprBrkD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ДК по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="A_DozBrkDopD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ДК по допусковому контролю" />
+            </ct:object>
+            <ct:object name="A_DozPolBrkD" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ДК по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="A_DozBrkG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по функц-му контролю" />
+            </ct:object>
+            <ct:object name="A_DozUprBrkG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ГК по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="A_DozBrkDopG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ГК по допусковому контролю" />
+            </ct:object>
+            <ct:object name="A_DozPolBrkG" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ГК по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="A_DozBrkCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по функц-му контролю" />
+            </ct:object>
+            <ct:object name="A_DozUprBrkCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность канала управления ДГ ЦМ по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="A_DozBrkDopCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ЦМ по допусковому контролю" />
+            </ct:object>
+            <ct:object name="A_DozPolBrkCM" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Отказ канала положения ДГ ЦМ по аппаратному контролю" />
+            </ct:object>
+            <ct:object name="N_VibDMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Опасная вибрация двигателя" />
+            </ct:object>
+            <ct:object name="A_PoutStVMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Повышенное давление пускового газа за СтВ" />
+            </ct:object>
+            <ct:object name="N_StrFS" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в ФС" />
+            </ct:object>
+            <ct:object name="N_StrKP" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в масле КП" />
+            </ct:object>
+            <ct:object name="N_StrRPT" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Стружка в масле откачки от РП ТВД" />
+            </ct:object>
+            <ct:object name="TimeZapHigh" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Время запуска велико" />
+            </ct:object>
+            <ct:object name="A_STbrk" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Неисправность СТ" />
+            </ct:object>
+            <ct:object name="A_ObRaskrST" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Самопроизвольная раскрутка ротора СТ без смазки" />
+            </ct:object>
+            <ct:object name="N_deltaPvxMax" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОбс. Входной тракт двигателя засорен" />
+            </ct:object>
+            <ct:object name="A_Pompag" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Помпаж двигателя" />
+            </ct:object>
+            <ct:object name="A_Pogas_roz" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Погасание КС после розжига" />
+            </ct:object>
+            <ct:object name="A_AObs_common" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Обобщенный АОбс от ТР" />
+            </ct:object>
+            <ct:object name="A_AOss_common" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Обобщенный АОсс от ТР" />
+            </ct:object>
+            <ct:object name="aSurge" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Помпаж нагнетателя" />
+            </ct:object>
+            <ct:object name="Kr6_nstOn" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Кран 6р не открылся на пуске" />
+            </ct:object>
+            <ct:object name="PPzht1_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ1" />
+            </ct:object>
+            <ct:object name="PPzht2_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ2" />
+            </ct:object>
+            <ct:object name="PPzht3_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ3" />
+            </ct:object>
+            <ct:object name="PPzht4_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ4" />
+            </ct:object>
+            <ct:object name="PPzht5_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ5" />
+            </ct:object>
+            <ct:object name="PPzht6_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ6" />
+            </ct:object>
+            <ct:object name="PPzht7_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ7" />
+            </ct:object>
+            <ct:object name="PPzht8_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ8" />
+            </ct:object>
+            <ct:object name="PPzht9_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ9" />
+            </ct:object>
+            <ct:object name="PPzht10_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ10" />
+            </ct:object>
+            <ct:object name="PPzht11_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ11" />
+            </ct:object>
+            <ct:object name="PPzht12_aH" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс. Опасная пульсация давления в ЖТ12" />
+            </ct:object>
+            <ct:object name="GTU_BEO_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. БЭАО сработал (от AD100)" />
+            </ct:object>
+            <ct:object name="GTU_PLC_AO" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Авария ПЛК AD200" />
+            </ct:object>
+            <ct:object name="GPA_NoLink" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АС. бляба" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
