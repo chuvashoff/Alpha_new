@@ -3250,6 +3250,269 @@
               <attribute type="unit.System.Attributes.Description" value="Включение ВОД на режиме" />
             </ct:object>
         </ct:object>
+        <ct:object name="PPU" access-level="public" >
+            <ct:object name="Kr1_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr2_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr6_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr4_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr5_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 5 не открыт" />
+            </ct:object>
+            <ct:object name="Kr12_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr11_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 не закрыт" />
+            </ct:object>
+            <ct:object name="Kr10_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 не открыт" />
+            </ct:object>
+            <ct:object name="Kr9_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 не открыт" />
+            </ct:object>
+            <ct:object name="ZPCV_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Задвижка подогрева циклового воздуха не закрыта" />
+            </ct:object>
+            <ct:object name="ZsBUT_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Байпасный клапан УТО не открыт" />
+            </ct:object>
+            <ct:object name="ZsTUT_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заслонка УТО не закрыта" />
+            </ct:object>
+            <ct:object name="Lmbd_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке двигателя &lt; 130 мм" />
+            </ct:object>
+            <ct:object name="Lmbd_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке двигателя  &gt; 715 мм" />
+            </ct:object>
+            <ct:object name="Lmbn_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке нагнетателя &lt; 300 мм" />
+            </ct:object>
+            <ct:object name="Lmbn_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Уровень масла в маслобаке нагнетателя &gt; 600 мм" />
+            </ct:object>
+            <ct:object name="ASPTKZ_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность АСПТиКЗ в ОД и ОН" />
+            </ct:object>
+            <ct:object name="U1_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженное напряжение питания на Вводе 1" />
+            </ct:object>
+            <ct:object name="U2_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженное напряжение питания на Вводе 2" />
+            </ct:object>
+            <ct:object name="U3_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженное напряжение питания на Вводе 3" />
+            </ct:object>
+            <ct:object name="U4_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженное напряжение питания на Вводе 4" />
+            </ct:object>
+            <ct:object name="UV1_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения 380 В 50 Гц (Ввод 1)" />
+            </ct:object>
+            <ct:object name="UV2_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения 380 В 50 Гц (Ввод 2)" />
+            </ct:object>
+            <ct:object name="UV3_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения 380 В 50 Гц (Ввод 3)" />
+            </ct:object>
+            <ct:object name="UV4_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения 380 В 50 Гц (Ввод 4)" />
+            </ct:object>
+            <ct:object name="UKR_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения =220 В (Краны)" />
+            </ct:object>
+            <ct:object name="QF_101_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат QF101 не включен" />
+            </ct:object>
+            <ct:object name="QF_201_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат QF201 не включен" />
+            </ct:object>
+            <ct:object name="QF_301_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат QF301 не включен" />
+            </ct:object>
+            <ct:object name="QF_401_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат QF401 не включен" />
+            </ct:object>
+            <ct:object name="QF_102_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат QF102 не включен" />
+            </ct:object>
+            <ct:object name="SF1_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF1 не включен" />
+            </ct:object>
+            <ct:object name="SF2_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF2 не включен" />
+            </ct:object>
+            <ct:object name="SF3_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF3 не включен" />
+            </ct:object>
+            <ct:object name="SF4_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF4 не включен" />
+            </ct:object>
+            <ct:object name="SF5_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF5 не включен" />
+            </ct:object>
+            <ct:object name="SF6_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF6 не включен" />
+            </ct:object>
+            <ct:object name="SF7_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF7 не включен" />
+            </ct:object>
+            <ct:object name="SF8_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF8 не включен" />
+            </ct:object>
+            <ct:object name="SF9_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF9 не включен (питание БЭАО)" />
+            </ct:object>
+            <ct:object name="SF10_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF10 не включен (питание ВНА)" />
+            </ct:object>
+            <ct:object name="SF11_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="SF11 не включен (питание кранов)" />
+            </ct:object>
+            <ct:object name="G101_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G101 не в норме " />
+            </ct:object>
+            <ct:object name="G102_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G102 не в норме " />
+            </ct:object>
+            <ct:object name="G103_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G103 не в норме " />
+            </ct:object>
+            <ct:object name="G104_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G104 не в норме " />
+            </ct:object>
+            <ct:object name="G105_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G105 не в норме " />
+            </ct:object>
+            <ct:object name="G106_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G106-G107 не в норме " />
+            </ct:object>
+            <ct:object name="G107_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G108 не в норме " />
+            </ct:object>
+            <ct:object name="G201_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G201 не в норме " />
+            </ct:object>
+            <ct:object name="G202_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G202 не в норме " />
+            </ct:object>
+            <ct:object name="G203_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G203 не в норме " />
+            </ct:object>
+            <ct:object name="G204_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G204 не в норме " />
+            </ct:object>
+            <ct:object name="G205_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G205 не в норме " />
+            </ct:object>
+            <ct:object name="G206_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G206-G207 не в норме " />
+            </ct:object>
+            <ct:object name="G207_NotU_OK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G208 не в норме " />
+            </ct:object>
+            <ct:object name="KR1_Alarm" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сработало реле контр.сопр.из. KR1" />
+            </ct:object>
+            <ct:object name="KR2_Alarm" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сработало реле контр.сопр.из. KR2" />
+            </ct:object>
+            <ct:object name="KR3_Alarm" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сработало реле контр.сопр.из. KR3" />
+            </ct:object>
+            <ct:object name="KR4_Alarm" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Сработало реле контр.сопр.из. KR4" />
+            </ct:object>
+            <ct:object name="UZIP1_notOK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 1 (~220 В) - Сработал" />
+            </ct:object>
+            <ct:object name="UZIP2_notOK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 2 (=220 В) - Сработал" />
+            </ct:object>
+            <ct:object name="UZIP3_notOK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 3 (~220 В) - Сработал" />
+            </ct:object>
+            <ct:object name="UZIP4_notOK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 4 (=220 В) - Сработал" />
+            </ct:object>
+            <ct:object name="AI_GPA_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков ГПА" />
+            </ct:object>
+            <ct:object name="DI_GPA_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков ГПА" />
+            </ct:object>
+            <ct:object name="IM_GPA_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов ГПА" />
+            </ct:object>
+            <ct:object name="Stop" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Есть аварийная сигнализация" />
+            </ct:object>
+            <ct:object name="BK1_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Байпасный клапан ВОУ №1 не закрыт" />
+            </ct:object>
+            <ct:object name="BK2_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Байпасный клапан ВОУ №2 не закрыт" />
+            </ct:object>
+            <ct:object name="BZD_nIspr" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность БЗД" />
+            </ct:object>
+            <ct:object name="ZAG_OD_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная загазованность в отсеке двигателя" />
+            </ct:object>
+            <ct:object name="ZAG_ON_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная загазованность в отсеке нагнетателя" />
+            </ct:object>
+            <ct:object name="Tmbd_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкая температура масла в маслобаке двигателя" />
+            </ct:object>
+            <ct:object name="Tmbn_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкая температура масла в маслобаке нагнетателя" />
+            </ct:object>
+            <ct:object name="AVOMD_NotReady" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Д) не готов к пуску" />
+            </ct:object>
+            <ct:object name="AVOMN_NotReady" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Н) не готов к пуску" />
+            </ct:object>
+            <ct:object name="Tv_inKGTU_5l" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Температура воздуха в отсеке двигателя &lt; 5 °C" />
+            </ct:object>
+            <ct:object name="Tv_inOG_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Температура воздуха в отсеке ГТУ &lt; 5 °C" />
+            </ct:object>
+            <ct:object name="Tv_inON_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Температура воздуха в отсеке нагнетателя &lt; 5 °C" />
+            </ct:object>
+            <ct:object name="ZAG_OG_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная концентрация газа в отсеке двигателя" />
+            </ct:object>
+            <ct:object name="ZAG_AO_GTU" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа под кожухом ГТУ" />
+            </ct:object>
+            <ct:object name="VIB_NotCheck" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Виброаппаратура не прошла контроль" />
+            </ct:object>
+            <ct:object name="BZD_NotCheck" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="БЗД не прошел контроль" />
+            </ct:object>
+            <ct:object name="DoorVOU_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Двери ВОУ не закрыты" />
+            </ct:object>
+            <ct:object name="NoLink" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет связи между контроллерами" />
+            </ct:object>
+            <ct:object name="RU_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Ручное управление на ЩРУ включено" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

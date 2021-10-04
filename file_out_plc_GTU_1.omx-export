@@ -2741,6 +2741,125 @@
               <attribute type="unit.System.Attributes.Description" value="Защита по низкому давлению ПГ взведена" />
             </ct:object>
         </ct:object>
+        <ct:object name="PPU" access-level="public" >
+            <ct:object name="Ngg_100h" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Ненулевые обороты ГГ" />
+            </ct:object>
+            <ct:object name="Nst_20h" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Ненулевые обороты СТ" />
+            </ct:object>
+            <ct:object name="Kr6r_stOff" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р не открыт" />
+            </ct:object>
+            <ct:object name="SK0_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СК0 не закрыт" />
+            </ct:object>
+            <ct:object name="SKDK1_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СКДК1 не закрыт" />
+            </ct:object>
+            <ct:object name="SKDK2_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СКДК2 не закрыт" />
+            </ct:object>
+            <ct:object name="SKGK_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СКГК не закрыт" />
+            </ct:object>
+            <ct:object name="SKCK_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СКЦК не закрыт" />
+            </ct:object>
+            <ct:object name="AI_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков ГТУ" />
+            </ct:object>
+            <ct:object name="DI_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков ГТУ" />
+            </ct:object>
+            <ct:object name="IM_GTU_brk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов ГТУ" />
+            </ct:object>
+            <ct:object name="P_TtzapBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчиков Ттзап по перекрестному контролю" />
+            </ct:object>
+            <ct:object name="P_TtzapDistort" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ обоих каналов измерения Ттзап" />
+            </ct:object>
+            <ct:object name="P_TtBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ 9-ти и более каналов измерения Тт" />
+            </ct:object>
+            <ct:object name="P_TstBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ 9-ти и более каналов измерения Тст" />
+            </ct:object>
+            <ct:object name="Tv_inK" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения температуры воздуха на входе в двигатель" />
+            </ct:object>
+            <ct:object name="Tm_inGTUBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика температуры масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="Tm_inGTU_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженная температура масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="P_TmspKvdBrkDop" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика температуры масла на выходе из опоры ШП КВД" />
+            </ct:object>
+            <ct:object name="P_TmrpTvdBrkDop" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика температуры масла  на выходе из опоры РП ТВД" />
+            </ct:object>
+            <ct:object name="P_TmoutStBrkDop" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика температуры масла на выходе из опор СТ" />
+            </ct:object>
+            <ct:object name="P_PkBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика давления воздуха за компрессором ВД" />
+            </ct:object>
+            <ct:object name="PgoutTVDBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика полного давления газа за турбиной ВД" />
+            </ct:object>
+            <ct:object name="P_PmvhDBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика давления масла на входе в двигатель" />
+            </ct:object>
+            <ct:object name="P_PsufBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика давления суфлирования" />
+            </ct:object>
+            <ct:object name="P_PvrpkBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика Р воздуха в разгрузочной полости компрессора ВД" />
+            </ct:object>
+            <ct:object name="P_inSTrazgBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика давления воздуха в разгрузочной полости СТ" />
+            </ct:object>
+            <ct:object name="P_VibPpBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения вибрации двигателя в зоне ПП" />
+            </ct:object>
+            <ct:object name="P_VibZpBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения вибрации двигателя в зоне ЗП" />
+            </ct:object>
+            <ct:object name="KPV_ONBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ электрической части канала управления КПВ" />
+            </ct:object>
+            <ct:object name="KPG_ONBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ электрической части канала управления КПВЗ и КПГ" />
+            </ct:object>
+            <ct:object name="Chip_FS" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стружка в ФС" />
+            </ct:object>
+            <ct:object name="Chip_KP" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стружка в масле КП" />
+            </ct:object>
+            <ct:object name="dPinGTUBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика dP между Ратм и полным давлением воздуха на входе в КВД" />
+            </ct:object>
+            <ct:object name="dPinGTUstatBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика dP между Ратм и стат. давлением воздуха на входе в КВД" />
+            </ct:object>
+            <ct:object name="dPatm_PstBrk" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ датчика dP между Ратм и полным давление газа за СТ" />
+            </ct:object>
+            <ct:object name="TginSK_wL" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пониженная температура топливного газа на входе в СК0" />
+            </ct:object>
+            <ct:object name="PinSK_wH" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Давление топливного газа перед СК0 повышенное" />
+            </ct:object>
+            <ct:object name="POS_stOn" base-type="Types.PPU.PPU_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заслонка ПОС ГТУ не закрыта" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
