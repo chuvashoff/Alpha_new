@@ -3635,6 +3635,140 @@
               <attribute type="unit.System.Attributes.Description" value="АОбс. АОбс по команде оператора с ПРУ" />
             </ct:object>
         </ct:object>
+        <ct:object name="ALG" access-level="public" >
+            <ct:object name="ALG_TimerQv" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Таймер взвода защиты Qв КШТ" />
+            </ct:object>
+            <ct:object name="ALG_Check_Break" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Контроль САУ не пройден" />
+            </ct:object>
+            <ct:object name="ALG_SubModeRes" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Подрежимы резерва" />
+            </ct:object>
+            <ct:object name="ALG_Reserv" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы резерва" />
+            </ct:object>
+            <ct:object name="ALG_Ready" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы готовности" />
+            </ct:object>
+            <ct:object name="ALG_Start" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы пуска" />
+            </ct:object>
+            <ct:object name="ALG_Work" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы работы" />
+            </ct:object>
+            <ct:object name="ALG_Stop" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы останова" />
+            </ct:object>
+            <ct:object name="ALG_TestMod" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Проверочные режимы" />
+            </ct:object>
+            <ct:object name="ALG_ModAO" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы АО" />
+            </ct:object>
+            <ct:object name="ALG_ModNO" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режимы НО" />
+            </ct:object>
+            <ct:object name="ALG_ModStopStrav" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов со стравливанием" />
+            </ct:object>
+            <ct:object name="ALG_Fire" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пожар" />
+            </ct:object>
+            <ct:object name="ALG_Gaz" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Загазованность" />
+            </ct:object>
+            <ct:object name="ALG_wasHeat" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Был прогрев" />
+            </ct:object>
+            <ct:object name="ALG_coAOss" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка АОсс" />
+            </ct:object>
+            <ct:object name="ALG_coAObs" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка АОбс" />
+            </ct:object>
+            <ct:object name="ALG_coNOss" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка НОсс" />
+            </ct:object>
+            <ct:object name="ALG_coNObs" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка НОбс" />
+            </ct:object>
+            <ct:object name="ALG_coUnlock" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Деблокировка" />
+            </ct:object>
+            <ct:object name="ALG_coRepair" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Ремонт" />
+            </ct:object>
+            <ct:object name="ALG_coHR" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ХР" />
+            </ct:object>
+            <ct:object name="ALG_coGR" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ГР" />
+            </ct:object>
+            <ct:object name="ALG_coStart" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Пуск" />
+            </ct:object>
+            <ct:object name="ALG_coCancel" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Отмена" />
+            </ct:object>
+            <ct:object name="ALG_coPZMS" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ПЗМС" />
+            </ct:object>
+            <ct:object name="ALG_coPZBS" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ПЗБС" />
+            </ct:object>
+            <ct:object name="ALG_coHP" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка ХП" />
+            </ct:object>
+            <ct:object name="ALG_coPM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка Промывка" />
+            </ct:object>
+            <ct:object name="ALG_coKPK" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка КПК" />
+            </ct:object>
+            <ct:object name="ALG_coAPK" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка АПК" />
+            </ct:object>
+            <ct:object name="ALG_coAPM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка АПМ" />
+            </ct:object>
+            <ct:object name="ALG_coKM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка К-М" />
+            </ct:object>
+            <ct:object name="ALG_coMK" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обобщенная кнопка М-К" />
+            </ct:object>
+            <ct:object name="ALG_DoCheckSAU" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Выполнить контроль САУ" />
+            </ct:object>
+            <ct:object name="ALG_Qmd_wH" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокий расход масла в маслобаке двигателя" />
+            </ct:object>
+            <ct:object name="ALG_DI_GPA_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков" />
+            </ct:object>
+            <ct:object name="ALG_AI_GPA_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков" />
+            </ct:object>
+            <ct:object name="ALG_IM_GPA_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов" />
+            </ct:object>
+            <ct:object name="ALG_OHL_START" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГТУ" />
+            </ct:object>
+            <ct:object name="ALG_ShowPPU" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отображение ППУ" />
+            </ct:object>
+            <ct:object name="ALG_NullRPM" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нулевые обороты" />
+            </ct:object>
+            <ct:object name="ALG_UTO_Work" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УТО в работе" />
+            </ct:object>
+            <ct:object name="ALG_GTU_NoLink" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD100" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

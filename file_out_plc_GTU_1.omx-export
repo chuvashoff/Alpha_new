@@ -3231,7 +3231,45 @@
               <attribute type="unit.System.Attributes.Description" value="АОсс. Авария ПЛК AD200" />
             </ct:object>
             <ct:object name="GPA_NoLink" base-type="Types.ALR.ALR_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
-              <attribute type="unit.System.Attributes.Description" value="АС. бляба" />
+              <attribute type="unit.System.Attributes.Description" value="АОсс. Нет связи с ПЛК AD200" />
+            </ct:object>
+        </ct:object>
+        <ct:object name="ALG" access-level="public" >
+            <ct:object name="ALG_MSD_Ready" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Маслосистема двигателя готова к пуску" />
+            </ct:object>
+            <ct:object name="ALG_ConturLim" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхних ограничительных контуров" />
+            </ct:object>
+            <ct:object name="ALG_TimeHP" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время ХП" />
+            </ct:object>
+            <ct:object name="ALG_TimePM" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время промывки" />
+            </ct:object>
+            <ct:object name="ALG_TimeOhl" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время охлаждения" />
+            </ct:object>
+            <ct:object name="ALG_TimeHeat" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время прогрева" />
+            </ct:object>
+            <ct:object name="ALG_TimeGZ" base-type="Types.ALG.ALG_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Время запуска" />
+            </ct:object>
+            <ct:object name="ALG_MAXREG" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Максимальный режим " />
+            </ct:object>
+            <ct:object name="ALG_DI_GTU_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из дискретных датчиков" />
+            </ct:object>
+            <ct:object name="ALG_AI_GTU_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ канала измерения любого из аналоговых датчиков" />
+            </ct:object>
+            <ct:object name="ALG_IM_GTU_brk" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность исполнительных механизмов" />
+            </ct:object>
+            <ct:object name="ALG_GPA_NoLink" base-type="Types.ALG.ALG_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD200" />
             </ct:object>
         </ct:object>
         </ct:object>

@@ -940,7 +940,7 @@ def is_read_sig(controller, cell, alg_name, par_name, type_protect, cpu, return_
 def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_name, index_type_protect,
                      index_cpu_name, tmp_object_btn_cnt_sig, tmp_ios, sl_type_sig, sl_set_par_cpu):
     # Словарь соответствия английского и русского наименования группы сигналов
-    sl_rus_ = {'TS': 'ТС', 'PPU': 'ППУ', 'ALR': 'АЛР'}
+    sl_rus_ = {'TS': 'ТС', 'PPU': 'ППУ', 'ALR': 'АЛР', 'ALG': 'АЛГ'}
     # Для каждого объекта...
     for objects in sl_object_all:
         # Записываем стартовую информацию IOS-аспекта для группы параметров
@@ -1036,7 +1036,7 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
     # Дополнительные словарь группировок
     dop_sl_group_signal = {'ХР': 'ППУ', 'ГР': 'ППУ', 'ТС': 'ТС', 'ТС (без условий)': 'ТС', 'АОсс': 'АЛР', 'АОбс': 'АЛР',
                            'ВОсс': 'АЛР', 'ВОбс': 'АЛР', 'АО': 'АЛР', 'НО': 'АЛР', 'АС': 'АЛР',
-                           'ПС': 'ПС', 'ПС (без условий)': 'ПС', 'BOOL': 'BOOL', 'FLOAT': 'FLOAT', 'INT': 'INT',
+                           'ПС': 'ПС', 'ПС (без условий)': 'ПС', 'BOOL': 'АЛГ', 'FLOAT': 'АЛГ', 'INT': 'АЛГ',
                            'Режим': 'Режим', 'Запись архива': 'Запись архива'}
     for par in cells:
         if dop_sl_group_signal.get(par[index_type_protect].value) not in sl_set_par_cpu:
@@ -1048,6 +1048,8 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
                 sl_set_par_cpu['АЛР'] = set()
             elif 'ПС' in par[index_type_protect].value:
                 sl_set_par_cpu['ПС'] = set()
+            elif par[index_type_protect].value in ('BOOL', 'FLOAT', 'INT'):
+                sl_set_par_cpu['АЛГ'] = set()
             else:
                 sl_set_par_cpu[par[index_type_protect].value] = set()
 
@@ -1059,6 +1061,8 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
             sl_set_par_cpu['АЛР'].add(par[index_cpu_name].value)
         elif 'ПС' in par[index_type_protect].value:
             sl_set_par_cpu['ПС'].add(par[index_cpu_name].value)
+        elif par[index_type_protect].value in ('BOOL', 'FLOAT', 'INT'):
+            sl_set_par_cpu['АЛГ'].add(par[index_cpu_name].value)
         else:
             sl_set_par_cpu[par[index_type_protect].value].add(par[index_cpu_name].value)
     print(sl_set_par_cpu)
@@ -1075,6 +1079,12 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
                      tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
 
     write_one_signal(write_par='ALR', sl_object_all=sl_object_all, cells=cells,
+                     index_alg_name=index_alg_name, index_rus_name=index_rus_name,
+                     index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
+                     tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
+
+    write_one_signal(write_par='ALG', sl_object_all=sl_object_all, cells=cells,
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
