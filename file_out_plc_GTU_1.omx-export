@@ -3272,6 +3272,131 @@
               <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD200" />
             </ct:object>
         </ct:object>
+        <ct:object name="WRN" access-level="public" >
+            <ct:object name="P_TotkMin" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкая температура масла в откачках от опор двигателя" />
+            </ct:object>
+            <ct:object name="P_SKBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК0" />
+            </ct:object>
+            <ct:object name="P_SKGBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ГК" />
+            </ct:object>
+            <ct:object name="P_SKD1Brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ДК1" />
+            </ct:object>
+            <ct:object name="P_SKD2Brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ДК2" />
+            </ct:object>
+            <ct:object name="P_SKCmBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ЦК" />
+            </ct:object>
+            <ct:object name="APK_notOff" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АПК не закрыт на режиме Магистраль" />
+            </ct:object>
+            <ct:object name="R_kt_Nvdogr_up" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимальных оборотов ГГ" />
+            </ct:object>
+            <ct:object name="R_kt_Tst" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимальной Т за СТ" />
+            </ct:object>
+            <ct:object name="R_kt_Gtogr_osn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимального расхода топлива" />
+            </ct:object>
+            <ct:object name="R_kt_Nstogr_up" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимальных оборотов СТ" />
+            </ct:object>
+            <ct:object name="R_kt_Pk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимального давления за ГГ" />
+            </ct:object>
+            <ct:object name="R_kt_GtPk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание контура ограничения максимального Gт/Р*к" />
+            </ct:object>
+            <ct:object name="MNDE_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ МНДЭ" />
+            </ct:object>
+            <ct:object name="PPzht1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ1" />
+            </ct:object>
+            <ct:object name="PPzht2_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ2" />
+            </ct:object>
+            <ct:object name="PPzht3_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ3" />
+            </ct:object>
+            <ct:object name="PPzht4_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ4" />
+            </ct:object>
+            <ct:object name="PPzht5_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ5" />
+            </ct:object>
+            <ct:object name="PPzht6_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ6" />
+            </ct:object>
+            <ct:object name="PPzht7_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ7" />
+            </ct:object>
+            <ct:object name="PPzht8_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ8" />
+            </ct:object>
+            <ct:object name="PPzht9_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ9" />
+            </ct:object>
+            <ct:object name="PPzht10_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ10" />
+            </ct:object>
+            <ct:object name="PPzht11_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ11" />
+            </ct:object>
+            <ct:object name="PPzht12_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ12" />
+            </ct:object>
+            <ct:object name="IVTA1_Fail" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)" />
+            </ct:object>
+            <ct:object name="IVTA2_Fail" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)" />
+            </ct:object>
+            <ct:object name="KS2_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран сброса воздуха из системы продувки ДК неисправность" />
+            </ct:object>
+            <ct:object name="KT0_wM" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран подвода воздуха на продувку ДК ограничение момента" />
+            </ct:object>
+            <ct:object name="KT0_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран подвода воздуха на продувку ДК неисправность" />
+            </ct:object>
+            <ct:object name="Chip_StV" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стружка в масле СтВ" />
+            </ct:object>
+            <ct:object name="DI_KC1_VNA1" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 1 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_KC1_VNA2" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 2 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_KC1_VNA3" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 3 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_KC2_VNA1" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 1 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_KC2_VNA2" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 2 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_KC2_VNA3" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв цепи катушки 3 ДБСКТ датчика угла ВНА" />
+            </ct:object>
+            <ct:object name="DI_UGTU_BEO" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие питания БЭАО ПЛК 1" />
+            </ct:object>
+            <ct:object name="DI_dPmf1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления масла на фильтрах БВМФ ГТУ" />
+            </ct:object>
+            <ct:object name="DI_Nstart_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокие обороты стартёра" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

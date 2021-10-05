@@ -153,8 +153,8 @@ try:
     write_ai_ae(sheet=book['Расчетные'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
                 tmp_ios=tmp_ios, group_objects='AE')
     # Дискретные
-    write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
-             tmp_ios=tmp_ios, group_objects='DI')
+    sl_wrn_di = write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
+                         tmp_ios=tmp_ios, group_objects='DI')
     # АПР, если он есть в контроллере
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -220,7 +220,7 @@ try:
 
     # Сигналы остальные
     write_signal(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-                 tmp_ios=tmp_ios)
+                 tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di)
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...

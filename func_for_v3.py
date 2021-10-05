@@ -18,6 +18,8 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
     for par in cells:
+        if par[0].value is None:
+            break
         set_par_cpu.add(par[index_cpu_name].value)
 
     # Для каждого объекта...
@@ -102,6 +104,8 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     # Словарь соответствия типа сигнала(DI или DI_AI) и его ПЛК-Аспекта
     sl_plc_aspect = {'Да': 'Types.DI.DI_PLC_View', 'Нет': 'Types.DI.DI_PLC_View', 'AI': 'Types.DI_AI.DI_AI_PLC_View'}
+    # Словарь предупреждений {CPU : {алг.имя : (рус.имя, тип наличия)}}
+    sl_wrn_di = {}
 
     cells = sheet['A1': 'AC' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
@@ -112,12 +116,18 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_res = is_f_ind(cells[0], 'Резервный')
     index_control_cel = is_f_ind(cells[0], 'Контроль цепи')
+    index_wrn = is_f_ind(cells[0], 'Предупреждение')
+    index_wrn_text = is_f_ind(cells[0], 'Текст предупреждения')
 
     cells = sheet['A2': 'AC' + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
     for par in cells:
+        if par[0].value is None:
+            break
         set_par_cpu.add(par[index_cpu_name].value)
+        if par[index_cpu_name].value not in sl_wrn_di:
+            sl_wrn_di[par[index_cpu_name].value] = {}
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -156,6 +166,8 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
         if cpu_name_par is None:
             break
         alg_par = par[index_alg_name].value.replace('|', '_')
+        if 'Да' in par[index_wrn].value:
+            sl_wrn_di[cpu_name_par][alg_par] = (is_cor_chr(par[index_wrn_text].value), par[index_wrn].value)
         # ...для каждого объекта...
         for objects in sl_object_all:
             # Записываем параметры в нужный файл PLC-аспект
@@ -193,6 +205,7 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write('      </ct:object>\n')
+    return sl_wrn_di
 
 
 def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_objects):
@@ -218,6 +231,8 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
     set_par_cpu = set()
     sl_cnt = {}
     for par in cells:
+        if par[0].value is None:
+            break
         set_par_cpu.add(par[index_cpu_name].value)
         # Если считаем наработку, то добавляем в словарь sl_cnt = {CPU: {алг.имя : русское имя}}
         if par[index_work_time].value == 'Да':
@@ -686,6 +701,8 @@ def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objec
     # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
+        if par[0].value is None:
+            break
         set_par_cpu.add(par[index_cpu_name].value)
 
     # Для каждого объекта...
@@ -761,6 +778,8 @@ def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
     # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
+        if par[0].value is None:
+            break
         set_par_cpu.add(par[index_cpu_name].value)
 
     # Для каждого объекта...
@@ -938,9 +957,10 @@ def is_read_sig(controller, cell, alg_name, par_name, type_protect, cpu, return_
 
 
 def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_name, index_type_protect,
-                     index_cpu_name, tmp_object_btn_cnt_sig, tmp_ios, sl_type_sig, sl_set_par_cpu):
+                     index_cpu_name, tmp_object_btn_cnt_sig, tmp_ios, sl_type_sig, sl_set_par_cpu, sl_update_signal):
     # Словарь соответствия английского и русского наименования группы сигналов
-    sl_rus_ = {'TS': 'ТС', 'PPU': 'ППУ', 'ALR': 'АЛР', 'ALG': 'АЛГ'}
+    sl_rus_ = {'TS': 'ТС', 'PPU': 'ППУ', 'ALR': 'АЛР', 'ALG': 'АЛГ', 'WRN': 'ПС', 'MODES': 'Режим'}
+    set_cpu_object = set()
     # Для каждого объекта...
     for objects in sl_object_all:
         # Записываем стартовую информацию IOS-аспекта для группы параметров
@@ -952,6 +972,10 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
                 if write_par == 'ALR':
                     f.write(f'        <ct:object name="Agregator_Important_IOS" '
                             f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                            f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                if write_par == 'WRN':
+                    f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                            f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
                             f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
 
     # Для каждого объекта...
@@ -965,8 +989,11 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
                                   par_name=index_rus_name,
                                   type_protect=index_type_protect,
                                   cpu=index_cpu_name)
+            # Обновляем словарь сигналов, полученными в других узлах
+            tmp_sig.update(sl_update_signal.get(cpu))
             # Если в котроллере есть сигналы...
             if tmp_sig:
+                set_cpu_object.add(cpu)
                 # ...то открываем группу сигналов в ПЛК-аспекте
                 with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write(f'        <ct:object name="{write_par}" access-level="public" >\n')
@@ -993,7 +1020,7 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
         for cpu in sl_object_all[objects]:
             # Закрываем группу объектов в ПЛК-аспекте
             # При условии, что у данного котроллера есть нужные сигналы
-            if set(sl_object_all[objects].keys()) & sl_set_par_cpu[sl_rus_[write_par]]:
+            if cpu in set_cpu_object:
                 with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write('        </ct:object>\n')
         # Закрываем группу в IOS-аспекте
@@ -1002,7 +1029,7 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
                 f.write('      </ct:object>\n')
 
 
-def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
+def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_di):
     # Словарь типов ПЛК-аспектов для сигналов
     sl_type_sig = {
         'Да (по наличию)': 'Types.WRN_On.WRN_On_PLC_View',
@@ -1039,6 +1066,8 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
                            'ПС': 'ПС', 'ПС (без условий)': 'ПС', 'BOOL': 'АЛГ', 'FLOAT': 'АЛГ', 'INT': 'АЛГ',
                            'Режим': 'Режим', 'Запись архива': 'Запись архива'}
     for par in cells:
+        if par[0].value is None:
+            break
         if dop_sl_group_signal.get(par[index_type_protect].value) not in sl_set_par_cpu:
             if par[index_type_protect].value in ('ХР', 'ГР'):
                 sl_set_par_cpu['ППУ'] = set()
@@ -1070,22 +1099,41 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
-                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal={key: {} for key in sl_wrn_di})
 
     write_one_signal(write_par='PPU', sl_object_all=sl_object_all, cells=cells,
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
-                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal={key: {} for key in sl_wrn_di})
 
     write_one_signal(write_par='ALR', sl_object_all=sl_object_all, cells=cells,
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
-                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal={key: {} for key in sl_wrn_di})
 
     write_one_signal(write_par='ALG', sl_object_all=sl_object_all, cells=cells,
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
-                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu)
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal={key: {} for key in sl_wrn_di})
+
+    write_one_signal(write_par='WRN', sl_object_all=sl_object_all, cells=cells,
+                     index_alg_name=index_alg_name, index_rus_name=index_rus_name,
+                     index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
+                     tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal=sl_wrn_di)
+
+    write_one_signal(write_par='MODES', sl_object_all=sl_object_all, cells=cells,
+                     index_alg_name=index_alg_name, index_rus_name=index_rus_name,
+                     index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
+                     tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
+                     tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
+                     sl_update_signal={key: {} for key in sl_wrn_di})
+

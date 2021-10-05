@@ -3769,6 +3769,466 @@
               <attribute type="unit.System.Attributes.Description" value="Нет связи с контроллером AD100" />
             </ct:object>
         </ct:object>
+        <ct:object name="WRN" access-level="public" >
+            <ct:object name="PgStV_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенное давление газа на выходе из СтВ" />
+            </ct:object>
+            <ct:object name="Lm_MBD_wL" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блокировка включения нагревателя масла МБД" />
+            </ct:object>
+            <ct:object name="dPtg_FO" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Фильтр топливного газа засорен" />
+            </ct:object>
+            <ct:object name="NoCheckBZD" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="БЗД не прошел контроль" />
+            </ct:object>
+            <ct:object name="NoCheckVIB" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Виброаппаратура не прошла контроль" />
+            </ct:object>
+            <ct:object name="BZD_nUnlock" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АО от БЗД не деблокирован" />
+            </ct:object>
+            <ct:object name="GNS_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ГНС неисправен" />
+            </ct:object>
+            <ct:object name="GNU_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ГНУ неисправен" />
+            </ct:object>
+            <ct:object name="Nst_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Nst (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Ngg_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Ngg (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Tst_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Tst (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Pk_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Pk (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Pg_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Pg (Локальная САР)" />
+            </ct:object>
+            <ct:object name="E_UP_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по степени сжатия (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Nst_DN_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание нижнего ограничения по Nst (Локальная САР)" />
+            </ct:object>
+            <ct:object name="Ngg_DN_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание нижнего ограничения по Ngg (Локальная САР)" />
+            </ct:object>
+            <ct:object name="PZ_DN_Z_low" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание нижнего ограничения по ПЗ (Локальная САР)" />
+            </ct:object>
+            <ct:object name="ST_UP_Block" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхних ограничений (Локальная САР)" />
+            </ct:object>
+            <ct:object name="ST_DN_Block" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание нижних ограничений (Локальная САР)" />
+            </ct:object>
+            <ct:object name="UP_BLOCK_OUT" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заблокировано поднятие оборотов (Локальная САР)" />
+            </ct:object>
+            <ct:object name="DN_BLOCK_OUT" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание верхнего ограничения по Nst (Локальная САР)" />
+            </ct:object>
+            <ct:object name="PruNoLink" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обрыв связи с ПРУ" />
+            </ct:object>
+            <ct:object name="VOT1_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность основного ВОТ" />
+            </ct:object>
+            <ct:object name="VOT2_brk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность резервного ВОТ" />
+            </ct:object>
+            <ct:object name="Vibr_GTU_flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность виброаппаратуры ГТУ" />
+            </ct:object>
+            <ct:object name="BZD_flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность СПО (БЗД)" />
+            </ct:object>
+            <ct:object name="DI_Door_GTU_stOn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Открыты двери под кожух ГТУ" />
+            </ct:object>
+            <ct:object name="DI_ZAG_ON_BRK" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ аппаратуры контроля загазованности отсека Н" />
+            </ct:object>
+            <ct:object name="DI_ZAG_ON_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа в отсеке Н (АОсс через 7200 сек)  " />
+            </ct:object>
+            <ct:object name="DI_ZAG_ON_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная концентрация газа в отсеке Н" />
+            </ct:object>
+            <ct:object name="DI_ZAG_OD_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа в отсеке ГТУ (АОсс через 7200 сек)  " />
+            </ct:object>
+            <ct:object name="DI_ZAG_OD_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная концентрация газа в отсеке ГТУ" />
+            </ct:object>
+            <ct:object name="DI_ASPTKZ_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АСПТиКЗ в ОД и ОН неисправна" />
+            </ct:object>
+            <ct:object name="DI_UPS_Off" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ агрегатной УПС" />
+            </ct:object>
+            <ct:object name="DI_ZAG_KG_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенная концентрация газа под кожухом ГТУ" />
+            </ct:object>
+            <ct:object name="DI_AKZ_Off" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отказ АКЗ ГТУ" />
+            </ct:object>
+            <ct:object name="DI_UPS_NotReady" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет готовности УПС к пуску ГПА" />
+            </ct:object>
+            <ct:object name="DI_Pm_AVOMN_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокое давление масла на выходе АВОМ(Н)" />
+            </ct:object>
+            <ct:object name="DI_AVOMD_Rdy" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Д) не готов к пуску" />
+            </ct:object>
+            <ct:object name="DI_AVOMD_Tm_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Температура масла на выходе АВОМ(Д) выше допустимой" />
+            </ct:object>
+            <ct:object name="DI_AVOMD_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Д) неисправен" />
+            </ct:object>
+            <ct:object name="DI_Lm_MBN_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предельно высокий уровень масла в МБН (DI)" />
+            </ct:object>
+            <ct:object name="DI_Lm_MBD_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Максимальный уровень масла в МБД (DI)" />
+            </ct:object>
+            <ct:object name="DI_dPg_sN_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления на сетке перед нагнетателем" />
+            </ct:object>
+            <ct:object name="DI_AVOMN_Rdy" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Н) не готов к пуску" />
+            </ct:object>
+            <ct:object name="DI_AVOMN_Tm_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Температура масла на выходе АВОМ(Н) выше допустимой" />
+            </ct:object>
+            <ct:object name="DI_AVOMN_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АВОМ(Д) не исправен" />
+            </ct:object>
+            <ct:object name="DI_DoorBB_open" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Двери блок-бокса открыты" />
+            </ct:object>
+            <ct:object name="DI_DoorVOU_stOn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Двери ВОУ открыты" />
+            </ct:object>
+            <ct:object name="DI_dPpg_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Фильтр пускового газа засорен" />
+            </ct:object>
+            <ct:object name="DI_Lcf1_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокий уровень конденсата в фильтре №1 топливного газа" />
+            </ct:object>
+            <ct:object name="DI_Lcf2_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Высокий уровень конденсата в фильтре №2 топливного газа" />
+            </ct:object>
+            <ct:object name="DI_BK1_stOn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Открыт байпасный клапан ВОУ №1" />
+            </ct:object>
+            <ct:object name="DI_BK2_stOn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Открыт байпасный клапан ВОУ №2" />
+            </ct:object>
+            <ct:object name="DI_DoorODON_open" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Двери в ОД и ОН открыты" />
+            </ct:object>
+            <ct:object name="DI_ZPCV_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗПЦВ" />
+            </ct:object>
+            <ct:object name="DI_ZVOD1_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗсВОД1" />
+            </ct:object>
+            <ct:object name="DI_ZVOD2_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗсВОД2" />
+            </ct:object>
+            <ct:object name="DI_ZVOD3_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗсВОД3" />
+            </ct:object>
+            <ct:object name="DI_ZsTUT_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗсТУТ" />
+            </ct:object>
+            <ct:object name="DI_ZsBUT_mufta" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Срабатывание муфты ограничения момента ЗсБУТ" />
+            </ct:object>
+            <ct:object name="DI_EnAPK_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Обогрев Кр6р отключен" />
+            </ct:object>
+            <ct:object name="DI_BZD_Ispr" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="БЗД не исправен" />
+            </ct:object>
+            <ct:object name="DI_UV1_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения на вводе 1 НКУ" />
+            </ct:object>
+            <ct:object name="DI_Vvod1_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность разрядника ввода 1 НКУ" />
+            </ct:object>
+            <ct:object name="DI_UV2_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения на вводе 2 НКУ" />
+            </ct:object>
+            <ct:object name="DI_Vvod2_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность разрядника ввода 2 НКУ" />
+            </ct:object>
+            <ct:object name="DI_UV3_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения на вводе 3 НКУ" />
+            </ct:object>
+            <ct:object name="DI_Vvod3_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность разрядника ввода 3 НКУ" />
+            </ct:object>
+            <ct:object name="DI_UV4_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения на вводе 4 НКУ" />
+            </ct:object>
+            <ct:object name="DI_Vvod4_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность разрядника ввода 4 НКУ" />
+            </ct:object>
+            <ct:object name="DI_Vvod5_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Неисправность разрядника ввода 5 НКУ" />
+            </ct:object>
+            <ct:object name="DI_RU_stOn" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Ручное управление на ЩРУ включено" />
+            </ct:object>
+            <ct:object name="DI_UKR_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие напряжения =220 В (Краны)" />
+            </ct:object>
+            <ct:object name="DI_UNAPK_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Напряжение на обогрев Кр 6р не подано" />
+            </ct:object>
+            <ct:object name="DI_NKU_Ok" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Напряжение на обогрев Кр 6р не подано" />
+            </ct:object>
+            <ct:object name="DI_UGPA_BEO" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отсутствие питания БЭАО ПЛК 2" />
+            </ct:object>
+            <ct:object name="DI_BZD_Ready1" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет питания БЗД" />
+            </ct:object>
+            <ct:object name="DI_QF101_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание САУ (основное) Ввод 1. QF101 не включен" />
+            </ct:object>
+            <ct:object name="DI_QF201_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание САУ (резервное) Ввод 2. QF201 не включен" />
+            </ct:object>
+            <ct:object name="DI_QF301_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание ИМ ГТУ (=27 В) Ввод 3. QF301 не включен" />
+            </ct:object>
+            <ct:object name="DI_QF401_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание кранов (=110 В) Ввод 4. QF401 не включен" />
+            </ct:object>
+            <ct:object name="DI_SF11_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание кранов (=110 В). SF11 не включен" />
+            </ct:object>
+            <ct:object name="DI_QF102_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Питание внешних потребителей (~220 В). QF102 не включен" />
+            </ct:object>
+            <ct:object name="DI_UZIP1_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 1 неисправен" />
+            </ct:object>
+            <ct:object name="DI_UZIP2_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 2 неисправен" />
+            </ct:object>
+            <ct:object name="DI_UZIP3_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 3 неисправен" />
+            </ct:object>
+            <ct:object name="DI_UZIP4_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="УЗИП Ввода 4 неисправен" />
+            </ct:object>
+            <ct:object name="DI_SF1_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF1 не включен (Преобразователи и барьеры гр.1)" />
+            </ct:object>
+            <ct:object name="DI_SF2_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF2 не включен (Преобразователи и барьеры гр.2)" />
+            </ct:object>
+            <ct:object name="DI_SF3_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF3 не включен (Внешнее оборудование)" />
+            </ct:object>
+            <ct:object name="DI_SF4_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF4 не включен (Сухие контакты внешних ДД)" />
+            </ct:object>
+            <ct:object name="DI_SF5_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF5 не включен (Команды управления ИМ ГПА)" />
+            </ct:object>
+            <ct:object name="DI_SF6_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF6 не включен (Датчики стружки)" />
+            </ct:object>
+            <ct:object name="DI_SF7_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF7 не включен (БЗА)" />
+            </ct:object>
+            <ct:object name="DI_SF8_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF8 не включен (ПРУ)" />
+            </ct:object>
+            <ct:object name="DI_SF9_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF9 не включен (БЭО)" />
+            </ct:object>
+            <ct:object name="DI_SF10_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF10 не включен (ВНА)" />
+            </ct:object>
+            <ct:object name="DI_Cond_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кондиционер. Авария" />
+            </ct:object>
+            <ct:object name="DI_G101_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G101 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G102_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G102 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G103_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G103 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G104_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G104 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G105_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G105 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G106_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G106 или G107 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G108_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G108 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G201_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G201 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G202_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G202 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G203_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G203 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G204_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G204 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G205_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G205 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G206_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G206 или G207 неисправен" />
+            </ct:object>
+            <ct:object name="DI_G208_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G208 неисправен" />
+            </ct:object>
+            <ct:object name="DI_DC1" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Коммутатор US1 неисправен" />
+            </ct:object>
+            <ct:object name="DI_DC2" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Коммутатор US2 неисправен" />
+            </ct:object>
+            <ct:object name="DI_DC3" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Коммутатор US3 неисправен" />
+            </ct:object>
+            <ct:object name="DI_DC4" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Коммутатор US4 неисправен" />
+            </ct:object>
+            <ct:object name="DI_KR1_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Реле контроля сопротивления изоляции KR1 - Авария" />
+            </ct:object>
+            <ct:object name="DI_KR2_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Реле контроля сопротивления изоляции KR2 - Авария" />
+            </ct:object>
+            <ct:object name="DI_KR3_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Реле контроля сопротивления изоляции KR3 - Авария" />
+            </ct:object>
+            <ct:object name="DI_KR4_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Реле контроля сопротивления изоляции KR4 - Авария" />
+            </ct:object>
+        </ct:object>
+        <ct:object name="MODES" access-level="public" >
+            <ct:object name="AOss" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;АОсс&quot;" />
+            </ct:object>
+            <ct:object name="regNum" base-type="Types.MODES.regNum_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Номер режима" />
+            </ct:object>
+            <ct:object name="AObs" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;АОбс&quot;" />
+            </ct:object>
+            <ct:object name="VOss" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ВОсс&quot;" />
+            </ct:object>
+            <ct:object name="VObs" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ВОбс&quot;" />
+            </ct:object>
+            <ct:object name="NOss" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;НОсс&quot;" />
+            </ct:object>
+            <ct:object name="NObs" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;НОбс&quot;" />
+            </ct:object>
+            <ct:object name="Repair" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Ремонт&quot;" />
+            </ct:object>
+            <ct:object name="Reserv" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Резерв&quot;" />
+            </ct:object>
+            <ct:object name="HR" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ХР&quot;" />
+            </ct:object>
+            <ct:object name="GR" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ГР&quot;" />
+            </ct:object>
+            <ct:object name="PZ" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ПЗ&quot;" />
+            </ct:object>
+            <ct:object name="readyHP" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к ХП&quot;" />
+            </ct:object>
+            <ct:object name="readyAPK" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к АПК&quot;" />
+            </ct:object>
+            <ct:object name="readyPM" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к Промывке&quot;" />
+            </ct:object>
+            <ct:object name="readyAPM" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к АПМ&quot;" />
+            </ct:object>
+            <ct:object name="readyKPK" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к КПК&quot;" />
+            </ct:object>
+            <ct:object name="readyPZMS" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к ПЗМС&quot;" />
+            </ct:object>
+            <ct:object name="readyPZBS" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Готов к ПЗБС&quot;" />
+            </ct:object>
+            <ct:object name="HP" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ХП&quot;" />
+            </ct:object>
+            <ct:object name="PM" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Промывка&quot;" />
+            </ct:object>
+            <ct:object name="KPK" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;КПК&quot;" />
+            </ct:object>
+            <ct:object name="PZMS" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ПЗМС&quot;" />
+            </ct:object>
+            <ct:object name="PZBS" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;ПЗБС&quot;" />
+            </ct:object>
+            <ct:object name="APK" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;АПК&quot;" />
+            </ct:object>
+            <ct:object name="APM" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;АПМ&quot;" />
+            </ct:object>
+            <ct:object name="K" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Кольцо&quot;" />
+            </ct:object>
+            <ct:object name="M" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Магистраль&quot;" />
+            </ct:object>
+            <ct:object name="KM" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;К-М&quot;" />
+            </ct:object>
+            <ct:object name="MK" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;М-К&quot;" />
+            </ct:object>
+            <ct:object name="Error" base-type="Types.MODES.MODES_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим &quot;Ошибка&quot;" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
