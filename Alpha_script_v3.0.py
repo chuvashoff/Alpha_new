@@ -50,6 +50,12 @@ try:
     # Считываем файл-шаблон для PZ
     with open(os.path.join('Template', 'Temp_PZ'), 'r', encoding='UTF-8') as f:
         tmp_object_PZ = f.read()
+    # Считываем файл-шаблон для топливного регулятора ПЛК-аспекта
+    with open(os.path.join('Template', 'Temp_TR_ps90'), 'r', encoding='UTF-8') as f:
+        tmp_tr_ps90 = f.read()
+    # Считываем файл-шаблон для топливного регулятора IOS-аспекта
+    with open(os.path.join('Template', 'Temp_TR_ps90_IOs'), 'r', encoding='UTF-8') as f:
+        tmp_tr_ps90_ios = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -221,6 +227,23 @@ try:
     # Сигналы остальные
     write_signal(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
                  tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di)
+
+    # ТР, если он есть в контроллере
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Если есть ТР в данном контроллере...
+            if 'ТР' in sl_CPU_spec[cpu]:
+                # ...то записываем в нужный файл ПЛК-аспект ТР
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(tmp_tr_ps90)
+                # ...записываем в нужный файл IOS-аспект АПР
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_tr_ps90_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree."
+                                                                                 f"System.TR",
+                                                                 target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
+
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...
