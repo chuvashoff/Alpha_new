@@ -56,6 +56,9 @@ try:
     # Считываем файл-шаблон для топливного регулятора IOS-аспекта
     with open(os.path.join('Template', 'Temp_TR_ps90_IOs'), 'r', encoding='UTF-8') as f:
         tmp_tr_ps90_ios = f.read()
+    # Считываем файл-шаблон для драйверных параметров
+    with open(os.path.join('Template', 'Temp_drv_par'), 'r', encoding='UTF-8') as f:
+        tmp_drv_par = f.read()
 
     print(datetime.datetime.now(), '- Начало 1')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -104,6 +107,18 @@ try:
             if p[is_f_ind(cells[0], 'APR')].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('АПР',)
 
+    # Определение заведённых драйверов
+    cells = sheet['A1': 'A' + str(sheet.max_row)]
+    drv_eng, drv_rus = [], []
+    for p in cells:
+        if p[0].value == 'Наименование драйвера (Eng)':
+            jj = 1
+            while sheet[p[0].row][jj].value and sheet[p[0].row + 1][jj].value:
+                drv_eng.append(sheet[p[0].row][jj].value)
+                drv_rus.append(sheet[p[0].row + 1][jj].value)
+                jj += 1
+    sl_all_drv = dict(zip(drv_eng, drv_rus))
+    print(sl_all_drv)
     # Чистим файлы с прошлой сборки
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -243,7 +258,9 @@ try:
                     f.write(Template(tmp_tr_ps90_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree."
                                                                                  f"System.TR",
                                                                  target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
-
+    # Драйвера
+    write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
+              tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di, sl_all_drv=sl_all_drv)
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...

@@ -661,17 +661,18 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
             # Записываем модуля в ПЛК-аспект
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(is_create_objects_diag(sl=sl_modules_cpu[cpu]) + '\n')
-            # Записываем параметры в IOS-аспект
-            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                for module in sl_modules_cpu[cpu]:
-                    f.write(Template(tmp_ios).substitute(
-                        object_name=module,
-                        object_type=sl_type_modules_ios[sl_modules_cpu[cpu][module][0]],
-                        object_aspect='Types.IOS_Aspect',
-                        original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.HW.{module}",
-                        target_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.HW.{module}"))
+            if cpu in sl_modules_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(is_create_objects_diag(sl=sl_modules_cpu[cpu]) + '\n')
+                # Записываем параметры в IOS-аспект
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    for module in sl_modules_cpu[cpu]:
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=module,
+                            object_type=sl_type_modules_ios[sl_modules_cpu[cpu][module][0]],
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.HW.{module}",
+                            target_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.HW.{module}"))
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -874,13 +875,14 @@ def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_obje
         for cpu in sl_object_all[objects]:
             # В ПЛК-аспекте открываем узел CNT
             with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('        <ct:object name="СNT" access-level="public" >\n')
-                for nar in sl_cnt[cpu]:
-                    f.write(Template(tmp_object_btn_cnt_sig).substitute(
-                        object_name=nar,
-                        object_type='Types.CNT.CNT_PLC_View',
-                        object_aspect='Types.PLC_Aspect',
-                        text_description=is_cor_chr(sl_cnt[cpu][nar])))
+                if cpu in sl_cnt:
+                    f.write('        <ct:object name="СNT" access-level="public" >\n')
+                    for nar in sl_cnt[cpu]:
+                        f.write(Template(tmp_object_btn_cnt_sig).substitute(
+                            object_name=nar,
+                            object_type='Types.CNT.CNT_PLC_View',
+                            object_aspect='Types.PLC_Aspect',
+                            text_description=is_cor_chr(sl_cnt[cpu][nar])))
         # В IOS-аспекте открываем узел CNT
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             f.write('      <ct:object name="CNT" access-level="public" >\n')
@@ -899,8 +901,9 @@ def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_obje
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
             # Закрываем узел CNT в ПЛК-аспекте
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('        </ct:object>\n')
+            if cpu in sl_cnt:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write('        </ct:object>\n')
         # Закрываем узел CNT в IOS-аспекте
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             f.write('      </ct:object>\n')
@@ -990,7 +993,7 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
                                   type_protect=index_type_protect,
                                   cpu=index_cpu_name)
             # Обновляем словарь сигналов, полученными в других узлах
-            tmp_sig.update(sl_update_signal.get(cpu))
+            tmp_sig.update(sl_update_signal.get(cpu, {}))
             # Если в котроллере есть сигналы...
             if tmp_sig:
                 set_cpu_object.add(cpu)
@@ -1137,3 +1140,166 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                      tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
                      sl_update_signal={key: {} for key in sl_wrn_di})
 
+
+# В словаре ДРВ - (драйвер, алг. имя) : рус наим, тип пер., ед. измер, чило знаков, цвет наличия, цвет отсутствия,
+# тип сообщения
+
+def is_load_drv(controller, cell, alg_name, name_par, eunit, type_sig, type_msg, c_on, c_off, f_dig, cpu, index_drv):
+    tmp = {}
+    for par in cell:
+        if par[name_par].value is None:
+            break
+        if par[cpu].value == controller:
+            drv_name = par[index_drv].value
+            drv_par = par[alg_name].value
+            tmp[(drv_name, drv_par)] = [is_cor_chr(par[name_par].value), par[type_sig].value, par[eunit].value,
+                                        par[f_dig].value, par[c_on].fill.start_color.index,
+                                        par[c_off].fill.start_color.index, par[type_msg].value]
+
+    return tmp
+
+
+def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_wrn_di, sl_all_drv):
+    sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
+    sl_type_drv = {
+        'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
+        'INT': 'Types.DRV_INT.DRV_INT_PLC_View',
+        'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View'
+    }
+
+    cells = sheet['A1': 'N' + str(sheet.max_row)]
+
+    index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
+    index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
+    index_cpu_name = is_f_ind(cells[0], 'CPU')
+    index_unit = is_f_ind(cells[0], 'Единица измерения')
+    index_type_sig = is_f_ind(cells[0], 'Тип')
+    index_type_msg = is_f_ind(cells[0], 'Тип сообщения')
+    index_color_on = is_f_ind(cells[0], 'Цвет при наличии')
+    index_color_off = is_f_ind(cells[0], 'Цвет при отсутствии')
+    index_fracdig = is_f_ind(cells[0], 'Число знаков')
+    index_drv = is_f_ind(cells[0], 'Драйвер')
+
+    cells = sheet['A2': 'N' + str(sheet.max_row)]
+
+    # Соствялем множество контроллеров, у которых есть данные параметры параметры
+    set_par_cpu = set()
+    for par in cells:
+        if par[0].value is None:
+            break
+        set_par_cpu.add(par[index_cpu_name].value)
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Записываем стартовую информацию группы параметров
+            # При условии, что у данного котроллера есть параметры загруженного листа
+            if cpu in set_par_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a',
+                          encoding='UTF-8') as f:
+                    f.write(f'        <ct:object name="DRV" access-level="public" >\n')
+        # Записываем стартовую информацию IOS-аспекта для группы параметров
+        # При условии, что есть пересечение между множеством контроллеров с параметрами и контроллеров в данном объекте,
+        # то есть наличие данные параметров у объектов
+        if set(sl_object_all[objects].keys()) & set_par_cpu:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write(f'      <ct:object name="DRV" access-level="public">\n')
+                f.write(f'        <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Выдёргиваем переменные драйверов
+            sl_drv_cpu = is_load_drv(controller=cpu, cell=cells, alg_name=index_alg_name, name_par=index_rus_name,
+                                     eunit=index_unit,
+                                     type_sig=index_type_sig, type_msg=index_type_msg,
+                                     c_on=index_color_on, c_off=index_color_off,
+                                     f_dig=index_fracdig, cpu=index_cpu_name,
+                                     index_drv=index_drv)
+            # sl_drv_new = {алг имя драйвера: {алг имя сигнала : value словаря sl_drv_cpu}}
+            # перебираем словарь для удобства
+            sl_drv_new = {key[0]: {} for key, value in sl_drv_cpu.items()}
+            for key, value in sl_drv_cpu.items():
+                sl_drv_new[key[0]].update({key[1]: value})
+
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                # Для каждого драйвера...
+                for driver in sl_drv_new:
+                    # ...открываем группу данного драйвера
+                    f.write(f'        <ct:object name="{driver}" access-level="public">\n')
+                    f.write(f'        <attribute type="unit.System.Attributes.Description" '
+                            f'value="{sl_all_drv.get(driver)}" />\n')
+                    # ...для каждого параметра в драйвере записываем в ПЛК-аспект
+                    for par, value in sl_drv_new[driver].items():
+                        if value[1] == 'FLOAT':
+                            s_on = '0'
+                            s_off = '0'
+                            typ_msg = '-'
+                            unit = value[2]
+                            f_dig = value[3]
+                        elif value[1] == 'BOOL':
+                            s_on = sl_color_di.get(value[4])
+                            s_off = sl_color_di.get(value[5])
+                            typ_msg = value[6]
+                            unit = '-'
+                            f_dig = '0'
+                        else:
+                            s_on = '0'
+                            s_off = '0'
+                            typ_msg = '-'
+                            unit = value[2]
+                            f_dig = '0'
+                        f.write(Template(tmp_drv_par).substitute(
+                            object_name=par,
+                            object_type=sl_type_drv.get(value[1]),
+                            object_aspect='Types.PLC_Aspect',
+                            text_description=value[0],
+                            type_msg=typ_msg,
+                            color_off=s_off,
+                            color_on=s_on,
+                            text_eunit=unit,
+                            text_fracdigits=f_dig))
+                    # Закрываем группу драйвера
+                    f.write(f'        </ct:object>\n')
+
+            for driver in sl_drv_new:
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(f'        <ct:object name="{driver}" access-level="public">\n')
+                    for par, value in sl_drv_new[driver].items():
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=par,
+                            object_type=sl_type_drv[value[1]].replace('PLC_View', 'IOS_View'),
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.DRV.{driver}.{par}",
+                            target_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.DRV.{driver}.{par}"))
+                    # Закрываем группу драйвера
+                    f.write(f'        </ct:object>\n')
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Закрываем группу объектов
+            # При условии, что у данного котроллера есть параметры загруженного листа
+            if cpu in set_par_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a',
+                          encoding='UTF-8') as f:
+                    f.write('        </ct:object>\n')
+        # Закрываем в IOS-аспекте
+        # Если в контроллерах объекта есть параметры загруженного листа
+        if set(sl_object_all[objects].keys()) & set_par_cpu:
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('      </ct:object>\n')
