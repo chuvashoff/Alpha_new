@@ -1037,7 +1037,6 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
 
 def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_di):
     # Словарь типов ПЛК-аспектов для сигналов
-    lst_all_alg = []
     sl_type_sig = {
         'Да (по наличию)': 'Types.WRN_On.WRN_On_PLC_View',
         'Да (по отсутствию)': 'Types.WRN_Off.WRN_Off_PLC_View',
@@ -1086,7 +1085,6 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                 sl_set_par_cpu['ПС'] = set()
             elif par[index_type_protect].value in ('BOOL', 'FLOAT', 'INT'):
                 sl_set_par_cpu['АЛГ'] = set()
-                lst_all_alg.append(par[index_alg_name].value.replace('|', '_'))
             else:
                 sl_set_par_cpu[par[index_type_protect].value] = set()
 
@@ -1144,7 +1142,7 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                      tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
                      sl_update_signal={key: {} for key in sl_wrn_di})
-    return lst_all_alg
+
 
 
 # В словаре ДРВ - (драйвер, алг. имя) : рус наим, тип пер., ед. измер, чило знаков, цвет наличия, цвет отсутствия,
