@@ -140,10 +140,12 @@ try:
                         'xmlns:ct="automation.control">\n')
                 f.write(f'  <trei:trei name="PLC_{cpu}_{objects[2]}" >\n')
                 f.write('    <trei:master-module name="CPU" >\n')
+                ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
+                ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
                 f.write(f'      <trei:ethernet-adapter name="Eth1" '
-                        f'address="{pref_IP[0]}{sl_object_all[objects][cpu][0]}" />\n')
+                        f'address="{ip1}" />\n')
                 f.write(f'      <trei:ethernet-adapter name="Eth2" '
-                        f'address="{pref_IP[1]}{sl_object_all[objects][cpu][1]}" />\n')
+                        f'address="{ip2}" />\n')
                 f.write(f'      <trei:unet-server name="UnetServer" '
                         f'address-map="PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap" '
                         f'port="6001"/>\n')
