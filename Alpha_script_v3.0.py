@@ -1,4 +1,4 @@
-import datetime
+# import datetime
 import openpyxl
 import logging
 import warnings
@@ -119,6 +119,19 @@ try:
                 drv_rus.append(sheet[p[0].row + 1][jj].value)
                 jj += 1
     sl_all_drv = dict(zip(drv_eng, drv_rus))
+
+    # Если нет папки File_for_Import, то создадим её
+    if not os.path.exists('File_for_Import'):
+        os.mkdir('File_for_Import')
+    # Если нет папки File_for_Import/PLC_Aspect_importDomain, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'PLC_Aspect_importDomain')):
+        os.mkdir(os.path.join('File_for_Import', 'PLC_Aspect_importDomain'))
+    # Если нет папки File_for_Import/IOS_Aspect_in_ApplicationServer, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer')):
+        os.mkdir(os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'))
+    # Если нет папки File_for_Import/Trends, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'Trends')):
+        os.mkdir(os.path.join('File_for_Import', 'Trends'))
 
     # Чистим файлы с прошлой сборки
     # Для каждого объекта...
@@ -301,7 +314,44 @@ try:
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv)
 
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # Проверяем и перезаписываем файлы ПЛК-аспекта в случае найденных отличий и удаляя промежуточный файл
+            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'r', encoding='UTF-8') as f:
+                new_data = f.read()
+            os.remove(f'file_out_plc_{cpu}_{objects[2]}.omx-export')
+            check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                            file_name_check=f'file_out_plc_{cpu}_{objects[2]}.omx-export',
+                            new_data=new_data,
+                            message_print=f'Требуется заменить ПЛК-аспект {cpu}_{objects[2]}')
+        # Проверяем и перезаписываем файлы IOS-аспекта в случае найденных отличий и удаляя промежуточный файл
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'r', encoding='UTF-8') as f:
+            new_data = f.read()
+        os.remove(f'file_out_IOS_inApp_{objects[0]}.omx-export')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                        file_name_check=f'file_out_IOS_inApp_{objects[0]}.omx-export',
+                        new_data=new_data,
+                        message_print=f'Требуется заменить IOS-аспект {objects[0]}')
+        # Проверяем и перезаписываем файлы трендов в случае найденных отличий и удаляя промежуточный файл
+        with open(f'Tree{objects[0]}.json', 'r', encoding='UTF-8') as f:
+            new_data = f.read()
+        os.remove(f'Tree{objects[0]}.json')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),
+                        file_name_check=f'Tree{objects[0]}.json',
+                        new_data=new_data,
+                        message_print=f'Требуется заменить файл Tree{objects[0]}.json - Trends')
+
     book.close()
+    # добавление отсечки в файл изменений, чтобы разные сборки не сливались
+    if os.path.exists('Required_change.txt'):
+        with open('Required_change.txt', 'r') as f_test:
+            check_test = f_test.readlines()[-1]
+        if check_test != '-' * 70 + '\n':
+            with open('Required_change.txt', 'a') as f_test:
+                f_test.write('-' * 70 + '\n')
+
     print(datetime.datetime.now(), 'Окончание сборки всех файлов')
 except (Exception, KeyError):
     print('Произошла ошибка выполнения')

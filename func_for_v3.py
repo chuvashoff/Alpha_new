@@ -3,6 +3,8 @@ from string import Template
 from copy import copy
 import os
 from algroritm import is_load_algoritm
+import datetime
+from time import sleep
 
 
 def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects):
@@ -1035,6 +1037,7 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
 
 def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_di):
     # Словарь типов ПЛК-аспектов для сигналов
+    lst_all_alg = []
     sl_type_sig = {
         'Да (по наличию)': 'Types.WRN_On.WRN_On_PLC_View',
         'Да (по отсутствию)': 'Types.WRN_Off.WRN_Off_PLC_View',
@@ -1083,6 +1086,7 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                 sl_set_par_cpu['ПС'] = set()
             elif par[index_type_protect].value in ('BOOL', 'FLOAT', 'INT'):
                 sl_set_par_cpu['АЛГ'] = set()
+                lst_all_alg.append(par[index_alg_name].value.replace('|', '_'))
             else:
                 sl_set_par_cpu[par[index_type_protect].value] = set()
 
@@ -1140,6 +1144,7 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                      tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                      tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
                      sl_update_signal={key: {} for key in sl_wrn_di})
+    return lst_all_alg
 
 
 # В словаре ДРВ - (драйвер, алг. имя) : рус наим, тип пер., ед. измер, чило знаков, цвет наличия, цвет отсутствия,
@@ -1379,3 +1384,34 @@ def write_alg(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
                 # ...в IOS-аспекте закрываем группу GRH
                 with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write('      </ct:object>\n')
+
+
+def check_diff_file(check_path, file_name_check, new_data, message_print):
+    # Если в целевой(указанной) папке уже есть формируемый файл
+    if os.path.exists(os.path.join(check_path, file_name_check)):
+        # считываем имеющейся файл
+        with open(os.path.join(check_path, file_name_check), 'r', encoding='UTF-8') as f_check:
+            old_data = f_check.read()
+        # Если отличаются
+        if new_data != old_data:
+            # Если нет папки Old, то создаём её
+            if not os.path.exists(os.path.join(check_path, 'Old')):
+                os.mkdir(os.path.join(check_path, 'Old'))
+            # Переносим старую файл в папку Old
+            os.replace(os.path.join(check_path, file_name_check),
+                       os.path.join(check_path, 'Old', file_name_check))
+            sleep(0.3)
+            # Записываем новый файл
+            with open(os.path.join(check_path, file_name_check), 'w', encoding='UTF-8') as f_wr:
+                f_wr.write(new_data)
+            # пишем, что надо заменить
+            print(message_print)
+            with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
+                f_change.write(f'{datetime.datetime.now()} - {message_print}\n')
+    # Если в целевой(указанной) папке нет формируемого файла, то создаём его и пишем, что заменить
+    else:
+        with open(os.path.join(check_path, file_name_check), 'w', encoding='UTF-8') as f_wr:
+            f_wr.write(new_data)
+        print(message_print)
+        with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
+            f_change.write(f'{datetime.datetime.now()} - {message_print}\n')
