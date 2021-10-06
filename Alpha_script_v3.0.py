@@ -3,6 +3,7 @@ import openpyxl
 import logging
 import warnings
 from func_for_v3 import *
+from create_trends import is_create_trends
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -294,6 +295,9 @@ try:
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             f.write(f'    </ct:object>\n')
             f.write('</omx>\n')
+
+    # Создаём тренды
+    is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv)
 
     book.close()
     print(datetime.datetime.now(), 'Окончание сборки всех файлов')
