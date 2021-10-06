@@ -4229,6 +4229,1676 @@
               <attribute type="unit.System.Attributes.Description" value="Режим &quot;Ошибка&quot;" />
             </ct:object>
         </ct:object>
+        <ct:object name="GRH" access-level="public">
+            <ct:object name="AOss_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима АОсс" />
+            </ct:object>
+            <ct:object name="AOss_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима АОсс" />
+            </ct:object>
+            <ct:object name="AOss_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима АОсс" />
+            </ct:object>
+            <ct:object name="AOss_GTU_stop" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов в ТР" />
+            </ct:object>
+            <ct:object name="AOss_Kr4_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr6r_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р открыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr12_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr9_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr10_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr1_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr6_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_Kr2_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыть" />
+            </ct:object>
+            <ct:object name="AOss_SKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стравливание контура Н" />
+            </ct:object>
+            <ct:object name="AOss_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="AOss_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОсс завершен" />
+            </ct:object>
+            <ct:object name="AObs_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима АОбс" />
+            </ct:object>
+            <ct:object name="AObs_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима АОбс" />
+            </ct:object>
+            <ct:object name="AObs_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима АОбс" />
+            </ct:object>
+            <ct:object name="AObs_GTU_stop" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов в ТР" />
+            </ct:object>
+            <ct:object name="AObs_Kr6r_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р открыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr12_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr9_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr10_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr1_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr4_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr6_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_Kr2_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыть" />
+            </ct:object>
+            <ct:object name="AObs_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="AObs_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="АОбс завершен" />
+            </ct:object>
+            <ct:object name="NOss_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима НОсс/ВОсс" />
+            </ct:object>
+            <ct:object name="NOss_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима НОсс/ВОсс" />
+            </ct:object>
+            <ct:object name="NOss_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима НОсс/ВОсс" />
+            </ct:object>
+            <ct:object name="NOss_MK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход М-К" />
+            </ct:object>
+            <ct:object name="NOss_TS_Ohl" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
+            </ct:object>
+            <ct:object name="NOss_GTU_stop" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение и останов в ТР" />
+            </ct:object>
+            <ct:object name="NOss_Kr12_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыть" />
+            </ct:object>
+            <ct:object name="NOss_Kr9_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыть" />
+            </ct:object>
+            <ct:object name="NOss_Kr1_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыть" />
+            </ct:object>
+            <ct:object name="NOss_Kr6_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыть" />
+            </ct:object>
+            <ct:object name="NOss_Kr2_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыть" />
+            </ct:object>
+            <ct:object name="NOss_SKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стравливание контура Н" />
+            </ct:object>
+            <ct:object name="NOss_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
+            </ct:object>
+            <ct:object name="NOss_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОсс завершен" />
+            </ct:object>
+            <ct:object name="NObs_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима НОбс/ВОбс" />
+            </ct:object>
+            <ct:object name="NObs_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима НОбс/ВОбс" />
+            </ct:object>
+            <ct:object name="NObs_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима НОбс/ВОбс" />
+            </ct:object>
+            <ct:object name="NObs_MK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход М-К" />
+            </ct:object>
+            <ct:object name="NObs_TS_Ohl" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
+            </ct:object>
+            <ct:object name="NObs_GTU_stop" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение и останов в ТР" />
+            </ct:object>
+            <ct:object name="NObs_Kr12_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыть" />
+            </ct:object>
+            <ct:object name="NObs_Kr9_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыть" />
+            </ct:object>
+            <ct:object name="NObs_Kr1_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыть" />
+            </ct:object>
+            <ct:object name="NObs_Kr6_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыть" />
+            </ct:object>
+            <ct:object name="NObs_Kr2_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыть" />
+            </ct:object>
+            <ct:object name="NObs_OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение двигателя" />
+            </ct:object>
+            <ct:object name="NObs_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="НОбс завершен" />
+            </ct:object>
+            <ct:object name="PZBS_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима ПЗБС" />
+            </ct:object>
+            <ct:object name="PZBS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима ПЗБС" />
+            </ct:object>
+            <ct:object name="PZBS_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима ПЗБС" />
+            </ct:object>
+            <ct:object name="PZBS_Alarm_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнализация" />
+            </ct:object>
+            <ct:object name="PZBS_VOD_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск ВОД" />
+            </ct:object>
+            <ct:object name="PZBS_VOD_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОД отключить" />
+            </ct:object>
+            <ct:object name="PZBS_ZH_Qv_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту Qвозд" />
+            </ct:object>
+            <ct:object name="PZBS_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗБС завершена" />
+            </ct:object>
+            <ct:object name="PZMS_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима ПЗМС" />
+            </ct:object>
+            <ct:object name="PZMS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима ПЗМС" />
+            </ct:object>
+            <ct:object name="PZMS_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима ПЗМС" />
+            </ct:object>
+            <ct:object name="PZMS_Alarm_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнализация" />
+            </ct:object>
+            <ct:object name="PZMS_PMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН" />
+            </ct:object>
+            <ct:object name="PZMS_PNU_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключить" />
+            </ct:object>
+            <ct:object name="PZMS_PNS_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключить" />
+            </ct:object>
+            <ct:object name="PZMS_ZH_Pmsn_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту по Рмсн" />
+            </ct:object>
+            <ct:object name="PZMS_ZH_dPmg_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту по dPмг" />
+            </ct:object>
+            <ct:object name="PZMS_VOT_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить ВОТ" />
+            </ct:object>
+            <ct:object name="PZMS_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПЗМС завершена" />
+            </ct:object>
+            <ct:object name="HP_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима ХП/Промывка" />
+            </ct:object>
+            <ct:object name="HP_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима ХП/Промывка" />
+            </ct:object>
+            <ct:object name="HP_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима ХП/Промывка" />
+            </ct:object>
+            <ct:object name="HP_Alarm_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнализация" />
+            </ct:object>
+            <ct:object name="HP_PMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН" />
+            </ct:object>
+            <ct:object name="HP_VOD_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОД включить" />
+            </ct:object>
+            <ct:object name="HP_Kr10_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыть" />
+            </ct:object>
+            <ct:object name="HP_Kr11_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыть" />
+            </ct:object>
+            <ct:object name="HP_TS_StabPG" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ" />
+            </ct:object>
+            <ct:object name="HP_GTU_HP" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ХП в ТР" />
+            </ct:object>
+            <ct:object name="HP_TS_GO" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Идет ХП/Промывка" />
+            </ct:object>
+            <ct:object name="HP_Kr10_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыть" />
+            </ct:object>
+            <ct:object name="HP_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
+            </ct:object>
+            <ct:object name="HP_VOD_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить ВОД" />
+            </ct:object>
+            <ct:object name="HP_ZH_Qv_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту Qвозд" />
+            </ct:object>
+            <ct:object name="HP_OMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов МСН" />
+            </ct:object>
+            <ct:object name="HP_TS_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Окончание ХП/промывки" />
+            </ct:object>
+            <ct:object name="KPK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима КПК" />
+            </ct:object>
+            <ct:object name="KPK_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима КПК" />
+            </ct:object>
+            <ct:object name="KPK_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима КПК" />
+            </ct:object>
+            <ct:object name="KPK_Alarm_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнализация" />
+            </ct:object>
+            <ct:object name="KPK_PMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН" />
+            </ct:object>
+            <ct:object name="KPK_ZKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение Н" />
+            </ct:object>
+            <ct:object name="KPK_Kr1_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr4_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr6r_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr6_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr12_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr9_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr11_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr10_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_TS_StabPTG" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+            </ct:object>
+            <ct:object name="KPK_Kr12_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr9_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr11_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr10_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr1_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr6_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыть" />
+            </ct:object>
+            <ct:object name="KPK_Kr6r_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р открыть" />
+            </ct:object>
+            <ct:object name="APK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима АПК/АПМ" />
+            </ct:object>
+            <ct:object name="APK_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима АПК/АПМ" />
+            </ct:object>
+            <ct:object name="APK_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима АПК/АПМ" />
+            </ct:object>
+            <ct:object name="APK_Alarm_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнализация" />
+            </ct:object>
+            <ct:object name="APK_PMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН" />
+            </ct:object>
+            <ct:object name="APK_ZKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение Н" />
+            </ct:object>
+            <ct:object name="APK_Kr1_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыть" />
+            </ct:object>
+            <ct:object name="APK_Kr6r_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыть" />
+            </ct:object>
+            <ct:object name="APK_Kr6_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыть" />
+            </ct:object>
+            <ct:object name="APK_Kr2_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 открыть" />
+            </ct:object>
+            <ct:object name="APK_VOD_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОД включить" />
+            </ct:object>
+            <ct:object name="APK_Kr12_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 открыть" />
+            </ct:object>
+            <ct:object name="APK_Kr9_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 закрыть" />
+            </ct:object>
+            <ct:object name="APK_Kr11_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыть" />
+            </ct:object>
+            <ct:object name="APK_Kr10_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыть" />
+            </ct:object>
+            <ct:object name="APK_TS_StabPTG" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+            </ct:object>
+            <ct:object name="APK_GTU_Start" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Запуск в ТР" />
+            </ct:object>
+            <ct:object name="APK_TS_Starter" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Раскрутка на стартере" />
+            </ct:object>
+            <ct:object name="APK_TS_Accel" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Разгон" />
+            </ct:object>
+            <ct:object name="APK_TS_Heat" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Прогрев" />
+            </ct:object>
+            <ct:object name="APK_KM_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход К-М" />
+            </ct:object>
+            <ct:object name="PMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима Пуск МСН" />
+            </ct:object>
+            <ct:object name="PMSN_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима Пуск МСН" />
+            </ct:object>
+            <ct:object name="PMSN_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима Пуск МСН" />
+            </ct:object>
+            <ct:object name="PMSN_VOT_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ включить" />
+            </ct:object>
+            <ct:object name="PMSN_PNS_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС включить" />
+            </ct:object>
+            <ct:object name="PMSN_TS_Pmsn_Zap" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслосистемы Н" />
+            </ct:object>
+            <ct:object name="PMSN_TS_Pmsn_Stab" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация Рмсн" />
+            </ct:object>
+            <ct:object name="PMSN_ZH_Pmsn_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Взвести защиту по Pмсн" />
+            </ct:object>
+            <ct:object name="PMSN_PNU_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ включить" />
+            </ct:object>
+            <ct:object name="PMSN_TS_dPmg_Zap" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслоуплотнений" />
+            </ct:object>
+            <ct:object name="PMSN_TS_dPmg_Stab" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация dРмг" />
+            </ct:object>
+            <ct:object name="PMSN_ZH_dPmg_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Взвести защиту по dРмг" />
+            </ct:object>
+            <ct:object name="OMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима Останов МСН" />
+            </ct:object>
+            <ct:object name="OMSN_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима Останов МСН" />
+            </ct:object>
+            <ct:object name="OMSN_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима Останов МСН" />
+            </ct:object>
+            <ct:object name="OMSN_ZH_dPmg_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту по dРмг" />
+            </ct:object>
+            <ct:object name="OMSN_PNU_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключить" />
+            </ct:object>
+            <ct:object name="OMSN_ZH_Pmsn_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту по Рмсн" />
+            </ct:object>
+            <ct:object name="OMSN_PNS_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключить" />
+            </ct:object>
+            <ct:object name="KM_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима К-М" />
+            </ct:object>
+            <ct:object name="KM_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима К-М" />
+            </ct:object>
+            <ct:object name="KM_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима К-М" />
+            </ct:object>
+            <ct:object name="KM_APK_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыть" />
+            </ct:object>
+            <ct:object name="MK_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима М-К" />
+            </ct:object>
+            <ct:object name="MK_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима М-К" />
+            </ct:object>
+            <ct:object name="MK_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима М-К" />
+            </ct:object>
+            <ct:object name="MK_APK_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Открытие 6р" />
+            </ct:object>
+            <ct:object name="MK_GTU_NstMG" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снижение Nst" />
+            </ct:object>
+            <ct:object name="ZKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима Заполнение контура Н" />
+            </ct:object>
+            <ct:object name="ZKN_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима Заполнение контура Н" />
+            </ct:object>
+            <ct:object name="ZKN_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима Заполнение контура Н" />
+            </ct:object>
+            <ct:object name="ZKN_Kr4_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 открыть" />
+            </ct:object>
+            <ct:object name="ZKN_TS_Prod" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Продувка контура Н" />
+            </ct:object>
+            <ct:object name="ZKN_Kr5_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 5 закрыть" />
+            </ct:object>
+            <ct:object name="ZKN_TS_Stab" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация контура Н" />
+            </ct:object>
+            <ct:object name="ZKN_Kr1_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыть" />
+            </ct:object>
+            <ct:object name="ZKN_Kr4_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыть" />
+            </ct:object>
+            <ct:object name="ZKN_Kr6r_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыть" />
+            </ct:object>
+            <ct:object name="ZKN_Kr6_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыть" />
+            </ct:object>
+            <ct:object name="SKN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима Стравливание контура Н" />
+            </ct:object>
+            <ct:object name="SKN_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима Стравливание контура Н" />
+            </ct:object>
+            <ct:object name="SKN_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима Стравливание контура Н" />
+            </ct:object>
+            <ct:object name="SKN_Kr5_On" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 5 открыть" />
+            </ct:object>
+            <ct:object name="SKN_OMSN_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов МСН" />
+            </ct:object>
+            <ct:object name="OHL_START" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Старт режима Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="OHL_END" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Оконачание режима Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="OHL_Point" base-type="Types.GRH.GRH_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Шаг режима Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="OHL_ZH_Qv_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снять защиту Qвозд" />
+            </ct:object>
+            <ct:object name="OHL_TS_CoolGPA" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА" />
+            </ct:object>
+            <ct:object name="OHL_VOD_Off" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Отключить ВОД" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_1_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СК0 закрыт" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_1_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_1_2_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыт" />
+            </ct:object>
+            <ct:object name="AOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_2_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 300 об/мин" />
+            </ct:object>
+            <ct:object name="AOss_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Par_In_2_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стравливание Н завершено" />
+            </ct:object>
+            <ct:object name="AOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_4_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 20 об/мин" />
+            </ct:object>
+            <ct:object name="AOss_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Par_In_4_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Par_In_4_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОсс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AOss_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="AOss_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_1_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СК0 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_1_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_1_2_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыт" />
+            </ct:object>
+            <ct:object name="AObs_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_2_1_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 300 об/мин" />
+            </ct:object>
+            <ct:object name="AObs_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Par_In_2_1_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Par_In_2_1_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_3_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 20 об/мин" />
+            </ct:object>
+            <ct:object name="AObs_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Par_In_3_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 3" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Par_In_3_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АОбс шага 3" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="AObs_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="AObs_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_2_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СК0 закрыт" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс/ВОсс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыт" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_3_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_4_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 300 об/мин" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Par_In_4_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс/ВОсс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Par_In_4_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс/ВОсс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стравливание Н завершено" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_6_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_6_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 20 об/мин" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Par_In_6_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс/ВОсс шага 6" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Par_In_6_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОсс/ВОсс шага 6" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_7_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="NOss_Cmd_In_7_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим НОсс" />
+            </ct:object>
+            <ct:object name="NOss_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход М-К завершен" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение Д завершено" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_2_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="СК0 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Par_In_2_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс/ВОбс шага 2" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыт" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_3_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 1300 об/мин" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_4_1_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 300 об/мин" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Par_In_4_1_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс/ВОбс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Par_In_4_1_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс/ВОбс шага 4" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_5_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_5_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 20 об/мин" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Par_In_5_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс/ВОбс шага 5" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Par_In_5_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима НОбс/ВОбс шага 5" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_6_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="NObs_Cmd_In_6_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим НОбс" />
+            </ct:object>
+            <ct:object name="NObs_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Работа ВОД" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_Out_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Работа ВОД-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкий Q воздуха в БС" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZBS_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Команда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="PZBS_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключен" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключен" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_5_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Аварийно-низкое Рмсн &lt; 0.07" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_5_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Аварийно-низкий dРмг &lt; 0.08" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Par_In_5_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ПЗМС шага 5" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="PZMS_Par_In_5_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ПЗМС шага 5" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_6_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Рмсн снята" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_6_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по dPmg снята" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_6_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ 1/2 отлючен" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PZMS_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кноманда &quot;Деблокировка&quot;" />
+            </ct:object>
+            <ct:object name="PZMS_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_2_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Газ в контуре Н" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыт" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыт" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Tmv_Out_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Готовность к ХП" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="МСД готова к ХП" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим ХП" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Готовность к Промывке" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_2_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="МСД готова к Промывке" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_7_2_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим Промывка" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Окончание ХП" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_8_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Окончание промывки" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Par_In_8_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП/Промывка шага 8" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Par_In_8_2_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП/Промывка шага 8" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_9_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nгг &lt; 100 об/мин" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_9_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Nст &lt; 20 об/мин" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_9_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыт" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Par_In_9_1_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП/Промывка шага 9" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Par_In_9_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима ХП/Промывка шага 9" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_10" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыт" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт снята" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_12_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Останов МСН завершен" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_12_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Газ в контуре Н" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_13_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ХП завершена" />
+            </ct:object>
+            <ct:object name="HP_Cmd_In_13_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Промывка завершена" />
+            </ct:object>
+            <ct:object name="HP_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_2_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Газ в контуре Н" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение Н завершено" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_3_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_3_2_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкий dP на Кране 1" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_3_2_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет подрежима заполнения" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_8_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_9_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_9_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_10" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_Out_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_11_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_11_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_12_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_12_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 открыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_13_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_13_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KPK_Cmd_In_14" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
+            </ct:object>
+            <ct:object name="KPK_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал." />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Предпусковая сигнал.-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_2_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Пуск МСН завершен" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_2_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Газ в контуре Н" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение Н завершено" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_3_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_3_2_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкий dP на Кране 1" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_3_2_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет подрежима заполнения" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_7" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 открыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_8" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт взведена" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_9" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 9 закрыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_9" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_10_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 12 открыт" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_10_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Давление ТГ &gt; 3.8 МПа" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_10_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Давление ТГ &lt; 4.45 МПа" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_10" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Par_In_10_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 10" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="APK_Par_In_10_1_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 10" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_11" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 10 закрыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_11" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_12" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 11 открыт" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_12" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_13" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Tmv_Out_13" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация ПГ и ТГ-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_14_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Готовность к запуску" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_14_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Pпг перед СтВ &lt; 0.75" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_14_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Pпг перед СтВ &gt; 0.28" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_14_1_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="МСД готова к запуску" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_14" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Par_In_14_1_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 14" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="APK_Par_In_14_1_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 14" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_15" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Есть горение" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_15" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Par_In_15" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 15" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_16" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Разгон окончен" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_16" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Par_In_16" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 16" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_17" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Прогрев окончен" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_17" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Par_In_17" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима АПК/АПМ шага 17" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_18_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Переход К-М завершен" />
+            </ct:object>
+            <ct:object name="APK_Cmd_In_18_2_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Режим АПК" />
+            </ct:object>
+            <ct:object name="APK_Tmv_In_18" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ВОТ 1/2 включен" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС включен" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Рмсн &gt; 0,18 МПа" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслосистемы Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_Out_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслосистемы Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Par_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Пуск МСН шага 3" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация Рмсн" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_Out_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация Рмсн-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_5" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ включен" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="dРмг &gt; 0,18 МПа" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслоуплотнений" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_Out_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Заполнение маслоуплотнений-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Par_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Дополнительный параметр режима Пуск МСН шага 6" />
+              <attribute type="Attributes.FracDigits" value="3" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация dPмг" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_Out_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилизация dPмг-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_8_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по dPмг взведена" />
+            </ct:object>
+            <ct:object name="PMSN_Cmd_In_8_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Рмсн взведена" />
+            </ct:object>
+            <ct:object name="PMSN_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OMSN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНУ отключен" />
+            </ct:object>
+            <ct:object name="OMSN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OMSN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="ПНС отключен" />
+            </ct:object>
+            <ct:object name="OMSN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="KM_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
+            </ct:object>
+            <ct:object name="KM_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="MK_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р открыт" />
+            </ct:object>
+            <ct:object name="MK_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="MK_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Снижение оборотов Nst в ТР" />
+            </ct:object>
+            <ct:object name="MK_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 открыт" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Продувка контура Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_Out_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Продувка контура Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 5 закрыт" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_4_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нагнетатель заполнен" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_4_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Низкий dP на Кране 1" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_4" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилиз. контура Н" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_Out_5" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Стабилиз. контура Н-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_6" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 открыт" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_6" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_7_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_7_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6р закрыт" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_7" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="ZKN_Cmd_In_8" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 открыт" />
+            </ct:object>
+            <ct:object name="ZKN_Tmv_In_8" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_1_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 1 закрыт" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_1_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 2 закрыт" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_1_1_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 4 закрыт" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_1_1_4" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Кран 6 закрыт" />
+            </ct:object>
+            <ct:object name="SKN_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Нет газа в нагнетателе" />
+            </ct:object>
+            <ct:object name="SKN_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_3_1_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита Pмсн снята" />
+            </ct:object>
+            <ct:object name="SKN_Cmd_In_3_1_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по dPмг снята" />
+            </ct:object>
+            <ct:object name="SKN_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OHL_Cmd_In_1" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Не было прогрева" />
+            </ct:object>
+            <ct:object name="OHL_Tmv_In_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА после прогрева" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OHL_Tmv_Out_1" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА после прогрева-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OHL_Cmd_In_2" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Был прогрев" />
+            </ct:object>
+            <ct:object name="OHL_Tmv_In_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА без прогрева" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OHL_Tmv_Out_2" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Охлаждение ГПА без прогрева-Вых" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+            <ct:object name="OHL_Cmd_In_3" base-type="Types.GRH.GRH_BOOL_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="Защита по Qкшт снята" />
+            </ct:object>
+            <ct:object name="OHL_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+              <attribute type="unit.System.Attributes.Description" value="-" />
+              <attribute type="Attributes.FracDigits" value="0" />
+            </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>

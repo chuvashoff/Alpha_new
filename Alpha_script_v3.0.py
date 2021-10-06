@@ -118,7 +118,7 @@ try:
                 drv_rus.append(sheet[p[0].row + 1][jj].value)
                 jj += 1
     sl_all_drv = dict(zip(drv_eng, drv_rus))
-    print(sl_all_drv)
+
     # Чистим файлы с прошлой сборки
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -260,7 +260,11 @@ try:
                                                                  target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # Драйвера
     write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
-              tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di, sl_all_drv=sl_all_drv)
+              tmp_ios=tmp_ios, sl_all_drv=sl_all_drv)
+
+    # Переменные алгоримтов
+    write_alg(sheet=book['Алгоритмы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
+              tmp_ios=tmp_ios)
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...

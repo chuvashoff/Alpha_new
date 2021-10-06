@@ -2,6 +2,7 @@ from my_func import is_f_ind, is_cor_chr
 from string import Template
 from copy import copy
 import os
+from algroritm import is_load_algoritm
 
 
 def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects):
@@ -1097,7 +1098,7 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
             sl_set_par_cpu['АЛГ'].add(par[index_cpu_name].value)
         else:
             sl_set_par_cpu[par[index_type_protect].value].add(par[index_cpu_name].value)
-    print(sl_set_par_cpu)
+
     write_one_signal(write_par='TS', sl_object_all=sl_object_all, cells=cells,
                      index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                      index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
@@ -1159,7 +1160,7 @@ def is_load_drv(controller, cell, alg_name, name_par, eunit, type_sig, type_msg,
     return tmp
 
 
-def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_wrn_di, sl_all_drv):
+def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_all_drv):
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     sl_type_drv = {
         'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
@@ -1303,3 +1304,78 @@ def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_wrn_di, sl_all_drv)
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write('      </ct:object>\n')
+
+
+def write_alg(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios):
+    # Считываем файл-шаблон для дополнительных параметров алгоритма (нужен fracdig)
+    with open(os.path.join('Template', 'Temp_GRH_dop_par'), 'r', encoding='UTF-8') as f:
+        tmp_grh_dop_par = f.read()
+    # Словарь типов ПЛК-аспектов для алгоритмических переменных
+    sl_type_alogritm = {
+        'BOOL': 'Types.GRH.GRH_BOOL_PLC_View',
+        'INT': 'Types.GRH.GRH_INT_PLC_View',
+        'FLOAT': 'Types.GRH.GRH_FLOAT_PLC_View'
+    }
+    cells = sheet['A1': 'A' + str(sheet.max_row)]
+
+    # словарь по cpu sl_alg_in_cpu = {cpu: sl_algoritm}
+    sl_alg_in_cpu = {}
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # ...заполняем общий словарь по контроллерам
+            sl_alg_in_cpu[cpu] = is_load_algoritm(controller=cpu, cells=cells, sheet=sheet)
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # ...если у контроллера есть переменные алгоритмов...
+            if sl_alg_in_cpu.get(cpu):
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    # ...то в ПЛК-аспект открываем группу GRH
+                    f.write(f'        <ct:object name="GRH" access-level="public">\n')
+                    # Для каждой алг. переменной текущего контроллера...
+                    for key, value in sl_alg_in_cpu.get(cpu).items():
+                        bool_dop_par = 'Дополнительный параметр режима' in value[0] and '_Par_' in key or \
+                                       'Обратный таймер режима' in value[0] and '_Rev_' in key or \
+                                       '_Tmv_In_' in key or '_Tmv_Out_' in key
+                        # Если определили, что параметр дополнительный, то записываем структуру доп. параметра
+                        if bool_dop_par:
+                            f.write(Template(tmp_grh_dop_par).substitute(object_name=key[key.find('|') + 1:],
+                                                                         object_type=sl_type_alogritm[value[1]],
+                                                                         object_aspect='Types.PLC_Aspect',
+                                                                         text_description=value[0],
+                                                                         text_fracdigits=value[2]))
+                        # Иначе записываем структуру параметра
+                        else:
+                            f.write(Template(tmp_object_btn_cnt_sig).substitute(object_name=key[key.find('|')+1:],
+                                                                                object_type=sl_type_alogritm[value[1]],
+                                                                                object_aspect='Types.PLC_Aspect',
+                                                                                text_description=is_cor_chr(value[0])))
+                # ...в IOS-аспекте открываем группу GRH
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(f'      <ct:object name="GRH" access-level="public">\n')
+                    # Для каждой алг. переменной текущего контроллера...
+                    for key, value in sl_alg_in_cpu.get(cpu).items():
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=key[key.find('|')+1:],
+                            object_type=sl_type_alogritm[value[1]].replace('PLC_View', 'IOS_View'),
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.GRH.{key[key.find('|')+1:]}",
+                            target_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.System.GRH.{key[key.find('|')+1:]}"))
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        # ...для каждого контроллера...
+        for cpu in sl_object_all[objects]:
+            # ...если у контроллера есть переменные алгоритмов...
+            if sl_alg_in_cpu.get(cpu):
+                # ...то в ПЛК-аспект закрываем группу GRH
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write('        </ct:object>\n')
+                # ...в IOS-аспекте закрываем группу GRH
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write('      </ct:object>\n')
