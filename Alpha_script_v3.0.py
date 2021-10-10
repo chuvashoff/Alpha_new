@@ -4,6 +4,7 @@ import logging
 import warnings
 from func_for_v3 import *
 from create_trends import is_create_trends
+from alpha_index_v3 import create_index
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -211,7 +212,7 @@ try:
                       tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM')
 
     # Диагностика
-    write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
+    sl_for_diag = write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # ПЕРЕХОДИМ К SYSTEM
 
@@ -248,16 +249,17 @@ try:
               tmp_ios=tmp_ios, group_objects='BTN')
 
     # Защиты
-    write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
-             tmp_ios=tmp_ios, group_objects='PZ')
+    sl_pz = write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
+                     tmp_ios=tmp_ios, group_objects='PZ')
 
     # Наработки и перестановки
     write_cnt(sl_cnt=sl_cnt, sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
               tmp_ios=tmp_ios, group_objects='CNT')
 
     # Сигналы остальные
-    write_signal(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-                 tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di)
+    sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn = write_signal(
+        sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
+        tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di)
 
     # ТР, если он есть в контроллере
     # Для каждого объекта...
@@ -275,12 +277,12 @@ try:
                                                                                  f"System.TR",
                                                                  target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # Драйвера
-    write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
-              tmp_ios=tmp_ios, sl_all_drv=sl_all_drv)
+    sl_cpu_drv_signal = write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
+                                  tmp_ios=tmp_ios, sl_all_drv=sl_all_drv)
 
     # Переменные алгоримтов
-    write_alg(sheet=book['Алгоритмы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-              tmp_ios=tmp_ios)
+    sl_grh = write_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all,
+                       tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig, tmp_ios=tmp_ios)
 
     # ЗАКРЫВАЕМ ГРУППУ SYSTEM
     # Для каждого объекта...
@@ -325,7 +327,7 @@ try:
             check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
                             file_name_check=f'file_out_plc_{cpu}_{objects[2]}.omx-export',
                             new_data=new_data,
-                            message_print=f'Требуется заменить ПЛК-аспект {cpu}_{objects[2]}')
+                            message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
         # Проверяем и перезаписываем файлы IOS-аспекта в случае найденных отличий и удаляя промежуточный файл
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'r', encoding='UTF-8') as f:
             new_data = f.read()
@@ -333,7 +335,7 @@ try:
         check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
                         file_name_check=f'file_out_IOS_inApp_{objects[0]}.omx-export',
                         new_data=new_data,
-                        message_print=f'Требуется заменить IOS-аспект {objects[0]}')
+                        message_print=f'Требуется заменить IOS-аспект объекта {objects[0]}')
         # Проверяем и перезаписываем файлы трендов в случае найденных отличий и удаляя промежуточный файл
         with open(f'Tree{objects[0]}.json', 'r', encoding='UTF-8') as f:
             new_data = f.read()
@@ -341,9 +343,32 @@ try:
         check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),
                         file_name_check=f'Tree{objects[0]}.json',
                         new_data=new_data,
-                        message_print=f'Требуется заменить файл Tree{objects[0]}.json - Trends')
+                        message_print=f'Требуется заменить файл Tree{objects[0]}.json - Групповые тренды')
 
     book.close()
+
+    # Создаём карту индексов
+    '''
+    В СЛУЧАЕ, ЕСЛИ У CPU НЕТ ПЕРЕМЕННЫХ ДАННОГО ТИПА, ТО В СООТВЕТСТВУЮЩЕМ СЛОВАРЕ ЕГО(CPU) НЕ БУДЕТ
+    sl_sig_alg - словарь ALG переменных, ключ - cpu, значение - кортеж переменных ALG_
+    sl_sig_mod - словарь режимов, ключ - cpu, значение - кортеж режимов (в том числе regNum)
+    sl_sig_ppu - словарь ППУ, ключ - cpu, значение - кортеж ППУ
+    sl_sig_ts - словарь ТС, ключ - cpu, значение - кортеж ТС
+    sl_sig_wrn - словарь ПС, ключ - cpu, значение - кортеж ПС(в том числе DI_)
+    sl_pz - словарь защит,  ключ - cpu, значение - кортеж (первая авария в ПЛК, последняя авария в ПЛК)
+    sl_CPU_spec - словарь спецдобавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при налчии таковых в cpu
+    sl_for_diag - словарь диагностики, ключ - cpu, значение - словарь: ключ - имя модуля, значение - тип модуля
+                                                   в случае CPU - ключ - 'CPU', значение - кортеж (имя cpu,тип cpu)
+    sl_cpu_drv_signal - словарь драйверов, ключ - cpu, значение - словарь - ключ - драйвер, значение - кортеж переменных
+    sl_grh = словарь алг. переменных, ключ - cpu, значение - кортеж переменных GRH|
+    tuple_all_cpu - кортеж всех контроллеров
+    '''
+
+    create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
+                 sl_sig_alg=sl_sig_alg, sl_sig_mod=sl_sig_mod, sl_sig_ppu=sl_sig_ppu,
+                 sl_sig_ts=sl_sig_ts, sl_sig_wrn=sl_sig_wrn, sl_pz=sl_pz, sl_cpu_spec=sl_CPU_spec, 
+                 sl_for_diag=sl_for_diag, sl_cpu_drv_signal=sl_cpu_drv_signal, sl_grh=sl_grh)
+
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
         with open('Required_change.txt', 'r') as f_test:

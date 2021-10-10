@@ -10,6 +10,27 @@
           </ct:object>
         </ct:object>
         <ct:object name="System" access-level="public" >
+        <ct:object name="DRV" access-level="public" >
+        <ct:object name="ASKZV" access-level="public">
+        <attribute type="unit.System.Attributes.Description" value="АСКЗВ" />
+              <ct:object name="Test1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+                <attribute type="unit.System.Attributes.Description" value="Тестовый1" />
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход" />
+                <attribute type="Attributes.sColorOff" value="2" />
+                <attribute type="Attributes.sColorOn" value="3" />
+                <attribute type="Attributes.EUnit" value="-" />
+                <attribute type="Attributes.FracDigits" value="0" />
+              </ct:object>
+              <ct:object name="Test2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public" >
+                <attribute type="unit.System.Attributes.Description" value="Тестовый2" />
+                <attribute type="Attributes.Type_wrn_DRV" value="-" />
+                <attribute type="Attributes.sColorOff" value="0" />
+                <attribute type="Attributes.sColorOn" value="0" />
+                <attribute type="Attributes.EUnit" value="-" />
+                <attribute type="Attributes.FracDigits" value="1" />
+              </ct:object>
+        </ct:object>
+        </ct:object>
         </ct:object>
 	    <trei:unet-address-map name="UnetAddressMap" />
       </dp:application-object>
