@@ -64,26 +64,28 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
         alg_par = par[index_alg_name].value.replace('|', '_')
         # ...для каждого объекта...
         for objects in sl_object_all:
-            # Записываем параметры в нужный файл PLC-аспект, если канал не резервный
-            if par[index_res].value == 'Нет':
-                with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_object_aiaeset).substitute(
-                        object_name=alg_par,
-                        object_type=f'Types.{group_objects}.{group_objects}_PLC_View',
-                        object_aspect='Types.PLC_Aspect',
-                        text_description=is_cor_chr(par[index_rus_name].value),
-                        text_eunit=par[index_unit].value,
-                        short_name=par[index_short_name].value,
-                        text_fracdigits=par[index_frag_dig].value))
-                # Записываем параметры в IOS-аспект, если канал не резервный
-                group_objects_ios = (f'System.{group_objects}' if group_objects == 'SET' else group_objects)
-                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_ios).substitute(
-                        object_name=alg_par,
-                        object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
-                        object_aspect='Types.IOS_Aspect',
-                        original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
-                        target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
+            # ...при условии, что контроллер параметра есть в составе объекта
+            if cpu_name_par in sl_object_all[objects]:
+                # Записываем параметры в нужный файл PLC-аспект, если канал не резервный
+                if par[index_res].value == 'Нет':
+                    with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_object_aiaeset).substitute(
+                            object_name=alg_par,
+                            object_type=f'Types.{group_objects}.{group_objects}_PLC_View',
+                            object_aspect='Types.PLC_Aspect',
+                            text_description=is_cor_chr(par[index_rus_name].value),
+                            text_eunit=par[index_unit].value,
+                            short_name=par[index_short_name].value,
+                            text_fracdigits=par[index_frag_dig].value))
+                    # Записываем параметры в IOS-аспект, если канал не резервный
+                    group_objects_ios = (f'System.{group_objects}' if group_objects == 'SET' else group_objects)
+                    with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=alg_par,
+                            object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
+                            target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -175,26 +177,29 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
             sl_wrn_di[cpu_name_par][alg_par] = (is_cor_chr(par[index_wrn_text].value), par[index_wrn].value)
         # ...для каждого объекта...
         for objects in sl_object_all:
-            # Записываем параметры в нужный файл PLC-аспект
-            # при условии, что сигнал не переведён в резерв и не принадлежит ИМу
-            if par[index_res].value == 'Нет' and par[index_im].value == 'Нет':
-                with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_object_di).substitute(
-                        object_name=alg_par,
-                        object_type=sl_plc_aspect.get(par[index_control_cel].value),
-                        object_aspect='Types.PLC_Aspect',
-                        text_description=is_cor_chr(par[index_rus_name].value),
-                        color_on=sl_color_di.get(par[index_color_on].fill.start_color.index, '404'),
-                        color_off=sl_color_di.get(par[index_color_off].fill.start_color.index, '404')))
-                # Записываем параметры в IOS-аспект
-                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_ios).substitute(object_name=alg_par,
-                                                         object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
-                                                         object_aspect='Types.IOS_Aspect',
-                                                         original_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                                                         f".CPU.Tree.{group_objects}.{alg_par}",
-                                                         target_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                                                       f".CPU.Tree.{group_objects}.{alg_par}"))
+            # ...при условии, что контроллер параметра есть в составе объекта
+            if cpu_name_par in sl_object_all[objects]:
+                # Записываем параметры в нужный файл PLC-аспект
+                # при условии, что сигнал не переведён в резерв и не принадлежит ИМу
+                if par[index_res].value == 'Нет' and par[index_im].value == 'Нет':
+                    with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_object_di).substitute(
+                            object_name=alg_par,
+                            object_type=sl_plc_aspect.get(par[index_control_cel].value),
+                            object_aspect='Types.PLC_Aspect',
+                            text_description=is_cor_chr(par[index_rus_name].value),
+                            color_on=sl_color_di.get(par[index_color_on].fill.start_color.index, '404'),
+                            color_off=sl_color_di.get(par[index_color_off].fill.start_color.index, '404')))
+                    # Записываем параметры в IOS-аспект
+                    with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_ios).substitute(object_name=alg_par,
+                                                             object_type=f'Types.{group_objects}.{group_objects}'
+                                                                         f'_IOS_View',
+                                                             object_aspect='Types.IOS_Aspect',
+                                                             original_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                                                             f".CPU.Tree.{group_objects}.{alg_par}",
+                                                             target_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                                                           f".CPU.Tree.{group_objects}.{alg_par}"))
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...для каждого контроллера...
@@ -293,25 +298,27 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         alg_par = par[index_alg_name].value
         # ...для каждого объекта...
         for objects in sl_object_all:
-            # Записываем параметры в нужный файл PLC-аспект
-            with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(Template(tmp_object_im).substitute(
-                    object_name=alg_par,
-                    object_type='Types.' + sl_im_plc.get(par[index_type_im].value),
-                    object_aspect='Types.PLC_Aspect',
-                    text_description=par[index_rus_name].value,
-                    gender=sl_gender.get(par[index_gender].value),
-                    start_view=par[19].value[0]))
-            # Записываем параметры в IOS-аспект
-            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(Template(tmp_ios).substitute(
-                    object_name=alg_par,
-                    object_type=f"Types.{sl_im_plc.get(par[index_type_im].value).replace('PLC_View', 'IOS_View')}",
-                    object_aspect='Types.IOS_Aspect',
-                    original_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                    f".CPU.Tree.{group_objects}.{alg_par}",
-                    target_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                  f".CPU.Tree.{group_objects}.{alg_par}"))
+            # ...при условии, что контроллер параметра есть в составе объекта
+            if cpu_name_par in sl_object_all[objects]:
+                # Записываем параметры в нужный файл PLC-аспект
+                with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_object_im).substitute(
+                        object_name=alg_par,
+                        object_type='Types.' + sl_im_plc.get(par[index_type_im].value),
+                        object_aspect='Types.PLC_Aspect',
+                        text_description=par[index_rus_name].value,
+                        gender=sl_gender.get(par[index_gender].value),
+                        start_view=par[19].value[0]))
+                # Записываем параметры в IOS-аспект
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_ios).substitute(
+                        object_name=alg_par,
+                        object_type=f"Types.{sl_im_plc.get(par[index_type_im].value).replace('PLC_View', 'IOS_View')}",
+                        object_aspect='Types.IOS_Aspect',
+                        original_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                        f".CPU.Tree.{group_objects}.{alg_par}",
+                        target_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                      f".CPU.Tree.{group_objects}.{alg_par}"))
 
     # Обрабатываем ИМ АО
     cells = sheet_imao['A1': 'AA' + str(sheet.max_row)]
@@ -370,27 +377,29 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         alg_par = par[index_alg_name].value
         # ...для каждого объекта...
         for objects in sl_object_all:
-            # Записываем параметры в нужный файл PLC-аспект
-            # При условии, что это ИМ и не выделен как резервный
-            if par[index_yes_im].value == 'Да' and par[index_res].value == 'Нет':
-                with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_object_im).substitute(
-                        object_name=alg_par,
-                        object_type='Types.' + sl_im_plc.get('ИМАО'),
-                        object_aspect='Types.PLC_Aspect',
-                        text_description=par[index_rus_name].value,
-                        gender=sl_gender.get(par[index_gender].value),
-                        start_view=par[index_type_im].value[0]))
-                # Записываем параметры в IOS-аспект
-                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_ios).substitute(
-                        object_name=alg_par,
-                        object_type=f"Types.{sl_im_plc.get('ИМАО').replace('PLC_View', 'IOS_View')}",
-                        object_aspect='Types.IOS_Aspect',
-                        original_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                        f".CPU.Tree.{group_objects}.{alg_par}",
-                        target_object=f"PLC_{cpu_name_par}_{objects[2]}"
-                                      f".CPU.Tree.{group_objects}.{alg_par}"))
+            # ...при условии, что контроллер параметра есть в составе объекта
+            if cpu_name_par in sl_object_all[objects]:
+                # Записываем параметры в нужный файл PLC-аспект
+                # При условии, что это ИМ и не выделен как резервный
+                if par[index_yes_im].value == 'Да' and par[index_res].value == 'Нет':
+                    with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_object_im).substitute(
+                            object_name=alg_par,
+                            object_type='Types.' + sl_im_plc.get('ИМАО'),
+                            object_aspect='Types.PLC_Aspect',
+                            text_description=par[index_rus_name].value,
+                            gender=sl_gender.get(par[index_gender].value),
+                            start_view=par[index_type_im].value[0]))
+                    # Записываем параметры в IOS-аспект
+                    with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=alg_par,
+                            object_type=f"Types.{sl_im_plc.get('ИМАО').replace('PLC_View', 'IOS_View')}",
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                            f".CPU.Tree.{group_objects}.{alg_par}",
+                            target_object=f"PLC_{cpu_name_par}_{objects[2]}"
+                                          f".CPU.Tree.{group_objects}.{alg_par}"))
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...для каждого контроллера...
@@ -629,41 +638,45 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
     for objects in sl_object_all:
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
-            # Записываем стартовую информацию группы параметров
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('        <ct:object name="Diag" access-level="public" >\n')
-                f.write('          <ct:object name="HW" access-level="public" >\n')
+            # Записываем стартовую информацию группы Diag
+            # при условии, что контроллер объекта есть в словарь модулей
+            if cpu in sl_modules_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write('        <ct:object name="Diag" access-level="public" >\n')
+                    f.write('          <ct:object name="HW" access-level="public" >\n')
 
         # Записываем стартовую информацию IOS-аспекта для диагностики
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            # узел Diag
-            f.write(f'      <ct:object name="Diag" access-level="public">\n')
-            f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_N_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            # подузел HW
-            f.write(f'        <ct:object name="HW" access-level="public">\n')
-            f.write(f'          <ct:object name="Agregator_Important_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_N_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_Repair_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+        # при условии, что в составе объекта есть контроллеры, которые есть в словаре модулей
+        if set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys()):
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                # узел Diag
+                f.write(f'      <ct:object name="Diag" access-level="public">\n')
+                f.write(f'        <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # подузел HW
+                f.write(f'        <ct:object name="HW" access-level="public">\n')
+                f.write(f'          <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
 
     '''
     for cpu in sl_modules_cpu:
@@ -692,17 +705,21 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
             # Закрываем группу объектов
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                # Закрываем узел HW
-                f.write('          </ct:object>\n')
-                # Закрываем узел Diag
-                f.write('        </ct:object>\n')
+            # при условии, что контроллер объекта есть в словарь модулей
+            if cpu in sl_modules_cpu:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    # Закрываем узел HW
+                    f.write('          </ct:object>\n')
+                    # Закрываем узел Diag
+                    f.write('        </ct:object>\n')
         # Закрываем в IOS-аспекте
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            # Закрываем узел HW
-            f.write('        </ct:object>\n')
-            # Закрываем узел Diag
-            f.write('      </ct:object>\n')
+        # при условии, что в составе объекта есть контроллеры, которые есть в словаре модулей
+        if set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys()):
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                # Закрываем узел HW
+                f.write('        </ct:object>\n')
+                # Закрываем узел Diag
+                f.write('      </ct:object>\n')
 
     return sl_for_diag
 
@@ -748,22 +765,24 @@ def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objec
         alg_par = 'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]
         # ...для каждого объекта...
         for objects in sl_object_all:
-            # Записываем параметры в нужный файл PLC-аспект, если канал не резервный
-            with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(Template(tmp_object_btn_cnt_sig).substitute(
-                    object_name=alg_par,
-                    object_type='Types.BTN.BTN_PLC_View',
-                    object_aspect='Types.PLC_Aspect',
-                    text_description=is_cor_chr(par[index_rus_name].value)))
-            # Записываем параметры в IOS-аспект, если канал не резервный
-            group_objects_ios = f'System.{group_objects}'
-            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write(Template(tmp_ios).substitute(
-                    object_name=alg_par,
-                    object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
-                    object_aspect='Types.IOS_Aspect',
-                    original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
-                    target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
+            # ...при условии, что контроллер параметра есть в составе объекта
+            if cpu_name_par in sl_object_all[objects]:
+                # Записываем параметры в нужный файл PLC-аспект, если канал не резервный
+                with open(f'file_out_plc_{cpu_name_par}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_object_btn_cnt_sig).substitute(
+                        object_name=alg_par,
+                        object_type='Types.BTN.BTN_PLC_View',
+                        object_aspect='Types.PLC_Aspect',
+                        text_description=is_cor_chr(par[index_rus_name].value)))
+                # Записываем параметры в IOS-аспект, если канал не резервный
+                group_objects_ios = f'System.{group_objects}'
+                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                    f.write(Template(tmp_ios).substitute(
+                        object_name=alg_par,
+                        object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                        object_aspect='Types.IOS_Aspect',
+                        original_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}",
+                        target_object=f"PLC_{cpu_name_par}_{objects[2]}.CPU.Tree.{group_objects_ios}.{alg_par}"))
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -898,13 +917,15 @@ def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
 
 
 def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objects):
+    # sl_cnt = {CPU: {алг.имя : русское имя}} - передан из функции записи ИМ
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
             # В ПЛК-аспекте открываем узел CNT
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                if cpu in sl_cnt:
+            # и записываем все параметры, если контроллер есть в словаре наработок
+            if cpu in sl_cnt:
+                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write('        <ct:object name="CNT" access-level="public" >\n')
                     for nar in sl_cnt[cpu]:
                         f.write(Template(tmp_object_btn_cnt_sig).substitute(
@@ -913,16 +934,18 @@ def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_obje
                             object_aspect='Types.PLC_Aspect',
                             text_description=is_cor_chr(sl_cnt[cpu][nar])))
         # В IOS-аспекте открываем узел CNT
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write('      <ct:object name="CNT" access-level="public" >\n')
-            for cpu_nar in sl_cnt:
-                for nar in sl_cnt[cpu_nar]:
-                    f.write(Template(tmp_ios).substitute(
-                        object_name=nar,
-                        object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
-                        object_aspect='Types.IOS_Aspect',
-                        original_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.CNT.{nar}",
-                        target_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.CNT.{nar}"))
+        # при условии, что в составе объекта есть контроллеры, у которых были найдены наработки
+        if set(sl_object_all[objects].keys()) & set(sl_cnt.keys()):
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('      <ct:object name="CNT" access-level="public" >\n')
+                for cpu_nar in sl_cnt:
+                    for nar in sl_cnt[cpu_nar]:
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=nar,
+                            object_type=f'Types.{group_objects}.{group_objects}_IOS_View',
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.CNT.{nar}",
+                            target_object=f"PLC_{cpu_nar}_{objects[2]}.CPU.Tree.System.CNT.{nar}"))
 
     # Закрываем группу наработок
     # Для каждого объекта...
@@ -934,8 +957,10 @@ def write_cnt(sl_cnt, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_obje
                 with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
                     f.write('        </ct:object>\n')
         # Закрываем узел CNT в IOS-аспекте
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write('      </ct:object>\n')
+        # при условии, что в составе объекта есть контроллеры, у которых были найдены наработки
+        if set(sl_object_all[objects].keys()) & set(sl_cnt.keys()):
+            with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+                f.write('      </ct:object>\n')
 
 
 def is_read_sig(controller, cell, alg_name, par_name, type_protect, cpu, return_par):

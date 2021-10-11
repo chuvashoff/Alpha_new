@@ -1,0 +1,29 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
+    <ct:object name="DD" access-level="public">
+      <attribute type="unit.System.Attributes.Description" value="ДРВ" />
+      <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="System" access-level="public" >
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+      <ct:object name="DRV" access-level="public">
+        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        <ct:object name="ASKZV" access-level="public">
+        <ct:object name="Test1" base-type="Types.DRV_DI.DRV_DI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_DRV_3.CPU.Tree.System.DRV.ASKZV.Test1" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_DRV_3.CPU.Tree.System.DRV.ASKZV.Test1" />
+        </ct:object>
+        <ct:object name="Test2" base-type="Types.DRV_AI.DRV_AI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_DRV_3.CPU.Tree.System.DRV.ASKZV.Test2" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_DRV_3.CPU.Tree.System.DRV.ASKZV.Test2" />
+        </ct:object>
+        </ct:object>
+      </ct:object>
+      </ct:object>
+    </ct:object>
+</omx>

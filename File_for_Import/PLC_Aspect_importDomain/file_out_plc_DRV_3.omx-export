@@ -1,9 +1,9 @@
 <omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
-  <trei:trei name="PLC_DRV_1" >
+  <trei:trei name="PLC_DRV_3" >
     <trei:master-module name="CPU" >
-      <trei:ethernet-adapter name="Eth1" address="192.168.3.12" />
-      <trei:ethernet-adapter name="Eth2" address="192.168.4.12" />
-      <trei:unet-server name="UnetServer" address-map="PLC_DRV_1.CPU.Tree.UnetAddressMap" port="6001"/>
+      <trei:ethernet-adapter name="Eth1" address="192.168.3.32" />
+      <trei:ethernet-adapter name="Eth2" address="192.168.4.32" />
+      <trei:unet-server name="UnetServer" address-map="PLC_DRV_3.CPU.Tree.UnetAddressMap" port="6001"/>
       <dp:application-object name="Tree" access-level="public" >
         <ct:object name="System" access-level="public" >
         <ct:object name="DRV" access-level="public" >
