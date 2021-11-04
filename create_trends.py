@@ -213,7 +213,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                     # ...собираем json
                     # print(node, param, sl_node_trends[node][param])
                     lst_json.append(
-                        {"Signal": {"UserTree": f'{sl_group_trends[list_config][0]}/{node}/{param}',
+                        {"Signal": {"UserTree": f"{sl_group_trends[list_config][0]}/"
+                                                f"{node.replace('/', '|')}/{param.replace('/', '|')}",
                                     "OpcTag":
                                         f'{obj[0]}.{sl_group_trends[list_config][1]}.{sl_node_trends[node][param][0]}',
                                     "EUnit": sl_node_trends[node][param][1],
@@ -227,7 +228,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                     # дополнительная проверка наличия драйвера в объявленных
                     if drv in sl_all_drv:
                         lst_json.append(
-                            {"Signal": {"UserTree": f"{sl_group_trends['Драйвера'][0]}/{sl_all_drv[drv]}/{sig_drv}",
+                            {"Signal": {"UserTree": f"{sl_group_trends['Драйвера'][0]}/"
+                                                    f"{sl_all_drv[drv].replace('/', '|')}/{sig_drv.replace('/', '|')}",
                                         "OpcTag":
                                             f"{obj[0]}.{sl_group_trends['Драйвера'][1]}.{sl_node_drv[drv][sig_drv][0]}",
                                         "EUnit": sl_node_drv[drv][sig_drv][1],
@@ -239,7 +241,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 for alr in sorted(sl_node_alr[node]):
                     # ...собираем json
                     lst_json.append(
-                        {"Signal": {"UserTree": f"Аварии/{node}/{node}. {alr}",
+                        {"Signal": {"UserTree": f"Аварии/{node.replace('/', '|')}/"
+                                                f"{node.replace('/', '|')}. {alr.replace('/', '|')}",
                                     "OpcTag":
                                         f"{obj[0]}.System.{sl_node_alr[node][alr][0]}",
                                     "EUnit": sl_node_alr[node][alr][1],
@@ -253,6 +256,39 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                                     f"{obj[0]}.System.MODES.{sl_node_modes[mode][0]}",
                                 "EUnit": sl_node_modes[mode][1],
                                 "Description": mode}})
+
+        # Добавление уставок на тренды
+        # Выбираем лист уставок в качестве активного
+        sheet = book['Уставки']
+        # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
+        cells_name = sheet['A1': 'AG1']
+        rus_par_ind = is_f_ind(cells_name[0], 'Наименование параметра')
+        alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
+        eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
+        cpu_par = is_f_ind(cells_name[0], 'CPU')
+
+        # Устанавливаем диапазон для чтения параметров
+        cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
+        sl_node_set = {}
+        # пробегаемся по параметрам листа
+        for par in cells_read:
+            # Если конец строки, то заканчиваем обработку ячеек
+            if par[rus_par_ind].value is None:
+                break
+            # если параметр принадлежит контроллеру объекта
+            if par[cpu_par].value in sl_object_all[obj]:
+                # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
+                sl_node_set[par[rus_par_ind].value] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
+                                                       par[eunit_ind].value)
+        # для каждой уставки в отсортированном словаре уставок
+        for a_set_rus in sorted(sl_node_set):
+            # ...собираем json
+            lst_json.append(
+                {"Signal": {"UserTree": f"Уставки/{a_set_rus.replace('/', '|')}",
+                            "OpcTag":
+                                f"{obj}.System.SET.{sl_node_set[a_set_rus][0]}",
+                            "EUnit": sl_node_set[a_set_rus][1],
+                            "Description": a_set_rus}})
 
         # Дополнительный перебор для сбора отказов
         for list_config in sl_brk_group_trends:
@@ -275,8 +311,10 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 if par[rus_par_ind].value is None:
                     break
                 # при условии, что находимся на листе 'Измеряемые', 'Расчетные' или на Входные и сигнал не привязан к ИМ
-                if list_config in ('Измеряемые', 'Расчетные') or \
-                        list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет':
+                # и параметр принадлежит контроллеру объекта
+                if (list_config in ('Измеряемые', 'Расчетные') or list_config == 'Входные' and
+                    par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
+                        par[cpu_par].value in sl_object_all[obj]:
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = \
                         {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') + '.fValue',
@@ -290,9 +328,11 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 for param in sorted(sl_node_trends[node]):
                     # ...собираем json
                     lst_json.append(
-                        {"Signal": {"UserTree": f'{sl_brk_group_trends[list_config][0]}/{node}/Отказ - {param}',
+                        {"Signal": {"UserTree": f"{sl_brk_group_trends[list_config][0]}/"
+                                                f"{node.replace('/', '|')}/Отказ - {param.replace('/', '|')}",
                                     "OpcTag":
-                                        f'{obj[0]}.{sl_brk_group_trends[list_config][1]}.{sl_node_trends[node][param][0]}',
+                                        f'{obj[0]}.{sl_brk_group_trends[list_config][1]}.'
+                                        f'{sl_node_trends[node][param][0]}',
                                     "EUnit": sl_node_trends[node][param][1],
                                     "Description": f'Отказ - {param}'}})
 
