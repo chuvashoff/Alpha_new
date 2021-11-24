@@ -62,10 +62,10 @@ try:
     with open(os.path.join('Template', 'Temp_drv_par'), 'r', encoding='UTF-8') as f:
         tmp_drv_par = f.read()
 
-    print(datetime.datetime.now(), '- Начало 1')
+    print(datetime.datetime.now(), '- Открытие файла конфигуратора')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
     # читаем список всех контроллеров
-    print(datetime.datetime.now(), '- Начало 2')
+    print(datetime.datetime.now(), '- Файл открыт. Начало сборки')
     sheet = book['Настройки']  # worksheets[1]
     '''
     cells = sheet['B2': 'B22']

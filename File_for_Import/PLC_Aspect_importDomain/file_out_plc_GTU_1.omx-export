@@ -732,7 +732,7 @@
             <attribute type="unit.System.Attributes.Description" value="Максимальная температура газа за турбиной на запуске" />
             <attribute type="Attributes.EUnit" value="°С" />
             <attribute type="Attributes.FracDigits" value="0" />
-            <attribute type="Attributes.ShortName" value="Tст" />
+            <attribute type="Attributes.ShortName" value="Tтзап" />
           </ct:object>
           <ct:object name="AE_Gt_zap" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Расход на запуске" />
@@ -973,6 +973,60 @@
             <attribute type="Attributes.EUnit" value="с" />
             <attribute type="Attributes.FracDigits" value="0" />
             <attribute type="Attributes.ShortName" value="t" />
+          </ct:object>
+          <ct:object name="AE_Nnd_Max" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Максимальные обороты КНД" />
+            <attribute type="Attributes.EUnit" value="об/мин" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="AE_Pk_ogr_max" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Ограничение давления воздуха за компрессором ВД макс" />
+            <attribute type="Attributes.EUnit" value="кПа" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Pв" />
+          </ct:object>
+          <ct:object name="AE_Tt_ogr_ust" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Ограничение максимальной Ттвд на режиме" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="Tтвд" />
+          </ct:object>
+          <ct:object name="AE_Gt_tekD" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход ТГ от ТР (Диффузионный)" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="AE_Gt_tekG" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход ТГ от ТР (Гомогенный)" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="AE_Gt_tekC" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Расход ТГ от ТР (Центральный)" />
+            <attribute type="Attributes.EUnit" value="кг/ч" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="Q" />
+          </ct:object>
+          <ct:object name="AE_PFR_uprDiff" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="PFR упр дифф." />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="PFR" />
+          </ct:object>
+          <ct:object name="AE_PFR_uprGom" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="PFR упр гом." />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="PFR" />
+          </ct:object>
+          <ct:object name="AE_PFR_uprCent" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="PFR упр центр." />
+            <attribute type="Attributes.EUnit" value="-" />
+            <attribute type="Attributes.FracDigits" value="1" />
+            <attribute type="Attributes.ShortName" value="PFR" />
           </ct:object>
         </ct:object>
         <ct:object name="DI" access-level="public" >
@@ -2028,6 +2082,12 @@
           </ct:object>
           <ct:object name="SP_R_TtMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Регулировка максимальной температуры газа за турбиной на режиме" />
+            <attribute type="Attributes.EUnit" value="°С" />
+            <attribute type="Attributes.FracDigits" value="0" />
+            <attribute type="Attributes.ShortName" value="N" />
+          </ct:object>
+          <ct:object name="SP_R_TstMax" base-type="Types.SET.SET_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Регулировка максимальной температуры газа за СТ на режиме" />
             <attribute type="Attributes.EUnit" value="°С" />
             <attribute type="Attributes.FracDigits" value="0" />
             <attribute type="Attributes.ShortName" value="N" />
