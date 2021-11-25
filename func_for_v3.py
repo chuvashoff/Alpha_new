@@ -719,9 +719,15 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
                 # Закрываем узел HW
                 f.write('        </ct:object>\n')
                 # Закрываем узел Diag
-                f.write('      </ct:object>\n')
+                # Узел Diag в IOS-аспекте пока не закрываем, поскольку может быть узел NET
+                # f.write('      </ct:object>\n')
 
     sheet_net = book['Сеть']
+    # Считываем файл-шаблоны для диагностики сети
+    with open(os.path.join('Template', 'Temp_NET_PLC'), 'r', encoding='UTF-8') as f:
+        tmp_net_plc = f.read()
+    with open(os.path.join('Template', 'Temp_NETres_PLC'), 'r', encoding='UTF-8') as f:
+        tmp_net_res_plc = f.read()
 
     cells = sheet_net['A1': 'K' + str(sheet_net.max_row)]
 
@@ -755,34 +761,28 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
             f.write('<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:snmp="automation.snmp" '
                     'xmlns:ct="automation.control">\n')
 
+    tuple_net_res = ('SWITCH_TREI_S34X',)
     # Для каждого юнита...
     for par in cells:
         if par[0].value is None:
             break
-        # Записываем информацию узла
-        ip_correct = '.'.join([a.lstrip('0') for a in f'{par[index_ip].value}'.split('.')])
+        # Записываем информацию узла в ПЛК-аспект NET
         with open(f'file_out_NET_{par[index_object_name].value}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write(f'  <dp:computer name="{par[index_object_name].value}_{par[index_alg_name].value}" >\n')
-            f.write(f'    <dp:ethernet-adapter name="Eth1" address="{ip_correct}" />\n')
-
-            # У SWITCH_TREI_S34X может быть резернвый IP, если он, то заводим его
-            if par[index_type].value == 'SWITCH_TREI_S34X':
-                ip_correct = '.'.join([a.lstrip('0') for a in f'{par[index_ip_res].value}'.split('.')])
-                f.write(f'    <dp:ethernet-adapter name="Eth2" address="{ip_correct}" />\n')
-            f.write(f'    <dp:external-runtime name="Runtime" >\n')
-            f.write(f'      <snmp:snmp-agent name="SnmpAgent" poll-port="161" poll-password="public" '
-                    f'notification-port="162" notification-password="public" protocol-version="Snmp_v1" '
-                    f'security-level="NoAuthNoPriv" auth-protocol="MD5" priv-protocol="AES"  '
-                    f'address-map="Application.SnmpLinkMap" />\n')
-            f.write(f'      <dp:application-object name="Application" access-level="public" >\n')
-            f.write(f'        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\{par[index_type].value}_map.xml" />\n')
-            f.write(f'        <ct:object name="Data" access-level="public" >\n')
-            f.write(f'          <ct:object name="Data" base-type="Types.SNMP_Switch.{par[index_type].value}_PLC_View" '
-                    f'aspect="Types.PLC_Aspect" access-level="public" />\n')
-            f.write(f'        </ct:object>\n')
-            f.write(f'      </dp:application-object>\n')
-            f.write(f'    </dp:external-runtime>\n')
-            f.write(f'  </dp:computer>\n')
+            if par[index_type].value in tuple_net_res:
+                f.write(Template(tmp_net_res_plc).substitute(
+                    object_name=f"{par[index_object_name].value}_{par[index_alg_name].value}",
+                    ip_osn='.'.join([a.lstrip('0') for a in f'{par[index_ip].value}'.split('.')]),
+                    ip_res='.'.join([a.lstrip('0') for a in f'{par[index_ip_res].value}'.split('.')]),
+                    name_file_map=f'SNMP&&8{par[index_type].value}_map.xml'.replace('&&8', '\\'),
+                    object_type=f'Types.SNMP_Switch.{par[index_type].value}_PLC_View',
+                    text_description=is_cor_chr(par[index_rus_name].value)))
+            else:
+                f.write(Template(tmp_net_plc).substitute(
+                    object_name=f"{par[index_object_name].value}_{par[index_alg_name].value}",
+                    ip_osn='.'.join([a.lstrip('0') for a in f'{par[index_ip].value}'.split('.')]),
+                    name_file_map=f'SNMP&&8{par[index_type].value}_map.xml'.replace('&&8', '\\'),
+                    object_type=f'Types.SNMP_Switch.{par[index_type].value}_PLC_View',
+                    text_description=is_cor_chr(par[index_rus_name].value)))
 
     # Для каждого объекта на листе сеть...
     for obj in set_objects_net:
@@ -790,28 +790,68 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
         with open(f'file_out_NET_{obj}.omx-export', 'a', encoding='UTF-8') as f:
             f.write('</omx>\n')
 
+    # Далее обрабатываем информацию для IOS-аспекта
     # Для каждого объекта...
     for objects in sl_object_all:
         # Записываем стартовую информацию IOS-аспекта для диагностики сети
-        # при условии, что объект есть во множестве объектов с диагностикой сети
-        if objects[0] in set_objects_net:
-            print(objects)
-            # подузел NET
-            '''
-            f.write(f'        <ct:object name="NET" access-level="public">\n')
-            f.write(f'          <ct:object name="Agregator_Important_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_N_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'          <ct:object name="Agregator_Repair_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            '''
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            # если нет модулей контроллера (то есть нет узла HW), но есть юниты объекта на листе Сеть (узел NET)
+            # то открываем узел Diag с агргеторами
+            if not (set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys())) and objects[0] in set_objects_net:
+                # узел Diag
+                f.write(f'      <ct:object name="Diag" access-level="public">\n')
+                f.write(f'        <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            # при условии, что объект есть во множестве объектов с диагностикой сети (то есть нет узла NET)
+            if objects[0] in set_objects_net:
+                # print(objects)
+                # подузел NET
+                f.write(f'        <ct:object name="NET" access-level="public">\n')
+                f.write(f'          <ct:object name="Agregator_Important_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_N_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                f.write(f'          <ct:object name="Agregator_Repair_IOS" '
+                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
+                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # пробегаемся по юнитам, и при условии, что они принадлежат данному объекту,
+                # добавляем их в IOS-аспект
+                for par in cells:
+                    if par[index_object_name].value == objects[0]:
+                        obj_name = f"{par[index_object_name].value}_{par[index_alg_name].value}"
+                        # при необходимости формирования кастомных ПС, можно удалить запись через шаблон и писать руками
+                        f.write(Template(tmp_ios).substitute(
+                            object_name=obj_name,
+                            object_type=f'Types.SNMP_Switch.{par[index_type].value}_IOS_View',
+                            object_aspect='Types.IOS_Aspect',
+                            original_object=f"Domain.{obj_name}.Runtime.Application.Data.Data",
+                            target_object=f"Domain.{obj_name}.Runtime.Application.Data.Data"))
+
+    # Далее закрываем информацию в IOS-аспекте
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            # если есть узел NET, то закрываем его группу
+            if objects[0] in set_objects_net:
+                f.write(f'        </ct:object>\n')
+            # Если есть узел NET или узел DIAG, то закрываем группу Diag
+            if objects[0] in set_objects_net or (set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys())):
+                f.write(f'      </ct:object>\n')
 
     return sl_for_diag
 

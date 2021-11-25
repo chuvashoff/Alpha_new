@@ -141,8 +141,10 @@ try:
         for cpu in sl_object_all[objects]:
             ff = open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'w', encoding='UTF-8')
             ff.close()
-            ff = open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'w', encoding='UTF-8')
-            ff.close()
+        ff = open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'w', encoding='UTF-8')
+        ff.close()
+        ff = open(f'Tree{objects[0]}.json', 'w', encoding='UTF-8')
+        ff.close()
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -344,6 +346,15 @@ try:
                         file_name_check=f'Tree{objects[0]}.json',
                         new_data=new_data,
                         message_print=f'Требуется заменить файл Tree{objects[0]}.json - Групповые тренды')
+        # Проверяем и перезаписываем файлы ПЛК-аспектов сети объектов в случае
+        # найденных отличий и удаляя промежуточный файл
+        with open(f'file_out_NET_{objects[0]}.omx-export', 'r', encoding='UTF-8') as f:
+            new_data = f.read()
+        os.remove(f'file_out_NET_{objects[0]}.omx-export')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                        file_name_check=f'file_out_NET_{objects[0]}.omx-export',
+                        new_data=new_data,
+                        message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
 
     book.close()
 

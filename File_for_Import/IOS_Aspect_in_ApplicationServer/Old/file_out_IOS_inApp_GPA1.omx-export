@@ -655,6 +655,33 @@
         <ct:object name="AE_VibegSTTimer" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_VibegSTTimer" access-level="public">
           <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_VibegSTTimer" />
         </ct:object>
+        <ct:object name="AE_Nnd_Max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Nnd_Max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Nnd_Max" />
+        </ct:object>
+        <ct:object name="AE_Pk_ogr_max" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Pk_ogr_max" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Pk_ogr_max" />
+        </ct:object>
+        <ct:object name="AE_Tt_ogr_ust" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Tt_ogr_ust" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Tt_ogr_ust" />
+        </ct:object>
+        <ct:object name="AE_Gt_tekD" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekD" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekD" />
+        </ct:object>
+        <ct:object name="AE_Gt_tekG" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekG" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekG" />
+        </ct:object>
+        <ct:object name="AE_Gt_tekC" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekC" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_Gt_tekC" />
+        </ct:object>
+        <ct:object name="AE_PFR_uprDiff" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprDiff" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprDiff" />
+        </ct:object>
+        <ct:object name="AE_PFR_uprGom" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprGom" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprGom" />
+        </ct:object>
+        <ct:object name="AE_PFR_uprCent" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprCent" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.AE.AE_PFR_uprCent" />
+        </ct:object>
         <ct:object name="AE_QTGM" base-type="Types.AE.AE_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.AE.AE_QTGM" access-level="public">
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.AE.AE_QTGM" />
         </ct:object>
@@ -1914,6 +1941,12 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD302" />
         </ct:object>
         </ct:object>
+        <ct:object name="NET" access-level="public">
+          <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+        </ct:object>
       </ct:object>
       <ct:object name="System" access-level="public" >
         <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -1939,6 +1972,9 @@
         </ct:object>
         <ct:object name="SP_R_TtMax" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtMax" access-level="public">
           <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TtMax" />
+        </ct:object>
+        <ct:object name="SP_R_TstMax" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TstMax" access-level="public">
+          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_TstMax" />
         </ct:object>
         <ct:object name="SP_R_PK_OgR_Max" base-type="Types.SET.SET_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.System.SET.SP_R_PK_OgR_Max" access-level="public">
           <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.System.SET.SP_R_PK_OgR_Max" />
