@@ -61,6 +61,10 @@ try:
     # Считываем файл-шаблон для драйверных параметров
     with open(os.path.join('Template', 'Temp_drv_par'), 'r', encoding='UTF-8') as f:
         tmp_drv_par = f.read()
+    # Считываем файл-шаблон для Агрегаторов
+    with open(os.path.join('Template', 'Temp_Agregator'), 'r', encoding='UTF-8') as f:
+        lst_agr = f.readlines()
+    lst_agr = [i for i in lst_agr if '#' not in i]
 
     print(datetime.datetime.now(), '- Открытие файла конфигуратора')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -173,28 +177,18 @@ try:
             f.write(f'    <ct:object name="{objects[0]}" access-level="public">\n')
             f.write(f'      <attribute type="unit.System.Attributes.Description" value="{objects[1]}" />\n')
             # Добавляем агрегаторы
-            f.write(f'      <ct:object name="Agregator_Important_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'      <ct:object name="Agregator_LessImportant_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'      <ct:object name="Agregator_N_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'      <ct:object name="Agregator_Repair_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            # rr = ''.join([6*' ' + i for i in lst_agr])
+            f.write(''.join([6*' ' + i for i in lst_agr]) + '\n')
 
     # Измеряемые
     write_ai_ae(sheet=book['Измеряемые'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='AI')
+                tmp_ios=tmp_ios, group_objects='AI', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
     # Расчетные
     write_ai_ae(sheet=book['Расчетные'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='AE')
+                tmp_ios=tmp_ios, group_objects='AE', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
     # Дискретные
     sl_wrn_di = write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
-                         tmp_ios=tmp_ios, group_objects='DI')
+                         tmp_ios=tmp_ios, group_objects='DI', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
     # АПР, если он есть в контроллере
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -211,10 +205,12 @@ try:
                                                              target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # ИМ
     sl_cnt = write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all,
-                      tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM')
+                      tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM',
+                      w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
 
     # Диагностика
-    sl_for_diag = write_diag(book, sl_object_all, tmp_ios, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
+    sl_for_diag = write_diag(book, sl_object_all, tmp_ios, ''.join([8*' ' + i for i in lst_agr]) + '\n',
+                             'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # ПЕРЕХОДИМ К SYSTEM
 
@@ -230,29 +226,18 @@ try:
         with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
             f.write('      <ct:object name="System" access-level="public" >\n')
             # Добавляем агрегаторы
-            f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_N_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-            f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                    f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                    f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+            f.write(''.join([8*' ' + i for i in lst_agr]) + '\n')
 
     # Уставки
     write_ai_ae(sheet=book['Уставки'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='SET')
+                tmp_ios=tmp_ios, group_objects='SET', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
     # Кнопки
     write_btn(sheet=book['Кнопки'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
               tmp_ios=tmp_ios, group_objects='BTN')
 
     # Защиты
     sl_pz = write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
-                     tmp_ios=tmp_ios, group_objects='PZ')
+                     tmp_ios=tmp_ios, group_objects='PZ', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
 
     # Наработки и перестановки
     write_cnt(sl_cnt=sl_cnt, sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
@@ -261,7 +246,7 @@ try:
     # Сигналы остальные
     sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn = write_signal(
         sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-        tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di)
+        tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di, w_agr_lst=lst_agr)
 
     # ТР, если он есть в контроллере
     # Для каждого объекта...
@@ -280,7 +265,8 @@ try:
                                                                  target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # Драйвера
     sl_cpu_drv_signal = write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
-                                  tmp_ios=tmp_ios, sl_all_drv=sl_all_drv)
+                                  tmp_ios=tmp_ios, sl_all_drv=sl_all_drv,
+                                  w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
 
     # Переменные алгоримтов
     sl_grh = write_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all,
@@ -388,9 +374,11 @@ try:
             with open('Required_change.txt', 'a') as f_test:
                 f_test.write('-' * 70 + '\n')
 
-    print(datetime.datetime.now(), 'Окончание сборки всех файлов')
+    print(datetime.datetime.now(), '- Окончание сборки всех файлов')
+    input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')
 except (Exception, KeyError):
-    print('Произошла ошибка выполнения')
+    # print('Произошла ошибка выполнения')
     logging.basicConfig(filename='error.log', filemode='a', datefmt='%d.%m.%y %H:%M:%S',
                         format='%(levelname)s - %(message)s - %(asctime)s')
     logging.exception("Ошибка выполнения")
+    input('Во время сборки произошла ошибка, сформирован файл error.log. Нажмите Enter для выхода...')

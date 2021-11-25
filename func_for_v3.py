@@ -7,7 +7,7 @@ import datetime
 from time import sleep
 
 
-def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects):
+def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects, w_agr):
     cells = sheet['A1': 'AG' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
@@ -41,18 +41,8 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого параметра на листе ...
     for par in cells:
@@ -104,7 +94,7 @@ def write_ai_ae(sheet, sl_object_all, tmp_object_aiaeset, tmp_ios, group_objects
                 f.write('      </ct:object>\n')
 
 
-def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
+def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects, w_agr):
     # Словарь соответствия цветов и его идентификатора в Альфе
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     # Словарь соответствия типа сигнала(DI или DI_AI) и его ПЛК-Аспекта
@@ -150,18 +140,8 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого параметра на листе ...
     for par in cells:
@@ -218,7 +198,7 @@ def write_di(sheet, sl_object_all, tmp_object_di, tmp_ios, group_objects):
     return sl_wrn_di
 
 
-def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_objects):
+def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_objects, w_agr):
     # Словарь соответствия типа ИМ и его ПЛК аспекта
     sl_im_plc = {'ИМ1Х0': 'IM1x0.IM1x0_PLC_View', 'ИМ1Х1': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2': 'IM1x2.IM1x2_PLC_View',
                  'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View', 'ИМ1Х0и': 'IM1x0.IM1x0_PLC_View',
@@ -275,18 +255,8 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого параметра на листе ...
     for par in cells:
@@ -354,18 +324,8 @@ def write_im(sheet, sheet_imao, sl_object_all, tmp_object_im, tmp_ios, group_obj
                 set(sl_object_all[objects].keys()) & set_par_cpu_imao:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого параметра на листе ...
     for par in cells:
@@ -548,7 +508,7 @@ def is_create_objects_diag(sl):
     return tmp_line_object.rstrip()
 
 
-def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
+def write_diag(book, sl_object_all, tmp_ios, w_agr, *sheets_signal):
     sheet_module = book['Модули']
     # Словарь возможных модулей со стартовым описанием каналов
     sl_modules = {
@@ -651,32 +611,12 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 # узел Diag
                 f.write(f'      <ct:object name="Diag" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
                 # подузел HW
                 f.write(f'        <ct:object name="HW" access-level="public">\n')
-                f.write(f'          <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write('\n'.join([10*' ' + i.lstrip() for i in w_agr.split('\n')]).rstrip(' '))
 
     '''
     for cpu in sl_modules_cpu:
@@ -800,35 +740,15 @@ def write_diag(book, sl_object_all, tmp_ios, *sheets_signal):
             if not (set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys())) and objects[0] in set_objects_net:
                 # узел Diag
                 f.write(f'      <ct:object name="Diag" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
             # при условии, что объект есть во множестве объектов с диагностикой сети (то есть нет узла NET)
             if objects[0] in set_objects_net:
                 # print(objects)
                 # подузел NET
                 f.write(f'        <ct:object name="NET" access-level="public">\n')
-                f.write(f'          <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'          <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write('\n'.join([10 * ' ' + i.lstrip() for i in w_agr.split('\n')]).rstrip(' '))
                 # пробегаемся по юнитам, и при условии, что они принадлежат данному объекту,
                 # добавляем их в IOS-аспект
                 for par in cells:
@@ -933,7 +853,7 @@ def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objec
                 f.write('      </ct:object>\n')
 
 
-def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
+def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects, w_agr):
     cells = sheet['A1': 'N' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
@@ -990,18 +910,8 @@ def write_pz(sheet, sl_object_all, tmp_object_pz, tmp_ios, group_objects):
         if set(sl_object_all[objects].keys()) & set(sl_pz.keys()):
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{group_objects}" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -1146,7 +1056,8 @@ def is_read_sig(controller, cell, alg_name, par_name, type_protect, cpu, return_
 
 
 def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_name, index_type_protect,
-                     index_cpu_name, tmp_object_btn_cnt_sig, tmp_ios, sl_type_sig, sl_set_par_cpu, sl_update_signal):
+                     index_cpu_name, tmp_object_btn_cnt_sig, tmp_ios, sl_type_sig, sl_set_par_cpu, sl_update_signal,
+                     w_agr_lst):
     # Словарь соответствия английского и русского наименования группы сигналов
     sl_rus_ = {'TS': 'ТС', 'PPU': 'ППУ', 'ALR': 'АЛР', 'ALG': 'АЛГ', 'WRN': 'ПС', 'MODES': 'Режим'}
     # Множество контроллеров с записываемыми параметрами
@@ -1162,13 +1073,11 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="{write_par}" access-level="public">\n')
                 if write_par == 'ALR':
-                    f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                            f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                            f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                    # Добавляем агрегаторы, на первой строке в файле стоит агрегатор аварий
+                    f.write(8*' ' + w_agr_lst[0])
                 if write_par == 'WRN':
-                    f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                            f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                            f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                    # Добавляем агрегаторы, на второй строке в файле стоит агрегатор предупреждений
+                    f.write(8*' ' + w_agr_lst[1])
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -1224,7 +1133,7 @@ def write_one_signal(write_par, sl_object_all, cells, index_alg_name, index_rus_
     return sl_sig_cpu
 
 
-def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_di):
+def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_di, w_agr_lst):
     # Словарь типов ПЛК-аспектов для сигналов
     sl_type_sig = {
         'Да (по наличию)': 'Types.WRN_On.WRN_On_PLC_View',
@@ -1295,42 +1204,42 @@ def write_signal(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, sl_wrn_d
                                  index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                  tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                  tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                 sl_update_signal={key: {} for key in sl_wrn_di})
+                                 sl_update_signal={key: {} for key in sl_wrn_di}, w_agr_lst=w_agr_lst)
 
     sl_sig_ppu = write_one_signal(write_par='PPU', sl_object_all=sl_object_all, cells=cells,
                                   index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                                   index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                   tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                   tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                  sl_update_signal={key: {} for key in sl_wrn_di})
+                                  sl_update_signal={key: {} for key in sl_wrn_di}, w_agr_lst=w_agr_lst)
 
     sl_sig_alr = write_one_signal(write_par='ALR', sl_object_all=sl_object_all, cells=cells,
                                   index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                                   index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                   tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                   tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                  sl_update_signal={key: {} for key in sl_wrn_di})
+                                  sl_update_signal={key: {} for key in sl_wrn_di}, w_agr_lst=w_agr_lst)
 
     sl_sig_alg = write_one_signal(write_par='ALG', sl_object_all=sl_object_all, cells=cells,
                                   index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                                   index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                   tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                   tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                  sl_update_signal={key: {} for key in sl_wrn_di})
+                                  sl_update_signal={key: {} for key in sl_wrn_di}, w_agr_lst=w_agr_lst)
 
     sl_sig_wrn = write_one_signal(write_par='WRN', sl_object_all=sl_object_all, cells=cells,
                                   index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                                   index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                   tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                   tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                  sl_update_signal=sl_wrn_di)
+                                  sl_update_signal=sl_wrn_di, w_agr_lst=w_agr_lst)
 
     sl_sig_mod = write_one_signal(write_par='MODES', sl_object_all=sl_object_all, cells=cells,
                                   index_alg_name=index_alg_name, index_rus_name=index_rus_name,
                                   index_type_protect=index_type_protect, index_cpu_name=index_cpu_name,
                                   tmp_object_btn_cnt_sig=tmp_object_btn_cnt_sig,
                                   tmp_ios=tmp_ios, sl_type_sig=sl_type_sig, sl_set_par_cpu=sl_set_par_cpu,
-                                  sl_update_signal={key: {} for key in sl_wrn_di})
+                                  sl_update_signal={key: {} for key in sl_wrn_di}, w_agr_lst=w_agr_lst)
 
     return sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn
 
@@ -1353,7 +1262,7 @@ def is_load_drv(controller, cell, alg_name, name_par, eunit, type_sig, type_msg,
     return tmp
 
 
-def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_all_drv):
+def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_all_drv, w_agr):
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     sl_type_drv = {
         'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
@@ -1406,18 +1315,8 @@ def write_drv(sheet, sl_object_all, tmp_drv_par, tmp_ios, sl_all_drv):
         if set(sl_object_all[objects].keys()) & set_par_cpu:
             with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
                 f.write(f'      <ct:object name="DRV" access-level="public">\n')
-                f.write(f'        <ct:object name="Agregator_Important_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Important_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_LessImportant_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_N_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_N_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
-                f.write(f'        <ct:object name="Agregator_Repair_IOS" '
-                        f'base-type="Types.MSG_Agregator.Agregator_Repair_IOS" '
-                        f'aspect="Types.IOS_Aspect" access-level="public"/>\n')
+                # Добавляем агрегаторы
+                f.write(w_agr)
 
     # Для каждого объекта...
     for objects in sl_object_all:
