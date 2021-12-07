@@ -661,6 +661,8 @@ def write_diag(book, sl_object_all, tmp_ios, w_agr, *sheets_signal):
                 # Закрываем узел Diag
                 # Узел Diag в IOS-аспекте пока не закрываем, поскольку может быть узел NET
                 # f.write('      </ct:object>\n')
+    write_diag_connect(sl_object_all=sl_object_all, sl_for_diag=sl_for_diag,
+                       w_agr='\n'.join([10*' ' + i.lstrip() for i in w_agr.split('\n')]).rstrip(' '))
 
     sheet_net = book['Сеть']
     # Считываем файл-шаблоны для диагностики сети
@@ -774,6 +776,82 @@ def write_diag(book, sl_object_all, tmp_ios, w_agr, *sheets_signal):
                 f.write(f'      </ct:object>\n')
 
     return sl_for_diag
+
+
+def write_diag_connect(sl_object_all, sl_for_diag, w_agr):
+    temp_diag_connect = '          <ct:parameter name="$param_name" type="bool" ' \
+                        'direction="out" access-level="public" >\n' \
+                        '            <attribute type="unit.Server.Attributes.Alarm" ' \
+                        'value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;' \
+                        ',&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;' \
+                        ':true,&quot;Message&quot;:&quot;. Нет связи с $name_cpu. Порт $num_port&quot;' \
+                        ',&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;' \
+                        'IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с $name_cpu. Порт $num_port&quot;' \
+                        ',&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}" />\n' \
+                        '            <attribute type="unit.System.Attributes.InitialValue" value="true" />\n' \
+                        '          </ct:parameter>\n' \
+                        '          <ct:subject-ref name="$ref_name" ' \
+                        'object="Service.Modules.UNET Client.$path_unet" ' \
+                        'const-access="false" aspected="false" access-level="public" />\n' \
+                        '          <ct:bind source="$bind_source" ' \
+                        'target="$param_name" action="set_all" />\n'
+
+    # Для каждого объекта...
+    for objects in sl_object_all:
+        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
+            f.write(f'        <ct:object name="Connect" access-level="public">\n')
+            f.write(w_agr)
+            # ...для каждого контроллера...
+            for cpu in sl_object_all[objects]:
+                for numeth in range(1, 3):
+                    f.write(Template(temp_diag_connect).substitute(
+                        num_port=numeth, name_cpu=sl_for_diag[cpu]['CPU'][0],
+                        ref_name=f'_{cpu}_{objects[2]}_Eth{numeth}',
+                        bind_source=f'_{cpu}_{objects[2]}_Eth{numeth}.IsConnected',
+                        num_eth=numeth, param_name=f'Connect_{cpu}{objects[2]}_port_{numeth}',
+                        path_unet=f'PLC_{cpu}_{objects[2]}.CPU_Eth{numeth}'))
+            f.write(f'        </ct:object>\n')
+
+
+def write_service_signal(sl_object_all):
+    temp_is_connected = '          <ct:object name="CPU_Eth$num_eth" access-level="public" >\n' \
+                        '            <ct:parameter name="IsConnected" type="bool" ' \
+                        'direction="out" access-level="public" />\n' \
+                        '            <attribute type="unit.System.Attributes.Comment" value="$type_Eth" />\n' \
+                        '          </ct:object>\n'
+    sl_num_eth = {1: 'Основная сеть', 2: 'Резервная сеть'}
+    with open(f'Service_signal.omx-export', 'a', encoding='UTF-8') as f:
+        f.write('<omx xmlns="system" xmlns:ct="automation.control" xmlns:r="automation.reference">\n')
+        # Открываем группу Service
+        f.write('  <ct:object name="Service" access-level="public" >\n')
+        f.write('    <attribute type="unit.Server.Attributes.Replicate" value="false" />\n')
+
+        # Открываем группу Modules
+        f.write('    <ct:object name="Modules" access-level="public" >\n')
+
+        # Открываем групупу UNET
+        f.write('      <ct:object name="UNET Client" access-level="public" >\n')
+        f.write('        <attribute type="unit.System.Attributes.Comment" value="для Диагностики связи с ПЛК" />\n')
+
+        # Для каждого объекта...
+        for objects in sl_object_all:
+            # ...для каждого контроллера...
+            for cpu in sl_object_all[objects]:
+                f.write(f'       <ct:object name="PLC_{cpu}_{objects[2]}" access-level="public" >\n')
+                for numeth in range(1, 3):
+                    f.write(Template(temp_is_connected).substitute(num_eth=numeth, type_Eth=sl_num_eth.get(numeth)))
+                f.write(f'       </ct:object>\n')
+
+        # Закрываем группу UNET
+        f.write('      </ct:object>\n')
+
+        # Закрываем группу Modules
+        f.write('    </ct:object>\n')
+
+        # Закрываем группу Service
+        f.write('  </ct:object>\n')
+
+        f.write('</omx>\n')
 
 
 def write_btn(sheet, sl_object_all, tmp_object_btn_cnt_sig, tmp_ios, group_objects):

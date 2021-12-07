@@ -149,6 +149,8 @@ try:
         ff.close()
         ff = open(f'Tree{objects[0]}.json', 'w', encoding='UTF-8')
         ff.close()
+    ff = open(f'Service_signal.omx-export', 'w', encoding='UTF-8')
+    ff.close()
 
     # Для каждого объекта...
     for objects in sl_object_all:
@@ -207,6 +209,9 @@ try:
     sl_cnt = write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all,
                       tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM',
                       w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
+
+    # Создание сервисных сигналов
+    write_service_signal(sl_object_all=sl_object_all)
 
     # Диагностика
     sl_for_diag = write_diag(book, sl_object_all, tmp_ios, ''.join([8*' ' + i for i in lst_agr]) + '\n',
@@ -342,6 +347,13 @@ try:
                         new_data=new_data,
                         message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
 
+    with open(f'Service_signal.omx-export', 'r', encoding='UTF-8') as f:
+        new_data = f.read()
+    os.remove(f'Service_signal.omx-export')
+    check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                    file_name_check=f'Service_signal.omx-export',
+                    new_data=new_data,
+                    message_print=f'Требуется заменить сервисные сигналы (файл Service_signal.omx-export)')
     book.close()
 
     # Создаём карту индексов
@@ -378,7 +390,11 @@ try:
     input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')
 except (Exception, KeyError):
     # print('Произошла ошибка выполнения')
+    import sys
     logging.basicConfig(filename='error.log', filemode='a', datefmt='%d.%m.%y %H:%M:%S',
                         format='%(levelname)s - %(message)s - %(asctime)s')
     logging.exception("Ошибка выполнения")
+    for file in os.listdir(os.path.dirname(sys.argv[0])):
+        if file.endswith('.omx-export') or file.endswith('.json'):
+            os.remove(file)
     input('Во время сборки произошла ошибка, сформирован файл error.log. Нажмите Enter для выхода...')

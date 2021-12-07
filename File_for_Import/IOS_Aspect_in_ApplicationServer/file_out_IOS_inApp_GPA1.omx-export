@@ -1941,6 +1941,36 @@
           <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD302" />
         </ct:object>
         </ct:object>
+        <ct:object name="Connect" access-level="public">
+          <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
+          <ct:parameter name="Connect_GTU1_port_1" type="bool" direction="out" access-level="public" >
+            <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}" />
+            <attribute type="unit.System.Attributes.InitialValue" value="true" />
+          </ct:parameter>
+          <ct:subject-ref name="_GTU_1_Eth1" object="Service.Modules.UNET Client.PLC_GTU_1.CPU_Eth1" const-access="false" aspected="false" access-level="public" />
+          <ct:bind source="_GTU_1_Eth1.IsConnected" target="Connect_GTU1_port_1" action="set_all" />
+          <ct:parameter name="Connect_GTU1_port_2" type="bool" direction="out" access-level="public" >
+            <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}" />
+            <attribute type="unit.System.Attributes.InitialValue" value="true" />
+          </ct:parameter>
+          <ct:subject-ref name="_GTU_1_Eth2" object="Service.Modules.UNET Client.PLC_GTU_1.CPU_Eth2" const-access="false" aspected="false" access-level="public" />
+          <ct:bind source="_GTU_1_Eth2.IsConnected" target="Connect_GTU1_port_2" action="set_all" />
+          <ct:parameter name="Connect_GPA1_port_1" type="bool" direction="out" access-level="public" >
+            <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}" />
+            <attribute type="unit.System.Attributes.InitialValue" value="true" />
+          </ct:parameter>
+          <ct:subject-ref name="_GPA_1_Eth1" object="Service.Modules.UNET Client.PLC_GPA_1.CPU_Eth1" const-access="false" aspected="false" access-level="public" />
+          <ct:bind source="_GPA_1_Eth1.IsConnected" target="Connect_GPA1_port_1" action="set_all" />
+          <ct:parameter name="Connect_GPA1_port_2" type="bool" direction="out" access-level="public" >
+            <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}" />
+            <attribute type="unit.System.Attributes.InitialValue" value="true" />
+          </ct:parameter>
+          <ct:subject-ref name="_GPA_1_Eth2" object="Service.Modules.UNET Client.PLC_GPA_1.CPU_Eth2" const-access="false" aspected="false" access-level="public" />
+          <ct:bind source="_GPA_1_Eth2.IsConnected" target="Connect_GPA1_port_2" action="set_all" />
+        </ct:object>
         <ct:object name="NET" access-level="public">
           <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
           <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
