@@ -184,7 +184,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
                     # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
                     sl_drv_trends = \
-                        {f'{f_ind_json(par[rus_par_ind].value)}': (par[alg_name_ind].value + '.Value',
+                        {f'{f_ind_json(par[rus_par_ind].value)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
                                                                    sl_type_unit[par[t_sig_drv_ind].value])}
                     # если в словаре драйверов отсутвует такой драйвер, то создаём
                     if drv_ not in sl_node_drv:
