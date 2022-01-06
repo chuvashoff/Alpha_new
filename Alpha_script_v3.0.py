@@ -2,13 +2,14 @@
 import openpyxl
 import logging
 import warnings
+import lxml.etree
+
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
-    # all_CPU = ()  # кортеж контроллеров
     pref_IP = ()  # кортеж префиксов IP
     sl_object_all = {}  # {(Объект, рус имя объекта, индекс объекта):
     # {контроллер: (ip основной, ip резервный, индекс объекта)} }
@@ -27,56 +28,12 @@ try:
             file_config = file
             break
 
-    # Считываем файл-шаблон для объекта IOS
-    with open(os.path.join('Template', 'Temp_IOS'), 'r', encoding='UTF-8') as f:
-        tmp_ios = f.read()
-
-    # Считываем файл-шаблон для AI  AE SET
-    with open(os.path.join('Template', 'Temp_AIAESET'), 'r', encoding='UTF-8') as f:
-        tmp_object_AIAESET = f.read()
-    # Считываем файл-шаблон для DI
-    with open(os.path.join('Template', 'Temp_DI'), 'r', encoding='UTF-8') as f:
-        tmp_object_DI = f.read()
-    # Считываем файл-шаблон для АПР ПЛК-аспекта
-    with open(os.path.join('Template', 'Temp_APR'), 'r', encoding='UTF-8') as f:
-        tmp_apr = f.read()
-    # Считываем файл-шаблон для АПР IOS-аспекта
-    with open(os.path.join('Template', 'Temp_APR_IOs'), 'r', encoding='UTF-8') as f:
-        tmp_apr_ios = f.read()
-    # Считываем файл-шаблон для IM
-    with open(os.path.join('Template', 'Temp_IM'), 'r', encoding='UTF-8') as f:
-        tmp_object_IM = f.read()
-    # Считываем файл-шаблон для BTN CNT
-    with open(os.path.join('Template', 'Temp_BTN_CNT_sig'), 'r', encoding='UTF-8') as f:
-        tmp_object_BTN_CNT_sig = f.read()
-    # Считываем файл-шаблон для PZ
-    with open(os.path.join('Template', 'Temp_PZ'), 'r', encoding='UTF-8') as f:
-        tmp_object_PZ = f.read()
-    # Считываем файл-шаблон для топливного регулятора ПЛК-аспекта
-    with open(os.path.join('Template', 'Temp_TR_ps90'), 'r', encoding='UTF-8') as f:
-        tmp_tr_ps90 = f.read()
-    # Считываем файл-шаблон для топливного регулятора IOS-аспекта
-    with open(os.path.join('Template', 'Temp_TR_ps90_IOs'), 'r', encoding='UTF-8') as f:
-        tmp_tr_ps90_ios = f.read()
-    # Считываем файл-шаблон для драйверных параметров
-    with open(os.path.join('Template', 'Temp_drv_par'), 'r', encoding='UTF-8') as f:
-        tmp_drv_par = f.read()
-    # Считываем файл-шаблон для Агрегаторов
-    with open(os.path.join('Template', 'Temp_Agregator'), 'r', encoding='UTF-8') as f:
-        lst_agr = f.readlines()
-    lst_agr = [i for i in lst_agr if '#' not in i]
-
     print(datetime.datetime.now(), '- Открытие файла конфигуратора')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
     # читаем список всех контроллеров
     print(datetime.datetime.now(), '- Файл открыт. Начало сборки')
     sheet = book['Настройки']  # worksheets[1]
-    '''
-    cells = sheet['B2': 'B22']
-    for p in cells:
-        if p[0].value is not None:
-            all_CPU += (p[0].value,)
-    '''
+
     # Читаем префиксы IP адреса ПЛК(нужно продумать про новые конфигураторы)
     cells = sheet['A1': 'B' + str(sheet.max_row)]
     for p in cells:
@@ -101,15 +58,30 @@ try:
             sl_object_all[p[1].value, p[2].value, p[0].value.replace('Объект', '').strip()] = sl_tmp
 
     # Мониторинг ТР и АПР в контроллере
+    sl_TR = {}
+    if os.path.exists(os.path.join('Template', 'Tun_TR.txt')):
+        with open(os.path.join('Template', 'Tun_TR.txt'), 'r', encoding='UTF-8') as f_tr:
+            for line in f_tr:
+                if '#' in line or ':' not in line:
+                    continue
+                line = line.split(':')
+                sl_TR[line[0]] = (tuple([branch.strip() for branch in line[1].split(',')]) if line[1] else tuple())
+
+    choice_tr = ''
     sl_CPU_spec = {}
+    sl_tr_cpu = {}
     cells = sheet['B1':'L21']
     for p in cells:
         if p[0].value is None:
             break
         else:
             sl_CPU_spec[p[0].value] = ()
-            if p[is_f_ind(cells[0], 'FLR')].value == 'ON' and p[is_f_ind(cells[0], 'Тип ТР')].value == 'ПС90':
+            if p[is_f_ind(cells[0], 'FLR')].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('ТР',)
+                choice_tr = p[is_f_ind(cells[0], 'Тип ТР')].value
+                if choice_tr not in sl_TR and not sl_TR:
+                    choice_tr = ''
+                    print('В файле Tun_TR.txt не указан выбранный тип топливного регулятора')
             if p[is_f_ind(cells[0], 'APR')].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('АПР',)
 
@@ -138,222 +110,487 @@ try:
     if not os.path.exists(os.path.join('File_for_Import', 'Trends')):
         os.mkdir(os.path.join('File_for_Import', 'Trends'))
 
-    # Чистим файлы с прошлой сборки
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера
-        for cpu in sl_object_all[objects]:
-            ff = open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'w', encoding='UTF-8')
-            ff.close()
-        ff = open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'w', encoding='UTF-8')
-        ff.close()
-        ff = open(f'Tree{objects[0]}.json', 'w', encoding='UTF-8')
-        ff.close()
-    ff = open(f'Service_signal.omx-export', 'w', encoding='UTF-8')
-    ff.close()
-
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера
-        for cpu in sl_object_all[objects]:
-            # Записываем стартовую информацию ПЛК аспекта
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" '
-                        'xmlns:ct="automation.control">\n')
-                f.write(f'  <trei:trei name="PLC_{cpu}_{objects[2]}" >\n')
-                f.write('    <trei:master-module name="CPU" >\n')
-                ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
-                ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
-                f.write(f'      <trei:ethernet-adapter name="Eth1" '
-                        f'address="{ip1}" />\n')
-                f.write(f'      <trei:ethernet-adapter name="Eth2" '
-                        f'address="{ip2}" />\n')
-                f.write(f'      <trei:unet-server name="UnetServer" '
-                        f'address-map="PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap" '
-                        f'port="6001"/>\n')
-                f.write('      <dp:application-object name="Tree" access-level="public" >\n')
-        # Записываем стартовую информацию IOS-аспекта
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write('<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" '
-                    'xmlns:ct="automation.control">\n')
-            f.write(f'    <ct:object name="{objects[0]}" access-level="public">\n')
-            f.write(f'      <attribute type="unit.System.Attributes.Description" value="{objects[1]}" />\n')
-            # Добавляем агрегаторы
-            # rr = ''.join([6*' ' + i for i in lst_agr])
-            f.write(''.join([6*' ' + i for i in lst_agr]) + '\n')
+    sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
+                'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
+                'Agregator_N_IOS': 'Types.MSG_Agregator.Agregator_N_IOS',
+                'Agregator_Repair_IOS': 'Types.MSG_Agregator.Agregator_Repair_IOS'}
 
     # Измеряемые
-    write_ai_ae(sheet=book['Измеряемые'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='AI', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
-    # Расчетные
-    write_ai_ae(sheet=book['Расчетные'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='AE', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
-    # Дискретные
-    sl_wrn_di = write_di(sheet=book['Входные'], sl_object_all=sl_object_all, tmp_object_di=tmp_object_DI,
-                         tmp_ios=tmp_ios, group_objects='DI', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
-    # АПР, если он есть в контроллере
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            # Если есть АПР в данном контроллере...
-            if 'АПР' in sl_CPU_spec[cpu]:
-                # ...то записываем в нужный файл ПЛК-аспект АПР
-                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(tmp_apr)
-                # ...записываем в нужный файл IOS-аспект АПР
-                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_apr_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree.APR",
-                                                             target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
-    # ИМ
-    sl_cnt = write_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'], sl_object_all=sl_object_all,
-                      tmp_object_im=tmp_object_IM, tmp_ios=tmp_ios, group_objects='IM',
-                      w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
+    # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+    return_sl_ai = is_read_ai_ae_set(sheet=book['Измеряемые'])
 
-    # Создание сервисных сигналов
-    write_service_signal(sl_object_all=sl_object_all)
+    # Расчетные
+    return_sl_ae = is_read_ai_ae_set(sheet=book['Расчетные'])
+
+    # Дискретные учесть тип, так как есть DI_AI!!!
+    return_sl_di, sl_wrn_di = is_read_di(sheet=book['Входные'])
+
+    # ИМ
+    return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
+
+    # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
+    sl_cnt_xml = {cpu: {alg_par: (val,) for alg_par, val in value.items()} for cpu, value in sl_cnt.items()}
 
     # Диагностика
-    sl_for_diag = write_diag(book, sl_object_all, tmp_ios, ''.join([8*' ' + i for i in lst_agr]) + '\n',
-                             'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
-
-    # ПЕРЕХОДИМ К SYSTEM
-
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            # В ПЛК-аспекте открываем узел System
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('        <ct:object name="System" access-level="public" >\n')
-        # В IOS-аспекте открываем узел System
-        # и записываем агрегаторы
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write('      <ct:object name="System" access-level="public" >\n')
-            # Добавляем агрегаторы
-            f.write(''.join([8*' ' + i for i in lst_agr]) + '\n')
+    # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
+    sl_modules_cpu, sl_for_diag = is_read_create_diag(book, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Уставки
-    write_ai_ae(sheet=book['Уставки'], sl_object_all=sl_object_all, tmp_object_aiaeset=tmp_object_AIAESET,
-                tmp_ios=tmp_ios, group_objects='SET', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
+    return_sl_set = is_read_ai_ae_set(sheet=book['Уставки'])
+
     # Кнопки
-    write_btn(sheet=book['Кнопки'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-              tmp_ios=tmp_ios, group_objects='BTN')
+    return_sl_btn = is_read_btn(sheet=book['Кнопки'])
 
     # Защиты
-    sl_pz = write_pz(sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_pz=tmp_object_PZ,
-                     tmp_ios=tmp_ios, group_objects='PZ', w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
-
-    # Наработки и перестановки
-    write_cnt(sl_cnt=sl_cnt, sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-              tmp_ios=tmp_ios, group_objects='CNT')
+    sl_pz, sl_pz_xml = is_read_pz(sheet=book['Сигналы'])
+    # sl_pz -  словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д. словарь для индексов
+    # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
 
     # Сигналы остальные
-    sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn = write_signal(
-        sheet=book['Сигналы'], sl_object_all=sl_object_all, tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig,
-        tmp_ios=tmp_ios, sl_wrn_di=sl_wrn_di, w_agr_lst=lst_agr)
+    # нужно для индексов сформировать sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn!!!
+    return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
+                                                                                              sl_wrn_di=sl_wrn_di)
 
-    # ТР, если он есть в контроллере
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            # Если есть ТР в данном контроллере...
-            if 'ТР' in sl_CPU_spec[cpu]:
-                # ...то записываем в нужный файл ПЛК-аспект ТР
-                with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(tmp_tr_ps90)
-                # ...записываем в нужный файл IOS-аспект АПР
-                with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-                    f.write(Template(tmp_tr_ps90_ios).substitute(original_object=f"PLC_{cpu}_{objects[2]}.CPU.Tree."
-                                                                                 f"System.TR",
-                                                                 target_object_CPU=f"PLC_{cpu}_{objects[2]}.CPU"))
     # Драйвера
-    sl_cpu_drv_signal = write_drv(sheet=book['Драйвера'], sl_object_all=sl_object_all, tmp_drv_par=tmp_drv_par,
-                                  tmp_ios=tmp_ios, sl_all_drv=sl_all_drv,
-                                  w_agr=''.join([8*' ' + i for i in lst_agr]) + '\n')
+    sl_cpu_drv_signal, return_sl_cpu_drv = is_read_drv(sheet=book['Драйвера'], sl_all_drv=sl_all_drv)
 
     # Переменные алгоримтов
-    sl_grh = write_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all,
-                       tmp_object_btn_cnt_sig=tmp_object_BTN_CNT_sig, tmp_ios=tmp_ios)
+    sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
 
-    # ЗАКРЫВАЕМ ГРУППУ SYSTEM
+    # Сеть(коммутаторы) - уже новая функция
+    return_sl_net = is_create_net(sl_object_all=sl_object_all, sheet_net=book['Сеть'])
+
+    sl_w = {
+        'AI': {'dict': return_sl_ai,
+               'tuple_attr': ('unit.System.Attributes.Description',
+                              'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
+               'add_tuple_par': ('AI.AI_PLC_View',),
+               'dict_agreg_IOS': sl_agreg
+               },
+        'AE': {'dict': return_sl_ae,
+               'tuple_attr': ('unit.System.Attributes.Description',
+                              'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
+               'add_tuple_par': ('AE.AE_PLC_View',),
+               'dict_agreg_IOS': sl_agreg
+               },
+        'DI': {'dict': return_sl_di,
+               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
+               'add_tuple_par': ('DI.DI_PLC_View',),
+               'dict_agreg_IOS': sl_agreg
+               },
+        'SET': {'dict': return_sl_set,
+                'tuple_attr': ('unit.System.Attributes.Description',
+                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
+                'add_tuple_par': ('SET.SET_PLC_View',),
+                'dict_agreg_IOS': sl_agreg
+                },
+        'BTN': {'dict': return_sl_btn,
+                'tuple_attr': ('unit.System.Attributes.Description', ),
+                'add_tuple_par': ('BTN.BTN_PLC_View',),
+                'dict_agreg_IOS': {}
+                },
+        # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
+        'PZ': {'dict': sl_pz_xml,
+               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.EUnit'),
+               'add_tuple_par': ('PZ.PZ_PLC_View',),
+               'dict_agreg_IOS': sl_agreg
+               },
+        # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
+        'CNT': {'dict': sl_cnt_xml,
+                'tuple_attr': ('unit.System.Attributes.Description', ),
+                'add_tuple_par': ('CNT.CNT_PLC_View',),
+                'dict_agreg_IOS': {}
+                },
+        'TS': {'dict': return_ts,
+               'tuple_attr': ('unit.System.Attributes.Description',),
+               'add_tuple_par': ('TS.TS_PLC_View',),
+               'dict_agreg_IOS': {}
+               },
+        'PPU': {'dict': return_ppu,
+                'tuple_attr': ('unit.System.Attributes.Description',),
+                'add_tuple_par': ('PPU.PPU_PLC_View',),
+                'dict_agreg_IOS': {}
+                },
+        'ALR': {'dict': return_alr,
+                'tuple_attr': ('unit.System.Attributes.Description',),
+                'add_tuple_par': ('ALR.ALR_PLC_View',),
+                'dict_agreg_IOS': {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS'}
+                },
+        # return_alg = {cpu: {алг_пар: (ТИП ALG в студии, русское имя, )}}
+        'ALG': {'dict': return_alg,
+                'tuple_attr': ('unit.System.Attributes.Description',),
+                'add_tuple_par': tuple(),
+                'dict_agreg_IOS': {}
+                },
+        # return_wrn = {cpu: {алг_пар: (ТИП WRN в студии, русское имя, )}}
+        'WRN': {'dict': return_wrn,
+                'tuple_attr': ('unit.System.Attributes.Description',),
+                'add_tuple_par': tuple(),
+                'dict_agreg_IOS': {'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS'}
+                },
+        # return_modes = {cpu: {алг_пар: (ТИП переменной режима в студии, русское имя, )}}
+        'MODES': {'dict': return_modes,
+                  'tuple_attr': ('unit.System.Attributes.Description',),
+                  'add_tuple_par': tuple(),
+                  'dict_agreg_IOS': {}
+                  },
+        # return_alg_grh = {cpu: {алг_пар: (тип переменной в студии, русское имя )}}
+        'GRH': {'dict': return_alg_grh,
+                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.FracDigits'),
+                'add_tuple_par': tuple(),
+                'dict_agreg_IOS': {}
+                }
+    }
+    # sl_object_all = {}  #
+    # {(Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
+
+    # {cpu: {алг_имя тюнинга: (плк_тип, рус. описание(имя))}}
+    sl_tun_apr = {}
     # Для каждого объекта...
     for objects in sl_object_all:
-        # ...для каждого контроллера...
+        # ...создаём корневой узел xml для IOS-аспекта
+        root_ios_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                                     xmlns_trei="trei", xmlns_ct="automation.control")
+        child_object = ET.SubElement(root_ios_aspect, 'ct_object', name=f"{objects[0]}", access_level="public")
+        ET.SubElement(child_object, 'attribute', type=f"unit.System.Attributes.Description",
+                      value=f"{objects[1]}")
+        # ...добавляем агрегаторы
+        for agreg, type_agreg in sl_agreg.items():
+            ET.SubElement(child_object, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                          aspect="Types.IOS_Aspect", access_level="public")
+        # Для каждого контроллера в объекте
         for cpu in sl_object_all[objects]:
-            # Закрываем узел System в ПЛК-аспекте
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('        </ct:object>\n')
-        # Закрываем узел System в IOS-аспекте
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write('      </ct:object>\n')
+            # ...создаём корневой узел xml для PLC-аспекта
+            # добавляем в него адаптеры с указанными IP
+            # добавляем unet-сервер и привязку к карте адресов
+            # добавляем APP с именем Tree
+            root_plc_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                                         xmlns_trei="trei", xmlns_ct="automation.control")
+            child = ET.SubElement(root_plc_aspect, 'trei_trei', name=f"PLC_{cpu}_{objects[2]}")
+            child_cpu = ET.SubElement(child, 'trei_master-module', name="CPU")
+            ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
+            ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
+            ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
+            ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
+            ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
+                          address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6001")
+            child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
+            ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
 
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            # Добавляем элемент адресной карты и закрываем стандартную информацию
-            # Закрываем стандартную информацию
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'a', encoding='UTF-8') as f:
-                f.write('	    <trei:unet-address-map name="UnetAddressMap" />\n')
-                f.write('      </dp:application-object>\n')
-                f.write('    </trei:master-module>\n')
-                f.write(f'  </trei:trei>\n')
-                f.write('</omx>\n')
-        # Закрываем стартовую информацию IOS-аспекта
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'a', encoding='UTF-8') as f:
-            f.write(f'    </ct:object>\n')
-            f.write('</omx>\n')
+            # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+            # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
+            # Добавляем в кортежи параметров на первое место тип сигнала в студии
+
+            # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
+            for node in ('AI', 'AE', 'DI'):
+                # если у текущего контроллера есть анпары или...
+                if cpu in sl_w[node]['dict']:
+                    tuple_attr = sl_w[node]['tuple_attr']
+                    add_xml_par_plc(name_group=node,
+                                    sl_par={alg_par: sl_w[node]['add_tuple_par'] + tuple_par
+                                            for alg_par, tuple_par in sl_w[node]['dict'][cpu].items()},
+                                    parent_node=child_app,
+                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value))
+                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
+
+            # Если есть АПР в данном контроллере...
+            if 'АПР' in sl_CPU_spec[cpu]:
+                # Добавляем ИМ, просто ссылкаемся на структуру студии, если что, можно заменить
+                child_apr = ET.SubElement(child_app, 'ct_object', name="APR", access_level="public")
+                child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
+                                             base_type="Types.APR_IM.APR_IM_PLC_View",
+                                             aspect="Types.PLC_Aspect", access_level="public")
+                ET.SubElement(child_apr_im, 'attribute', type="unit.System.Attributes.Description", value="АПР")
+                child_apr_tuninig = ET.SubElement(child_apr, 'ct_object', name="Tuning", access_level="public")
+                # Если есть файл с описанием необходимых тюнингов
+                if os.path.exists(os.path.join('Template', 'Tun_APR.txt')):
+                    # Создаём кортеж в словаре cpu-тюнингов
+                    sl_tun_apr[cpu] = {}
+                    # открываем данный файл
+                    with open(os.path.join('Template', 'Tun_APR.txt'), 'r', encoding='UTF-8') as f_in:
+                        # и по файлу бежим
+                        for line in f_in:
+                            if '#' in line:
+                                continue
+                            in_f = [i.strip() for i in line.split(';')]
+                            # Если структура в файле состоит из двух элементов
+                            if len(in_f) == 2:
+                                # добавляем в кортеж, чтобы использовать потом
+                                sl_tun_apr[cpu].update({in_f[0]: ('APR_tuning.APR_tuning_PLC_View', in_f[1])})
+                                # То записываем структуру
+                                one_tun = ET.SubElement(child_apr_tuninig, 'ct_object', name=f"{in_f[0]}",
+                                                        base_type="Types.APR_tuning.APR_tuning_PLC_View",
+                                                        aspect="Types.PLC_Aspect", access_level="public")
+                                ET.SubElement(one_tun, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{in_f[1]}")
+
+            if cpu in return_sl_im:
+                # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender)}}
+                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.StartView', 'Attributes.Gender')
+                add_xml_par_plc(name_group='IM',
+                                sl_par=return_sl_im[cpu],
+                                parent_node=child_app,
+                                sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
+                                             for alg_par, value in return_sl_im[cpu].items()})
+
+            # Создаём узел Diag
+            child_diag = ET.SubElement(child_app, 'ct_object', name="Diag", access_level="public")
+            # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
+            # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
+            if cpu in sl_modules_cpu:
+                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.ShortName')
+                sl_tt = {alg_par: dict(zip((tuple_attr if 'CPU' in value
+                                            else tuple_attr + tuple([f'Attributes.Channel_{i+1}'
+                                                                     for i in range(len(value[2]))])),
+                                           ([(f'Диагностика мастер-модуля {alg_par} ({value[1]})'
+                                             if 'CPU' in value else f'Диагностика модуля {alg_par} ({value[1]})'),
+                                            alg_par] if 'CPU' in value
+                                            else [f'Диагностика модуля {alg_par} ({value[1]})', alg_par] + value[2])))
+                         for alg_par, value in sl_modules_cpu[cpu].items()}
+                add_xml_par_plc(name_group='HW', sl_par=sl_modules_cpu[cpu],
+                                parent_node=child_diag,
+                                sl_attr_par=sl_tt)
+
+            # Создаём узел System
+            child_system = ET.SubElement(child_app, 'ct_object', name="System", access_level="public")
+
+            # Пробегаемся по словарю ключами
+            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR'):
+                # если у текущего контроллера есть анпары или...
+                if cpu in sl_w[node]['dict']:
+                    tuple_attr = sl_w[node]['tuple_attr']
+                    add_xml_par_plc(name_group=node,
+                                    sl_par={alg_par: sl_w[node]['add_tuple_par'] + tuple_par
+                                            for alg_par, tuple_par in sl_w[node]['dict'][cpu].items()},
+                                    parent_node=child_system,
+                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value))
+                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
+
+            # Пробегаемся по словарю ключами
+            for node in ('ALG', 'WRN', 'MODES', 'GRH'):
+                # если у текущего контроллера есть анпары или...
+                if cpu in sl_w[node]['dict']:
+                    tuple_attr = sl_w[node]['tuple_attr']
+                    add_xml_par_plc(name_group=node,
+                                    sl_par=sl_w[node]['dict'][cpu],
+                                    parent_node=child_system,
+                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
+                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
+            if cpu in return_sl_cpu_drv:
+                # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
+                # {алг.пар: (Тип переменной, рус имя, тип сообщения, цвет отключения,
+                # цвет включения, ед.измер, кол-во знаков) }}}
+                child_drv_node = ET.SubElement(child_system, 'ct_object', name="DRV", access_level="public")
+                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.Type_wrn_DRV',
+                              'Attributes.sColorOff', 'Attributes.sColorOn',
+                              'Attributes.EUnit', 'Attributes.FracDigits')
+                for drv, sl_sig_drv in return_sl_cpu_drv[cpu].items():
+                    add_xml_par_plc(name_group=drv,
+                                    sl_par=sl_sig_drv,
+                                    parent_node=child_drv_node,
+                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
+                                                 for alg_par, value in sl_sig_drv.items()})
+
+            # Если есть ТР в данном контроллере...
+            if 'ТР' in sl_CPU_spec[cpu] and sl_TR:
+                # Создаём узел TR
+                child_TR = ET.SubElement(child_system, 'ct_object', name="TR", access_level="public")
+                if choice_tr in sl_TR:
+                    for sub_node_tr in sl_TR[choice_tr]:
+                        ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
+                                      base_type=f'Types.{sub_node_tr}.{sub_node_tr}_PLC_View',
+                                      aspect="Types.PLC_Aspect", access_level="public")
+
+            # Нормируем и записываем PLC-аспект
+            temp = ET.tostring(root_plc_aspect).decode('UTF-8')
+            check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                            file_name_check=f'file_out_plc_{cpu}_{objects[2]}.omx-export',
+                            new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                              pretty_print=True, encoding='unicode')),
+                            message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
+
+        # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
+        for node in ('AI', 'AE', 'DI'):
+            # Если у текущего объекта есть контроллеры с анпарами...
+            if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
+                add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                objects=objects, name_group=node,
+                                sl_par={cpu_in: {alg_par: sl_w[node]['add_tuple_par'] + tuple_par
+                                                 for alg_par, tuple_par in sl_w[node]['dict'][cpu_in].items()}
+                                        for cpu_in in sl_w[node]['dict']},
+                                parent_node=child_object, sl_agreg=sl_w[node]['dict_agreg_IOS'], plc_node_tree=node)
+
+        # Если у текущего объекта есть контроллеры с АПР на борту
+        if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'АПР' in sl_CPU_spec[i]]):
+            set_cpu_apr = set([i for i in sl_CPU_spec if 'АПР' in sl_CPU_spec[i]])
+            # На случай, если в объекте будут несколько контроллеров с АПР, то в IOS аспекте будут созданы несколько
+            for cpu_apr in set_cpu_apr:
+                child_apr = ET.SubElement(child_object, 'ct_object',
+                                          name=('APR' if len(set_cpu_apr) == 1 else f'APR_{cpu_apr}'),
+                                          aspect="Types.IOS_Aspect", access_level="public")
+                # ...добавляем агрегаторы
+                for agreg, type_agreg in sl_agreg.items():
+                    ET.SubElement(child_apr, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                  aspect="Types.IOS_Aspect", access_level="public")
+                child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
+                                             base_type="Types.APR_IM.APR_IM_IOS_View",
+                                             original=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM",
+                                             aspect="Types.IOS_Aspect", access_level="public")
+                ET.SubElement(child_apr_im, 'ct_init-ref',
+                              ref="_PLC_View", target=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM")
+                if sl_tun_apr:
+                    add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                    objects=objects, name_group='Tuning',
+                                    sl_par=sl_tun_apr, parent_node=child_apr, plc_node_tree='APR.Tuning',
+                                    sl_agreg={})
+
+        # Если у текущего объекта есть контроллеры с ИМами
+        if set(sl_object_all[objects].keys()) & set(return_sl_im.keys()):
+            # ...то создаём узел IM в IOS-аспекте
+            add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                            objects=objects, name_group='IM', sl_par=return_sl_im,
+                            parent_node=child_object, sl_agreg=sl_agreg, plc_node_tree='IM')
+        # Создаём узел Diag
+        child_diag = ET.SubElement(child_object, 'ct_object', name='Diag', access_level="public")
+        # ...добавляем агрегаторы
+        for agreg, type_agreg in sl_agreg.items():
+            ET.SubElement(child_diag, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                          aspect="Types.IOS_Aspect", access_level="public")
+
+        # Если у текущего объекта есть контроллеры с модулями в HW
+        if set(sl_object_all[objects].keys()) & set(sl_modules_cpu.keys()):
+            add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                            objects=objects, name_group='HW', sl_par=sl_modules_cpu,
+                            parent_node=child_diag, sl_agreg=sl_agreg, plc_node_tree='Diag.HW')
+
+        # Формируем узел Connect - диагностика связи с ПЛК
+        if sl_object_all[objects]:
+            child_connect = ET.SubElement(child_diag, 'ct_object', name='Connect', access_level="public")
+            # ...добавляем агрегаторы
+            for agreg, type_agreg in sl_agreg.items():
+                ET.SubElement(child_connect, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                              aspect="Types.IOS_Aspect", access_level="public")
+
+            for cpu_connect in sl_object_all[objects]:
+                name_cpu = ''.join([key for key, value in sl_modules_cpu.get(cpu_connect).items() if 'CPU' in value])
+
+                for num_port in range(1, 3):
+                    child_sig_con = ET.SubElement(child_connect, 'ct_parameter',
+                                                  name=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}',
+                                                  type='bool', direction='out', access_level="public")
+                    ET.SubElement(child_sig_con, 'attribute', type='unit.Server.Attributes.Alarm',
+                                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                                        f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                        f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
+                                        f'"Severity":40,"Type":2}},'
+                                        f'{{"AckStrategy":2,"IsEnabled":true,'
+                                        f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
+                                        f'"Severity":40,"Type":3}}],'
+                                        f'"Type":2}}}}')
+                    ET.SubElement(child_sig_con, 'attribute', type='unit.System.Attributes.InitialValue', value='true')
+                    ET.SubElement(child_connect, 'ct_subject-ref', name=f'_{cpu_connect}_1_Eth{num_port}',
+                                  object=f"Service.Modules."
+                                         f"UNET Client.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
+                                  const_access="false", aspected="false", access_level="public")
+                    ET.SubElement(child_connect, 'ct_bind',
+                                  source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}.IsConnected",
+                                  target=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}', action="set_all")
+
+        # Формируем узел NET, при условии, что в данном объекте что-то такое есть
+        if objects[0] in return_sl_net:
+            child_net = ET.SubElement(child_diag, 'ct_object', name='NET', access_level="public")
+            # ...добавляем агрегаторы
+            for agreg, type_agreg in sl_agreg.items():
+                ET.SubElement(child_net, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                              aspect="Types.IOS_Aspect", access_level="public")
+            for alg, sl_value in return_sl_net[objects[0]].items():
+                child_alg = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
+                                          base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
+                                          aspect="Types.IOS_Aspect",
+                                          original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
+                                          access_level="public")
+                ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
+                              target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+
+        # Создаём узел System
+        child_system = ET.SubElement(child_object, 'ct_object', name='System', access_level="public")
+        # ...добавляем агрегаторы
+        for agreg, type_agreg in sl_agreg.items():
+            ET.SubElement(child_system, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                          aspect="Types.IOS_Aspect", access_level="public")
+
+        # Пробегаемся по словарю ключами
+        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR'):
+            # Если у текущего объекта есть контроллеры с анпарами...
+            if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
+                add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                objects=objects, name_group=node,
+                                sl_par={cpu_in: {alg_par: sl_w[node]['add_tuple_par'] + tuple_par
+                                                 for alg_par, tuple_par in sl_w[node]['dict'][cpu_in].items()}
+                                        for cpu_in in sl_w[node]['dict']},
+                                parent_node=child_system, sl_agreg=sl_w[node]['dict_agreg_IOS'],
+                                plc_node_tree=f'System.{node}')
+
+        # Пробегаемся по словарю ключами
+        for node in ('ALG', 'WRN', 'MODES', 'GRH'):
+            # Если у текущего объекта есть контроллеры с анпарами...
+            if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
+                add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                objects=objects, name_group=node,
+                                sl_par=sl_w[node]['dict'],
+                                parent_node=child_system,
+                                sl_agreg=sl_w[node]['dict_agreg_IOS'],
+                                plc_node_tree=f'System.{node}')
+
+        # Формируем драйверные переменные в IOS-аспекте
+        if set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys()):
+            child_drv_node = ET.SubElement(child_system, 'ct_object', name='DRV', access_level="public")
+            # ...добавляем агрегаторы
+            for agreg, type_agreg in sl_agreg.items():
+                ET.SubElement(child_drv_node, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                              aspect="Types.IOS_Aspect", access_level="public")
+            for cpu_with_drv in tuple(set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys())):
+                for drv_tuple, sl_par in return_sl_cpu_drv[cpu_with_drv].items():
+                    add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                    objects=objects, name_group=drv_tuple[0],
+                                    sl_par={cpu_with_drv: sl_par},
+                                    parent_node=child_drv_node,
+                                    sl_agreg=sl_agreg,
+                                    plc_node_tree=f'System.DRV.{drv_tuple[0]}')
+
+        # Если в объекте есть контроллеры, помеченные с ТР
+        if set(sl_object_all[objects].keys()) & set(cpu for cpu in sl_CPU_spec if 'ТР' in sl_CPU_spec[cpu]) and sl_TR:
+            for cpu_tr in (cpu for cpu in sl_CPU_spec if 'ТР' in sl_CPU_spec[cpu]):
+                # Создаём узел ТР
+                child_TR = ET.SubElement(child_system, 'ct_object', name='TR', access_level="public")
+                # ...добавляем агрегаторы
+                for agreg, type_agreg in sl_agreg.items():
+                    ET.SubElement(child_TR, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                  aspect="Types.IOS_Aspect", access_level="public")
+                if choice_tr in sl_TR:
+                    for sub_node_tr in sl_TR[choice_tr]:
+                        child_sub = ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
+                                                  base_type=f"Types.{sub_node_tr}.{sub_node_tr}_IOS_View",
+                                                  original=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
+                                                           f"TR.{sub_node_tr.replace('TR_', '')}",
+                                                  aspect="Types.IOS_Aspect", access_level="public")
+                        ET.SubElement(child_sub, 'ct_init-ref',
+                                      ref="_PLC_View", target=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
+                                                              f"TR.{sub_node_tr.replace('TR_', '')}")
+        # Нормируем и записываем IOS-аспект
+        temp = ET.tostring(root_ios_aspect).decode('UTF-8')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                        file_name_check=f'file_out_IOS_inApp_{objects[0]}.omx-export',
+                        new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                          pretty_print=True, encoding='unicode')),
+                        message_print=f'Требуется заменить IOS-аспект объекта {objects[0]}')
+
+    # Создание сервисных сигналов
+    is_create_service_signal(sl_object_all=sl_object_all)
 
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv)
 
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            # Проверяем и перезаписываем файлы ПЛК-аспекта в случае найденных отличий и удаляя промежуточный файл
-            with open(f'file_out_plc_{cpu}_{objects[2]}.omx-export', 'r', encoding='UTF-8') as f:
-                new_data = f.read()
-            os.remove(f'file_out_plc_{cpu}_{objects[2]}.omx-export')
-            check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
-                            file_name_check=f'file_out_plc_{cpu}_{objects[2]}.omx-export',
-                            new_data=new_data,
-                            message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
-        # Проверяем и перезаписываем файлы IOS-аспекта в случае найденных отличий и удаляя промежуточный файл
-        with open(f'file_out_IOS_inApp_{objects[0]}.omx-export', 'r', encoding='UTF-8') as f:
-            new_data = f.read()
-        os.remove(f'file_out_IOS_inApp_{objects[0]}.omx-export')
-        check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
-                        file_name_check=f'file_out_IOS_inApp_{objects[0]}.omx-export',
-                        new_data=new_data,
-                        message_print=f'Требуется заменить IOS-аспект объекта {objects[0]}')
-        # Проверяем и перезаписываем файлы трендов в случае найденных отличий и удаляя промежуточный файл
-        with open(f'Tree{objects[0]}.json', 'r', encoding='UTF-8') as f:
-            new_data = f.read()
-        os.remove(f'Tree{objects[0]}.json')
-        check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),
-                        file_name_check=f'Tree{objects[0]}.json',
-                        new_data=new_data,
-                        message_print=f'Требуется заменить файл Tree{objects[0]}.json - Групповые тренды')
-        # Проверяем и перезаписываем файлы ПЛК-аспектов сети объектов в случае
-        # найденных отличий и удаляя промежуточный файл
-        with open(f'file_out_NET_{objects[0]}.omx-export', 'r', encoding='UTF-8') as f:
-            new_data = f.read()
-        os.remove(f'file_out_NET_{objects[0]}.omx-export')
-        check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
-                        file_name_check=f'file_out_NET_{objects[0]}.omx-export',
-                        new_data=new_data,
-                        message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
-
-    with open(f'Service_signal.omx-export', 'r', encoding='UTF-8') as f:
-        new_data = f.read()
-    os.remove(f'Service_signal.omx-export')
-    check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
-                    file_name_check=f'Service_signal.omx-export',
-                    new_data=new_data,
-                    message_print=f'Требуется заменить сервисные сигналы (файл Service_signal.omx-export)')
     book.close()
 
     # Создаём карту индексов
@@ -372,11 +609,14 @@ try:
     sl_grh = словарь алг. переменных, ключ - cpu, значение - кортеж переменных GRH|
     tuple_all_cpu - кортеж всех контроллеров
     '''
-
+    # поддержать вытягивание индексов для АС!!!
+    # Возможно, подробней рассмотреть аварии(ALR)!!!
+    '''
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                  sl_sig_alg=sl_sig_alg, sl_sig_mod=sl_sig_mod, sl_sig_ppu=sl_sig_ppu,
                  sl_sig_ts=sl_sig_ts, sl_sig_wrn=sl_sig_wrn, sl_pz=sl_pz, sl_cpu_spec=sl_CPU_spec, 
                  sl_for_diag=sl_for_diag, sl_cpu_drv_signal=sl_cpu_drv_signal, sl_grh=sl_grh)
+    '''
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):

@@ -1,8 +1,0 @@
-  <trei:trei name="$plc_name" >
-    <trei:master-module name="$plc_name_type" >
-      <trei:ethernet-adapter name="Eth1" address="$ip_eth1" />
-      <trei:ethernet-adapter name="Eth2" address="$ip_eth2" />
-      <trei:unet-server name="UnetServer" address-map="$plc_name.CPU.Tree.UnetAddressMap" port="6001"/>
-$dp_app
-    </trei:master-module>
-  </trei:trei>

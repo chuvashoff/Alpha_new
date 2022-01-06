@@ -1,5 +1,7 @@
 from my_func import is_f_ind, f_ind_json
 from json import dumps as json_dumps
+from func_for_v3 import check_diff_file
+import os
 
 
 def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
@@ -159,20 +161,20 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 # при условии, что парсим лист Сигналы
                 # и параметр принадлежит контроллеру объекта
                 elif list_config in ('Сигналы',) and par[cpu_par].value in sl_object_all[obj]:
-                    type_prot = par[is_f_ind(cells_name[0], 'Тип защиты')].value
+                    type_protect = par[is_f_ind(cells_name[0], 'Тип защиты')].value
                     # Если увидели аварию
-                    if type_prot in 'АОссАОбсВОссВОбсАОНО':
+                    if type_protect in 'АОссАОбсВОссВОбсАОНО':
                         # создаём промежуточный словарь аварии {рус.имя: (алг.имя, единицы измерения - '-')}
                         sl_alr_trends = \
                             {f'{f_ind_json(par[rus_par_ind].value)}': (par[alg_name_ind].value.replace('|', '.') +
                                                                        '.Value', '-')}
                         # если в словаре аварий отсутвует такая авария, то создаём
-                        if type_prot not in sl_node_alr:
-                            sl_node_alr[type_prot] = sl_alr_trends
+                        if type_protect not in sl_node_alr:
+                            sl_node_alr[type_protect] = sl_alr_trends
                         else:  # иначе обновляем словарь, который есть
-                            sl_node_alr[type_prot].update(sl_alr_trends)
+                            sl_node_alr[type_protect].update(sl_alr_trends)
                     # Если увидели режим
-                    elif type_prot in ('Режим',):
+                    elif type_protect in ('Режим',):
                         # то добавляем в словарь режимов с ключом рус имени аварии : (алг.имя, единицы измерения - '-')
                         sl_node_modes[f_ind_json(par[rus_par_ind].value)] = \
                             (par[alg_name_ind].value.replace('MOD|', '') + '.Value', '-')
@@ -336,5 +338,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                                     "EUnit": sl_node_trends[node][param][1],
                                     "Description": f'Отказ - {param}'}})
 
-        with open(f'Tree{obj[0]}.json', 'a', encoding='UTF-8') as f:
-            f.write(json_dumps({"UserTree": lst_json}, indent=1, ensure_ascii=False))
+        # Проверяем и перезаписываем файлы трендов в случае найденных отличий
+        check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),
+                        file_name_check=f'Tree{obj[0]}.json',
+                        new_data=json_dumps({"UserTree": lst_json}, indent=1, ensure_ascii=False),
+                        message_print=f'Требуется заменить файл Tree{obj[0]}.json - Групповые тренды')
