@@ -122,7 +122,7 @@ try:
     # Расчетные
     return_sl_ae = is_read_ai_ae_set(sheet=book['Расчетные'])
 
-    # Дискретные учесть тип, так как есть DI_AI!!!
+    # Дискретные
     return_sl_di, sl_wrn_di = is_read_di(sheet=book['Входные'])
 
     # ИМ
@@ -147,7 +147,7 @@ try:
     # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
 
     # Сигналы остальные
-    # нужно для индексов сформировать sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn!!!
+
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
                                                                                               sl_wrn_di=sl_wrn_di)
 
@@ -173,9 +173,10 @@ try:
                'add_tuple_par': ('AE.AE_PLC_View',),
                'dict_agreg_IOS': sl_agreg
                },
+        # DI в пробеге не используется, поскольку есть специальные типы (DI_AI, тип формируется в функции)
         'DI': {'dict': return_sl_di,
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
-               'add_tuple_par': ('DI.DI_PLC_View',),
+               'add_tuple_par': tuple(),
                'dict_agreg_IOS': sl_agreg
                },
         'SET': {'dict': return_sl_set,
@@ -282,7 +283,7 @@ try:
             # Добавляем в кортежи параметров на первое место тип сигнала в студии
 
             # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
-            for node in ('AI', 'AE', 'DI'):
+            for node in ('AI', 'AE'):
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
@@ -293,6 +294,14 @@ try:
                                     sl_attr_par={alg_par: dict(zip(tuple_attr, value))
                                                  for alg_par, value in sl_w[node]['dict'][cpu].items()})
 
+            if cpu in return_sl_di:
+                # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
+                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn')
+                add_xml_par_plc(name_group='DI',
+                                sl_par=return_sl_di[cpu],
+                                parent_node=child_app,
+                                sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
+                                             for alg_par, value in return_sl_di[cpu].items()})
             # Если есть АПР в данном контроллере...
             if 'АПР' in sl_CPU_spec[cpu]:
                 # Добавляем ИМ, просто ссылкаемся на структуру студии, если что, можно заменить
@@ -410,7 +419,7 @@ try:
                             message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
 
         # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
-        for node in ('AI', 'AE', 'DI'):
+        for node in ('AI', 'AE'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
@@ -419,6 +428,13 @@ try:
                                                  for alg_par, tuple_par in sl_w[node]['dict'][cpu_in].items()}
                                         for cpu_in in sl_w[node]['dict']},
                                 parent_node=child_object, sl_agreg=sl_w[node]['dict_agreg_IOS'], plc_node_tree=node)
+
+        # Если у текущего объекта есть контроллеры с дискретами
+        if set(sl_object_all[objects].keys()) & set(return_sl_di.keys()):
+            # ...то создаём узел DI в IOS-аспекте
+            add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                            objects=objects, name_group='DI', sl_par=return_sl_di,
+                            parent_node=child_object, sl_agreg=sl_agreg, plc_node_tree='DI')
 
         # Если у текущего объекта есть контроллеры с АПР на борту
         if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'АПР' in sl_CPU_spec[i]]):
@@ -611,12 +627,25 @@ try:
     '''
     # поддержать вытягивание индексов для АС!!!
     # Возможно, подробней рассмотреть аварии(ALR)!!!
-    '''
+
+    # return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes
+    sl_sig_alg = {cpu: tuple(value.keys()) for cpu, value in return_alg.items()}
+    sl_sig_mod = {cpu: tuple(value.keys()) for cpu, value in return_modes.items()}
+    sl_sig_ppu = {cpu: tuple(value.keys()) for cpu, value in return_ppu.items()}
+    sl_sig_ts = {cpu: tuple(value.keys()) for cpu, value in return_ts.items()}
+    sl_sig_wrn = {cpu: tuple(value.keys()) for cpu, value in return_wrn.items()}
+
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
-                 sl_sig_alg=sl_sig_alg, sl_sig_mod=sl_sig_mod, sl_sig_ppu=sl_sig_ppu,
-                 sl_sig_ts=sl_sig_ts, sl_sig_wrn=sl_sig_wrn, sl_pz=sl_pz, sl_cpu_spec=sl_CPU_spec, 
-                 sl_for_diag=sl_for_diag, sl_cpu_drv_signal=sl_cpu_drv_signal, sl_grh=sl_grh)
-    '''
+                 sl_sig_alg=sl_sig_alg, 
+                 sl_sig_mod=sl_sig_mod, 
+                 sl_sig_ppu=sl_sig_ppu,
+                 sl_sig_ts=sl_sig_ts, 
+                 sl_sig_wrn=sl_sig_wrn, 
+                 sl_pz=sl_pz, 
+                 sl_cpu_spec=sl_CPU_spec, 
+                 sl_for_diag=sl_for_diag,
+                 sl_cpu_drv_signal=sl_cpu_drv_signal,
+                 sl_grh=sl_grh)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):

@@ -107,13 +107,13 @@ def is_read_ai_ae_set(sheet):
 
 
 def is_read_di(sheet):
-    # return_sl_di = {cpu: {алг_пар: (русское имя, sColorOff, sColorOn)}}
+    # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
     return_sl_di = {}
 
     # Словарь соответствия цветов и его идентификатора в Альфе
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     # Словарь соответствия типа сигнала(DI или DI_AI) и его ПЛК-Аспекта
-    sl_plc_aspect = {'Да': 'Types.DI.DI_PLC_View', 'Нет': 'Types.DI.DI_PLC_View', 'AI': 'Types.DI_AI.DI_AI_PLC_View'}
+    sl_plc_aspect = {'Да': 'DI.DI_PLC_View', 'Нет': 'DI.DI_PLC_View', 'AI': 'DI_AI.DI_AI_PLC_View'}
     # Словарь предупреждений {CPU : {алг.имя : (рус.имя, тип наличия)}}
     sl_wrn_di = {}
 
@@ -140,20 +140,22 @@ def is_read_di(sheet):
             sl_wrn_di[par[index_cpu_name].value] = {}
         if par[index_res].value == 'Нет' and par[index_im].value == 'Нет':
             if par[index_cpu_name].value not in return_sl_di:
-                # return_sl_di = {cpu: {алг_пар: (русское имя, sColorOff, sColorOn)}}
+                # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
                 return_sl_di[par[index_cpu_name].value] = {}
 
             return_sl_di[par[index_cpu_name].value].update(
                 {par[index_alg_name].value.replace('|', '_'): (
+                    sl_plc_aspect.get(par[index_control_cel].value),
                     par[index_rus_name].value,
                     sl_color_di.get(par[index_color_off].fill.start_color.index, '404'),
                     sl_color_di.get(par[index_color_on].fill.start_color.index, '404'))})
+
             # Если есть предупреждение по дискрету и канал не переведён в резерв и не привязан к ИМ
             # то добавляем в словарь предупреждений по дискретам
             if 'Да' in par[index_wrn].value:
                 cpu_name_par = par[index_cpu_name].value
                 alg_par = par[index_alg_name].value.replace('|', '_')
-                sl_wrn_di[cpu_name_par][alg_par] = (is_cor_chr(par[index_wrn_text].value), par[index_wrn].value)
+                sl_wrn_di[cpu_name_par][alg_par] = (par[index_wrn_text].value, par[index_wrn].value)
 
     return return_sl_di, sl_wrn_di
 
