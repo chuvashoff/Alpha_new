@@ -301,12 +301,21 @@ def create_group_drv(drv_sl, template_no_arc_index, source):
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                  sl_for_diag, sl_cpu_drv_signal, sl_grh):
-    # Считываем шаблоны для карты
-    with open(os.path.join('Template', 'Temp_map_index_Arc'), 'r', encoding='UTF-8') as f_arc:
-        tmp_ind_arc = f_arc.read()
-    with open(os.path.join('Template', 'Temp_map_index_noArc'), 'r', encoding='UTF-8') as f_no_arc:
-        tmp_ind_no_arc = f_no_arc.read()
 
+    tmp_ind_arc = '  <item Binding="Introduced">\n' \
+                  '    <node-path>$name_signal</node-path>\n' \
+                  '    <protocoltype>$type_signal</protocoltype>\n' \
+                  '    <index>$index</index>\n' \
+                  '    <buffer-length>50</buffer-length>\n' \
+                  '    <archivation-period>1</archivation-period>\n' \
+                  '    <category>$data_category</category>\n' \
+                  '  </item>\n'
+    tmp_ind_no_arc = '  <item Binding="Introduced">\n' \
+                     '    <node-path>$name_signal</node-path>\n' \
+                     '    <protocoltype>$type_signal</protocoltype>\n' \
+                     '    <index>$index</index>\n' \
+                     '    <category>$data_category</category>\n' \
+                     '  </item>\n'
     lst_ae = (
         'coSim', 'coRepair', 'coUpdRepair', 'Message.msg_fBreak', 'Message.msg_qbiValue', 'Value', 'fValue', 'iValue',
         'qbiValue', 'sChlType', 'sEnRepair', 'TRepair', 'Value100', 'aH', 'aL', 'fParam', 'fOverlow', 'fOverhigh',
@@ -953,4 +962,3 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             # for j in dd.split('\n'):
             #    if '- ' in j or '+ ' in j:
             #        print(j)
-
