@@ -1,4 +1,4 @@
-from my_func import is_f_ind, is_cor_chr
+from my_func import is_f_ind
 from string import Template
 from copy import copy
 import os
