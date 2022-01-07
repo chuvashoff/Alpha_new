@@ -209,14 +209,14 @@ def create_group_apr(sl_global, sl_global_fast, template_no_arc_index, template_
     return s_out
 
 
-def create_group_alr(sl_global_alr, template_arc_index, source):
+def create_group_alr(sl_global_fast_alr, template_arc_index, source):
     sl_type = {
         'R': 'Analog',
         'I': 'Analog',
         'B': 'Bool'
     }
     s_out = ''
-    for key, value in sl_global_alr.items():
+    for key, value in sl_global_fast_alr.items():
         a = key
         pref_arc = 'Arc'  # для проекта Бованенково убрать '.Value'
         s_out += Template(template_arc_index).substitute(name_signal=f'System.ALR.{a}.Value',
@@ -300,7 +300,7 @@ def create_group_drv(drv_sl, template_no_arc_index, source):
 
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
-                 sl_for_diag, sl_cpu_drv_signal, sl_grh):
+                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -470,8 +470,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_cnt = {}
             set_all_im = set()  # sl_all_im - для ИМ с наработками
             set_cnt_im1x0, set_cnt_im1x1, set_cnt_im1x2, set_cnt_im2x2 = set(), set(), set(), set()
-            sl_global_alr = {}
+            sl_global_fast_alr = {}
             set_tmp_alr = set()
+            test_sl_global_as = {}
             sl_global_alg = {}
             sl_global_mod = {}
             sl_global_ppu = {}
@@ -665,9 +666,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                                                             line[1]]
                         elif 'FAST|ALR_' in line and len(line.split(',')) >= 10:
                             line_alr = line.split(',')
-                            sl_global_alr[line_alr[0][line_alr[0].find('_')+1:]] = [max(int(line_alr[9]),
-                                                                                        int(line_alr[10])),
-                                                                                    line_alr[1]]
+                            sl_global_fast_alr[line_alr[0][line_alr[0].find('_')+1:]] = [max(int(line_alr[9]),
+                                                                                             int(line_alr[10])),
+                                                                                         line_alr[1]]
 
                         elif 'ALG|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -744,6 +745,17 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                     sl_global_diag[(curr_module, signal_name)] = [max(int(line[9]),
                                                                                       int(line[10])), line[1]]
 
+                        elif 'ALR|' in line and 'ALR|Delay' not in line and len(line.split(',')) >= 10:
+                            line = line.split(',')
+                            tmp_alg_alr = line[0][1:]  # c префиксом ALR|
+                            alg_alr = tmp_alg_alr[tmp_alg_alr.find('|')+1:]  # без префикса ALR|
+                            # Если текущий контроллер есть в словаре из конифгуратора...
+                            if line_source[0] in sl_sig_alr:
+                                # ...если ALRка есть в перечне ALRов контроллера из конфигуратора и нет в PZ
+                                if alg_alr in sl_sig_alr[line_source[0]] and alg_alr not in set_tmp_alr:
+                                    # ...то считаем, что это АС и добавляем в словарь
+                                    test_sl_global_as[alg_alr] = [max(int(line[9]), int(line[10])), line[1]]
+
                         # если в текущем контроллере объявлены драйвера и строка явно содержит индекс
                         elif line_source[0] in sl_cpu_drv_signal and len(line.split(',')) >= 10:
                             tmp_check = line.split(',')[0]
@@ -805,7 +817,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 set_all_im.update(jj)
             sl_global_cnt = {key: value for key, value in sl_global_cnt.items() if key in set_all_im}
 
-            sl_global_alr = {key: value for key, value in sl_global_alr.items() if key in set_tmp_alr}
+            sl_global_fast_alr = {key: value for key, value in sl_global_fast_alr.items() if key in set_tmp_alr}
 
             # Обработка и запись в карту аналогов
             if sl_global_ai and sl_tmp_ai:
@@ -862,8 +874,12 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 s_all += create_group_system_sig('CNT', sl_global_cnt, tmp_ind_no_arc, line_source[0])
 
             # Обработка и запись в карту ALR
-            if sl_global_alr:
-                s_all += create_group_alr(sl_global_alr, tmp_ind_arc, line_source[0])
+            if sl_global_fast_alr:
+                s_all += create_group_alr(sl_global_fast_alr, tmp_ind_arc, line_source[0])
+
+            # Если выцепили АСки, то закидываем в карту индексов
+            if test_sl_global_as:
+                s_all += create_group_system_sig('ALR', test_sl_global_as, tmp_ind_no_arc, line_source[0])
 
             # Обработка и запись в карту ALG
             if sl_global_alg:

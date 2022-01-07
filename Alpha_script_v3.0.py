@@ -624,8 +624,11 @@ try:
     sl_cpu_drv_signal - словарь драйверов, ключ - cpu, значение - словарь - ключ - драйвер, значение - кортеж переменных
     sl_grh = словарь алг. переменных, ключ - cpu, значение - кортеж переменных GRH|
     tuple_all_cpu - кортеж всех контроллеров
+    
+    sl_sig_alr - словарь ALRов, ключ - cpu, значение - кортеж переменных аварий(без ALR|), в том числе АС - 
+                 в индексах использую его для вычленения АС
     '''
-    # поддержать вытягивание индексов для АС!!!
+    # поддержать вытягивание индексов для АС - сделано, но индексы хорошо бы переписать
     # Возможно, подробней рассмотреть аварии(ALR)!!!
 
     # return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes
@@ -634,6 +637,7 @@ try:
     sl_sig_ppu = {cpu: tuple(value.keys()) for cpu, value in return_ppu.items()}
     sl_sig_ts = {cpu: tuple(value.keys()) for cpu, value in return_ts.items()}
     sl_sig_wrn = {cpu: tuple(value.keys()) for cpu, value in return_wrn.items()}
+    sl_sig_alr = {cpu: tuple(value.keys()) for cpu, value in return_alr.items()}
 
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                  sl_sig_alg=sl_sig_alg, 
@@ -645,7 +649,8 @@ try:
                  sl_cpu_spec=sl_CPU_spec, 
                  sl_for_diag=sl_for_diag,
                  sl_cpu_drv_signal=sl_cpu_drv_signal,
-                 sl_grh=sl_grh)
+                 sl_grh=sl_grh,
+                 sl_sig_alr=sl_sig_alr)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
