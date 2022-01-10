@@ -73,9 +73,10 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
     return
 
 
-def is_read_ai_ae_set(sheet):
-    # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+def is_read_ai_ae_set(sheet, type_signal):
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
     return_sl = {}
+    sl_plc_aspect = {'AI': 'AI.AI_PLC_View', 'AE': 'AE.AE_PLC_View', 'SET': 'SET.SET_PLC_View'}
 
     cells = sheet['A1': 'AG' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
@@ -98,6 +99,7 @@ def is_read_ai_ae_set(sheet):
                 # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
                 return_sl[par[index_cpu_name].value] = {}
             return_sl[par[index_cpu_name].value].update({par[index_alg_name].value.replace('|', '_'): (
+                sl_plc_aspect.get(type_signal, 'Пустой тип'),
                 par[index_rus_name].value,
                 par[index_unit].value,
                 par[index_short_name].value,
@@ -438,7 +440,7 @@ def is_create_service_signal(sl_object_all):
 
 
 def is_read_btn(sheet):
-    # return_sl = {cpu: {алг_пар: (русское имя, )}}
+    # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
     return_sl = {}
     cells = sheet['A1': 'C' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
@@ -456,7 +458,10 @@ def is_read_btn(sheet):
             # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
             return_sl[par[index_cpu_name].value] = {}
         return_sl[par[index_cpu_name].value].update({
-            'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]: (par[index_rus_name].value,)})
+            'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]: (
+                'BTN.BTN_PLC_View',
+                par[index_rus_name].value)
+        })
 
     return return_sl
 
@@ -505,8 +510,9 @@ def is_read_pz(sheet):
 
     # Из функции возвращаем словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д.
     return_sl_pz = {key: tuple([prot[0] for prot in value]) for key, value in sl_pz.items()}
-    # sl_pz_xml = {cpu: {алг_имя(A000): (рус.имя, ед измерения)}}
-    sl_pz_xml = {cpu: dict(zip(return_sl_pz[cpu], [tuple(val[1:]) for val in value])) for cpu, value in sl_pz.items()}
+    # sl_pz_xml = {cpu: {алг_имя(A000): (тип защиты в студии, рус.имя, ед измерения)}}
+    sl_pz_xml = {cpu: dict(zip(return_sl_pz[cpu], [('PZ.PZ_PLC_View',) + tuple(val[1:]) for val in value]))
+                 for cpu, value in sl_pz.items()}
     return return_sl_pz, sl_pz_xml
 
 
@@ -570,7 +576,8 @@ def is_read_signals(sheet, sl_wrn_di):
                 tuple_update = ('MODES.MODES_PLC_View', f'Режим "{par[index_rus_name].value}"')
             sl_signal_type[protect][par[index_cpu_name].value].update({key_update: tuple_update})
 
-        '''     
+        '''
+        пока оставил данный кусок кода как наследие от старого кода, возможно подскажет     
         elif par[type_protect].value in 'АОссАОбсВОссВОбсАОНО' or 'АС' in par[type_protect].value:
             if 'АС' in par[type_protect].value:
                 tmp_alr[par[alg_name].value[par[alg_name].value.find('|') + 1:]] = ('АС. ' +
@@ -587,6 +594,16 @@ def is_read_signals(sheet, sl_wrn_di):
             return_wrn[cpu].update(sl_wrn_di[cpu])
     return_wrn = {cpu: {alg: (sl_type_wrn.get(val[1]), val[0])
                         for alg, val in value.items()} for cpu, value in return_wrn.items()}
+
+    # пробегаемся по словарям в приведённом ниже списке и добавляем в кортежи параметров соответствующие типы
+    # да, немного костыль, но красивый
+    for change_return in [(return_ts, 'TS.TS_PLC_View'),
+                          (return_ppu, 'PPU.PPU_PLC_View'),
+                          (return_alr, 'ALR.ALR_PLC_View')]:
+        for cpu, sl_par in change_return[0].items():
+            for par in sl_par:
+                sl_par[par] = (change_return[1],) + sl_par[par]
+
     return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes
 
 
@@ -687,7 +704,7 @@ def is_read_create_grh(sheet, sl_object_all):
     #         for cpu, value in sl_alg_in_cpu.items() if value}
     return {key: value for key, value in sl_.items() if value}, \
            {cpu: {alg_par.split('|')[1]: (sl_type_alogritm.get(val[1]).replace('Types.', ''), val[0]) +
-                           (tuple(val[2]) if len(val) == 3 else tuple())
+                                         (tuple(val[2]) if len(val) == 3 else tuple())
                   for alg_par, val in value.items()} for cpu, value in sl_alg_in_cpu.items() if value}
 
 

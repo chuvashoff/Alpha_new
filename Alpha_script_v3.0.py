@@ -117,10 +117,10 @@ try:
 
     # Измеряемые
     # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
-    return_sl_ai = is_read_ai_ae_set(sheet=book['Измеряемые'])
+    return_sl_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
 
     # Расчетные
-    return_sl_ae = is_read_ai_ae_set(sheet=book['Расчетные'])
+    return_sl_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
 
     # Дискретные
     return_sl_di, sl_wrn_di = is_read_di(sheet=book['Входные'])
@@ -128,15 +128,17 @@ try:
     # ИМ
     return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
 
+    # # sl_cnt = {CPU: {алг.имя : русское имя}}
     # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
-    sl_cnt_xml = {cpu: {alg_par: (val,) for alg_par, val in value.items()} for cpu, value in sl_cnt.items()}
+    sl_cnt_xml = {cpu: {alg_par: ('CNT.CNT_PLC_View', val) for alg_par, val in value.items()}
+                  for cpu, value in sl_cnt.items()}
 
     # Диагностика
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
     sl_modules_cpu, sl_for_diag = is_read_create_diag(book, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Уставки
-    return_sl_set = is_read_ai_ae_set(sheet=book['Уставки'])
+    return_sl_set = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
 
     # Кнопки
     return_sl_btn = is_read_btn(sheet=book['Кнопки'])
@@ -161,84 +163,85 @@ try:
     return_sl_net = is_create_net(sl_object_all=sl_object_all, sheet_net=book['Сеть'])
 
     sl_w = {
+        # return_sl_ai =
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
         'AI': {'dict': return_sl_ai,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-               'add_tuple_par': ('AI.AI_PLC_View',),
                'dict_agreg_IOS': sl_agreg
                },
+        # return_sl_ae =
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
         'AE': {'dict': return_sl_ae,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-               'add_tuple_par': ('AE.AE_PLC_View',),
                'dict_agreg_IOS': sl_agreg
                },
-        # DI в пробеге не используется, поскольку есть специальные типы (DI_AI, тип формируется в функции)
+        # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
         'DI': {'dict': return_sl_di,
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
-               'add_tuple_par': tuple(),
                'dict_agreg_IOS': sl_agreg
                },
+        # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender)}}
+        'IM': {'dict': return_sl_im,
+               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.StartView', 'Attributes.Gender'),
+               'dict_agreg_IOS': sl_agreg
+               },
+        # return_sl_set =
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
         'SET': {'dict': return_sl_set,
                 'tuple_attr': ('unit.System.Attributes.Description',
                                'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-                'add_tuple_par': ('SET.SET_PLC_View',),
                 'dict_agreg_IOS': sl_agreg
                 },
+        # return_sl_btn = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
         'BTN': {'dict': return_sl_btn,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
-                'add_tuple_par': ('BTN.BTN_PLC_View',),
                 'dict_agreg_IOS': {}
                 },
-        # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
+        # sl_pz_xml = {cpu: {алг_имя(A000): (тип защиты в студии, рус.имя, ед измерения)}}
         'PZ': {'dict': sl_pz_xml,
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.EUnit'),
-               'add_tuple_par': ('PZ.PZ_PLC_View',),
                'dict_agreg_IOS': sl_agreg
                },
         # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
         'CNT': {'dict': sl_cnt_xml,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
-                'add_tuple_par': ('CNT.CNT_PLC_View',),
                 'dict_agreg_IOS': {}
                 },
+        # return_ts = {cpu: {алг_пар: (ТИП TS в студии, русское имя, )}}
         'TS': {'dict': return_ts,
                'tuple_attr': ('unit.System.Attributes.Description',),
-               'add_tuple_par': ('TS.TS_PLC_View',),
                'dict_agreg_IOS': {}
                },
+        # return_ppu = {cpu: {алг_пар: (ТИП PPU в студии, русское имя, )}}
         'PPU': {'dict': return_ppu,
                 'tuple_attr': ('unit.System.Attributes.Description',),
-                'add_tuple_par': ('PPU.PPU_PLC_View',),
                 'dict_agreg_IOS': {}
                 },
+        # return_alr = {cpu: {алг_пар: (ТИП ALR в студии, русское имя, )}}
         'ALR': {'dict': return_alr,
                 'tuple_attr': ('unit.System.Attributes.Description',),
-                'add_tuple_par': ('ALR.ALR_PLC_View',),
                 'dict_agreg_IOS': {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS'}
                 },
         # return_alg = {cpu: {алг_пар: (ТИП ALG в студии, русское имя, )}}
         'ALG': {'dict': return_alg,
                 'tuple_attr': ('unit.System.Attributes.Description',),
-                'add_tuple_par': tuple(),
                 'dict_agreg_IOS': {}
                 },
         # return_wrn = {cpu: {алг_пар: (ТИП WRN в студии, русское имя, )}}
         'WRN': {'dict': return_wrn,
                 'tuple_attr': ('unit.System.Attributes.Description',),
-                'add_tuple_par': tuple(),
                 'dict_agreg_IOS': {'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS'}
                 },
         # return_modes = {cpu: {алг_пар: (ТИП переменной режима в студии, русское имя, )}}
         'MODES': {'dict': return_modes,
                   'tuple_attr': ('unit.System.Attributes.Description',),
-                  'add_tuple_par': tuple(),
                   'dict_agreg_IOS': {}
                   },
         # return_alg_grh = {cpu: {алг_пар: (тип переменной в студии, русское имя )}}
         'GRH': {'dict': return_alg_grh,
                 'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.FracDigits'),
-                'add_tuple_par': tuple(),
                 'dict_agreg_IOS': {}
                 }
     }
@@ -283,25 +286,16 @@ try:
             # Добавляем в кортежи параметров на первое место тип сигнала в студии
 
             # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
-            for node in ('AI', 'AE'):
+            for node in ('AI', 'AE', 'DI', 'IM'):
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
                     add_xml_par_plc(name_group=node,
-                                    sl_par={alg_par: sl_w[node]['add_tuple_par'] + tuple_par
-                                            for alg_par, tuple_par in sl_w[node]['dict'][cpu].items()},
+                                    sl_par=sl_w[node]['dict'][cpu],
                                     parent_node=child_app,
-                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value))
+                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
                                                  for alg_par, value in sl_w[node]['dict'][cpu].items()})
 
-            if cpu in return_sl_di:
-                # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
-                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn')
-                add_xml_par_plc(name_group='DI',
-                                sl_par=return_sl_di[cpu],
-                                parent_node=child_app,
-                                sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
-                                             for alg_par, value in return_sl_di[cpu].items()})
             # Если есть АПР в данном контроллере...
             if 'АПР' in sl_CPU_spec[cpu]:
                 # Добавляем ИМ, просто ссылкаемся на структуру студии, если что, можно заменить
@@ -333,15 +327,6 @@ try:
                                 ET.SubElement(one_tun, 'attribute', type="unit.System.Attributes.Description",
                                               value=f"{in_f[1]}")
 
-            if cpu in return_sl_im:
-                # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender)}}
-                tuple_attr = ('unit.System.Attributes.Description', 'Attributes.StartView', 'Attributes.Gender')
-                add_xml_par_plc(name_group='IM',
-                                sl_par=return_sl_im[cpu],
-                                parent_node=child_app,
-                                sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
-                                             for alg_par, value in return_sl_im[cpu].items()})
-
             # Создаём узел Diag
             child_diag = ET.SubElement(child_app, 'ct_object', name="Diag", access_level="public")
             # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
@@ -364,19 +349,7 @@ try:
             child_system = ET.SubElement(child_app, 'ct_object', name="System", access_level="public")
 
             # Пробегаемся по словарю ключами
-            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR'):
-                # если у текущего контроллера есть анпары или...
-                if cpu in sl_w[node]['dict']:
-                    tuple_attr = sl_w[node]['tuple_attr']
-                    add_xml_par_plc(name_group=node,
-                                    sl_par={alg_par: sl_w[node]['add_tuple_par'] + tuple_par
-                                            for alg_par, tuple_par in sl_w[node]['dict'][cpu].items()},
-                                    parent_node=child_system,
-                                    sl_attr_par={alg_par: dict(zip(tuple_attr, value))
-                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
-
-            # Пробегаемся по словарю ключами
-            for node in ('ALG', 'WRN', 'MODES', 'GRH'):
+            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH'):
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
@@ -385,6 +358,7 @@ try:
                                     parent_node=child_system,
                                     sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
                                                  for alg_par, value in sl_w[node]['dict'][cpu].items()})
+
             if cpu in return_sl_cpu_drv:
                 # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
                 # {алг.пар: (Тип переменной, рус имя, тип сообщения, цвет отключения,
@@ -419,22 +393,13 @@ try:
                             message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
 
         # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
-        for node in ('AI', 'AE'):
+        for node in ('AI', 'AE', 'DI', 'IM'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
                                 objects=objects, name_group=node,
-                                sl_par={cpu_in: {alg_par: sl_w[node]['add_tuple_par'] + tuple_par
-                                                 for alg_par, tuple_par in sl_w[node]['dict'][cpu_in].items()}
-                                        for cpu_in in sl_w[node]['dict']},
+                                sl_par=sl_w[node]['dict'],
                                 parent_node=child_object, sl_agreg=sl_w[node]['dict_agreg_IOS'], plc_node_tree=node)
-
-        # Если у текущего объекта есть контроллеры с дискретами
-        if set(sl_object_all[objects].keys()) & set(return_sl_di.keys()):
-            # ...то создаём узел DI в IOS-аспекте
-            add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                            objects=objects, name_group='DI', sl_par=return_sl_di,
-                            parent_node=child_object, sl_agreg=sl_agreg, plc_node_tree='DI')
 
         # Если у текущего объекта есть контроллеры с АПР на борту
         if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'АПР' in sl_CPU_spec[i]]):
@@ -460,12 +425,6 @@ try:
                                     sl_par=sl_tun_apr, parent_node=child_apr, plc_node_tree='APR.Tuning',
                                     sl_agreg={})
 
-        # Если у текущего объекта есть контроллеры с ИМами
-        if set(sl_object_all[objects].keys()) & set(return_sl_im.keys()):
-            # ...то создаём узел IM в IOS-аспекте
-            add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                            objects=objects, name_group='IM', sl_par=return_sl_im,
-                            parent_node=child_object, sl_agreg=sl_agreg, plc_node_tree='IM')
         # Создаём узел Diag
         child_diag = ET.SubElement(child_object, 'ct_object', name='Diag', access_level="public")
         # ...добавляем агрегаторы
@@ -536,26 +495,13 @@ try:
                           aspect="Types.IOS_Aspect", access_level="public")
 
         # Пробегаемся по словарю ключами
-        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR'):
-            # Если у текущего объекта есть контроллеры с анпарами...
-            if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
-                add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                                objects=objects, name_group=node,
-                                sl_par={cpu_in: {alg_par: sl_w[node]['add_tuple_par'] + tuple_par
-                                                 for alg_par, tuple_par in sl_w[node]['dict'][cpu_in].items()}
-                                        for cpu_in in sl_w[node]['dict']},
-                                parent_node=child_system, sl_agreg=sl_w[node]['dict_agreg_IOS'],
-                                plc_node_tree=f'System.{node}')
-
-        # Пробегаемся по словарю ключами
-        for node in ('ALG', 'WRN', 'MODES', 'GRH'):
+        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
                                 objects=objects, name_group=node,
                                 sl_par=sl_w[node]['dict'],
-                                parent_node=child_system,
-                                sl_agreg=sl_w[node]['dict_agreg_IOS'],
+                                parent_node=child_system, sl_agreg=sl_w[node]['dict_agreg_IOS'],
                                 plc_node_tree=f'System.{node}')
 
         # Формируем драйверные переменные в IOS-аспекте
