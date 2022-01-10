@@ -385,7 +385,7 @@ def is_create_net(sl_object_all, sheet_net):
                 child_app = ET.SubElement(child_runtime, 'dp_application-object', name="Application",
                                           access_level="public")
                 ET.SubElement(child_app, 'snmp_snmp-link-map', name="SnmpLinkMap",
-                              file=f'SNMP\{sl_value["Type"]}_map.xml')
+                              file='SNMP\\' + f'{sl_value["Type"]}_map.xml')
                 child_data = ET.SubElement(child_app, 'ct_object', name="Data", access_level="public")
                 child_data_app = ET.SubElement(child_data, 'ct_object', name="Data",
                                                base_type=f"Types.SNMP_Switch.{sl_value['Type']}_PLC_View",
