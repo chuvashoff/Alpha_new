@@ -1,4 +1,4 @@
-from my_func import is_f_ind
+# from my_func import is_f_ind
 from string import Template
 from copy import copy
 import os
@@ -182,6 +182,7 @@ def is_read_im(sheet, sheet_imao):
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_work_time = is_f_ind(cells[0], 'Считать наработку')
     index_swap = is_f_ind(cells[0], 'Считать перестановки')
+    index_start_view = is_f_ind(cells[0], 'Тип ИМ', target_count=2)
 
     cells = sheet['A2': 'T' + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры параметры
@@ -209,7 +210,8 @@ def is_read_im(sheet, sheet_imao):
             return_sl_im[par[index_cpu_name].value] = {}
         return_sl_im[par[index_cpu_name].value].update(
             {par[index_alg_name].value: (sl_im_plc.get(par[index_type_im].value),
-                                         par[index_rus_name].value, par[19].value[0],
+                                         par[index_rus_name].value,
+                                         par[index_start_view].value[0],
                                          sl_gender.get(par[index_gender].value))})
 
     # Обрабатываем ИМ АО
@@ -217,7 +219,7 @@ def is_read_im(sheet, sheet_imao):
 
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
-    index_type_im = is_f_ind(cells[0], 'Тип ИМ')
+    index_start_view = is_f_ind(cells[0], 'Тип ИМ')
     index_yes_im = is_f_ind(cells[0], 'ИМ')
     index_gender = is_f_ind(cells[0], 'Род')
     index_res = is_f_ind(cells[0], 'Резервный')
@@ -236,7 +238,8 @@ def is_read_im(sheet, sheet_imao):
                 return_sl_im[par[index_cpu_name].value] = {}
             return_sl_im[par[index_cpu_name].value].update(
                 {par[index_alg_name].value: (sl_im_plc.get('ИМАО'),
-                                             par[index_rus_name].value, par[index_type_im].value[0],
+                                             par[index_rus_name].value,
+                                             par[index_start_view].value[0],
                                              sl_gender.get(par[index_gender].value))})
 
     return return_sl_im, sl_cnt
@@ -737,3 +740,39 @@ def check_diff_file(check_path, file_name_check, new_data, message_print):
         print(message_print)
         with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
             f_change.write(f'{datetime.datetime.now()} - {message_print}\n')
+
+
+# Функция для индексов
+# Функция получения алгоритмического имени в нижнем регистре (вместе с разделителем |, если такой есть)
+# из строки в словаре Трея
+def get_variable(line):
+    line = line.split(',')
+    if isinstance(line[0], str):
+        var = ''.join([i for i in line[0] if i not in '#'])
+        return var.lower()
+    else:
+        return 'Странная переменная'
+
+
+# Функция для замены нескольких значений
+def multiple_replace(target_str):
+    replace_values = {'\n': ' ', '_x000D_': ''}
+    # получаем заменяемое: подставляемое из словаря в цикле
+    for i, j in replace_values.items():
+        # меняем все target_str на подставляемое
+        target_str = target_str.replace(i, j)
+    return target_str
+
+
+# функция для поиска индекса нужного столбца
+def is_f_ind(cell, name_col, target_count=1):
+    count = 1
+    for i in range(len(cell)):
+        if cell[i].value is None:
+            break
+        if multiple_replace(cell[i].value) == name_col:
+            if count == target_count:
+                return i
+            else:
+                count += 1
+    return 0

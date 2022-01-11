@@ -3,6 +3,8 @@ import re
 # import difflib
 # from string import Template
 # from my_func import *
+import string
+
 from func_for_v3 import *
 
 
@@ -483,7 +485,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             s_all = ''
 
             lst_tr_par = []
+            lst_tr_par_lower = []
             lst_apr_par = []
+            lst_apr_par_lower = []
             sl_global_tr = {}
             sl_global_apr = {}
             sl_global_diag = {}
@@ -491,12 +495,16 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
             sl_global_grh = {}
 
-            if 'ТР' in sl_cpu_spec.get(line_source[0], 'None'):
+            if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 with open(os.path.join('Template', 'TR_par'), 'r', encoding='UTF-8') as f_tr:
-                    lst_tr_par = f_tr.read().split('\n')
-            if 'АПР' in sl_cpu_spec.get(line_source[0], 'None'):
+                    lst_tr_par = [i for i in f_tr.read().split('\n') if i and '#' not in i]
+                    # Получаем нижний регистр топливных переменных для дальнейшей проверки
+                    lst_tr_par_lower = [a.lower() for a in lst_tr_par]
+            if 'АПР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 with open(os.path.join('Template', 'APR_par'), 'r', encoding='UTF-8') as f_:
-                    lst_apr_par = f_.read().split('\n')
+                    lst_apr_par = [i for i in f_.read().split('\n') if i and '#' not in i]
+                    # Получаем нижний регистр переменных АПР для дальнейшей проверки
+                    lst_apr_par_lower = [a.lower() for a in lst_apr_par]
 
             # Если есть файл аналогов
             if os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
@@ -573,6 +581,22 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 with open(os.path.join(line_source[1], 'global0.var'), 'rt') as f_global:
                     for line in f_global:
                         line = line.strip()
+                        if lst_tr_par and len(line.split(',')) >= 10:
+                            # Получаем переменную в нижнем регистре и с разделителем
+                            tmp_var = get_variable(line=line)
+                            # Делим по разделителю
+                            lst_tmp_var = tmp_var.split('|')
+                            # Если есть разделитель...
+                            if len(lst_tmp_var) == 2:
+                                # ...то у папки удаляем в конце цифры
+                                lst_tmp_var[0] = lst_tmp_var[0].rstrip(string.digits)
+                                # Выясняем, что за переменная в перечне и вносим в словарь и есть ли она
+                                if '.'.join(lst_tmp_var) in lst_tr_par_lower:
+                                    index_lst = lst_tr_par_lower.index('.'.join(lst_tmp_var))
+                                    line_tr = line.split(',')
+                                    sl_global_tr[lst_tr_par[index_lst]] = [max(int(line_tr[9]), int(line_tr[10])),
+                                                                           line_tr[1]]
+
                         if 'A_INP|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
                             if 'msg' not in line[0]:
@@ -703,43 +727,62 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             line = line.split(',')
                             sl_global_set[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])), line[1]]
 
-                        elif ('svk2|' in line or 'svk|' in line) and len(line.split(',')) >= 10:
-                            line = line.split(',')
-                            if f"SVK.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
-                                sl_global_tr[f"SVK.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
-                                                                                              int(line[10])), line[1]]
-
-                        elif 'dis|' in line and len(line.split(',')) >= 10:
-                            line = line.split(',')
-                            if f"DIS.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
-                                sl_global_tr[f"DIS.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
-                                                                                              int(line[10])), line[1]]
+                        # elif ('svk2|' in line or 'svk|' in line) and len(line.split(',')) >= 10:
+                        #     line = line.split(',')
+                        #     if f"SVK.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
+                        #         sl_global_tr[f"SVK.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
+                        #                                                                       int(line[10])),
+                        #                                                                   line[1]]
+                        #
+                        # elif 'dis|' in line and len(line.split(',')) >= 10:
+                        #     line = line.split(',')
+                        #     if f"DIS.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
+                        #         sl_global_tr[f"DIS.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
+                        #                                                                       int(line[10])),
+                        #                                                                   line[1]]
                         elif 'APR|' in line and len(line.split(',')) >= 10:
-                            line = line.split(',')
-                            if line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '') in lst_apr_par:
-                                key_apr = f"IM.{line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '')}"
+                            # Получаем переменную в нижнем регистре и с разделителем и убираем "мусор"
+                            tmp_var = get_variable(line=line).replace('[', '').replace(']', '').replace('apr|', '')
+                            # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
+                            if tmp_var in lst_apr_par_lower:
+                                line = line.split(',')
+                                index_lst = lst_apr_par_lower.index(tmp_var)
+                                key_apr = f"IM.{lst_apr_par[index_lst]}"
                                 sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
+                            # line = line.split(',')
+                            # if line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '') in lst_apr_par:
+                            #     key_apr = f"IM.{line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '')}"
+                            #     sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
 
                         elif 'sTunings|' in line and len(line.split(',')) >= 10:
-                            line = line.split(',')
-                            if f"Tuning.{line[0][line[0].find('|') + 1:]}" in lst_apr_par:
-                                key_apr = f"Tuning.{line[0][line[0].find('|') + 1:]}.Value"
+                            # Получаем переменную в нижнем регистре и с разделителем и добавляем перфикс тюнинга
+                            tmp_var = get_variable(line=line).replace('stunings|', 'tuning.')
+                            # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
+                            if tmp_var in lst_apr_par_lower:
+                                line = line.split(',')
+                                index_lst = lst_apr_par_lower.index(tmp_var)
+                                key_apr = f"{lst_apr_par[index_lst]}.Value"
                                 sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
+                            # line = line.split(',')
+                            # if f"Tuning.{line[0][line[0].find('|') + 1:]}" in lst_apr_par:
+                            #     key_apr = f"Tuning.{line[0][line[0].find('|') + 1:]}.Value"
+                            #     sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
 
                         elif 'DIAG|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
-                            if line[0][line[0].find('|')+1:] in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                            var_name = line[0][line[0].find('|') + 1:]
+                            if var_name in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 signal_name = \
-                                    sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][line[0][line[0].find('|')+1:]]
+                                    sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][var_name]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, signal_name)] = [max(int(line[9]), int(line[10])), line[1]]
-                            elif re.match(r'MODSTAT|MODERR|ERR_Power', line[0][line[0].find('|')+1:]):
+                            elif re.match(r'MODSTAT|MODERR|ERR_Power', var_name):
                                 tmp_obr = line[0][line[0].find('|')+1:]
                                 curr_module = tmp_obr.replace('ERR_Power', '')[
                                               tmp_obr.replace('ERR_Power', '').find('_')+1:]
                                 # доп проверка наличия модуля во входном словаре
-                                if curr_module in sl_for_diag[line_source[0]]:
+                                if curr_module in sl_for_diag.get(line_source[0], 'бла'):
                                     signal_name = (tmp_obr[:tmp_obr.find('_')] if 'ERR_Power' not in tmp_obr
                                                    else 'ERR_Power')
                                     sl_global_diag[(curr_module, signal_name)] = [max(int(line[9]),
@@ -752,7 +795,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             # Если текущий контроллер есть в словаре из конифгуратора...
                             if line_source[0] in sl_sig_alr:
                                 # ...если ALRка есть в перечне ALRов контроллера из конфигуратора и нет в PZ
-                                if alg_alr in sl_sig_alr[line_source[0]] and alg_alr not in set_tmp_alr:
+                                if alg_alr in sl_sig_alr.get(line_source[0], 'бла') and alg_alr not in set_tmp_alr:
                                     # ...то считаем, что это АС и добавляем в словарь
                                     test_sl_global_as[alg_alr] = [max(int(line[9]), int(line[10])), line[1]]
 
@@ -760,7 +803,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         elif line_source[0] in sl_cpu_drv_signal and len(line.split(',')) >= 10:
                             tmp_check = line.split(',')[0]
                             # если в считанной строке-переменной есть признак какого- либо драйвера
-                            if tmp_check[1:tmp_check.find('|')] in sl_cpu_drv_signal[line_source[0]]:
+                            if tmp_check[1:tmp_check.find('|')] in sl_cpu_drv_signal.get(line_source[0], 'бла'):
                                 tmp_check_drv = tmp_check[1:tmp_check.find('|')]
                                 # если в считанной строке с признаком драйвера обнаружена объявленная переменная
                                 if tmp_check[tmp_check.find('|')+1:] in \
@@ -781,12 +824,12 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             for key, value in sl_global_di.items():
                 if 'ValueAlg' == key[:key.find('[')]:
                     var_ = sl_tmp_di.get(int(key[key.find('[')+1:key.find(']')]), 'bla')
-                    if f"DI_{var_[var_.find('_')+1:]}" in sl_sig_wrn[line_source[0]]:
+                    if f"DI_{var_[var_.find('_')+1:]}" in sl_sig_wrn.get(line_source[0], 'бла'):
                         sl_wrn_di[f"DI_{var_[var_.find('_')+1:]}"] = value
             for key, value in sl_global_ai_di.items():
                 if 'ValueAlg' == key[:key.find('[')]:
                     var_ = sl_tmp_ai_di.get(int(key[key.find('[')+1:key.find(']')]), 'bla')
-                    if f"DI_{var_[var_.find('_')+1:]}" in sl_sig_wrn[line_source[0]]:
+                    if f"DI_{var_[var_.find('_')+1:]}" in sl_sig_wrn.get(line_source[0], 'бла'):
                         sl_wrn_di[f"DI_{var_[var_.find('_')+1:]}"] = value
 
             sl_global_di = {key: value for key, value in sl_global_di.items() if key[:key.find('[')] in lst_di}
@@ -801,14 +844,19 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_set = {key: value for key, value in sl_global_set.items() if key[:key.find('[')] in lst_set}
             # отсуда и далее до нар ориентируемся на то, что есть в конфигураторе, так как в проекте может быть "мусор"
             # в данных словарях лежит alg имя: [индекс переменной, тип переменной(I, B, R)]
-            sl_global_alg = {key: value for key, value in sl_global_alg.items() if key in sl_sig_alg[line_source[0]]}
+            sl_global_alg = {key: value for key, value in sl_global_alg.items()
+                             if key in sl_sig_alg.get(line_source[0], 'бла')}
             # формирование словаря sl_global_grh добавлено позже для создания алгоритма в новом конифигураторе
             sl_global_grh = {key[key.find('|') + 1:]: value for key, value in sl_global_grh.items()
                              if key in sl_grh[line_source[0]]}
-            sl_global_mod = {key: value for key, value in sl_global_mod.items() if key in sl_sig_mod[line_source[0]]}
-            sl_global_ppu = {key: value for key, value in sl_global_ppu.items() if key in sl_sig_ppu[line_source[0]]}
-            sl_global_ts = {key: value for key, value in sl_global_ts.items() if key in sl_sig_ts[line_source[0]]}
-            sl_global_wrn = {key: value for key, value in sl_global_wrn.items() if key in sl_sig_wrn[line_source[0]]}
+            sl_global_mod = {key: value for key, value in sl_global_mod.items()
+                             if key in sl_sig_mod.get(line_source[0], 'бла')}
+            sl_global_ppu = {key: value for key, value in sl_global_ppu.items()
+                             if key in sl_sig_ppu.get(line_source[0], 'бла')}
+            sl_global_ts = {key: value for key, value in sl_global_ts.items()
+                            if key in sl_sig_ts.get(line_source[0], 'бла')}
+            sl_global_wrn = {key: value for key, value in sl_global_wrn.items()
+                             if key in sl_sig_wrn.get(line_source[0], 'бла')}
             sl_global_wrn.update(sl_wrn_di)
 
             # print(line_source[0], len(sl_global_pz))
@@ -936,7 +984,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         line = f_global.readline().strip()
                         if not line:
                             break
-                        if line.split(',')[0][1:] in sl_for_diag[line_source[0]]:
+                        if line.split(',')[0][1:] in sl_for_diag.get(line_source[0], 'бла'):
                             module = line.split(',')[0][1:]  # алгоритмическое имя модуля
                             while 8:
                                 tmp_line = f_global.readline().strip()
