@@ -495,13 +495,15 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
             sl_global_grh = {}
 
-            if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла'):
-                with open(os.path.join('Template', 'TR_par'), 'r', encoding='UTF-8') as f_tr:
+            if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha',
+                                                                                              'TR_par')):
+                with open(os.path.join('Template_Alpha', 'TR_par'), 'r', encoding='UTF-8') as f_tr:
                     lst_tr_par = [i for i in f_tr.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр топливных переменных для дальнейшей проверки
                     lst_tr_par_lower = [a.lower() for a in lst_tr_par]
-            if 'АПР' in sl_cpu_spec.get(line_source[0], 'бла'):
-                with open(os.path.join('Template', 'APR_par'), 'r', encoding='UTF-8') as f_:
+            if 'АПР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha',
+                                                                                               'APR_par')):
+                with open(os.path.join('Template_Alpha', 'APR_par'), 'r', encoding='UTF-8') as f_:
                     lst_apr_par = [i for i in f_.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр переменных АПР для дальнейшей проверки
                     lst_apr_par_lower = [a.lower() for a in lst_apr_par]

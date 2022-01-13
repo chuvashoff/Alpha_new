@@ -3,7 +3,7 @@ import openpyxl
 import logging
 import warnings
 import lxml.etree
-
+import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
@@ -14,19 +14,23 @@ try:
     sl_object_all = {}  # {(Объект, рус имя объекта, индекс объекта):
     # {контроллер: (ip основной, ip резервный, индекс объекта)} }
 
-    # path_config = input('Укажите путь до конфигуратора\n')
-    with open('Source_list_config.txt', 'r', encoding='UTF-8') as f:
-        path_config = f.readline().strip()
+    # # path_config = input('Укажите путь до конфигуратора\n')
+    # with open('Source_list_config.txt', 'r', encoding='UTF-8') as f:
+    #     path_config = f.readline().strip()
 
-    print(datetime.datetime.now(), '- Начало сборки файлов')
-
-    file_config = 'UnimodCreate.xlsm'
-
-    # Ищем файл конфигуратора в указанном каталоге
+    path_config = os.path.dirname(sys.argv[0])
+    file_config = ''
+    # Ищем файл конфигуратора в текущем каталоге
     for file in os.listdir(path_config):
         if file.endswith('.xlsm') or file.endswith('.xls'):
             file_config = file
             break
+    if not file_config:
+        print('Файл конфигуратора не найден, выполнение будет прекращено')
+        sleep(3)
+        sys.exit()
+
+    print(datetime.datetime.now(), '- Начало сборки файлов')
 
     print(datetime.datetime.now(), '- Открытие файла конфигуратора')
     book = openpyxl.open(os.path.join(path_config, file_config))  # , read_only=True
@@ -43,13 +47,17 @@ try:
             pref_IP += (p[1].value + '.',)
             break
     # Читаем состав объектов и заполняем sl_object_all
-    cells = sheet['A24': 'R38']
+    cells = sheet['A23': 'U23']
+    index_on1 = is_f_ind(cells[0], 'ON1')
+    cells = sheet['A24': 'U38']
     for p in cells:
-        if p[1].value is not None:
+        if p[1].value is None:
+            break
+        else:
             # промежуточный словарь, для загрузки в общий
             # {контроллер: (ip основной, ip резервный)}
             sl_tmp = {}
-            for i in range(12, 17):
+            for i in range(index_on1, index_on1+6):
                 if p[i].value == 'ON':
                     last_dig_ip = p[i - 5].value
                     tmp_dig_ip1 = (last_dig_ip if '(' not in last_dig_ip else last_dig_ip[:last_dig_ip.find('(')])
@@ -59,8 +67,8 @@ try:
 
     # Мониторинг ТР и АПР в контроллере
     sl_TR = {}
-    if os.path.exists(os.path.join('Template', 'Tun_TR.txt')):
-        with open(os.path.join('Template', 'Tun_TR.txt'), 'r', encoding='UTF-8') as f_tr:
+    if os.path.exists(os.path.join('Template_Alpha', 'Tun_TR.txt')):
+        with open(os.path.join('Template_Alpha', 'Tun_TR.txt'), 'r', encoding='UTF-8') as f_tr:
             for line in f_tr:
                 if '#' in line or ':' not in line:
                     continue
@@ -68,21 +76,28 @@ try:
                 sl_TR[line[0]] = (tuple([branch.strip() for branch in line[1].split(',')]) if line[1] else tuple())
 
     choice_tr = ''
+    # sl_CPU_spec - словарь спецдобавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при налчии таковых в cpu
     sl_CPU_spec = {}
     sl_tr_cpu = {}
-    cells = sheet['B1':'L21']
+    cells = sheet['B1':'L1']
+    index_flr_on = is_f_ind(cells[0], 'FLR')
+    index_type_tr = is_f_ind(cells[0], 'Тип ТР')
+    index_apr_on = is_f_ind(cells[0], 'APR')
+    index_path = is_f_ind(cells[0], 'Path')
+    cells = sheet['B2':'L21']
     for p in cells:
         if p[0].value is None:
             break
         else:
             sl_CPU_spec[p[0].value] = ()
-            if p[is_f_ind(cells[0], 'FLR')].value == 'ON':
+            #print(p[0].value, p[index_path].value)
+            if p[index_flr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('ТР',)
-                choice_tr = p[is_f_ind(cells[0], 'Тип ТР')].value
+                choice_tr = p[index_type_tr].value
                 if choice_tr not in sl_TR and not sl_TR:
                     choice_tr = ''
                     print('В файле Tun_TR.txt не указан выбранный тип топливного регулятора')
-            if p[is_f_ind(cells[0], 'APR')].value == 'ON':
+            if p[index_apr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('АПР',)
 
     # Определение заведённых драйверов
@@ -306,11 +321,11 @@ try:
                 ET.SubElement(child_apr_im, 'attribute', type="unit.System.Attributes.Description", value="АПР")
                 child_apr_tuninig = ET.SubElement(child_apr, 'ct_object', name="Tuning", access_level="public")
                 # Если есть файл с описанием необходимых тюнингов
-                if os.path.exists(os.path.join('Template', 'Tun_APR.txt')):
+                if os.path.exists(os.path.join('Template_Alpha', 'Tun_APR.txt')):
                     # Создаём кортеж в словаре cpu-тюнингов
                     sl_tun_apr[cpu] = {}
                     # открываем данный файл
-                    with open(os.path.join('Template', 'Tun_APR.txt'), 'r', encoding='UTF-8') as f_in:
+                    with open(os.path.join('Template_Alpha', 'Tun_APR.txt'), 'r', encoding='UTF-8') as f_in:
                         # и по файлу бежим
                         for line in f_in:
                             if '#' in line:

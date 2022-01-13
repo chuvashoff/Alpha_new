@@ -19,7 +19,7 @@
     <dp:external-runtime name="Runtime">
       <snmp:snmp-agent name="SnmpAgent" poll-port="161" poll-password="public" notification-port="162" notification-password="public" protocol-version="Snmp_v1" security-level="NoAuthNoPriv" auth-protocol="MD5" priv-protocol="AES"  address-map="Application.SnmpLinkMap"/>
       <dp:application-object name="Application" access-level="public">
-        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\SWITCH_TREI_S34X_map.xml />
+        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\SWITCH_TREI_S34X_map.xml"/>
         <ct:object name="Data" access-level="public">
           <ct:object name="Data" base-type="Types.SNMP_Switch.SWITCH_TREI_S34X_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Тест 2"/>

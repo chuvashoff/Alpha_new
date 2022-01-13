@@ -211,7 +211,7 @@ def is_read_im(sheet, sheet_imao):
         return_sl_im[par[index_cpu_name].value].update(
             {par[index_alg_name].value: (sl_im_plc.get(par[index_type_im].value),
                                          par[index_rus_name].value,
-                                         par[index_start_view].value[0],
+                                         ''.join([i for i in par[index_start_view].value if i.isdigit()]),
                                          sl_gender.get(par[index_gender].value))})
 
     # Обрабатываем ИМ АО
@@ -239,7 +239,7 @@ def is_read_im(sheet, sheet_imao):
             return_sl_im[par[index_cpu_name].value].update(
                 {par[index_alg_name].value: (sl_im_plc.get('ИМАО'),
                                              par[index_rus_name].value,
-                                             par[index_start_view].value[0],
+                                             ''.join([i for i in par[index_start_view].value if i.isdigit()]),
                                              sl_gender.get(par[index_gender].value))})
 
     return return_sl_im, sl_cnt
@@ -401,10 +401,10 @@ def is_create_net(sl_object_all, sheet_net):
             temp = ET.tostring(root_plc_aspect).decode('UTF-8')
 
             check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
-                            file_name_check=f'file_out_test_NET_{objects[0]}.omx-export',
+                            file_name_check=f'file_out_NET_{objects[0]}.omx-export',
                             new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
                                                                               pretty_print=True, encoding='unicode')),
-                            message_print=f'ТЕСТ Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
+                            message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
     return return_sl_net
 
 
