@@ -302,7 +302,7 @@ def create_group_drv(drv_sl, template_no_arc_index, source):
 
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
-                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr):
+                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -496,8 +496,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_grh = {}
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha',
-                                                                                              'TR_par')):
-                with open(os.path.join('Template_Alpha', 'TR_par'), 'r', encoding='UTF-8') as f_tr:
+                                                                                              f'TR_par_{choice_tr}')):
+                with open(os.path.join('Template_Alpha', f'TR_par_{choice_tr}'), 'r', encoding='UTF-8') as f_tr:
                     lst_tr_par = [i for i in f_tr.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр топливных переменных для дальнейшей проверки
                     lst_tr_par_lower = [a.lower() for a in lst_tr_par]
@@ -966,11 +966,11 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                           'System.SET', line_source[0])
 
             # Обработка и запись в карту ТР
-            if sl_global_tr:
+            if sl_global_tr and 'ТР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 s_all += create_group_tr(sl_global_tr, tmp_ind_no_arc, 'System.TR', line_source[0])
 
             # Обработка и запись в карту АПР
-            if sl_global_apr:
+            if sl_global_apr and 'АПР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 s_all += create_group_apr(sl_global_apr, sl_global_fast, tmp_ind_no_arc, tmp_ind_arc, 'APR',
                                           line_source[0])
 

@@ -78,7 +78,6 @@ try:
     choice_tr = ''
     # sl_CPU_spec - словарь спецдобавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при налчии таковых в cpu
     sl_CPU_spec = {}
-    sl_tr_cpu = {}
     cells = sheet['B1':'L1']
     index_flr_on = is_f_ind(cells[0], 'FLR')
     index_type_tr = is_f_ind(cells[0], 'Тип ТР')
@@ -391,13 +390,19 @@ try:
 
             # Если есть ТР в данном контроллере...
             if 'ТР' in sl_CPU_spec[cpu] and sl_TR:
-                # Создаём узел TR
-                child_TR = ET.SubElement(child_system, 'ct_object', name="TR", access_level="public")
+                # Создаём узел TR, если в настроечном файле есть выбранный топливник
                 if choice_tr in sl_TR:
-                    for sub_node_tr in sl_TR[choice_tr]:
-                        ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
-                                      base_type=f'Types.{sub_node_tr}.{sub_node_tr}_PLC_View',
+                    if len(sl_TR[choice_tr]) == 1:
+                        sub_node_tr = ''.join(sl_TR[choice_tr])
+                        ET.SubElement(child_system, 'ct_object', name="TR",
+                                      base_type=f'Types.TR.{choice_tr}.{sub_node_tr}.{sub_node_tr}_PLC_View',
                                       aspect="Types.PLC_Aspect", access_level="public")
+                    else:
+                        child_TR = ET.SubElement(child_system, 'ct_object', name="TR", access_level="public")
+                        for sub_node_tr in sl_TR[choice_tr]:
+                            ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
+                                          base_type=f'Types.TR.{choice_tr}.{sub_node_tr}.{sub_node_tr}_PLC_View',
+                                          aspect="Types.PLC_Aspect", access_level="public")
 
             # Нормируем и записываем PLC-аспект
             temp = ET.tostring(root_plc_aspect).decode('UTF-8')
@@ -538,22 +543,33 @@ try:
         # Если в объекте есть контроллеры, помеченные с ТР
         if set(sl_object_all[objects].keys()) & set(cpu for cpu in sl_CPU_spec if 'ТР' in sl_CPU_spec[cpu]) and sl_TR:
             for cpu_tr in (cpu for cpu in sl_CPU_spec if 'ТР' in sl_CPU_spec[cpu]):
-                # Создаём узел ТР
-                child_TR = ET.SubElement(child_system, 'ct_object', name='TR', access_level="public")
-                # ...добавляем агрегаторы
-                for agreg, type_agreg in sl_agreg.items():
-                    ET.SubElement(child_TR, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
-                                  aspect="Types.IOS_Aspect", access_level="public")
+                # Создаём узел ТР, при условии, что выбранный топливник есть в словаре
                 if choice_tr in sl_TR:
-                    for sub_node_tr in sl_TR[choice_tr]:
-                        child_sub = ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
-                                                  base_type=f"Types.{sub_node_tr}.{sub_node_tr}_IOS_View",
-                                                  original=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
-                                                           f"TR.{sub_node_tr.replace('TR_', '')}",
+                    if len(sl_TR[choice_tr]) == 1:
+                        sub_node_tr = ''.join(sl_TR[choice_tr])
+                        child_sub = ET.SubElement(child_system, 'ct_object', name=f"TR",
+                                                  base_type=f'Types.TR.{choice_tr}.'
+                                                            f'{sub_node_tr}.{sub_node_tr}_IOS_View',
+                                                  original=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System.TR",
                                                   aspect="Types.IOS_Aspect", access_level="public")
-                        ET.SubElement(child_sub, 'ct_init-ref',
-                                      ref="_PLC_View", target=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
-                                                              f"TR.{sub_node_tr.replace('TR_', '')}")
+                        ET.SubElement(child_sub, 'ct_init-ref', ref="_PLC_View",
+                                      target=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System.TR")
+                    else:
+                        child_TR = ET.SubElement(child_system, 'ct_object', name='TR', access_level="public")
+                        # ...добавляем агрегаторы
+                        for agreg, type_agreg in sl_agreg.items():
+                            ET.SubElement(child_TR, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                          aspect="Types.IOS_Aspect", access_level="public")
+                        for sub_node_tr in sl_TR[choice_tr]:
+                            child_sub = ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
+                                                      base_type=f"Types.TR.{choice_tr}."
+                                                                f"{sub_node_tr}.{sub_node_tr}_IOS_View",
+                                                      original=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
+                                                               f"TR.{sub_node_tr.replace('TR_', '')}",
+                                                      aspect="Types.IOS_Aspect", access_level="public")
+                            ET.SubElement(child_sub, 'ct_init-ref',
+                                          ref="_PLC_View", target=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
+                                                                  f"TR.{sub_node_tr.replace('TR_', '')}")
         # Нормируем и записываем IOS-аспект
         temp = ET.tostring(root_ios_aspect).decode('UTF-8')
         check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
@@ -611,7 +627,8 @@ try:
                  sl_for_diag=sl_for_diag,
                  sl_cpu_drv_signal=sl_cpu_drv_signal,
                  sl_grh=sl_grh,
-                 sl_sig_alr=sl_sig_alr)
+                 sl_sig_alr=sl_sig_alr,
+                 choice_tr=choice_tr)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):

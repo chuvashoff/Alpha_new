@@ -1146,6 +1146,16 @@
             <attribute type="Attributes.sColorOff" value="2"/>
             <attribute type="Attributes.sColorOn" value="1"/>
           </ct:object>
+          <ct:object name="DI_SF12_stOn" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Автомат SF12 включен (Оборудование вибрации)"/>
+            <attribute type="Attributes.sColorOff" value="2"/>
+            <attribute type="Attributes.sColorOn" value="1"/>
+          </ct:object>
+          <ct:object name="DI_SF13_stOn" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Автомат SF13 включен (Оборудование вибрации)"/>
+            <attribute type="Attributes.sColorOff" value="2"/>
+            <attribute type="Attributes.sColorOn" value="1"/>
+          </ct:object>
           <ct:object name="DI_Cond_stOn" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Кондиционер. Включен"/>
             <attribute type="Attributes.sColorOff" value="2"/>
@@ -1188,6 +1198,11 @@
           </ct:object>
           <ct:object name="DI_G108_OK" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G108 - В норме"/>
+            <attribute type="Attributes.sColorOff" value="2"/>
+            <attribute type="Attributes.sColorOn" value="1"/>
+          </ct:object>
+          <ct:object name="DI_G109_OK" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Выходное напряжение БП G109 - В норме"/>
             <attribute type="Attributes.sColorOff" value="2"/>
             <attribute type="Attributes.sColorOn" value="1"/>
           </ct:object>
@@ -1535,7 +1550,7 @@
               <attribute type="Attributes.Channel_10" value="Температура воздуха под кожухом ГТУ (в выходном воздуховоде)"/>
               <attribute type="Attributes.Channel_11" value="Температура воздуха в отсеке ГТУ"/>
               <attribute type="Attributes.Channel_12" value="Температура воздуха в отсеке Н"/>
-              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Температура масла в маслобаке Н"/>
               <attribute type="Attributes.Channel_14" value="Температура воздуха в блоке НКУ"/>
               <attribute type="Attributes.Channel_15" value="Температура масла на входе АВОМ Н"/>
               <attribute type="Attributes.Channel_16" value="Температура масла на выходе АВОМ Н"/>
@@ -1589,7 +1604,7 @@
               <attribute type="Attributes.Channel_4" value="Резерв"/>
               <attribute type="Attributes.Channel_5" value="Давление масла на смазку подшипников нагнетателя"/>
               <attribute type="Attributes.Channel_6" value="Перепад давления масло-газ в системе уплотнений Н"/>
-              <attribute type="Attributes.Channel_7" value="Температура масла в маслобаке Н"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
               <attribute type="Attributes.Channel_8" value="Давление масла на входе АВОМ (Н)"/>
               <attribute type="Attributes.Channel_9" value="Уровень масла в аккумуляторе масла"/>
               <attribute type="Attributes.Channel_10" value="Перепад Рв между атмосферой и зоной обдува трансмиссии"/>
@@ -2095,9 +2110,9 @@
               <attribute type="Attributes.Channel_26" value="Автомат SF10 включен (ВНА)"/>
               <attribute type="Attributes.Channel_27" value="Кондиционер. Включен"/>
               <attribute type="Attributes.Channel_28" value="Кондиционер. Авария"/>
-              <attribute type="Attributes.Channel_29" value="Резерв"/>
-              <attribute type="Attributes.Channel_30" value="Резерв"/>
-              <attribute type="Attributes.Channel_31" value="Резерв"/>
+              <attribute type="Attributes.Channel_29" value="Выходное напряжение БП G109 - В норме"/>
+              <attribute type="Attributes.Channel_30" value="Автомат SF12 включен (Оборудование вибрации)"/>
+              <attribute type="Attributes.Channel_31" value="Автомат SF13 включен (Оборудование вибрации)"/>
               <attribute type="Attributes.Channel_32" value="Резерв"/>
             </ct:object>
             <ct:object name="AD302" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -2693,163 +2708,163 @@
             </ct:object>
           </ct:object>
           <ct:object name="PZ" access-level="public">
-            <ct:object name="A124" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A133" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Опасная вибрация ротора Н в передней опоре"/>
               <attribute type="Attributes.EUnit" value="мкм "/>
             </ct:object>
-            <ct:object name="A125" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A134" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Опасная вибрация ротора Н в задней опоре"/>
               <attribute type="Attributes.EUnit" value="мкм "/>
             </ct:object>
-            <ct:object name="A126" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A135" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийный осевой сдвиг ротора нагнетателя вперед к двигателю"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A127" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A136" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийный осевой сдвиг ротора нагнетателя назад к двигателю"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A128" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A137" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-низкое давление масла смазки нагнетателя"/>
               <attribute type="Attributes.EUnit" value="МПа "/>
             </ct:object>
-            <ct:object name="A129" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A138" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая Т передней колодки упорного подшипника Н"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A130" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A139" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая Т задней колодки упорного подшипника Н"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A131" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A140" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая Т переднего опорного подшипника Н"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A132" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A141" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая Т заднего опорного подшипника Н"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A133" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A142" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая Т газа на выходе нагнетателя"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A134" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A143" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Низкий уровень масла в МБД"/>
               <attribute type="Attributes.EUnit" value="мм "/>
             </ct:object>
-            <ct:object name="A135" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A144" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Минимальный уровень масла в маслобаке ГТУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A136" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A145" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-низкий уровень масла в МБН"/>
               <attribute type="Attributes.EUnit" value="мм "/>
             </ct:object>
-            <ct:object name="A137" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A146" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Холодное масло в МБН"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A138" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A147" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Низкий перепад масло-газ"/>
               <attribute type="Attributes.EUnit" value="кПа"/>
             </ct:object>
-            <ct:object name="A139" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A148" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Самопроизвольное закрытие крана №1"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A140" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A149" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Самопроизвольное закрытие крана №2"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A141" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A150" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Аварийно-высокая температура воздуха под кожухом ГТУ"/>
               <attribute type="Attributes.EUnit" value="°С "/>
             </ct:object>
-            <ct:object name="A142" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A151" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Не включены ВОТы на режиме"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A143" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A152" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Низкий расход воздуха продувки"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A144" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A153" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Низкий расход воздуха продувки И загазованность под КШТ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A145" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A154" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Низкий расход воздуха продувки И неисправность АКЗ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A146" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A155" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Пожар ГПА"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A147" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A156" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа под кожухом ГТУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A148" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A157" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа в отсеке нагнетателя"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A149" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A158" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Опасная концентрация газа в отсеке ГТУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A150" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A159" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Повышенная концентрация газа под кожухом ГТУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A151" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A160" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АСПТиКЗ в ОД и ОН неисправна"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A152" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A161" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОcc от кнопки на ПРУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A153" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A162" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОcc от кнопки в отсеке двигателя"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A154" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A163" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОсс от кнопки в блок-боксе"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A155" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A164" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОсс от кнопки в цеху"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A156" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A165" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="ЭО от кнопки на ПРУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A157" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A166" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="БЭАО сработал (от AD200)"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A158" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A167" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Авария ПЛК AD100"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A159" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A168" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Нет связи с ПЛК AD100"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A160" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A169" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОсс по команде оператора"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A161" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A170" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОбс по команде оператора"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A162" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A171" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОсс по команде оператора с ПРУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
-            <ct:object name="A163" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <ct:object name="A172" base-type="Types.PZ.PZ_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АОбс по команде оператора с ПРУ"/>
               <attribute type="Attributes.EUnit" value="-"/>
             </ct:object>
@@ -4065,6 +4080,12 @@
             <ct:object name="DI_SF10_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Автомат SF10 не включен (ВНА)"/>
             </ct:object>
+            <ct:object name="DI_SF12_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF12 включен (Оборудование вибрации) не включен"/>
+            </ct:object>
+            <ct:object name="DI_SF13_stOn" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Автомат SF13 включен (Оборудование вибрации) не включен"/>
+            </ct:object>
             <ct:object name="DI_Cond_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Кондиционер. Авария"/>
             </ct:object>
@@ -4088,6 +4109,9 @@
             </ct:object>
             <ct:object name="DI_G108_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Блок питания G108 неисправен"/>
+            </ct:object>
+            <ct:object name="DI_G109_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Блок питания G109 неисправен"/>
             </ct:object>
             <ct:object name="DI_G201_OK" base-type="Types.WRN_Off.WRN_Off_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Блок питания G201 неисправен"/>
@@ -5892,46 +5916,6 @@
             <ct:object name="OHL_Tmv_In_3" base-type="Types.GRH.GRH_FLOAT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="-"/>
               <attribute type="Attributes.FracDigits" value="0"/>
-            </ct:object>
-          </ct:object>
-          <ct:object name="DRV" access-level="public">
-            <ct:object name="ASKZV" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="АСКЗВ"/>
-              <ct:object name="test1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-                <attribute type="unit.System.Attributes.Description" value="Тестовый 1"/>
-                <attribute type="Attributes.Type_wrn_DRV" value="АС"/>
-                <attribute type="Attributes.sColorOff" value="2"/>
-                <attribute type="Attributes.sColorOn" value="3"/>
-                <attribute type="Attributes.EUnit" value="-"/>
-                <attribute type="Attributes.FracDigits" value="0"/>
-              </ct:object>
-              <ct:object name="test2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-                <attribute type="unit.System.Attributes.Description" value="Тестовый 2"/>
-                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
-                <attribute type="Attributes.sColorOff" value="0"/>
-                <attribute type="Attributes.sColorOn" value="0"/>
-                <attribute type="Attributes.EUnit" value="°С"/>
-                <attribute type="Attributes.FracDigits" value="2"/>
-              </ct:object>
-              <ct:object name="test3" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-                <attribute type="unit.System.Attributes.Description" value="Тестовый 3"/>
-                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
-                <attribute type="Attributes.sColorOff" value="0"/>
-                <attribute type="Attributes.sColorOn" value="0"/>
-                <attribute type="Attributes.EUnit" value="Мпа"/>
-                <attribute type="Attributes.FracDigits" value="0"/>
-              </ct:object>
-            </ct:object>
-            <ct:object name="AVOMD" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="АВОМД"/>
-              <ct:object name="test4" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-                <attribute type="unit.System.Attributes.Description" value="Тестовый 4"/>
-                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
-                <attribute type="Attributes.sColorOff" value="0"/>
-                <attribute type="Attributes.sColorOn" value="1"/>
-                <attribute type="Attributes.EUnit" value="-"/>
-                <attribute type="Attributes.FracDigits" value="0"/>
-              </ct:object>
             </ct:object>
           </ct:object>
         </ct:object>
