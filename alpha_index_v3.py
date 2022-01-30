@@ -8,7 +8,7 @@ import string
 from func_for_v3 import *
 
 
-def create_sl(text, str_check, str_check_block):
+def create_sl(text, str_check, str_check_block, par_config):
     sl_tmp = {}
     str_ch = str_check.replace('_', '|')
     for i in text:  # and str_check.replace('_', '|') not in i:
@@ -21,20 +21,26 @@ def create_sl(text, str_check, str_check_block):
 
     sl_tmp = {key: value for key, value in sl_tmp.items() if f'FAST|{key}' not in sl_tmp}
     # В словаре sl_tmp лежит индекс массива: алг имя (в том числе FAST|+)
-    sl_tmp = {value: key for key, value in sl_tmp.items()}
+    sl_tmp = {value: key for key, value in sl_tmp.items() if key.replace('FAST|', '') in par_config}
     return sl_tmp
 
 
-def create_sl_im(text):
+def create_sl_im(text, par_config):
     sl_tmp = {}
     cnt_set = set()
     for i in text:
         if 'IM|' in i and '//' not in i and '[' in i:
             a = i.split(':=')[0].strip()
-            sl_tmp[int(i[i.rfind('[') + 1:i.rfind(']')])] = a[a.find('|')+1:a.rfind('_')]
-        if 'IM|' in i and '//' not in i and ('WorkTime' in i or 'Swap' in i) and 'TCycle' not in i:
-            aa = i.split(':=')[0].strip()
-            cnt_set.add(aa[aa.find('|')+1:])
+            par_im = a[a.find('|')+1:a.rfind('_')]
+            if par_im in par_config:
+                sl_tmp[int(i[i.rfind('[') + 1:i.rfind(']')])] = par_im
+        if '//' not in i and ('WorkTime' in i or 'Swap' in i):
+            for word in i.split():
+                word = word.strip()
+                if 'WorkTime' in word or 'Swap' in word:
+                    par_cnt = word.replace('IM|', '')
+                    if par_cnt.replace('_Swap', '').replace('_WorkTime', '') in par_config:
+                        cnt_set.add(word.replace('IM|', ''))
     # В словаре sl_tmp лежит индекс массива: алг имя; в cnt_set лежат используемые наработки
     return sl_tmp, cnt_set
 
@@ -311,7 +317,8 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
 
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
-                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec):
+                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
+                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -533,59 +540,62 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             if os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
                 with open(os.path.join(line_source[1], '0_par_A.st'), 'rt') as f_par_a:
                     text = f_par_a.read().split('\n')
-                sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|')
+                sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|', par_config=sl_ai_config.get(line_source[0], tuple()))
 
             # Если есть файл расчётных
             if os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
                 with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
                     text = f_par_evl.read().split('\n')
-                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|')
+                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], ()))
 
             # Если есть файл дискретных
             if os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
                 with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
                     text = f_par_d.read().split('\n')
-                sl_tmp_di = create_sl(text, 'DI_', 'D_INP|')
-                sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|')
+                sl_tmp_di = create_sl(text, 'DI_', 'D_INP|', par_config=sl_di_config.get(line_source[0], tuple()))
+                sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|', par_config=sl_di_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x0
             if os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x0.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
-                sl_tmp_im1x0, set_cnt_im1x0 = create_sl_im(text)
+                sl_tmp_im1x0, set_cnt_im1x0 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x1
             if os.path.exists(os.path.join(line_source[1], '0_IM_1x1.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x1.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
-                sl_tmp_im1x1, set_cnt_im1x1 = create_sl_im(text)
+                sl_tmp_im1x1, set_cnt_im1x1 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x2
             if os.path.exists(os.path.join(line_source[1], '0_IM_1x2.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x2.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
-                sl_tmp_im1x2, set_cnt_im1x2 = create_sl_im(text)
+                sl_tmp_im1x2, set_cnt_im1x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_2x2
             if os.path.exists(os.path.join(line_source[1], '0_IM_2x2.st')):
                 with open(os.path.join(line_source[1], '0_IM_2x2.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
-                sl_tmp_im2x2, set_cnt_im2x2 = create_sl_im(text)
+                sl_tmp_im2x2, set_cnt_im2x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_АО
             if os.path.exists(os.path.join(line_source[1], '0_IM_AO.st')):
                 with open(os.path.join(line_source[1], '0_IM_AO.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
-                sl_tmp_im_ao, bla_ = create_sl_im(text)
+                sl_tmp_im_ao, bla_ = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл кнопок
             if os.path.exists(os.path.join(line_source[1], '0_BTN.st')):
                 with open(os.path.join(line_source[1], '0_BTN.st'), 'rt') as f_btn:
                     text = f_btn.read().split('\n')
+                tuple_btn_config = sl_btn_config.get(line_source[0], tuple())
                 for i in text:
                     if 'BTN_' in i and '(' in i:
                         a = i.split(',')[0]
-                        sl_tmp_btn[int(a[a.find('(')+1:].strip())] = a[:a.find('(')].strip()
+                        par_btn = a[:a.find('(')].strip()
+                        if par_btn in tuple_btn_config:
+                            sl_tmp_btn[int(a[a.find('(')+1:].strip())] = par_btn
 
             # Если есть файл защит PZ
             if os.path.exists(os.path.join(line_source[1], '0_PZ.st')):
@@ -597,7 +607,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             if os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
                 with open(os.path.join(line_source[1], '0_Par_Set.st'), 'rt') as f_set:
                     text = f_set.read().split('\n')
-                sl_tmp_set = create_sl(text, 'SP_', 'A_SET|')
+                sl_tmp_set = create_sl(text, 'SP_', 'A_SET|', par_config=sl_set_config.get(line_source[0], tuple()))
 
             # Если есть глобальный словарь
             if os.path.exists(os.path.join(line_source[1], 'global0.var')):

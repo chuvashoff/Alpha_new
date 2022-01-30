@@ -643,7 +643,14 @@ try:
                  sl_grh=sl_grh,
                  sl_sig_alr=sl_sig_alr,
                  choice_tr=choice_tr,
-                 sl_cpu_drv_iec=sl_cpu_drv_iec)
+                 sl_cpu_drv_iec=sl_cpu_drv_iec,
+                 # Передаём словари вида {cpu: кортеж алг. переменных}, чтобы отсечь мусор, который может быть в ПЛК
+                 sl_ai_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ai.items()},
+                 sl_ae_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ae.items()},
+                 sl_di_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_di.items()},
+                 sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
+                 sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
+                 sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()})
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
