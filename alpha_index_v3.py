@@ -15,7 +15,8 @@ def create_sl(text, str_check, str_check_block):
         if (str_check in i or str_ch in i) and '//' not in i and '(' not in i:
             if 'FAST|' in i and str_check_block in i:
                 sl_tmp[i[:i.find(':=')].strip()] = int(i[i.rfind('[') + 1:i.rfind(']')])
-            elif str_ch in i and str_check_block in i and not (f'B{str_ch}' in i or f'{str_ch}Brk' in i):
+            elif str_ch in i and str_check_block in i and not (f'B{str_ch}' in i or f'{str_ch}Brk' in i) \
+                    and i.find('[') > i.find(':='):
                 sl_tmp[i[:i.find(':=')].strip().replace('|', '_')] = int(i[i.rfind('[') + 1:i.rfind(']')])
 
     sl_tmp = {key: value for key, value in sl_tmp.items() if f'FAST|{key}' not in sl_tmp}
@@ -279,7 +280,7 @@ def create_group_diag(diag_sl, template_no_arc_index, source):
     return s_out
 
 
-def create_group_drv(drv_sl, template_no_arc_index, source):
+def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, template_arc_index, sl_drv_iec):
     sl_data_cat = {
         'R': 'Analog',
         'I': 'Analog',
@@ -298,11 +299,19 @@ def create_group_drv(drv_sl, template_no_arc_index, source):
         s_out += Template(template_no_arc_index).substitute(name_signal=f'System.DRV.{name_drv}.{name_signal}.Value',
                                                             type_signal=sl_type[value[1]], index=value[0],
                                                             data_category=f'DataCategory_{source}_{pref_arc}')
+    # Для каждого параметра IEC в словаре IEC от драйверов...
+    for iec_par, type_iec_par in sl_drv_iec.items():
+        # ...при условии, что параметр есть в словаре FAST, то есть можно определить его индекс
+        if f'FAST|{iec_par}' in sl_global_fast:
+            s_out += Template(template_arc_index).substitute(name_signal=f'System.DRV.IEC.{iec_par}.Value',
+                                                             type_signal=sl_type[type_iec_par],
+                                                             index=sl_global_fast[f'FAST|{iec_par}'],
+                                                             data_category=f'DataCategory_{source}_Arc')
     return s_out
 
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
-                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr):
+                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -406,6 +415,18 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
 
         'M991E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
+                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
+                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
+                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
+                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
+                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
+                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
+                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
+                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
+                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
+                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+
+        'M991S': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
                   'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
                   'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
                   'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
@@ -975,9 +996,11 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                           line_source[0])
 
             # Обработка и запись в карту драйверных переменных
-            if sl_global_drv:
+            if sl_global_drv or sl_cpu_drv_iec.get(line_source[0], {}):
                 s_all += create_group_drv(drv_sl=sl_global_drv, template_no_arc_index=tmp_ind_no_arc,
-                                          source=line_source[0])
+                                          source=line_source[0],
+                                          sl_global_fast=sl_global_fast, template_arc_index=tmp_ind_arc,
+                                          sl_drv_iec=sl_cpu_drv_iec.get(line_source[0], {}))
 
             # повторно открываем глобальный словарь контроллера для сбора диагностики (здесь немного по-другому читаем)
             if os.path.exists(os.path.join(line_source[1], 'global0.var')):

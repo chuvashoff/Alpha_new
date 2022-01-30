@@ -110,6 +110,10 @@ try:
                 drv_rus.append(sheet[p[0].row + 1][jj].value)
                 jj += 1
     sl_all_drv = dict(zip(drv_eng, drv_rus))
+    # sl_all_drv = {Англ. имя драйвера: русское имя}
+    # Если не объявлен IEC, то добавляем
+    if 'IEC' not in sl_all_drv:
+        sl_all_drv['IEC'] = 'Прочие архивируемые параметры'
 
     # Если нет папки File_for_Import, то создадим её
     if not os.path.exists('File_for_Import'):
@@ -467,29 +471,32 @@ try:
                               aspect="Types.IOS_Aspect", access_level="public")
 
             for cpu_connect in sl_object_all[objects]:
-                name_cpu = ''.join([key for key, value in sl_modules_cpu.get(cpu_connect).items() if 'CPU' in value])
-
-                for num_port in range(1, 3):
-                    child_sig_con = ET.SubElement(child_connect, 'ct_parameter',
-                                                  name=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}',
-                                                  type='bool', direction='out', access_level="public")
-                    ET.SubElement(child_sig_con, 'attribute', type='unit.Server.Attributes.Alarm',
-                                  value=f'{{"Condition":{{"IsEnabled":"true",'
-                                        f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
-                                        f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
-                                        f'"Severity":40,"Type":2}},'
-                                        f'{{"AckStrategy":2,"IsEnabled":true,'
-                                        f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
-                                        f'"Severity":40,"Type":3}}],'
-                                        f'"Type":2}}}}')
-                    ET.SubElement(child_sig_con, 'attribute', type='unit.System.Attributes.InitialValue', value='true')
-                    ET.SubElement(child_connect, 'ct_subject-ref', name=f'_{cpu_connect}_1_Eth{num_port}',
-                                  object=f"Service.Modules."
-                                         f"UNET Client.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
-                                  const_access="false", aspected="false", access_level="public")
-                    ET.SubElement(child_connect, 'ct_bind',
-                                  source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}.IsConnected",
-                                  target=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}', action="set_all")
+                name_cpu = ''.join([key for key, value in sl_modules_cpu.get(cpu_connect, {}).items()
+                                    if 'CPU' in value])
+                # Если имя непустое, то есть ПЛК объявлен на листе модулей, то добавляем по нему коннект в объект
+                if name_cpu:
+                    for num_port in range(1, 3):
+                        child_sig_con = ET.SubElement(child_connect, 'ct_parameter',
+                                                      name=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}',
+                                                      type='bool', direction='out', access_level="public")
+                        ET.SubElement(child_sig_con, 'attribute', type='unit.Server.Attributes.Alarm',
+                                      value=f'{{"Condition":{{"IsEnabled":"true",'
+                                            f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                            f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
+                                            f'"Severity":40,"Type":2}},'
+                                            f'{{"AckStrategy":2,"IsEnabled":true,'
+                                            f'"Message":". Нет связи с {name_cpu}. Порт {num_port}",'
+                                            f'"Severity":40,"Type":3}}],'
+                                            f'"Type":2}}}}')
+                        ET.SubElement(child_sig_con, 'attribute', type='unit.System.Attributes.InitialValue',
+                                      value='true')
+                        ET.SubElement(child_connect, 'ct_subject-ref', name=f'_{cpu_connect}_1_Eth{num_port}',
+                                      object=f"Service.Modules."
+                                             f"UNET Client.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
+                                      const_access="false", aspected="false", access_level="public")
+                        ET.SubElement(child_connect, 'ct_bind',
+                                      source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}.IsConnected",
+                                      target=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}', action="set_all")
 
         # Формируем узел NET, при условии, что в данном объекте что-то такое есть
         if objects[0] in return_sl_net:
@@ -531,7 +538,7 @@ try:
             for agreg, type_agreg in sl_agreg.items():
                 ET.SubElement(child_drv_node, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                               aspect="Types.IOS_Aspect", access_level="public")
-            for cpu_with_drv in tuple(set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys())):
+            for cpu_with_drv in sorted(tuple(set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys()))):
                 for drv_tuple, sl_par in return_sl_cpu_drv[cpu_with_drv].items():
                     add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
                                     objects=objects, name_group=drv_tuple[0],
@@ -604,6 +611,9 @@ try:
     
     sl_sig_alr - словарь ALRов, ключ - cpu, значение - кортеж переменных аварий(без ALR|), в том числе АС - 
                  в индексах использую его для вычленения АС
+    choice_tr - переменная str, в которой содержится выбранный в конфигураторе ТР
+    sl_cpu_drv_iec - словарь переменных IEC, ключ - cpu, значение - словарь: ключ - алг.имя переменной IEC, 
+                                                                             значение - тип переменной (R или B)
     '''
     # поддержать вытягивание индексов для АС - сделано, но индексы хорошо бы переписать
     # Возможно, подробней рассмотреть аварии(ALR)!!!
@@ -615,6 +625,10 @@ try:
     sl_sig_ts = {cpu: tuple(value.keys()) for cpu, value in return_ts.items()}
     sl_sig_wrn = {cpu: tuple(value.keys()) for cpu, value in return_wrn.items()}
     sl_sig_alr = {cpu: tuple(value.keys()) for cpu, value in return_alr.items()}
+
+    sl_cpu_drv_iec = {plc: {par: value[0].replace('DRV_AI.DRV_AI_PLC_View', 'R').replace('DRV_DI.DRV_DI_PLC_View', 'B')
+                            for par, value in sl_driver.get(('IEC', 'Прочие архивируемые параметры'), {}).items()}
+                      for plc, sl_driver in return_sl_cpu_drv.items()}
 
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                  sl_sig_alg=sl_sig_alg, 
@@ -628,7 +642,8 @@ try:
                  sl_cpu_drv_signal=sl_cpu_drv_signal,
                  sl_grh=sl_grh,
                  sl_sig_alr=sl_sig_alr,
-                 choice_tr=choice_tr)
+                 choice_tr=choice_tr,
+                 sl_cpu_drv_iec=sl_cpu_drv_iec)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):

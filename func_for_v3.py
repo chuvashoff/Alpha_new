@@ -254,7 +254,7 @@ def is_read_create_diag(book, *sheets_signal):
         'M557D': ['Резерв'] * 32,
         'M557O': ['Резерв'] * 32,
         'M932C_2N': ['Резерв'] * 8,
-        'M903E': 'CPU', 'M991E': 'CPU', 'M915E': 'CPU', 'M501E': 'CPU',
+        'M903E': 'CPU', 'M991E': 'CPU', 'M915E': 'CPU', 'M501E': 'CPU', 'M991S': 'CPU',
         'M548A': ['Резерв'] * 16,
         'M538V': ['Резерв'] * 8,
         'M558D': ['Резерв'] * 32,
@@ -266,6 +266,7 @@ def is_read_create_diag(book, *sheets_signal):
     sl_type_modules = {
         'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
         'M991E': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
+        'M991S': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
         'M547A': 'Types.DIAG_M547A.DIAG_M547A_PLC_View',
         'M548A': 'Types.DIAG_M548A.DIAG_M548A_PLC_View',
         'M537V': 'Types.DIAG_M537V.DIAG_M537V_PLC_View',
@@ -298,8 +299,9 @@ def is_read_create_diag(book, *sheets_signal):
     # sl_for_diag - словарь для корректной педечачи для создания индексов
     sl_for_diag = {}
     for name_cpu, value in sl_modules_cpu.items():
-        keys_sl_for_diag = [i if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E') else 'CPU' for i in value]
-        value_sl_for_diag = [value[i][0] if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E')
+        keys_sl_for_diag = [i if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E', 'M991S')
+                            else 'CPU' for i in value]
+        value_sl_for_diag = [value[i][0] if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E', 'M991S')
                              else (i, value[i][0]) for i in value]
         sl_for_diag[name_cpu] = dict(zip(keys_sl_for_diag, value_sl_for_diag))
 
@@ -615,7 +617,9 @@ def is_read_drv(sheet, sl_all_drv):
     sl_type_drv = {
         'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
         'INT': 'Types.DRV_INT.DRV_INT_PLC_View',
-        'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View'
+        'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View',
+        'IECR': 'Types.DRV_AI.DRV_AI_PLC_View',
+        'IECB': 'Types.DRV_DI.DRV_DI_PLC_View'
     }
 
     cells = sheet['A1': 'N' + str(sheet.max_row)]
@@ -642,37 +646,42 @@ def is_read_drv(sheet, sl_all_drv):
     for par in cells:
         if par[0].value is None:
             break
-        set_par_cpu.add(par[index_cpu_name].value)
-        # Если в словаре sl_cpu_drv_signal нет инфы по cpu, то создаём для него внутренний пустой словарь
-        if par[index_cpu_name].value not in sl_cpu_drv_signal:
-            sl_cpu_drv_signal[par[index_cpu_name].value] = {}
-        # Если в sl_cpu_drv_signal[cpu] нет инфы по драйверу, то создаём для него внутренний кортеж
-        if par[index_drv].value not in sl_cpu_drv_signal[par[index_cpu_name].value]:
-            sl_cpu_drv_signal[par[index_cpu_name].value][par[index_drv].value] = ()
-        sl_cpu_drv_signal[par[index_cpu_name].value][par[index_drv].value] += (par[index_alg_name].value,)
+        # Если указанный драйвер есть в словаре объявленных драйверов, то обрабатываем
+        if par[index_drv].value in sl_all_drv:
+            set_par_cpu.add(par[index_cpu_name].value)
+            # Получаем тип переменной (нужно для удобного отсечения и дальнейшего использования)
+            type_sig_par = par[index_type_sig].value.replace(' (с имитацией)', '')
 
-        if par[index_cpu_name].value not in return_sl_cpu_drv:
-            return_sl_cpu_drv[par[index_cpu_name].value] = {}
+            # Если в словаре sl_cpu_drv_signal нет инфы по cpu, то создаём для него внутренний пустой словарь
+            if par[index_cpu_name].value not in sl_cpu_drv_signal:
+                sl_cpu_drv_signal[par[index_cpu_name].value] = {}
+            # Если в sl_cpu_drv_signal[cpu] нет инфы по драйверу, то создаём для него внутренний кортеж
+            if par[index_drv].value not in sl_cpu_drv_signal[par[index_cpu_name].value]:
+                sl_cpu_drv_signal[par[index_cpu_name].value][par[index_drv].value] = ()
+            sl_cpu_drv_signal[par[index_cpu_name].value][par[index_drv].value] += (par[index_alg_name].value,)
 
-        if (par[index_drv].value, sl_all_drv.get(par[index_drv].value)) \
-                not in return_sl_cpu_drv[par[index_cpu_name].value]:
-            return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value,
-                                                          sl_all_drv.get(par[index_drv].value))] = {}
+            if par[index_cpu_name].value not in return_sl_cpu_drv:
+                return_sl_cpu_drv[par[index_cpu_name].value] = {}
 
-        type_sig_in_tuple = sl_type_drv.get(par[index_type_sig].value, 'Types.').replace('Types.', '')
-        type_msg_in_tuple = (par[index_type_msg].value if par[index_type_sig].value == 'BOOL' else '-')
-        c_off_in_tuple = (sl_color_di.get(par[index_color_off].fill.start_color.index)
-                          if par[index_type_sig].value == 'BOOL' else '0')
-        c_on_in_tuple = (sl_color_di.get(par[index_color_on].fill.start_color.index)
-                         if par[index_type_sig].value == 'BOOL' else '0')
-        unit_in_tuple = (par[index_unit].value if par[index_type_sig].value != 'BOOL' else '-')
-        fracdig_in_tuple = (par[index_fracdig].value if par[index_type_sig].value == 'FLOAT' else '0')
+            if (par[index_drv].value, sl_all_drv.get(par[index_drv].value)) \
+                    not in return_sl_cpu_drv[par[index_cpu_name].value]:
+                return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value,
+                                                              sl_all_drv.get(par[index_drv].value))] = {}
 
-        tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
-                     c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple)
+            type_sig_in_tuple = sl_type_drv.get(type_sig_par, 'Types.').replace('Types.', '')
+            type_msg_in_tuple = (par[index_type_msg].value if type_sig_par == 'BOOL' else '-')
+            c_off_in_tuple = (sl_color_di.get(par[index_color_off].fill.start_color.index)
+                              if type_sig_par == 'BOOL' else '0')
+            c_on_in_tuple = (sl_color_di.get(par[index_color_on].fill.start_color.index)
+                             if type_sig_par == 'BOOL' else '0')
+            unit_in_tuple = (par[index_unit].value if type_sig_par != 'BOOL' else '-')
+            fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR') else '0')
 
-        return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value, sl_all_drv.get(par[index_drv].value))][
-            par[index_alg_name].value] = tuple_par
+            tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
+                         c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple)
+
+            return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value, sl_all_drv.get(par[index_drv].value))][
+                par[index_alg_name].value] = tuple_par
 
     return sl_cpu_drv_signal, return_sl_cpu_drv
 

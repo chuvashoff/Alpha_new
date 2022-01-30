@@ -67,6 +67,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
             eunit_drv_ind = is_f_ind(cells_name[0], 'Единица измерения')
             t_sig_drv_ind = is_f_ind(cells_name[0], 'Тип')
             cpu_par = is_f_ind(cells_name[0], 'CPU')
+            name_drv_ind = is_f_ind(cells_name[0], 'Драйвер')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -180,14 +181,16 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                             (par[alg_name_ind].value.replace('MOD|', '') + '.Value', '-')
                 # при условии, что парсим лист Драйверов
                 # и параметр принадлежит контроллеру объекта
-                elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj]:
+                # и указанный драйвер переменной есть в объявленных
+                elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj] \
+                        and par[name_drv_ind].value in sl_all_drv:
                     sl_type_unit = {'BOOL': '-', 'INT': par[eunit_drv_ind].value, 'FLOAT': par[eunit_drv_ind].value,
-                                    'IEC': '-', 'Daily': '-'}
+                                    'IEC': '-', 'Daily': '-', 'IECB': '-', 'IECR': par[eunit_drv_ind].value}
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
                     # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
                     sl_drv_trends = \
                         {f'{f_ind_json(par[rus_par_ind].value)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
-                                                                   sl_type_unit[par[t_sig_drv_ind].value])}
+                                                                   sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
                     # если в словаре драйверов отсутвует такой драйвер, то создаём
                     if drv_ not in sl_node_drv:
                         sl_node_drv[drv_] = sl_drv_trends
