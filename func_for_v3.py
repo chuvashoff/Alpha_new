@@ -785,3 +785,12 @@ def is_f_ind(cell, name_col, target_count=1):
             else:
                 count += 1
     return 0
+
+
+def f_ind_json(target_str):
+    replace_values = {'\"': '', '\'': ''}
+    # получаем заменяемое: подставляемое из словаря в цикле
+    for i, j in replace_values.items():
+        # меняем все target_str на подставляемое
+        target_str = target_str.replace(i, j)
+    return target_str

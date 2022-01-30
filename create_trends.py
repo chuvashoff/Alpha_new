@@ -1,6 +1,5 @@
-from my_func import is_f_ind, f_ind_json
 from json import dumps as json_dumps
-from func_for_v3 import check_diff_file
+from func_for_v3 import check_diff_file, is_f_ind, f_ind_json
 import os
 
 

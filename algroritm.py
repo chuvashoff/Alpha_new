@@ -1,9 +1,18 @@
 from string import Template
-from my_func import is_cor_chr
+
+
+# Функция для замены в строке спецсимволов HTML, пока используется в парсинге листа алгоритмов
+def is_cor_chr(st):
+    sl_chr = {'<': '&lt;', '>': '&gt;', '"': '&quot;'}
+    tmp = []
+    tmp.extend(st)
+    for i in range(len(tmp)):
+        if tmp[i] in sl_chr:
+            tmp[i] = sl_chr[tmp[i]]
+    return ''.join(tmp)
+
 
 # Функция для выдёргивания переменных хода алгоритма
-
-
 def is_load_algoritm(controller, cells, sheet):
     sl_algoritm = {}
     # Для выдачи команд заполняем sl_algoritm парами алг.имя команды: (руское наименование команды, тип сигнала-BOOL)
