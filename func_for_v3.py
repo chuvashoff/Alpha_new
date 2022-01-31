@@ -170,7 +170,7 @@ def is_read_im(sheet, sheet_imao):
     sl_im_plc = {'ИМ1Х0': 'IM1x0.IM1x0_PLC_View', 'ИМ1Х1': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2': 'IM1x2.IM1x2_PLC_View',
                  'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View', 'ИМ1Х0и': 'IM1x0.IM1x0_PLC_View',
                  'ИМ1Х1и': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2и': 'IM1x2.IM1x2_PLC_View', 'ИМ2Х2с': 'IM2x2.IM2x2_PLC_View',
-                 'ИМАО': 'IM_AO.IM_AO_PLC_View'}
+                 'ИМАО': 'IM_AO.IM_AO_PLC_View', 'ИМ2Х2ПЧ': 'IM2x2PCH.IM2x2PCH_PLC_View'}
     # Словарь соответствия рода ИМ и его идентификатора в Альфе
     sl_gender = {'С': '0', 'М': '1', 'Ж': '2'}
 
