@@ -67,6 +67,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
             t_sig_drv_ind = is_f_ind(cells_name[0], 'Тип')
             cpu_par = is_f_ind(cells_name[0], 'CPU')
             name_drv_ind = is_f_ind(cells_name[0], 'Драйвер')
+            reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -76,10 +77,10 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 if par[rus_par_ind].value is None:
                     break
                 # при условии, что находимся на листе 'Измеряемые', 'Расчетные' или на Входные и сигнал не привязан к ИМ
-                # и параметр принадлежит контроллеру объекта
+                # и параметр принадлежит контроллеру объекта и не переведено в резерв
                 if (list_config in ('Измеряемые', 'Расчетные') or
                     list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
-                        par[cpu_par].value in sl_object_all[obj]:
+                        par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') +
                                                                           '.Value',
@@ -270,6 +271,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
         alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
         eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
         cpu_par = is_f_ind(cells_name[0], 'CPU')
+        reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
 
         # Устанавливаем диапазон для чтения параметров
         cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -279,8 +281,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
             # Если конец строки, то заканчиваем обработку ячеек
             if par[rus_par_ind].value is None:
                 break
-            # если параметр принадлежит контроллеру объекта
-            if par[cpu_par].value in sl_object_all[obj]:
+            # если параметр принадлежит контроллеру объекта и не переведено в резерв
+            if par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
                 # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                 sl_node_set[par[rus_par_ind].value] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
                                                        par[eunit_ind].value)
@@ -306,6 +308,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
             alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
             # eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
             node_name_ind = is_f_ind(cells_name[0], 'Узел')
+            reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -315,10 +318,10 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                 if par[rus_par_ind].value is None:
                     break
                 # при условии, что находимся на листе 'Измеряемые', 'Расчетные' или на Входные и сигнал не привязан к ИМ
-                # и параметр принадлежит контроллеру объекта
+                # и параметр принадлежит контроллеру объекта и не переведено в резерв
                 if (list_config in ('Измеряемые', 'Расчетные') or list_config == 'Входные' and
                     par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
-                        par[cpu_par].value in sl_object_all[obj]:
+                        par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = \
                         {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') + '.fValue',

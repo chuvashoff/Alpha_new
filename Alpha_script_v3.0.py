@@ -7,6 +7,7 @@ import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
+from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -45,6 +46,15 @@ try:
             pref_IP += (p[1].value + '.',)
         if p[0].value == 'Cетевая часть адреса резервной сети (связь с CPU)':
             pref_IP += (p[1].value + '.',)
+            break
+    # Читаем размер мнемосхем
+    size_shirina = 1920
+    size_vysota = 900
+    for p in cells:
+        if p[0].value == 'Ширина мнемосхемы, в пикселях':
+            size_shirina = int(p[1].value)
+        if p[0].value == 'Высота мнемосхемы, в пикселях':
+            size_vysota = int(p[1].value)
             break
     # Читаем состав объектов и заполняем sl_object_all
     cells = sheet['A23': 'U23']
@@ -100,14 +110,21 @@ try:
                 sl_CPU_spec[p[0].value] += ('АПР',)
 
     # Определение заведённых драйверов
+    # Также Определяем список объявленных мнемосхем
     cells = sheet['A1': 'A' + str(sheet.max_row)]
     drv_eng, drv_rus = [], []
+    tuple_mnemo = tuple()
     for p in cells:
         if p[0].value == 'Наименование драйвера (Eng)':
             jj = 1
             while sheet[p[0].row][jj].value and sheet[p[0].row + 1][jj].value:
                 drv_eng.append(sheet[p[0].row][jj].value)
                 drv_rus.append(sheet[p[0].row + 1][jj].value)
+                jj += 1
+        if p[0].value == 'Мнемосхемы проекта':
+            jj = 1
+            while sheet[p[0].row + 1][jj].value:
+                tuple_mnemo += (sheet[p[0].row + 1][jj].value,)
                 jj += 1
     sl_all_drv = dict(zip(drv_eng, drv_rus))
     # sl_all_drv = {Англ. имя драйвера: русское имя}
@@ -127,6 +144,9 @@ try:
     # Если нет папки File_for_Import/Trends, то создадим её
     if not os.path.exists(os.path.join('File_for_Import', 'Trends')):
         os.mkdir(os.path.join('File_for_Import', 'Trends'))
+    # Если нет папки File_for_Import/Mnemo, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'Mnemo')):
+        os.mkdir(os.path.join('File_for_Import', 'Mnemo'))
 
     sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
                 'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
@@ -135,16 +155,52 @@ try:
 
     # Измеряемые
     # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
-    return_sl_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+    # sl_mnemo = {узел: список параметров узла}
+    return_sl_ai, sl_mnemo = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+
+    # return_sl_mnemo = {узел: список параметров узла}
+    # Передаём такой словарь, но упорядоченный по узлам, согласно объявлению
+    if sl_mnemo:
+        create_mnemo_param(name_list='Измеряемые', name_group='AI', name_page='AINP', base_type_param='S_A_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
 
     # Расчетные
-    return_sl_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+    return_sl_ae, sl_mnemo = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+
+    if sl_mnemo:
+        create_mnemo_param(name_list='Расчетные', name_group='AE', name_page='AEVL', base_type_param='S_A_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
 
     # Дискретные
-    return_sl_di, sl_wrn_di = is_read_di(sheet=book['Входные'])
+    return_sl_di, sl_wrn_di, sl_mnemo = is_read_di(sheet=book['Входные'])
+
+    if sl_mnemo:
+        create_mnemo_param(name_list='Дискретные', name_group='DI', name_page='DINP', base_type_param='S_D_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
 
     # ИМ
     return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
+
+    # Создаём и набиваем словарь для мнемосхемы наработок
+    sl_mnemo = {'Наработка': list(), 'Перестановки': list()}
+    for cpu, sl_c in sl_cnt.items():
+        for nar in sl_c:
+            if 'WorkTime' in nar:
+                sl_mnemo['Наработка'].append(nar)
+            elif 'Swap' in nar:
+                sl_mnemo['Перестановки'].append(nar)
+
+    if sl_cnt:
+        create_mnemo_param(name_list='Наработка', name_group='System.CNT', name_page='SCNT', base_type_param='S_CNT',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param=sl_mnemo)
 
     # # sl_cnt = {CPU: {алг.имя : русское имя}}
     # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
@@ -156,7 +212,7 @@ try:
     sl_modules_cpu, sl_for_diag = is_read_create_diag(book, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Уставки
-    return_sl_set = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
+    return_sl_set, sl_set_mnemo_not_use = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
 
     # Кнопки
     return_sl_btn = is_read_btn(sheet=book['Кнопки'])
@@ -167,6 +223,10 @@ try:
     # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
 
     # Сигналы остальные
+    create_mnemo_pz(name_group='System.PZ', name_page='ПЗ', base_type_param='S_ALR',
+                    size_shirina=size_shirina,
+                    size_vysota=size_vysota,
+                    param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz])
 
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
                                                                                               sl_wrn_di=sl_wrn_di)

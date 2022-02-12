@@ -76,6 +76,8 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
 def is_read_ai_ae_set(sheet, type_signal):
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
     return_sl = {}
+    # return_sl_mnemo = {узел: список параметров узла}
+    return_sl_mnemo = {}
     sl_plc_aspect = {'AI': 'AI.AI_PLC_View', 'AE': 'AE.AE_PLC_View', 'SET': 'SET.SET_PLC_View'}
 
     cells = sheet['A1': 'AG' + str(sheet.max_row)]
@@ -86,6 +88,7 @@ def is_read_ai_ae_set(sheet, type_signal):
     index_frag_dig = is_f_ind(cells[0], 'Количество знаков')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_res = is_f_ind(cells[0], 'Резервный')
+    index_node_mnemo = is_f_ind(cells[0], 'Узел')
 
     cells = sheet['A2': 'AG' + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
@@ -104,13 +107,20 @@ def is_read_ai_ae_set(sheet, type_signal):
                 par[index_unit].value,
                 par[index_short_name].value,
                 par[index_frag_dig].value)})
+            # Если не парсим уставки, то заполняем словарь для мнемосхемы
+            if 'SP|' not in par[index_alg_name].value and par[index_node_mnemo].value not in return_sl_mnemo:
+                return_sl_mnemo[par[index_node_mnemo].value] = list()
+            if 'SP|' not in par[index_alg_name].value:
+                return_sl_mnemo[par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
 
-    return return_sl
+    return return_sl, return_sl_mnemo
 
 
 def is_read_di(sheet):
     # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
     return_sl_di = {}
+    # return_sl_mnemo = {узел: список параметров узла}
+    return_sl_mnemo = {}
 
     # Словарь соответствия цветов и его идентификатора в Альфе
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
@@ -130,6 +140,7 @@ def is_read_di(sheet):
     index_control_cel = is_f_ind(cells[0], 'Контроль цепи')
     index_wrn = is_f_ind(cells[0], 'Предупреждение')
     index_wrn_text = is_f_ind(cells[0], 'Текст предупреждения')
+    index_node_mnemo = is_f_ind(cells[0], 'Узел')
 
     cells = sheet['A2': 'AC' + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
@@ -159,7 +170,11 @@ def is_read_di(sheet):
                 alg_par = par[index_alg_name].value.replace('|', '_')
                 sl_wrn_di[cpu_name_par][alg_par] = (par[index_wrn_text].value, par[index_wrn].value)
 
-    return return_sl_di, sl_wrn_di
+            if par[index_node_mnemo].value not in return_sl_mnemo:
+                return_sl_mnemo[par[index_node_mnemo].value] = list()
+            return_sl_mnemo[par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
+
+    return return_sl_di, sl_wrn_di, return_sl_mnemo
 
 
 def is_read_im(sheet, sheet_imao):
@@ -318,19 +333,22 @@ def is_read_create_diag(book, *sheets_signal):
         no_stand_kc_index = is_f_ind(cells_run[0], 'Нестандартный канал КЦ')
         name_module_par_kc_index = is_f_ind(cells_run[0], 'Номер модуля контроля')
         num_canal_kc_index = is_f_ind(cells_run[0], 'Номер канала контроля')
+        reserve_par_index = is_f_ind(cells_run[0], 'Резервный')
         cells_run = sheet_run['A2': 'O' + str(sheet_run.max_row)]
         # пробегаемся по параметрам на листе
         for par in cells_run:
-            # если не указан НЕстандартный канал, то вносим в список
-            if par[no_stand_index].value == 'Нет':
-                tmp_ind = int(par[num_canal_index].value) - 1
-                sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_index].value][1][tmp_ind] = \
-                    par[name_par_index].value
-            # если выбран контроль цепи и контроль стандартный, то также добавляем в список
-            if par[control_index].value == 'Да' and par[no_stand_kc_index].value == 'Нет':
-                tmp_ind = int(par[num_canal_kc_index].value) - 1
-                sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_kc_index].value][1][tmp_ind] = \
-                    f"КЦ: {par[name_par_index].value}"
+            # Если сигнал не резернвый...
+            if par[reserve_par_index].value == 'Нет':
+                # если не указан НЕстандартный канал, то вносим в список
+                if par[no_stand_index].value == 'Нет':
+                    tmp_ind = int(par[num_canal_index].value) - 1
+                    sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_index].value][1][tmp_ind] = \
+                        par[name_par_index].value
+                # если выбран контроль цепи и контроль стандартный, то также добавляем в список
+                if par[control_index].value == 'Да' and par[no_stand_kc_index].value == 'Нет':
+                    tmp_ind = int(par[num_canal_kc_index].value) - 1
+                    sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_kc_index].value][1][tmp_ind] = \
+                        f"КЦ: {par[name_par_index].value}"
 
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
     return {cpu: {mod: (sl_type_modules.get(value[0], 'Types.').replace('Types.', ''), ) + value
