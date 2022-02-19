@@ -891,6 +891,162 @@
             <attribute type="Attributes.ShortName" value="PFR"/>
             <attribute type="Attributes.FracDigits" value="1"/>
           </ct:object>
+          <ct:object name="AE_Vpp" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Виброскорость корпуса двигателя в зоне передней подвески"/>
+            <attribute type="Attributes.EUnit" value="мм/с"/>
+            <attribute type="Attributes.ShortName" value="V"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_Vzp" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Виброскорость корпуса двигателя в зоне задней подвески "/>
+            <attribute type="Attributes.EUnit" value="мм/с"/>
+            <attribute type="Attributes.ShortName" value="V"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT1" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №1 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT2" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №2 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT3" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №3 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT4" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №4 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT5" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №5 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT6" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №6 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT7" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №7 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT8" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №8 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT9" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №9 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT10" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №10 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT11" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №11 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_PP_ZHT12" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Пульсация давления в ЖТ №12 (размах пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="Pp"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT1" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №1 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT2" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №2 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT3" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №3 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT4" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №4 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT5" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №5 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT6" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №6 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT7" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №7 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT8" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №8 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT9" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №9 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT10" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №10 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT11" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №11 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
+          <ct:object name="AE_P_ZHT12" base-type="Types.AE.AE_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Давление в ЖТ №12 (СКЗ пульсаций)"/>
+            <attribute type="Attributes.EUnit" value="кПа"/>
+            <attribute type="Attributes.ShortName" value="P"/>
+            <attribute type="Attributes.FracDigits" value="2"/>
+          </ct:object>
         </ct:object>
         <ct:object name="DI" access-level="public">
           <ct:object name="DI_KC1_VNA1" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -944,7 +1100,7 @@
             <attribute type="Attributes.sColorOn" value="1"/>
           </ct:object>
           <ct:object name="DI_BZD_AO" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="АО от БЗД"/>
+            <attribute type="unit.System.Attributes.Description" value="АО от БЗА"/>
             <attribute type="Attributes.sColorOff" value="0"/>
             <attribute type="Attributes.sColorOn" value="3"/>
           </ct:object>
@@ -992,6 +1148,136 @@
             <attribute type="unit.System.Attributes.Description" value="Кран № 6р закрыт"/>
             <attribute type="Attributes.sColorOff" value="0"/>
             <attribute type="Attributes.sColorOn" value="1"/>
+          </ct:object>
+          <ct:object name="DI_Vpp_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная вибрация корпуса двигателя "/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_Vpp_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная вибрация корпуса двигателя "/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht1_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ1"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht1_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ1"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht2_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ2"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht2_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ2"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht3_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ3"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht3_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ3"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht4_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ4"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht4_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ4"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht5_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ5"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht5_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ5"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht6_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ6"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht6_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ6"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht7_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ7"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht7_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ7"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht8_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ8"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht8_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ8"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht9_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ9"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht9_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ9"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht10_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ10"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht10_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ10"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht11_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ11"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht11_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ11"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
+          <ct:object name="DI_PPzht12_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ12"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
+          <ct:object name="DI_PPzht12_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Опасная пульсация давления в ЖТ12"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
           </ct:object>
           <ct:object name="DI_dPmf1_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления масла на фильтрах БВМФ-84"/>
@@ -1140,7 +1426,7 @@
             <attribute type="Attributes.StartView" value="1"/>
             <attribute type="Attributes.Gender" value="1"/>
           </ct:object>
-          <ct:object name="PZStV" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+          <ct:object name="PZStV" base-type="Types.IM2x2.IM2x2_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ПЗСтВ"/>
             <attribute type="Attributes.StartView" value="1"/>
             <attribute type="Attributes.Gender" value="2"/>
@@ -1163,6 +1449,11 @@
           <ct:object name="SHIM" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Блокировка ШИМ ВНА"/>
             <attribute type="Attributes.StartView" value="0"/>
+            <attribute type="Attributes.Gender" value="2"/>
+          </ct:object>
+          <ct:object name="EMT_PZStV" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="ЭМТ ПЗ СтВ"/>
+            <attribute type="Attributes.StartView" value="1"/>
             <attribute type="Attributes.Gender" value="2"/>
           </ct:object>
           <ct:object name="VNA" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -1470,14 +1761,14 @@
             <ct:object name="AD115" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD115 (M548A)"/>
               <attribute type="Attributes.ShortName" value="AD115"/>
-              <attribute type="Attributes.Channel_1" value="Давление топливного газа на входе в дифузионный коллектор №2"/>
+              <attribute type="Attributes.Channel_1" value="Резерв"/>
               <attribute type="Attributes.Channel_2" value="Резерв"/>
               <attribute type="Attributes.Channel_3" value="Давление воздуха отбираемого из-за КВД на охлаждение"/>
-              <attribute type="Attributes.Channel_4" value="Давление топливного газа на входе в гомогенный коллектор"/>
-              <attribute type="Attributes.Channel_5" value="Давление топливного газа на входе в дифузионный коллектор №1"/>
-              <attribute type="Attributes.Channel_6" value="Давление топливного газа на входе в ДГ центрального модуля"/>
-              <attribute type="Attributes.Channel_7" value="Виброскорость корпуса двигателя в зоне передней подвески"/>
-              <attribute type="Attributes.Channel_8" value="Виброскорость корпуса двигателя в зоне задней подвески "/>
+              <attribute type="Attributes.Channel_4" value="Давление топливного газа на выходе из ДГ гомогенного коллектора"/>
+              <attribute type="Attributes.Channel_5" value="Давление топливного газа на выходе из ДГ диффузионных коллекторов"/>
+              <attribute type="Attributes.Channel_6" value="Давление топливного газа на выходе из ДГ центрального модуля"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
               <attribute type="Attributes.Channel_9" value="Контроль катушки 1 ВНА"/>
               <attribute type="Attributes.Channel_10" value="Контроль катушки 2 ВНА"/>
               <attribute type="Attributes.Channel_11" value="Общий контроль выходов ВНА"/>
@@ -1490,34 +1781,34 @@
             <ct:object name="AD116" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD116 (M548A)"/>
               <attribute type="Attributes.ShortName" value="AD116"/>
-              <attribute type="Attributes.Channel_1" value="Пульсация давления в ЖТ №1 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_2" value="Пульсация давления в ЖТ №2 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_3" value="Пульсация давления в ЖТ №3 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_4" value="Пульсация давления в ЖТ №4 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_5" value="Пульсация давления в ЖТ №5 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_6" value="Пульсация давления в ЖТ №6 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_7" value="Давление в ЖТ №1 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_8" value="Давление в ЖТ №2 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_9" value="Давление в ЖТ №3 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_10" value="Давление в ЖТ №4 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_11" value="Давление в ЖТ №5 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_12" value="Давление в ЖТ №6 (СКЗ пульсаций)"/>
-              <attribute type="Attributes.Channel_13" value="Пульсация давления в ЖТ №7 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_14" value="Пульсация давления в ЖТ №8 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_15" value="Пульсация давления в ЖТ №9 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_16" value="Пульсация давления в ЖТ №10 (размах пульсаций)"/>
+              <attribute type="Attributes.Channel_1" value="Резерв"/>
+              <attribute type="Attributes.Channel_2" value="Резерв"/>
+              <attribute type="Attributes.Channel_3" value="Резерв"/>
+              <attribute type="Attributes.Channel_4" value="Резерв"/>
+              <attribute type="Attributes.Channel_5" value="Резерв"/>
+              <attribute type="Attributes.Channel_6" value="Резерв"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
+              <attribute type="Attributes.Channel_9" value="Резерв"/>
+              <attribute type="Attributes.Channel_10" value="Резерв"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Резерв"/>
+              <attribute type="Attributes.Channel_16" value="Резерв"/>
             </ct:object>
             <ct:object name="AD117" base-type="Types.DIAG_M548A.DIAG_M548A_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD117 (M548A)"/>
               <attribute type="Attributes.ShortName" value="AD117"/>
-              <attribute type="Attributes.Channel_1" value="Пульсация давления в ЖТ №11 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_2" value="Пульсация давления в ЖТ №12 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_3" value="Давление в КС №7 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_4" value="Давление в КС №8 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_5" value="Давление в КС №9 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_6" value="Давление в КС №10 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_7" value="Давление в КС №11 (размах пульсаций)"/>
-              <attribute type="Attributes.Channel_8" value="Давление в КС №12 (размах пульсаций)"/>
+              <attribute type="Attributes.Channel_1" value="Резерв"/>
+              <attribute type="Attributes.Channel_2" value="Резерв"/>
+              <attribute type="Attributes.Channel_3" value="Резерв"/>
+              <attribute type="Attributes.Channel_4" value="Резерв"/>
+              <attribute type="Attributes.Channel_5" value="Резерв"/>
+              <attribute type="Attributes.Channel_6" value="Резерв"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
               <attribute type="Attributes.Channel_9" value="Положение дозатора газа дифузионных коллекторов"/>
               <attribute type="Attributes.Channel_10" value="Положение дозатора газа гомогенного коллектора"/>
               <attribute type="Attributes.Channel_11" value="Положение дозатора газа центрального контура"/>
@@ -1589,7 +1880,7 @@
               <attribute type="Attributes.Channel_25" value="Резерв"/>
               <attribute type="Attributes.Channel_26" value="Резерв"/>
               <attribute type="Attributes.Channel_27" value="Резерв"/>
-              <attribute type="Attributes.Channel_28" value="Резерв"/>
+              <attribute type="Attributes.Channel_28" value="АО от БЗА"/>
               <attribute type="Attributes.Channel_29" value="Резерв"/>
               <attribute type="Attributes.Channel_30" value="Резерв"/>
               <attribute type="Attributes.Channel_31" value="Резерв"/>
@@ -1598,8 +1889,8 @@
             <ct:object name="AD132" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD132 (M558D)"/>
               <attribute type="Attributes.ShortName" value="AD132"/>
-              <attribute type="Attributes.Channel_1" value="АО от БЗД"/>
-              <attribute type="Attributes.Channel_2" value="КЦ: АО от БЗД"/>
+              <attribute type="Attributes.Channel_1" value="Резерв"/>
+              <attribute type="Attributes.Channel_2" value="Резерв"/>
               <attribute type="Attributes.Channel_3" value="Резерв"/>
               <attribute type="Attributes.Channel_4" value="Резерв"/>
               <attribute type="Attributes.Channel_5" value="Резерв"/>
@@ -1621,38 +1912,38 @@
               <attribute type="Attributes.Channel_21" value="КПВ КВД открыты"/>
               <attribute type="Attributes.Channel_22" value="КПВЗ и КПГ ТВД открыты"/>
               <attribute type="Attributes.Channel_23" value="ПОС включена"/>
-              <attribute type="Attributes.Channel_24" value="Опасная вибрация корпуса двигателя "/>
-              <attribute type="Attributes.Channel_25" value="Повышенная вибрация корпуса двигателя "/>
-              <attribute type="Attributes.Channel_26" value="Повышенная пульсация давления в ЖТ1"/>
-              <attribute type="Attributes.Channel_27" value="Опасная пульсация давления в ЖТ1"/>
-              <attribute type="Attributes.Channel_28" value="Повышенная пульсация давления в ЖТ2"/>
-              <attribute type="Attributes.Channel_29" value="Опасная пульсация давления в ЖТ2"/>
-              <attribute type="Attributes.Channel_30" value="Повышенная пульсация давления в ЖТ3"/>
-              <attribute type="Attributes.Channel_31" value="Опасная пульсация давления в ЖТ3"/>
-              <attribute type="Attributes.Channel_32" value="Повышенная пульсация давления в ЖТ4"/>
+              <attribute type="Attributes.Channel_24" value="Резерв"/>
+              <attribute type="Attributes.Channel_25" value="Резерв"/>
+              <attribute type="Attributes.Channel_26" value="Резерв"/>
+              <attribute type="Attributes.Channel_27" value="Резерв"/>
+              <attribute type="Attributes.Channel_28" value="Резерв"/>
+              <attribute type="Attributes.Channel_29" value="Резерв"/>
+              <attribute type="Attributes.Channel_30" value="Резерв"/>
+              <attribute type="Attributes.Channel_31" value="Резерв"/>
+              <attribute type="Attributes.Channel_32" value="Резерв"/>
             </ct:object>
             <ct:object name="AD133" base-type="Types.DIAG_M558D.DIAG_M558D_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Диагностика модуля AD133 (M558D)"/>
               <attribute type="Attributes.ShortName" value="AD133"/>
-              <attribute type="Attributes.Channel_1" value="Опасная пульсация давления в ЖТ4"/>
-              <attribute type="Attributes.Channel_2" value="Повышенная пульсация давления в ЖТ5"/>
-              <attribute type="Attributes.Channel_3" value="Опасная пульсация давления в ЖТ5"/>
-              <attribute type="Attributes.Channel_4" value="Повышенная пульсация давления в ЖТ6"/>
-              <attribute type="Attributes.Channel_5" value="Опасная пульсация давления в ЖТ6"/>
-              <attribute type="Attributes.Channel_6" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)"/>
-              <attribute type="Attributes.Channel_7" value="Повышенная пульсация давления в ЖТ7"/>
-              <attribute type="Attributes.Channel_8" value="Опасная пульсация давления в ЖТ7"/>
-              <attribute type="Attributes.Channel_9" value="Повышенная пульсация давления в ЖТ8"/>
-              <attribute type="Attributes.Channel_10" value="Опасная пульсация давления в ЖТ8"/>
-              <attribute type="Attributes.Channel_11" value="Повышенная пульсация давления в ЖТ9"/>
-              <attribute type="Attributes.Channel_12" value="Опасная пульсация давления в ЖТ9"/>
-              <attribute type="Attributes.Channel_13" value="Повышенная пульсация давления в ЖТ10"/>
-              <attribute type="Attributes.Channel_14" value="Опасная пульсация давления в ЖТ10"/>
-              <attribute type="Attributes.Channel_15" value="Повышенная пульсация давления в ЖТ11"/>
-              <attribute type="Attributes.Channel_16" value="Опасная пульсация давления в ЖТ11"/>
-              <attribute type="Attributes.Channel_17" value="Повышенная пульсация давления в ЖТ12"/>
-              <attribute type="Attributes.Channel_18" value="Опасная пульсация давления в ЖТ12"/>
-              <attribute type="Attributes.Channel_19" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)"/>
+              <attribute type="Attributes.Channel_1" value="Резерв"/>
+              <attribute type="Attributes.Channel_2" value="Резерв"/>
+              <attribute type="Attributes.Channel_3" value="Резерв"/>
+              <attribute type="Attributes.Channel_4" value="Резерв"/>
+              <attribute type="Attributes.Channel_5" value="Резерв"/>
+              <attribute type="Attributes.Channel_6" value="Резерв"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
+              <attribute type="Attributes.Channel_9" value="Резерв"/>
+              <attribute type="Attributes.Channel_10" value="Резерв"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Резерв"/>
+              <attribute type="Attributes.Channel_16" value="Резерв"/>
+              <attribute type="Attributes.Channel_17" value="Резерв"/>
+              <attribute type="Attributes.Channel_18" value="Резерв"/>
+              <attribute type="Attributes.Channel_19" value="Резерв"/>
               <attribute type="Attributes.Channel_20" value="Повышенный перепад давления масла на фильтрах БВМФ-84"/>
               <attribute type="Attributes.Channel_21" value="СК диффузионного контура №1 открыт"/>
               <attribute type="Attributes.Channel_22" value="СК диффузионного контура №1 закрыт"/>
@@ -1734,8 +2025,8 @@
               <attribute type="Attributes.Channel_26" value="Закрыть кран Кт0 подвода воздуха на продувку диффузионных контуров"/>
               <attribute type="Attributes.Channel_27" value="Аварийное управление краном Кт0 подвода воздуха на продувку диффузионных контуров"/>
               <attribute type="Attributes.Channel_28" value="Стоп кран Кт0 подвода воздуха на продувку диффузионных контуров"/>
-              <attribute type="Attributes.Channel_29" value="Открыть клапан Кт1 продувки диффузионного коллектора №1"/>
-              <attribute type="Attributes.Channel_30" value="Открыть клапан Кт1 продувки диффузионного коллектора №2"/>
+              <attribute type="Attributes.Channel_29" value="Открыть ЭМТ ПЗ СтВ"/>
+              <attribute type="Attributes.Channel_30" value="Закрыть перекрывную ЗСтВ"/>
               <attribute type="Attributes.Channel_31" value="Открыть перекрывную ЗСтВ"/>
               <attribute type="Attributes.Channel_32" value="Открыть воздушную ЗСтВ"/>
             </ct:object>
@@ -1744,8 +2035,8 @@
               <attribute type="Attributes.ShortName" value="AD142"/>
               <attribute type="Attributes.Channel_1" value="Резерв"/>
               <attribute type="Attributes.Channel_2" value="Резерв"/>
-              <attribute type="Attributes.Channel_3" value="Резерв"/>
-              <attribute type="Attributes.Channel_4" value="Резерв"/>
+              <attribute type="Attributes.Channel_3" value="Открыть клапан Кт1 продувки диффузионного коллектора №1"/>
+              <attribute type="Attributes.Channel_4" value="Открыть клапан Кт2 продувки диффузионного коллектора №2"/>
               <attribute type="Attributes.Channel_5" value="Контроль ПЛК (в AD200)"/>
               <attribute type="Attributes.Channel_6" value="Запрет питания команд ШИМ ВНА 48В"/>
               <attribute type="Attributes.Channel_7" value="Резерв"/>
@@ -3253,12 +3544,6 @@
             </ct:object>
             <ct:object name="PPzht12_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Повышенная пульсация давления в ЖТ12"/>
-            </ct:object>
-            <ct:object name="IVTA1_Fail" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 1)"/>
-            </ct:object>
-            <ct:object name="IVTA2_Fail" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="Отказ аппаратуры ИВ-ТА-8-10МП (пропуск канала 2)"/>
             </ct:object>
             <ct:object name="KS2_Flt" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Кран сброса воздуха из системы продувки ДК неисправность"/>

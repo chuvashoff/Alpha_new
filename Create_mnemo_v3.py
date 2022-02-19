@@ -21,7 +21,8 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
                        size_shirina: int, size_vysota: int, sl_param: dict):
     # uuid.uuid4()
     sl_size = {
-        '1920x900': (1780, 900, 780)
+        '1920x900': (1780, 900, 780),
+        '1920x780': (1780, 780, 780)
     }
     # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
     sl_uuid_base = {
@@ -439,7 +440,8 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
                     size_shirina: int, size_vysota: int, param_pz: list):
     # uuid.uuid4()
     sl_size = {
-        '1920x900': (1920, 900, 780)
+        '1920x900': (1920, 900, 780),
+        '1920x780': (1920, 780, 780)
     }
     # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
     sl_uuid_base = {
@@ -642,7 +644,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
                                  'Line_6': (806.5, 62, 0, vert_base - 70, 0, 0, 0, vert_base - 70, 0),
                                  'Line_7': (476.7, -413, 0, 950.3, 0, 0, 0, 950.3, 270),
                                  'Line_8': (476.7, -383.5, 0, 950.3, 0, 0, 0, 950.3, 270),
-                                 'Line_9': (476.7, 416.5, 0, 951, 0, 0, 0, 951, 270),
+                                 'Line_9': (476.7, (-413+(vert_base - 70)), 0, 951, 0, 0, 0, 951, 270),
                                  'Line_10': (857.5, 62, 0, vert_base - 70, 0, 0, 0, vert_base - 70, 0),
                                  'Line_11': (952.5, 62, 0, vert_base - 70, 0, 0, 0, vert_base - 70, 0)
                                  }.items():

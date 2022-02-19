@@ -1,4 +1,4 @@
-<type access-modifier="private" name="ПЗ_4" display-name="ПЗ_4" uuid="5b396994-6bff-4b0a-8dae-8f7022837308" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
+<type access-modifier="private" name="ПЗ_4" display-name="ПЗ_4" uuid="25e71af7-c98f-4951-a5be-d2237c3eb341" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
   <designed target="X" value="0" ver="3"/>
   <designed target="Y" value="0" ver="3"/>
   <designed target="ZValue" value="0" ver="3"/>
@@ -8,7 +8,7 @@
   <designed target="Enabled" value="true" ver="3"/>
   <designed target="Tooltip" value="" ver="3"/>
   <designed target="Width" value="1920" ver="3"/>
-  <designed target="Height" value="900" ver="3"/>
+  <designed target="Height" value="780" ver="3"/>
   <designed target="PenColor" value="4278190080" ver="3"/>
   <designed target="PenStyle" value="0" ver="3"/>
   <designed target="PenWidth" value="1" ver="3"/>
@@ -32,7 +32,7 @@
   <designed target="WindowPosition" value="1" ver="3"/>
   <designed target="WindowCloseMode" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Description_list" display-name="Description_list" uuid="8aaf26c0-cf33-41a1-8de0-a2fe74ff76b4" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Description_list" display-name="Description_list" uuid="c5ddc79a-d0a7-42a0-9233-459f9c2d211f" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="40.5" ver="3"/>
     <designed target="Y" value="13" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -49,143 +49,335 @@
     <designed target="TextAlignment" value="129" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_157_A156" display-name="Строка проверки защит_157_A156" uuid="a8a3d027-797c-4adf-a387-174fb19ecec0" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+  <object access-modifier="private" name="Строка проверки защит_133_A132" display-name="Строка проверки защит_133_A132" uuid="b2b111ec-3fd7-43bf-8eee-34d0353ae996" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="92" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A132"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_134_A133" display-name="Строка проверки защит_134_A133" uuid="5df5ea59-297b-487a-bc3d-a954180628ee" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="122" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A133"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_135_A134" display-name="Строка проверки защит_135_A134" uuid="3f122a1b-8648-40df-9081-5660a9aa9047" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="152" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A134"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_136_A135" display-name="Строка проверки защит_136_A135" uuid="37fc77ae-f72a-4e91-92c2-f3bbabf2cdb8" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="182" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A135"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_137_A136" display-name="Строка проверки защит_137_A136" uuid="016140e4-cd1b-4aa7-9623-121c2424c759" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="212" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A136"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_138_A137" display-name="Строка проверки защит_138_A137" uuid="0e63637b-0a02-4358-8043-cc836f193dd4" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="242" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A137"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_139_A138" display-name="Строка проверки защит_139_A138" uuid="c0e002e9-1ac2-4432-baf7-fc041b47c355" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="272" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A138"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_140_A139" display-name="Строка проверки защит_140_A139" uuid="8267dbb5-8922-45c5-8eb1-722513eced0e" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="302" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A139"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_141_A140" display-name="Строка проверки защит_141_A140" uuid="a016a2be-2608-4f12-aed7-35d74334986b" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="332" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A140"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_142_A141" display-name="Строка проверки защит_142_A141" uuid="166908df-336d-46e5-9b56-47d2a552bb8f" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="362" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A141"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_143_A142" display-name="Строка проверки защит_143_A142" uuid="795e0fe7-6820-4932-8f5d-5083bd9bba1b" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="392" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A142"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_144_A143" display-name="Строка проверки защит_144_A143" uuid="ed4bb6bf-61c4-40aa-b7f6-52abb5a5cd5a" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="422" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A143"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_145_A144" display-name="Строка проверки защит_145_A144" uuid="c5ad1593-02a5-4157-8182-cd94fc9ef9fc" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="452" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A144"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_146_A145" display-name="Строка проверки защит_146_A145" uuid="890b79c8-a4f5-4bea-ae59-ef77306c17a5" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="482" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A145"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_147_A146" display-name="Строка проверки защит_147_A146" uuid="c6a6c727-3225-4c9a-812b-31e2d5f4e9e4" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="512" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A146"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_148_A147" display-name="Строка проверки защит_148_A147" uuid="e53bad4c-6fd5-416b-b83f-3fc6c9a8a9cc" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="542" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A147"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_149_A148" display-name="Строка проверки защит_149_A148" uuid="1a3fe5f6-3b53-4cb5-8016-d19b8fd27b44" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="572" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A148"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_150_A149" display-name="Строка проверки защит_150_A149" uuid="015aedda-23df-46ec-a702-233dc81d61fb" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="602" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A149"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_151_A150" display-name="Строка проверки защит_151_A150" uuid="edfc968c-d7ad-4095-a6fb-8885c6c06e2e" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="632" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A150"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_152_A151" display-name="Строка проверки защит_152_A151" uuid="390098fa-6414-4933-85bc-9c278d5307e5" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="662" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A151"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_153_A152" display-name="Строка проверки защит_153_A152" uuid="ccc4a914-30af-4d73-ba5f-00f18c27dd75" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="692" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A152"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_154_A153" display-name="Строка проверки защит_154_A153" uuid="9b549237-8bc7-466d-b1b4-6803af12f75d" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="11.111" ver="3"/>
+    <designed target="Y" value="722" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A153"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_155_A154" display-name="Строка проверки защит_155_A154" uuid="b3e9fdbd-ea3b-41d2-b7c1-dbb4eadfed85" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="92" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A154"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_156_A155" display-name="Строка проверки защит_156_A155" uuid="2a65312a-2300-4841-bbe3-d627b5eed30a" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="122" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="System.PZ.A155"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Строка проверки защит_157_A156" display-name="Строка проверки защит_157_A156" uuid="71a0fa45-eac4-408b-8036-1470e07d08b3" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="152" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A156"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_158_A157" display-name="Строка проверки защит_158_A157" uuid="9c6439d1-4ada-4299-b222-1eb36cf0e7d6" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="122" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_158_A157" display-name="Строка проверки защит_158_A157" uuid="4d26325d-0219-4092-81b6-9816954f8fe9" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="182" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A157"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_159_A158" display-name="Строка проверки защит_159_A158" uuid="96d130e6-ec61-4004-aa2a-a26bcc77a21e" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="152" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_159_A158" display-name="Строка проверки защит_159_A158" uuid="930e2149-2922-4bc7-8a35-f10222650966" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="212" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A158"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_160_A159" display-name="Строка проверки защит_160_A159" uuid="f7fee9ad-5a79-4080-a00d-8c32f1384696" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="182" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_160_A159" display-name="Строка проверки защит_160_A159" uuid="912e2961-72fa-47d0-8775-d3a9060d25e1" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="242" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A159"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_161_A160" display-name="Строка проверки защит_161_A160" uuid="eacb0363-11c3-44b4-9248-6c337e7b0db2" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="212" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_161_A160" display-name="Строка проверки защит_161_A160" uuid="e194a4f9-2434-489e-a651-410adeeb61d7" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="272" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A160"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_162_A161" display-name="Строка проверки защит_162_A161" uuid="299d8dbf-0610-4af1-8f28-e07d9833e150" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="242" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_162_A161" display-name="Строка проверки защит_162_A161" uuid="c20fa154-94f1-4586-94ef-59c949d3a022" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="302" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A161"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_163_A162" display-name="Строка проверки защит_163_A162" uuid="35c268c2-d843-40f1-afd7-e3a979acf914" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="272" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_163_A162" display-name="Строка проверки защит_163_A162" uuid="6353d963-e9a2-431c-9996-2174ee509c4f" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="332" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A162"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_164_A163" display-name="Строка проверки защит_164_A163" uuid="c88f4ef0-a7aa-4c17-acd9-da49ea57cdae" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="302" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_164_A163" display-name="Строка проверки защит_164_A163" uuid="911d91a8-49ac-42f0-9983-ddea483fa7e9" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="362" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A163"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_165_A164" display-name="Строка проверки защит_165_A164" uuid="a7d9cbe8-e9b4-4fa9-bda9-08c7ffe0bee9" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="332" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_165_A164" display-name="Строка проверки защит_165_A164" uuid="b8b02a5a-fc23-4625-9bae-09f3f1e099e6" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="392" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A164"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_166_A165" display-name="Строка проверки защит_166_A165" uuid="09a10c4d-e47d-4c2d-8356-44f557d679fb" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="362" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_166_A165" display-name="Строка проверки защит_166_A165" uuid="7f4fd159-625e-4743-8382-6c7499b2cfc4" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="422" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A165"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_167_A166" display-name="Строка проверки защит_167_A166" uuid="a008d2a1-ec1e-4866-93f6-89cf508a56ae" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="392" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_167_A166" display-name="Строка проверки защит_167_A166" uuid="d0f0407e-7f28-46a9-b4f6-cca9f1786af1" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="452" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A166"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_168_A167" display-name="Строка проверки защит_168_A167" uuid="1b5827ab-f57b-41f8-ab0c-ff0e8101402b" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="422" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_168_A167" display-name="Строка проверки защит_168_A167" uuid="91879c36-bf84-41dd-a1ad-6c0a18d9f8bb" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="482" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A167"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_169_A168" display-name="Строка проверки защит_169_A168" uuid="59dddd02-a8b5-45eb-b3dd-b7cfa96feacc" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="452" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_169_A168" display-name="Строка проверки защит_169_A168" uuid="940cfd64-1001-450e-8cd2-f2757ee12d9c" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="512" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A168"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_170_A169" display-name="Строка проверки защит_170_A169" uuid="94508a22-834f-4a70-bcc6-a822addc99dd" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="482" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_170_A169" display-name="Строка проверки защит_170_A169" uuid="6051d907-a32c-4227-81bb-2dc38d83f120" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="542" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A169"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_171_A170" display-name="Строка проверки защит_171_A170" uuid="dc366d1d-1795-48fb-9708-fb8c5a740f59" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="512" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_171_A170" display-name="Строка проверки защит_171_A170" uuid="12bc35b7-f33b-43be-9fe3-49669706a349" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="572" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A170"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_172_A171" display-name="Строка проверки защит_172_A171" uuid="c5cde8dc-ac83-4197-b1e4-f41133522d44" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="542" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_172_A171" display-name="Строка проверки защит_172_A171" uuid="326ee079-e999-4dfd-a09b-24e459847b69" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="602" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A171"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Строка проверки защит_173_A172" display-name="Строка проверки защит_173_A172" uuid="e9d20cdd-b111-4034-9642-50ef91e72cf9" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="572" ver="3"/>
+  <object access-modifier="private" name="Строка проверки защит_173_A172" display-name="Строка проверки защит_173_A172" uuid="ee9027f2-5f89-4b64-9384-f9e43bd54fed" base-type="S_ALR" base-type-id="401676e6-e678-4938-bc7a-8a3382258f93" ver="3">
+    <designed target="X" value="971.0" ver="3"/>
+    <designed target="Y" value="632" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_Object" ver="3" value="System.PZ.A172"/>
     <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Description_0" display-name="Description_0" uuid="4c1bbb15-9b31-49af-b5b9-550d68690375" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Description_0" display-name="Description_0" uuid="6896f73f-6399-497e-835f-5f2119c999eb" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="11.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -202,7 +394,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Timer_0" display-name="Timer_0" uuid="8cfe3ded-a2d9-4df3-a9c7-991054f27455" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Timer_0" display-name="Timer_0" uuid="868c1c69-4d56-4817-98c6-4b26bf99eb5e" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="546.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -219,7 +411,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Delay_0" display-name="Delay_0" uuid="d773a5be-10f3-4dca-ab3d-92a53610213b" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Delay_0" display-name="Delay_0" uuid="625fa532-9868-45bc-b7a0-2f69be92a1b5" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="611.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -236,7 +428,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Ustavka_0" display-name="Ustavka_0" uuid="445d1da3-f8d4-4d42-9c65-1463dc5dfa54" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Ustavka_0" display-name="Ustavka_0" uuid="51999f26-b459-4eea-8269-0c05d7c4065c" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="676.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -253,7 +445,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Value_0" display-name="Value_0" uuid="069821d9-a601-46a8-957b-915f451a0c6b" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Value_0" display-name="Value_0" uuid="e0250fa2-bb1e-4c5f-9d09-7de720eb3bbc" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="741.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -270,7 +462,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="E_Unit_0" display-name="E_Unit_0" uuid="3f57a204-9a3d-4a0a-9863-efa294aad877" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="E_Unit_0" display-name="E_Unit_0" uuid="2d4647ea-59df-420a-a6a0-eb7c18e8cb68" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="806.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -287,7 +479,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Check_0" display-name="Check_0" uuid="30d7ef95-a877-4018-a997-f70ccdbe446b" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Check_0" display-name="Check_0" uuid="b63c991e-ff99-4d19-9642-64a690832031" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="858.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -304,7 +496,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_1_0" display-name="Line_1_0" uuid="521f07ed-f56d-415f-b572-9449fe9914a2" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_1_0" display-name="Line_1_0" uuid="af8b3d91-5145-4fa0-afa7-8a2ba41043c6" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -314,23 +506,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="9d80e349-eebb-4604-85a6-5963f75adb6b" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="3a6da345-c36f-4700-b99c-82e997c2229d" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="5635f24a-f37e-44a1-aa4b-8eb6a8e67287" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="6db2baaf-defb-482f-a8c0-2faf68aeac4d" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_2_0" display-name="Line_2_0" uuid="33872230-1b20-4405-afb6-e00581a5793f" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_2_0" display-name="Line_2_0" uuid="c1ab81e6-f20e-4644-a880-d1987ad4b3be" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="546.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -340,23 +532,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="70a98c4b-673c-4710-9ad0-60260affd5ee" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="e9f518df-a79e-4ca1-a644-6bcc0e7f82c3" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="67f10412-3e01-4b52-a1e8-6922e650ba5f" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="46600708-a180-440e-a115-0d8621553f94" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_3_0" display-name="Line_3_0" uuid="6639151c-9742-468f-a335-817e339a6d15" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_3_0" display-name="Line_3_0" uuid="a75a0cfe-5f4f-4128-a0b4-bb295b15544a" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="611.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -366,23 +558,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="12aabe99-8b99-4d05-ac36-006453ba0752" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="d2aee49e-a6c4-48fa-8318-034445324aec" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="03dfc4cf-8437-483b-9612-c28c4e7e31e9" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="f8028383-e7d5-46ee-8942-e093bfa5ef9b" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_4_0" display-name="Line_4_0" uuid="7d5182e6-87a6-4eaa-b003-f9bff314dac2" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_4_0" display-name="Line_4_0" uuid="1f073f42-2946-4cd5-b1d6-35e0f6f98e12" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="676.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -392,23 +584,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="fb0141a7-3906-45d0-9b22-a66f80f3c196" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="4c00e71a-a738-42e9-969f-645723b00fa4" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="c81caa9d-aa79-40f3-8308-a3a78fa0d676" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="bd3e0705-fdf7-4d67-a616-cc23204f0a23" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_5_0" display-name="Line_5_0" uuid="f2570b54-8d1a-47d2-a57e-4c8f8f51fd89" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_5_0" display-name="Line_5_0" uuid="0c12d681-8f27-4a46-9361-9a721e2d2132" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="741.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -418,23 +610,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="e7a13069-7808-4930-99cd-f561a58c332e" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="428abd38-13da-449e-a81f-b059cd2e7554" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="62bae9eb-c15d-41f9-aa25-3e38246b9e5c" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="b788300b-19ef-4934-98da-28e3e7a22e34" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_6_0" display-name="Line_6_0" uuid="9d8aa169-9371-4400-a15c-ba96395a64dc" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_6_0" display-name="Line_6_0" uuid="b86d15a5-6af6-4ee8-9a0f-c37ff94b094a" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="806.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -444,23 +636,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="b2459da3-9b36-4cd6-9908-a3439f54a38f" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="eb174e52-764e-45a5-adff-656f464ef69e" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="0bfae110-a94c-4ac8-9fdb-51d64d2f5b3a" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="959c854b-8ed2-4ecc-9274-88beabc92a7d" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_7_0" display-name="Line_7_0" uuid="20bf0ea4-00ad-4cce-a6b3-9e21b705821a" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_7_0" display-name="Line_7_0" uuid="1b8d3495-f1a6-4616-86be-e1b35d0140a4" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="476.7" ver="3"/>
     <designed target="Y" value="-413" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -476,17 +668,17 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="c25be0d1-3304-411f-a90d-862098ff1c43" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="b2bbdf97-842b-4a26-8a3d-c2fc2298e161" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="061bbb2b-67ca-485c-9448-b1002e58b5d0" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="fb5a6aa5-a1fa-4b94-8a9a-1603cebd25fa" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="950.3" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_8_0" display-name="Line_8_0" uuid="a1f702d3-ff09-47df-a305-6912afb28402" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_8_0" display-name="Line_8_0" uuid="54c7a914-1815-43d2-9345-4e3dfb665245" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="476.7" ver="3"/>
     <designed target="Y" value="-383.5" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -502,19 +694,19 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="7a2dd933-81fe-4a59-8c36-26ccd5ac05d4" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="c65f5a1d-d8e5-4b82-9c6a-5a9a39859a9e" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="42d54f04-d38c-451c-a193-2b63d98aa903" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="a5b53fb2-50ea-47dd-b56c-32e5b3c1fc49" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="950.3" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_9_0" display-name="Line_9_0" uuid="422de85b-f095-42fd-a05f-87632b6492f7" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_9_0" display-name="Line_9_0" uuid="dc04944c-f37d-43d7-a346-31d79251040d" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="476.7" ver="3"/>
-    <designed target="Y" value="416.5" ver="3"/>
+    <designed target="Y" value="297" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Rotation" value="270" ver="3"/>
     <designed target="Scale" value="1" ver="3"/>
@@ -528,17 +720,17 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="68308782-e069-4cdd-87f8-8dbbef267eb4" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="6bb73ee8-4d0b-44b5-80be-4099b555a57e" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="861557c3-bcc2-4072-9b30-5454ab95116d" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="0f74cbca-f77d-409a-bc86-bf8e7f7bb214" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="951" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_10_0" display-name="Line_10_0" uuid="ea17894e-cf1b-4d22-92d8-65030e9744cb" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_10_0" display-name="Line_10_0" uuid="cffbf345-6dbc-4b3e-8bc9-a785689ca2fd" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="857.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -548,23 +740,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="4b6d2619-54e8-4965-967e-3fbb94ad79f0" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="0846726d-fa31-4cfe-9d71-a0fbe7a612a3" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="6ef8f34c-44f4-49b9-bbce-7665921fcd7c" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="daa0a058-ffc1-4622-ba35-3e728a8e8d8a" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_11_0" display-name="Line_11_0" uuid="5fe385e1-9e83-4491-9d54-09347cd05f18" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_11_0" display-name="Line_11_0" uuid="c0860f11-e329-4389-8948-e36ee485e33c" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="952.5" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -574,23 +766,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="19f674a2-973a-45ad-a78c-7d5c4919587a" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="748bc12c-18c9-4ac0-b613-366429720a1c" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="cce6168b-bf9e-4811-a358-f96c76068bb8" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="b1a5942a-55de-49fd-b1e6-ff5cd1407c05" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Description_1" display-name="Description_1" uuid="7c952990-d919-44e6-b6be-d0d1307a8bad" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Description_1" display-name="Description_1" uuid="adc93a6e-add7-48b7-b123-9aed1c3979cf" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="971.389" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -607,7 +799,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Timer_1" display-name="Timer_1" uuid="344ff84f-67cb-45e1-9d5e-97f920ab75e3" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Timer_1" display-name="Timer_1" uuid="aa9dfb1a-3ed6-45bd-a170-6e62bef636e4" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1506.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -624,7 +816,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Delay_1" display-name="Delay_1" uuid="6ecbfa86-306e-46d7-89ab-a7b184b126b7" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Delay_1" display-name="Delay_1" uuid="106dfb72-d0c2-4d25-96c8-6cc42aea8a01" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1571.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -641,7 +833,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Ustavka_1" display-name="Ustavka_1" uuid="e4ee9878-e8de-4630-bad2-4e8ec78975ef" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Ustavka_1" display-name="Ustavka_1" uuid="e44559c2-53cd-47e4-8d49-4fed1a9deefa" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1636.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -658,7 +850,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Value_1" display-name="Value_1" uuid="978844e5-6989-48b1-873a-a4bd2ed40a45" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Value_1" display-name="Value_1" uuid="d2d9f8fc-c348-4292-83f1-5aec7db6eb9b" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1701.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -675,7 +867,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="E_Unit_1" display-name="E_Unit_1" uuid="3baaaacd-aa86-4aad-a504-4fc3b29a6004" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="E_Unit_1" display-name="E_Unit_1" uuid="6709d774-ffdf-4ec7-a0cb-4a5461af8993" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1766.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -692,7 +884,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Check_1" display-name="Check_1" uuid="2a829a7d-9302-4dd2-a4c9-63481fb41d66" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Check_1" display-name="Check_1" uuid="e2e8a10d-599c-491a-955f-fcf36c5cfb1e" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="1818.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -709,7 +901,7 @@
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_1_1" display-name="Line_1_1" uuid="2945eb5d-b279-4a85-a06d-7594d8d2494d" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_1_1" display-name="Line_1_1" uuid="fb671bf8-953f-4229-93cd-e22e50217ea1" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="961.389" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -719,23 +911,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="32ba14c3-a823-4202-a4fd-e348d3e0d1ae" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="4f698937-5298-4b47-9979-f7376bc068ea" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="2d620569-c5b8-41d4-9162-7f592d263e5f" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="2d2405d9-53d9-47fa-aa6f-177ef6ce0e34" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_2_1" display-name="Line_2_1" uuid="bccc1abe-6274-4a80-9998-54d41f109291" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_2_1" display-name="Line_2_1" uuid="80a16077-4747-423f-b6a7-dae4ef87a013" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1506.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -745,23 +937,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="7dae421d-cf85-493f-a7cd-42c62c71657f" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="1a9b6d09-1b26-48c3-a93b-ce0674b0a4e2" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="f6cf09d9-4864-48f0-afe3-1cb79f4e89e2" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="f184223b-6a3b-41cd-983c-c588c53d3e8d" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_3_1" display-name="Line_3_1" uuid="b22b48c9-bac4-4f5a-a3af-1059774574c6" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_3_1" display-name="Line_3_1" uuid="14489c69-6c5c-4324-81a7-0f0931b0946c" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1571.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -771,23 +963,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="9ab67540-e4cc-4c6a-b344-e963a0ecfc89" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="2d2ecd17-4177-43b9-a428-272d179d7fce" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="a074bf88-ec63-49dd-91e4-044f1cf931a3" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="73c0a574-554b-443e-9002-14baf8f7d8c8" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_4_1" display-name="Line_4_1" uuid="4fe1bb79-1d2d-4030-a3c9-3a2e1a1f3bec" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_4_1" display-name="Line_4_1" uuid="cd32fd30-6158-4576-8547-36c0bfb33e3d" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1636.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -797,23 +989,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="2c1f49b2-99d8-40ae-9909-db7de42e6112" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="7a7e64c3-ec0f-4131-8f9d-4951cd485f5b" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="8730c357-10bf-42b2-8a07-93dd1b967a99" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="4bb7ddfb-af32-4005-b3c2-adb862e68350" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_5_1" display-name="Line_5_1" uuid="4431b967-7dac-42fc-9188-b5b3ab537bd3" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_5_1" display-name="Line_5_1" uuid="40db1438-6982-4789-a514-18f6499de6df" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1701.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -823,23 +1015,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="f26d6b0b-3119-440a-8dfa-52610bfe73da" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="cf44fb26-8bc6-4a95-adb6-6e3d9ae8ce48" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="1afbba65-5c76-4a88-98be-3cb4cad67cb8" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="5d6ea1b1-7b5e-46a9-950a-f9a29c61bf99" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_6_1" display-name="Line_6_1" uuid="6660ec3c-ef78-4304-9207-6dc9fe3aa15b" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_6_1" display-name="Line_6_1" uuid="120b5251-e2a2-410f-af1b-5372c704f5cb" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1766.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -849,23 +1041,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="a5d4cf43-8af3-4fab-8ebc-105354b18570" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="ab798c29-956a-4336-b532-0e6ae7a8ebed" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="d5624452-bf1e-4103-bff8-5d03d513cadf" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="0be6bfbf-02aa-4160-b257-260b6d5d0297" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_7_1" display-name="Line_7_1" uuid="660a5362-11f7-4cd4-94b5-ef75e378b773" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_7_1" display-name="Line_7_1" uuid="6096be8d-1d40-45e2-8788-b2f68f2cadd6" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1436.589" ver="3"/>
     <designed target="Y" value="-413" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -881,17 +1073,17 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="6057b26d-6998-4b59-93a9-ec4b4166b586" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="0eb7df52-c4d4-4b63-89d2-bf54b08a97b1" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="2eb0c771-c20d-44c5-8198-7d99e5f97dd7" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="4d49fd92-779f-46cc-a642-1472f6a0fdf9" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="950.3" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_8_1" display-name="Line_8_1" uuid="18faa07f-d9c0-4dd9-a0a5-0d8b73c116f2" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_8_1" display-name="Line_8_1" uuid="dffcdb25-1078-4eb1-96d0-94c9095c5d94" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1436.589" ver="3"/>
     <designed target="Y" value="-383.5" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -907,19 +1099,19 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="e664361e-f83a-4fd2-8dd1-d61fb5538341" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="0251e355-04b8-460a-a94e-84f6439c5dc6" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="d366b337-539e-4c5e-b338-8c15d7b16ce2" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="bd230739-9c99-4edb-a791-393f25a44c57" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="950.3" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_9_1" display-name="Line_9_1" uuid="cf04eaea-6844-40b3-bd31-b2665473dad0" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_9_1" display-name="Line_9_1" uuid="1a91ec3b-02f4-4c7c-b9cb-7bf7b57542ab" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1436.589" ver="3"/>
-    <designed target="Y" value="416.5" ver="3"/>
+    <designed target="Y" value="297" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Rotation" value="270" ver="3"/>
     <designed target="Scale" value="1" ver="3"/>
@@ -933,17 +1125,17 @@
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="2cb06d70-815e-47d0-9b1c-e0c788aac8e9" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="303e7b2b-bbd2-4ab2-931f-60b501b62036" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="d4f46b2f-0434-4738-b7f8-4d05065e2eef" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="8947d7e8-c75a-4837-b04e-5ae1aa9f29e7" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="951" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_10_1" display-name="Line_10_1" uuid="20f24246-7869-4224-b580-f7598e501b78" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_10_1" display-name="Line_10_1" uuid="535a46f4-9d6d-4e76-907a-941728366a78" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1817.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -953,23 +1145,23 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="ce9be6de-08c0-4454-864e-86ae97b03d43" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="ae3f8fdf-51e3-401a-ac98-eec291411266" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="3131518e-3891-4500-af67-1d67d6c9af6e" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="9c6154a8-885e-4fd5-b091-3c29fde13dbf" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Line_11_1" display-name="Line_11_1" uuid="dfaebd52-0789-4398-9f91-dc8ab25bf0c1" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
+  <object access-modifier="private" name="Line_11_1" display-name="Line_11_1" uuid="1c5f13e1-c95d-497b-9a80-c77fa75b8a31" base-type="Line" base-type-id="4dd08b15-1502-453f-a174-2c0a5aa850ba" ver="3">
     <designed target="X" value="1912.3890000000001" ver="3"/>
     <designed target="Y" value="62" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -979,28 +1171,28 @@
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="0" ver="3"/>
-    <designed target="Height" value="830" ver="3"/>
+    <designed target="Height" value="710" ver="3"/>
     <designed target="PenColor" value="0xff818181" ver="3"/>
     <designed target="PenStyle" value="1" ver="3"/>
     <designed target="PenWidth" value="1" ver="3"/>
     <designed target="BrushColor" value="0xff000000" ver="3"/>
     <designed target="BrushStyle" value="0" ver="3"/>
-    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="800c3d7a-a55a-4014-980f-bfc77e115f86" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_1" display-name="Point_1" uuid="78e54295-f7d8-43ac-93f3-7ceca046fad9" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
       <designed target="Y" value="0" ver="3"/>
     </object>
-    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="e8ee930a-8d0f-478f-a198-5dbb2c76e52f" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
+    <object access-modifier="private" name="Point_2" display-name="Point_2" uuid="61370089-a849-4239-b315-331abafb3ea1" base-type="Point" base-type-id="467f1af0-7bb4-4a61-b6fb-06e7bfd530d6" ver="3">
       <designed target="X" value="0" ver="3"/>
-      <designed target="Y" value="830" ver="3"/>
+      <designed target="Y" value="710" ver="3"/>
     </object>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="87eda99a-6b06-4a64-a441-aea071c361c4" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="40f90320-99b3-4090-b98e-6b013400243b" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <init target="ParentSource" ver="3" ref="_init_ApSource"/>
     <init target="Path" ver="3" ref="_init_GPAPath"/>
   </object>
-  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="a45c1582-7d3e-4bac-bae4-61d2affda829" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
-  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="6f404654-7d78-4819-8da5-1f35d3b4ef96" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="efef039f-0def-4f60-bc6b-362caa8f13e6" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="ebe3dc88-f308-42d8-95c8-21d7851fb59c" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
 </type>

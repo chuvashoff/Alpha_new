@@ -1271,6 +1271,11 @@
             <attribute type="Attributes.sColorOff" value="0"/>
             <attribute type="Attributes.sColorOn" value="2"/>
           </ct:object>
+          <ct:object name="DI_dPoilF_wH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления на маслофильтре после ГТУ"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="2"/>
+          </ct:object>
         </ct:object>
         <ct:object name="IM" access-level="public">
           <ct:object name="OGK" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -1506,16 +1511,6 @@
           <ct:object name="HeatMNE" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Электронагреватель БГ11-23А (МНЭ)"/>
             <attribute type="Attributes.StartView" value="5"/>
-            <attribute type="Attributes.Gender" value="1"/>
-          </ct:object>
-          <ct:object name="FK32_1" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Клапан продувки диф. контура №1"/>
-            <attribute type="Attributes.StartView" value="1"/>
-            <attribute type="Attributes.Gender" value="1"/>
-          </ct:object>
-          <ct:object name="FK32_2" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Клапан продувки диф. контура №2"/>
-            <attribute type="Attributes.StartView" value="1"/>
             <attribute type="Attributes.Gender" value="1"/>
           </ct:object>
           <ct:object name="VODr1" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -1878,7 +1873,7 @@
               <attribute type="Attributes.Channel_10" value="Ручное управление ЩРУ включено"/>
               <attribute type="Attributes.Channel_11" value="Напряжение на краны =220 В подано"/>
               <attribute type="Attributes.Channel_12" value="Напряжение на обогрев крана 6р подано"/>
-              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Повышенный перепад давления на маслофильтре после ГТУ"/>
               <attribute type="Attributes.Channel_14" value="Резерв"/>
               <attribute type="Attributes.Channel_15" value="Резерв"/>
               <attribute type="Attributes.Channel_16" value="Резерв"/>
@@ -2059,8 +2054,8 @@
               <attribute type="Attributes.Channel_11" value="Электронагреватель маслонасоса (МНДЭ) включить"/>
               <attribute type="Attributes.Channel_12" value="Электронагреватель АВО 11-01М (АВО) включить"/>
               <attribute type="Attributes.Channel_13" value="Электронагреватель БГ11-23А (МНЭ) включить"/>
-              <attribute type="Attributes.Channel_14" value="Клапан продувки диф. контура №1 открыть"/>
-              <attribute type="Attributes.Channel_15" value="Клапан продувки диф. контура №2 открыть"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Резерв"/>
               <attribute type="Attributes.Channel_16" value="Резерв"/>
               <attribute type="Attributes.Channel_17" value="Резерв"/>
               <attribute type="Attributes.Channel_18" value="Резерв"/>
@@ -2136,8 +2131,8 @@
               <attribute type="Attributes.Channel_16" value="Резерв"/>
               <attribute type="Attributes.Channel_17" value="Диагностика коммутатора US1"/>
               <attribute type="Attributes.Channel_18" value="Диагностика коммутатора US2"/>
-              <attribute type="Attributes.Channel_19" value="Диагностика коммутатора US3"/>
-              <attribute type="Attributes.Channel_20" value="Диагностика коммутатора US4"/>
+              <attribute type="Attributes.Channel_19" value="Резерв"/>
+              <attribute type="Attributes.Channel_20" value="Резерв"/>
               <attribute type="Attributes.Channel_21" value="Резерв"/>
               <attribute type="Attributes.Channel_22" value="Резерв"/>
               <attribute type="Attributes.Channel_23" value="Резерв"/>
@@ -2962,12 +2957,6 @@
             </ct:object>
             <ct:object name="TA2_WorkTime" base-type="Types.CNT.CNT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="ТА2"/>
-            </ct:object>
-            <ct:object name="FK32_1_Swap" base-type="Types.CNT.CNT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="Клапан продувки диф. контура №1"/>
-            </ct:object>
-            <ct:object name="FK32_2_Swap" base-type="Types.CNT.CNT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="Клапан продувки диф. контура №2"/>
             </ct:object>
           </ct:object>
           <ct:object name="TS" access-level="public">
@@ -4151,6 +4140,9 @@
             </ct:object>
             <ct:object name="DI_KR4_Alarm" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Реле контроля сопротивления изоляции KR4 - Авария"/>
+            </ct:object>
+            <ct:object name="DI_dPoilF_wH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Повышенный перепад давления на маслофильтре после ГТУ"/>
             </ct:object>
           </ct:object>
           <ct:object name="MODES" access-level="public">
