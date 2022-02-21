@@ -731,11 +731,6 @@
             <attribute type="Attributes.sColorOff" value="0"/>
             <attribute type="Attributes.sColorOn" value="3"/>
           </ct:object>
-          <ct:object name="DI_PgStV_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="Повышенное давление газа на выходе из СтВ"/>
-            <attribute type="Attributes.sColorOff" value="0"/>
-            <attribute type="Attributes.sColorOn" value="3"/>
-          </ct:object>
           <ct:object name="DI_Qv_ohlGTU_w" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="Низкий расход воздуха в системе охлаждения ГТУ"/>
             <attribute type="Attributes.sColorOff" value="0"/>
@@ -1761,8 +1756,8 @@
               <attribute type="Attributes.Channel_6" value="КЦ: Нажата кнопка АО  из цеха"/>
               <attribute type="Attributes.Channel_7" value="ОГК открыт"/>
               <attribute type="Attributes.Channel_8" value="КЦ: ОГК открыт"/>
-              <attribute type="Attributes.Channel_9" value="Повышенное давление газа на выходе из СтВ"/>
-              <attribute type="Attributes.Channel_10" value="КЦ: Повышенное давление газа на выходе из СтВ"/>
+              <attribute type="Attributes.Channel_9" value="Резерв"/>
+              <attribute type="Attributes.Channel_10" value="Резерв"/>
               <attribute type="Attributes.Channel_11" value="Низкий расход воздуха в системе охлаждения ГТУ"/>
               <attribute type="Attributes.Channel_12" value="КЦ: Низкий расход воздуха в системе охлаждения ГТУ"/>
               <attribute type="Attributes.Channel_13" value="Резерв"/>
@@ -3775,9 +3770,6 @@
             </ct:object>
           </ct:object>
           <ct:object name="WRN" access-level="public">
-            <ct:object name="PgStV_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-              <attribute type="unit.System.Attributes.Description" value="Повышенное давление газа на выходе из СтВ"/>
-            </ct:object>
             <ct:object name="Lm_MBD_wL" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Блокировка включения нагревателя масла МБД"/>
             </ct:object>
