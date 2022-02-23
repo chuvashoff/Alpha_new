@@ -93,13 +93,15 @@ try:
     index_type_tr = is_f_ind(cells[0], 'Тип ТР')
     index_apr_on = is_f_ind(cells[0], 'APR')
     index_path = is_f_ind(cells[0], 'Path')
+    index_name_cpu = is_f_ind(cells[0], 'Наименование CPU')
     cells = sheet['B2':'L21']
+    # Словарь {ПЛК: путь к проекту ПЛК}
+    sl_cpu_path = {}
     for p in cells:
         if p[0].value is None:
             break
         else:
             sl_CPU_spec[p[0].value] = ()
-            #print(p[0].value, p[index_path].value)
             if p[index_flr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('ТР',)
                 choice_tr = p[index_type_tr].value
@@ -108,6 +110,8 @@ try:
                     print('В файле Tun_TR.txt не указан выбранный тип топливного регулятора')
             if p[index_apr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('АПР',)
+            # Узнаём пути к контроллерам и забиваем в словарь
+            sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
 
     # Определение заведённых драйверов
     # Также Определяем список объявленных мнемосхем
@@ -156,51 +160,25 @@ try:
     # Измеряемые
     # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
     # sl_mnemo = {узел: список параметров узла}
-    return_sl_ai, sl_mnemo = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
-
-    # return_sl_mnemo = {узел: список параметров узла}
-    # Передаём такой словарь, но упорядоченный по узлам, согласно объявлению
-    if sl_mnemo:
-        create_mnemo_param(name_list='Измеряемые', name_group='AI', name_page='AINP', base_type_param='S_A_INP_Param',
-                           size_shirina=size_shirina,
-                           size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
+    return_sl_ai, sl_mnemo_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
 
     # Расчетные
-    return_sl_ae, sl_mnemo = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
-
-    if sl_mnemo:
-        create_mnemo_param(name_list='Расчетные', name_group='AE', name_page='AEVL', base_type_param='S_A_INP_Param',
-                           size_shirina=size_shirina,
-                           size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
+    return_sl_ae, sl_mnemo_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
 
     # Дискретные
-    return_sl_di, sl_wrn_di, sl_mnemo = is_read_di(sheet=book['Входные'])
-
-    if sl_mnemo:
-        create_mnemo_param(name_list='Дискретные', name_group='DI', name_page='DINP', base_type_param='S_D_INP_Param',
-                           size_shirina=size_shirina,
-                           size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo.get(node) for node in tuple_mnemo if node in sl_mnemo})
+    return_sl_di, sl_wrn_di, sl_mnemo_di = is_read_di(sheet=book['Входные'])
 
     # ИМ
     return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
 
     # Создаём и набиваем словарь для мнемосхемы наработок
-    sl_mnemo = {'Наработка': list(), 'Перестановки': list()}
+    sl_mnemo_cnt = {'Наработка': list(), 'Перестановки': list()}
     for cpu, sl_c in sl_cnt.items():
         for nar in sl_c:
             if 'WorkTime' in nar:
-                sl_mnemo['Наработка'].append(nar)
+                sl_mnemo_cnt['Наработка'].append(nar)
             elif 'Swap' in nar:
-                sl_mnemo['Перестановки'].append(nar)
-
-    if sl_cnt:
-        create_mnemo_param(name_list='Наработка', name_group='System.CNT', name_page='SCNT', base_type_param='S_CNT',
-                           size_shirina=size_shirina,
-                           size_vysota=size_vysota,
-                           sl_param=sl_mnemo)
+                sl_mnemo_cnt['Перестановки'].append(nar)
 
     # # sl_cnt = {CPU: {алг.имя : русское имя}}
     # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
@@ -223,11 +201,6 @@ try:
     # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
 
     # Сигналы остальные
-    create_mnemo_pz(name_group='System.PZ', name_page='ПЗ', base_type_param='S_ALR',
-                    size_shirina=size_shirina,
-                    size_vysota=size_vysota,
-                    param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz])
-
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
                                                                                               sl_wrn_di=sl_wrn_di)
 
@@ -674,6 +647,7 @@ try:
     choice_tr - переменная str, в которой содержится выбранный в конфигураторе ТР
     sl_cpu_drv_iec - словарь переменных IEC, ключ - cpu, значение - словарь: ключ - алг.имя переменной IEC, 
                                                                              значение - тип переменной (R или B)
+    sl_cpu_path = Словарь {ПЛК: путь к проекту ПЛК}
     '''
     # поддержать вытягивание индексов для АС - сделано, но индексы хорошо бы переписать
     # Возможно, подробней рассмотреть аварии(ALR)!!!
@@ -710,7 +684,8 @@ try:
                  sl_di_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_di.items()},
                  sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
                  sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
-                 sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()})
+                 sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
+                 sl_cpu_path=sl_cpu_path)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
@@ -719,6 +694,39 @@ try:
         if check_test != '-' * 70 + '\n':
             with open('Required_change.txt', 'a') as f_test:
                 f_test.write('-' * 70 + '\n')
+
+    # Создаём мнемосхемы (их изменение не котролируется по причине смены uuid, позже будет доработано)
+    # Проработать вопрос создания мнемосхем для разных объектов!!!
+    # return_sl_mnemo = {узел: список параметров узла}
+    # Передаём такой словарь, но упорядоченный по узлам, согласно объявлению
+    if sl_mnemo_ai:
+        create_mnemo_param(name_list='Измеряемые', name_group='AI', name_page='AINP', base_type_param='S_A_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo_ai.get(node) for node in tuple_mnemo if node in sl_mnemo_ai})
+
+    if sl_mnemo_ae:
+        create_mnemo_param(name_list='Расчетные', name_group='AE', name_page='AEVL', base_type_param='S_A_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo_ae.get(node) for node in tuple_mnemo if node in sl_mnemo_ae})
+
+    if sl_mnemo_di:
+        create_mnemo_param(name_list='Дискретные', name_group='DI', name_page='DINP', base_type_param='S_D_INP_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param={node: sl_mnemo_di.get(node) for node in tuple_mnemo if node in sl_mnemo_di})
+
+    if sl_cnt:
+        create_mnemo_param(name_list='Наработка', name_group='System.CNT', name_page='SCNT', base_type_param='S_CNT',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param=sl_mnemo_cnt)
+    if sl_pz:
+        create_mnemo_pz(name_group='System.PZ', name_page='ПЗ', base_type_param='S_ALR',
+                        size_shirina=size_shirina,
+                        size_vysota=size_vysota,
+                        param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz])
 
     print(datetime.datetime.now(), '- Окончание сборки всех файлов')
     input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')

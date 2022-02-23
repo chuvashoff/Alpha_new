@@ -318,7 +318,7 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                  sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
-                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config):
+                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -476,15 +476,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
                   'LAN4_NoLink': 'LAN4_NoLink'}
     }
-
-    with open('Source_list_plc.txt', 'r', encoding='UTF-8') as f_source:
-        while 8:
-            line_source = f_source.readline()
-            if not line_source:
-                break
-            line_source = [i.strip() for i in line_source.strip().split(',')]
-            # если закоментировано или контроллера нет в списке контроллеров конфигуратора, то пропускаем
-            if '#' in ''.join(line_source) or line_source[0] not in tuple_all_cpu:
+    for cpu, path in sl_cpu_path.items():
+        # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
+        if not os.path.exists(path):
+            print(f"НЕ НАЙДЕНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
+            continue
+        else:
+            line_source = [cpu.strip(), path.strip()]
+            if cpu not in tuple_all_cpu:
                 continue
             sl_global_ai, sl_tmp_ai = {}, {}
             sl_global_ae, sl_tmp_ae = {}, {}
@@ -1046,11 +1045,16 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             # Если нет папки File_for_Import/Maps, то создадим её
             if not os.path.exists(os.path.join('File_for_Import', 'Maps')):
                 os.mkdir(os.path.join('File_for_Import', 'Maps'))
-
-            check_diff_file(check_path=os.path.join('File_for_Import', 'Maps'),
-                            file_name_check=f'trei_map_{line_source[0]}.xml',
-                            new_data='<root format-version=\"0\">\n' + s_all.rstrip() + '\n</root>',
-                            message_print=f'Требуется заменить карту адресов контроллера {line_source[0]}')
+            # Проверка на пустую карту, то есть в том случае, когда
+            new_map = '<root format-version=\"0\">\n' + s_all.rstrip() + '\n</root>'
+            if new_map == '<root format-version=\"0\">\n' + '\n</root>':
+                print(f'Неверно указана папка проекта контроллера {line_source[0]}(ошибка пустой карты)')
+                print(f'Карта адресов контроллера {line_source[0]} не обновлена')
+            else:
+                check_diff_file(check_path=os.path.join('File_for_Import', 'Maps'),
+                                file_name_check=f'trei_map_{line_source[0]}.xml',
+                                new_data=new_map,
+                                message_print=f'Требуется заменить карту адресов контроллера {line_source[0]}')
 
             # совместно с модулем difflib можно в будущем определить отличающиеся строки - на будущее
             # new_map_file = new_map_file.splitlines(keepends=True)

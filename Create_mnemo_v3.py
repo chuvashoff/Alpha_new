@@ -479,7 +479,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
     # Узнаём количество требуемых листов, деля количество требуемых элементов на количество на одном листе
     # num_par = sum(len(i) for i in tuple(sl_param.values())) + len(tuple(sl_param.keys()))
     # number_list = ceil(num_par / par_one_list)
-    print(name_group, par_one_list)
+    #print(name_group, par_one_list)
     start_list = 1
     count = 0
     # sl_list_par = {номер листа: кортеж защит листа}
