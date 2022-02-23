@@ -29,7 +29,7 @@ def create_sl_im(text, par_config):
     sl_tmp = {}
     cnt_set = set()
     for i in text:
-        if 'IM|' in i and '//' not in i and '[' in i:
+        if 'IM|' in i and '//' not in i and '[' in i and ':=' in i:
             a = i.split(':=')[0].strip()
             par_im = a[a.find('|')+1:a.rfind('_')]
             if par_im in par_config:
@@ -482,7 +482,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             line_source = f_source.readline()
             if not line_source:
                 break
-            line_source = line_source.strip().split(',')
+            line_source = [i.strip() for i in line_source.strip().split(',')]
             # если закоментировано или контроллера нет в списке контроллеров конфигуратора, то пропускаем
             if '#' in ''.join(line_source) or line_source[0] not in tuple_all_cpu:
                 continue
@@ -546,7 +546,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             if os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
                 with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
                     text = f_par_evl.read().split('\n')
-                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], ()))
+                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], tuple()))
 
             # Если есть файл дискретных
             if os.path.exists(os.path.join(line_source[1], '0_par_D.st')):

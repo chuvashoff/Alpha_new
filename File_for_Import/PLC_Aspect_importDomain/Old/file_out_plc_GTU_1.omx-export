@@ -1329,6 +1329,11 @@
             <attribute type="Attributes.sColorOff" value="0"/>
             <attribute type="Attributes.sColorOn" value="1"/>
           </ct:object>
+          <ct:object name="DI_PgStV_aH" base-type="Types.DI.DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+            <attribute type="unit.System.Attributes.Description" value="Повышенное давление газа на выходе из СтВ"/>
+            <attribute type="Attributes.sColorOff" value="0"/>
+            <attribute type="Attributes.sColorOn" value="3"/>
+          </ct:object>
         </ct:object>
         <ct:object name="IM" access-level="public">
           <ct:object name="KPV" base-type="Types.IM1x1.IM1x1_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -1453,7 +1458,7 @@
           </ct:object>
           <ct:object name="EMT_PZStV" base-type="Types.IM1x0.IM1x0_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
             <attribute type="unit.System.Attributes.Description" value="ЭМТ ПЗ СтВ"/>
-            <attribute type="Attributes.StartView" value="1"/>
+            <attribute type="Attributes.StartView" value="0"/>
             <attribute type="Attributes.Gender" value="2"/>
           </ct:object>
           <ct:object name="VNA" base-type="Types.IM_AO.IM_AO_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
@@ -1883,8 +1888,8 @@
               <attribute type="Attributes.Channel_4" value="Резерв"/>
               <attribute type="Attributes.Channel_5" value="Резерв"/>
               <attribute type="Attributes.Channel_6" value="Резерв"/>
-              <attribute type="Attributes.Channel_7" value="Резерв"/>
-              <attribute type="Attributes.Channel_8" value="Резерв"/>
+              <attribute type="Attributes.Channel_7" value="Повышенное давление газа на выходе из СтВ"/>
+              <attribute type="Attributes.Channel_8" value="КЦ: Повышенное давление газа на выходе из СтВ"/>
               <attribute type="Attributes.Channel_9" value="Стружка в ФС"/>
               <attribute type="Attributes.Channel_10" value="Стружка в масле КП"/>
               <attribute type="Attributes.Channel_11" value="Стружка в масле откачки от ш/п КВД"/>
@@ -3469,6 +3474,9 @@
             </ct:object>
             <ct:object name="P_SKCmBrk" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Отказ пневмомеханической части канала управления СК ЦК"/>
+            </ct:object>
+            <ct:object name="PgStV_aH" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Повышенное давление газа на выходе из СтВ"/>
             </ct:object>
             <ct:object name="APK_notOff" base-type="Types.WRN_On.WRN_On_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="АПК не закрыт на режиме Магистраль"/>
