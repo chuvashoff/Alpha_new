@@ -183,8 +183,10 @@ def is_read_im(sheet, sheet_imao):
 
     # Словарь соответствия типа ИМ и его ПЛК аспекта
     sl_im_plc = {'ИМ1Х0': 'IM1x0.IM1x0_PLC_View', 'ИМ1Х1': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2': 'IM1x2.IM1x2_PLC_View',
-                 'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View', 'ИМ1Х0и': 'IM1x0.IM1x0_PLC_View',
-                 'ИМ1Х1и': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2и': 'IM1x2.IM1x2_PLC_View', 'ИМ2Х2с': 'IM2x2.IM2x2_PLC_View',
+                 'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View',
+                 'ИМ1Х0и': 'IM1x0inv.IM1x0inv_PLC_View', 'ИМ1Х1и': 'IM1x1inv.IM1x1inv_PLC_View',
+                 'ИМ1Х2и': 'IM1x2inv.IM1x2inv_PLC_View',
+                 'ИМ2Х2с': 'IM2x2.IM2x2_PLC_View',
                  'ИМАО': 'IM_AO.IM_AO_PLC_View', 'ИМ2Х2ПЧ': 'IM2x2PCH.IM2x2PCH_PLC_View'}
     # Словарь соответствия рода ИМ и его идентификатора в Альфе
     sl_gender = {'С': '0', 'М': '1', 'Ж': '2'}
@@ -260,7 +262,7 @@ def is_read_im(sheet, sheet_imao):
     return return_sl_im, sl_cnt
 
 
-def is_read_create_diag(book, *sheets_signal):
+def is_read_create_diag(book, name_prj, *sheets_signal):
     sheet_module = book['Модули']
     # Словарь возможных модулей со стартовым описанием каналов
     sl_modules = {
@@ -277,6 +279,8 @@ def is_read_create_diag(book, *sheets_signal):
         'M531I': ['Резерв'] * 8,
         'M543G': ['Резерв'] * 16,
         'M5571': ['Резерв'] * 32,
+        'M532U': ['Резерв'] * 8,  # Добавлено в тестовом режиме для Игринской!!!
+        'M582IS': ['Резерв'] * 3,  # Добавлено в тестовом режиме для Игринской!!!
     }
     sl_type_modules = {
         'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
@@ -294,7 +298,9 @@ def is_read_create_diag(book, *sheets_signal):
         'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
         'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View',
         'M531I': 'Types.DIAG_M531I.DIAG_M531I_PLC_View',
-        'M543G': 'Types.DIAG_M543G.DIAG_M543G_PLC_View'
+        'M543G': 'Types.DIAG_M543G.DIAG_M543G_PLC_View',
+        'M532U': 'Types.DIAG_M532U_test.DIAG_M532U_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
+        'M582IS': 'Types.DIAG_M582IS_test.DIAG_M582IS_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
     }
     cells = sheet_module['A1': 'G' + str(sheet_module.max_row)]
     type_module_index = is_f_ind(cells[0], 'Шифр модуля')
@@ -310,6 +316,12 @@ def is_read_create_diag(book, *sheets_signal):
         if p[cpu_index].value not in sl_modules_cpu:
             sl_modules_cpu[p[cpu_index].value] = {}
         sl_modules_cpu[p[cpu_index].value].update({p[name_module_index].value: (p[type_module_index].value, aa)})
+    # В тестовом режиме для игринской добавляем два новых модуля в GTU жёстко!!!
+    if 'Игринская' in name_prj:
+        aa = copy(sl_modules['M532U'])
+        sl_modules_cpu['GTU'].update({'AD102': ('M532U', aa)})
+        aa = copy(sl_modules['M582IS'])
+        sl_modules_cpu['GTU'].update({'AD1': ('M582IS', aa)})
 
     # sl_for_diag - словарь для корректной педечачи для создания индексов
     sl_for_diag = {}
@@ -489,7 +501,7 @@ def is_read_btn(sheet):
     return return_sl
 
 
-def is_read_pz(sheet):
+def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
 
     cells = sheet['A1': 'N' + str(sheet.max_row)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
@@ -497,6 +509,7 @@ def is_read_pz(sheet):
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_type_protect = is_f_ind(cells[0], 'Тип защиты')
     index_unit = is_f_ind(cells[0], 'Единица измерения')
+    index_cond = is_f_ind(cells[0], 'Условия защиты')
 
     cells = sheet['A2': 'N' + str(sheet.max_row)]
 
@@ -519,6 +532,16 @@ def is_read_pz(sheet):
             if par[index_unit].value == '-999.0':
                 tmp_eunit = str(par[index_unit].comment)[str(par[index_unit].comment).find(' ') + 1:
                                                          str(par[index_unit].comment).find('by')]
+                # Для каждого слова в условии защиты ищем первую BND| и определяем по словарям
+                # AI, и AE какие единицы измерения писать, на тот случай, если комменты не правдивы
+                for word in par[index_cond].value.split():
+                    if 'BND|' in word:
+                        check = word[word.find('|')+1:word.rfind('_')]
+                        if f'AI_{check}' in sl_ai.get(cpu_name_par, {}):
+                            tmp_eunit = sl_ai[cpu_name_par][f'AI_{check}']
+                        elif f'AE_{check}' in sl_ae.get(cpu_name_par, {}):
+                            tmp_eunit = sl_ae[cpu_name_par][f'AE_{check}']
+                        break
             else:
                 tmp_eunit = par[index_unit].value
             # В словарь Защит соответсвтующего контроллера добавляем [алг имя, рус. имя, единицы измерения]
@@ -636,6 +659,7 @@ def is_read_drv(sheet, sl_all_drv):
         'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
         'INT': 'Types.DRV_INT.DRV_INT_PLC_View',
         'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View',
+        'IEC': 'Types.DRV_AI.DRV_AI_PLC_View',
         'IECR': 'Types.DRV_AI.DRV_AI_PLC_View',
         'IECB': 'Types.DRV_DI.DRV_DI_PLC_View'
     }
@@ -655,7 +679,8 @@ def is_read_drv(sheet, sl_all_drv):
 
     cells = sheet['A2': 'N' + str(sheet.max_row)]
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
-    # {алг.пар: (Тип переменной, рус имя, тип сообщения, цвет отключения, цвет включения, ед.измер, кол-во знаков) }}}
+    # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
+    # ед.измер, кол-во знаков) }}}
     return_sl_cpu_drv = {}
     # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
     sl_cpu_drv_signal = {}
@@ -668,7 +693,7 @@ def is_read_drv(sheet, sl_all_drv):
         if par[index_drv].value in sl_all_drv:
             set_par_cpu.add(par[index_cpu_name].value)
             # Получаем тип переменной (нужно для удобного отсечения и дальнейшего использования)
-            type_sig_par = par[index_type_sig].value.replace(' (с имитацией)', '')
+            type_sig_par = par[index_type_sig].value.replace(' (с имитацией)', '')  # учесть тип имитации!!!
 
             # Если в словаре sl_cpu_drv_signal нет инфы по cpu, то создаём для него внутренний пустой словарь
             if par[index_cpu_name].value not in sl_cpu_drv_signal:
@@ -693,7 +718,7 @@ def is_read_drv(sheet, sl_all_drv):
             c_on_in_tuple = (sl_color_di.get(par[index_color_on].fill.start_color.index)
                              if type_sig_par == 'BOOL' else '0')
             unit_in_tuple = (par[index_unit].value if type_sig_par != 'BOOL' else '-')
-            fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR') else '0')
+            fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR', 'IEC') else '0')
 
             tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
                          c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple)
@@ -772,11 +797,23 @@ def check_diff_file(check_path, file_name_check, new_data, message_print):
 # Функция для индексов
 # Функция получения алгоритмического имени в нижнем регистре (вместе с разделителем |, если такой есть)
 # из строки в словаре Трея
-def get_variable(line):
+def get_variable_lower(line):
     line = line.split(',')
     if isinstance(line[0], str):
         var = ''.join([i for i in line[0] if i not in '#'])
         return var.lower()
+    else:
+        return 'Странная переменная'
+
+
+# Функция для индексов
+# Функция получения алгоритмического имени в нижнем регистре (вместе с разделителем |, если такой есть)
+# из строки в словаре Трея
+def get_variable(line):
+    line = line.split(',')
+    if isinstance(line[0], str):
+        var = ''.join([i for i in line[0] if i not in '#'])
+        return var
     else:
         return 'Странная переменная'
 
@@ -796,7 +833,7 @@ def is_f_ind(cell, name_col, target_count=1):
     count = 1
     for i in range(len(cell)):
         if cell[i].value is None:
-            break
+            continue
         if multiple_replace(cell[i].value) == name_col:
             if count == target_count:
                 return i

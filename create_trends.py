@@ -3,7 +3,7 @@ from func_for_v3 import check_diff_file, is_f_ind, f_ind_json
 import os
 
 
-def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
+def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
     # ТРЕНДЫ- JSON
 
     # Определение объявленных мнемосхем с листа настроек
@@ -42,6 +42,49 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
         'Открыть': 'Закрыть',
         'Включить': 'Отключить'
     }
+    # print(sl_object_all)
+    # Словарь модулей и сигналов, по которым нужны тренды диагностики
+    sl_signal_module = {
+        'M531I': {'Частота канала 1 модуля': ('Canal_01', 'Гц'), 'Частота канала 2 модуля': ('Canal_02', 'Гц'),
+                  'Частота канала 3 модуля': ('Canal_03', 'Гц'), 'Частота канала 4 модуля': ('Canal_04', 'Гц'),
+                  'Частота канала 5 модуля': ('Canal_05', 'Гц'), 'Частота канала 6 модуля': ('Canal_06', 'Гц'),
+                  'Частота канала 7 модуля': ('Canal_07', 'Гц'), 'Частота канала 8 модуля': ('Canal_08', 'Гц'),
+                  'Ошибка канала 1 модуля': ('Err_Canal_01', '-'), 'Ошибка канала 2 модуля': ('Err_Canal_02', '-'),
+                  'Ошибка канала 3 модуля': ('Err_Canal_03', '-'), 'Ошибка канала 4 модуля': ('Err_Canal_04', '-'),
+                  'Ошибка канала 5 модуля': ('Err_Canal_05', '-'), 'Ошибка канала 6 модуля': ('Err_Canal_06', '-'),
+                  'Ошибка канала 7 модуля': ('Err_Canal_07', '-'), 'Ошибка канала 8 модуля': ('Err_Canal_08', '-')},
+
+        'M532I': {'Частота канала 1 модуля': ('Canal_01', 'Гц'), 'Частота канала 2 модуля': ('Canal_02', 'Гц'),
+                  'Частота канала 3 модуля': ('Canal_03', 'Гц'), 'Частота канала 4 модуля': ('Canal_04', 'Гц'),
+                  'Частота канала 5 модуля': ('Canal_05', 'Гц'), 'Частота канала 6 модуля': ('Canal_06', 'Гц'),
+                  'Частота канала 7 модуля': ('Canal_07', 'Гц'), 'Частота канала 8 модуля': ('Canal_08', 'Гц'),
+                  'Ошибка канала 1 модуля': ('Err_Canal_01', '-'), 'Ошибка канала 2 модуля': ('Err_Canal_02', '-'),
+                  'Ошибка канала 3 модуля': ('Err_Canal_03', '-'), 'Ошибка канала 4 модуля': ('Err_Canal_04', '-'),
+                  'Ошибка канала 5 модуля': ('Err_Canal_05', '-'), 'Ошибка канала 6 модуля': ('Err_Canal_06', '-'),
+                  'Ошибка канала 7 модуля': ('Err_Canal_07', '-'), 'Ошибка канала 8 модуля': ('Err_Canal_08', '-')},
+
+        'M582IS': {'Частота канала 1 модуля': ('Canal_01', 'Гц'), 'Частота канала 2 модуля': ('Canal_02', 'Гц'),
+                   'Частота канала 3 модуля': ('Canal_03', 'Гц'),
+                   'Ошибка канала 1 модуля': ('Err_Canal_01', '-'), 'Ошибка канала 2 модуля': ('Err_Canal_02', '-'),
+                   'Ошибка канала 3 модуля': ('Err_Canal_03', '-')},
+        'M501E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с')},
+        'M903E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с')},
+    }
+    # sl_for_diag - словарь диагностики, ключ - cpu, значение - словарь: ключ - имя модуля, значение - тип модуля
+    # в случае CPU - ключ - 'CPU', значение - кортеж (имя cpu,тип cpu)
+
+    # В словаре sl_for_diag оставляем только те конструкции, где есть частотные модуля или модуль БЗА
+    sl_for_diag = {cpu: {module_name: module_type for module_name, module_type in sl_modules.items()
+                         if module_type in ('M531I', 'M532I', 'M582IS') or module_name == 'CPU'}
+                   for cpu, sl_modules in sl_for_diag.items()}
+    # Приводим sl_for_diag к удобоваримому виду, чтобы было красиво
+    # {'GTU': {'AD100': 'M501E', 'AD101': 'M531I', 'AD1': 'M582IS'}, 'GPA': {'AD200': 'M501E'}}
+    for cpu in sl_for_diag:
+        tmp_dic = {module_name if module_name != 'CPU' else sl_for_diag[cpu]['CPU'][0]: (module_type
+                                                                                         if module_name != 'CPU' else
+                                                                                         sl_for_diag[cpu]['CPU'][1])
+                   for module_name, module_type in sl_for_diag[cpu].items()}
+        sl_for_diag[cpu] = tmp_dic
 
     # Для каждого объекта, прочитанного ранее
     for obj in sl_object_all:
@@ -342,6 +385,25 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv):
                                         f'{sl_node_trends[node][param][0]}',
                                     "EUnit": sl_node_trends[node][param][1],
                                     "Description": f'Отказ - {param}'}})
+
+        # Добавляем на тренды диагностику по интересным модулям
+        # Для каждого контроллера объекта...
+        for cpu in sl_object_all[obj]:
+            # ...для каждого спец модуля контроллера (частотный или бза)
+            # при этом проверяем, что у контроллера вообще есть такие модуля, если нет, то перебора не будет
+            for spec_module_name in sl_for_diag.get(cpu, {}):
+                # узнаём тип текущего перебираемого модуля
+                type_module = sl_for_diag[cpu][spec_module_name]
+                # для сигналов модуля, описанных в словаре sl_signal_module добавляем тренды
+                for signal in sl_signal_module.get(type_module, ''):
+                    lst_json.append(
+                        {"Signal": {"UserTree": f"Диагностика/{spec_module_name} ({type_module})/"
+                                                f"{signal} {spec_module_name}",
+                                    "OpcTag":
+                                        f'{obj[0]}.Diag.HW.{spec_module_name}.'
+                                        f'{sl_signal_module[type_module][signal][0]}',
+                                    "EUnit": sl_signal_module[type_module][signal][1],
+                                    "Description": f'{signal} {spec_module_name} ({type_module})'}})
 
         # Проверяем и перезаписываем файлы трендов в случае найденных отличий
         check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),

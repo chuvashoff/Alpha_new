@@ -26,10 +26,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Давление воздуха отбираемого из-за КВД на охлаждение",
+    "UserTree": "Аналоговые входные/Двигатель/Давление воздуха отбираемого из-за КВД на охлаждение ДК",
     "OpcTag": "GPA1.AI.AI_Pv_KVDohlDK.Value",
     "EUnit": "МПа",
-    "Description": "Давление воздуха отбираемого из-за КВД на охлаждение"
+    "Description": "Давление воздуха отбираемого из-за КВД на охлаждение ДК"
    }
   },
   {
@@ -106,10 +106,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Давление топливного газа перед измерительной диафрагмой",
-    "OpcTag": "GPA1.AI.AI_Ptg_inMSH.Value",
-    "EUnit": "МПа",
-    "Description": "Давление топливного газа перед измерительной диафрагмой"
+    "UserTree": "Аналоговые входные/Двигатель/Измерение крутящего момента от БИКМ М-106М",
+    "OpcTag": "GPA1.AI.AI_BIKM_torq.Value",
+    "EUnit": "кНм",
+    "Description": "Измерение крутящего момента от БИКМ М-106М"
    }
   },
   {
@@ -126,14 +126,6 @@
     "OpcTag": "GPA1.AI.AI_dPtg_FO.Value",
     "EUnit": "кПа",
     "Description": "Перепад давления на фильтрах топливного газа"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Перепад давления топливного газа на измерительной диафрагме",
-    "OpcTag": "GPA1.AI.AI_dPtg_MSH.Value",
-    "EUnit": "кПа",
-    "Description": "Перепад давления топливного газа на измерительной диафрагме"
    }
   },
   {
@@ -206,38 +198,6 @@
     "OpcTag": "GPA1.AI.AI_POS_DGck.Value",
     "EUnit": "%",
     "Description": "Положение дозатора газа центрального контура"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Положение катушки ВНА Cos (канал 1)",
-    "OpcTag": "GPA1.AI.AI_VNA1_Icos.Value",
-    "EUnit": "мА",
-    "Description": "Положение катушки ВНА Cos (канал 1)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Положение катушки ВНА Cos (канал 2)",
-    "OpcTag": "GPA1.AI.AI_VNA2_Icos.Value",
-    "EUnit": "мА",
-    "Description": "Положение катушки ВНА Cos (канал 2)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Положение катушки ВНА Sin (канал 1)",
-    "OpcTag": "GPA1.AI.AI_VNA1_Isin.Value",
-    "EUnit": "мА",
-    "Description": "Положение катушки ВНА Sin (канал 1)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Положение катушки ВНА Sin (канал 2)",
-    "OpcTag": "GPA1.AI.AI_VNA2_Isin.Value",
-    "EUnit": "мА",
-    "Description": "Положение катушки ВНА Sin (канал 2)"
    }
   },
   {
@@ -322,14 +282,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Температура топливного газа на входе в гомогенный коллектор",
-    "OpcTag": "GPA1.AI.AI_TginGK.Value",
-    "EUnit": "°С",
-    "Description": "Температура топливного газа на входе в гомогенный коллектор"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Аналоговые входные/Двигатель/Температура топливного газа на входе в диффузионный коллектор 1",
     "OpcTag": "GPA1.AI.AI_TginDK1.Value",
     "EUnit": "°С",
@@ -342,30 +294,6 @@
     "OpcTag": "GPA1.AI.AI_TginDK2.Value",
     "EUnit": "°С",
     "Description": "Температура топливного газа на входе в диффузионный коллектор 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Температура топливного газа на входе в центральный модуль",
-    "OpcTag": "GPA1.AI.AI_TginCM.Value",
-    "EUnit": "°С",
-    "Description": "Температура топливного газа на входе в центральный модуль"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Температура топливного газа перед дозатором",
-    "OpcTag": "GPA1.AI.AI_TginDG.Value",
-    "EUnit": "°С",
-    "Description": "Температура топливного газа перед дозатором"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аналоговые входные/Двигатель/Температура топливного газа после измерительной диафрагмы",
-    "OpcTag": "GPA1.AI.AI_Ttg_outMSH.Value",
-    "EUnit": "°С",
-    "Description": "Температура топливного газа после измерительной диафрагмы"
    }
   },
   {
@@ -460,7 +388,7 @@
    "Signal": {
     "UserTree": "Аналоговые входные/Нагнетатель/Перепад давления масло-газ в системе уплотнений Н",
     "OpcTag": "GPA1.AI.AI_dPmg_N.Value",
-    "EUnit": "кПа",
+    "EUnit": "МПа",
     "Description": "Перепад давления масло-газ в системе уплотнений Н"
    }
   },
@@ -676,7 +604,7 @@
    "Signal": {
     "UserTree": "Аналоговые входные/Маслосистема Н/Уровень масла в аккумуляторе масла",
     "OpcTag": "GPA1.AI.AI_Lmacc.Value",
-    "EUnit": "кПа",
+    "EUnit": "мм",
     "Description": "Уровень масла в аккумуляторе масла"
    }
   },
@@ -1098,10 +1026,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Аналоговые входные/Диагностика/Контроль напряжения САУ Ввод 3 (=27)",
+    "UserTree": "Аналоговые входные/Диагностика/Контроль напряжения САУ Ввод 3 (=24)",
     "OpcTag": "GPA1.AI.AI_U3.Value",
     "EUnit": "В",
-    "Description": "Контроль напряжения САУ Ввод 3 (=27)"
+    "Description": "Контроль напряжения САУ Ввод 3 (=24)"
    }
   },
   {
@@ -1130,30 +1058,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/PFR упр гом.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprGom.Value",
-    "EUnit": "-",
-    "Description": "PFR упр гом."
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/PFR упр дифф.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprDiff.Value",
-    "EUnit": "-",
-    "Description": "PFR упр дифф."
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/PFR упр центр.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprCent.Value",
-    "EUnit": "-",
-    "Description": "PFR упр центр."
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Расчетные параметры/Двигатель/ВНА1. Положение",
     "OpcTag": "GPA1.AE.AE_VNA1_POS.Value",
     "EUnit": "%",
@@ -1166,142 +1070,6 @@
     "OpcTag": "GPA1.AE.AE_VNA2_POS.Value",
     "EUnit": "%",
     "Description": "ВНА2. Положение"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Виброскорость корпуса двигателя в зоне задней подвески ",
-    "OpcTag": "GPA1.AE.AE_Vzp.Value",
-    "EUnit": "мм/с",
-    "Description": "Виброскорость корпуса двигателя в зоне задней подвески "
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Виброскорость корпуса двигателя в зоне передней подвески",
-    "OpcTag": "GPA1.AE.AE_Vpp.Value",
-    "EUnit": "мм/с",
-    "Description": "Виброскорость корпуса двигателя в зоне передней подвески"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Время выбега ротора КВД",
-    "OpcTag": "GPA1.AE.AE_VibegGGTimer.Value",
-    "EUnit": "с",
-    "Description": "Время выбега ротора КВД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Время выбега ротора СТ",
-    "OpcTag": "GPA1.AE.AE_VibegSTTimer.Value",
-    "EUnit": "с",
-    "Description": "Время выбега ротора СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Время сброса команды СЗ СтВ",
-    "OpcTag": "GPA1.AE.AE_tSbrSzOn.Value",
-    "EUnit": "об/мин",
-    "Description": "Время сброса команды СЗ СтВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №1 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT1.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №1 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №10 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT10.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №10 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №11 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT11.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №11 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №12 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT12.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №12 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №2 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT2.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №2 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №3 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT3.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №3 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №4 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT4.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №4 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №5 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT5.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №5 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №6 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT6.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №6 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №7 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT7.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №7 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №8 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT8.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №8 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Давление в ЖТ №9 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT9.Value",
-    "EUnit": "кПа",
-    "Description": "Давление в ЖТ №9 (СКЗ пульсаций)"
    }
   },
   {
@@ -1338,178 +1106,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальная температура газа за СТ",
-    "OpcTag": "GPA1.AE.AE_TstMax.Value",
-    "EUnit": "°С",
-    "Description": "Максимальная температура газа за СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальная температура газа за турбиной на запуске",
-    "OpcTag": "GPA1.AE.AE_TtzapMax.Value",
-    "EUnit": "°С",
-    "Description": "Максимальная температура газа за турбиной на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальные обороты КВД",
-    "OpcTag": "GPA1.AE.AE_Ngg_Max.Value",
-    "EUnit": "об/мин",
-    "Description": "Максимальные обороты КВД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальные обороты КНД",
-    "OpcTag": "GPA1.AE.AE_Nnd_Max.Value",
-    "EUnit": "об/мин",
-    "Description": "Максимальные обороты КНД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальный расход",
-    "OpcTag": "GPA1.AE.AE_GT_max.Value",
-    "EUnit": "кг/ч",
-    "Description": "Максимальный расход"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Максимальный расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz_max.Value",
-    "EUnit": "кг/ч",
-    "Description": "Максимальный расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Расчетные параметры/Двигатель/Мгновенный расход газа через нагнетатель",
     "OpcTag": "GPA1.AE.AE_Qn.Value",
     "EUnit": "кг/сек",
     "Description": "Мгновенный расход газа через нагнетатель"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Метка контура регулятора",
-    "OpcTag": "GPA1.AE.AE_contur.Value",
-    "EUnit": "-",
-    "Description": "Метка контура регулятора"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Миниммальный расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz_min.Value",
-    "EUnit": "кг/ч",
-    "Description": "Миниммальный расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты МГ",
-    "OpcTag": "GPA1.AE.AE_NGG_MG.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты МГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты закрытия КПВ",
-    "OpcTag": "GPA1.AE.AE_nvdCloseKP.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты закрытия КПВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты закрытия КПВЗ-КПГ",
-    "OpcTag": "GPA1.AE.AE_nvdCloseKPG.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты закрытия КПВЗ-КПГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты на розжиге",
-    "OpcTag": "GPA1.AE.AE_Nroz.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты открытия КПВ",
-    "OpcTag": "GPA1.AE.AE_nvdOpenKP.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты открытия КПВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Обороты открытия КПВЗ-КПГ",
-    "OpcTag": "GPA1.AE.AE_nvdOpenKPG.Value",
-    "EUnit": "об/мин",
-    "Description": "Обороты открытия КПВЗ-КПГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение давления воздуха за компрессором ВД макс",
-    "OpcTag": "GPA1.AE.AE_Pk_ogr_max.Value",
-    "EUnit": "кПа",
-    "Description": "Ограничение давления воздуха за компрессором ВД макс"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение давления воздуха за компрессором ВД на режиме",
-    "OpcTag": "GPA1.AE.AE_Pk_ogr_nom.Value",
-    "EUnit": "кПа",
-    "Description": "Ограничение давления воздуха за компрессором ВД на режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение максимальной Ттвд на режиме",
-    "OpcTag": "GPA1.AE.AE_Tt_ogr_ust.Value",
-    "EUnit": "°С",
-    "Description": "Ограничение максимальной Ттвд на режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение максимальных оборотов СТ",
-    "OpcTag": "GPA1.AE.AE_Nst_ogr.Value",
-    "EUnit": "об/мин",
-    "Description": "Ограничение максимальных оборотов СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение по контуру Gт|Pк",
-    "OpcTag": "GPA1.AE.AE_GtdivPk.Value",
-    "EUnit": "кг/ч",
-    "Description": "Ограничение по контуру Gт/Pк"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение раскрутки ротора СТ",
-    "OpcTag": "GPA1.AE.AE_Nst_max.Value",
-    "EUnit": "об/мин",
-    "Description": "Ограничение раскрутки ротора СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ограничение скорости расхода на запуске",
-    "OpcTag": "GPA1.AE.AE_dGtStart.Value",
-    "EUnit": "об/мин/c",
-    "Description": "Ограничение скорости расхода на запуске"
    }
   },
   {
@@ -1546,174 +1146,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №1 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT1.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №1 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №10 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT10.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №10 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №11 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT11.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №11 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №12 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT12.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №12 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №2 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT2.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №2 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №3 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT3.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №3 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №4 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT4.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №4 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №5 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT5.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №5 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №6 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT6.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №6 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №7 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT7.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №7 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №8 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT8.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №8 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Пульсация давления в ЖТ №9 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT9.Value",
-    "EUnit": "кПа",
-    "Description": "Пульсация давления в ЖТ №9 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход ТГ от ТР",
-    "OpcTag": "GPA1.AE.AE_Gt_tek.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход ТГ от ТР"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход ТГ от ТР (Гомогенный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekG.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход ТГ от ТР (Гомогенный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход ТГ от ТР (Диффузионный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekD.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход ТГ от ТР (Диффузионный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход ТГ от ТР (Центральный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekC.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход ТГ от ТР (Центральный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход на запуске",
-    "OpcTag": "GPA1.AE.AE_Gt_zap.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz.Value",
-    "EUnit": "кг/ч",
-    "Description": "Расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Скважность управления ВНА",
-    "OpcTag": "GPA1.AE.AE_Skvaz.Value",
-    "EUnit": "%",
-    "Description": "Скважность управления ВНА"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Состояние регулятора",
-    "OpcTag": "GPA1.AE.AE_condition.Value",
-    "EUnit": "-",
-    "Description": "Состояние регулятора"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Темп дозатора для перераспределения РУ",
-    "OpcTag": "GPA1.AE.AE_setTempDoz.Value",
-    "EUnit": "-",
-    "Description": "Темп дозатора для перераспределения РУ"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Расчетные параметры/Двигатель/Температура за СТ",
     "OpcTag": "GPA1.AE.AE_Tst.Value",
     "EUnit": "°С",
@@ -1734,30 +1166,6 @@
     "OpcTag": "GPA1.AE.AE_Ttzap.Value",
     "EUnit": "°С",
     "Description": "Температура за турбиной на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ускорение на старте при включенном стартере",
-    "OpcTag": "GPA1.AE.AE_dNgg_CTB.Value",
-    "EUnit": "об/мин",
-    "Description": "Ускорение на старте при включенном стартере"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ускорение на старте при отключенном стартере",
-    "OpcTag": "GPA1.AE.AE_dNgg.Value",
-    "EUnit": "об/мин",
-    "Description": "Ускорение на старте при отключенном стартере"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Двигатель/Ускорениея Nvd",
-    "OpcTag": "GPA1.AE.AE_dNvd.Value",
-    "EUnit": "об/мин",
-    "Description": "Ускорениея Nvd"
    }
   },
   {
@@ -1818,46 +1226,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Количество АО",
-    "OpcTag": "GPA1.AE.AE_NUMAO.Value",
-    "EUnit": "-",
-    "Description": "Количество АО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Количество ВО",
-    "OpcTag": "GPA1.AE.AE_NUMVO.Value",
-    "EUnit": "-",
-    "Description": "Количество ВО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Количество НО",
-    "OpcTag": "GPA1.AE.AE_NUMNO.Value",
-    "EUnit": "-",
-    "Description": "Количество НО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Количество ХП",
-    "OpcTag": "GPA1.AE.AE_NUMHP.Value",
-    "EUnit": "-",
-    "Description": "Количество ХП"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Количество запусков",
-    "OpcTag": "GPA1.AE.AE_NUMSTART.Value",
-    "EUnit": "-",
-    "Description": "Количество запусков"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Расчетные параметры/Наработки/Коммерческая произв.ЦБН",
     "OpcTag": "GPA1.AE.AE_QCOMM.Value",
     "EUnit": "КВт",
@@ -1886,22 +1254,6 @@
     "OpcTag": "GPA1.AE.AE_NE.Value",
     "EUnit": "КВт",
     "Description": "Мощность на валу ГТУ-ЦБН"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Наработка на максимальном режиме",
-    "OpcTag": "GPA1.AE.AE_NARMAX.Value",
-    "EUnit": "ч",
-    "Description": "Наработка на максимальном режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Наработка на номинальном режиме",
-    "OpcTag": "GPA1.AE.AE_NARNOM.Value",
-    "EUnit": "ч",
-    "Description": "Наработка на номинальном режиме"
    }
   },
   {
@@ -2038,22 +1390,6 @@
     "OpcTag": "GPA1.AE.AE_TGGAS_CH.Value",
     "EUnit": "тыс.м3/ч",
     "Description": "Расход топливного газа за текущий час"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Суммарная наработка",
-    "OpcTag": "GPA1.AE.AE_NARSUM.Value",
-    "EUnit": "ч",
-    "Description": "Суммарная наработка"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Расчетные параметры/Наработки/Эквивалентная наработка",
-    "OpcTag": "GPA1.AE.AE_NAREQV.Value",
-    "EUnit": "ч",
-    "Description": "Эквивалентная наработка"
    }
   },
   {
@@ -2242,6 +1578,22 @@
   },
   {
    "Signal": {
+    "UserTree": "Дискретные входные/Двигатель/Перекрывная заслонка перед СтВ закрыта",
+    "OpcTag": "GPA1.DI.DI_PZStV_stOff.Value",
+    "EUnit": "-",
+    "Description": "Перекрывная заслонка перед СтВ закрыта"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Дискретные входные/Двигатель/Перекрывная заслонка перед СтВ открыта",
+    "OpcTag": "GPA1.DI.DI_PZStV_stOn.Value",
+    "EUnit": "-",
+    "Description": "Перекрывная заслонка перед СтВ открыта"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Дискретные входные/Двигатель/Повышенная вибрация корпуса двигателя ",
     "OpcTag": "GPA1.DI.DI_Vpp_wH.Value",
     "EUnit": "-",
@@ -2318,14 +1670,6 @@
     "OpcTag": "GPA1.DI.DI_VP_BRK.Value",
     "EUnit": "-",
     "Description": "Неисправность или обрыв цепи первичных ВП передней опоры Н "
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Нагнетатель/Низкий перепад давления на кране 1",
-    "OpcTag": "GPA1.DI.DI_dPg_Kr1_wL.Value",
-    "EUnit": "-",
-    "Description": "Низкий перепад давления на кране 1"
    }
   },
   {
@@ -3154,14 +2498,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/БЗД исправен",
-    "OpcTag": "GPA1.DI.DI_BZD_Ispr.Value",
-    "EUnit": "-",
-    "Description": "БЗД исправен"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Дискретные входные/Диагностика/БЭАО сработал (от AD100) ",
     "OpcTag": "GPA1.DI.DI_GTU_BEO_AO.Value",
     "EUnit": "-",
@@ -3338,10 +2674,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Готовность 1 БЗД",
+    "UserTree": "Дискретные входные/Диагностика/Готовность БЗА",
     "OpcTag": "GPA1.DI.DI_BZD_Ready1.Value",
     "EUnit": "-",
-    "Description": "Готовность 1 БЗД"
+    "Description": "Готовность БЗА"
    }
   },
   {
@@ -3414,54 +2750,6 @@
     "OpcTag": "GPA1.DI.DI_PLC_GPA_OK.Value",
     "EUnit": "-",
     "Description": "Контроль ПЛК 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA1.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA1.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA2.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA2.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA3.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Дискретные входные/Диагностика/Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA3.Value",
-    "EUnit": "-",
-    "Description": "Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2"
    }
   },
   {
@@ -3770,6 +3058,14 @@
   },
   {
    "Signal": {
+    "UserTree": "Исполнительные механизмы/Двигатель/Закрыть ПЗСтВ. Открыть",
+    "OpcTag": "GPA1.IM.PZStVOff.oOn",
+    "EUnit": "-",
+    "Description": "Закрыть ПЗСтВ. Открыть"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Исполнительные механизмы/Двигатель/КПВ. Открыт",
     "OpcTag": "GPA1.IM.KPV.stOn",
     "EUnit": "-",
@@ -3954,34 +3250,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Исполнительные механизмы/Двигатель/ПЗСтВ. Закрыта",
-    "OpcTag": "GPA1.IM.PZStV.stOff",
+    "UserTree": "Исполнительные механизмы/Двигатель/Открыть ПЗСтВ. Открыть",
+    "OpcTag": "GPA1.IM.PZStVOn.oOn",
     "EUnit": "-",
-    "Description": "ПЗСтВ. Закрыта"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Двигатель/ПЗСтВ. Закрыть",
-    "OpcTag": "GPA1.IM.PZStV.oOff",
-    "EUnit": "-",
-    "Description": "ПЗСтВ. Закрыть"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Двигатель/ПЗСтВ. Открыта",
-    "OpcTag": "GPA1.IM.PZStV.stOn",
-    "EUnit": "-",
-    "Description": "ПЗСтВ. Открыта"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Двигатель/ПЗСтВ. Открыть",
-    "OpcTag": "GPA1.IM.PZStV.oOn",
-    "EUnit": "-",
-    "Description": "ПЗСтВ. Открыть"
+    "Description": "Открыть ПЗСтВ. Открыть"
    }
   },
   {
@@ -5162,6 +4434,790 @@
   },
   {
    "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Качество связи",
+    "OpcTag": "GPA1.System.DRV.BIKM.linkQuality.Value",
+    "EUnit": "%",
+    "Description": "БИКМ. Качество связи"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Кванты на выходе АЦП",
+    "OpcTag": "GPA1.System.DRV.BIKM.ACP_QuantOut.Value",
+    "EUnit": "-",
+    "Description": "БИКМ. Кванты на выходе АЦП"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Крутящий момент (Драйвер)",
+    "OpcTag": "GPA1.System.DRV.BIKM.Torque.Value",
+    "EUnit": "Н*м",
+    "Description": "БИКМ. Крутящий момент (Драйвер)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Максимальная зафиксированная температура",
+    "OpcTag": "GPA1.System.DRV.BIKM.MaxTempRotor.Value",
+    "EUnit": "°С",
+    "Description": "БИКМ. Максимальная зафиксированная температура"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Мощность",
+    "OpcTag": "GPA1.System.DRV.BIKM.RotorPower.Value",
+    "EUnit": "кВт",
+    "Description": "БИКМ. Мощность"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Напряжение питания на роторе",
+    "OpcTag": "GPA1.System.DRV.BIKM.RotorVoltPower.Value",
+    "EUnit": "мВ",
+    "Description": "БИКМ. Напряжение питания на роторе"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Нет связи",
+    "OpcTag": "GPA1.System.DRV.BIKM.NoLink.Value",
+    "EUnit": "-",
+    "Description": "БИКМ. Нет связи"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Температура ротора",
+    "OpcTag": "GPA1.System.DRV.BIKM.RotorTemp.Value",
+    "EUnit": "°С",
+    "Description": "БИКМ. Температура ротора"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/БИКМ/БИКМ. Частота вращения",
+    "OpcTag": "GPA1.System.DRV.BIKM.RotorSpeed.Value",
+    "EUnit": "об/мин",
+    "Description": "БИКМ. Частота вращения"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/PFR упр гом.",
+    "OpcTag": "GPA1.System.DRV.FLR.PFR_uprGom.Value",
+    "EUnit": "-",
+    "Description": "PFR упр гом."
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/PFR упр дифф.",
+    "OpcTag": "GPA1.System.DRV.FLR.PFR_uprDiff.Value",
+    "EUnit": "-",
+    "Description": "PFR упр дифф."
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/PFR упр центр.",
+    "OpcTag": "GPA1.System.DRV.FLR.PFR_uprCent.Value",
+    "EUnit": "-",
+    "Description": "PFR упр центр."
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Время выбега ротора КВД",
+    "OpcTag": "GPA1.System.DRV.FLR.VibegGGTimer.Value",
+    "EUnit": "с",
+    "Description": "Время выбега ротора КВД"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Время выбега ротора СТ",
+    "OpcTag": "GPA1.System.DRV.FLR.VibegSTTimer.Value",
+    "EUnit": "с",
+    "Description": "Время выбега ротора СТ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Время сброса команды СЗ СтВ",
+    "OpcTag": "GPA1.System.DRV.FLR.tSbrSzOn.Value",
+    "EUnit": "об/мин",
+    "Description": "Время сброса команды СЗ СтВ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Давление топливного газа перед СК0",
+    "OpcTag": "GPA1.System.DRV.FLR.Ptopl.Value",
+    "EUnit": "МПа",
+    "Description": "Давление топливного газа перед СК0"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Коэффициент коррекции nvd по Т*вх",
+    "OpcTag": "GPA1.System.DRV.FLR.CTvhNvd.Value",
+    "EUnit": "-",
+    "Description": "Коэффициент коррекции nvd по Т*вх"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальная температура газа за СТ",
+    "OpcTag": "GPA1.System.DRV.FLR.TstMax.Value",
+    "EUnit": "°С",
+    "Description": "Максимальная температура газа за СТ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальная температура газа за турбиной на запуске",
+    "OpcTag": "GPA1.System.DRV.FLR.TtzapMax.Value",
+    "EUnit": "°С",
+    "Description": "Максимальная температура газа за турбиной на запуске"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальные обороты КВД",
+    "OpcTag": "GPA1.System.DRV.FLR.Ngg_Max.Value",
+    "EUnit": "об/мин",
+    "Description": "Максимальные обороты КВД"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальные обороты КНД",
+    "OpcTag": "GPA1.System.DRV.FLR.Nnd_Max.Value",
+    "EUnit": "об/мин",
+    "Description": "Максимальные обороты КНД"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальный расход",
+    "OpcTag": "GPA1.System.DRV.FLR.GT_max.Value",
+    "EUnit": "кг/ч",
+    "Description": "Максимальный расход"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Максимальный расход на розжиге",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_roz_max.Value",
+    "EUnit": "кг/ч",
+    "Description": "Максимальный расход на розжиге"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Метка контура регулятора",
+    "OpcTag": "GPA1.System.DRV.FLR.contur.Value",
+    "EUnit": "-",
+    "Description": "Метка контура регулятора"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Миниммальный расход на розжиге",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_roz_min.Value",
+    "EUnit": "кг/ч",
+    "Description": "Миниммальный расход на розжиге"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты МГ",
+    "OpcTag": "GPA1.System.DRV.FLR.NGG_MG.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты МГ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты закрытия ЗПВ1",
+    "OpcTag": "GPA1.System.DRV.FLR.R_ZPV1_OFF.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты закрытия ЗПВ1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты закрытия ЗПВ2",
+    "OpcTag": "GPA1.System.DRV.FLR.R_ZPV2_OFF.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты закрытия ЗПВ2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты закрытия КПВ",
+    "OpcTag": "GPA1.System.DRV.FLR.nvdCloseKP.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты закрытия КПВ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты закрытия КПВЗ-КПГ",
+    "OpcTag": "GPA1.System.DRV.FLR.nvdCloseKPG.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты закрытия КПВЗ-КПГ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты на розжиге",
+    "OpcTag": "GPA1.System.DRV.FLR.Nroz.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты на розжиге"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты открытия ЗПВ1",
+    "OpcTag": "GPA1.System.DRV.FLR.R_ZPV1_ON.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты открытия ЗПВ1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты открытия ЗПВ2",
+    "OpcTag": "GPA1.System.DRV.FLR.R_ZPV2_ON.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты открытия ЗПВ2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты открытия КПВ",
+    "OpcTag": "GPA1.System.DRV.FLR.nvdOpenKP.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты открытия КПВ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Обороты открытия КПВЗ-КПГ",
+    "OpcTag": "GPA1.System.DRV.FLR.nvdOpenKPG.Value",
+    "EUnit": "об/мин",
+    "Description": "Обороты открытия КПВЗ-КПГ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение давления воздуха за компрессором ВД макс",
+    "OpcTag": "GPA1.System.DRV.FLR.Pk_ogr_max.Value",
+    "EUnit": "кПа",
+    "Description": "Ограничение давления воздуха за компрессором ВД макс"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение давления воздуха за компрессором ВД на режиме",
+    "OpcTag": "GPA1.System.DRV.FLR.Pk_ogr_nom.Value",
+    "EUnit": "МПа",
+    "Description": "Ограничение давления воздуха за компрессором ВД на режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение максимальной Ттвд на режиме",
+    "OpcTag": "GPA1.System.DRV.FLR.Tt_ogr_ust.Value",
+    "EUnit": "°С",
+    "Description": "Ограничение максимальной Ттвд на режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение максимальных оборотов СТ",
+    "OpcTag": "GPA1.System.DRV.FLR.Nst_ogr.Value",
+    "EUnit": "об/мин",
+    "Description": "Ограничение максимальных оборотов СТ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение по контуру Gт|Pк",
+    "OpcTag": "GPA1.System.DRV.FLR.GtdivPk.Value",
+    "EUnit": "кг/ч",
+    "Description": "Ограничение по контуру Gт/Pк"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение раскрутки ротора СТ",
+    "OpcTag": "GPA1.System.DRV.FLR.Nst_max.Value",
+    "EUnit": "об/мин",
+    "Description": "Ограничение раскрутки ротора СТ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ограничение скорости расхода на запуске",
+    "OpcTag": "GPA1.System.DRV.FLR.dGtStart.Value",
+    "EUnit": "об/мин/c",
+    "Description": "Ограничение скорости расхода на запуске"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ от ТР",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_tek.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход ТГ от ТР"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ от ТР (Гомогенный)",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_tekG.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход ТГ от ТР (Гомогенный)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ от ТР (Диффузионный)",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_tekD.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход ТГ от ТР (Диффузионный)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ от ТР (Центральный)",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_tekC.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход ТГ от ТР (Центральный)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ через дозатор ГК (по положению ДГ)",
+    "OpcTag": "GPA1.System.DRV.FLR.GtGomSAUproc.Value",
+    "EUnit": "%",
+    "Description": "Расход ТГ через дозатор ГК (по положению ДГ)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ через дозатор ДК (по положению ДГ)",
+    "OpcTag": "GPA1.System.DRV.FLR.GtDifSAUproc.Value",
+    "EUnit": "%",
+    "Description": "Расход ТГ через дозатор ДК (по положению ДГ)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход ТГ через дозатор ЦК (по положению ДГ)",
+    "OpcTag": "GPA1.System.DRV.FLR.GtCentSAUproc.Value",
+    "EUnit": "%",
+    "Description": "Расход ТГ через дозатор ЦК (по положению ДГ)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход на запуске",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_zap.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход на запуске"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Расход на розжиге",
+    "OpcTag": "GPA1.System.DRV.FLR.Gt_roz.Value",
+    "EUnit": "кг/ч",
+    "Description": "Расход на розжиге"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Скважность управления ВНА",
+    "OpcTag": "GPA1.System.DRV.FLR.Skvaz.Value",
+    "EUnit": "%",
+    "Description": "Скважность управления ВНА"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Состояние регулятора",
+    "OpcTag": "GPA1.System.DRV.FLR.condition.Value",
+    "EUnit": "-",
+    "Description": "Состояние регулятора"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Таймер времени ХП",
+    "OpcTag": "GPA1.System.DRV.FLR.HPTimer.Value",
+    "EUnit": "c",
+    "Description": "Таймер времени ХП"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Таймер времени охлаждения",
+    "OpcTag": "GPA1.System.DRV.FLR.coolTimer.Value",
+    "EUnit": "c",
+    "Description": "Таймер времени охлаждения"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Таймер времени прогрева",
+    "OpcTag": "GPA1.System.DRV.FLR.heatTimer.Value",
+    "EUnit": "c",
+    "Description": "Таймер времени прогрева"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Таймер времени промывки",
+    "OpcTag": "GPA1.System.DRV.FLR.promTimer.Value",
+    "EUnit": "c",
+    "Description": "Таймер времени промывки"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Таймер времени старта",
+    "OpcTag": "GPA1.System.DRV.FLR.startTimer.Value",
+    "EUnit": "c",
+    "Description": "Таймер времени старта"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Темп дозатора для перераспределения РУ",
+    "OpcTag": "GPA1.System.DRV.FLR.setTempDoz.Value",
+    "EUnit": "-",
+    "Description": "Темп дозатора для перераспределения РУ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ускорение на старте при включенном стартере",
+    "OpcTag": "GPA1.System.DRV.FLR.dNgg_CTB.Value",
+    "EUnit": "об/мин",
+    "Description": "Ускорение на старте при включенном стартере"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ускорение на старте при отключенном стартере",
+    "OpcTag": "GPA1.System.DRV.FLR.dNgg.Value",
+    "EUnit": "об/мин",
+    "Description": "Ускорение на старте при отключенном стартере"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Ускорениея Nvd",
+    "OpcTag": "GPA1.System.DRV.FLR.dNvd.Value",
+    "EUnit": "об/мин",
+    "Description": "Ускорениея Nvd"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Количество АО",
+    "OpcTag": "GPA1.System.DRV.GPA.NUMAO.Value",
+    "EUnit": "-",
+    "Description": "Количество АО"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Количество ВО",
+    "OpcTag": "GPA1.System.DRV.GPA.NUMVO.Value",
+    "EUnit": "-",
+    "Description": "Количество ВО"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Количество НО",
+    "OpcTag": "GPA1.System.DRV.GPA.NUMNO.Value",
+    "EUnit": "-",
+    "Description": "Количество НО"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Количество ХП",
+    "OpcTag": "GPA1.System.DRV.GPA.NUMHP.Value",
+    "EUnit": "-",
+    "Description": "Количество ХП"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Количество запусков",
+    "OpcTag": "GPA1.System.DRV.GPA.NUMSTART.Value",
+    "EUnit": "-",
+    "Description": "Количество запусков"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Наработка на максимальном режиме",
+    "OpcTag": "GPA1.System.DRV.GPA.NARMAX.Value",
+    "EUnit": "ч",
+    "Description": "Наработка на максимальном режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Наработка на номинальном режиме",
+    "OpcTag": "GPA1.System.DRV.GPA.NARNOM.Value",
+    "EUnit": "ч",
+    "Description": "Наработка на номинальном режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Суммарная наработка",
+    "OpcTag": "GPA1.System.DRV.GPA.NARSUM.Value",
+    "EUnit": "ч",
+    "Description": "Суммарная наработка"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ГПА/Эквивалентная наработка",
+    "OpcTag": "GPA1.System.DRV.GPA.NAREQV.Value",
+    "EUnit": "ч",
+    "Description": "Эквивалентная наработка"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Виброскорость корпуса двигателя в зоне задней подвески ",
+    "OpcTag": "GPA1.System.DRV.TIK.Vzp.Value",
+    "EUnit": "мм/с",
+    "Description": "Виброскорость корпуса двигателя в зоне задней подвески "
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Виброскорость корпуса двигателя в зоне передней подвески",
+    "OpcTag": "GPA1.System.DRV.TIK.Vpp.Value",
+    "EUnit": "мм/с",
+    "Description": "Виброскорость корпуса двигателя в зоне передней подвески"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №1 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT1.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №1 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №10 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT10.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №10 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №11 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT11.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №11 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №12 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT12.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №12 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №2 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT2.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №2 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №3 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT3.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №3 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №4 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT4.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №4 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №5 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT5.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №5 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №6 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT6.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №6 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №7 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT7.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №7 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №8 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT8.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №8 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Давление в ЖТ №9 (СКЗ пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.P_ZHT9.Value",
+    "EUnit": "кПа",
+    "Description": "Давление в ЖТ №9 (СКЗ пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №1 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT1.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №1 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №10 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT10.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №10 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №11 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT11.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №11 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №12 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT12.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №12 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №2 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT2.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №2 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №3 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT3.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №3 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №4 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT4.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №4 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №5 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT5.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №5 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №6 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT6.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №6 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №7 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT7.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №7 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №8 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT8.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №8 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТИК/Пульсация давления в ЖТ №9 (размах пульсаций)",
+    "OpcTag": "GPA1.System.DRV.TIK.PP_ZHT9.Value",
+    "EUnit": "кПа",
+    "Description": "Пульсация давления в ЖТ №9 (размах пульсаций)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. АО по погасанию жаровых труб",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT.Value",
+    "EUnit": "-",
+    "Description": "АОбс. АО по погасанию жаровых труб"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. АОбс по команде оператора",
     "OpcTag": "GPA1.System.ALR.CO_AObs.Value",
     "EUnit": "-",
@@ -5178,10 +5234,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Аварийно высокая температура газа за турбиной ГГ",
+    "UserTree": "Аварии/АОбс/АОбс. Аварийно высокая температура газа за турбиной ГГ на режиме",
     "OpcTag": "GPA1.System.ALR.A_TtHigh.Value",
     "EUnit": "-",
-    "Description": "АОбс. Аварийно высокая температура газа за турбиной ГГ"
+    "Description": "АОбс. Аварийно высокая температура газа за турбиной ГГ на режиме"
    }
   },
   {
@@ -5203,7 +5259,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Аварийно-высокая температура масла откачки от СТ",
-    "OpcTag": "GPA1.System.ALR.A_TmoutStBrk.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmopStMax.Value",
     "EUnit": "-",
     "Description": "АОбс. Аварийно-высокая температура масла откачки от СТ"
    }
@@ -5211,7 +5267,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Аварийно-высокая температура масла откачки от опоры РП ТВД",
-    "OpcTag": "GPA1.System.ALR.A_TmrpTvdBrk.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmrpTvdMax.Value",
     "EUnit": "-",
     "Description": "АОбс. Аварийно-высокая температура масла откачки от опоры РП ТВД"
    }
@@ -5219,7 +5275,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Аварийно-высокая температура масла откачки от опоры РП ТНД",
-    "OpcTag": "GPA1.System.ALR.A_TmrpTndBrk.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmrpTndMax.Value",
     "EUnit": "-",
     "Description": "АОбс. Аварийно-высокая температура масла откачки от опоры РП ТНД"
    }
@@ -5238,14 +5294,6 @@
     "OpcTag": "GPA1.System.ALR.A_PtgMax.Value",
     "EUnit": "-",
     "Description": "АОбс. Аварийно-высокое давление топливного газа перед СК0"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Аварийно-низкая частота вращения ротора КВД",
-    "OpcTag": "GPA1.System.ALR.A_NggLow.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Аварийно-низкая частота вращения ротора КВД"
    }
   },
   {
@@ -5274,8 +5322,16 @@
   },
   {
    "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Высокая неравномерность Тт на запуске",
+    "OpcTag": "GPA1.System.ALR.A_deltaTtAlarm.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Высокая неравномерность Тт на запуске"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Высокая температура масла откачки от ШП КВД",
-    "OpcTag": "GPA1.System.ALR.A_TmspKvdBrk.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmspKvdMax.Value",
     "EUnit": "-",
     "Description": "АОбс. Высокая температура масла откачки от ШП КВД"
    }
@@ -5354,14 +5410,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Давление топливного газа перед СК0 пониженное на пуске",
-    "OpcTag": "GPA1.System.ALR.A_PtgMinZap.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Давление топливного газа перед СК0 пониженное на пуске"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Кран 6р не открылся на пуске",
     "OpcTag": "GPA1.System.ALR.Kr6_nstOn.Value",
     "EUnit": "-",
@@ -5390,22 +5438,6 @@
     "OpcTag": "GPA1.System.ALR.A_STbrk.Value",
     "EUnit": "-",
     "Description": "АОбс. Неисправность СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Неисправность канала упр-ия КПВВ. Аппаратный контроль",
-    "OpcTag": "GPA1.System.ALR.A_KPVV_Brk.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Неисправность канала упр-ия КПВВ. Аппаратный контроль"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Неисправность канала упр-ия КПВВ. Функциональный контроль",
-    "OpcTag": "GPA1.System.ALR.A_KPVV_IMBrk.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Неисправность канала упр-ия КПВВ. Функциональный контроль"
    }
   },
   {
@@ -5458,22 +5490,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Неисправность канала управления положением ЗПВ КНД 1 гр.",
-    "OpcTag": "GPA1.System.ALR.A_ZPV1IMBrk.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Неисправность канала управления положением ЗПВ КНД 1 гр."
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Неисправность канала управления положением ЗПВ КНД 2 гр.",
-    "OpcTag": "GPA1.System.ALR.A_ZPV2IMBrk.Value",
-    "EUnit": "-",
-    "Description": "АОбс. Неисправность канала управления положением ЗПВ КНД 2 гр."
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Неисправность канала управления положением КПВ КВД",
     "OpcTag": "GPA1.System.ALR.A_KPVIMBrk.Value",
     "EUnit": "-",
@@ -5506,10 +5522,26 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/АОбс/АОбс. Низкая температура масла в откачках от опор двигателя",
-    "OpcTag": "GPA1.System.ALR.A_TotkMin.Value",
+    "UserTree": "Аварии/АОбс/АОбс. Нет сигнала БУШ гомогенный исправен",
+    "OpcTag": "GPA1.System.ALR.A_BUSHg_isp.Value",
     "EUnit": "-",
-    "Description": "АОбс. Низкая температура масла в откачках от опор двигателя"
+    "Description": "АОбс. Нет сигнала БУШ гомогенный исправен"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Нет сигнала БУШ диффузионный исправен",
+    "OpcTag": "GPA1.System.ALR.A_BUSHd_isp.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Нет сигнала БУШ диффузионный исправен"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Нет сигнала БУШ центральный исправен",
+    "OpcTag": "GPA1.System.ALR.A_BUSHc_isp.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Нет сигнала БУШ центральный исправен"
    }
   },
   {
@@ -5550,6 +5582,14 @@
     "OpcTag": "GPA1.System.ALR.A_AObs_common.Value",
     "EUnit": "-",
     "Description": "АОбс. Обобщенный АОбс от ТР"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Обрыв связи с виброаппаратурой ТИК",
+    "OpcTag": "GPA1.System.ALR.TIK_NoLink.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Обрыв связи с виброаппаратурой ТИК"
    }
   },
   {
@@ -5674,6 +5714,14 @@
   },
   {
    "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ более 9-ти каналов измерения Тт",
+    "OpcTag": "GPA1.System.ALR.A_TtBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ более 9-ти каналов измерения Тт"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ всех каналов измерения Nквд",
     "OpcTag": "GPA1.System.ALR.A_NvdBrk.Value",
     "EUnit": "-",
@@ -5715,7 +5763,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ датчика Тм на выходе из опор СТ на запуске",
-    "OpcTag": "GPA1.System.ALR.A_TmopStMax.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmoutStBrk.Value",
     "EUnit": "-",
     "Description": "АОбс. Отказ датчика Тм на выходе из опор СТ на запуске"
    }
@@ -5723,7 +5771,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ датчика Тм на выходе из опоры РП ТВД на запуске",
-    "OpcTag": "GPA1.System.ALR.A_TmrpTvdMax.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmrpTvdBrk.Value",
     "EUnit": "-",
     "Description": "АОбс. Отказ датчика Тм на выходе из опоры РП ТВД на запуске"
    }
@@ -5731,7 +5779,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ датчика Тм на выходе из опоры РП ТНД на запуске",
-    "OpcTag": "GPA1.System.ALR.A_TmrpTndMax.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmrpTndBrk.Value",
     "EUnit": "-",
     "Description": "АОбс. Отказ датчика Тм на выходе из опоры РП ТНД на запуске"
    }
@@ -5739,7 +5787,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ датчика Тм на выходе из опоры ШП КВД на запуске",
-    "OpcTag": "GPA1.System.ALR.A_TmspKvdMax.Value",
+    "OpcTag": "GPA1.System.ALR.A_TmspKvdBrk.Value",
     "EUnit": "-",
     "Description": "АОбс. Отказ датчика Тм на выходе из опоры ШП КВД на запуске"
    }
@@ -5842,6 +5890,126 @@
   },
   {
    "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ механической части управления КС2 при задании на закрытие",
+    "OpcTag": "GPA1.System.ALR.A_KPDKnSOffBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ механической части управления КС2 при задании на закрытие"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ механической части управления КС2 при задании на открытие",
+    "OpcTag": "GPA1.System.ALR.A_KPDKnSOnBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ механической части управления КС2 при задании на открытие"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ механической части управления КТ0 при задании на закрытие",
+    "OpcTag": "GPA1.System.ALR.A_KPDKOffBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ механической части управления КТ0 при задании на закрытие"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ механической части управления КТ0 при задании на открытие",
+    "OpcTag": "GPA1.System.ALR.A_KPDKOnBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ механической части управления КТ0 при задании на открытие"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ пневмомеханической части канала управления СК ГК",
+    "OpcTag": "GPA1.System.ALR.A_SKGBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ пневмомеханической части канала управления СК ГК"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ пневмомеханической части канала управления СК ДК1",
+    "OpcTag": "GPA1.System.ALR.A_SKD1Brk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ пневмомеханической части канала управления СК ДК1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ пневмомеханической части канала управления СК ДК2",
+    "OpcTag": "GPA1.System.ALR.A_SKD2Brk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ пневмомеханической части канала управления СК ДК2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ пневмомеханической части канала управления СК ЦК",
+    "OpcTag": "GPA1.System.ALR.A_SKCBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ пневмомеханической части канала управления СК ЦК"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ пневмомеханической части канала управления СК0",
+    "OpcTag": "GPA1.System.ALR.A_SKBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ пневмомеханической части канала управления СК0"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ элек. части канала управления ЗПВ1 на запуске и режиме",
+    "OpcTag": "GPA1.System.ALR.A_ZPV1IMBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ элек. части канала управления ЗПВ1 на запуске и режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ элек. части канала управления ЗПВ2 на запуске и режиме",
+    "OpcTag": "GPA1.System.ALR.A_ZPV2IMBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ элек. части канала управления ЗПВ2 на запуске и режиме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ электрической части канала управления СК ГК",
+    "OpcTag": "GPA1.System.ALR.A_SKGBelBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ электрической части канала управления СК ГК"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ электрической части канала управления СК ДК1",
+    "OpcTag": "GPA1.System.ALR.A_SKD1BelBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ электрической части канала управления СК ДК1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ электрической части канала управления СК ДК2",
+    "OpcTag": "GPA1.System.ALR.A_SKD2BelBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ электрической части канала управления СК ДК2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Отказ электрической части канала управления СК ЦК",
+    "OpcTag": "GPA1.System.ALR.A_SKCBelBrk.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Отказ электрической части канала управления СК ЦК"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Отказ электрической части канала управления СК0",
     "OpcTag": "GPA1.System.ALR.A_SKIMBrk.Value",
     "EUnit": "-",
@@ -5862,6 +6030,198 @@
     "OpcTag": "GPA1.System.ALR.A_Pogas_roz.Value",
     "EUnit": "-",
     "Description": "АОбс. Погасание КС после розжига"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 1-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT1.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 1-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 10-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT10.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 10-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 11-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT11.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 11-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 12-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT12.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 12-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 2-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT2.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 2-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 3-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT3.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 3-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 4-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT4.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 4-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 5-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT5.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 5-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 6-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT6.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 6-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 7-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT7.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 7-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 8-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT8.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 8-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на запуске по 9-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_PogasZap_GT9.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на запуске по 9-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 1-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT1.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 1-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 10-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT10.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 10-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 11-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT11.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 11-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 12-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT12.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 12-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 2-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT2.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 2-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 3-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT3.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 3-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 4-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT4.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 4-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 5-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT5.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 5-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 6-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT6.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 6-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 7-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT7.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 7-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 8-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT8.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 8-й термопаре"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Погасание на режиме по 9-й термопаре",
+    "OpcTag": "GPA1.System.ALR.A_Pogas_GT9.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Погасание на режиме по 9-й термопаре"
    }
   },
   {
@@ -5891,7 +6251,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОбс/АОбс. Пониженная температура топливного газа на входе в СК0 на запуске",
-    "OpcTag": "GPA1.System.ALR.A_TgInSK0.Value",
+    "OpcTag": "GPA1.System.ALR.A_TtgvhSKOMin.Value",
     "EUnit": "-",
     "Description": "АОбс. Пониженная температура топливного газа на входе в СК0 на запуске"
    }
@@ -5918,6 +6278,22 @@
     "OpcTag": "GPA1.System.ALR.Kr2_nstOn.Value",
     "EUnit": "-",
     "Description": "АОбс. Самопроизвольное закрытие крана №2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Система продувки диф. коллектора №1 негерметична",
+    "OpcTag": "GPA1.System.ALR.A_noGermProdD1.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Система продувки диф. коллектора №1 негерметична"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Система продувки диф. коллектора №2 негерметична",
+    "OpcTag": "GPA1.System.ALR.A_noGermProdD2.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Система продувки диф. коллектора №2 негерметична"
    }
   },
   {
@@ -6058,6 +6434,14 @@
   },
   {
    "Signal": {
+    "UserTree": "Аварии/АОсс/АОсс. Аварийно-низкая частота вращения ротора КВД",
+    "OpcTag": "GPA1.System.ALR.A_NggLow.Value",
+    "EUnit": "-",
+    "Description": "АОсс. Аварийно-низкая частота вращения ротора КВД"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/АОсс/АОсс. Аварийно-низкий уровень масла в МБН",
     "OpcTag": "GPA1.System.ALR.Lm_MBN_aL.Value",
     "EUnit": "-",
@@ -6099,7 +6483,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОсс/АОсс. Авария ПЛК AD100",
-    "OpcTag": "GPA1.System.ALR.GPA_PLC_AO.Value",
+    "OpcTag": "GPA1.System.ALR.GTU_PLC_AO.Value",
     "EUnit": "-",
     "Description": "АОсс. Авария ПЛК AD100"
    }
@@ -6107,7 +6491,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/АОсс/АОсс. Авария ПЛК AD200",
-    "OpcTag": "GPA1.System.ALR.GTU_PLC_AO.Value",
+    "OpcTag": "GPA1.System.ALR.GPA_PLC_AO.Value",
     "EUnit": "-",
     "Description": "АОсс. Авария ПЛК AD200"
    }
@@ -6290,16 +6674,16 @@
   },
   {
    "Signal": {
-    "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура газа за турбиной ГГ",
+    "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура газа за турбиной ГГ на режиме",
     "OpcTag": "GPA1.System.ALR.N_TtHigh.Value",
     "EUnit": "-",
-    "Description": "ВОбс. Высокая температура газа за турбиной ГГ"
+    "Description": "ВОбс. Высокая температура газа за турбиной ГГ на режиме"
    }
   },
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура масла на откачки от опоры РП ТВД",
-    "OpcTag": "GPA1.System.ALR.N_TmrpTvdBrk.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmrpTvdMax.Value",
     "EUnit": "-",
     "Description": "ВОбс. Высокая температура масла на откачки от опоры РП ТВД"
    }
@@ -6307,7 +6691,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура масла на откачки от опоры РП ТНД",
-    "OpcTag": "GPA1.System.ALR.N_TmrpTndBrk.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmrpTndMax.Value",
     "EUnit": "-",
     "Description": "ВОбс. Высокая температура масла на откачки от опоры РП ТНД"
    }
@@ -6315,7 +6699,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура масла откачки от СТ",
-    "OpcTag": "GPA1.System.ALR.N_TmoutStBrk.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmopStMax.Value",
     "EUnit": "-",
     "Description": "ВОбс. Высокая температура масла откачки от СТ"
    }
@@ -6323,7 +6707,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Высокая температура масла откачки от ШП КВД",
-    "OpcTag": "GPA1.System.ALR.N_TmspKvdBrk.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmspKvdMax.Value",
     "EUnit": "-",
     "Description": "ВОбс. Высокая температура масла откачки от ШП КВД"
    }
@@ -6350,6 +6734,22 @@
     "OpcTag": "GPA1.System.ALR.Lm_MBD_aL.Value",
     "EUnit": "-",
     "Description": "ВОбс. Минимальный уровень масла в маслобаке ГТУ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Нет продувки диффузионного коллектора № 1",
+    "OpcTag": "GPA1.System.ALR.N_noProdD1.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Нет продувки диффузионного коллектора № 1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Нет продувки диффузионного коллектора № 2",
+    "OpcTag": "GPA1.System.ALR.N_noProdD2.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Нет продувки диффузионного коллектора № 2"
    }
   },
   {
@@ -6395,7 +6795,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Низкое давление топливного газа перед СК0",
-    "OpcTag": "GPA1.System.ALR.A_PtgLow.Value",
+    "OpcTag": "GPA1.System.ALR.N_PtgMin.Value",
     "EUnit": "-",
     "Description": "ВОбс. Низкое давление топливного газа перед СК0"
    }
@@ -6442,8 +6842,16 @@
   },
   {
    "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Отказ 9-ти каналов измерения Тт",
+    "OpcTag": "GPA1.System.ALR.N_TtBrk.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Отказ 9-ти каналов измерения Тт"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Отказ датчика Тм на выходе из опор СТ",
-    "OpcTag": "GPA1.System.ALR.N_TmopStMax.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmopStBrk.Value",
     "EUnit": "-",
     "Description": "ВОбс. Отказ датчика Тм на выходе из опор СТ"
    }
@@ -6451,7 +6859,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Отказ датчика Тм на выходе из опоры РП ТВД",
-    "OpcTag": "GPA1.System.ALR.N_TmrpTvdMax.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmrpTvdBrk.Value",
     "EUnit": "-",
     "Description": "ВОбс. Отказ датчика Тм на выходе из опоры РП ТВД"
    }
@@ -6459,7 +6867,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Отказ датчика Тм на выходе из опоры РП ТНД",
-    "OpcTag": "GPA1.System.ALR.N_TmrpTndMax.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmrpTndBrk.Value",
     "EUnit": "-",
     "Description": "ВОбс. Отказ датчика Тм на выходе из опоры РП ТНД"
    }
@@ -6467,7 +6875,7 @@
   {
    "Signal": {
     "UserTree": "Аварии/ВОбс/ВОбс. Отказ датчика Тм на выходе из опоры ШП КВД",
-    "OpcTag": "GPA1.System.ALR.N_TmspKvdMax.Value",
+    "OpcTag": "GPA1.System.ALR.N_TmspKvdBrk.Value",
     "EUnit": "-",
     "Description": "ВОбс. Отказ датчика Тм на выходе из опоры ШП КВД"
    }
@@ -6510,6 +6918,38 @@
     "OpcTag": "GPA1.System.ALR.Tm_inGTU_aH.Value",
     "EUnit": "-",
     "Description": "ВОбс. Повышенная температура масла на входе в двигатель"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Повышенная температура на выходе из АВО-11 по диф 1",
+    "OpcTag": "GPA1.System.ALR.N_Pv1AVO.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Повышенная температура на выходе из АВО-11 по диф 1"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Повышенная температура на выходе из АВО-11 по диф 2",
+    "OpcTag": "GPA1.System.ALR.N_Pv2AVO.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Повышенная температура на выходе из АВО-11 по диф 2"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Система продувки диф. коллектора №1 негерметична",
+    "OpcTag": "GPA1.System.ALR.N_noGermProdD1.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Система продувки диф. коллектора №1 негерметична"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/ВОбс/ВОбс. Система продувки диф. коллектора №2 негерметична",
+    "OpcTag": "GPA1.System.ALR.N_noGermProdD2.Value",
+    "EUnit": "-",
+    "Description": "ВОбс. Система продувки диф. коллектора №2 негерметична"
    }
   },
   {
@@ -7340,14 +7780,14 @@
    "Signal": {
     "UserTree": "Уставки/Регулировка давления воздуха за КВД при максимальном режиме",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_PK_OgR_Max.Value",
-    "EUnit": "кПа",
+    "EUnit": "МПа",
     "Description": "Регулировка давления воздуха за КВД при максимальном режиме"
    }
   },
   {
    "Signal": {
     "UserTree": "Уставки/Регулировка закрытия ЗПВ1",
-    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_ZPV1.Value",
+    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_ZPV1_OFF.Value",
     "EUnit": "об/мин",
     "Description": "Регулировка закрытия ЗПВ1"
    }
@@ -7355,7 +7795,7 @@
   {
    "Signal": {
     "UserTree": "Уставки/Регулировка закрытия ЗПВ2",
-    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_ZPV2.Value",
+    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_ZPV2_OFF.Value",
     "EUnit": "об/мин",
     "Description": "Регулировка закрытия ЗПВ2"
    }
@@ -7484,7 +7924,7 @@
    "Signal": {
     "UserTree": "Уставки/Регулировка ограничения по давлению воздуха за КВД",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_Pk_ogr.Value",
-    "EUnit": "кПа",
+    "EUnit": "МПа",
     "Description": "Регулировка ограничения по давлению воздуха за КВД"
    }
   },
@@ -7546,10 +7986,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Уставки/Регулировка ускорения на старте при отлюченном стартере",
+    "UserTree": "Уставки/Регулировка ускорения на старте при отключенном стартере",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_R_dNgg.Value",
     "EUnit": "(об/мин)/с",
-    "Description": "Регулировка ускорения на старте при отлюченном стартере"
+    "Description": "Регулировка ускорения на старте при отключенном стартере"
    }
   },
   {
@@ -7650,10 +8090,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Давление воздуха отбираемого из-за КВД на охлаждение",
+    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Давление воздуха отбираемого из-за КВД на охлаждение ДК",
     "OpcTag": "GPA1.AI.AI_Pv_KVDohlDK.fValue",
     "EUnit": "-",
-    "Description": "Отказ - Давление воздуха отбираемого из-за КВД на охлаждение"
+    "Description": "Отказ - Давление воздуха отбираемого из-за КВД на охлаждение ДК"
    }
   },
   {
@@ -7730,10 +8170,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Давление топливного газа перед измерительной диафрагмой",
-    "OpcTag": "GPA1.AI.AI_Ptg_inMSH.fValue",
+    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Измерение крутящего момента от БИКМ М-106М",
+    "OpcTag": "GPA1.AI.AI_BIKM_torq.fValue",
     "EUnit": "-",
-    "Description": "Отказ - Давление топливного газа перед измерительной диафрагмой"
+    "Description": "Отказ - Измерение крутящего момента от БИКМ М-106М"
    }
   },
   {
@@ -7750,14 +8190,6 @@
     "OpcTag": "GPA1.AI.AI_dPtg_FO.fValue",
     "EUnit": "-",
     "Description": "Отказ - Перепад давления на фильтрах топливного газа"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Перепад давления топливного газа на измерительной диафрагме",
-    "OpcTag": "GPA1.AI.AI_dPtg_MSH.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Перепад давления топливного газа на измерительной диафрагме"
    }
   },
   {
@@ -7830,38 +8262,6 @@
     "OpcTag": "GPA1.AI.AI_POS_DGck.fValue",
     "EUnit": "-",
     "Description": "Отказ - Положение дозатора газа центрального контура"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Положение катушки ВНА Cos (канал 1)",
-    "OpcTag": "GPA1.AI.AI_VNA1_Icos.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Положение катушки ВНА Cos (канал 1)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Положение катушки ВНА Cos (канал 2)",
-    "OpcTag": "GPA1.AI.AI_VNA2_Icos.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Положение катушки ВНА Cos (канал 2)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Положение катушки ВНА Sin (канал 1)",
-    "OpcTag": "GPA1.AI.AI_VNA1_Isin.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Положение катушки ВНА Sin (канал 1)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Положение катушки ВНА Sin (канал 2)",
-    "OpcTag": "GPA1.AI.AI_VNA2_Isin.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Положение катушки ВНА Sin (канал 2)"
    }
   },
   {
@@ -7946,14 +8346,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Температура топливного газа на входе в гомогенный коллектор",
-    "OpcTag": "GPA1.AI.AI_TginGK.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Температура топливного газа на входе в гомогенный коллектор"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Температура топливного газа на входе в диффузионный коллектор 1",
     "OpcTag": "GPA1.AI.AI_TginDK1.fValue",
     "EUnit": "-",
@@ -7966,30 +8358,6 @@
     "OpcTag": "GPA1.AI.AI_TginDK2.fValue",
     "EUnit": "-",
     "Description": "Отказ - Температура топливного газа на входе в диффузионный коллектор 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Температура топливного газа на входе в центральный модуль",
-    "OpcTag": "GPA1.AI.AI_TginCM.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Температура топливного газа на входе в центральный модуль"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Температура топливного газа перед дозатором",
-    "OpcTag": "GPA1.AI.AI_TginDG.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Температура топливного газа перед дозатором"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы аналоговых входных/Двигатель/Отказ - Температура топливного газа после измерительной диафрагмы",
-    "OpcTag": "GPA1.AI.AI_Ttg_outMSH.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Температура топливного газа после измерительной диафрагмы"
    }
   },
   {
@@ -8722,10 +9090,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы аналоговых входных/Диагностика/Отказ - Контроль напряжения САУ Ввод 3 (=27)",
+    "UserTree": "Отказы аналоговых входных/Диагностика/Отказ - Контроль напряжения САУ Ввод 3 (=24)",
     "OpcTag": "GPA1.AI.AI_U3.fValue",
     "EUnit": "-",
-    "Description": "Отказ - Контроль напряжения САУ Ввод 3 (=27)"
+    "Description": "Отказ - Контроль напряжения САУ Ввод 3 (=24)"
    }
   },
   {
@@ -8754,30 +9122,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - PFR упр гом.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprGom.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - PFR упр гом."
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - PFR упр дифф.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprDiff.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - PFR упр дифф."
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - PFR упр центр.",
-    "OpcTag": "GPA1.AE.AE_PFR_uprCent.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - PFR упр центр."
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - ВНА1. Положение",
     "OpcTag": "GPA1.AE.AE_VNA1_POS.fValue",
     "EUnit": "-",
@@ -8790,142 +9134,6 @@
     "OpcTag": "GPA1.AE.AE_VNA2_POS.fValue",
     "EUnit": "-",
     "Description": "Отказ - ВНА2. Положение"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Виброскорость корпуса двигателя в зоне задней подвески ",
-    "OpcTag": "GPA1.AE.AE_Vzp.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Виброскорость корпуса двигателя в зоне задней подвески "
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Виброскорость корпуса двигателя в зоне передней подвески",
-    "OpcTag": "GPA1.AE.AE_Vpp.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Виброскорость корпуса двигателя в зоне передней подвески"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Время выбега ротора КВД",
-    "OpcTag": "GPA1.AE.AE_VibegGGTimer.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Время выбега ротора КВД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Время выбега ротора СТ",
-    "OpcTag": "GPA1.AE.AE_VibegSTTimer.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Время выбега ротора СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Время сброса команды СЗ СтВ",
-    "OpcTag": "GPA1.AE.AE_tSbrSzOn.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Время сброса команды СЗ СтВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №1 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT1.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №1 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №10 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT10.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №10 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №11 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT11.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №11 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №12 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT12.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №12 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №2 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT2.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №2 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №3 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT3.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №3 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №4 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT4.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №4 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №5 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT5.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №5 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №6 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT6.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №6 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №7 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT7.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №7 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №8 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT8.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №8 (СКЗ пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Давление в ЖТ №9 (СКЗ пульсаций)",
-    "OpcTag": "GPA1.AE.AE_P_ZHT9.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Давление в ЖТ №9 (СКЗ пульсаций)"
    }
   },
   {
@@ -8962,178 +9170,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальная температура газа за СТ",
-    "OpcTag": "GPA1.AE.AE_TstMax.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальная температура газа за СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальная температура газа за турбиной на запуске",
-    "OpcTag": "GPA1.AE.AE_TtzapMax.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальная температура газа за турбиной на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальные обороты КВД",
-    "OpcTag": "GPA1.AE.AE_Ngg_Max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальные обороты КВД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальные обороты КНД",
-    "OpcTag": "GPA1.AE.AE_Nnd_Max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальные обороты КНД"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальный расход",
-    "OpcTag": "GPA1.AE.AE_GT_max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальный расход"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Максимальный расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz_max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Максимальный расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Мгновенный расход газа через нагнетатель",
     "OpcTag": "GPA1.AE.AE_Qn.fValue",
     "EUnit": "-",
     "Description": "Отказ - Мгновенный расход газа через нагнетатель"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Метка контура регулятора",
-    "OpcTag": "GPA1.AE.AE_contur.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Метка контура регулятора"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Миниммальный расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz_min.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Миниммальный расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты МГ",
-    "OpcTag": "GPA1.AE.AE_NGG_MG.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты МГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты закрытия КПВ",
-    "OpcTag": "GPA1.AE.AE_nvdCloseKP.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты закрытия КПВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты закрытия КПВЗ-КПГ",
-    "OpcTag": "GPA1.AE.AE_nvdCloseKPG.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты закрытия КПВЗ-КПГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты на розжиге",
-    "OpcTag": "GPA1.AE.AE_Nroz.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты открытия КПВ",
-    "OpcTag": "GPA1.AE.AE_nvdOpenKP.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты открытия КПВ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Обороты открытия КПВЗ-КПГ",
-    "OpcTag": "GPA1.AE.AE_nvdOpenKPG.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Обороты открытия КПВЗ-КПГ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение давления воздуха за компрессором ВД макс",
-    "OpcTag": "GPA1.AE.AE_Pk_ogr_max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение давления воздуха за компрессором ВД макс"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение давления воздуха за компрессором ВД на режиме",
-    "OpcTag": "GPA1.AE.AE_Pk_ogr_nom.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение давления воздуха за компрессором ВД на режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение максимальной Ттвд на режиме",
-    "OpcTag": "GPA1.AE.AE_Tt_ogr_ust.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение максимальной Ттвд на режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение максимальных оборотов СТ",
-    "OpcTag": "GPA1.AE.AE_Nst_ogr.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение максимальных оборотов СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение по контуру Gт|Pк",
-    "OpcTag": "GPA1.AE.AE_GtdivPk.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение по контуру Gт/Pк"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение раскрутки ротора СТ",
-    "OpcTag": "GPA1.AE.AE_Nst_max.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение раскрутки ротора СТ"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ограничение скорости расхода на запуске",
-    "OpcTag": "GPA1.AE.AE_dGtStart.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ограничение скорости расхода на запуске"
    }
   },
   {
@@ -9170,174 +9210,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №1 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT1.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №1 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №10 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT10.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №10 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №11 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT11.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №11 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №12 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT12.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №12 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №2 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT2.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №2 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №3 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT3.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №3 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №4 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT4.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №4 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №5 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT5.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №5 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №6 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT6.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №6 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №7 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT7.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №7 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №8 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT8.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №8 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Пульсация давления в ЖТ №9 (размах пульсаций)",
-    "OpcTag": "GPA1.AE.AE_PP_ZHT9.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Пульсация давления в ЖТ №9 (размах пульсаций)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход ТГ от ТР",
-    "OpcTag": "GPA1.AE.AE_Gt_tek.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход ТГ от ТР"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход ТГ от ТР (Гомогенный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekG.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход ТГ от ТР (Гомогенный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход ТГ от ТР (Диффузионный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekD.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход ТГ от ТР (Диффузионный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход ТГ от ТР (Центральный)",
-    "OpcTag": "GPA1.AE.AE_Gt_tekC.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход ТГ от ТР (Центральный)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход на запуске",
-    "OpcTag": "GPA1.AE.AE_Gt_zap.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Расход на розжиге",
-    "OpcTag": "GPA1.AE.AE_Gt_roz.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Расход на розжиге"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Скважность управления ВНА",
-    "OpcTag": "GPA1.AE.AE_Skvaz.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Скважность управления ВНА"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Состояние регулятора",
-    "OpcTag": "GPA1.AE.AE_condition.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Состояние регулятора"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Темп дозатора для перераспределения РУ",
-    "OpcTag": "GPA1.AE.AE_setTempDoz.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Темп дозатора для перераспределения РУ"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Температура за СТ",
     "OpcTag": "GPA1.AE.AE_Tst.fValue",
     "EUnit": "-",
@@ -9358,30 +9230,6 @@
     "OpcTag": "GPA1.AE.AE_Ttzap.fValue",
     "EUnit": "-",
     "Description": "Отказ - Температура за турбиной на запуске"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ускорение на старте при включенном стартере",
-    "OpcTag": "GPA1.AE.AE_dNgg_CTB.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ускорение на старте при включенном стартере"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ускорение на старте при отключенном стартере",
-    "OpcTag": "GPA1.AE.AE_dNgg.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ускорение на старте при отключенном стартере"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Двигатель/Отказ - Ускорениея Nvd",
-    "OpcTag": "GPA1.AE.AE_dNvd.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Ускорениея Nvd"
    }
   },
   {
@@ -9442,46 +9290,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Количество АО",
-    "OpcTag": "GPA1.AE.AE_NUMAO.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Количество АО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Количество ВО",
-    "OpcTag": "GPA1.AE.AE_NUMVO.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Количество ВО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Количество НО",
-    "OpcTag": "GPA1.AE.AE_NUMNO.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Количество НО"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Количество ХП",
-    "OpcTag": "GPA1.AE.AE_NUMHP.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Количество ХП"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Количество запусков",
-    "OpcTag": "GPA1.AE.AE_NUMSTART.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Количество запусков"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Коммерческая произв.ЦБН",
     "OpcTag": "GPA1.AE.AE_QCOMM.fValue",
     "EUnit": "-",
@@ -9510,22 +9318,6 @@
     "OpcTag": "GPA1.AE.AE_NE.fValue",
     "EUnit": "-",
     "Description": "Отказ - Мощность на валу ГТУ-ЦБН"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Наработка на максимальном режиме",
-    "OpcTag": "GPA1.AE.AE_NARMAX.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Наработка на максимальном режиме"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Наработка на номинальном режиме",
-    "OpcTag": "GPA1.AE.AE_NARNOM.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Наработка на номинальном режиме"
    }
   },
   {
@@ -9662,22 +9454,6 @@
     "OpcTag": "GPA1.AE.AE_TGGAS_CH.fValue",
     "EUnit": "-",
     "Description": "Отказ - Расход топливного газа за текущий час"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Суммарная наработка",
-    "OpcTag": "GPA1.AE.AE_NARSUM.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Суммарная наработка"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы расчетных параметров/Наработки/Отказ - Эквивалентная наработка",
-    "OpcTag": "GPA1.AE.AE_NAREQV.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Эквивалентная наработка"
    }
   },
   {
@@ -9866,6 +9642,22 @@
   },
   {
    "Signal": {
+    "UserTree": "Отказы дискретных входных/Двигатель/Отказ - Перекрывная заслонка перед СтВ закрыта",
+    "OpcTag": "GPA1.DI.DI_PZStV_stOff.fValue",
+    "EUnit": "-",
+    "Description": "Отказ - Перекрывная заслонка перед СтВ закрыта"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Отказы дискретных входных/Двигатель/Отказ - Перекрывная заслонка перед СтВ открыта",
+    "OpcTag": "GPA1.DI.DI_PZStV_stOn.fValue",
+    "EUnit": "-",
+    "Description": "Отказ - Перекрывная заслонка перед СтВ открыта"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Отказы дискретных входных/Двигатель/Отказ - Повышенная вибрация корпуса двигателя ",
     "OpcTag": "GPA1.DI.DI_Vpp_wH.fValue",
     "EUnit": "-",
@@ -9942,14 +9734,6 @@
     "OpcTag": "GPA1.DI.DI_VP_BRK.fValue",
     "EUnit": "-",
     "Description": "Отказ - Неисправность или обрыв цепи первичных ВП передней опоры Н "
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Нагнетатель/Отказ - Низкий перепад давления на кране 1",
-    "OpcTag": "GPA1.DI.DI_dPg_Kr1_wL.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Низкий перепад давления на кране 1"
    }
   },
   {
@@ -10778,14 +10562,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - БЗД исправен",
-    "OpcTag": "GPA1.DI.DI_BZD_Ispr.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - БЗД исправен"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Отказы дискретных входных/Диагностика/Отказ - БЭАО сработал (от AD100) ",
     "OpcTag": "GPA1.DI.DI_GTU_BEO_AO.fValue",
     "EUnit": "-",
@@ -10962,10 +10738,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Готовность 1 БЗД",
+    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Готовность БЗА",
     "OpcTag": "GPA1.DI.DI_BZD_Ready1.fValue",
     "EUnit": "-",
-    "Description": "Отказ - Готовность 1 БЗД"
+    "Description": "Отказ - Готовность БЗА"
    }
   },
   {
@@ -11038,54 +10814,6 @@
     "OpcTag": "GPA1.DI.DI_PLC_GPA_OK.fValue",
     "EUnit": "-",
     "Description": "Отказ - Контроль ПЛК 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA1.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA1.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 1 ДБСКТ датчика угла ВНА канал 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA2.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA2.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 2 ДБСКТ датчика угла ВНА канал 2"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1",
-    "OpcTag": "GPA1.DI.DI_KC1_VNA3.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 1"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Отказы дискретных входных/Диагностика/Отказ - Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2",
-    "OpcTag": "GPA1.DI.DI_KC2_VNA3.fValue",
-    "EUnit": "-",
-    "Description": "Отказ - Контроль цепи катушки 3 ДБСКТ датчика угла ВНА канал 2"
    }
   },
   {
@@ -11326,6 +11054,214 @@
     "OpcTag": "GPA1.DI.DI_UZIP4_OK.fValue",
     "EUnit": "-",
     "Description": "Отказ - УЗИП Ввода 4 (=220 В) - В норме"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD100 (M501E)/Цикл контроллера AD100",
+    "OpcTag": "GPA1.Diag.HW.AD100.TCycle",
+    "EUnit": "с",
+    "Description": "Цикл контроллера AD100 (M501E)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD100 (M501E)/Максимальный цикл контроллера AD100",
+    "OpcTag": "GPA1.Diag.HW.AD100.TCycleMax",
+    "EUnit": "с",
+    "Description": "Максимальный цикл контроллера AD100 (M501E)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 1 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_01",
+    "EUnit": "Гц",
+    "Description": "Частота канала 1 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 2 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_02",
+    "EUnit": "Гц",
+    "Description": "Частота канала 2 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 3 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_03",
+    "EUnit": "Гц",
+    "Description": "Частота канала 3 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 4 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_04",
+    "EUnit": "Гц",
+    "Description": "Частота канала 4 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 5 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_05",
+    "EUnit": "Гц",
+    "Description": "Частота канала 5 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 6 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_06",
+    "EUnit": "Гц",
+    "Description": "Частота канала 6 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 7 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_07",
+    "EUnit": "Гц",
+    "Description": "Частота канала 7 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Частота канала 8 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Canal_08",
+    "EUnit": "Гц",
+    "Description": "Частота канала 8 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 1 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_01",
+    "EUnit": "-",
+    "Description": "Ошибка канала 1 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 2 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_02",
+    "EUnit": "-",
+    "Description": "Ошибка канала 2 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 3 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_03",
+    "EUnit": "-",
+    "Description": "Ошибка канала 3 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 4 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_04",
+    "EUnit": "-",
+    "Description": "Ошибка канала 4 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 5 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_05",
+    "EUnit": "-",
+    "Description": "Ошибка канала 5 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 6 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_06",
+    "EUnit": "-",
+    "Description": "Ошибка канала 6 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 7 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_07",
+    "EUnit": "-",
+    "Description": "Ошибка канала 7 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD101 (M531I)/Ошибка канала 8 модуля AD101",
+    "OpcTag": "GPA1.Diag.HW.AD101.Err_Canal_08",
+    "EUnit": "-",
+    "Description": "Ошибка канала 8 модуля AD101 (M531I)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Частота канала 1 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Canal_01",
+    "EUnit": "Гц",
+    "Description": "Частота канала 1 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Частота канала 2 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Canal_02",
+    "EUnit": "Гц",
+    "Description": "Частота канала 2 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Частота канала 3 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Canal_03",
+    "EUnit": "Гц",
+    "Description": "Частота канала 3 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Ошибка канала 1 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Err_Canal_01",
+    "EUnit": "-",
+    "Description": "Ошибка канала 1 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Ошибка канала 2 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Err_Canal_02",
+    "EUnit": "-",
+    "Description": "Ошибка канала 2 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD1 (M582IS)/Ошибка канала 3 модуля AD1",
+    "OpcTag": "GPA1.Diag.HW.AD1.Err_Canal_03",
+    "EUnit": "-",
+    "Description": "Ошибка канала 3 модуля AD1 (M582IS)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD200 (M501E)/Цикл контроллера AD200",
+    "OpcTag": "GPA1.Diag.HW.AD200.TCycle",
+    "EUnit": "с",
+    "Description": "Цикл контроллера AD200 (M501E)"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Диагностика/AD200 (M501E)/Максимальный цикл контроллера AD200",
+    "OpcTag": "GPA1.Diag.HW.AD200.TCycleMax",
+    "EUnit": "с",
+    "Description": "Максимальный цикл контроллера AD200 (M501E)"
    }
   }
  ]

@@ -39,9 +39,13 @@ try:
     print(datetime.datetime.now(), '- Файл открыт. Начало сборки')
     sheet = book['Настройки']  # worksheets[1]
 
-    # Читаем префиксы IP адреса ПЛК(нужно продумать про новые конфигураторы)
+    # Читаем префиксы IP адреса ПЛК
+    # Также читаем имя проекта для отработки спец-добавок
     cells = sheet['A1': 'B' + str(sheet.max_row)]
+    name_prj = ''
     for p in cells:
+        if p[0].value == 'Наменование проекта':
+            name_prj = p[1].value
         if p[0].value == 'Cетевая часть адреса основной сети (связь с CPU)':
             pref_IP += (p[1].value + '.',)
         if p[0].value == 'Cетевая часть адреса резервной сети (связь с CPU)':
@@ -152,24 +156,44 @@ try:
     if not os.path.exists(os.path.join('File_for_Import', 'Mnemo')):
         os.mkdir(os.path.join('File_for_Import', 'Mnemo'))
 
+    # Чистим папку Мнемосхем, чтобы далее создать новые
+    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo')):
+        if file.endswith('.omobj'):
+            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', file))
+    # Очистка файла изменений, если он есть и содержит больше 100 строк
+    if os.path.exists('Required_change.txt'):
+        with open('Required_change.txt', 'r') as f_test:
+            check_test = f_test.readlines()
+        if len(check_test) > 100:
+            with open('Required_change.txt', 'w') as f_test:
+                f_test.write('-' * 70 + '\n')
+
     sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
                 'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
                 'Agregator_N_IOS': 'Types.MSG_Agregator.Agregator_N_IOS',
                 'Agregator_Repair_IOS': 'Types.MSG_Agregator.Agregator_Repair_IOS'}
 
     # Измеряемые
-    # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
     # sl_mnemo = {узел: список параметров узла}
-    return_sl_ai, sl_mnemo_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+    return_sl_ai, sl_mnemo_ai = {}, {}
+    if 'Измеряемые' in book.sheetnames:
+        return_sl_ai, sl_mnemo_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
 
     # Расчетные
-    return_sl_ae, sl_mnemo_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+    return_sl_ae, sl_mnemo_ae = {}, {}
+    if 'Расчетные' in book.sheetnames:
+        return_sl_ae, sl_mnemo_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
 
     # Дискретные
-    return_sl_di, sl_wrn_di, sl_mnemo_di = is_read_di(sheet=book['Входные'])
+    return_sl_di, sl_wrn_di, sl_mnemo_di = {}, {}, {}
+    if 'Входные' in book.sheetnames:
+        return_sl_di, sl_wrn_di, sl_mnemo_di = is_read_di(sheet=book['Входные'])
 
     # ИМ
-    return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
+    return_sl_im, sl_cnt = {}, {}
+    if 'ИМ' in book.sheetnames and 'ИМ(АО)' in book.sheetnames:
+        return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
 
     # Создаём и набиваем словарь для мнемосхемы наработок
     sl_mnemo_cnt = {'Наработка': list(), 'Перестановки': list()}
@@ -187,31 +211,53 @@ try:
 
     # Диагностика
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
-    sl_modules_cpu, sl_for_diag = is_read_create_diag(book, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
+    sl_modules_cpu, sl_for_diag = {}, {}
+    if {'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)'} <= set(book.sheetnames):
+        sl_modules_cpu, sl_for_diag = is_read_create_diag(book, name_prj, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Уставки
-    return_sl_set, sl_set_mnemo_not_use = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
+    return_sl_set, sl_set_mnemo_not_use = {}, {}
+    if 'Уставки' in book.sheetnames:
+        return_sl_set, sl_set_mnemo_not_use = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
 
     # Кнопки
-    return_sl_btn = is_read_btn(sheet=book['Кнопки'])
+    return_sl_btn = {}
+    if 'Кнопки' in book.sheetnames:
+        return_sl_btn = is_read_btn(sheet=book['Кнопки'])
 
     # Защиты
-    sl_pz, sl_pz_xml = is_read_pz(sheet=book['Сигналы'])
+    # В чтении защит передаём словари AI и AE с единицами измерения
+    # чтобы определить единицы измрения у защиты при необходимости
+    sl_pz, sl_pz_xml = {}, {}
+    if 'Сигналы' in book.sheetnames:
+        sl_pz, sl_pz_xml = is_read_pz(sheet=book['Сигналы'],
+                                      sl_ai={cpu: {par: value[2] for par, value in sl_par.items()}
+                                             for cpu, sl_par in return_sl_ai.items()},
+                                      sl_ae={cpu: {par: value[2] for par, value in sl_par.items()}
+                                             for cpu, sl_par in return_sl_ae.items()})
     # sl_pz -  словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д. словарь для индексов
     # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
 
     # Сигналы остальные
-    return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
-                                                                                              sl_wrn_di=sl_wrn_di)
+    return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = {}, {}, {}, {}, {}, {}
+    if 'Сигналы' in book.sheetnames:
+        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
+                                                                                                  sl_wrn_di=sl_wrn_di)
 
     # Драйвера
-    sl_cpu_drv_signal, return_sl_cpu_drv = is_read_drv(sheet=book['Драйвера'], sl_all_drv=sl_all_drv)
+    sl_cpu_drv_signal, return_sl_cpu_drv = {}, {}
+    if 'Драйвера' in book.sheetnames:
+        sl_cpu_drv_signal, return_sl_cpu_drv = is_read_drv(sheet=book['Драйвера'], sl_all_drv=sl_all_drv)
 
     # Переменные алгоримтов
-    sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
+    sl_grh, return_alg_grh = {}, {}
+    if 'Алгоритмы' in book.sheetnames:
+        sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
 
     # Сеть(коммутаторы) - уже новая функция
-    return_sl_net = is_create_net(sl_object_all=sl_object_all, sheet_net=book['Сеть'])
+    return_sl_net = {}
+    if 'Сеть' in book.sheetnames:
+        return_sl_net = is_create_net(sl_object_all=sl_object_all, sheet_net=book['Сеть'])
 
     sl_w = {
         # return_sl_ai =
@@ -328,7 +374,7 @@ try:
             ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
             ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
             ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
-                          address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6001")
+                          address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
             child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
             ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
 
@@ -622,7 +668,8 @@ try:
     is_create_service_signal(sl_object_all=sl_object_all)
 
     # Создаём тренды
-    is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv)
+    is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
+                     sl_for_diag=sl_for_diag)
 
     book.close()
 

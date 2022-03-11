@@ -264,7 +264,7 @@ def create_group_pz(sl_global_pz, lst_pz, tuple_anum, template_no_arc_index, sou
     return s_out
 
 
-def create_group_diag(diag_sl, template_no_arc_index, source):
+def create_group_diag(diag_sl, template_no_arc_index, source, template_arc_index, sl_global_fast):
     sl_data_cat = {
         'R': 'Analog',
         'I': 'Analog',
@@ -279,10 +279,17 @@ def create_group_diag(diag_sl, template_no_arc_index, source):
     for key, value in diag_sl.items():
         module = key[0]
         signal = key[1]
-        pref_arc = f'NoArc{sl_data_cat[value[1]]}'
-        s_out += Template(template_no_arc_index).substitute(name_signal=f'Diag.HW.{module}.{signal}',
-                                                            type_signal=sl_type[value[1]], index=value[0],
-                                                            data_category=f'DataCategory_{source}_{pref_arc}')
+        if f'FAST|{signal}' in sl_global_fast:
+            temp = template_arc_index
+            pref_arc = 'Arc'
+            index = sl_global_fast[f'FAST|{signal}']
+        else:
+            temp = template_no_arc_index
+            pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+            index = value[0]
+        s_out += Template(temp).substitute(name_signal=f'Diag.HW.{module}.{signal}',
+                                           type_signal=sl_type[value[1]], index=index,
+                                           data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out
 
 
@@ -406,7 +413,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'Not_Ready', 'Power_hig', 'Power_lo', 'Reset_co', 'Timeo', 'Work_Ti', 'Freq_CH_', 'Err_CH_',
                   'Metro_CH_'),
         'M543G': ('Duration_CH_', 'Err_CH_', 'Err_lin', 'Line1_Err', 'Line2_Err', 'Not_ready', 'Power_hig', 'Power_lo',
-                  'Period_CH_', 'Reset_co', 'Timeo', 'Work_Ti')
+                  'Period_CH_', 'Reset_co', 'Timeo', 'Work_Ti'),
+        # !!! Два модуля добавлены в тестовом режиме
+        'M532U': ('Err_lin', 'Power_hig', 'Power_lo', 'Work_Ti', 'Timeo', 'Reset_co', 'Not_Ready', 'Err_sequence',
+                  'U1_C', 'U2_C', 'U2_C', 'U3_C', 'U4_C', 'U4_C', 'U5_C', 'U5_C', 'U6_C', 'U7_C',
+                  'U8_C'),
+        'M582IS': ('Err_lin', 'Power_hig', 'Power_lo', 'Work_Ti', 'Timeo', 'Reset_co', 'Not_Ready', 'Err_sequence',
+                   'Write_protect', 'Freq_I', 'Err_Freq_I', 'DI1_state', 'DI2_state', 'DO1_state', 'DO2_state',
+                   'DO3_state', 'DO4_state', 'DO5_state'),
     }
     sl_diag_cpu_sig = {
         'M915E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
@@ -460,7 +474,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'LAN4_Error': 'LAN4_Error',
                   'SFP1_Error': 'SFP1_Error', 'SFP2_Error': 'SFP2_Error',
                   'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-                  'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink'},
+                  'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink',
+                  'TCycle': 'TCycle', 'TCycleMax': 'TCycleMax'},
 
         'M501E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
                   'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
@@ -474,7 +489,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
                   'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange',
                   'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-                  'LAN4_NoLink': 'LAN4_NoLink'}
+                  'LAN4_NoLink': 'LAN4_NoLink',
+                  'TCycle': 'TCycle', 'TCycleMax': 'TCycleMax'}
     }
     for cpu, path in sl_cpu_path.items():
         # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
@@ -615,7 +631,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         line = line.strip()
                         if lst_tr_par and len(line.split(',')) >= 10:
                             # Получаем переменную в нижнем регистре и с разделителем
-                            tmp_var = get_variable(line=line)
+                            tmp_var = get_variable_lower(line=line)
                             # Делим по разделителю
                             lst_tmp_var = tmp_var.split('|')
                             # Если есть разделитель...
@@ -628,6 +644,19 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                     line_tr = line.split(',')
                                     sl_global_tr[lst_tr_par[index_lst]] = [max(int(line_tr[9]), int(line_tr[10])),
                                                                            line_tr[1]]
+
+                        # Ищем переменные диагностики контроллера помимо каталога DIAG|
+                        if len(line.split(',')) >= 10:
+                            # Получаем переменную в нижнем регистре и с разделителем
+                            tmp_var = get_variable(line=line)
+                            # Если переменная есть в списке сигналов контроллера
+                            # По сути ищем переменные контроллера без разделителей в глобальном словаре
+                            if tmp_var in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                                line_diag = line.split(',')
+                                module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
+                                # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
+                                sl_global_diag[(module_cpu, tmp_var)] = [max(int(line_diag[9]),
+                                                                             int(line_diag[10])), line_diag[1]]
 
                         if 'A_INP|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -774,7 +803,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         #                                                                   line[1]]
                         elif 'APR|' in line and len(line.split(',')) >= 10:
                             # Получаем переменную в нижнем регистре и с разделителем и убираем "мусор"
-                            tmp_var = get_variable(line=line).replace('[', '').replace(']', '').replace('apr|', '')
+                            tmp_var = get_variable_lower(line=line).replace('[', '').replace(']', '').replace('apr|', '')
                             # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
                             if tmp_var in lst_apr_par_lower:
                                 line = line.split(',')
@@ -788,7 +817,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
                         elif 'sTunings|' in line and len(line.split(',')) >= 10:
                             # Получаем переменную в нижнем регистре и с разделителем и добавляем перфикс тюнинга
-                            tmp_var = get_variable(line=line).replace('stunings|', 'tuning.')
+                            tmp_var = get_variable_lower(line=line).replace('stunings|', 'tuning.')
                             # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
                             if tmp_var in lst_apr_par_lower:
                                 line = line.split(',')
@@ -846,9 +875,13 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                                                                           int(line.split(',')[10])),
                                                                                       line.split(',')[1])
                         if 'FAST|' in line:
+                            tmp_var = get_variable(line=line)
                             line = line.split(',')
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
                             sl_global_fast[line[0][1:]] = max(int(line[9]), int(line[10]))
+                            # Ищем переменные контроллерв в FAST
+                            if tmp_var.replace('FAST|', '') in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                                sl_global_fast[tmp_var] = max(int(line[9]), int(line[10]))
 
             # В словаре sl_global_ai лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
             sl_global_ai = {key: value for key, value in sl_global_ai.items() if key[:key.find('[')] in lst_ai}
@@ -880,7 +913,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                              if key in sl_sig_alg.get(line_source[0], 'бла')}
             # формирование словаря sl_global_grh добавлено позже для создания алгоритма в новом конифигураторе
             sl_global_grh = {key[key.find('|') + 1:]: value for key, value in sl_global_grh.items()
-                             if key in sl_grh[line_source[0]]}
+                             if key in sl_grh.get(line_source[0], 'бла')}
             sl_global_mod = {key: value for key, value in sl_global_mod.items()
                              if key in sl_sig_mod.get(line_source[0], 'бла')}
             sl_global_ppu = {key: value for key, value in sl_global_ppu.items()
@@ -1036,7 +1069,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                          tmp_line.split(',')[1]]
             if sl_global_diag:
                 s_all += create_group_diag(diag_sl=sl_global_diag, template_no_arc_index=tmp_ind_no_arc,
-                                           source=line_source[0])
+                                           source=line_source[0], template_arc_index=tmp_ind_arc,
+                                           sl_global_fast=sl_global_fast)
 
             # Проверка изменений, и если есть изменения, то запись
             # Если нет папки File_for_Import, то создадим её
