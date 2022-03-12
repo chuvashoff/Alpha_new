@@ -335,7 +335,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             lst_json.append(
                 {"Signal": {"UserTree": f"Уставки/{a_set_rus.replace('/', '|')}",
                             "OpcTag":
-                                f"{obj}.System.SET.{sl_node_set[a_set_rus][0]}",
+                                f"{obj[0]}.System.SET.{sl_node_set[a_set_rus][0]}",
                             "EUnit": sl_node_set[a_set_rus][1],
                             "Description": a_set_rus}})
 

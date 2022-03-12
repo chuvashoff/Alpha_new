@@ -444,7 +444,7 @@
    "Signal": {
     "UserTree": "Аналоговые входные/Маслосистема Д/Давление масла на выходе из ГТУ",
     "OpcTag": "GPA1.AI.AI_Pm_outGTU.Value",
-    "EUnit": "МПа",
+    "EUnit": "кПа",
     "Description": "Давление масла на выходе из ГТУ"
    }
   },
@@ -1526,6 +1526,14 @@
     "OpcTag": "GPA1.DI.DI_DG3_stOn.Value",
     "EUnit": "-",
     "Description": "Дозатор газа ДГ3 центрального контура включен"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Дискретные входные/Двигатель/КПВВ местное управление",
+    "OpcTag": "GPA1.DI.DI_KPVV_MU.Value",
+    "EUnit": "-",
+    "Description": "КПВВ местное управление"
    }
   },
   {
@@ -4218,30 +4226,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Исполнительные механизмы/Отсеки/Электронагреватель АВО 11-01М (АВО). Включить",
-    "OpcTag": "GPA1.IM.HeatAVO.oOn",
-    "EUnit": "-",
-    "Description": "Электронагреватель АВО 11-01М (АВО). Включить"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Отсеки/Электронагреватель БГ11-23А (МНЭ). Включить",
-    "OpcTag": "GPA1.IM.HeatMNE.oOn",
-    "EUnit": "-",
-    "Description": "Электронагреватель БГ11-23А (МНЭ). Включить"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Исполнительные механизмы/Отсеки/Электронагреватель маслонасоса (МНДЭ). Включить",
-    "OpcTag": "GPA1.IM.HeatMNDE.oOn",
-    "EUnit": "-",
-    "Description": "Электронагреватель маслонасоса (МНДЭ). Включить"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Исполнительные механизмы/Диагностика/ГПА в работе. Включить",
     "OpcTag": "GPA1.IM.GPAwork.oOn",
     "EUnit": "-",
@@ -4770,6 +4754,22 @@
   },
   {
    "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Приведенная к Твх частота вращения КВД",
+    "OpcTag": "GPA1.System.DRV.FLR.Nvd0.Value",
+    "EUnit": "об/мин",
+    "Description": "Приведенная к Твх частота вращения КВД"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Приведенная частота ротора низкого давления",
+    "OpcTag": "GPA1.System.DRV.FLR.nndNorm.Value",
+    "EUnit": "об/мин",
+    "Description": "Приведенная частота ротора низкого давления"
+   }
+  },
+  {
+   "Signal": {
     "UserTree": "Сигналы от драйверов/ТР/Расход ТГ от ТР",
     "OpcTag": "GPA1.System.DRV.FLR.Gt_tek.Value",
     "EUnit": "кг/ч",
@@ -4902,6 +4902,14 @@
     "OpcTag": "GPA1.System.DRV.FLR.setTempDoz.Value",
     "EUnit": "-",
     "Description": "Темп дозатора для перераспределения РУ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Сигналы от драйверов/ТР/Температура воздуха на входе в КВД",
+    "OpcTag": "GPA1.System.DRV.FLR.Tknd.Value",
+    "EUnit": "%",
+    "Description": "Температура воздуха на входе в КВД"
    }
   },
   {
@@ -5518,6 +5526,30 @@
     "OpcTag": "GPA1.System.ALR.A_PgInStVmin_proval.Value",
     "EUnit": "-",
     "Description": "АОбс. Нет давления пускового газа перед СтВ"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Нет продувки диффузионных контуров",
+    "OpcTag": "GPA1.System.ALR.A_noProdDif.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Нет продувки диффузионных контуров"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Нет розжига ",
+    "OpcTag": "GPA1.System.ALR.notFire.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Нет розжига "
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Аварии/АОбс/АОбс. Нет розжига ни одной ЖТ",
+    "OpcTag": "GPA1.System.ALR.notFireGTi.Value",
+    "EUnit": "-",
+    "Description": "АОбс. Нет розжига ни одной ЖТ"
    }
   },
   {
@@ -7266,10 +7298,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Уставки/dZ при регулировании рассхода газа",
+    "UserTree": "Уставки/dZ при регулировании расхода газа",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_DZ_QG.Value",
     "EUnit": "-",
-    "Description": "dZ при регулировании рассхода газа"
+    "Description": "dZ при регулировании расхода газа"
    }
   },
   {
@@ -7290,10 +7322,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Уставки/kd при регулировании рассхода газа",
+    "UserTree": "Уставки/kd при регулировании расхода газа",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_KD_QG.Value",
     "EUnit": "-",
-    "Description": "kd при регулировании рассхода газа"
+    "Description": "kd при регулировании расхода газа"
    }
   },
   {
@@ -7322,10 +7354,10 @@
   },
   {
    "Signal": {
-    "UserTree": "Уставки/ki при регулировании рассхода газа",
+    "UserTree": "Уставки/ki при регулировании расхода газа",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_KI_QG.Value",
     "EUnit": "-",
-    "Description": "ki при регулировании рассхода газа"
+    "Description": "ki при регулировании расхода газа"
    }
   },
   {
@@ -7434,22 +7466,6 @@
   },
   {
    "Signal": {
-    "UserTree": "Уставки/Длительность включения ВОД в работу (сек)",
-    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_VOD_sTload.Value",
-    "EUnit": "с",
-    "Description": "Длительность включения ВОД в работу (сек)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Уставки/Длительность включения ВОД в работу после переключения (сек)",
-    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_VOD_sTsl.Value",
-    "EUnit": "с",
-    "Description": "Длительность включения ВОД в работу после переключения (сек)"
-   }
-  },
-  {
-   "Signal": {
     "UserTree": "Уставки/Длительность включения ВОТ в работу (сек)",
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_VOT_sTload.Value",
     "EUnit": "с",
@@ -7462,14 +7478,6 @@
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_VOT_sTsl.Value",
     "EUnit": "с",
     "Description": "Длительность включения ВОТ в работу после переключения (сек)"
-   }
-  },
-  {
-   "Signal": {
-    "UserTree": "Уставки/Длительность переключения ВОД (сек)",
-    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_VOD_sTswitch.Value",
-    "EUnit": "с",
-    "Description": "Длительность переключения ВОД (сек)"
    }
   },
   {
@@ -8038,6 +8046,14 @@
     "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_TinK_PermMR.Value",
     "EUnit": "°С",
     "Description": "Уставка на включение максимального режима"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Уставки/Уставка поддержания Ттвд при АУ КПВВ",
+    "OpcTag": "('GPA1', 'ГПА3', '1').System.SET.SP_TT_ustKPVV.Value",
+    "EUnit": "-",
+    "Description": "Уставка поддержания Ттвд при АУ КПВВ"
    }
   },
   {
@@ -9590,6 +9606,14 @@
     "OpcTag": "GPA1.DI.DI_DG3_stOn.fValue",
     "EUnit": "-",
     "Description": "Отказ - Дозатор газа ДГ3 центрального контура включен"
+   }
+  },
+  {
+   "Signal": {
+    "UserTree": "Отказы дискретных входных/Двигатель/Отказ - КПВВ местное управление",
+    "OpcTag": "GPA1.DI.DI_KPVV_MU.fValue",
+    "EUnit": "-",
+    "Description": "Отказ - КПВВ местное управление"
    }
   },
   {
