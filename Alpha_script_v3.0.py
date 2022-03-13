@@ -569,7 +569,8 @@ try:
                                             f'"Type":2}}}}')
                         ET.SubElement(child_sig_con, 'attribute', type='unit.System.Attributes.InitialValue',
                                       value='true')
-                        ET.SubElement(child_connect, 'ct_subject-ref', name=f'_{cpu_connect}_1_Eth{num_port}',
+                        ET.SubElement(child_connect, 'ct_subject-ref',
+                                      name=f'_{cpu_connect}_{objects[2]}_Eth{num_port}',
                                       object=f"Service.Modules."
                                              f"UNET Client.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
                                       const_access="false", aspected="false", access_level="public")
