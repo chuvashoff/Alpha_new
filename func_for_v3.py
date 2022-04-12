@@ -474,6 +474,82 @@ def is_create_service_signal(sl_object_all):
     return
 
 
+# Функция создания узла SYS
+def is_create_sys(sl_object_all: dict, name_prj: str):
+    root_aspect = ET.Element('omx', xmlns="system", xmlns_ct="automation.control", xmlns_r="automation.reference")
+    child_sys = ET.SubElement(root_aspect, 'ct_object', name='SYS', access_level="public")
+    ET.SubElement(child_sys, 'attribute', type="unit.System.Attributes.Description", value="Система")
+
+    child_message = ET.SubElement(child_sys, 'ct_object', name='Message', access_level="public")
+    ET.SubElement(child_message, 'attribute', type="unit.System.Attributes.Comment",
+                  value="Для глобальных сообщений оператора")
+    child_cmd = ET.SubElement(child_message, 'ct_parameter', name='cmd_operator', type="bool", direction="out",
+                              access_level="public")
+    ET.SubElement(child_cmd, 'attribute', type='unit.Server.Attributes.Alarm',
+                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                        f'"Subconditions":[{{"AckStrategy":0,'
+                        f'"Message":"___",'
+                        f'"Severity":10,"Type":2}},'
+                        f'{{"AckStrategy":0,"IsEnabled":true,'
+                        f'"Message":"___",'
+                        f'"Severity":10,"Type":3}}],'
+                        f'"Type":2}}}}')
+    ET.SubElement(child_cmd, 'attribute', type="unit.System.Attributes.InitialValue", value="false")
+    ET.SubElement(child_cmd, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+
+    child_msg = ET.SubElement(child_message, 'ct_parameter', name='msg_operator', type="string", direction="out",
+                              access_level="public")
+    ET.SubElement(child_msg, 'attribute', type="unit.System.Attributes.InitialValue", value="Действие оператора")
+    ET.SubElement(child_msg, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+
+    child_handler = ET.SubElement(child_message, 'ct_handler', name='Handler',
+                                  source_code="cmd_operator.Messages.Selected.Message = msg_operator.Value;")
+    ET.SubElement(child_handler, 'ct_trigger', on='cmd_operator', cause="message-prepare")
+
+    child_objname = ET.SubElement(child_sys, 'ct_parameter', name='ObjNam', type="string", direction="out",
+                                  access_level="public")
+    ET.SubElement(child_objname, 'attribute', type="unit.System.Attributes.InitialValue",
+                  value=f"{';'.join([obj[1] for obj in sl_object_all])}")
+    ET.SubElement(child_objname, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+    ET.SubElement(child_objname, 'attribute', type="unit.Server.Attributes.Replicate", value="false")
+
+    child_objalg = ET.SubElement(child_sys, 'ct_parameter', name='ObjAlg', type="string", direction="out",
+                                 access_level="public")
+    ET.SubElement(child_objalg, 'attribute', type="unit.System.Attributes.InitialValue",
+                  value=f"{';'.join([obj[0] for obj in sl_object_all])}")
+    ET.SubElement(child_objalg, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+    ET.SubElement(child_objalg, 'attribute', type="unit.Server.Attributes.Replicate", value="false")
+
+    child_objnum = ET.SubElement(child_sys, 'ct_parameter', name='ObjNum', type="string", direction="out",
+                                 access_level="public")
+    ET.SubElement(child_objnum, 'attribute', type="unit.System.Attributes.InitialValue", value=f"{len(sl_object_all)}")
+    ET.SubElement(child_objnum, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+    ET.SubElement(child_objnum, 'attribute', type="unit.Server.Attributes.Replicate", value="false")
+
+    child_systemname = ET.SubElement(child_sys, 'ct_parameter', name='SystemName', type="string", direction="out",
+                                     access_level="public")
+    ET.SubElement(child_systemname, 'attribute', type="unit.System.Attributes.InitialValue",
+                  value=f"{name_prj}")
+    ET.SubElement(child_systemname, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+    ET.SubElement(child_systemname, 'attribute', type="unit.Server.Attributes.Replicate", value="false")
+
+    child_ap_activity_switch = ET.SubElement(child_sys, 'ct_parameter', name='AP_activity_switch',
+                                             type="bool", direction="out", access_level="public")
+    ET.SubElement(child_ap_activity_switch, 'attribute', type="unit.System.Attributes.InitialValue",
+                  value="false")
+    ET.SubElement(child_ap_activity_switch, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+
+    # Нормируем и записываем IOS-аспект
+    temp = ET.tostring(root_aspect).decode('UTF-8')
+
+    check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                    file_name_check=f'SYS_object.omx-export',
+                    new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                      pretty_print=True, encoding='unicode')),
+                    message_print=f'Требуется заменить объект SYS (файл SYS_object.omx-export)')
+    return
+
+
 def is_read_btn(sheet):
     # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
     return_sl = {}

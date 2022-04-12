@@ -8,6 +8,7 @@ from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz
+from create_reports import create_reports
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -155,6 +156,9 @@ try:
     # Если нет папки File_for_Import/Mnemo, то создадим её
     if not os.path.exists(os.path.join('File_for_Import', 'Mnemo')):
         os.mkdir(os.path.join('File_for_Import', 'Mnemo'))
+    # Если нет папки File_for_Import/Reports, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'Reports')):
+        os.mkdir(os.path.join('File_for_Import', 'Reports'))
 
     # Чистим папку Мнемосхем, чтобы далее создать новые
     for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo')):
@@ -205,7 +209,7 @@ try:
                 sl_mnemo_cnt['Перестановки'].append(nar)
 
     # # sl_cnt = {CPU: {алг.имя : русское имя}}
-    # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
+    # sl_cnt_xml = {CPU: {алг.имя : (тип модуля в студии, русское имя,)}}
     sl_cnt_xml = {cpu: {alg_par: ('CNT.CNT_PLC_View', val) for alg_par, val in value.items()}
                   for cpu, value in sl_cnt.items()}
 
@@ -301,7 +305,7 @@ try:
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.EUnit'),
                'dict_agreg_IOS': sl_agreg
                },
-        # sl_cnt_xml = {CPU: {алг.имя : (русское имя,)}}
+        # sl_cnt_xml = {CPU: {алг.имя : (тип модуля в студии, русское имя,)}}
         'CNT': {'dict': sl_cnt_xml,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
                 'dict_agreg_IOS': {}
@@ -668,6 +672,9 @@ try:
     # Создание сервисных сигналов
     is_create_service_signal(sl_object_all=sl_object_all)
 
+    # Создаём папку SYS
+    is_create_sys(sl_object_all=sl_object_all, name_prj=name_prj)
+
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
                      sl_for_diag=sl_for_diag)
@@ -742,6 +749,18 @@ try:
         if check_test != '-' * 70 + '\n':
             with open('Required_change.txt', 'a') as f_test:
                 f_test.write('-' * 70 + '\n')
+    # Если есть аналоговые параметры, то делаем шаблон Reports
+    if return_sl_ai:
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
+                       sl_param=return_sl_ai)
+    # Если есть расчётные параметры, то делаем шаблон Reports
+    if return_sl_ae:
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
+                       sl_param=return_sl_ae)
+    # Если есть наработки, то делаем шаблон Reports
+    if sl_cnt_xml:
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
+                       sl_param=sl_cnt_xml)
 
     # Создаём мнемосхемы (их изменение не котролируется по причине смены uuid, позже будет доработано)
     # Проработать вопрос создания мнемосхем для разных объектов!!!
