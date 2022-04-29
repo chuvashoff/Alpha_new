@@ -8,7 +8,7 @@ from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz
-from create_reports import create_reports
+from create_reports import create_reports, create_reports_pz, create_reports_sday
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -180,14 +180,14 @@ try:
     # Измеряемые
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
     # sl_mnemo = {узел: список параметров узла}
-    return_sl_ai, sl_mnemo_ai = {}, {}
+    return_sl_ai, sl_mnemo_ai, return_sl_sday = {}, {}, {}
     if 'Измеряемые' in book.sheetnames:
-        return_sl_ai, sl_mnemo_ai = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+        return_sl_ai, sl_mnemo_ai, return_sl_sday = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
 
     # Расчетные
-    return_sl_ae, sl_mnemo_ae = {}, {}
+    return_sl_ae, sl_mnemo_ae, return_ae_sday = {}, {}, {}
     if 'Расчетные' in book.sheetnames:
-        return_sl_ae, sl_mnemo_ae = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+        return_sl_ae, sl_mnemo_ae, return_ae_sday = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
 
     # Дискретные
     return_sl_di, sl_wrn_di, sl_mnemo_di = {}, {}, {}
@@ -220,9 +220,18 @@ try:
         sl_modules_cpu, sl_for_diag = is_read_create_diag(book, name_prj, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
 
     # Уставки
-    return_sl_set, sl_set_mnemo_not_use = {}, {}
+    return_sl_set, sl_set_mnemo_not_use, return_set_sday = {}, {}, {}
     if 'Уставки' in book.sheetnames:
-        return_sl_set, sl_set_mnemo_not_use = is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
+        return_sl_set, sl_set_mnemo_not_use, return_set_sday = is_read_ai_ae_set(sheet=book['Уставки'],
+                                                                                 type_signal='SET')
+    # Собираем словари сменной ведомости в один
+    # return_sl_sday = {cpu: {Перфискспапки.alg_par: русское имя}}
+    for sl in (return_ae_sday, return_set_sday):
+        for cpu in sl:
+            if cpu in return_sl_sday:
+                return_sl_sday[cpu].update(sl[cpu])
+            else:
+                return_sl_sday[cpu] = sl[cpu]
 
     # Кнопки
     return_sl_btn = {}
@@ -249,14 +258,24 @@ try:
                                                                                                   sl_wrn_di=sl_wrn_di)
 
     # Драйвера
-    sl_cpu_drv_signal, return_sl_cpu_drv = {}, {}
+    # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
+    # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
+    # ед.измер, кол-во знаков) }}}
+    # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
+    # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
+    # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
+    # ед.измер, кол-во знаков) }}}
+    sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = {}, {}, {}
     if 'Драйвера' in book.sheetnames:
-        sl_cpu_drv_signal, return_sl_cpu_drv = is_read_drv(sheet=book['Драйвера'], sl_all_drv=sl_all_drv)
+        sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = is_read_drv(sheet=book['Драйвера'],
+                                                                           sl_all_drv=sl_all_drv)
 
     # Переменные алгоримтов
     sl_grh, return_alg_grh = {}, {}
     if 'Алгоритмы' in book.sheetnames:
-        sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
+        # Проверяем существование режимов, на тот случай, если лист Алгоритмы может быть пустой
+        if 'Режим' in (p[0].value for p in book['Алгоритмы']['A1': 'A' + str(sheet.max_row)]):
+            sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
 
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
@@ -616,20 +635,32 @@ try:
                                 plc_node_tree=f'System.{node}')
 
         # Формируем драйверные переменные в IOS-аспекте
+        # Если в текущем объекте есть контроллеры с драйверами...
         if set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys()):
+            # ...то создаём узел DRV
             child_drv_node = ET.SubElement(child_system, 'ct_object', name='DRV', access_level="public")
             # ...добавляем агрегаторы
             for agreg, type_agreg in sl_agreg.items():
                 ET.SubElement(child_drv_node, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                               aspect="Types.IOS_Aspect", access_level="public")
-            for cpu_with_drv in sorted(tuple(set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys()))):
-                for drv_tuple, sl_par in return_sl_cpu_drv[cpu_with_drv].items():
-                    add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                                    objects=objects, name_group=drv_tuple[0],
-                                    sl_par={cpu_with_drv: sl_par},
-                                    parent_node=child_drv_node,
-                                    sl_agreg=sl_agreg,
-                                    plc_node_tree=f'System.DRV.{drv_tuple[0]}')
+            # для каждого драйвера...
+            for driver in return_ios_drv:
+                # создаём узлы драйверов
+                add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                objects=objects, name_group=driver[0],
+                                sl_par=return_ios_drv[driver],
+                                parent_node=child_drv_node,
+                                sl_agreg=sl_agreg,
+                                plc_node_tree=f'System.DRV.{driver[0]}')
+
+            # for cpu_with_drv in sorted(tuple(set(sl_object_all[objects].keys()) & set(return_sl_cpu_drv.keys()))):
+            #     for drv_tuple, sl_par in return_sl_cpu_drv[cpu_with_drv].items():
+            #         add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+            #                         objects=objects, name_group=drv_tuple[0],
+            #                         sl_par={cpu_with_drv: sl_par},
+            #                         parent_node=child_drv_node,
+            #                         sl_agreg=sl_agreg,
+            #                         plc_node_tree=f'System.DRV.{drv_tuple[0]}')
 
         # Если в объекте есть контроллеры, помеченные с ТР
         if set(sl_object_all[objects].keys()) & set(cpu for cpu in sl_CPU_spec if 'ТР' in sl_CPU_spec[cpu]) and sl_TR:
@@ -761,6 +792,13 @@ try:
     if sl_cnt_xml:
         create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
                        sl_param=sl_cnt_xml)
+    # Если есть защиты, то делаем шаблон Reports
+    if sl_pz_xml:
+        create_reports_pz(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
+                          node_alg_name='System.PZ', sl_param=sl_pz_xml)
+
+    if return_sl_sday:
+        create_reports_sday(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость', sl_param=return_sl_sday)
 
     # Создаём мнемосхемы (их изменение не котролируется по причине смены uuid, позже будет доработано)
     # Проработать вопрос создания мнемосхем для разных объектов!!!

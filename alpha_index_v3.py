@@ -803,7 +803,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         #                                                                   line[1]]
                         elif 'APR|' in line and len(line.split(',')) >= 10:
                             # Получаем переменную в нижнем регистре и с разделителем и убираем "мусор"
-                            tmp_var = get_variable_lower(line=line).replace('[', '').replace(']', '').replace('apr|', '')
+                            tmp_var = get_variable_lower(line=line).replace('[', '').replace(']', '').replace('apr|',
+                                                                                                              '')
                             # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
                             if tmp_var in lst_apr_par_lower:
                                 line = line.split(',')

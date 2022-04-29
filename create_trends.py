@@ -111,6 +111,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             cpu_par = is_f_ind(cells_name[0], 'CPU')
             name_drv_ind = is_f_ind(cells_name[0], 'Драйвер')
             reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
+            index_save_history = is_f_ind(cells_name[0], 'Сохранять в истории')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -226,7 +227,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                 # и параметр принадлежит контроллеру объекта
                 # и указанный драйвер переменной есть в объявленных
                 elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj] \
-                        and par[name_drv_ind].value in sl_all_drv:
+                        and par[name_drv_ind].value in sl_all_drv and par[index_save_history].value == 'Да':
                     sl_type_unit = {'BOOL': '-', 'INT': par[eunit_drv_ind].value, 'FLOAT': par[eunit_drv_ind].value,
                                     'IEC': '-', 'Daily': '-', 'IECB': '-', 'IECR': par[eunit_drv_ind].value}
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value

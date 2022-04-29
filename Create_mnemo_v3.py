@@ -425,8 +425,6 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
 
         ET.SubElement(root_list, 'init', target="_pathToGPA", ver="3", ref="here._init_GPAPath")
 
-
-
         # Нормируем и записываем страницу мнемосхемы
         temp = ET.tostring(root_list).decode('UTF-8')
         with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_0.omobj'),
@@ -479,7 +477,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
     # Узнаём количество требуемых листов, деля количество требуемых элементов на количество на одном листе
     # num_par = sum(len(i) for i in tuple(sl_param.values())) + len(tuple(sl_param.keys()))
     # number_list = ceil(num_par / par_one_list)
-    #print(name_group, par_one_list)
+    # print(name_group, par_one_list)
     start_list = 1
     count = 0
     # sl_list_par = {номер листа: кортеж защит листа}

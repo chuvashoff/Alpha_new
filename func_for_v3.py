@@ -21,7 +21,8 @@ def multiple_replace_xml(target_str):
                       'snmp_': 'snmp:', 'poll_port': 'poll-port', 'poll_password': 'poll-password',
                       'notification_port': 'notification-port', 'notification_password': 'notification-password',
                       'protocol_version': 'protocol-version', 'security_level': 'security-level',
-                      'auth_protocol': 'auth-protocol', 'priv_protocol': 'priv-protocol'}
+                      'auth_protocol': 'auth-protocol', 'priv_protocol': 'priv-protocol',
+                      'source_code': 'source-code', 'ct_trigger': 'ct:trigger', 'ct_handler': 'ct:handler'}
     # получаем заменяемое: подставляемое из словаря в цикле
     for i, j in replace_values.items():
         # меняем все target_str на подставляемое
@@ -63,9 +64,13 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
             # ...для каждого параметра контроллера...
             for par, tuple_par in sl_par[cpu].items():
                 # ...создаём структуру параметра
+                base_type = (f"Types.{tuple_par[0].replace('PLC_View', 'IOS_NotHistory_View')}"  #
+                             if 'Сохраняемый - Нет' in tuple_par
+                             else f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}")
+                aspect = ("Types.IOS_NotHistory_Aspect" if 'Сохраняемый - Нет' in tuple_par else "Types.IOS_Aspect")
                 child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
-                                          base_type=f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}",
-                                          aspect="Types.IOS_Aspect",
+                                          base_type=base_type,
+                                          aspect=aspect,
                                           original=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}",
                                           access_level="public")
                 ET.SubElement(child_par, 'ct_init-ref',
@@ -76,6 +81,8 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
 def is_read_ai_ae_set(sheet, type_signal):
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
     return_sl = {}
+    # return_sl_sday = {cpu: {Перфискспапки.alg_par: русское имя}}
+    return_sl_sday = {}
     # return_sl_mnemo = {узел: список параметров узла}
     return_sl_mnemo = {}
     sl_plc_aspect = {'AI': 'AI.AI_PLC_View', 'AE': 'AE.AE_PLC_View', 'SET': 'SET.SET_PLC_View'}
@@ -89,6 +96,7 @@ def is_read_ai_ae_set(sheet, type_signal):
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_res = is_f_ind(cells[0], 'Резервный')
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
+    index_sday = is_f_ind(cells[0], 'Используется в ведомости')
 
     cells = sheet['A2': 'AG' + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
@@ -101,6 +109,13 @@ def is_read_ai_ae_set(sheet, type_signal):
             if par[index_cpu_name].value not in return_sl:
                 # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
                 return_sl[par[index_cpu_name].value] = {}
+
+            if par[index_sday].value == 'Да':
+                if par[index_cpu_name].value not in return_sl_sday:
+                    return_sl_sday[par[index_cpu_name].value] = {}
+                return_sl_sday[par[index_cpu_name].value].update(
+                    {f"{type_signal}.{par[index_alg_name].value.replace('|', '_')}": par[index_rus_name].value})
+
             return_sl[par[index_cpu_name].value].update({par[index_alg_name].value.replace('|', '_'): (
                 sl_plc_aspect.get(type_signal, 'Пустой тип'),
                 par[index_rus_name].value,
@@ -113,7 +128,7 @@ def is_read_ai_ae_set(sheet, type_signal):
             if 'SP|' not in par[index_alg_name].value:
                 return_sl_mnemo[par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
 
-    return return_sl, return_sl_mnemo
+    return return_sl, return_sl_mnemo, return_sl_sday
 
 
 def is_read_di(sheet):
@@ -621,7 +636,8 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
             else:
                 tmp_eunit = par[index_unit].value
             # В словарь Защит соответсвтующего контроллера добавляем [алг имя, рус. имя, единицы измерения]
-            sl_pz[cpu_name_par] += ([par[index_alg_name].value, par[index_rus_name].value, tmp_eunit],)
+            rus_name = f'{par[index_type_protect].value}. {par[index_rus_name].value}'
+            sl_pz[cpu_name_par] += ([par[index_alg_name].value, rus_name, tmp_eunit],)
 
     # В словаре защит алгоритмическое имя меняем на A+ номер
     num_pz = 0
@@ -752,12 +768,17 @@ def is_read_drv(sheet, sl_all_drv):
     index_color_off = is_f_ind(cells[0], 'Цвет при отсутствии')
     index_fracdig = is_f_ind(cells[0], 'Число знаков')
     index_drv = is_f_ind(cells[0], 'Драйвер')
+    index_save_history = is_f_ind(cells[0], 'Сохранять в истории')
 
     cells = sheet['A2': 'N' + str(sheet.max_row)]
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
     # ед.измер, кол-во знаков) }}}
     return_sl_cpu_drv = {}
+    # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
+    # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
+    # ед.измер, кол-во знаков) }}}
+    return_ios_drv = {}
     # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
     sl_cpu_drv_signal = {}
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
@@ -786,6 +807,13 @@ def is_read_drv(sheet, sl_all_drv):
                     not in return_sl_cpu_drv[par[index_cpu_name].value]:
                 return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value,
                                                               sl_all_drv.get(par[index_drv].value))] = {}
+            if (par[index_drv].value, sl_all_drv.get(par[index_drv].value)) not in return_ios_drv:
+                return_ios_drv[(par[index_drv].value, sl_all_drv.get(par[index_drv].value))] = {}
+
+            if par[index_cpu_name].value \
+                    not in return_ios_drv[(par[index_drv].value, sl_all_drv.get(par[index_drv].value))]:
+                return_ios_drv[(par[index_drv].value,
+                                sl_all_drv.get(par[index_drv].value))][par[index_cpu_name].value] = {}
 
             type_sig_in_tuple = sl_type_drv.get(type_sig_par, 'Types.').replace('Types.', '')
             type_msg_in_tuple = (par[index_type_msg].value if type_sig_par == 'BOOL' else '-')
@@ -795,14 +823,19 @@ def is_read_drv(sheet, sl_all_drv):
                              if type_sig_par == 'BOOL' else '0')
             unit_in_tuple = (par[index_unit].value if type_sig_par != 'BOOL' else '-')
             fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR', 'IEC') else '0')
+            history_in_tuple = f'Сохраняемый - {par[index_save_history].value}'
 
             tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
-                         c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple)
+                         c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple, history_in_tuple)
 
             return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value, sl_all_drv.get(par[index_drv].value))][
                 par[index_alg_name].value] = tuple_par
 
-    return sl_cpu_drv_signal, return_sl_cpu_drv
+            return_ios_drv[(par[index_drv].value,
+                            sl_all_drv.get(par[index_drv].value))][par[index_cpu_name].value][
+                par[index_alg_name].value] = tuple_par
+
+    return sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv
 
 
 def is_read_create_grh(sheet, sl_object_all):

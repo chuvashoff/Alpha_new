@@ -6885,16 +6885,16 @@
           <ct:object name="RotorVoltPower" base-type="Types.DRV_INT.DRV_INT_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.RotorVoltPower" access-level="public">
             <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.RotorVoltPower"/>
           </ct:object>
-          <ct:object name="linkQuality" base-type="Types.DRV_INT.DRV_INT_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.linkQuality" access-level="public">
+          <ct:object name="linkQuality" base-type="Types.DRV_INT.DRV_INT_IOS_NotHistory_View" aspect="Types.IOS_NotHistory_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.linkQuality" access-level="public">
             <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.linkQuality"/>
           </ct:object>
-          <ct:object name="ACP_QuantOut" base-type="Types.DRV_INT.DRV_INT_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.ACP_QuantOut" access-level="public">
+          <ct:object name="ACP_QuantOut" base-type="Types.DRV_INT.DRV_INT_IOS_NotHistory_View" aspect="Types.IOS_NotHistory_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.ACP_QuantOut" access-level="public">
             <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.ACP_QuantOut"/>
           </ct:object>
           <ct:object name="MaxTempRotor" base-type="Types.DRV_INT.DRV_INT_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.MaxTempRotor" access-level="public">
             <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.MaxTempRotor"/>
           </ct:object>
-          <ct:object name="NoLink" base-type="Types.DRV_DI.DRV_DI_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.NoLink" access-level="public">
+          <ct:object name="NoLink" base-type="Types.DRV_DI.DRV_DI_IOS_NotHistory_View" aspect="Types.IOS_NotHistory_Aspect" original="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.NoLink" access-level="public">
             <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.System.DRV.BIKM.NoLink"/>
           </ct:object>
         </ct:object>

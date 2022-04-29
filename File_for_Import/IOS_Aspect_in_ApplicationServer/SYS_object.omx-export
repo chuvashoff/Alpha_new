@@ -12,9 +12,9 @@
         <attribute type="unit.System.Attributes.InitialValue" value="Действие оператора"/>
         <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       </ct:parameter>
-      <ct_handler name="Handler" source_code="cmd_operator.Messages.Selected.Message = msg_operator.Value;">
-        <ct_trigger on="cmd_operator" cause="message-prepare"/>
-      </ct_handler>
+      <ct:handler name="Handler" source-code="cmd_operator.Messages.Selected.Message = msg_operator.Value;">
+        <ct:trigger on="cmd_operator" cause="message-prepare"/>
+      </ct:handler>
     </ct:object>
     <ct:parameter name="ObjNam" type="string" direction="out" access-level="public">
       <attribute type="unit.System.Attributes.InitialValue" value="ГПА3"/>
