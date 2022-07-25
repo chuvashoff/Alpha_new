@@ -8,7 +8,8 @@ def multiple_replace_xml_mnemo(target_str):
     replace_values = {'access_modifier': 'access-modifier', 'display_name': 'display-name',
                       'type_id': 'type-id', 'base_': 'base-',
                       'frame_link': 'frame-link', 'form_action': 'form-action', 'form_by_id': 'form-by-id',
-                      '<forCDATA/>': '<![CDATA[here.NameOpened]]>'}
+                      '<forCDATA/>': '<![CDATA[here.NameOpened]]>',
+                      'yopta_on': '<', 'yopta_off': '>'}
     # получаем заменяемое: подставляемое из словаря в цикле
     for i, j in replace_values.items():
         # меняем все target_str на подставляемое

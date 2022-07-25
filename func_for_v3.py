@@ -8,6 +8,7 @@ from time import sleep
 # для тестирования новых возможностей
 import xml.etree.ElementTree as ET
 import lxml.etree
+from openpyxl.utils import get_column_letter
 
 
 def multiple_replace_xml(target_str):
@@ -22,7 +23,8 @@ def multiple_replace_xml(target_str):
                       'notification_port': 'notification-port', 'notification_password': 'notification-password',
                       'protocol_version': 'protocol-version', 'security_level': 'security-level',
                       'auth_protocol': 'auth-protocol', 'priv_protocol': 'priv-protocol',
-                      'source_code': 'source-code', 'ct_trigger': 'ct:trigger', 'ct_handler': 'ct:handler'}
+                      'source_code': 'source-code', 'ct_trigger': 'ct:trigger', 'ct_handler': 'ct:handler',
+                      'ct_formula': 'ct:formula'}
     # получаем заменяемое: подставляемое из словаря в цикле
     for i, j in replace_values.items():
         # меняем все target_str на подставляемое
@@ -75,19 +77,58 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
                                           access_level="public")
                 ET.SubElement(child_par, 'ct_init-ref',
                               ref="_PLC_View", target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}")
+                # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
+                if name_group in ('AI', 'AE', 'SET'):
+                    deadband_hist = 1/(10**int(tuple_par[5])) if tuple_par[5] != '' else 0.01
+                    object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
+                                                 direction='out', access_level="public")
+                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
+                                  value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                    ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
+                                  value=f"@(object:unit.System.Attributes.Description)")
+                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
+                                  value=f"@(object:Attributes.EUnit)")
+                    ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
+                # Если ИМ АО, то добавляем Set и iPos с гистерезисом
+                elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
+                    deadband_hist = 1/(10**int(tuple_par[6])) if tuple_par[6] != '' else 0.01
+                    for sig, attr_sig in {'Set': ('Задание',), 'iPos': ('Положение',)}.items():
+                        object_sig = ET.SubElement(child_par, 'ct_parameter', name=f'{sig}', type='float32',
+                                                   direction='out', access_level="public")
+                        ET.SubElement(object_sig, 'attribute', type="unit.System.Attributes.Description",
+                                      value=f"{attr_sig[0]}")
+                        ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.Unit",
+                                      value=f"@(object:Attributes.EUnit)")
+                        ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.History",
+                                      value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                        ET.SubElement(child_par, 'ct_formula', source_code=f"_PLC_View.States.{sig}", target=f"{sig}")
+                # Если драйверный параметр, AI и сохраняем историю
+                elif 'System.DRV' in plc_node_tree and 'DRV_AI_IOS_View' in base_type:
+                    deadband_hist = 1/(10**int(tuple_par[8])) if tuple_par[8] != '' else 0.01
+                    object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
+                                                 direction='out', access_level="public")
+                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
+                                  value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                    ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
+                                  value=f"@(object:unit.System.Attributes.Description)")
+                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
+                                  value=f"@(object:Attributes.EUnit)")
+                    ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
+
     return
 
 
 def is_read_ai_ae_set(sheet, type_signal):
-    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков,
+    # количество знаков для истории)}}
     return_sl = {}
     # return_sl_sday = {cpu: {Перфискспапки.alg_par: русское имя}}
     return_sl_sday = {}
     # return_sl_mnemo = {узел: список параметров узла}
     return_sl_mnemo = {}
     sl_plc_aspect = {'AI': 'AI.AI_PLC_View', 'AE': 'AE.AE_PLC_View', 'SET': 'SET.SET_PLC_View'}
-
-    cells = sheet['A1': 'AG' + str(sheet.max_row)]
+    # print('Зашли в фукнкцию, максимальное чилсло колонок - ', sheet.max_column)
+    cells = sheet['A1': get_column_letter(100) + str(100)]  # sheet.max_column
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_unit = is_f_ind(cells[0], 'Единицы измерения')
@@ -98,7 +139,7 @@ def is_read_ai_ae_set(sheet, type_signal):
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
     index_sday = is_f_ind(cells[0], 'Используется в ведомости')
 
-    cells = sheet['A2': 'AG' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
     for par in cells:
@@ -107,7 +148,8 @@ def is_read_ai_ae_set(sheet, type_signal):
         set_par_cpu.add(par[index_cpu_name].value)
         if par[index_res].value == 'Нет':
             if par[index_cpu_name].value not in return_sl:
-                # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+                # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков,
+                # количество знаков для истории)}}
                 return_sl[par[index_cpu_name].value] = {}
 
             if par[index_sday].value == 'Да':
@@ -116,12 +158,17 @@ def is_read_ai_ae_set(sheet, type_signal):
                 return_sl_sday[par[index_cpu_name].value].update(
                     {f"{type_signal}.{par[index_alg_name].value.replace('|', '_')}": par[index_rus_name].value})
 
+            frag_dig_hist = ''.join([i for i
+                                     in str(par[index_frag_dig].comment)[:str(par[index_frag_dig].comment).find('by')]
+                                     if i.isdigit()]) if par[index_frag_dig].comment else par[index_frag_dig].value
+
             return_sl[par[index_cpu_name].value].update({par[index_alg_name].value.replace('|', '_'): (
                 sl_plc_aspect.get(type_signal, 'Пустой тип'),
                 par[index_rus_name].value,
                 par[index_unit].value,
                 par[index_short_name].value,
-                par[index_frag_dig].value)})
+                par[index_frag_dig].value,
+                frag_dig_hist)})
             # Если не парсим уставки, то заполняем словарь для мнемосхемы
             if 'SP|' not in par[index_alg_name].value and par[index_node_mnemo].value not in return_sl_mnemo:
                 return_sl_mnemo[par[index_node_mnemo].value] = list()
@@ -144,7 +191,7 @@ def is_read_di(sheet):
     # Словарь предупреждений {CPU : {алг.имя : (рус.имя, тип наличия)}}
     sl_wrn_di = {}
 
-    cells = sheet['A1': 'AC' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(100) + str(100)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_im = is_f_ind(cells[0], 'ИМ')
@@ -157,7 +204,7 @@ def is_read_di(sheet):
     index_wrn_text = is_f_ind(cells[0], 'Текст предупреждения')
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
 
-    cells = sheet['A2': 'AC' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
     for par in cells:
@@ -193,20 +240,35 @@ def is_read_di(sheet):
 
 
 def is_read_im(sheet, sheet_imao):
-    # return_sl_im = {cpu: {алг_пар: (русское имя, StartView, Gender)}}
+    # return_sl_im = {cpu: {алг_пар: (русское имя, StartView, Gender, ед измер, количество знаков(для д.ИМ=0),
+    # количество знаков для истории)}}
     return_sl_im = {}
 
+    sl_im_plc = {}
     # Словарь соответствия типа ИМ и его ПЛК аспекта
-    sl_im_plc = {'ИМ1Х0': 'IM1x0.IM1x0_PLC_View', 'ИМ1Х1': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2': 'IM1x2.IM1x2_PLC_View',
-                 'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View',
-                 'ИМ1Х0и': 'IM1x0inv.IM1x0inv_PLC_View', 'ИМ1Х1и': 'IM1x1inv.IM1x1inv_PLC_View',
-                 'ИМ1Х2и': 'IM1x2inv.IM1x2inv_PLC_View',
-                 'ИМ2Х2с': 'IM2x2.IM2x2_PLC_View',
-                 'ИМАО': 'IM_AO.IM_AO_PLC_View', 'ИМ2Х2ПЧ': 'IM2x2PCH.IM2x2PCH_PLC_View'}
+    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'dict_im')):
+        with open(os.path.join('Template_Alpha', 'Systemach', f'dict_im'), 'r', encoding='UTF-8') as f_signal:
+            for line in f_signal:
+                if '#' in line:
+                    continue
+                if not line.strip():
+                    break
+                line = line.strip()
+                lst_line = [i.strip() for i in line.split(':')]
+                sl_im_plc[lst_line[0]] = lst_line[1]
+    else:
+        print(f'Не найден файл сигналов Template_Alpha/Systemach/dict_im, стуртуры ИМ добавлены не будут')
+    # sl_im_plc = {'ИМ1Х0': 'IM1x0.IM1x0_PLC_View', 'ИМ1Х1': 'IM1x1.IM1x1_PLC_View', 'ИМ1Х2': 'IM1x2.IM1x2_PLC_View',
+    #              'ИМ2Х2': 'IM2x2.IM2x2_PLC_View', 'ИМ2Х4': 'IM2x2.IM2x4_PLC_View',
+    #              'ИМ1Х0и': 'IM1x0inv.IM1x0inv_PLC_View', 'ИМ1Х1и': 'IM1x1inv.IM1x1inv_PLC_View',
+    #              'ИМ1Х2и': 'IM1x2inv.IM1x2inv_PLC_View',
+    #              'ИМ2Х2с': 'IM2x2.IM2x2_PLC_View',
+    #              'ИМАО': 'IM_AO.IM_AO_PLC_View', 'ИМ2Х2ПЧ': 'IM2x2PCH.IM2x2PCH_PLC_View'}
+
     # Словарь соответствия рода ИМ и его идентификатора в Альфе
     sl_gender = {'С': '0', 'М': '1', 'Ж': '2'}
 
-    cells = sheet['A1': 'T' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(200) + str(200)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_type_im = is_f_ind(cells[0], 'Тип ИМ')
@@ -216,7 +278,7 @@ def is_read_im(sheet, sheet_imao):
     index_swap = is_f_ind(cells[0], 'Считать перестановки')
     index_start_view = is_f_ind(cells[0], 'Тип ИМ', target_count=2)
 
-    cells = sheet['A2': 'T' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(200) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu = set()
     sl_cnt = {}
@@ -238,16 +300,21 @@ def is_read_im(sheet, sheet_imao):
                 {par[index_alg_name].value + '_Swap': par[index_rus_name].value})
 
         if par[index_cpu_name].value not in return_sl_im:
-            # return_sl_im = {cpu: {алг_пар: (тип ИМа, русское имя, StartView, Gender)}}
+            # return_sl_im = {cpu: {алг_пар: (тип ИМа, русское имя, StartView, Gender, ед измер(для д.ИМ='-'),
+            # количество знаков(для д.ИМ=0), количество знаков для истории)}}
             return_sl_im[par[index_cpu_name].value] = {}
-        return_sl_im[par[index_cpu_name].value].update(
-            {par[index_alg_name].value: (sl_im_plc.get(par[index_type_im].value),
-                                         par[index_rus_name].value,
-                                         ''.join([i for i in par[index_start_view].value if i.isdigit()]),
-                                         sl_gender.get(par[index_gender].value))})
+        if par[index_type_im].value in sl_im_plc:
+            return_sl_im[par[index_cpu_name].value].update(
+                {par[index_alg_name].value: (sl_im_plc.get(par[index_type_im].value),
+                                             par[index_rus_name].value,
+                                             ''.join([i for i in par[index_start_view].value if i.isdigit()]),
+                                             sl_gender.get(par[index_gender].value),
+                                             '-',
+                                             '0',
+                                             '0')})
 
     # Обрабатываем ИМ АО
-    cells = sheet_imao['A1': 'AA' + str(sheet.max_row)]
+    cells = sheet_imao['A1': get_column_letter(200) + str(200)]
 
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
@@ -256,8 +323,10 @@ def is_read_im(sheet, sheet_imao):
     index_gender = is_f_ind(cells[0], 'Род')
     index_res = is_f_ind(cells[0], 'Резервный')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
+    index_frag_dig = is_f_ind(cells[0], 'Количество знаков')
+    index_unit = is_f_ind(cells[0], 'Единицы измерения')
 
-    cells = sheet_imao['A2': 'AA' + str(sheet.max_row)]
+    cells = sheet_imao['A2': get_column_letter(200) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры параметры
     set_par_cpu_imao = set()
     for par in cells:
@@ -266,13 +335,21 @@ def is_read_im(sheet, sheet_imao):
         set_par_cpu_imao.add(par[index_cpu_name].value)
         if par[index_yes_im].value == 'Да' and par[index_res].value == 'Нет':
             if par[index_cpu_name].value not in return_sl_im:
-                # return_sl_im = {cpu: {алг_пар: (тип ИМа, русское имя, StartView, Gender)}}
+                # return_sl_im = {cpu: {алг_пар: (тип ИМа, русское имя, StartView, Gender, ед измер, количество знаков,
+                # количество знаков для истории)}}
                 return_sl_im[par[index_cpu_name].value] = {}
-            return_sl_im[par[index_cpu_name].value].update(
-                {par[index_alg_name].value: (sl_im_plc.get('ИМАО'),
-                                             par[index_rus_name].value,
-                                             ''.join([i for i in par[index_start_view].value if i.isdigit()]),
-                                             sl_gender.get(par[index_gender].value))})
+            frag_dig_hist = ''.join([i for i
+                                     in str(par[index_frag_dig].comment)[:str(par[index_frag_dig].comment).find('by')]
+                                     if i.isdigit()]) if par[index_frag_dig].comment else par[index_frag_dig].value
+            if 'ИМАО' in sl_im_plc:
+                return_sl_im[par[index_cpu_name].value].update(
+                    {par[index_alg_name].value: (sl_im_plc.get('ИМАО'),
+                                                 par[index_rus_name].value,
+                                                 ''.join([i for i in par[index_start_view].value if i.isdigit()]),
+                                                 sl_gender.get(par[index_gender].value),
+                                                 par[index_unit].value,
+                                                 par[index_frag_dig].value,
+                                                 frag_dig_hist)})
 
     return return_sl_im, sl_cnt
 
@@ -280,77 +357,114 @@ def is_read_im(sheet, sheet_imao):
 def is_read_create_diag(book, name_prj, *sheets_signal):
     sheet_module = book['Модули']
     # Словарь возможных модулей со стартовым описанием каналов
-    sl_modules = {
-        'M547A': ['Резерв'] * 16,
-        'M537V': ['Резерв'] * 8,
-        'M557D': ['Резерв'] * 32,
-        'M557O': ['Резерв'] * 32,
-        'M932C_2N': ['Резерв'] * 8,
-        'M903E': 'CPU', 'M991E': 'CPU', 'M915E': 'CPU', 'M501E': 'CPU', 'M991S': 'CPU',
-        'M548A': ['Резерв'] * 16,
-        'M538V': ['Резерв'] * 8,
-        'M558D': ['Резерв'] * 32,
-        'M558O': ['Резерв'] * 32,
-        'M531I': ['Резерв'] * 8,
-        'M543G': ['Резерв'] * 16,
-        'M5571': ['Резерв'] * 32,
-        'M532U': ['Резерв'] * 8,  # Добавлено в тестовом режиме для Игринской!!!
-        'M582IS': ['Резерв'] * 3,  # Добавлено в тестовом режиме для Игринской!!!
-    }
-    sl_type_modules = {
-        'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
-        'M991E': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
-        'M991S': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
-        'M547A': 'Types.DIAG_M547A.DIAG_M547A_PLC_View',
-        'M548A': 'Types.DIAG_M548A.DIAG_M548A_PLC_View',
-        'M537V': 'Types.DIAG_M537V.DIAG_M537V_PLC_View',
-        'M538V': 'Types.DIAG_M538V.DIAG_M538V_PLC_View',
-        'M932C_2N': 'Types.DIAG_M932C_2N.DIAG_M932C_2N_PLC_View',
-        'M557D': 'Types.DIAG_M557D.DIAG_M557D_PLC_View',
-        'M558D': 'Types.DIAG_M558D.DIAG_M558D_PLC_View',
-        'M557O': 'Types.DIAG_M557O.DIAG_M557O_PLC_View',
-        'M558O': 'Types.DIAG_M558O.DIAG_M558O_PLC_View',
-        'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
-        'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View',
-        'M531I': 'Types.DIAG_M531I.DIAG_M531I_PLC_View',
-        'M543G': 'Types.DIAG_M543G.DIAG_M543G_PLC_View',
-        'M532U': 'Types.DIAG_M532U_test.DIAG_M532U_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
-        'M582IS': 'Types.DIAG_M582IS_test.DIAG_M582IS_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
-    }
-    cells = sheet_module['A1': 'G' + str(sheet_module.max_row)]
+    sl_modules_channel = {}
+    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'dict_module_channel')):
+        with open(os.path.join('Template_Alpha', 'Systemach', f'dict_module_channel'), 'r', encoding='UTF-8') as f_sig:
+            for line in f_sig:
+                if '#' in line:
+                    continue
+                if not line.strip():
+                    break
+                line = line.strip()
+                lst_line = [i.strip() for i in line.split(':')]
+                if '*' in lst_line[1]:
+                    tm = [i.strip() for i in lst_line[1].split('*')]
+                    sl_modules_channel[lst_line[0]] = [tm[0]] * int(tm[1])
+                else:
+                    sl_modules_channel[lst_line[0]] = lst_line[1]
+    else:
+        print(f'Не найден файл сигналов Template_Alpha/Systemach/dict_module_channel, '
+              f'стуртуры модулей добавлены не будут')
+    # sl_modules = {
+    #     'M547A': ['Резерв'] * 16,
+    #     'M537V': ['Резерв'] * 8,
+    #     'M557D': ['Резерв'] * 32,
+    #     'M557O': ['Резерв'] * 32,
+    #     'M932C_2N': ['Резерв'] * 8,
+    #     'M903E': 'CPU', 'M991E': 'CPU', 'M915E': 'CPU', 'M501E': 'CPU', 'M991S': 'CPU',
+    #     'M548A': ['Резерв'] * 16,
+    #     'M538V': ['Резерв'] * 8,
+    #     'M558D': ['Резерв'] * 32,
+    #     'M558O': ['Резерв'] * 32,
+    #     'M531I': ['Резерв'] * 8,
+    #     'M543G': ['Резерв'] * 16,
+    #     'M5571': ['Резерв'] * 32,
+    #     'M532U': ['Резерв'] * 8,  # Добавлено в тестовом режиме для Игринской!!!
+    #     'M582IS': ['Резерв'] * 3,  # Добавлено в тестовом режиме для Игринской!!!
+    # }
+    sl_type_modules = {}
+    tuple_cpu_name = tuple()
+    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'dict_module')):
+        with open(os.path.join('Template_Alpha', 'Systemach', f'dict_module'), 'r', encoding='UTF-8') as f_signal:
+            for line in f_signal:
+                if '#' in line:
+                    continue
+                if not line.strip():
+                    break
+                line = line.strip()
+                lst_line = [i.strip() for i in line.split(':')]
+                sl_type_modules[lst_line[0]] = lst_line[1]
+                if 'CPU' in lst_line[1]:
+                    tuple_cpu_name += (lst_line[0],)
+    else:
+        print(f'Не найден файл сигналов Template_Alpha/Systemach/dict_module, стуртуры модулей добавлены не будут')
+
+    # sl_type_modules = {
+    #     'M903E': 'Types.DIAG_CPU.DIAG_CPU_M903E_PLC_View',
+    #     'M991E': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
+    #     'M991S': 'Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View',
+    #     'M547A': 'Types.DIAG_M547A.DIAG_M547A_PLC_View',
+    #     'M548A': 'Types.DIAG_M548A.DIAG_M548A_PLC_View',
+    #     'M537V': 'Types.DIAG_M537V.DIAG_M537V_PLC_View',
+    #     'M538V': 'Types.DIAG_M538V.DIAG_M538V_PLC_View',
+    #     'M932C_2N': 'Types.DIAG_M932C_2N.DIAG_M932C_2N_PLC_View',
+    #     'M557D': 'Types.DIAG_M557D.DIAG_M557D_PLC_View',
+    #     'M558D': 'Types.DIAG_M558D.DIAG_M558D_PLC_View',
+    #     'M557O': 'Types.DIAG_M557O.DIAG_M557O_PLC_View',
+    #     'M558O': 'Types.DIAG_M558O.DIAG_M558O_PLC_View',
+    #     'M915E': 'Types.DIAG_CPU.DIAG_CPU_M915E_PLC_View',
+    #     'M501E': 'Types.DIAG_CPU.DIAG_CPU_M501E_PLC_View',
+    #     'M531I': 'Types.DIAG_M531I.DIAG_M531I_PLC_View',
+    #     'M543G': 'Types.DIAG_M543G.DIAG_M543G_PLC_View',
+    #     'M532U': 'Types.DIAG_M532U_test.DIAG_M532U_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
+    #     'M582IS': 'Types.DIAG_M582IS_test.DIAG_M582IS_test_PLC_View',  # Добавлено в тестовом режиме для Игринской!!!
+    # }
+    cells = sheet_module['A1': get_column_letter(50) + str(50)]
     type_module_index = is_f_ind(cells[0], 'Шифр модуля')
     name_module_index = is_f_ind(cells[0], 'Имя модуля')
     cpu_index = is_f_ind(cells[0], 'CPU')
-    cells = sheet_module['A2': 'G' + str(sheet_module.max_row)]
+    cells = sheet_module['A2': get_column_letter(50) + str(sheet_module.max_row)]
     sl_modules_cpu = {}
     # словарь sl_modules_cpu {имя CPU: {имя модуля: (тип модуля, [каналы])}}
     for p in cells:
         if p[0].value is None:
             break
-        aa = copy(sl_modules[p[type_module_index].value])
-        if p[cpu_index].value not in sl_modules_cpu:
-            sl_modules_cpu[p[cpu_index].value] = {}
-        sl_modules_cpu[p[cpu_index].value].update({p[name_module_index].value: (p[type_module_index].value, aa)})
+        if sl_modules_channel.get(p[type_module_index].value):
+            aa = copy(sl_modules_channel[p[type_module_index].value])
+            if p[cpu_index].value not in sl_modules_cpu:
+                sl_modules_cpu[p[cpu_index].value] = {}
+            sl_modules_cpu[p[cpu_index].value].update({p[name_module_index].value: (p[type_module_index].value, aa)})
     # В тестовом режиме для игринской добавляем два новых модуля в GTU жёстко!!!
     if 'Игринская' in name_prj:
-        aa = copy(sl_modules['M532U'])
-        sl_modules_cpu['GTU'].update({'AD102': ('M532U', aa)})
-        aa = copy(sl_modules['M582IS'])
-        sl_modules_cpu['GTU'].update({'AD1': ('M582IS', aa)})
+        if sl_modules_channel.get('M532U') and sl_modules_channel.get('M582IS'):
+            aa = copy(sl_modules_channel['M532U'])
+            sl_modules_cpu['GTU'].update({'AD102': ('M532U', aa)})
+            aa = copy(sl_modules_channel['M582IS'])
+            sl_modules_cpu['GTU'].update({'AD1': ('M582IS', aa)})
 
     # sl_for_diag - словарь для корректной педечачи для создания индексов
     sl_for_diag = {}
     for name_cpu, value in sl_modules_cpu.items():
-        keys_sl_for_diag = [i if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E', 'M991S')
+        keys_sl_for_diag = [i if value[i][0] not in tuple_cpu_name
                             else 'CPU' for i in value]
-        value_sl_for_diag = [value[i][0] if value[i][0] not in ('M903E', 'M991E', 'M915E', 'M501E', 'M991S')
+        value_sl_for_diag = [value[i][0] if value[i][0] not in tuple_cpu_name
                              else (i, value[i][0]) for i in value]
         sl_for_diag[name_cpu] = dict(zip(keys_sl_for_diag, value_sl_for_diag))
 
     # пробегаемся по листам, где могут быть указаны каналы модулей
     for jj in sheets_signal:
         sheet_run = book[jj]
-        cells_run = sheet_run['A1': 'O' + str(sheet_run.max_row)]
+        cells_run = sheet_run['A1': 'O' + str(sheet_run.max_column)]
         num_canal_index = is_f_ind(cells_run[0], 'Номер канала')
         no_stand_index = is_f_ind(cells_run[0], 'Нестандартный канал')
         cpu_par_index = is_f_ind(cells_run[0], 'CPU')
@@ -369,23 +483,27 @@ def is_read_create_diag(book, name_prj, *sheets_signal):
                 # если не указан НЕстандартный канал, то вносим в список
                 if par[no_stand_index].value == 'Нет':
                     tmp_ind = int(par[num_canal_index].value) - 1
-                    sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_index].value][1][tmp_ind] = \
-                        par[name_par_index].value
+                    if sl_modules_cpu.get(par[cpu_par_index].value) and \
+                            sl_modules_cpu[par[cpu_par_index].value].get(par[name_module_par_index].value):
+                        sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_index].value][1][tmp_ind] = \
+                            par[name_par_index].value
                 # если выбран контроль цепи и контроль стандартный, то также добавляем в список
                 if par[control_index].value == 'Да' and par[no_stand_kc_index].value == 'Нет':
                     tmp_ind = int(par[num_canal_kc_index].value) - 1
-                    sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_kc_index].value][1][tmp_ind] = \
-                        f"КЦ: {par[name_par_index].value}"
+                    if sl_modules_cpu.get(par[cpu_par_index].value) and \
+                            sl_modules_cpu[par[cpu_par_index].value].get(par[name_module_par_index].value):
+                        sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_kc_index].value][1][tmp_ind] = \
+                            f"КЦ: {par[name_par_index].value}"
 
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
     return {cpu: {mod: (sl_type_modules.get(value[0], 'Types.').replace('Types.', ''), ) + value
-                  for mod, value in sl_modules_cpu[cpu].items()}
+                  for mod, value in sl_modules_cpu[cpu].items() if sl_type_modules.get(value[0])}
             for cpu in sl_modules_cpu}, sl_for_diag
 
 
 def is_create_net(sl_object_all, sheet_net):
     # Проработать в студии IOlogic - настройка в конфигураторе !!!
-    cells = sheet_net['A1': 'K' + str(sheet_net.max_row)]
+    cells = sheet_net['A1': get_column_letter(60) + str(60)]
 
     index_rus_name = is_f_ind(cells[0], 'Наименование юнита')
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
@@ -395,7 +513,7 @@ def is_create_net(sl_object_all, sheet_net):
     index_ip_res = is_f_ind(cells[0], 'Резервный IP-адрес')
     index_option = is_f_ind(cells[0], 'Настройка')
 
-    cells = sheet_net['A2': 'K' + str(sheet_net.max_row)]
+    cells = sheet_net['A2': get_column_letter(60) + str(sheet_net.max_row)]
 
     tuple_net_res = ('SWITCH_TREI_S34X',)
     tuple_net_with_option = ('IOLOGIC_MOXA_E2242',)
@@ -554,6 +672,12 @@ def is_create_sys(sl_object_all: dict, name_prj: str):
                   value="false")
     ET.SubElement(child_ap_activity_switch, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
 
+    child_control = ET.SubElement(child_sys, 'ct_object', name='ZControlForAAP', access_level="public")
+    child_ready = ET.SubElement(child_control, 'ct_parameter', name='Ready',
+                                type="bool", direction="out", access_level="public")
+    ET.SubElement(child_ready, 'attribute', type="unit.System.Attributes.InitialValue", value="true")
+    ET.SubElement(child_ready, 'attribute', type="unit.Server.Attributes.InitialQuality", value="216")
+
     # Нормируем и записываем IOS-аспект
     temp = ET.tostring(root_aspect).decode('UTF-8')
 
@@ -568,12 +692,12 @@ def is_create_sys(sl_object_all: dict, name_prj: str):
 def is_read_btn(sheet):
     # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
     return_sl = {}
-    cells = sheet['A1': 'C' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(50) + str(50)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
 
-    cells = sheet['A2': 'C' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
     # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
@@ -581,7 +705,7 @@ def is_read_btn(sheet):
             break
         set_par_cpu.add(par[index_cpu_name].value)
         if par[index_cpu_name].value not in return_sl:
-            # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+            # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
             return_sl[par[index_cpu_name].value] = {}
         return_sl[par[index_cpu_name].value].update({
             'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]: (
@@ -594,7 +718,7 @@ def is_read_btn(sheet):
 
 def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
 
-    cells = sheet['A1': 'N' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(50) + str(50)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
@@ -602,7 +726,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
     index_unit = is_f_ind(cells[0], 'Единица измерения')
     index_cond = is_f_ind(cells[0], 'Условия защиты')
 
-    cells = sheet['A2': 'N' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
 
     # Словарь Защит, в котором ключ - cpu, значение - кортеж списков [алг имя, рус. имя, единицы измерения]
     sl_pz = {}
@@ -667,6 +791,8 @@ def is_read_signals(sheet, sl_wrn_di):
         'ГР': return_ppu,
         'ХР': return_ppu,
         'АОсс': return_alr,
+        'АО': return_alr,
+        'НО': return_alr,
         'АОбс': return_alr,
         'ВОсс': return_alr,
         'ВОбс': return_alr,
@@ -682,14 +808,14 @@ def is_read_signals(sheet, sl_wrn_di):
         'Да (по наличию)': 'WRN_On.WRN_On_PLC_View',
         'Да (по отсутствию)': 'WRN_Off.WRN_Off_PLC_View'
     }
-    cells = sheet['A1': 'N' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(50) + str(50)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_type_protect = is_f_ind(cells[0], 'Тип защиты')
     index_unit = is_f_ind(cells[0], 'Единица измерения')
 
-    cells = sheet['A2': 'N' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
 
     for par in cells:
         if par[index_rus_name].value is None:
@@ -700,7 +826,7 @@ def is_read_signals(sheet, sl_wrn_di):
             if par[index_cpu_name].value not in sl_signal_type[protect]:
                 sl_signal_type[protect][par[index_cpu_name].value] = {}
             tuple_update = (f"{protect.replace(' (без условий)','')}. {par[index_rus_name].value}"
-                            if protect in 'АОссАОбсВОссВОбс' or 'АС' in protect
+                            if protect in 'АОссАОбсВОссВОбсАОНО' or 'АС' in protect
                             else par[index_rus_name].value, )
             if protect in ('BOOL', 'INT', 'FLOAT'):
                 tuple_update = (f'ALG.ALG_{protect}_PLC_View',) + tuple_update
@@ -747,16 +873,29 @@ def is_read_signals(sheet, sl_wrn_di):
 
 def is_read_drv(sheet, sl_all_drv):
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
-    sl_type_drv = {
-        'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
-        'INT': 'Types.DRV_INT.DRV_INT_PLC_View',
-        'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View',
-        'IEC': 'Types.DRV_AI.DRV_AI_PLC_View',
-        'IECR': 'Types.DRV_AI.DRV_AI_PLC_View',
-        'IECB': 'Types.DRV_DI.DRV_DI_PLC_View'
-    }
+    # sl_type_drv = {
+    #     'FLOAT': 'Types.DRV_AI.DRV_AI_PLC_View',
+    #     'INT': 'Types.DRV_INT.DRV_INT_PLC_View',
+    #     'BOOL': 'Types.DRV_DI.DRV_DI_PLC_View',
+    #     'IEC': 'Types.DRV_AI.DRV_AI_PLC_View',
+    #     'IECR': 'Types.DRV_AI.DRV_AI_PLC_View',
+    #     'IECB': 'Types.DRV_DI.DRV_DI_PLC_View'
+    # }
+    sl_type_drv = {}
+    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'dict_type_drv')):
+        with open(os.path.join('Template_Alpha', 'Systemach', f'dict_type_drv'), 'r', encoding='UTF-8') as f_signal:
+            for line in f_signal:
+                if '#' in line:
+                    continue
+                if not line.strip():
+                    break
+                line = line.strip()
+                lst_line = [i.strip() for i in line.split(':')]
+                sl_type_drv[lst_line[0]] = lst_line[1]
+    else:
+        print(f'Не найден файл сигналов Template_Alpha/Systemach/dict_type_drv, стуртуры модулей добавлены не будут')
 
-    cells = sheet['A1': 'N' + str(sheet.max_row)]
+    cells = sheet['A1': get_column_letter(50) + str(50)]
 
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
@@ -770,10 +909,10 @@ def is_read_drv(sheet, sl_all_drv):
     index_drv = is_f_ind(cells[0], 'Драйвер')
     index_save_history = is_f_ind(cells[0], 'Сохранять в истории')
 
-    cells = sheet['A2': 'N' + str(sheet.max_row)]
+    cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
-    # ед.измер, кол-во знаков) }}}
+    # ед.измер, кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков для истории) }}}
     return_sl_cpu_drv = {}
     # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
@@ -824,9 +963,13 @@ def is_read_drv(sheet, sl_all_drv):
             unit_in_tuple = (par[index_unit].value if type_sig_par != 'BOOL' else '-')
             fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR', 'IEC') else '0')
             history_in_tuple = f'Сохраняемый - {par[index_save_history].value}'
+            frag_dig_hist_in_tuple = ''.join(
+                [i for i in str(par[index_fracdig].comment)[:str(par[index_fracdig].comment).find('by')]
+                 if i.isdigit()]) if par[index_fracdig].comment else par[index_fracdig].value
 
             tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
-                         c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple, history_in_tuple)
+                         c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple, history_in_tuple,
+                         frag_dig_hist_in_tuple)
 
             return_sl_cpu_drv[par[index_cpu_name].value][(par[index_drv].value, sl_all_drv.get(par[index_drv].value))][
                 par[index_alg_name].value] = tuple_par
@@ -851,13 +994,21 @@ def is_read_create_grh(sheet, sl_object_all):
 
     # словарь по cpu sl_alg_in_cpu = {cpu: sl_algoritm}
     sl_alg_in_cpu = {}
+    # словарь команд по cpu sl_command_in_cpu = {cpu: sl_command}
+    # sl_command = {(Режим_alg, русское имя режима): {номер шага: {команда_alg: русский текст команды}}}
+    sl_command_in_cpu = {}
+
+    # словарь режимов(в том числе и подрежимов),
+    # sl_mod_cpu = {cpu: кортеж режимов(в том числе и подрежимов)-(содержит кортеж (алг, рус)}
+    sl_mod_cpu = {}
 
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...для каждого контроллера...
         for cpu in sl_object_all[objects]:
             # ...заполняем общий словарь по контроллерам
-            sl_alg_in_cpu[cpu] = is_load_algoritm(controller=cpu, cells=cells, sheet=sheet)
+            sl_alg_in_cpu[cpu], sl_command_in_cpu[cpu], sl_mod_cpu[cpu] = is_load_algoritm(
+                controller=cpu, cells=cells, sheet=sheet)
 
     # Из функции возвращаяем словарь где ключ - cpu, а значение - кортеж переменных GRH
     # Также возвращаем словарь вида {cpu: {алг_пар: (тип переменной в студии, русское имя,
@@ -869,7 +1020,9 @@ def is_read_create_grh(sheet, sl_object_all):
     return {key: value for key, value in sl_.items() if value}, \
            {cpu: {alg_par.split('|')[1]: (sl_type_alogritm.get(val[1]).replace('Types.', ''), val[0]) +
                                          (tuple(val[2]) if len(val) == 3 else tuple())
-                  for alg_par, val in value.items()} for cpu, value in sl_alg_in_cpu.items() if value}
+                  for alg_par, val in value.items()}
+            for cpu, value in sl_alg_in_cpu.items() if value}, \
+           {key: value for key, value in sl_command_in_cpu.items() if value}, sl_mod_cpu
 
 
 def check_diff_file(check_path, file_name_check, new_data, message_print):
@@ -916,7 +1069,7 @@ def get_variable_lower(line):
 
 
 # Функция для индексов
-# Функция получения алгоритмического имени в нижнем регистре (вместе с разделителем |, если такой есть)
+# Функция получения алгоритмического имени (вместе с разделителем |, если такой есть)
 # из строки в словаре Трея
 def get_variable(line):
     line = line.split(',')

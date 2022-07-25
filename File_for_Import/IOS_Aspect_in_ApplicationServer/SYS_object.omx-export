@@ -17,12 +17,12 @@
       </ct:handler>
     </ct:object>
     <ct:parameter name="ObjNam" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="ГПА3"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="САР"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="ObjAlg" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="GPA1"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="SAR"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
@@ -32,7 +32,7 @@
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="SystemName" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="КС «Игринская»"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="САР ГП-1 ДКС3"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
@@ -40,5 +40,11 @@
       <attribute type="unit.System.Attributes.InitialValue" value="false"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
     </ct:parameter>
+    <ct:object name="ZControlForAAP" access-level="public">
+      <ct:parameter name="Ready" type="bool" direction="out" access-level="public">
+        <attribute type="unit.System.Attributes.InitialValue" value="true"/>
+        <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
+      </ct:parameter>
+    </ct:object>
   </ct:object>
 </omx>

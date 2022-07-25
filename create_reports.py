@@ -93,7 +93,7 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
                 # ...для каждого параметра...
                 for par, property_par in sl_par.items():
                     # Если отсчитали 17 параметров, то добавляем шапку для следующего листа
-                    if not (num_par - 1) % 26 and num_par != 1:
+                    if not (num_par - 1) % 33 and num_par != 1:
                         num_cel += 2
                         for _ in range(3):
                             sheet.row_dimensions[num_cel].height = 35

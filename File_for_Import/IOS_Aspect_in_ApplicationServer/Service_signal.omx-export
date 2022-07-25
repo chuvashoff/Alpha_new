@@ -4,17 +4,7 @@
     <ct:object name="Modules" access-level="public">
       <ct:object name="UNET Client" access-level="public">
         <attribute type="unit.System.Attributes.Comment" value="для диагностики связи с ПЛК"/>
-        <ct:object name="PLC_GTU_1" access-level="public">
-          <ct:object name="CPU_Eth1" access-level="public">
-            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
-            <attribute type="unit.System.Attributes.Comment" value="Основная сеть"/>
-          </ct:object>
-          <ct:object name="CPU_Eth2" access-level="public">
-            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
-            <attribute type="unit.System.Attributes.Comment" value="Резервная сеть"/>
-          </ct:object>
-        </ct:object>
-        <ct:object name="PLC_GPA_1" access-level="public">
+        <ct:object name="PLC_SAR_1" access-level="public">
           <ct:object name="CPU_Eth1" access-level="public">
             <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
             <attribute type="unit.System.Attributes.Comment" value="Основная сеть"/>

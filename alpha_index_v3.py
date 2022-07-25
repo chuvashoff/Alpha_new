@@ -4,6 +4,7 @@ import re
 # from string import Template
 # from my_func import *
 import string
+import sys
 
 from func_for_v3 import *
 
@@ -190,6 +191,27 @@ def create_group_tr(sl_global, template_no_arc_index, pref_par, source):
     return s_out
 
 
+def create_group_sar(sl_global, template_no_arc_index, pref_par, source):
+    sl_data_cat = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Discrete'
+    }
+    sl_type = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool'
+    }
+    s_out = ''
+    for key, value in sl_global.items():
+        a = key
+        pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+        s_out += Template(template_no_arc_index).substitute(name_signal=f'{pref_par}.{a}',
+                                                            type_signal=sl_type[value[1]], index=value[0],
+                                                            data_category=f'DataCategory_{source}_{pref_arc}')
+    return s_out
+
+
 def create_group_apr(sl_global, sl_global_fast, template_no_arc_index, template_arc_index, pref_par, source):
     sl_data_cat = {
         'R': 'Analog',
@@ -325,13 +347,14 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                  sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
-                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path):
+                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
+                 buff_size):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
                   '    <protocoltype>$type_signal</protocoltype>\n' \
                   '    <index>$index</index>\n' \
-                  '    <buffer-length>50</buffer-length>\n' \
+                  f'    <buffer-length>{buff_size}</buffer-length>\n' \
                   '    <archivation-period>1</archivation-period>\n' \
                   '    <category>$data_category</category>\n' \
                   '  </item>\n'
@@ -341,157 +364,83 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                      '    <index>$index</index>\n' \
                      '    <category>$data_category</category>\n' \
                      '  </item>\n'
-    lst_ae = (
-        'coSim', 'coRepair', 'coUpdRepair', 'Message.msg_fBreak', 'Message.msg_qbiValue', 'Value', 'fValue', 'iValue',
-        'qbiValue', 'sChlType', 'sEnRepair', 'TRepair', 'Value100', 'aH', 'aL', 'fParam', 'fOverlow', 'fOverhigh',
-        'fHighspeed', 'Repair', 'Sim', 'wH', 'wL', 'sEnaH', 'sBndaH', 'sEnaL', 'sBndaL', 'sEnwH', 'sBndwH', 'sEnwL',
-        'sBndwL', 'sEnRate', 'sBndRate', 'sHighLim', 'sHys', 'sLowLim', 'sSimValue', 'sTaH', 'sTaL', 'sTRepair', 'sTwH',
-        'sTwL'
-    )
-    lst_ai = lst_ae + ('sHighiValue', 'sLowiValue')
-    lst_di = (
-        'coSim', 'brk', 'kz', 'coRepair', 'coUpdRepair', 'fParam', 'Value', 'fValue', 'Message.msg_brk',
-        'Message.msg_qbiValue', 'Message.msg_kz', 'qbiValue', 'Repair', 'sBlkPar', 'Sim', 'sSimValue', 'TRepair',
-        'sTRepair', 'iValue'
-    )
-    lst_ai_di = (
-        'coSim', 'coRepair', 'coUpdRepair', 'Message.msg_brk', 'Message.msg_qbiValue', 'Message.msg_kz', 'sHys',
-        'sSimValue', 'sTRepair', 'sValueBreak', 'sValueFalse', 'sValueKz', 'sValueTrue', 'fBreak', 'fKz', 'fParam',
-        'fValue', 'qbiValue', 'Repair', 'Sim', 'TRepair', 'Value', 'iValue'
-    )
-    lst_im1x0 = (
-        'coOn', 'coOff', 'Message.msg_fwcOn', 'Message.msg_fwsDu', 'Message.msg_qbiDu', 'Message.msg_qboOn', 'oOff',
-        'oOn', 'fFlt', 'fwcOn', 'pcoMan', 'pcoOff', 'pcoOn', 'pMan', 'qbiDu', 'qboOn', 'Repair', 'fwsDu', 'wbcaOff',
-        'wbcaOn', 'wMU', 'wRU', 'TRepair', 'coRepair', 'sTRepair', 'coUpdRepair', 'coMan', 'coSim'
-    )
-    lst_im1x1 = (
-        'coOn', 'coOff', 'coRst', 'Message.msg_fwcOn', 'Message.msg_qbiOn', 'Message.msg_fwsOn', 'Message.msg_fwsDu',
-        'Message.msg_qbiDu', 'Message.msg_qboOn', 'fwcOn', 'pcoMan', 'pcoOff', 'pcoOn', 'pcoRst', 'pMan', 'qbiDu',
-        'qbiOn', 'qboOn', 'stOn', 'stOff', 'stOng', 'stOffg', 'fwsDu', 'fwsOn', 'wNotOn', 'wNotOff', 'TRepair',
-        'oOn', 'oOff', 'fFlt', 'Repair', 'wbcaOff', 'wbcaOn', 'wMU', 'wRU', 'sTOn_Off', 'sTRepair', 'coRepair',
-        'coUpdRepair', 'coMan', 'coSim'
-    )
-    lst_im1x2 = lst_im1x1 + ('wUnkw', 'wDbl', 'Message.msg_fwsOff', 'Message.msg_qbiOff', 'fwsOff', 'qbiOff')
-    lst_im2x2 = lst_im1x2 + ('coStop', 'Message.msg_fwcOff', 'Message.msg_qboOff', 'fwcOff', 'pcoStop', 'qboOff',
-                             'sTcom', 'sTPress')
-    lst_im_ao = (
-        'Message.msgqbiPos', 'Message.msgqboSet', 'fFlt', 'pcoMan', 'pMan', 'qbiPos', 'Repair', 'wRU', 'TRepair',
-        'stWay', 'fPos', 'fSet', 'ifOut', 'ifPos', 'iPos', 'Out', 'qboSet', 'Set', 'stOn', 'stOff', 'coMan', 'coRepair',
-        'sTRepair', 'coUpdRepair', 'coSet', 'sHighiValue', 'sLowiValue', 'sHighLim', 'sLowLim'
-    )
-    lst_btn = (
-        'ceOn', 'coOn', 'caLhBTN', 'pBTN', 'pcoMan'
-    )
-    lst_pz = (
-        'ALR', 'CHECK', 'PZH', 'PZM', 'PZS', 'TDELAY', 'TRDELAY', 'WASFIRST', 'CHECKVALUE', 'SETPOINT', 'VALUE',
-        'coSbros', 'BLOCKED'
-    )
-    lst_set = (
-        'ceSP', 'seSP', 'soSP', 'Value', 'caRegOn', 'fParam', 'NoLink', 'sHighLim', 'sLowLim', 'vPar'
-    )
-    sl_module_diag_sig = {
-        'M547A': ('Canal_', 'Err_Canal_', 'Err_izm_AC', 'Err_kalib_AC', 'Err_line_AC', 'Err_voltage_AC', 'Line1_E',
-                  'Line2_E', 'Err_lin', 'Metro_Canal_', 'No_powe', 'Parameter_Canal_', 'Work_Ti', 'Reset_co', 'Timeo'),
-        'M548A': ('Canal_', 'Err_Canal_', 'Err_izm_AC', 'Err_kalib_AC', 'Err_line_AC', 'Err_voltage_AC', 'Line1_E',
-                  'Line2_E', 'Err_lin', 'Metro_Canal_', 'No_powe', 'Parameter_Canal_', 'Work_Ti', 'Reset_co', 'Timeo'),
-        'M537V': ('Canal_', 'Err_Canal_', 'Metro_Canal_', 'Err_lin', 'Line1_E', 'Line2_E', 'Parameter_Canal_',
-                  'Work_Ti', 'Reset_co', 'Timeo', 'Err_C', 'No_powe', 'Default_Canal_'),
-        'M538V': ('Canal_', 'Err_Canal_', 'Metro_Canal_', 'Err_lin', 'Line1_E', 'Line2_E', 'Parameter_Canal_',
-                  'Work_Ti', 'Reset_co', 'Timeo', 'Err_C', 'No_powe', 'Default_Canal_'),
-        'M557D': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'No_powe'),
-        'M558D': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'No_powe'),
-        'M557O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
-                  'No_Canal_pow', 'No_powe'),
-        'M558O': ('Canal_', 'Work_Ti', 'Reset_co', 'Timeo', 'Err_lin', 'Line1_E', 'Line2_E', 'Default_Canal_', 'Peregr',
-                  'No_powe'),
-        'M932C_2N': ('Err_lin', 'Line1_E', 'Line2_E', 'Err_U1_C01', 'Err_U2_C01', 'Err_U3_C01',
-                     'Err_U4_C01', 'Err_U5_C01', 'Err_U6_C01', 'Err_U7_C01', 'Err_U8_C01', 'Err_ha', 'Metro_Unit_01',
-                     'Metro_Unit_02', 'Metro_Unit_03', 'Metro_Unit_04', 'Metro_Unit_05', 'Metro_Unit_06',
-                     'Metro_Unit_07', 'Metro_Unit_08', 'U1_C01', 'U2_C01', 'U2_C01', 'U3_C01', 'U4_C01', 'U4_C01',
-                     'U5_C01', 'U5_C01', 'U6_C01', 'U7_C01', 'U8_C01', 'Work_Ti', 'Reset_co', 'Timeo'),
-        'M531I': ('Energy_save', 'Err_hard', 'Err_lin', 'Ext_conn_err', 'Line1_Err', 'Line2_Err', 'Mode_CH_',
-                  'Not_Ready', 'Power_hig', 'Power_lo', 'Reset_co', 'Timeo', 'Work_Ti', 'Freq_CH_', 'Err_CH_',
-                  'Metro_CH_'),
-        'M543G': ('Duration_CH_', 'Err_CH_', 'Err_lin', 'Line1_Err', 'Line2_Err', 'Not_ready', 'Power_hig', 'Power_lo',
-                  'Period_CH_', 'Reset_co', 'Timeo', 'Work_Ti'),
-        # !!! Два модуля добавлены в тестовом режиме
-        'M532U': ('Err_lin', 'Power_hig', 'Power_lo', 'Work_Ti', 'Timeo', 'Reset_co', 'Not_Ready', 'Err_sequence',
-                  'U1_C', 'U2_C', 'U2_C', 'U3_C', 'U4_C', 'U4_C', 'U5_C', 'U5_C', 'U6_C', 'U7_C',
-                  'U8_C'),
-        'M582IS': ('Err_lin', 'Power_hig', 'Power_lo', 'Work_Ti', 'Timeo', 'Reset_co', 'Not_Ready', 'Err_sequence',
-                   'Write_protect', 'Freq_I', 'Err_Freq_I', 'DI1_state', 'DI2_state', 'DO1_state', 'DO2_state',
-                   'DO3_state', 'DO4_state', 'DO5_state'),
-    }
-    sl_diag_cpu_sig = {
-        'M915E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
-                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
-                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
-                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
-                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
-                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
-                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
-                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
-                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+    lst_ae = tuple()
+    lst_ai = tuple()
+    lst_di = tuple()
+    lst_ai_di = tuple()
+    lst_im1x0 = tuple()
+    lst_im1x1 = tuple()
+    lst_im1x2 = tuple()
+    lst_im2x2 = tuple()
+    lst_im_ao = tuple()
+    lst_btn = tuple()
+    lst_pz = tuple()
+    lst_set = tuple()
+    for file in ('Signal_ae', 'Signal_ai', 'Signal_di', 'Signal_ai_di', 'Signal_im1x0', 'Signal_im1x1', 'Signal_im1x2',
+                 'Signal_im2x2', 'Signal_imao', 'Signal_btn', 'Signal_pz', 'Signal_set'):
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'{file}')):
+            with open(os.path.join('Template_Alpha', 'Systemach', f'{file}'), 'r', encoding='UTF-8') as f_signal:
+                for line in f_signal:
+                    if '#' in line:
+                        continue
+                    if not line.strip():
+                        break
+                    if file == 'Signal_ae':
+                        lst_ae += (line.strip(),)
+                    elif file == 'Signal_ai':
+                        lst_ai += (line.strip(),)
+                    elif file == 'Signal_di':
+                        lst_di += (line.strip(),)
+                    elif file == 'Signal_ai_di':
+                        lst_ai_di += (line.strip(),)
+                    elif file == 'Signal_im1x0':
+                        lst_im1x0 += (line.strip(),)
+                    elif file == 'Signal_im1x1':
+                        lst_im1x1 += (line.strip(),)
+                    elif file == 'Signal_im1x2':
+                        lst_im1x2 += (line.strip(),)
+                    elif file == 'Signal_im2x2':
+                        lst_im2x2 += (line.strip(),)
+                    elif file == 'Signal_imao':
+                        lst_im_ao += (line.strip(),)
+                    elif file == 'Signal_btn':
+                        lst_btn += (line.strip(),)
+                    elif file == 'Signal_pz':
+                        lst_pz += (line.strip(),)
+                    elif file == 'Signal_set':
+                        lst_set += (line.strip(),)
+        else:
+            print(f'Не найден файл сигналов Template_Alpha/Systemach/{file}, '
+                  'сигналы в карту адресов добавлены не будут')
 
-        'M991E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
-                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
-                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
-                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
-                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
-                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
-                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
-                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
-                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+    sl_module_diag_sig = {}
+    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_sig')):
+        with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_sig'), 'r', encoding='UTF-8') as f_signal:
+            for line in f_signal:
+                if '#' in line:
+                    continue
+                name_module = line[:line.find(':')]
+                str_sig = line[line.find(':')+1:].strip()
+                sl_module_diag_sig[name_module] = tuple([i.strip() for i in str_sig.split(',')])
+    else:
+        print(f'Не найден файл сигналов модулей Template_Alpha/Systemach/Module_diag_sig, '
+              'сигналы модулей не будут добавлены в карту адресов')
 
-        'M991S': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
-                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
-                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
-                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
-                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
-                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
-                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
-                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
-                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange'},
+    sl_diag_cpu_sig = {}
 
-        'M903E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
-                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
-                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
-                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
-                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
-                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
-                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
-                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
-                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange',
-                  'LAN1_Error': 'LAN1_Error', 'LAN2_Error': 'LAN2_Error', 'LAN3_Error': 'LAN3_Error',
-                  'LAN4_Error': 'LAN4_Error',
-                  'SFP1_Error': 'SFP1_Error', 'SFP2_Error': 'SFP2_Error',
-                  'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-                  'LAN4_NoLink': 'LAN4_NoLink', 'SFP1_NoLink': 'SFP1_NoLink', 'SFP2_NoLink': 'SFP2_NoLink',
-                  'TCycle': 'TCycle', 'TCycleMax': 'TCycleMax'},
+    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu')):
+        if file.startswith('Signal_cpu_'):
+            name_cpu = file.replace('Signal_cpu_', '')
+            sl_diag_cpu_sig[name_cpu] = {}
+            with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu', file), 'r',
+                      encoding='UTF-8') as f_signal:
+                for line in f_signal:
+                    if '#' in line:
+                        continue
+                    key = line[:line.find(':')].strip()
+                    value = line[line.find(':')+1:].strip()
+                    sl_diag_cpu_sig[name_cpu].update({key: value})
 
-        'M501E': {'CheckSum': 'CONSUM', 'RestartCode': 'System44_8', 'CheckSumErr': 'System44_1_2',
-                  'DataSizeErr': 'System44_1_3', 'SoftVerErr': 'System44_1_4', 'ValueErr': 'System44_1_5',
-                  'FBErr': 'System44_1_6', 'FileErr': 'System44_1_7', 'WriteErr': 'System44_1_8',
-                  'ReadErr': 'System44_1_9', 'CPUBlock': 'System44_1_10', 'LowPower': 'System44_5_0',
-                  'LowBatteryPower': 'System44_5_1', 'ModErr': 'System44_6_0', 'ChanErr': 'System44_6_1',
-                  'ZerkErr': 'System44_6_3', 'ConfigErr': 'System44_6_4', 'RSErr': 'System44_6_5',
-                  'EthernetErr': 'System44_6_6', 'STbusErr': 'System44_6_7', 'RuntimeErr': 'System44_7_0',
-                  'ResetMod': 'System44_7_1', 'HWErr': 'System44_7_5', 'HWConfErr': 'System44_7_6',
-                  'HWUnitErr': 'System44_7_7', 'ExtComErr': 'System44_7_11', 'IntComErr': 'System44_7_12',
-                  'ModuleComErr': 'System44_7_24', 'SoftOk': 'System44_9_0', 'SoftStop': 'System44_9_3',
-                  'SoftBlock': 'System44_9_4', 'SoftReserve': 'System44_9_5', 'CheckSumChange': 'CheckSumChange',
-                  'LAN1_NoLink': 'LAN1_NoLink', 'LAN2_NoLink': 'LAN2_NoLink', 'LAN3_NoLink': 'LAN3_NoLink',
-                  'LAN4_NoLink': 'LAN4_NoLink',
-                  'TCycle': 'TCycle', 'TCycleMax': 'TCycleMax'}
-    }
     for cpu, path in sl_cpu_path.items():
         # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
         if not os.path.exists(path):
@@ -537,19 +486,67 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_drv = {}
 
             sl_global_grh = {}
+            sl_sar_tun = {}
+            sl_global_sar = {}
 
-            if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha',
+            if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'TR',
                                                                                               f'TR_par_{choice_tr}')):
-                with open(os.path.join('Template_Alpha', f'TR_par_{choice_tr}'), 'r', encoding='UTF-8') as f_tr:
+                with open(os.path.join('Template_Alpha', 'TR', f'TR_par_{choice_tr}'), 'r', encoding='UTF-8') as f_tr:
                     lst_tr_par = [i for i in f_tr.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр топливных переменных для дальнейшей проверки
                     lst_tr_par_lower = [a.lower() for a in lst_tr_par]
-            if 'АПР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha',
+            if 'АПР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'APR',
                                                                                                'APR_par')):
-                with open(os.path.join('Template_Alpha', 'APR_par'), 'r', encoding='UTF-8') as f_:
+                with open(os.path.join('Template_Alpha', 'APR', 'APR_par'), 'r', encoding='UTF-8') as f_:
                     lst_apr_par = [i for i in f_.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр переменных АПР для дальнейшей проверки
                     lst_apr_par_lower = [a.lower() for a in lst_apr_par]
+            if line_source[0] == 'SAR':
+                # Tuning
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            sl_sar_tun[line.strip().split(';')[2].lower()] = line.strip().split(';')[0]
+                # REGUL
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'REGUL')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'REGUL'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            sl_sar_tun[f"{line.strip().split(';')[0].lower()}.REGUL"] = line.strip().split(';')[1]
+                # WRN
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'WRN')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'WRN'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            sl_sar_tun[f"{line.strip().split(';')[0].lower()}.WRN"] = line.strip().split(';')[1]
+                # Signal_KHR
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Signal_KHR')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'Signal_KHR'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            sl_sar_tun[f"{line.strip().split(';')[0].lower()}.Signal_KHR"] = line.strip().split(';')[1]
+                # Reload
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            sl_sar_tun[f"{line.strip().split(';')[0].lower()}.Reload"] = line.strip().split(';')[1]
 
             # Если есть файл аналогов
             if os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
@@ -629,6 +626,34 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 with open(os.path.join(line_source[1], 'global0.var'), 'rt') as f_global:
                     for line in f_global:
                         line = line.strip()
+                        # Получаем сигналы SARa
+                        if sl_sar_tun and len(line.split(',')) >= 10:
+                            # Получаем переменную
+                            tmp_var = get_variable_lower(line=line)
+                            if tmp_var in sl_sar_tun:
+                                line_sar = line.split(',')
+                                sl_global_sar[f'Tuning.{sl_sar_tun[tmp_var]}.Value'] = [max(int(line_sar[9]),
+                                                                                            int(line_sar[10])),
+                                                                                        line_sar[1]]
+                            elif f'{tmp_var}.REGUL' in sl_sar_tun:
+                                line_sar = line.split(',')
+                                tm = sl_sar_tun[f'{tmp_var}.REGUL']
+                                sl_global_sar[f'REGUL.{tm}'] = [max(int(line_sar[9]), int(line_sar[10])), line_sar[1]]
+                            elif f'{tmp_var}.WRN' in sl_sar_tun:
+                                line_sar = line.split(',')
+                                tm = sl_sar_tun[f'{tmp_var}.WRN']
+                                sl_global_sar[f'WRN.{tm}'] = [max(int(line_sar[9]), int(line_sar[10])), line_sar[1]]
+                            elif f'{tmp_var}.Signal_KHR' in sl_sar_tun:
+                                line_sar = line.split(',')
+                                tm = sl_sar_tun[f'{tmp_var}.Signal_KHR']
+                                sl_global_sar[f'IM.KHR.{tm}'] = [max(int(line_sar[9]), int(line_sar[10])), line_sar[1]]
+                            elif f'{tmp_var}.Reload' in sl_sar_tun:
+                                line_sar = line.split(',')
+                                tm = sl_sar_tun[f'{tmp_var}.Reload']
+                                sl_global_sar[f'Reload.{tm}.Value'] = [max(int(line_sar[9]), int(line_sar[10])),
+                                                                       line_sar[1]]
+
+                        # Получаем сигналы топливного регулятора
                         if lst_tr_par and len(line.split(',')) >= 10:
                             # Получаем переменную в нижнем регистре и с разделителем
                             tmp_var = get_variable_lower(line=line)
@@ -651,7 +676,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             tmp_var = get_variable(line=line)
                             # Если переменная есть в списке сигналов контроллера
                             # По сути ищем переменные контроллера без разделителей в глобальном словаре
-                            if tmp_var in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                            if tmp_var in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 line_diag = line.split(',')
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
@@ -766,7 +791,11 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
                         elif 'MOD|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
-                            sl_global_mod[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])), line[1]]
+                            if 'regnum' in line[0][line[0].find('|') + 1:].lower():
+                                sl_global_mod['regNum'] = [max(int(line[9]), int(line[10])), line[1]]
+                            else:
+                                sl_global_mod[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])),
+                                                                                  line[1]]
 
                         elif 'PPU|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -829,11 +858,19 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             # if f"Tuning.{line[0][line[0].find('|') + 1:]}" in lst_apr_par:
                             #     key_apr = f"Tuning.{line[0][line[0].find('|') + 1:]}.Value"
                             #     sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
+                        elif 'SRCalc' in line and len(line.split(',')) >= 10:
+                            # Получаем переменную в нижнем регистре и с разделителем и добавляем перфикс тюнинга
+                            tmp_var = get_variable_lower(line=line).replace('srcalc|', 'srcalc.')
+                            if tmp_var in lst_apr_par_lower:
+                                line = line.split(',')
+                                index_lst = lst_apr_par_lower.index(tmp_var)
+                                key_apr = f"IM.{lst_apr_par[index_lst]}"
+                                sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
 
                         elif 'DIAG|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
                             var_name = line[0][line[0].find('|') + 1:]
-                            if var_name in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                            if var_name in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 signal_name = \
                                     sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][var_name]
@@ -881,7 +918,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
                             sl_global_fast[line[0][1:]] = max(int(line[9]), int(line[10]))
                             # Ищем переменные контроллерв в FAST
-                            if tmp_var.replace('FAST|', '') in sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]]:
+                            if tmp_var.replace('FAST|', '') \
+                                    in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 sl_global_fast[tmp_var] = max(int(line[9]), int(line[10]))
 
             # В словаре sl_global_ai лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
@@ -1033,6 +1071,11 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             if sl_global_tr and 'ТР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 s_all += create_group_tr(sl_global_tr, tmp_ind_no_arc, 'System.TR', line_source[0])
 
+
+            # Обработка и запись в карту тегов SAR
+            if sl_global_sar:
+                s_all += create_group_sar(sl_global_sar, tmp_ind_no_arc, 'SAR', line_source[0])
+
             # Обработка и запись в карту АПР
             if sl_global_apr and 'АПР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 s_all += create_group_apr(sl_global_apr, sl_global_fast, tmp_ind_no_arc, tmp_ind_arc, 'APR',
@@ -1061,8 +1104,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                     if tmp_line == '/':
                                         break
                                 curr_module = sl_for_diag[line_source[0]][module]  # тип модуля
-                                if tmp_line.split(',')[0][1:-2] in sl_module_diag_sig[curr_module] or \
-                                        tmp_line.split(',')[0][1:] in sl_module_diag_sig[curr_module]:
+                                if tmp_line.split(',')[0][1:-2] in sl_module_diag_sig.get(curr_module, 'бла') or \
+                                        tmp_line.split(',')[0][1:] in sl_module_diag_sig.get(curr_module, 'бла'):
 
                                     # в словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
                                     sl_global_diag[(module, tmp_line.split(',')[0][1:])] = \

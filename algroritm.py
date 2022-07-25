@@ -14,11 +14,24 @@ def is_cor_chr(st):
 
 # Функция для выдёргивания переменных хода алгоритма
 def is_load_algoritm(controller, cells, sheet):
+    # Кортеж режимов(в том числе и подрежимов), на выходе - по принадлежности к контроллеру (содержит кортеж (алг, рус))
+    tuple_mod_cpu = tuple()
     sl_algoritm = {}
+    # sl_command = {(Режим_alg, русское имя режима): {номер шага: {команда_alg: русский текст команды}}}
+    sl_command = {}
     # Для выдачи команд заполняем sl_algoritm парами алг.имя команды: (руское наименование команды, тип сигнала-BOOL)
     for p in cells:
         # Если установлен нужный контроллер и мы находимся в строке объявления режима
         if sheet[p[0].row][3].value == controller and p[0].value == 'Режим':
+
+            # Определяем количество шагов в режиме:
+            count_step = 0
+            while sheet[p[0].row + 2 + count_step][0].value is not None:
+                count_step += 1
+            # print(count_step, sheet[p[0].row][2].value)
+            # tmp_dict_step = {номер шага: {команда_alg: русский текст команды}}
+            tmp_dict_step = dict(zip(range(1, count_step+1), ({} for _ in range(1, count_step+1))))
+            #
             cmd_eng, cmd_rus = (), ()
             # Добавляем дефолтные переменные для режима
             cmd_rus += ((f"Старт режима {sheet[p[0].row][2].value}", 'BOOL'),
@@ -27,11 +40,31 @@ def is_load_algoritm(controller, cells, sheet):
             cmd_eng += (f"GRH|{sheet[p[0].row][1].value}_START",
                         f"GRH|{sheet[p[0].row][1].value}_END",
                         f"GRH|{sheet[p[0].row][1].value}_Point")
+            # В кортеж режимов(в том числе и подрежимов) добавляем режим
+            tuple_mod_cpu += ((sheet[p[0].row][1].value, sheet[p[0].row][2].value),)
             jj = 7
             while jj != sheet.max_column and sheet[p[0].row][jj].value and sheet[p[0].row + 1][jj].value:
                 cmd_rus += ((sheet[p[0].row][jj].value, 'BOOL'),)
                 cmd_eng += (sheet[p[0].row + 1][jj].value,)
+                cmd_val = "FALSE"
+                # Проходим по шагам и определяем для каждой команды её взвод. Если Есть TRUE и далее до FALSE,
+                # то погружаем во временный словарь шагов текущего режима
+                for step in range(1, count_step+1):
+                    if sheet[p[0].row + 1 + step][jj].value is None and cmd_val == "FALSE" or \
+                            sheet[p[0].row + 1 + step][jj].value == "FALSE":
+                        # print(step, "FALSE", sheet[p[0].row + 1][jj].value)
+                        cmd_val = "FALSE"
+                    elif sheet[p[0].row + 1 + step][jj].value is None and cmd_val == "TRUE" or \
+                            sheet[p[0].row + 1 + step][jj].value == "TRUE":
+                        # print(step, sheet[p[0].row + 1 + step][jj].value, sheet[p[0].row + 1][jj].value)
+                        tmp_dict_step[step].update(
+                            {sheet[p[0].row + 1][jj].value.replace("GRH|", ""): sheet[p[0].row][jj].value})
+                        cmd_val = "TRUE"
                 jj += 1
+            # for step in tmp_dict_step:
+            #     print(step, tmp_dict_step[step])
+            # Заносим в словарь команд режим
+            sl_command.update({(sheet[p[0].row][1].value, sheet[p[0].row][2].value): tmp_dict_step})
             sl_algoritm.update(dict(zip(cmd_eng, cmd_rus)))
 
     j = 0
@@ -197,7 +230,7 @@ def is_load_algoritm(controller, cells, sheet):
                                             tuple(zip(tuple_rev_timer_rus, ('FLOAT',) * len(tuple_rev_timer_rus),
                                                       ('0',) * len(tuple_rev_timer_rus))))))
 
-    return sl_algoritm
+    return sl_algoritm, sl_command, tuple_mod_cpu
 
 # Функция для создания структуры для каждой переменной алгоритма
 

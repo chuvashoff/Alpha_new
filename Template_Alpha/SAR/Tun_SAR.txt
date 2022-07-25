@@ -1,0 +1,95 @@
+# Алг.имя_тюнинга;тип(REAL,INT);тег_в_ПЛК;Описание
+# sSetWord - особенный, для него заведён отдельный тип и создаётся такой (раскладывается по битам)
+sNumGPA;INT;sTunings|sNumGPA;Количество ГПА в цеху
+sSetWord;INT;sTunings|sSetWord;Слово настроечных параметров цеха
+sMainContur;INT;sTunings|sMainContur;Контур по-умолчанию (1 - Рвых, 2 - Рвх, 3 - Ст.сж, 4 - Расход)
+sKpDistN;REAL;sTunings|sKpDistN;Кр алгоритма распределения по мощности
+sKpDistSR;REAL;sTunings|sKpDistSR;Кр алгоритма распределения по ПЗ
+sDistrDZ_N;REAL;sTunings|sDistrDZ_N;Зона нечувствительности алгоритма распределения по мощности
+sDistrDZ_SR;REAL;sTunings|sDistrDZ_SR;Зона нечувствительности алгоритма распределения по ПЗ
+sNstMax;REAL;sTunings|sNstMax;Уставка Nст.макс. На ГПА
+sNstMin;REAL;sTunings|sNstMin;Уставка Nст.мин. На ГПА
+sdNstMaxDist;REAL;sTunings|sdNstMaxDist;Уставка максимального приращения Nст в режиме распределения
+sdNstMinDist;REAL;sTunings|sdNstMinDist;Уставка минимального приращения Nст в режиме распределения
+sdNstTimeDist;REAL;sTunings|sdNstTimeDist;Уставка интервала между приращениями Nст в режиме распределения
+sdNstMaxReg;REAL;sTunings|sdNstMaxReg;Уставка максимального приращения Nст в режиме регулирования
+sdNstMinReg;REAL;sTunings|sdNstMinReg;Уставка минимального приращения Nст в режиме регулирования
+sdNstTimeReg;REAL;sTunings|sdNstTimeReg;Уставка интервала между приращениями Nст в режиме регулирования
+sdNstMaxLim;REAL;sTunings|sdNstMaxLim;Уставка максимального приращения Nст в режиме ограничения
+sdNstMinLim;REAL;sTunings|sdNstMinLim;Уставка минимального приращения Nст в режиме ограничения
+sdNstTimeLim;REAL;sTunings|sdNstTimeLim;Уставка интервала между приращениями Nст в режиме ограничения
+sCv_KHRfunc;REAL;sTunings|sCv_KHRfunc;Характеристика КХР (1 - быстрая, 2 - линейная, 3 - равнопроцентная)
+sCv_KHR;REAL;sTunings|sCv_KHR;Расходный коэффициент КХР
+sD;REAL;sTunings|sD;Плотность газа по воздуху для расхода через КХР
+sDZ_KHR;REAL;sTunings|sDZ_KHR;Зона нечувствительности КХР
+sTimeOpenDU;REAL;sTunings|sTimeOpenDU;Время открытия КХР в ручном режиме
+sTimeCloseDU;REAL;sTunings|sTimeCloseDU;Время закрытия КХР в ручном режиме
+sTimeOpenAuto;REAL;sTunings|sTimeOpenAuto;Время открытия КХР в автоматическом режиме
+sTimeCloseAuto;REAL;sTunings|sTimeCloseAuto;Время закрытия КХР в автоматическом режиме
+sTimeCloseLoadEND;REAL;sTunings|sTimeCloseLoadEND;Время закрытия КХР в режиме загрузки цеха
+sDeltaMaxKHR;REAL;sTunings|sDeltaMaxKHR;Уставка включения алгоритма компенсации расхода через КХР (млн.нм3/сут)
+sDeltaDelayKHR;REAL;sTunings|sDeltaDelayKHR;Задержка включения алгоритма компенсации расхода через КХР
+sDeltaDzKHR;REAL;sTunings|sDeltaDzKHR;Уставка отключения алгоритма компенсации расхода через КХР
+sDZPin;REAL;sTunings|sDZPin;Зона нечувствительности регулятора Рвх
+sKpPin;REAL;sTunings|sKpPin;Кр регулятора Рвх
+sDZPout;REAL;sTunings|sDZPout;Зона нечувствительности регулятора Рвых
+sKpPout;REAL;sTunings|sKpPout;Кр регулятора Рвых
+sDZE;REAL;sTunings|sDZE;Зона нечувствительности регулятора ст.сж
+sKpE;REAL;sTunings|sKpE;Кр регулятора ст.сж
+sDZQ;REAL;sTunings|sDZQ;Зона нечувствительности регулятора расхода
+sKpQ;REAL;sTunings|sKpQ;Кр регулятора расхода
+spPoutMax1;REAL;sTunings|spPoutMax1;Уставка ограничения Рвых. макс. ЦР
+spPoutMin_delta;REAL;sTunings|spPoutMin_delta;Динамическая уставка ограничения Рвых. мин. ЦР
+spPoutMax_delta;REAL;sTunings|spPoutMax_delta;Динамическая уставка ограничения Рвых. макс. ЦР
+sUpDZPout;REAL;sTunings|sUpDZPout;Зона нечувствительности верхняя ограничения Рвых. ЦР
+sDownDZPout;REAL;sTunings|sDownDZPout;Зона нечувствительности нижняя ограничения Рвых ЦР
+sKpLimNPout;REAL;sTunings|sKpLimNPout;Кр контура ограничения Рвых. ЦР
+spPinMin1;REAL;sTunings|spPinMin1;Уставка ограничения Рвх. мин. ЦР
+spPinMin_delta;REAL;sTunings|spPinMin_delta;Динамическая уставка ограничения Рвх. мин. ЦР
+spPinMax_delta;REAL;sTunings|spPinMax_delta;Динамическая уставка ограничения Рвх. макс. ЦР
+sUpDZPin;REAL;sTunings|sUpDZPin;Зона нечувствительности верхняя ограничения Рвх. ЦР
+sDownDZPin;REAL;sTunings|sDownDZPin;Зона нечувствительности нижняя ограничения Рвх. ЦР
+sKpLimNPin;REAL;sTunings|sKpLimNPin;Кр контура ограничения Рвх ЦР
+spEMax1;REAL;sTunings|spEMax1;Уставка ограничения ст. сж. макс. ЦР
+sUpDZE;REAL;sTunings|sUpDZE;Зона нечувствительности верхняя ограничения ст. сж. макс. ЦР
+sDownDZE;REAL;sTunings|sDownDZE;Зона нечувствительности нижняя ограничения ст. сж. ЦР
+sKpLimNE;REAL;sTunings|sKpLimNE;Кр контура ограничения ст. сж. ЦР
+spPoutMax2;REAL;sTunings|spPoutMax2;Уставка ограничения Рвых. макс. КХР
+spPoutMin_delta2;REAL;sTunings|spPoutMin_delta2;Динамическая уставка ограничения Рвых. мин. КХР
+spPoutMax_delta2;REAL;sTunings|spPoutMax_delta2;Динамическая уставка ограничения Рвых. макс. КХР
+sDeclinePout2;REAL;sTunings|sDeclinePout2;Отклонение от уставки ограничения Рвых. макс. КХР
+sDZPout2;REAL;sTunings|sDZPout2;Зона нечувствительности ограничения Рвых. КХР
+sKpLimKHRPout;REAL;sTunings|sKpLimKHRPout;Кр контура ограничения Рвых. КХР
+sTiLimKHRPout;REAL;sTunings|sTiLimKHRPout;Ти контура ограничения Рвых. КХР
+sTdLimKHRPout;REAL;sTunings|sTdLimKHRPout;Тд контура ограничения Рвых. КХР
+spPinMin2;REAL;sTunings|spPinMin2;Уставка ограничения Рвх. мин. КХР
+spPinMin_delta2;REAL;sTunings|spPinMin_delta2;Динамическая уставка ограничения Рвх. мин. КХР
+spPinMax_delta2;REAL;sTunings|spPinMax_delta2;Динамическая уставка ограничения Рвх. макс. КХР
+sDeclinePin2;REAL;sTunings|sDeclinePin2;Отклонение от уставки ограничения Рвх. мин. КХР
+sDZPin2;REAL;sTunings|sDZPin2;Зона нечувствительности ограничения Рвх. КХР
+sKpLimKHRPin;REAL;sTunings|sKpLimKHRPin;Кр контура ограничения Рвх. КХР
+sTiLimKHRPin;REAL;sTunings|sTiLimKHRPin;Ти контура ограничения Рвх. КХР
+sTdLimKHRPin;REAL;sTunings|sTdLimKHRPin;Тд контура ограничения Рвх. КХР
+spEMax2;REAL;sTunings|spEMax2;Уставка ограничения ст. сж. макс. КХР
+sDeclineE2;REAL;sTunings|sDeclineE2;Отклонение от уставки ограничения ст. сж. макс. КХР
+sDZE2;REAL;sTunings|sDZE2;Зона нечувствительности ограничения ст. сж. КХР
+sKpLimKHRE;REAL;sTunings|sKpLimKHRE;Кр контура ограничения ст. сж. КХР
+sTiLimKHRE;REAL;sTunings|sTiLimKHRE;Ти контура ограничения ст. сж. КХР
+sTdLimKHRE;REAL;sTunings|sTdLimKHRE;Тд контура ограничения ст. сж. КХР
+spSurgeResMax;REAL;sTunings|spSurgeResMax;Уставка ограничения макс. ПЗ
+spSurgeResMin;REAL;sTunings|spSurgeResMin;Уставка ограничения мин. ПЗ
+sDeclineSurgeRes;REAL;sTunings|sDeclineSurgeRes;Отклонение от уставки ограничения мин. ПЗ
+sDZSurgeRes;REAL;sTunings|sDZSurgeRes;Зона нечувствительности ограничения ПЗ
+sKpLimKHRSR;REAL;sTunings|sKpLimKHRSR;Кр контура ограничения ПЗ
+sTiLimKHRSR;REAL;sTunings|sTiLimKHRSR;Ти контура ограничения ПЗ
+sTdLimKHRSR;REAL;sTunings|sTdLimKHRSR;Тд контура ограничения ПЗ
+sUpDZPoutReload;REAL;sTunings|sUpDZPoutReload;Зона нечувствительности верхняя регулятора Рвых. КХР при перезагрузке
+sDownDZPoutReload;REAL;sTunings|sDownDZPoutReload;Зона нечувствительности нижняя регулятора Рвых. КХР при перезагрузке
+sKpKHRPoutReload;REAL;sTunings|sKpKHRPoutReload;Кр контура регулирования Рвых. КХР при перезагрузке
+sTiKHRPoutReload;REAL;sTunings|sTiKHRPoutReload;Ти контура регулирования Рвых. КХР при перезагрузке
+sTdKHRPoutReload;REAL;sTunings|sTdKHRPoutReload;Тд контура регулирования Рвых. КХР при перезагрузке
+sPoutZone;REAL;sTunings|sPoutZone;Зона высокого Рвых цеха
+sPinZone;REAL;sTunings|sPinZone;Зона низкого Рвх цеха
+sEZone;REAL;sTunings|sEZone;Зона высокой степени сжатия цеха
+sSurResZone;REAL;sTunings|sSurResZone;Зона низкого ПЗ цеха
+sDZmul;REAL;sTunings|sDZmul;Множитель смещения зоны нечувствительности цехового регулятора

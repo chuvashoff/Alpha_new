@@ -8,6 +8,7 @@ from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz
+from Create_mnemo_visual import create_mnemo_visual
 from create_reports import create_reports, create_reports_pz, create_reports_sday
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
@@ -61,6 +62,10 @@ try:
         if p[0].value == 'Высота мнемосхемы, в пикселях':
             size_vysota = int(p[1].value)
             break
+    buff_size = '50'
+    for p in cells:
+        if p[0].value == 'Количество хранимых записей МЭК':
+            buff_size = p[1].value
     # Читаем состав объектов и заполняем sl_object_all
     cells = sheet['A23': 'U23']
     index_on1 = is_f_ind(cells[0], 'ON1')
@@ -82,8 +87,8 @@ try:
 
     # Мониторинг ТР и АПР в контроллере
     sl_TR = {}
-    if os.path.exists(os.path.join('Template_Alpha', 'Tun_TR.txt')):
-        with open(os.path.join('Template_Alpha', 'Tun_TR.txt'), 'r', encoding='UTF-8') as f_tr:
+    if os.path.exists(os.path.join('Template_Alpha', 'TR', 'Tun_TR.txt')):
+        with open(os.path.join('Template_Alpha', 'TR', 'Tun_TR.txt'), 'r', encoding='UTF-8') as f_tr:
             for line in f_tr:
                 if '#' in line or ':' not in line:
                     continue
@@ -119,6 +124,7 @@ try:
             sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
 
     # Определение заведённых драйверов
+    # print('Определение заведённых драйверов, Также Определяем список объявленных мнемосхем')
     # Также Определяем список объявленных мнемосхем
     cells = sheet['A1': 'A' + str(sheet.max_row)]
     drv_eng, drv_rus = [], []
@@ -156,14 +162,23 @@ try:
     # Если нет папки File_for_Import/Mnemo, то создадим её
     if not os.path.exists(os.path.join('File_for_Import', 'Mnemo')):
         os.mkdir(os.path.join('File_for_Import', 'Mnemo'))
+    # Если нет папки File_for_Import/Mnemo/Control_Mnemo, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo')):
+        os.mkdir(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo'))
+    # Если нет папки File_for_Import/Mnemo/Control_Mnemo/Systemach, то создадим её
+    if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo', 'Systemach')):
+        os.mkdir(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo', 'Systemach'))
     # Если нет папки File_for_Import/Reports, то создадим её
     if not os.path.exists(os.path.join('File_for_Import', 'Reports')):
         os.mkdir(os.path.join('File_for_Import', 'Reports'))
 
-    # Чистим папку Мнемосхем, чтобы далее создать новые
+    # Чистим папку Мнемосхем, чтобы далее создать новые!!!
     for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo')):
         if file.endswith('.omobj'):
             os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', file))
+    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'Control_Mnemo')):
+        if file.endswith('.omobj'):
+            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'Control_Mnemo', file))
     # Очистка файла изменений, если он есть и содержит больше 100 строк
     if os.path.exists('Required_change.txt'):
         with open('Required_change.txt', 'r') as f_test:
@@ -177,23 +192,25 @@ try:
                 'Agregator_N_IOS': 'Types.MSG_Agregator.Agregator_N_IOS',
                 'Agregator_Repair_IOS': 'Types.MSG_Agregator.Agregator_Repair_IOS'}
 
+    # print(datetime.datetime.now(), ' - Начинаем парсить файл')
     # Измеряемые
-    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков,
+    # количество знаков для истории)}}
     # sl_mnemo = {узел: список параметров узла}
     return_sl_ai, sl_mnemo_ai, return_sl_sday = {}, {}, {}
     if 'Измеряемые' in book.sheetnames:
         return_sl_ai, sl_mnemo_ai, return_sl_sday = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
-
+    # print(datetime.datetime.now(), ' - Разпарсили Анпары, парсим Расчётные')
     # Расчетные
     return_sl_ae, sl_mnemo_ae, return_ae_sday = {}, {}, {}
     if 'Расчетные' in book.sheetnames:
         return_sl_ae, sl_mnemo_ae, return_ae_sday = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
-
+    # print(datetime.datetime.now(), ' - Разпарсили Расчётные, парсим Дискретные')
     # Дискретные
     return_sl_di, sl_wrn_di, sl_mnemo_di = {}, {}, {}
     if 'Входные' in book.sheetnames:
         return_sl_di, sl_wrn_di, sl_mnemo_di = is_read_di(sheet=book['Входные'])
-
+    # print(datetime.datetime.now(), ' - Разпарсили Дискретные, парсим ИМы и ИМАО')
     # ИМ
     return_sl_im, sl_cnt = {}, {}
     if 'ИМ' in book.sheetnames and 'ИМ(АО)' in book.sheetnames:
@@ -212,13 +229,13 @@ try:
     # sl_cnt_xml = {CPU: {алг.имя : (тип модуля в студии, русское имя,)}}
     sl_cnt_xml = {cpu: {alg_par: ('CNT.CNT_PLC_View', val) for alg_par, val in value.items()}
                   for cpu, value in sl_cnt.items()}
-
+    # print(datetime.datetime.now(), ' - Разпарсили ИМы и ИМАО, собираем диагностику модулей')
     # Диагностика
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
     sl_modules_cpu, sl_for_diag = {}, {}
     if {'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)'} <= set(book.sheetnames):
         sl_modules_cpu, sl_for_diag = is_read_create_diag(book, name_prj, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
-
+    # print(datetime.datetime.now(), ' - Собрали диагностику, парсим уставки')
     # Уставки
     return_sl_set, sl_set_mnemo_not_use, return_set_sday = {}, {}, {}
     if 'Уставки' in book.sheetnames:
@@ -232,12 +249,12 @@ try:
                 return_sl_sday[cpu].update(sl[cpu])
             else:
                 return_sl_sday[cpu] = sl[cpu]
-
+    # print(datetime.datetime.now(), ' - Разпарсили уставки, парсим кнопки')
     # Кнопки
     return_sl_btn = {}
     if 'Кнопки' in book.sheetnames:
         return_sl_btn = is_read_btn(sheet=book['Кнопки'])
-
+    # print(datetime.datetime.now(), ' - Разпарсили кнопки, парсим защиты и сигналы')
     # Защиты
     # В чтении защит передаём словари AI и AE с единицами измерения
     # чтобы определить единицы измрения у защиты при необходимости
@@ -256,11 +273,11 @@ try:
     if 'Сигналы' in book.sheetnames:
         return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
                                                                                                   sl_wrn_di=sl_wrn_di)
-
+    # print(datetime.datetime.now(), ' - Разпарсили защиты и сигналы, парсим Драйвера')
     # Драйвера
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
-    # ед.измер, кол-во знаков) }}}
+    # ед.измер, кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков для истории) }}}
     # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
     # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
@@ -271,11 +288,63 @@ try:
                                                                            sl_all_drv=sl_all_drv)
 
     # Переменные алгоримтов
-    sl_grh, return_alg_grh = {}, {}
+    # словарь команд по cpu sl_command_in_cpu = {cpu: sl_command}
+    # sl_command = {(Режим_alg, русское имя режима): {номер шага: {команда_alg: русский текст команды}}}
+    sl_grh, return_alg_grh, sl_command_in_cpu = {}, {}, {}
+    sl_mod_cpu = {}
+    # print(datetime.datetime.now(), ' - Разпарсили Драйвера, парсим Алгоритмы')
     if 'Алгоритмы' in book.sheetnames:
         # Проверяем существование режимов, на тот случай, если лист Алгоритмы может быть пустой
         if 'Режим' in (p[0].value for p in book['Алгоритмы']['A1': 'A' + str(sheet.max_row)]):
-            sl_grh, return_alg_grh = is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
+            sl_grh, return_alg_grh, sl_command_in_cpu, sl_mod_cpu = \
+                is_read_create_grh(sheet=book['Алгоритмы'], sl_object_all=sl_object_all)
+
+    # Подготавливаем словарь такого же вида, как sl_command_in_cpu
+    # только для условий перехода и без кортежа в режимах - там просто режим_alg
+    sl_condition_in_cpu = {cpu: {mod[0]: {step: {} for step in sl_step} for mod, sl_step in sl_.items()}
+                           for cpu, sl_ in sl_command_in_cpu.items()}
+
+    # print('sl_command_in_cpu ', sl_command_in_cpu)
+    # print('sl_mod_cpu ', sl_mod_cpu)
+
+    # Создаём кортеж всех комманд, чтобы анализировать и отсеивать их
+    tuple_all_command = tuple([command for cpu in sl_command_in_cpu
+                               for mod in sl_command_in_cpu[cpu]
+                               for step in sl_command_in_cpu[cpu][mod]
+                               for command in sl_command_in_cpu[cpu][mod][step]])
+
+    for m in [mod[0] for cpu in sl_command_in_cpu for mod in sl_command_in_cpu[cpu]]:
+        tuple_all_command += (f'{m}_START', f'{m}_END', f'{m}_Point')
+
+    for cpu, sl_alg_grh in return_alg_grh.items():
+        # Определяем все режимы в контроллере
+        all_mod_cpu = [i[0] for i in sl_mod_cpu.get(cpu, ' ')]
+        # Пробегаемся по алгоритмическим переменным, за исключением команд и Tmv_in в составе
+        for cond in [co for co in sl_alg_grh if co not in tuple_all_command and 'Tmv_In' not in co]:
+            # Определяем, к какому режиму относится
+            mode = ''
+            for m in all_mod_cpu:
+                if cond.startswith(m):
+                    mode = m
+                    break
+            # Определяем к какому шагу это относится
+            step = int([i for i in cond.replace(mode, '').split('_') if i.isdigit()][0])
+            # print(f'Команда {cond}, Режим {mode}, Шаг {step}')
+            # Закидываем в словарь условий перехода
+            sl_condition_in_cpu[cpu][mode][int(step)].update({cond: sl_alg_grh[cond][1]})
+
+    # # пробегаемся по общему словарю и выдёргиваем оттуда всё, что не касается, старта, стопа, шага и команд
+    # # если не понадобиться, можно удалить Tmv_In если они не нужны - исключено
+    # for cpu, sl_alg_grh in return_alg_grh.items():
+    #     for alg, tuple_property_alg in sl_alg_grh.items():
+    #         if "START" not in alg and "END" not in alg and "Point" not in alg and 'Tmv_In' not in alg \
+    #                 and alg not in tuple_all_command:
+    #             mod = alg[:alg.find('_')]  # узнаём к какому режиму относится alg-шка
+    #             step = [i for i in alg.split('_') if i.isdigit()][0]  # узнаём какой шаг алгоритма
+    #             # Засовываем в словарь условия с проверкой вхождения
+    #             if cpu in sl_condition_in_cpu and mod in sl_condition_in_cpu[cpu] \
+    #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
+    #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
@@ -302,9 +371,11 @@ try:
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
                'dict_agreg_IOS': sl_agreg
                },
-        # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender)}}
+        # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender, ед измер,
+        # количество знаков(для д.ИМ=0), количество знаков для истории)}}
         'IM': {'dict': return_sl_im,
-               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.StartView', 'Attributes.Gender'),
+               'tuple_attr': ('unit.System.Attributes.Description',
+                              'Attributes.StartView', 'Attributes.Gender', 'Attributes.EUnit', 'Attributes.FracDigits'),
                'dict_agreg_IOS': sl_agreg
                },
         # return_sl_set =
@@ -367,7 +438,7 @@ try:
     }
     # sl_object_all = {}  #
     # {(Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
-
+    print(datetime.datetime.now(), ' - Начинаем создавать выходные файлы')
     # {cpu: {алг_имя тюнинга: (плк_тип, рус. описание(имя))}}
     sl_tun_apr = {}
     # Для каждого объекта...
@@ -392,14 +463,63 @@ try:
                                          xmlns_trei="trei", xmlns_ct="automation.control")
             child = ET.SubElement(root_plc_aspect, 'trei_trei', name=f"PLC_{cpu}_{objects[2]}")
             child_cpu = ET.SubElement(child, 'trei_master-module', name="CPU")
-            ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
-            ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
-            ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
-            ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
+            if pref_IP[0] != '000.000.000.':
+                ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
+                ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
+            if pref_IP[1] != '000.000.000.':
+                ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
+                ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
             ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
                           address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
             child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
             ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
+
+            # Если есть контроллер САР, то добавляем в него структуру САР (PLC-аспект)
+            if 'SAR' in cpu:
+                child_sar = ET.SubElement(child_app, 'ct_object', name=f"SAR", access_level="public")
+                child_sar_im = ET.SubElement(child_sar, 'ct_object', name=f"IM", access_level="public")
+                child_sar_reload = ET.SubElement(child_sar, 'ct_object', name=f"Reload", access_level="public")
+                for i in range(1, 10):
+                    reload_km = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_KM{i}",
+                                              base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
+                                              aspect="Types.PLC_Aspect", access_level="public")
+                    ET.SubElement(reload_km, 'attribute', type="unit.System.Attributes.Description",
+                                  value=f"Загрузка ГПА{i} в магистраль")
+                    reload_mk = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_MK{i}",
+                                              base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
+                                              aspect="Types.PLC_Aspect", access_level="public")
+                    ET.SubElement(reload_mk, 'attribute', type="unit.System.Attributes.Description",
+                                  value=f"Разгрузка ГПА{i} на кольцо")
+                ET.SubElement(child_sar_im, 'ct_object', name=f"KHR",
+                              base_type=f"Types.SAR_Classic.KHR_PLC_View",
+                              aspect="Types.PLC_Aspect", access_level="public")
+                ET.SubElement(child_sar, 'ct_object', name=f"REGUL",
+                              base_type=f"Types.SAR_Classic.REGUL_PLC_View",
+                              aspect="Types.PLC_Aspect", access_level="public")
+                ET.SubElement(child_sar, 'ct_object', name=f"WRN",
+                              base_type=f"Types.SAR_Classic.WRN_PLC_View",
+                              aspect="Types.PLC_Aspect", access_level="public")
+                if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                    child_tun = ET.SubElement(child_sar, 'ct_object', name=f"Tuning", access_level="public")
+                    with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
+                              'r', encoding='UTF-8') as f_signal:
+                        for line in f_signal:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            lst_tun = line.strip().split(';')
+                            if lst_tun[0] == 'sSetWord':
+                                types_tun = f'SAR_tuning_sSetWord'
+                            else:
+                                types_tun = f'SAR_tuning' if lst_tun[1] == 'REAL' else f'SAR_tuning_int'
+                            object_sar_tuning = ET.SubElement(child_tun, 'ct_object', name=f"{lst_tun[0]}",
+                                                              base_type=f"Types.{types_tun}.{types_tun}_PLC_View",
+                                                              aspect="Types.PLC_Aspect", access_level="public")
+                            ET.SubElement(object_sar_tuning, 'attribute', type="unit.System.Attributes.Description",
+                                          value=f"{lst_tun[3]}")
+                else:
+                    print('Не найден файл тюнингов Template_Alpha/SAR/Tun_SAR.txt, тюнинги не будут добавлены')
 
             # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
             # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
@@ -426,11 +546,11 @@ try:
                 ET.SubElement(child_apr_im, 'attribute', type="unit.System.Attributes.Description", value="АПР")
                 child_apr_tuninig = ET.SubElement(child_apr, 'ct_object', name="Tuning", access_level="public")
                 # Если есть файл с описанием необходимых тюнингов
-                if os.path.exists(os.path.join('Template_Alpha', 'Tun_APR.txt')):
+                if os.path.exists(os.path.join('Template_Alpha', 'APR', 'Tun_APR.txt')):
                     # Создаём кортеж в словаре cpu-тюнингов
                     sl_tun_apr[cpu] = {}
                     # открываем данный файл
-                    with open(os.path.join('Template_Alpha', 'Tun_APR.txt'), 'r', encoding='UTF-8') as f_in:
+                    with open(os.path.join('Template_Alpha', 'APR', 'Tun_APR.txt'), 'r', encoding='UTF-8') as f_in:
                         # и по файлу бежим
                         for line in f_in:
                             if '#' in line:
@@ -482,7 +602,7 @@ try:
             if cpu in return_sl_cpu_drv:
                 # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
                 # {алг.пар: (Тип переменной, рус имя, тип сообщения, цвет отключения,
-                # цвет включения, ед.измер, кол-во знаков) }}}
+                # цвет включения, ед.измер, кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков) }}}
                 child_drv_node = ET.SubElement(child_system, 'ct_object', name="DRV", access_level="public")
                 tuple_attr = ('unit.System.Attributes.Description', 'Attributes.Type_wrn_DRV',
                               'Attributes.sColorOff', 'Attributes.sColorOn',
@@ -517,6 +637,70 @@ try:
                             new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
                                                                               pretty_print=True, encoding='unicode')),
                             message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
+            # print(datetime.datetime.now(), f' - Создали аспект {cpu}_{objects[2]}')
+
+        # Если в объекте есто контроллер САР, то добавлем структуру САР в IOS-аспект
+        if 'SAR' in set(sl_object_all[objects].keys()):
+            child_ios_sar = ET.SubElement(child_object, 'ct_object', name=f"SAR", access_level="public")
+            ET.SubElement(child_ios_sar, 'attribute', type='unit.System.Attributes.Description', value=f'САР')
+            child_ios_sar_im = ET.SubElement(child_ios_sar, 'ct_object', name=f"IM", access_level="public")
+            child_ios_sar_reload = ET.SubElement(child_ios_sar, 'ct_object', name=f"Reload", access_level="public")
+            for i in range(1, 10):
+                ios_km = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_KM{i}",
+                                       base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                       original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}",
+                                       aspect="Types.IOS_Aspect", access_level="public")
+                ET.SubElement(ios_km, 'ct_init-ref',
+                              ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}")
+                ios_mk = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_MK{i}",
+                                       base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                       original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}",
+                                       aspect="Types.IOS_Aspect", access_level="public")
+                ET.SubElement(ios_mk, 'ct_init-ref',
+                              ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}")
+            child_ios_khr = ET.SubElement(child_ios_sar_im, 'ct_object', name=f"KHR",
+                                          base_type='Types.SAR_Classic.KHR_IOS_View',
+                                          aspect="Types.IOS_Aspect",
+                                          original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.IM.KHR",
+                                          access_level="public")
+            ET.SubElement(child_ios_khr, 'ct_init-ref',
+                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.IM.KHR")
+            ET.SubElement(child_ios_khr, 'attribute', type='unit.System.Attributes.Description', value=f'КХР')
+            child_ios_sar_regul = ET.SubElement(child_ios_sar, 'ct_object', name=f"REGUL",
+                                                base_type='Types.SAR_Classic.REGUL_IOS_View',
+                                                aspect="Types.IOS_Aspect",
+                                                original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.REGUL",
+                                                access_level="public")
+            ET.SubElement(child_ios_sar_regul, 'ct_init-ref',
+                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.REGUL")
+            child_ios_sar_wrn = ET.SubElement(child_ios_sar, 'ct_object', name=f"WRN",
+                                              base_type='Types.SAR_Classic.WRN_IOS_View',
+                                              aspect="Types.IOS_Aspect",
+                                              original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.WRN",
+                                              access_level="public")
+            ET.SubElement(child_ios_sar_wrn, 'ct_init-ref',
+                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.WRN")
+            if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                child_ios_sar_tun = ET.SubElement(child_ios_sar, 'ct_object', name=f"Tuning", access_level="public")
+                with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
+                          'r', encoding='UTF-8') as f_signal:
+                    for line in f_signal:
+                        if '#' in line:
+                            continue
+                        if not line.strip():
+                            break
+                        lst_tun = line.strip().split(';')
+                        if lst_tun[0] == 'sSetWord':
+                            types_tun = f'SAR_tuning_sSetWord'
+                        else:
+                            types_tun = f'SAR_tuning' if lst_tun[1] == 'REAL' else f'SAR_tuning_int'
+                        object_ios_sar_tuning = ET.SubElement(
+                            child_ios_sar_tun, 'ct_object', name=f"{lst_tun[0]}",
+                            base_type=f"Types.{types_tun}.{types_tun}_IOS_View",
+                            original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}",
+                            aspect="Types.IOS_Aspect", access_level="public")
+                        ET.SubElement(object_ios_sar_tuning, 'ct_init-ref',
+                                      ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}")
 
         # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
         for node in ('AI', 'AE', 'DI', 'IM'):
@@ -553,6 +737,7 @@ try:
 
         # Создаём узел Diag
         child_diag = ET.SubElement(child_object, 'ct_object', name='Diag', access_level="public")
+        ET.SubElement(child_diag, 'attribute', type='unit.System.Attributes.Description', value=f'Диагностика')
         # ...добавляем агрегаторы
         for agreg, type_agreg in sl_agreg.items():
             ET.SubElement(child_diag, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
@@ -699,6 +884,7 @@ try:
                         new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
                                                                           pretty_print=True, encoding='unicode')),
                         message_print=f'Требуется заменить IOS-аспект объекта {objects[0]}')
+        # print(datetime.datetime.now(), f' - Создали аспект IOS-аспект {objects[0]}')
 
     # Создание сервисных сигналов
     is_create_service_signal(sl_object_all=sl_object_all)
@@ -771,7 +957,8 @@ try:
                  sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
                  sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
                  sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
-                 sl_cpu_path=sl_cpu_path)
+                 sl_cpu_path=sl_cpu_path,
+                 buff_size=buff_size)
 
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
@@ -832,6 +1019,9 @@ try:
                         size_shirina=size_shirina,
                         size_vysota=size_vysota,
                         param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz])
+    if sl_command_in_cpu and sl_condition_in_cpu and return_modes:
+        create_mnemo_visual(sl_object_all=sl_object_all, sl_command_in_cpu=sl_command_in_cpu,
+                            sl_condition_in_cpu=sl_condition_in_cpu, sl_mod_cpu=sl_mod_cpu)
 
     print(datetime.datetime.now(), '- Окончание сборки всех файлов')
     input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')
