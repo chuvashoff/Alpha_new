@@ -414,16 +414,20 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'сигналы в карту адресов добавлены не будут')
 
     sl_module_diag_sig = {}
-    if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_sig')):
-        with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_sig'), 'r', encoding='UTF-8') as f_signal:
-            for line in f_signal:
-                if '#' in line:
-                    continue
-                name_module = line[:line.find(':')]
-                str_sig = line[line.find(':')+1:].strip()
-                sl_module_diag_sig[name_module] = tuple([i.strip() for i in str_sig.split(',')])
+    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'Module_diag_signal')):
+        for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha',
+                                            'Systemach', 'Module_diag_signal')):
+            sl_module_diag_sig[file] = tuple()
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_signal', file),
+                      'r', encoding='UTF-8') as f_signal:
+                for line in f_signal:
+                    if '#' in line:
+                        continue
+                    if not line.strip():
+                        break
+                    sl_module_diag_sig[file] += (line.strip(),)
     else:
-        print(f'Не найден файл сигналов модулей Template_Alpha/Systemach/Module_diag_sig, '
+        print(f'Не найдена папка сигналов модулей Template_Alpha/Systemach/Module_diag_signal, '
               'сигналы модулей не будут добавлены в карту адресов')
 
     sl_diag_cpu_sig = {}
@@ -437,6 +441,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 for line in f_signal:
                     if '#' in line:
                         continue
+                    if not line.strip():
+                        break
                     key = line[:line.find(':')].strip()
                     value = line[line.find(':')+1:].strip()
                     sl_diag_cpu_sig[name_cpu].update({key: value})
@@ -501,7 +507,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                     lst_apr_par = [i for i in f_.read().split('\n') if i and '#' not in i]
                     # Получаем нижний регистр переменных АПР для дальнейшей проверки
                     lst_apr_par_lower = [a.lower() for a in lst_apr_par]
-            if line_source[0] == 'SAR':
+            if 'САР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 # Tuning
                 if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt')):
                     with open(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt'), 'r', encoding='UTF-8') as f_:
@@ -676,12 +682,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             tmp_var = get_variable(line=line)
                             # Если переменная есть в списке сигналов контроллера
                             # По сути ищем переменные контроллера без разделителей в глобальном словаре
-                            if tmp_var in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
+                            if sl_for_diag.get(line_source[0]) and \
+                                    tmp_var in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 line_diag = line.split(',')
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
+                                tag_name = sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][tmp_var]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
-                                sl_global_diag[(module_cpu, tmp_var)] = [max(int(line_diag[9]),
-                                                                             int(line_diag[10])), line_diag[1]]
+                                sl_global_diag[(module_cpu, tag_name)] = [max(int(line_diag[9]),
+                                                                              int(line_diag[10])), line_diag[1]]
 
                         if 'A_INP|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -868,24 +876,28 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
 
                         elif 'DIAG|' in line and len(line.split(',')) >= 10:
-                            line = line.split(',')
-                            var_name = line[0][line[0].find('|') + 1:]
-                            if var_name in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
+                            # Получаем диагностику CPU из группы DIAG
+                            var_name = get_variable(line=line).replace('DIAG|', '')
+                            if sl_for_diag.get(line_source[0]) and \
+                                    var_name in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 signal_name = \
                                     sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][var_name]
                                 # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
-                                sl_global_diag[(module_cpu, signal_name)] = [max(int(line[9]), int(line[10])), line[1]]
-                            elif re.match(r'MODSTAT|MODERR|ERR_Power', var_name):
-                                tmp_obr = line[0][line[0].find('|')+1:]
-                                curr_module = tmp_obr.replace('ERR_Power', '')[
-                                              tmp_obr.replace('ERR_Power', '').find('_')+1:]
-                                # доп проверка наличия модуля во входном словаре
-                                if curr_module in sl_for_diag.get(line_source[0], 'бла'):
-                                    signal_name = (tmp_obr[:tmp_obr.find('_')] if 'ERR_Power' not in tmp_obr
-                                                   else 'ERR_Power')
-                                    sl_global_diag[(curr_module, signal_name)] = [max(int(line[9]),
-                                                                                      int(line[10])), line[1]]
+                                sl_global_diag[(module_cpu, signal_name)] = [max(int(line.split(',')[9]),
+                                                                                 int(line.split(',')[10])),
+                                                                             line.split(',')[1]]
+                            else:
+                                # Анализируем переменные узла DIAG на предмет привязки к модулям в/в
+                                for alg_module in sl_for_diag.get(line_source[0], {}):
+                                    if var_name.endswith(alg_module):
+                                        signal = var_name.replace(alg_module, '').rstrip('_')
+                                        if signal in sl_module_diag_sig.get(sl_for_diag[line_source[0]][alg_module],
+                                                                            'бла'):
+                                            # print(signal, var_name)
+                                            sl_global_diag[(alg_module, signal)] = [max(int(line.split(',')[9]),
+                                                                                        int(line.split(',')[10])),
+                                                                                    line.split(',')[1]]
 
                         elif 'ALR|' in line and 'ALR|Delay' not in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -1071,7 +1083,6 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             if sl_global_tr and 'ТР' in sl_cpu_spec.get(line_source[0], 'бла'):
                 s_all += create_group_tr(sl_global_tr, tmp_ind_no_arc, 'System.TR', line_source[0])
 
-
             # Обработка и запись в карту тегов SAR
             if sl_global_sar:
                 s_all += create_group_sar(sl_global_sar, tmp_ind_no_arc, 'SAR', line_source[0])
@@ -1103,14 +1114,21 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                     tmp_line = f_global.readline().strip()
                                     if tmp_line == '/':
                                         break
-                                curr_module = sl_for_diag[line_source[0]][module]  # тип модуля
-                                if tmp_line.split(',')[0][1:-2] in sl_module_diag_sig.get(curr_module, 'бла') or \
-                                        tmp_line.split(',')[0][1:] in sl_module_diag_sig.get(curr_module, 'бла'):
+                                if not tmp_line:
+                                    break
+                                if sl_for_diag.get(line_source[0]):
+                                    curr_module = sl_for_diag[line_source[0]][module]  # тип модуля
+                                else:
+                                    curr_module = ''
+                                tag = get_variable(line=tmp_line)
+                                if tag in sl_module_diag_sig.get(curr_module, 'бла'):
+                                    # print(tmp_line.split(',')[0][1:], get_variable(line=tmp_line))
 
                                     # в словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
-                                    sl_global_diag[(module, tmp_line.split(',')[0][1:])] = \
-                                        [max(int(tmp_line.split(',')[9]), int(tmp_line.split(',')[10])),
-                                         tmp_line.split(',')[1]]
+                                    if (module, tag) not in sl_global_diag:
+                                        sl_global_diag[(module, tag)] = [max(int(tmp_line.split(',')[9]),
+                                                                             int(tmp_line.split(',')[10])),
+                                                                         tmp_line.split(',')[1]]
             if sl_global_diag:
                 s_all += create_group_diag(diag_sl=sl_global_diag, template_no_arc_index=tmp_ind_no_arc,
                                            source=line_source[0], template_arc_index=tmp_ind_arc,

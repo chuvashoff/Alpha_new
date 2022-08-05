@@ -530,7 +530,7 @@ def is_create_net(sl_object_all, sheet_net):
             'Type': par[index_type].value,
             'IP': '.'.join([a.lstrip('0') for a in par[index_ip].value.split('.')]),
             'IP_res': ('.'.join([a.lstrip('0') for a in par[index_ip_res].value.split('.')])
-                       if par[index_type].value in tuple_net_res else ''),
+                       if par[index_ip_res].fill.start_color.index == '00000000' else ''),
             'Option': (par[index_option].value if par[index_type].value in tuple_net_with_option else '')}})
 
     # Для каждого объекта
@@ -544,23 +544,24 @@ def is_create_net(sl_object_all, sheet_net):
                 ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth1", address=sl_value['IP'])
                 if sl_value['IP_res']:
                     ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth2", address=sl_value['IP_res'])
-                child_runtime = ET.SubElement(child_alg, 'dp_external-runtime', name="Runtime")
-                ET.SubElement(child_runtime, 'snmp_snmp-agent', name="SnmpAgent",
-                              poll_port="161", poll_password="public", notification_port="162",
-                              notification_password="public", protocol_version="Snmp_v1",
-                              security_level="NoAuthNoPriv", auth_protocol="MD5", priv_protocol="AES",
-                              address_map="Application.SnmpLinkMap")
-                child_app = ET.SubElement(child_runtime, 'dp_application-object', name="Application",
-                                          access_level="public")
-                ET.SubElement(child_app, 'snmp_snmp-link-map', name="SnmpLinkMap",
-                              file='SNMP\\' + f'{sl_value["Type"]}_map.xml')
-                child_data = ET.SubElement(child_app, 'ct_object', name="Data", access_level="public")
-                child_data_app = ET.SubElement(child_data, 'ct_object', name="Data",
-                                               base_type=f"Types.SNMP_Switch.{sl_value['Type']}_PLC_View",
-                                               aspect="Types.PLC_Aspect",
-                                               access_level="public")
-                ET.SubElement(child_data_app, 'attribute', type="unit.System.Attributes.Description",
-                              value=f"{sl_value['Unit']}")
+                if "checkip" not in sl_value['Type'].lower():
+                    child_runtime = ET.SubElement(child_alg, 'dp_external-runtime', name="Runtime")
+                    ET.SubElement(child_runtime, 'snmp_snmp-agent', name="SnmpAgent",
+                                  poll_port="161", poll_password="public", notification_port="162",
+                                  notification_password="public", protocol_version="Snmp_v1",
+                                  security_level="NoAuthNoPriv", auth_protocol="MD5", priv_protocol="AES",
+                                  address_map="Application.SnmpLinkMap")
+                    child_app = ET.SubElement(child_runtime, 'dp_application-object', name="Application",
+                                              access_level="public")
+                    ET.SubElement(child_app, 'snmp_snmp-link-map', name="SnmpLinkMap",
+                                  file='SNMP\\' + f'{sl_value["Type"]}_map.xml')
+                    child_data = ET.SubElement(child_app, 'ct_object', name="Data", access_level="public")
+                    child_data_app = ET.SubElement(child_data, 'ct_object', name="Data",
+                                                   base_type=f"Types.SNMP_Switch.{sl_value['Type']}_PLC_View",
+                                                   aspect="Types.PLC_Aspect",
+                                                   access_level="public")
+                    ET.SubElement(child_data_app, 'attribute', type="unit.System.Attributes.Description",
+                                  value=f"{sl_value['Unit']}")
 
             # Нормируем и записываем IOS-аспект
             temp = ET.tostring(root_plc_aspect).decode('UTF-8')

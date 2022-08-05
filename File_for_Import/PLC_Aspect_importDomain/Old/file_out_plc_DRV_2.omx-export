@@ -1,0 +1,435 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
+  <trei:trei name="PLC_DRV_2">
+    <trei:master-module name="CPU">
+      <trei:ethernet-adapter name="Eth1" address="192.168.3.213"/>
+      <trei:ethernet-adapter name="Eth2" address="192.168.11.213"/>
+      <trei:unet-server name="UnetServer" address-map="PLC_DRV_2.CPU.Tree.UnetAddressMap" port="6021"/>
+      <dp:application-object name="Tree" access-level="public">
+        <trei:unet-address-map name="UnetAddressMap"/>
+        <ct:object name="Diag" access-level="public">
+          <ct:object name="HW" access-level="public">
+            <ct:object name="US104" base-type="Types.DIAG_CPU.DIAG_CPU_M991E_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Диагностика мастер-модуля US104 (M991S)"/>
+              <attribute type="Attributes.ShortName" value="US104"/>
+            </ct:object>
+          </ct:object>
+        </ct:object>
+        <ct:object name="System" access-level="public">
+          <ct:object name="DRV" access-level="public">
+            <ct:object name="SPO" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="СПО"/>
+              <ct:object name="Num_MM_ch1" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Количество магнитных меток (зубьев) канал 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Kf_ch1" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент фильтрации в канале 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Num_MM_ch2" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Количество магнитных меток (зубьев) канал 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Kf_ch2" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент фильтрации в канале 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Num_MM_ch3" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Количество магнитных меток (зубьев) канал 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Kf_ch3" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент фильтрации в канале 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="En_Master" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Разрешение работы в режиме Master"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Sreg_Master" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Адрес начального регистра в режиме Master"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Nreg_Master" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Количество регистров для Master"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Move_adr_Master" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Смещение адресов для режима Master"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Kr_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент редукции в канале 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Kr_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент редукции в канале 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Kr_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Коэффициент редукции в канале 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Fm_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Мгновенная частота канал 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="Гц"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Fm_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Мгновенная частота канал 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="Гц"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Fm_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Мгновенная частота канал 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="Гц"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Ts_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/сек расчитанные с учетом количества зубьев и редуктора к.1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/сек"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Ts_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/сек расчитанные с учетом количества зубьев и редуктора к.2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/сек"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Ts_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/сек расчитанные с учетом количества зубьев и редуктора к.1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/сек"/>
+                <attribute type="Attributes.FracDigits" value="2"/>
+              </ct:object>
+              <ct:object name="Tm_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/мин расчитанные с учетом количества зубьев и редуктора к.1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Tm_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/мин расчитанные с учетом количества зубьев и редуктора к.2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Tm_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Об/мин расчитанные с учетом количества зубьев и редуктора к.3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Delay_ch1" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Задержка на срабатывание уставки по каналу 1 (мс)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="мс"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Delay_ch2" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Задержка на срабатывание уставки по каналу 2 (мс)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="мс"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Delay_ch3" base-type="Types.DRV_INT.DRV_INT_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Задержка на срабатывание уставки по каналу 3 (мс)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="мс"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 1 (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 2 (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 3 (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_AO_ch1" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 1 при перемычке Контроль АО (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_AO_ch2" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 2 при перемычке Контроль АО (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_AO_ch3" base-type="Types.DRV_AI.DRV_AI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Аварийная уставка по каналу 3 при перемычке Контроль АО (об/мин)"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="-"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="0"/>
+                <attribute type="Attributes.EUnit" value="об/мин"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="SPO_ok" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="СПО исправен"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_On_ch1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Сработала аварийная уставка по каналу 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="3"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_On_ch2" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Сработала аварийная уставка по каналу 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="3"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="aH_On_ch3" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Сработала аварийная уставка по каналу 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="3"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="AO" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Команда АО"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="3"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="fwc_ch1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Обрыв цепи датчика по каналу 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="fwc_ch2" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Обрыв цепи датчика по каналу 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="fwc_ch3" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Обрыв цепи датчика по каналу 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="kz_ch1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="КЗ цепи датчика по каналу 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="kz_ch2" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="КЗ цепи датчика по каналу 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="kz_ch3" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="КЗ цепи датчика по каналу 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Control_R" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Команда Контроль"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Deblock_R" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Команда Деблокировка"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Control_AO" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Состояние перемычки Контроль АО"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Control_W" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Команда Контроль"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Deblock_W" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Команда Деблокировка"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Work_W_ch1" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Разрешение работы каналу 1"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Work_W_ch2" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Разрешение работы каналу 2"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="Work_W_ch3" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Разрешение работы каналу 3"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="Вход"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="1"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+              <ct:object name="NoLink" base-type="Types.DRV_DI.DRV_DI_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+                <attribute type="unit.System.Attributes.Description" value="Нет связи с СПО"/>
+                <attribute type="Attributes.Type_wrn_DRV" value="ПС"/>
+                <attribute type="Attributes.sColorOff" value="0"/>
+                <attribute type="Attributes.sColorOn" value="2"/>
+                <attribute type="Attributes.EUnit" value="-"/>
+                <attribute type="Attributes.FracDigits" value="0"/>
+              </ct:object>
+            </ct:object>
+          </ct:object>
+        </ct:object>
+      </dp:application-object>
+    </trei:master-module>
+  </trei:trei>
+</omx>

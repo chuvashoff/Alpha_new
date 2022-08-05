@@ -122,7 +122,21 @@ try:
                 sl_CPU_spec[p[0].value] += ('АПР',)
             # Узнаём пути к контроллерам и забиваем в словарь
             sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
-
+    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu_spec.txt')):
+        with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu_spec.txt'),
+                  'r', encoding='UTF-8') as f_signal:
+            for line in f_signal:
+                if '#' in line:
+                    continue
+                if not line.strip():
+                    break
+                cpu_s = line.split(':')[0].strip()
+                spec = line.split(':')[1].strip()
+                if cpu_s in sl_CPU_spec:
+                    sl_CPU_spec[cpu_s] += (spec,)
+                else:
+                    sl_CPU_spec[cpu_s] = (spec,)
+    # print(sl_CPU_spec)
     # Определение заведённых драйверов
     # print('Определение заведённых драйверов, Также Определяем список объявленных мнемосхем')
     # Также Определяем список объявленных мнемосхем
@@ -467,15 +481,37 @@ try:
                 ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
                 ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
             if pref_IP[1] != '000.000.000.':
-                ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
+                ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][0]}'.split('.')])
                 ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
-            ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
-                          address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
+            if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach',
+                                           'cpu', 'unet_tcp_port.txt')):
+                sl_unet = {}
+                with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach',
+                                       'cpu', 'unet_tcp_port.txt'), 'r', encoding='UTF-8') as f_:
+                    for line in f_:
+                        if '#' in line:
+                            continue
+                        if not line.strip():
+                            break
+                        cpu_unet = line.split(':')[0].strip()
+                        ports = tuple(sorted(set([i.strip() for i in line.split(':')[1].strip().split(',')
+                                                  if i.strip().isdigit()])))
+                        sl_unet[cpu_unet] = ports
+                if cpu in sl_unet:
+                    for port in sl_unet[cpu]:
+                        ET.SubElement(child_cpu, 'trei_unet-server', name=f"UnetServer_{port}",
+                                      address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port=f"{port}")
+                else:
+                    ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
+                                  address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
+            else:
+                ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
+                              address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
             child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
             ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
 
             # Если есть контроллер САР, то добавляем в него структуру САР (PLC-аспект)
-            if 'SAR' in cpu:
+            if 'САР' in sl_CPU_spec.get(cpu, {}):
                 child_sar = ET.SubElement(child_app, 'ct_object', name=f"SAR", access_level="public")
                 child_sar_im = ET.SubElement(child_sar, 'ct_object', name=f"IM", access_level="public")
                 child_sar_reload = ET.SubElement(child_sar, 'ct_object', name=f"Reload", access_level="public")
@@ -639,8 +675,8 @@ try:
                             message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
             # print(datetime.datetime.now(), f' - Создали аспект {cpu}_{objects[2]}')
 
-        # Если в объекте есто контроллер САР, то добавлем структуру САР в IOS-аспект
-        if 'SAR' in set(sl_object_all[objects].keys()):
+        # Если у текущего объекта есть контроллеры с САР на борту
+        if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'САР' in sl_CPU_spec[i]]):
             child_ios_sar = ET.SubElement(child_object, 'ct_object', name=f"SAR", access_level="public")
             ET.SubElement(child_ios_sar, 'attribute', type='unit.System.Attributes.Description', value=f'САР')
             child_ios_sar_im = ET.SubElement(child_ios_sar, 'ct_object', name=f"IM", access_level="public")
@@ -794,13 +830,16 @@ try:
                 ET.SubElement(child_net, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                               aspect="Types.IOS_Aspect", access_level="public")
             for alg, sl_value in return_sl_net[objects[0]].items():
-                child_alg = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
-                                          base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
-                                          aspect="Types.IOS_Aspect",
-                                          original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
-                                          access_level="public")
-                ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
-                              target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                if "checkip" in sl_value['Type'].lower():
+                    pass
+                else:
+                    child_alg = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
+                                              base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
+                                              aspect="Types.IOS_Aspect",
+                                              original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
+                                              access_level="public")
+                    ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
+                                  target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
 
         # Создаём узел System
         child_system = ET.SubElement(child_object, 'ct_object', name='System', access_level="public")

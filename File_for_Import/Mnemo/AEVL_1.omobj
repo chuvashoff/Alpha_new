@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AEVL_1" display-name="AEVL_1" uuid="dab3f0ff-0389-45e9-b7a7-b103e9430f13" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
+<type access-modifier="private" name="AEVL_1" display-name="AEVL_1" uuid="0446f6ec-8594-4399-9d6e-aa30b86ecc6e" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
   <designed target="X" value="0" ver="3"/>
   <designed target="Y" value="0" ver="3"/>
   <designed target="ZValue" value="0" ver="3"/>
@@ -16,7 +16,7 @@
   <designed target="BrushStyle" value="1" ver="3"/>
   <designed target="WindowX" value="0" ver="3"/>
   <designed target="WindowY" value="0" ver="3"/>
-  <designed target="WindowWidth" value="1920" ver="3"/>
+  <designed target="WindowWidth" value="1280" ver="3"/>
   <designed target="WindowHeight" value="780" ver="3"/>
   <designed target="WindowCaption" value="1" ver="3"/>
   <designed target="ShowWindowCaption" value="true" ver="3"/>
@@ -31,7 +31,7 @@
   <designed target="MonitorNumber" value="0" ver="3"/>
   <designed target="WindowPosition" value="1" ver="3"/>
   <designed target="WindowCloseMode" value="0" ver="3"/>
-  <object access-modifier="private" name="Text_1" display-name="Text_1" uuid="387a2fe5-ec40-4386-bf1f-8bffa8049baa" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Text_1" display-name="Text_1" uuid="f8dcc34a-f901-4477-b8c6-f8607d21b266" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="15" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -42,75 +42,238 @@
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="590.567" ver="3"/>
     <designed target="Height" value="24" ver="3"/>
-    <designed target="Text" value="САР" ver="3"/>
+    <designed target="Text" value="Двигатель" ver="3"/>
     <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
     <designed target="FontColor" value="0xff000000" ver="3"/>
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="AE_SurgeRes_num2" display-name="AE_SurgeRes_num2" uuid="ab150859-7da0-4142-8414-f06f42528957" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_NvdRate_num2" display-name="AE_NvdRate_num2" uuid="a4718d58-18b4-4131-9b99-fdc0b51dd277" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="45" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_SurgeRes"/>
+    <init target="_init_Object" ver="3" value="AE.AE_NvdRate"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_PressRatio_num3" display-name="AE_PressRatio_num3" uuid="c757c016-2b22-46ad-bcdc-7a06097e2cce" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_conturcur_num3" display-name="AE_conturcur_num3" uuid="a42f5d91-88c6-4431-8467-5334f6ba1b40" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="75" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_PressRatio"/>
+    <init target="_init_Object" ver="3" value="AE.AE_conturcur"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_Qg_num4" display-name="AE_Qg_num4" uuid="07c5d4ca-f7e8-4ced-aea5-50b869e7ba02" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_contursum_num4" display-name="AE_contursum_num4" uuid="3a305edf-997c-44fa-a9a9-e1f186bd885b" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="105" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_Qg"/>
+    <init target="_init_Object" ver="3" value="AE.AE_contursum"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_Pgin_num5" display-name="AE_Pgin_num5" uuid="2deb4126-36cb-400d-9923-30e874277aad" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_condition_num5" display-name="AE_condition_num5" uuid="33b72b06-a7a0-41c3-9d66-0fb1f42080cb" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="135" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_Pgin"/>
+    <init target="_init_Object" ver="3" value="AE.AE_condition"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_Pgout_num6" display-name="AE_Pgout_num6" uuid="653d72a7-5972-4e12-a382-9dc48fd47c69" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_Nvd_num6" display-name="AE_Nvd_num6" uuid="3aef7018-4e66-4408-be4c-d5ef00aa2d9a" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="165" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_Pgout"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Nvd"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_SET_KHR_num7" display-name="AE_SET_KHR_num7" uuid="039c2eda-4159-4683-b89c-a25aa5311ccd" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_NvdNorm_num7" display-name="AE_NvdNorm_num7" uuid="b33b0af7-1b6e-47ca-be0c-ea6cba2dce02" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="195" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_SET_KHR"/>
+    <init target="_init_Object" ver="3" value="AE.AE_NvdNorm"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="AE_POS_KHR_num8" display-name="AE_POS_KHR_num8" uuid="1797533d-9a9e-435a-8178-5075dd7bce2b" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+  <object access-modifier="private" name="AE_Nst_num8" display-name="AE_Nst_num8" uuid="8166578f-392e-4b25-942f-d2236e340338" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
     <designed target="X" value="3" ver="3"/>
     <designed target="Y" value="225" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
-    <init target="_init_Object" ver="3" value="AE.AE_POS_KHR"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Nst"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Tvd_num9" display-name="AE_Tvd_num9" uuid="83c76cb9-3760-481f-b211-9d77603b1e40" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="255" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Tvd"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Tst_num10" display-name="AE_Tst_num10" uuid="b7204b4b-43e1-459e-b4b5-5a01dc2a547e" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="285" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Tst"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_KprT_num11" display-name="AE_KprT_num11" uuid="0585a967-6692-4a2e-ab60-ea78b60fc516" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="315" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_KprT"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_KprP_num12" display-name="AE_KprP_num12" uuid="302769d9-6366-433d-8690-70499cd244b0" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="345" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_KprP"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Ptg_num13" display-name="AE_Ptg_num13" uuid="23489387-e617-40e5-a98b-a9d5b9490282" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="375" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Ptg"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Pkd_num14" display-name="AE_Pkd_num14" uuid="f4f99253-147a-46ad-8dcd-ac9c9dd024e8" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="405" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Pkd"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Gt_num15" display-name="AE_Gt_num15" uuid="0195ba99-8218-4b23-a3ef-322afa674636" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="435" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Gt"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_timeNvd_num16" display-name="AE_timeNvd_num16" uuid="943bd322-3311-4fd4-ae7c-a07f89907abd" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="465" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_timeNvd"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_timeNst_num17" display-name="AE_timeNst_num17" uuid="1a500f1b-c659-4b20-b16f-876bc22b5f04" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="495" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_timeNst"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Text_18" display-name="Text_18" uuid="8828b753-9277-49b7-a19a-cf4ec93041e3" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="525" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Tooltip" value="" ver="3"/>
+    <designed target="Width" value="590.567" ver="3"/>
+    <designed target="Height" value="24" ver="3"/>
+    <designed target="Text" value="Нагнетатель" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
+    <designed target="FontColor" value="0xff000000" ver="3"/>
+    <designed target="TextAlignment" value="132" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+  </object>
+  <object access-modifier="private" name="AE_Surge_Res_num19" display-name="AE_Surge_Res_num19" uuid="6fb3526d-e857-45a7-958a-94083074b997" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="555" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Surge_Res"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Press_Ratio_num20" display-name="AE_Press_Ratio_num20" uuid="b4526a28-ad95-447c-be64-4e8906bb6501" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="585" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Press_Ratio"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="AE_Q_num21" display-name="AE_Q_num21" uuid="af14c5fc-7bd3-4511-a320-ac5cc368b87a" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="615" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Q"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Text_22" display-name="Text_22" uuid="cf560aa0-8d4e-4873-ba58-b826ada581c4" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="645" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Tooltip" value="" ver="3"/>
+    <designed target="Width" value="590.567" ver="3"/>
+    <designed target="Height" value="24" ver="3"/>
+    <designed target="Text" value="Маслосистема Д" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
+    <designed target="FontColor" value="0xff000000" ver="3"/>
+    <designed target="TextAlignment" value="132" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+  </object>
+  <object access-modifier="private" name="AE_Lm_MBD_num23" display-name="AE_Lm_MBD_num23" uuid="c5bf3aaa-8b3c-4bf2-8373-121f25e85025" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="675" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Lm_MBD"/>
+    <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
+  </object>
+  <object access-modifier="private" name="Text_24" display-name="Text_24" uuid="449922ee-8048-4a46-a957-6b176486c5fa" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="705" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Tooltip" value="" ver="3"/>
+    <designed target="Width" value="590.567" ver="3"/>
+    <designed target="Height" value="24" ver="3"/>
+    <designed target="Text" value="Маслосистема Н" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
+    <designed target="FontColor" value="0xff000000" ver="3"/>
+    <designed target="TextAlignment" value="132" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+  </object>
+  <object access-modifier="private" name="AE_Lm_MBN_num25" display-name="AE_Lm_MBN_num25" uuid="98f5dd28-10e7-490b-bf07-4ef41584aecf" base-type="S_A_INP_Param" base-type-id="937a763e-eb58-4ded-b5a0-b58f4abd7ee7" ver="3">
+    <designed target="X" value="3" ver="3"/>
+    <designed target="Y" value="735" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_APSource" ver="3" ref="ApSource_CurrentForm"/>
+    <init target="_init_Object" ver="3" value="AE.AE_Lm_MBN"/>
     <init target="_AbonentName" ver="4" ref="here._init_GPAPath"/>
   </object>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="f4556477-71fc-48a9-9f1c-92bae58748b0" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="da4bec0c-f093-4c3c-8283-228bda48eb5e" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <init target="ParentSource" ver="3" ref="_init_ApSource"/>
     <init target="Path" ver="3" ref="_init_GPAPath"/>
   </object>
-  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="4613e20f-6933-4a4e-ba37-e8ee3529bd54" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
-  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="4cb70bd5-512c-4921-a9cd-b4cb4309e3a4" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="453e6c3c-2a60-4d81-9a37-a2176fd7b11a" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="32f38df1-c3dd-4004-8978-c95fb8515383" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
 </type>
