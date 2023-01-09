@@ -1,0 +1,300 @@
+<type access-modifier="private" name="AlgVisual_PSGU_GPA1" display-name="AlgVisual_PSGU_GPA1" uuid="ed9edd92-3a7c-4e49-aecc-347dd6efd849" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+  <designed target="X" value="1" ver="2"/>
+  <designed target="Y" value="1" ver="2"/>
+  <designed target="Rotation" value="0" ver="2"/>
+  <designed target="Scale" value="1" ver="2"/>
+  <designed target="Visible" value="true" ver="2"/>
+  <designed target="Enabled" value="true" ver="2"/>
+  <designed target="Tooltip" value="" ver="2"/>
+  <designed target="PenColor" value="4278190080" ver="2"/>
+  <designed target="PenStyle" value="0" ver="2"/>
+  <designed target="PenWidth" value="1" ver="2"/>
+  <designed target="BrushColor" value="4293980400" ver="2"/>
+  <designed target="BrushStyle" value="1" ver="2"/>
+  <designed target="WindowX" value="0" ver="2"/>
+  <designed target="WindowY" value="0" ver="2"/>
+  <designed target="WindowCaption" value="PSGU" ver="2"/>
+  <designed target="ShowWindowCaption" value="true" ver="2"/>
+  <designed target="ShowWindowMinimize" value="true" ver="2"/>
+  <designed target="ShowWindowMaximize" value="true" ver="2"/>
+  <designed target="ShowWindowClose" value="true" ver="2"/>
+  <designed target="AlwaysOnTop" value="false" ver="2"/>
+  <designed target="WindowSizeMode" value="1" ver="2"/>
+  <designed target="WindowBorderStyle" value="1" ver="2"/>
+  <designed target="WindowState" value="0" ver="2"/>
+  <designed target="WindowScalingMode" value="0" ver="2"/>
+  <designed target="MonitorNumber" value="0" ver="2"/>
+  <designed target="WindowPosition" value="0" ver="2"/>
+  <designed target="WindowCloseMode" value="0" ver="2"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Opacity" value="1" ver="3"/>
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="67366a36-048d-4e05-ae31-b6d886d74686" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+    <designed target="X" value="0" ver="2"/>
+    <designed target="Y" value="0" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Tooltip" value="" ver="2"/>
+    <designed target="Width" value="500" ver="2"/>
+    <designed target="Height" value="30" ver="2"/>
+    <designed target="RoundingRadius" value="0" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="BrushColor" value="4278190080" ver="2"/>
+    <designed target="BrushStyle" value="0" ver="2"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <object access-modifier="private" name="PSGU" display-name="PSGU" uuid="defc9d47-0feb-4bac-8f17-b4fb838cd952" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+      <designed target="X" value="0" ver="2"/>
+      <designed target="Y" value="0" ver="2"/>
+      <designed target="Rotation" value="0" ver="2"/>
+      <designed target="Scale" value="1" ver="2"/>
+      <designed target="Visible" value="true" ver="2"/>
+      <designed target="Enabled" value="true" ver="2"/>
+      <designed target="Tooltip" value="" ver="2"/>
+      <designed target="Width" value="500" ver="2"/>
+      <designed target="Height" value="30" ver="2"/>
+      <designed target="Text" value="ПУСК СГУ" ver="2"/>
+      <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+      <designed target="FontColor" value="4278190080" ver="2"/>
+      <designed target="TextAlignment" value="132" ver="2"/>
+      <designed target="ZValue" value="0" ver="3"/>
+      <designed target="Opacity" value="1" ver="3"/>
+    </object>
+  </object>
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="e2667a63-44a1-4b80-a766-0d92ab68a873" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Path" ver="3" value="System.GRH.PSGU_START.Value"/>
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+  </object>
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="d8f5f26a-ca81-4f81-b5dc-1479303040bd" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Num" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="3"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_1_PSGU_Cmd_In_1_1_1" display-name="Set_SP_1_PSGU_Cmd_In_1_1_1" uuid="1bd8ee16-37a4-4e7c-8967-68ff78877465" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="Text" ver="3" value="Кл.газ-газ открыт на 10%"/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Par_In_1_1_1"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.PSGU_Cmd_In_1_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_1_1" display-name="Set_OR_1_1" uuid="3e924c24-f26c-460e-8ff5-f8456a3d504b" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="50.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="1"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.PSGU_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_1_PSGU_Cmd_In_1_2_1" display-name="Set_1_PSGU_Cmd_In_1_2_1" uuid="e6891812-8f41-4d4c-bc5b-3f8ca84a1714" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Газ в контуре"/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Cmd_In_1_2_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_1_PSGU_Klgg_to10usl" display-name="Cmd_1_PSGU_Klgg_to10usl" uuid="41ae756f-9a0c-437e-9d8b-32edd8dc1a4c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кл.ГГ на 10%"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="7cbe61ad-1218-447e-9bd5-f66a1b25fc18" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Num" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_2_PSGU_Cmd_In_2" display-name="Set_2_PSGU_Cmd_In_2" uuid="e6d5244b-2817-4711-ad86-e67639bfc385" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 15 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Cmd_In_2"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_PSGU_Kr15_On" display-name="Cmd_2_PSGU_Kr15_On" uuid="4b659327-3b27-45be-bb16-542a7302f3cb" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 15 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="58ac8c4d-0188-4550-9fcb-2e73b321cbeb" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Num" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_3_PSGU_Cmd_In_3" display-name="Set_3_PSGU_Cmd_In_3" uuid="4725fa14-73a5-44c5-a51b-d94746be8eca" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value=""/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Cmd_In_3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_3_PSGU_Tmv_Out_3" display-name="Set_SP_3_PSGU_Tmv_Out_3" uuid="70067ecb-5bfc-419e-bfd5-5bedd774266c" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="Text" ver="3" value="Таймер: Продувка БГ"/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Tmv_Out_3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="a667da2f-21a0-4524-98a0-2eaaf325ce13" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Num" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_4_PSGU_Cmd_In_4" display-name="Set_4_PSGU_Cmd_In_4" uuid="2dacab7c-da26-43f6-a6ff-34f301aef215" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 16 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.PSGU_Cmd_In_4"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PSGU_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_PSGU_Kr16_Off" display-name="Cmd_4_PSGU_Kr16_Off" uuid="961e1be7-0b63-4540-aaf8-65baa6cf22a5" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 16 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.PSGU_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <designed target="Width" value="500" ver="2"/>
+  <designed target="Height" value="170.0" ver="2"/>
+  <designed target="WindowWidth" value="500" ver="2"/>
+  <designed target="WindowHeight" value="170" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="0fac9e5c-d40f-4af2-8806-a8f0ecae9129" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="6fa37c2e-2ab3-43cc-b5f5-733176028a9b" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="67167379-e6b9-44b8-ac12-d176cea58001" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_HP" display-name="Open_HP" uuid="7a50ca6e-93ec-49e4-abc9-256b317e1515" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_HP" display-name="Handler_Open_HP" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="a341d7a2-d68a-4b60-970f-9e4db97c46ed" base-type="AlgVisual_HP_GPA1" base-type-id="2049164d-5970-48f7-bc19-9796773a7ea6" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_ZKN" display-name="Open_ZKN" uuid="9ea6c519-f7a7-43c8-a402-39e774a6c5e9" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_ZKN" display-name="Handler_Open_ZKN" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="89bec4ad-fe20-448f-9df2-5ec573162068" base-type="AlgVisual_ZKN_GPA1" base-type-id="0948f39a-6d21-4aa9-be68-e91e4889236c" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="eb428de5-5a29-4eb9-82fe-fb5075ff6c9f" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+    <designed target="X" value="420" ver="5"/>
+    <designed target="Y" value="0" ver="5"/>
+    <designed target="ZValue" value="0" ver="5"/>
+    <designed target="Rotation" value="0" ver="5"/>
+    <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
+      <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "HP")) Open_HP.Invoke();
+if (String.EndsWith(OpenFrom, "ZKN")) Open_ZKN.Invoke();
+LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
+if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
+    </do-on>
+  </object>
+</type>

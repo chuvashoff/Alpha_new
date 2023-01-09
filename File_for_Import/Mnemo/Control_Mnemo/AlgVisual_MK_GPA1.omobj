@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AlgVisual_MK_GPA1" display-name="AlgVisual_MK_GPA1" uuid="34a2c2c4-05ee-43c3-b61e-f5c86b0828a2" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+<type access-modifier="private" name="AlgVisual_MK_GPA1" display-name="AlgVisual_MK_GPA1" uuid="064c67f8-3746-4dc0-87be-a897aab507b8" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
   <designed target="X" value="1" ver="2"/>
   <designed target="Y" value="1" ver="2"/>
   <designed target="Rotation" value="0" ver="2"/>
@@ -28,7 +28,7 @@
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="ZValue" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Headline" display-name="Headline" uuid="c1de6464-8bc7-4c53-9546-3c7a3c41a471" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="034f9fea-601d-4a64-be56-6e646906cf65" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
     <designed target="X" value="0" ver="2"/>
     <designed target="Y" value="0" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -46,7 +46,7 @@
     <designed target="BrushStyle" value="0" ver="2"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
-    <object access-modifier="private" name="MK" display-name="MK" uuid="19b8fc68-9380-4f54-a596-8c3183f526d6" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+    <object access-modifier="private" name="MK" display-name="MK" uuid="431de535-72c1-4c59-864a-3275e93aa6f7" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
       <designed target="X" value="0" ver="2"/>
       <designed target="Y" value="0" ver="2"/>
       <designed target="Rotation" value="0" ver="2"/>
@@ -64,11 +64,11 @@
       <designed target="Opacity" value="1" ver="3"/>
     </object>
   </object>
-  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="dcbe47e9-0aa1-4b5e-b8d8-ad36a828eb8a" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="6cecc8c4-43ab-4c89-a245-81ad0a3429e2" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Path" ver="3" value="System.GRH.MK_START.Value"/>
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
   </object>
-  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="fcb035de-16c3-450d-86ca-1a22d5f6c13b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="4ad40f73-1bd3-4545-968c-fc6dcc765fe3" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -79,38 +79,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="3"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_1_MK_Cmd_In_1_1_1" display-name="Set_1_MK_Cmd_In_1_1_1" uuid="633e7cc5-6bd8-4531-9ae0-aec1fdc755e4" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_1_MK_Cmd_In_1" display-name="Set_1_MK_Cmd_In_1" uuid="900dff04-4bfd-4e43-9b20-b3a506ce4b53" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Кран 6р открыт"/>
-    <init target="_Set" ver="3" value="System.GRH.MK_Cmd_In_1_1_1"/>
+    <init target="_Set" ver="3" value="System.GRH.MK_Cmd_In_1"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_CurPoint" ver="3" value="System.GRH.MK_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.5"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_SP_1_MK_Cmd_In_1_1_2" display-name="Set_SP_1_MK_Cmd_In_1_1_2" uuid="7face743-8ccd-4bc6-91b4-64e10a18546d" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="60.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.MK_Point"/>
-    <init target="Text" ver="3" value="Положение 6р &gt; 90%"/>
-    <init target="_Set" ver="3" value="System.GRH.MK_Par_In_1_1_2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.5"/>
-  </object>
-  <object access-modifier="private" name="Cmd_1_MK_TS" display-name="Cmd_1_MK_TS" uuid="17a6efd7-657e-4533-8331-7f9ee2d5f9b2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_MK_GTU_NstMG" display-name="Cmd_1_MK_GTU_NstMG" uuid="76556a42-89c9-4f8d-ad03-1ea580b9209e" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ТС: Переход М-К"/>
+    <init target="Text" ver="3" value="Снижение Nst"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.MK_Point"/>
     <init target="Point" ver="3" value="1"/>
@@ -119,11 +107,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_1_MK_APK_Open" display-name="Cmd_1_MK_APK_Open" uuid="e2202cc1-a94f-4b4b-a756-b6203284db0d" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_MK_APK_On" display-name="Cmd_1_MK_APK_On" uuid="8d3e7841-0a21-4b4a-a0b5-e48c035400f7" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6р (АПРК) Закрытие"/>
+    <init target="Text" ver="3" value="Открытие 6р"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.MK_Point"/>
     <init target="Point" ver="3" value="1"/>
@@ -132,22 +120,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_1_MK_Nst_Down" display-name="Cmd_1_MK_Nst_Down" uuid="37e47e53-289d-425f-b277-00c4dfc72db6" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Уменьшение оборотов"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.MK_Point"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="1cf904ab-2227-4891-8ee3-8ded91b7e22f" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="5b620b26-89fd-4f40-99bc-f82e4e399773" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -158,9 +133,9 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_2_MK_Cmd_In_2" display-name="Set_2_MK_Cmd_In_2" uuid="50b436af-f63c-4b27-a0b1-27cc6e689b54" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_2_MK_Cmd_In_2" display-name="Set_2_MK_Cmd_In_2" uuid="a1512b1c-6029-408d-b920-1df289eca427" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Кран 2 закрыт"/>
     <init target="_Set" ver="3" value="System.GRH.MK_Cmd_In_2"/>
@@ -171,9 +146,9 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_2_MK_Kr2_Off" display-name="Cmd_2_MK_Kr2_Off" uuid="8ee6387d-f493-4088-90bf-e1df6394cb5e" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_2_MK_Kr2_Off" display-name="Cmd_2_MK_Kr2_Off" uuid="d61d9ccb-4b3d-4e65-81f2-837bdcbc757f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Кран 2 закрыть"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -185,27 +160,51 @@
     <designed target="Opacity" value="1" ver="4"/>
   </object>
   <designed target="Width" value="500" ver="2"/>
-  <designed target="Height" value="110.0" ver="2"/>
+  <designed target="Height" value="90.0" ver="2"/>
   <designed target="WindowWidth" value="500" ver="2"/>
-  <designed target="WindowHeight" value="110" ver="2"/>
-  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="50d9db26-0c16-4b4a-b82e-e8e9338e9ce0" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="4b81bf68-272a-472d-bde2-addcc4b979e6" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <designed target="WindowHeight" value="90" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="7406c42f-776a-4c84-af6f-d8ab5c33dec6" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="91d56216-36b9-4489-8870-80eadc4f013c" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
     <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="4a53464e-0bca-4ec1-b09f-788444707a70" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
-        <init target="_init_ApSource" ver="3" ref="here.ApSource_CurrentForm"/>
+      <object access-modifier="private" uuid="7ca7b0b7-66ee-4228-874e-2f3669ee3fd1" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="748b128a-40cd-4a49-adbb-2dc972633cfd" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+  <object access-modifier="private" name="Open_NOss" display-name="Open_NOss" uuid="cfb4872b-f9ca-4ade-b789-55e023ea1787" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_NOss" display-name="Handler_Open_NOss" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="f3294713-3261-4bca-acca-5b855bfc10ca" base-type="AlgVisual_NOss_GPA1" base-type-id="063a246b-6cd6-4494-a5db-a5998d8e6856" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_NObs" display-name="Open_NObs" uuid="2e0d7466-c4a2-47fa-8399-d917de90ab98" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_NObs" display-name="Handler_Open_NObs" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="c7161818-8bd8-47ef-b024-1c3d74e19572" base-type="AlgVisual_NObs_GPA1" base-type-id="a9ca95a6-0d5b-465f-aa3e-e2606f51aba7" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="e2095c8d-cfd5-44c8-a650-52c22ca08a02" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
     <designed target="X" value="420" ver="5"/>
     <designed target="Y" value="0" ver="5"/>
     <designed target="ZValue" value="0" ver="5"/>
     <designed target="Rotation" value="0" ver="5"/>
     <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
       <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "NOss")) Open_NOss.Invoke();
+if (String.EndsWith(OpenFrom, "NObs")) Open_NObs.Invoke();
 LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
 if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
     </do-on>

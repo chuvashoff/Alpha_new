@@ -1,0 +1,428 @@
+<type access-modifier="private" name="AlgVisual_SCBN_GPA1" display-name="AlgVisual_SCBN_GPA1" uuid="d71cb45f-7aa3-48e9-bec3-ac236b61a1d5" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+  <designed target="X" value="1" ver="2"/>
+  <designed target="Y" value="1" ver="2"/>
+  <designed target="Rotation" value="0" ver="2"/>
+  <designed target="Scale" value="1" ver="2"/>
+  <designed target="Visible" value="true" ver="2"/>
+  <designed target="Enabled" value="true" ver="2"/>
+  <designed target="Tooltip" value="" ver="2"/>
+  <designed target="PenColor" value="4278190080" ver="2"/>
+  <designed target="PenStyle" value="0" ver="2"/>
+  <designed target="PenWidth" value="1" ver="2"/>
+  <designed target="BrushColor" value="4293980400" ver="2"/>
+  <designed target="BrushStyle" value="1" ver="2"/>
+  <designed target="WindowX" value="0" ver="2"/>
+  <designed target="WindowY" value="0" ver="2"/>
+  <designed target="WindowCaption" value="SCBN" ver="2"/>
+  <designed target="ShowWindowCaption" value="true" ver="2"/>
+  <designed target="ShowWindowMinimize" value="true" ver="2"/>
+  <designed target="ShowWindowMaximize" value="true" ver="2"/>
+  <designed target="ShowWindowClose" value="true" ver="2"/>
+  <designed target="AlwaysOnTop" value="false" ver="2"/>
+  <designed target="WindowSizeMode" value="1" ver="2"/>
+  <designed target="WindowBorderStyle" value="1" ver="2"/>
+  <designed target="WindowState" value="0" ver="2"/>
+  <designed target="WindowScalingMode" value="0" ver="2"/>
+  <designed target="MonitorNumber" value="0" ver="2"/>
+  <designed target="WindowPosition" value="0" ver="2"/>
+  <designed target="WindowCloseMode" value="0" ver="2"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Opacity" value="1" ver="3"/>
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="e6cd95f7-4903-42c4-a6d8-c8c9dbd330ab" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+    <designed target="X" value="0" ver="2"/>
+    <designed target="Y" value="0" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Tooltip" value="" ver="2"/>
+    <designed target="Width" value="500" ver="2"/>
+    <designed target="Height" value="30" ver="2"/>
+    <designed target="RoundingRadius" value="0" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="BrushColor" value="4278190080" ver="2"/>
+    <designed target="BrushStyle" value="0" ver="2"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <object access-modifier="private" name="SCBN" display-name="SCBN" uuid="30720d2b-55cc-460d-a3c5-e81f8af2fe42" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+      <designed target="X" value="0" ver="2"/>
+      <designed target="Y" value="0" ver="2"/>
+      <designed target="Rotation" value="0" ver="2"/>
+      <designed target="Scale" value="1" ver="2"/>
+      <designed target="Visible" value="true" ver="2"/>
+      <designed target="Enabled" value="true" ver="2"/>
+      <designed target="Tooltip" value="" ver="2"/>
+      <designed target="Width" value="500" ver="2"/>
+      <designed target="Height" value="30" ver="2"/>
+      <designed target="Text" value="Останов систем ЦБН" ver="2"/>
+      <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+      <designed target="FontColor" value="4278190080" ver="2"/>
+      <designed target="TextAlignment" value="132" ver="2"/>
+      <designed target="ZValue" value="0" ver="3"/>
+      <designed target="Opacity" value="1" ver="3"/>
+    </object>
+  </object>
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="102e8c75-f143-4819-8eaa-5870c58488ee" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Path" ver="3" value="System.GRH.SCBN_START.Value"/>
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+  </object>
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="c5de801d-3243-4c64-84ec-4a38a67580ea" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Num" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="5"/>
+  </object>
+  <object access-modifier="private" name="Set_1_SCBN_Cmd_In_1_1_1" display-name="Set_1_SCBN_Cmd_In_1_1_1" uuid="167ffba7-bad7-4ff1-906c-f4f82587eca4" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Режим ХП/промывка"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_1_1_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_1_1" display-name="Set_OR_1_1" uuid="59a1de8f-4784-4579-8b1a-d1f9c5b6f5fd" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="50.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="1"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_1_SCBN_Cmd_In_1_2_1" display-name="Set_1_SCBN_Cmd_In_1_2_1" uuid="5d2f5f27-50e6-4cc2-8820-3cc1f62a8013" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 15 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_1_2_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_1_2" display-name="Set_OR_1_2" uuid="e898a4e6-924a-4c9b-b44c-f05b668a5a23" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="90.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="1"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_1_SCBN_Tmv_Out_1" display-name="Set_SP_1_SCBN_Tmv_Out_1" uuid="1a3db1bd-1e17-4bb7-965f-87407763e89e" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="Text" ver="3" value="Таймер: Продувка БГ"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Tmv_Out_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_1_SCBN_ZH_Pbg_Off" display-name="Cmd_1_SCBN_ZH_Pbg_Off" uuid="fb8834f8-6f9c-4d68-8c03-b775192edaa3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиты по Рбг"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="5.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="dd9fe7c3-0620-4a6e-9af1-0874b1ed0e11" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Num" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_2_SCBN_Cmd_In_2" display-name="Set_2_SCBN_Cmd_In_2" uuid="517eae31-d220-4187-bab7-42bc95e484be" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 15 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_2"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_SCBN_Kr15_Off" display-name="Cmd_2_SCBN_Kr15_Off" uuid="fea10f13-ab5a-4c89-8201-07c1dda7af43" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Краны 15 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="2d970d4d-d08d-44d5-bc2e-d5d5a8113b54" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Num" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="3"/>
+  </object>
+  <object access-modifier="private" name="Set_3_SCBN_Cmd_In_3" display-name="Set_3_SCBN_Cmd_In_3" uuid="c23c357d-86af-4efe-85cf-4ab37dae9adf" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Защита по МСН снята"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_SCBN_Kr15_Off" display-name="Cmd_3_SCBN_Kr15_Off" uuid="088d36b8-f1e8-4d2b-89fd-a990e9695fe7" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Краны 15 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_SCBN_ZH_MSN_Off" display-name="Cmd_3_SCBN_ZH_MSN_Off" uuid="a818d5a8-3542-42a7-a308-7523e9feffa4" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиты по Рмсн"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_SCBN_Kr16_On" display-name="Cmd_3_SCBN_Kr16_On" uuid="39c6f521-f50f-4445-ab56-486c38162178" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Краны 16 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="20ff18a6-501c-4718-80bc-45d8bd35001e" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Num" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="3"/>
+  </object>
+  <object access-modifier="private" name="Set_4_SCBN_Cmd_In_4_1_1" display-name="Set_4_SCBN_Cmd_In_4_1_1" uuid="1c01f51f-0566-49d9-a987-3019cde628ab" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 16 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_4_1_1"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.5"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_4_SCBN_Cmd_In_4_1_2" display-name="Set_4_SCBN_Cmd_In_4_1_2" uuid="0b430579-0c05-4d67-a552-cc1ea6441861" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="240.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="НСП ЦБН отключен"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_4_1_2"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.5"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_SCBN_ZH_MSN_Off" display-name="Cmd_4_SCBN_ZH_MSN_Off" uuid="ccbc4276-77ce-4184-b291-2c8b5e8a63ab" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиты по Рмсн"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_SCBN_Kr16_On" display-name="Cmd_4_SCBN_Kr16_On" uuid="e6c8506e-bc28-4b05-9cec-3711919a6b01" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Краны 16 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_SCBN_NsMSN_Off" display-name="Cmd_4_SCBN_NsMSN_Off" uuid="2cefa134-e79a-4201-ad2d-e57cf3502f9b" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="НСП ЦБН отключить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="6cff649e-b9a4-4d99-b7ba-dd466127f17c" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Num" ver="3" value="5"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_5_SCBN_Cmd_In_5" display-name="Set_5_SCBN_Cmd_In_5" uuid="ee542303-7625-49aa-9018-a001ed047965" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Защита по Рбв снята"/>
+    <init target="_Set" ver="3" value="System.GRH.SCBN_Cmd_In_5"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SCBN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_5_SCBN_ZH_Pba_Off" display-name="Cmd_5_SCBN_ZH_Pba_Off" uuid="b8cc0a8f-d65d-4f59-857b-e05a688249bc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиты по Рбг"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SCBN_Point"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <designed target="Width" value="500" ver="2"/>
+  <designed target="Height" value="290.0" ver="2"/>
+  <designed target="WindowWidth" value="500" ver="2"/>
+  <designed target="WindowHeight" value="290" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="454db752-ba67-4b72-b660-adbbb9028f55" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="c8ad0c0c-0e72-448c-9d50-e36d64bbb176" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="c8e62f58-2a9d-4738-8bac-8228d0a8b334" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_AOss" display-name="Open_AOss" uuid="eebd8b1f-814f-4c79-812b-50a985d24347" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_AOss" display-name="Handler_Open_AOss" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="3b2d09e5-e0da-4a8f-9ac1-a7da124efa86" base-type="AlgVisual_AOss_GPA1" base-type-id="3e270243-a92d-4d6b-9bf9-bb5beb9a1552" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_NOss" display-name="Open_NOss" uuid="7561a5ee-245c-487b-947e-6099455fd95c" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_NOss" display-name="Handler_Open_NOss" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="8061d3a2-2f5e-4a25-b128-d5a27a0680e5" base-type="AlgVisual_NOss_GPA1" base-type-id="063a246b-6cd6-4494-a5db-a5998d8e6856" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="8a9a5671-bda8-49ca-8e6e-f9568bbc34aa" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+    <designed target="X" value="420" ver="5"/>
+    <designed target="Y" value="0" ver="5"/>
+    <designed target="ZValue" value="0" ver="5"/>
+    <designed target="Rotation" value="0" ver="5"/>
+    <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
+      <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "AOss")) Open_AOss.Invoke();
+if (String.EndsWith(OpenFrom, "NOss")) Open_NOss.Invoke();
+LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
+if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
+    </do-on>
+  </object>
+</type>

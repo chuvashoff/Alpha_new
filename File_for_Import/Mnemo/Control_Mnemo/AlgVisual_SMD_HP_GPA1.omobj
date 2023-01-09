@@ -1,0 +1,458 @@
+<type access-modifier="private" name="AlgVisual_SMD_HP_GPA1" display-name="AlgVisual_SMD_HP_GPA1" uuid="19137132-1a7e-4475-ba22-236ee4b320a8" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+  <designed target="X" value="1" ver="2"/>
+  <designed target="Y" value="1" ver="2"/>
+  <designed target="Rotation" value="0" ver="2"/>
+  <designed target="Scale" value="1" ver="2"/>
+  <designed target="Visible" value="true" ver="2"/>
+  <designed target="Enabled" value="true" ver="2"/>
+  <designed target="Tooltip" value="" ver="2"/>
+  <designed target="PenColor" value="4278190080" ver="2"/>
+  <designed target="PenStyle" value="0" ver="2"/>
+  <designed target="PenWidth" value="1" ver="2"/>
+  <designed target="BrushColor" value="4293980400" ver="2"/>
+  <designed target="BrushStyle" value="1" ver="2"/>
+  <designed target="WindowX" value="0" ver="2"/>
+  <designed target="WindowY" value="0" ver="2"/>
+  <designed target="WindowCaption" value="SMD_HP" ver="2"/>
+  <designed target="ShowWindowCaption" value="true" ver="2"/>
+  <designed target="ShowWindowMinimize" value="true" ver="2"/>
+  <designed target="ShowWindowMaximize" value="true" ver="2"/>
+  <designed target="ShowWindowClose" value="true" ver="2"/>
+  <designed target="AlwaysOnTop" value="false" ver="2"/>
+  <designed target="WindowSizeMode" value="1" ver="2"/>
+  <designed target="WindowBorderStyle" value="1" ver="2"/>
+  <designed target="WindowState" value="0" ver="2"/>
+  <designed target="WindowScalingMode" value="0" ver="2"/>
+  <designed target="MonitorNumber" value="0" ver="2"/>
+  <designed target="WindowPosition" value="0" ver="2"/>
+  <designed target="WindowCloseMode" value="0" ver="2"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Opacity" value="1" ver="3"/>
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="b2f463ce-e15a-4296-a981-5b21ca30a993" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+    <designed target="X" value="0" ver="2"/>
+    <designed target="Y" value="0" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Tooltip" value="" ver="2"/>
+    <designed target="Width" value="500" ver="2"/>
+    <designed target="Height" value="30" ver="2"/>
+    <designed target="RoundingRadius" value="0" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="BrushColor" value="4278190080" ver="2"/>
+    <designed target="BrushStyle" value="0" ver="2"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <object access-modifier="private" name="SMD_HP" display-name="SMD_HP" uuid="154a656d-c515-4ce5-bf42-6cd6757c5fdc" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+      <designed target="X" value="0" ver="2"/>
+      <designed target="Y" value="0" ver="2"/>
+      <designed target="Rotation" value="0" ver="2"/>
+      <designed target="Scale" value="1" ver="2"/>
+      <designed target="Visible" value="true" ver="2"/>
+      <designed target="Enabled" value="true" ver="2"/>
+      <designed target="Tooltip" value="" ver="2"/>
+      <designed target="Width" value="500" ver="2"/>
+      <designed target="Height" value="30" ver="2"/>
+      <designed target="Text" value="ХП/Промывка" ver="2"/>
+      <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+      <designed target="FontColor" value="4278190080" ver="2"/>
+      <designed target="TextAlignment" value="132" ver="2"/>
+      <designed target="ZValue" value="0" ver="3"/>
+      <designed target="Opacity" value="1" ver="3"/>
+    </object>
+  </object>
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="23e14d78-de46-42f6-9169-0ec3a0ba3fad" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Path" ver="3" value="System.GRH.SMD_HP_START.Value"/>
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+  </object>
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="2db5c6f9-c4be-4675-a14c-a70281bbd7ca" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Num" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="3"/>
+  </object>
+  <object access-modifier="private" name="Set_1_SMD_HP_Cmd_In_1_1_1" display-name="Set_1_SMD_HP_Cmd_In_1_1_1" uuid="2375fee7-7008-4ba5-87d9-d114f45b43aa" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Готов к ХП"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_1_1_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_1_1" display-name="Set_OR_1_1" uuid="efec5c5d-6093-42dc-b77a-4e0f33ab95e9" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="50.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="1"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_1_SMD_HP_Cmd_In_1_2_1" display-name="Set_1_SMD_HP_Cmd_In_1_2_1" uuid="ea1ebeba-63c1-4245-8479-1653ce4a4492" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Готов к промывке"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_1_2_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="138957b7-ec16-4678-b826-7f6017638f14" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Num" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_2_SMD_HP_Tmv_Out_2" display-name="Set_SP_2_SMD_HP_Tmv_Out_2" uuid="5a9e1630-5c33-4e8b-a22d-afd14817b9ca" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="Text" ver="3" value="Таймер: Идет ХП"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Tmv_Out_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="2.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_SMD_HP_Elst_On" display-name="Cmd_2_SMD_HP_Elst_On" uuid="bcacbf47-6e5c-473f-be06-d25553c05c03" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_SMD_HP_TS_HPM" display-name="Cmd_2_SMD_HP_TS_HPM" uuid="080e3f9e-9894-4475-8663-1d77c229c520" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Идет ХП/Промывка"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="5cbb6b3e-e374-4429-a11c-1ada06d04151" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Num" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="6"/>
+  </object>
+  <object access-modifier="private" name="Set_3_SMD_HP_Cmd_In_3_1_1" display-name="Set_3_SMD_HP_Cmd_In_3_1_1" uuid="b39a1ba6-48f4-4f43-a7c2-717dc44528f5" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Режим &quot;Промывка&quot;"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_3_1_1"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_3_SMD_HP_Tmv_Rev_3_1_1" display-name="Set_SP_3_SMD_HP_Tmv_Rev_3_1_1" uuid="fdaf94ae-186c-4a26-8e6d-a151bad781cd" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="Text" ver="3" value="Обратный таймер"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Tmv_Rev_3_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_3_1" display-name="Set_OR_3_1" uuid="d7c2e424-62bd-4d8b-86b2-11f913943dc3" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="170.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="3"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_3_SMD_HP_Cmd_In_3_2_1" display-name="Set_3_SMD_HP_Cmd_In_3_2_1" uuid="394e65fd-8b35-4921-bd1a-237e11b270f8" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Неиспр.систем ГТД"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_3_2_1"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_3_2" display-name="Set_OR_3_2" uuid="d19ce763-0ab1-4e06-a91e-f3ab28279c76" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="210.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="3"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_3_SMD_HP_Tmv_Out_3" display-name="Set_SP_3_SMD_HP_Tmv_Out_3" uuid="d91b3f4a-c293-4f0c-9770-97a3c0aa2809" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="Text" ver="3" value="Таймер: Идет ХП"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Tmv_Out_3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_SMD_HP_Elst_On" display-name="Cmd_3_SMD_HP_Elst_On" uuid="51249a82-ee2d-4c6f-ac51-bd811ec36a29" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_SMD_HP_TS_HPM" display-name="Cmd_3_SMD_HP_TS_HPM" uuid="f1bfe290-d37c-477b-8970-43855b2e2bac" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Идет ХП/Промывка"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="de52d366-e93a-45c5-b048-856ec043cf61" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Num" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="6"/>
+  </object>
+  <object access-modifier="private" name="Set_4_SMD_HP_Cmd_In_4_1_1" display-name="Set_4_SMD_HP_Cmd_In_4_1_1" uuid="e3995f85-690d-455e-88ca-46f8c766e72f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Режим &quot;ХП&quot;"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_4_1_1"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_4_SMD_HP_Tmv_Rev_4_1_1" display-name="Set_SP_4_SMD_HP_Tmv_Rev_4_1_1" uuid="08e16cba-77b7-4b1e-822a-fa90cbce1e00" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="Text" ver="3" value="Обратный таймер"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Tmv_Rev_4_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_4_1" display-name="Set_OR_4_1" uuid="5e5796b3-cc8f-40ad-a29d-35ef2d9ccb41" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="290.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="4"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_4_SMD_HP_Cmd_In_4_2_1" display-name="Set_4_SMD_HP_Cmd_In_4_2_1" uuid="5d12383f-1e7a-421b-bc98-b144c8dff955" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Неиспр.систем ГТД"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_4_2_1"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_4_2" display-name="Set_OR_4_2" uuid="8b2e67c7-0150-4199-98d5-96e3b329fd0c" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="330.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="4"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_4_SMD_HP_Tmv_Out_4" display-name="Set_SP_4_SMD_HP_Tmv_Out_4" uuid="a3389168-b292-4c9b-9a88-367c33ed044a" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="350.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="Text" ver="3" value="Таймер: Идет промывка"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Tmv_Out_4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_SMD_HP_Elst_On" display-name="Cmd_4_SMD_HP_Elst_On" uuid="0dade2ca-bb9a-4e8b-92ea-abb4f80018c2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_SMD_HP_TS_HPM" display-name="Cmd_4_SMD_HP_TS_HPM" uuid="0dbb8dc0-795b-49de-9168-1d171193cc8d" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Идет ХП/Промывка"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="3.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="048ef3b0-3038-43b6-b090-d6cde5a47b4a" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.SMD_HP_Point"/>
+    <init target="Num" ver="3" value="5"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_5_SMD_HP_Cmd_In_5" display-name="Set_5_SMD_HP_Cmd_In_5" uuid="3459621f-ce5f-4f27-926c-12c9c7db1c30" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить электростартер"/>
+    <init target="_Set" ver="3" value="System.GRH.SMD_HP_Cmd_In_5"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.SMD_HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <designed target="Width" value="500" ver="2"/>
+  <designed target="Height" value="390.0" ver="2"/>
+  <designed target="WindowWidth" value="500" ver="2"/>
+  <designed target="WindowHeight" value="390" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="aa1e4dc7-b205-41ff-94cc-8cfce135c4dc" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="d87151f0-70fa-4a0e-a5c3-f7117908f53a" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="3d489407-d3c2-4f71-881b-16be71f4dd49" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_HP" display-name="Open_HP" uuid="fbdc81b0-868c-42db-9ad4-9d9e9b8909cb" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_HP" display-name="Handler_Open_HP" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="ecc348d1-dadc-4273-a5c1-2ea951800813" base-type="AlgVisual_HP_GPA1" base-type-id="2049164d-5970-48f7-bc19-9796773a7ea6" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="401a54ca-603b-4669-b7fc-8ce8be251aea" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+    <designed target="X" value="420" ver="5"/>
+    <designed target="Y" value="0" ver="5"/>
+    <designed target="ZValue" value="0" ver="5"/>
+    <designed target="Rotation" value="0" ver="5"/>
+    <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
+      <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "HP")) Open_HP.Invoke();
+LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
+if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
+    </do-on>
+  </object>
+</type>

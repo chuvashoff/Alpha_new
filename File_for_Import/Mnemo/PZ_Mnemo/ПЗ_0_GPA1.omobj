@@ -1,0 +1,201 @@
+<type access-modifier="private" name="ПЗ_0_GPA1" display-name="ПЗ_0_GPA1" uuid="321a2d4e-c271-4671-ab77-e44323737387" base-type="00_Base" base-type-id="4f3aa327-d38a-4afe-8913-c7729acaafc0" ver="3">
+  <designed target="X" value="0" ver="3"/>
+  <designed target="Y" value="0" ver="3"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Rotation" value="0" ver="3"/>
+  <designed target="Scale" value="1" ver="3"/>
+  <designed target="Visible" value="true" ver="3"/>
+  <designed target="Enabled" value="true" ver="3"/>
+  <designed target="Tooltip" value="" ver="3"/>
+  <designed target="Width" value="1920" ver="3"/>
+  <designed target="Height" value="900" ver="3"/>
+  <designed target="PenColor" value="4278190080" ver="3"/>
+  <designed target="PenStyle" value="0" ver="3"/>
+  <designed target="PenWidth" value="1" ver="3"/>
+  <designed target="BrushColor" value="0xffbfbfbf" ver="3"/>
+  <designed target="BrushStyle" value="1" ver="3"/>
+  <designed target="WindowX" value="0" ver="3"/>
+  <designed target="WindowY" value="0" ver="3"/>
+  <designed target="WindowWidth" value="1920" ver="3"/>
+  <designed target="WindowHeight" value="780" ver="3"/>
+  <designed target="WindowCaption" value="Проверка защит" ver="3"/>
+  <designed target="ShowWindowCaption" value="true" ver="3"/>
+  <designed target="ShowWindowMinimize" value="true" ver="3"/>
+  <designed target="ShowWindowMaximize" value="true" ver="3"/>
+  <designed target="ShowWindowClose" value="true" ver="3"/>
+  <designed target="AlwaysOnTop" value="false" ver="3"/>
+  <designed target="WindowSizeMode" value="2" ver="3"/>
+  <designed target="WindowBorderStyle" value="1" ver="3"/>
+  <designed target="WindowState" value="0" ver="3"/>
+  <designed target="WindowScalingMode" value="0" ver="3"/>
+  <designed target="MonitorNumber" value="0" ver="3"/>
+  <designed target="WindowPosition" value="1" ver="3"/>
+  <designed target="WindowCloseMode" value="0" ver="3"/>
+  <object access-modifier="private" name="MainFrame" display-name="MainFrame" uuid="f65d1bcf-3cb5-4d22-862b-6a012185c067" base-type="ПЗ_1" base-type-id="71f78e19-ef99-4133-a029-2968b14f02b6" ver="3">
+    <designed target="X" value="0" ver="3"/>
+    <designed target="Y" value="0" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Tooltip" value="" ver="3"/>
+    <designed target="Width" value="1920" ver="3"/>
+    <designed target="Height" value="900" ver="3"/>
+    <designed target="PenColor" value="4278190080" ver="3"/>
+    <designed target="PenStyle" value="1" ver="3"/>
+    <designed target="PenWidth" value="1" ver="3"/>
+    <designed target="BrushColor" value="4278190080" ver="3"/>
+    <designed target="BrushStyle" value="0" ver="3"/>
+    <designed target="OverrideScaling" value="false" ver="3"/>
+    <designed target="ShowScrollBars" value="true" ver="3"/>
+    <designed target="MoveByMouse" value="false" ver="3"/>
+  </object>
+  <designed target="Opacity" value="1" ver="3"/>
+  <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="Opened" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
+    <object access-modifier="private" uuid="8f6d7482-1392-4958-bedc-f60a76836728" base-type="ПЗ_1_GPA1" base-type-id="8f7e53ac-ec7a-4aa2-b292-498f1f20746e" ver="3">
+      <init target="Link_PZ" ver="3" ref="here"/>
+      <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
+      <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
+    </object>
+  </do-on>
+  <object access-modifier="private" name="NameOpened" display-name="NameOpened" uuid="04233a07-27e5-4742-be23-d9b6161a8d85" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Button_print" display-name="Button_print" uuid="7b400926-d9ca-4776-9682-8531a000cf73" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="1342" ver="3"/>
+    <designed target="Y" value="10" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Width" value="107" ver="3"/>
+    <designed target="Height" value="40" ver="3"/>
+    <designed target="Checkable" value="false" ver="3"/>
+    <designed target="Text" value="Печать" ver="3"/>
+    <designed target="TextAlignment" value="132" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
+    <designed target="FontColor" value="0xff000000" ver="3"/>
+    <designed target="OnClickFontColor" value="0xff000000" ver="3"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="3"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="3"/>
+    <designed target="BrushColor" value="0xfff0f0f0" ver="3"/>
+    <designed target="BrushStyle" value="1" ver="3"/>
+    <designed target="OnClickBrushColor" value="0xffa0a0a0" ver="3"/>
+    <designed target="OnClickBrushStyle" value="0" ver="3"/>
+    <designed target="OnHoverBrushColor" value="0xffffffff" ver="3"/>
+    <designed target="OnHoverBrushStyle" value="0" ver="3"/>
+    <designed target="DisabledBrushColor" value="0xffa0a0a0" ver="3"/>
+    <designed target="DisabledBrushStyle" value="0" ver="3"/>
+    <designed target="PenColor" value="0xff000000" ver="3"/>
+    <designed target="PenStyle" value="1" ver="3"/>
+    <designed target="PenWidth" value="1" ver="3"/>
+    <designed target="OnClickPenColor" value="0xff000000" ver="3"/>
+    <designed target="OnClickPenStyle" value="1" ver="3"/>
+    <designed target="OnClickPenWidth" value="1" ver="3"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="3"/>
+    <designed target="OnHoverPenStyle" value="1" ver="3"/>
+    <designed target="OnHoverPenWidth" value="1" ver="3"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="3"/>
+    <designed target="DisabledPenStyle" value="1" ver="3"/>
+    <designed target="DisabledPenWidth" value="1" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
+      <object access-modifier="private" uuid="cd27084a-ec12-43cf-9727-7c1bde9905f7" base-type="Alpha.Reports" base-type-id="665556a0-5ea4-4768-8935-9ab18d0eb2a0" ver="4">
+        <init target="_Report" ver="4" value="Протокол проверки защит"/>
+        <init target="GPA" ver="4" ref="here._pathToGPA"/>
+      </object>
+    </do-on>
+    <do-on access-modifier="private" name="Handler_2" display-name="Handler_2" ver="5" event="MouseClick">
+      <body kind="om"><![CDATA[me.Visible = false;
+ExtPageButton_1.Visible = false;
+ExtPageButton_2.Visible = false;
+ExtPageButton_3.Visible = false;
+]]></body>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="ExtPageButton_1" display-name="ExtPageButton_1" uuid="515a0ac9-92de-4ab9-b353-d4867629afc6" base-type="ExtPageButton" base-type-id="2c2d6f3d-f500-4be6-b80c-620853cd99e3" ver="3">
+    <designed target="X" value="1449" ver="3"/>
+    <designed target="Y" value="10" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Width" value="50" ver="3"/>
+    <designed target="Height" value="40" ver="3"/>
+    <designed target="Text" value="1" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
+    <do-trace access-modifier="private" target="_Name" ver="3">
+      <body>
+        <![CDATA[here.NameOpened]]>
+      </body>
+    </do-trace>
+    <init target="_IDtoOpen" ver="3" value="8f7e53ac-ec7a-4aa2-b292-498f1f20746e"/>
+    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
+      <object access-modifier="private" uuid="be9e5db5-d540-4e54-9565-7154cb7f536a" base-type="ПЗ_1_GPA1" base-type-id="8f7e53ac-ec7a-4aa2-b292-498f1f20746e" ver="3">
+        <init target="Link_PZ" ver="3" ref="here"/>
+        <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
+        <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="ExtPageButton_2" display-name="ExtPageButton_2" uuid="049f98e8-36e4-40f5-abc0-e1b094bcaf4d" base-type="ExtPageButton" base-type-id="2c2d6f3d-f500-4be6-b80c-620853cd99e3" ver="3">
+    <designed target="X" value="1499" ver="3"/>
+    <designed target="Y" value="10" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Width" value="50" ver="3"/>
+    <designed target="Height" value="40" ver="3"/>
+    <designed target="Text" value="2" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
+    <do-trace access-modifier="private" target="_Name" ver="3">
+      <body>
+        <![CDATA[here.NameOpened]]>
+      </body>
+    </do-trace>
+    <init target="_IDtoOpen" ver="3" value="84639b31-6953-4470-aab8-ffcd907c57b8"/>
+    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
+      <object access-modifier="private" uuid="15500072-1d81-4e65-baa6-559c5104e4c8" base-type="ПЗ_2_GPA1" base-type-id="84639b31-6953-4470-aab8-ffcd907c57b8" ver="3">
+        <init target="Link_PZ" ver="3" ref="here"/>
+        <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
+        <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="ExtPageButton_3" display-name="ExtPageButton_3" uuid="703e5359-f01b-4dc7-bb7c-543853e1a44c" base-type="ExtPageButton" base-type-id="2c2d6f3d-f500-4be6-b80c-620853cd99e3" ver="3">
+    <designed target="X" value="1549" ver="3"/>
+    <designed target="Y" value="10" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Width" value="50" ver="3"/>
+    <designed target="Height" value="40" ver="3"/>
+    <designed target="Text" value="3" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
+    <do-trace access-modifier="private" target="_Name" ver="3">
+      <body>
+        <![CDATA[here.NameOpened]]>
+      </body>
+    </do-trace>
+    <init target="_IDtoOpen" ver="3" value="294b6f51-6351-47a6-b626-0b363a16f516"/>
+    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
+      <object access-modifier="private" uuid="20d8f609-e6e1-4aff-a42c-95d11a200a1e" base-type="ПЗ_3_GPA1" base-type-id="294b6f51-6351-47a6-b626-0b363a16f516" ver="3">
+        <init target="Link_PZ" ver="3" ref="here"/>
+        <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
+        <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="de56f4ed-fff1-40d2-bb80-7256c553a905" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+    <designed target="Active" value="true" ver="3"/>
+    <designed target="ReAdvise" value="0" ver="3"/>
+    <init target="ParentSource" ver="3" ref="_init_ApSource"/>
+    <init target="Path" ver="3" ref="_init_GPAPath"/>
+    <designed target="Path" value="" ver="3"/>
+  </object>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="d66d0862-e068-4817-aa32-1f46f5877ae9" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="ff570009-a5ea-45eb-b13f-43114483d6a3" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <object access-modifier="private" name="DebugTool_1" display-name="DebugTool_1" uuid="219b125f-3f8c-49cb-96c4-de66578c8236" base-type="DebugTool" base-type-id="43946044-139a-43f4-a7b8-19a6074ffc56" ver="3"/>
+  <object access-modifier="private" name="_pathToGPA" display-name="_pathToGPA" uuid="531d1180-a190-445d-b4fd-57a262a7ce97" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="ApSource_Main" display-name="ApSource_Main" uuid="08b49def-3edb-4345-9ea5-cb84a6aa9dda" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+    <designed target="Active" value="true" ver="3"/>
+    <designed target="ReAdvise" value="0" ver="3"/>
+    <designed target="Path" value="" ver="3"/>
+    <init target="ParentSource" ver="3" ref="here._init_ApSource"/>
+  </object>
+  <init target="_pathToGPA" ver="3" ref="here._init_GPAPath"/>
+</type>

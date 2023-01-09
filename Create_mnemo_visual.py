@@ -83,7 +83,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             for _, _sl_command in _sl_step.items():
                 for ss in [i[i.find('_')+1:i.find('_START')] for i in _sl_command if i.endswith('_START')]:
                     if ss in sl_object_modes_to_modes[obj]:
-                        sl_object_modes_to_modes[obj][ss] += (main_mod[0],)
+                        if main_mod[0] not in sl_object_modes_to_modes[obj][ss]:
+                            sl_object_modes_to_modes[obj][ss] += (main_mod[0],)
     # for obj in sl_object_modes_to_modes:
     #     print(obj)
     #     for m in sl_object_modes_to_modes[obj]:
@@ -127,7 +128,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
         'ApSource': '966603da-f05e-4b4d-8ef0-919efbf8ab2c',
         'string': '76403785-f3d5-41a7-9eb6-d19d2aa2d95d',
         'Button': '61e46e4a-827f-4dd2-ac8a-b68bcaddf442',
-        '01_MainControl': 'c1882486-6ced-4543-a63a-eb1e5f0c3cf8'
+        '01_MainControl': 'c1882486-6ced-4543-a63a-eb1e5f0c3cf8',
+        '00_FormAlg_Base': '8970c7d2-2f62-4029-b1a6-48d46a91463b'
     }
     gor_base = 500  # sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[0]
     # vert_base = 270  # sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[1]
@@ -191,8 +193,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                 'type', access_modifier="private", name=f"01_FormAlg_{obj[0]}",
                 display_name=f"01_FormAlg_{obj[0]}",
                 uuid=f"{sl_page_uuid[f'01_FormAlg_{obj[0]}']}",
-                base_type="Form",
-                base_type_id=f"{sl_uuid_base.get('Form', '')}",
+                base_type="00_FormAlg_Base",
+                base_type_id=f"{sl_uuid_base.get('00_FormAlg_Base', '')}",
                 ver="2")
             for target, target_value in {'X': '1', 'Y': '1', 'ZValue': '0', 'Rotation': '0', 'Scale': '1',
                                          "Visible": 'true', "Enabled": 'true', "PenColor": "4278190080",
@@ -206,30 +208,30 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                          "Opacity": "1"}.items():
                 ET.SubElement(root_type, 'designed', target=target, value=target_value, ver="2")
 
-            # Добавляем ApSource_CurrentForm
-            apsource_currentform = ET.SubElement(root_type, 'object', access_modifier="private",
-                                                 name="ApSource_CurrentForm",
-                                                 display_name="ApSource_CurrentForm",
-                                                 uuid=f"{uuid.uuid4()}",
-                                                 base_type="ApSource",
-                                                 base_type_id=sl_uuid_base.get('ApSource', ''), ver="3")
-            ET.SubElement(apsource_currentform, 'designed', target="Active", value="true", ver="3")
-            ET.SubElement(apsource_currentform, 'designed', target="ReAdvise", value="0", ver="3")
-            ET.SubElement(apsource_currentform, 'init', target="ParentSource", ver="3", ref="_init_ApSource")
-            ET.SubElement(apsource_currentform, 'init', target="Path", ver="3", ref="_init_GPAPath")
-            ET.SubElement(apsource_currentform, 'designed', target="Path", value="", ver="5")
-            ET.SubElement(apsource_currentform, 'designed', target="ClientDisplayName", value="HMI", ver="5")
-            ET.SubElement(apsource_currentform, 'designed', target="ClientId", value="HMI", ver="5")
-
-            ET.SubElement(root_type, 'param', access_modifier="private", name="_init_ApSource",
-                          display_name="_init_ApSource",
-                          uuid=f"{uuid.uuid4()}",
-                          base_type="ApSource", base_type_id=sl_uuid_base.get('ApSource', ''),
-                          base_const="true", base_ref="true", ver="3")
-            ET.SubElement(root_type, 'param', access_modifier="private", name="_init_GPAPath",
-                          display_name="_init_GPAPath",
-                          uuid=f"{uuid.uuid4()}",
-                          base_type="string", base_type_id=sl_uuid_base.get('string', ''), ver="3")
+            # # Добавляем ApSource_CurrentForm
+            # apsource_currentform = ET.SubElement(root_type, 'object', access_modifier="private",
+            #                                      name="ApSource_CurrentForm",
+            #                                      display_name="ApSource_CurrentForm",
+            #                                      uuid=f"{uuid.uuid4()}",
+            #                                      base_type="ApSource",
+            #                                      base_type_id=sl_uuid_base.get('ApSource', ''), ver="3")
+            # ET.SubElement(apsource_currentform, 'designed', target="Active", value="true", ver="3")
+            # ET.SubElement(apsource_currentform, 'designed', target="ReAdvise", value="0", ver="3")
+            # ET.SubElement(apsource_currentform, 'init', target="ParentSource", ver="3", ref="_init_ApSource")
+            # ET.SubElement(apsource_currentform, 'init', target="Path", ver="3", ref="_init_GPAPath")
+            # ET.SubElement(apsource_currentform, 'designed', target="Path", value="", ver="5")
+            # ET.SubElement(apsource_currentform, 'designed', target="ClientDisplayName", value="HMI", ver="5")
+            # ET.SubElement(apsource_currentform, 'designed', target="ClientId", value="HMI", ver="5")
+            #
+            # ET.SubElement(root_type, 'param', access_modifier="private", name="_init_ApSource",
+            #               display_name="_init_ApSource",
+            #               uuid=f"{uuid.uuid4()}",
+            #               base_type="ApSource", base_type_id=sl_uuid_base.get('ApSource', ''),
+            #               base_const="true", base_ref="true", ver="3")
+            # ET.SubElement(root_type, 'param', access_modifier="private", name="_init_GPAPath",
+            #               display_name="_init_GPAPath",
+            #               uuid=f"{uuid.uuid4()}",
+            #               base_type="string", base_type_id=sl_uuid_base.get('string', ''), ver="3")
 
             # Пробегаемся по возможным режимам с контролем вхождения в объект
             x_but_start = 17
@@ -302,8 +304,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                                        base_type=name_open,
                                                        base_type_id=f"{sl_page_uuid.get(name_open, '')}",
                                                        ver="5")
-                ET.SubElement(object_open_in_handler, 'init', target="_init_ApSource", ver="5",
-                              ref=f"here.ApSource_CurrentForm")
+                ET.SubElement(object_open_in_handler, 'init', target="_AbonentPath", ver="5",
+                              ref=f"here._AbonentPath")
                 ET.SubElement(object_open_in_handler, 'init', target="OpenFrom", ver="5", value="01_FormAlg")
                 ET.SubElement(object_open_in_handler, 'designed', target="WindowCaption", ver="5",
                               value=f"{modes_obj[0]}")
@@ -325,13 +327,13 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             ET.SubElement(root_type, 'designed', target='WindowHeight', value=f'{y_but + 70}', ver="2")
 
             # Добавляеям Линк на главную форму
-            ET.SubElement(root_type, 'object', access_modifier="private",
-                          name=f"Link_MainControl",
-                          display_name=f"Link_MainControl",
-                          uuid=f"{uuid.uuid4()}",
-                          base_type="01_MainControl",
-                          base_type_id=sl_uuid_base.get('01_MainControl', ''), base_const="true",
-                          base_ref="true", ver="5")
+            # ET.SubElement(root_type, 'object', access_modifier="private",
+            #               name=f"Link_MainControl",
+            #               display_name=f"Link_MainControl",
+            #               uuid=f"{uuid.uuid4()}",
+            #               base_type="01_MainControl",
+            #               base_type_id=sl_uuid_base.get('01_MainControl', ''), base_const="true",
+            #               base_ref="true", ver="5")
 
             object_handler = ET.SubElement(root_type, 'do-on', access_modifier="private",
                                            name=f"Handler_1", display_name=f"Handler_1", ver="5", event="Opened")
@@ -583,7 +585,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                             ET.SubElement(object_cond, 'init', target="_init_APSource", ver="3",
                                           ref="here.ApSource_CurrentForm")
                             ET.SubElement(object_cond, 'init', target="_Height", ver="3", value=f"{_height}")
-                        # Если есть признак того, что имеется дополнительный параметр c выводом уставки,
+                        # Если есть признак того, что имеется дополнительный параметр с выводом уставки,
                         # создаём соответстсвующий объект
                         elif cond.replace('Cmd_In', 'Par_In') in conditions:
                             object_cond = ET.SubElement(root_type,
@@ -609,11 +611,13 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                           value=f"{sl_condition_object[obj][tuple_mod[0]][num_step][cond]}")
                             ET.SubElement(object_cond, 'init', target="_Set", ver="3",
                                           value=f"System.GRH.{cond.replace('Cmd_In', 'Par_In')}")
+                            ET.SubElement(object_cond, 'init', target="_Condition_step", ver="5",
+                                          value=f"System.GRH.{cond}")
                             ET.SubElement(object_cond, 'init', target="_MOD", ver="3", ref="here._MOD")
                             ET.SubElement(object_cond, 'init', target="_init_APSource", ver="3",
                                           ref="here.ApSource_CurrentForm")
                             ET.SubElement(object_cond, 'init', target="_Height", ver="3", value=f"{_height}")
-                        # В противном случае, считаем, что это просто команда
+                        # В противном случае считаем, что это просто команда
                         # создаём соответстсвующий объект
                         else:
                             object_cond = ET.SubElement(root_type,
@@ -723,8 +727,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                                                base_type=f"{name_open}",
                                                                base_type_id=f"{sl_page_uuid.get(name_open, '')}",
                                                                ver="5")
-                        ET.SubElement(object_open_in_handler, 'init', target="_init_ApSource", ver="5",
-                                      ref=f"here.ApSource_CurrentForm")
+                        ET.SubElement(object_open_in_handler, 'init', target="_AbonentPath", ver="5",
+                                      ref=f"here._AbonentPath")
                         ET.SubElement(object_open_in_handler, 'init', target="Link_MainControl", ver="5",
                                       ref=f"here.Link_MainControl")
                         object_open_in_handler_open_from = ET.SubElement(object_open_in_handler,
@@ -732,7 +736,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                         el = ET.SubElement(object_open_in_handler_open_from, 'expr')
                         el.text = f'yopta_on![CDATA[here.OpenFrom + ";" + here.WindowCaption]]yopta_off'
                     else:
-                        # Если команда не запускает подрежим
+                        # Если команда не запускает подрежим,
                         # то делаем добавляем обычную команду
                         object_command = ET.SubElement(root_type,
                                                        'object', access_modifier="private",
@@ -803,8 +807,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                                    uuid=f"{uuid.uuid4()}",
                                                    base_type=f"{name_open}",
                                                    base_type_id=f"{sl_page_uuid.get(name_open, '')}", ver="3")
-            ET.SubElement(object_open_in_handler, 'init', target="_init_ApSource", ver="3",
-                          ref=f"here.ApSource_CurrentForm")
+            ET.SubElement(object_open_in_handler, 'init', target="_AbonentPath", ver="3",
+                          ref=f"here._AbonentPath")
             ET.SubElement(object_open_in_handler, 'init', target="Link_MainControl", ver="5",
                           ref=f"here.Link_MainControl")
 
@@ -829,8 +833,8 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                     uuid=f"{uuid.uuid4()}",
                     base_type=name_back_mod,
                     base_type_id=f"{sl_page_uuid.get(name_back_mod, '')}", ver="3")
-                ET.SubElement(object_open_in_handler, 'init', target="_init_ApSource", ver="3",
-                              ref=f"here.ApSource_CurrentForm")
+                ET.SubElement(object_open_in_handler, 'init', target="_AbonentPath", ver="3",
+                              ref=f"here._AbonentPath")
                 ET.SubElement(object_open_in_handler, 'init', target="Link_MainControl", ver="5",
                               ref=f"here.Link_MainControl")
                 ET.SubElement(object_open_in_handler, 'init', target="OpenFrom", ver="5", ref="here.OpenFrom")

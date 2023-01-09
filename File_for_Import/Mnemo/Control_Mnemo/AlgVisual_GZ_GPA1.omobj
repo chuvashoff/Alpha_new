@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AlgVisual_GZ_GPA1" display-name="AlgVisual_GZ_GPA1" uuid="18471021-481c-495e-9e98-f7ee38a7e118" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+<type access-modifier="private" name="AlgVisual_GZ_GPA1" display-name="AlgVisual_GZ_GPA1" uuid="c3dd6484-5161-4050-8dd1-a17694dcd4b5" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
   <designed target="X" value="1" ver="2"/>
   <designed target="Y" value="1" ver="2"/>
   <designed target="Rotation" value="0" ver="2"/>
@@ -28,7 +28,7 @@
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="ZValue" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Headline" display-name="Headline" uuid="b0471034-4910-4349-8e5a-fc711b4d3462" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="d01eaade-f39e-4a90-a9f5-2e90423607c5" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
     <designed target="X" value="0" ver="2"/>
     <designed target="Y" value="0" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -46,7 +46,7 @@
     <designed target="BrushStyle" value="0" ver="2"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
-    <object access-modifier="private" name="GZ" display-name="GZ" uuid="306caef4-2441-4619-8d0f-fc13eaaf201a" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+    <object access-modifier="private" name="GZ" display-name="GZ" uuid="21e55388-7f01-4a6e-8085-f4d3e8bfe383" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
       <designed target="X" value="0" ver="2"/>
       <designed target="Y" value="0" ver="2"/>
       <designed target="Rotation" value="0" ver="2"/>
@@ -56,7 +56,7 @@
       <designed target="Tooltip" value="" ver="2"/>
       <designed target="Width" value="500" ver="2"/>
       <designed target="Height" value="30" ver="2"/>
-      <designed target="Text" value="Запуск ГТУ" ver="2"/>
+      <designed target="Text" value="Запуск ГТД" ver="2"/>
       <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
       <designed target="FontColor" value="4278190080" ver="2"/>
       <designed target="TextAlignment" value="132" ver="2"/>
@@ -64,11 +64,11 @@
       <designed target="Opacity" value="1" ver="3"/>
     </object>
   </object>
-  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="d6e05f03-99fe-462d-bf7b-75d013d589cc" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="0d18313b-2904-44e3-9197-efb23aeb553e" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Path" ver="3" value="System.GRH.GZ_START.Value"/>
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
   </object>
-  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="5460002c-fe26-405b-a5b2-4df482057552" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="bbacfcdc-f5cd-42a9-b7f2-26276cfe2a45" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -81,11 +81,11 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_1_GZ_Cmd_In_1" display-name="Set_1_GZ_Cmd_In_1" uuid="b467d838-d81a-4e54-9d13-2ac12e6330ec" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_1_GZ_Cmd_In_1" display-name="Set_1_GZ_Cmd_In_1" uuid="e7c55f9b-c341-4e7f-a686-9ccf44811861" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Готовность к запуску от ТР"/>
+    <init target="Text" ver="3" value="Готовность к запуску"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_1"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
@@ -94,7 +94,7 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="979d87f2-7694-425e-82f5-da5f9672a7a7" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="95c1609f-e20d-4685-84a4-eca7ce0be23d" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -107,46 +107,45 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_2_GZ_Cmd_In_2" display-name="Set_2_GZ_Cmd_In_2" uuid="7871e81a-77c9-4a93-9b8c-5d1b0c002bbb" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_2_GZ_Cmd_In_2" display-name="Set_2_GZ_Cmd_In_2" uuid="be68ffeb-8245-4eb3-a1d9-56e38591a025" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 13 открыт"/>
+    <init target="Text" ver="3" value=""/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_2"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_2_GZ_Kr13_On" display-name="Cmd_2_GZ_Kr13_On" uuid="6ff9f696-4004-4ab7-b93e-1a3523183aa8" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Set_SP_2_GZ_Tmv_Out_2" display-name="Set_SP_2_GZ_Tmv_Out_2" uuid="a26514cb-8929-4951-a9e1-0004117361e1" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
+    <init target="Text" ver="3" value="Таймер: Разгон на стартере"/>
+    <init target="_Set" ver="3" value="System.GRH.GZ_Tmv_Out_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_GZ_Elst_On" display-name="Cmd_2_GZ_Elst_On" uuid="9617cf2e-83ad-4b10-a0d4-6c460e550edf" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 13 открыть"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_2_GZ_VNA_On" display-name="Cmd_2_GZ_VNA_On" uuid="73c8175c-09a2-49ba-aca8-c214b5a305d9" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ВНА открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="157937d7-faf4-45ad-a40d-c85c03fd9378" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="2493ad79-fcc3-44b3-aaac-7f57d9edc15e" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -157,75 +156,76 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="3"/>
+    <init target="_Height" ver="3" value="4"/>
   </object>
-  <object access-modifier="private" name="Set_SP_3_GZ_Cmd_In_3_1_1" display-name="Set_SP_3_GZ_Cmd_In_3_1_1" uuid="3ff9782f-eb5e-4218-8207-c28ccb6cc512" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_3_GZ_Cmd_In_3" display-name="Set_3_GZ_Cmd_In_3" uuid="40b02d08-7242-4b9a-84f0-9be2350523d0" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Розжиг закончен"/>
+    <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_3"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nтк &gt; 1800 об/мин"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_3_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="4.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_GZ_Elst_On" display-name="Cmd_3_GZ_Elst_On" uuid="574ca4cf-8fec-4fe8-bced-7cbb65ef46ab" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
+    <init target="Point" ver="3" value="3"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_3_GZ_Cmd_In_3_1_2" display-name="Set_3_GZ_Cmd_In_3_1_2" uuid="36c73459-8435-4a71-8ec6-f08c76abd9b0" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
+  <object access-modifier="private" name="Cmd_3_GZ_GTU_start" display-name="Cmd_3_GZ_GTU_start" uuid="c3473964-263f-4f1d-b967-55e0233a48c4" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Рм САР &gt; 1500 кПа"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_3_1_2"/>
+    <init target="Text" ver="3" value="Запуск в ТР"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="3"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_3_GZ_Cmd_In_3_1_3" display-name="Set_3_GZ_Cmd_In_3_1_3" uuid="1d33b77b-2d8f-45b8-ac98-9d0d63409c9b" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
+  <object access-modifier="private" name="Cmd_3_GZ_SK_On" display-name="Cmd_3_GZ_SK_On" uuid="fa92df72-2f80-48a0-a277-cd050673ccbc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="130.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1-5 открыты"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_3_1_3"/>
+    <init target="Text" ver="3" value="СК открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="3"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_GZ_KPV1_On" display-name="Cmd_3_GZ_KPV1_On" uuid="879a2645-2896-4f13-9c7b-d22cf46b3d1a" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_3_GZ_AZ_On" display-name="Cmd_3_GZ_AZ_On" uuid="96fab256-ec1b-417c-bc4a-6e98af069359" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="3"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.5"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_3_GZ_TS_GTU_start" display-name="Cmd_3_GZ_TS_GTU_start" uuid="1d9a2097-30f4-4cfa-91e4-e38946fbbc92" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="120.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="3"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.5"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="840eb950-ba01-44ec-9a25-ccc78c306ddd" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
-    <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="АЗ включить"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="a90e756b-8385-4d3d-8a03-934a4a226b7d" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -234,39 +234,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="3"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_4_GZ_Cmd_In_4" display-name="Set_4_GZ_Cmd_In_4" uuid="87b7ed9a-fbfe-4fa8-9191-3f10b9f78e62" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_4_GZ_Cmd_In_4" display-name="Set_4_GZ_Cmd_In_4" uuid="5d3a63b4-4018-450e-808c-32842a67c557" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6 открыт"/>
+    <init target="Text" ver="3" value="Стабилизация розж. закончена"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_4"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="3.0"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_GZ_KPV1_On" display-name="Cmd_4_GZ_KPV1_On" uuid="63cf87ff-7a06-4752-91c4-e836f91eacac" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_4_GZ_TS_GTU_start" display-name="Cmd_4_GZ_TS_GTU_start" uuid="894c9e53-75ef-41e9-bb41-44a17339475f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_4_GZ_Elst_On" display-name="Cmd_4_GZ_Elst_On" uuid="6bcd80ee-db2d-4c32-8ab4-add016be36c5" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="170.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="4"/>
@@ -275,11 +262,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_GZ_Kr6_On" display-name="Cmd_4_GZ_Kr6_On" uuid="424ebab2-c028-4985-be97-51a2f15ced71" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_4_GZ_AZ_Off" display-name="Cmd_4_GZ_AZ_Off" uuid="1db9a44a-7cac-4aad-9e48-24e3e37fdf83" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="190.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6 открыть"/>
+    <init target="Text" ver="3" value="АЗ отключить"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="4"/>
@@ -288,7 +275,7 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="dec570a9-5e4b-419f-a029-a8d371331642" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="85420d1c-342a-40b7-b487-e24fa9ef5dd5" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -299,26 +286,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="6"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_5_GZ_Cmd_In_5" display-name="Set_5_GZ_Cmd_In_5" uuid="07d61e00-8406-40db-a3e9-f6446d3980f6" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_SP_5_GZ_Cmd_In_5" display-name="Set_SP_5_GZ_Cmd_In_5" uuid="b3dcabd3-15af-4fd6-9da0-0f761e370f04" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Есть горение"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_5"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
+    <init target="Text" ver="3" value="Nвд &gt; 7050* об/мин"/>
+    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_5"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_5"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="6.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_5_GZ_KPV1_On" display-name="Cmd_5_GZ_KPV1_On" uuid="c99156a9-d500-4b3c-90ce-fcad8a074338" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_5_GZ_Elst_On" display-name="Cmd_5_GZ_Elst_On" uuid="d2070f09-8e8f-4be5-9384-dae53a712d47" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
+    <init target="Text" ver="3" value="Электростартер включить"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="5"/>
@@ -327,74 +314,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_5_GZ_TS_GTU_start" display-name="Cmd_5_GZ_TS_GTU_start" uuid="88123fe6-3307-436c-9b53-def8cf8a67e9" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="230.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_5_GZ_SK_On" display-name="Cmd_5_GZ_SK_On" uuid="b4465fd0-feaf-4b8b-bbd5-83bd947ee39f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="250.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_5_GZ_AZf_On" display-name="Cmd_5_GZ_AZf_On" uuid="3ff7eb6a-52f6-47bc-9591-df86e78a97b9" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="270.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АЗ включить"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_5_GZ_Kr15_On" display-name="Cmd_5_GZ_Kr15_On" uuid="e68d5b0d-430b-4ff9-ba91-b9f3887193fa" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="290.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 15 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_5_GZ_GTU_start" display-name="Cmd_5_GZ_GTU_start" uuid="6065c4b1-a440-4e22-8a7e-07ecbfbbccb7" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="310.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Пуск в ТР"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="eeea1979-ddd8-4cf1-9940-c0a1e9fec569" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="c53993b9-3021-4010-b8e6-15d416105ed9" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="330.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="6"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -403,49 +325,24 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_6_GZ_Cmd_In_6" display-name="Set_SP_6_GZ_Cmd_In_6" uuid="9cda8ea1-e183-43b7-b9a7-6e72ef340ccc" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_SP_6_GZ_Cmd_In_6" display-name="Set_SP_6_GZ_Cmd_In_6" uuid="7ef7fcf9-c65e-4bac-a031-b48f4b06667d" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="330.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="6"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nтк &gt; 4500 об/мин"/>
+    <init target="Text" ver="3" value="Разгон по программе закончен"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_6"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="2.0"/>
-  </object>
-  <object access-modifier="private" name="Cmd_6_GZ_KPV1_On" display-name="Cmd_6_GZ_KPV1_On" uuid="12b3e960-ea46-4de2-b502-c1d2da42961f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="330.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="6"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_6"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_6_GZ_TS_GTU_start" display-name="Cmd_6_GZ_TS_GTU_start" uuid="2c958aa7-7fce-4cf9-80dd-8af1b568b78e" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="350.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="6"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="c0a2031d-9de1-4b2e-ba07-c53857e5f6c5" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="7e6ef22f-7c30-45bb-99d5-8668c4c2dae1" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="7"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -454,101 +351,24 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="6"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_7_GZ_Cmd_In_7" display-name="Set_SP_7_GZ_Cmd_In_7" uuid="8cc44ce2-0e41-46d7-b8cc-686af02bbcac" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_SP_7_GZ_Cmd_In_7" display-name="Set_SP_7_GZ_Cmd_In_7" uuid="a9e77e00-bf7a-4d62-b589-b3ee8ae8d41d" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="7"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nтк &gt; 6700 об/мин"/>
+    <init target="Text" ver="3" value="Разгон по Nвд закончен"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="6.0"/>
-  </object>
-  <object access-modifier="private" name="Cmd_7_GZ_KPV1_On" display-name="Cmd_7_GZ_KPV1_On" uuid="624d4a94-4ddb-4f99-a784-83e1be6f3e8d" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="370.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_7"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_7_GZ_TS_GTU_start" display-name="Cmd_7_GZ_TS_GTU_start" uuid="0f18a747-c68c-4dd8-baa7-f10fbed341fe" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="390.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_7_GZ_Kr15_Off" display-name="Cmd_7_GZ_Kr15_Off" uuid="4714d636-7759-4ff8-a1a1-3ff8a4ca0522" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="410.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 15 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_7_GZ_Kr13_Off" display-name="Cmd_7_GZ_Kr13_Off" uuid="9b9f091c-4768-493a-9061-144ce5fcd685" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="430.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 13 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_7_GZ_KPV2_Off" display-name="Cmd_7_GZ_KPV2_Off" uuid="6b3d1dee-96ee-4bf3-9b8d-1c7e4c7a8e85" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="450.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 2 - 4 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_7_GZ_VNA_Off" display-name="Cmd_7_GZ_VNA_Off" uuid="5401d04c-0de2-466f-9129-4a75c952096c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="470.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ВНА закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="6dfa644c-a109-4ebd-b1f1-2277f0b4545d" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="53d00e68-6536-4730-a09a-bdefa3abb1a5" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="490.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="8"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -557,49 +377,24 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_8_GZ_Cmd_In_8" display-name="Set_SP_8_GZ_Cmd_In_8" uuid="0dce90a6-791c-4229-a28a-4ed4b1e1e86e" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_SP_8_GZ_Cmd_In_8" display-name="Set_SP_8_GZ_Cmd_In_8" uuid="70dea42a-1a22-4ef6-b792-0d8a7fef8103" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="490.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="8"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Прогрев на МГ"/>
+    <init target="Text" ver="3" value="Прогрев на МГ закончен"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_8"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="2.0"/>
-  </object>
-  <object access-modifier="private" name="Cmd_8_GZ_KPV1_On" display-name="Cmd_8_GZ_KPV1_On" uuid="449cb2b4-5a2e-4062-bcc6-ad950279843b" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="490.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="8"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_8"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_8_GZ_TS_GTU_start" display-name="Cmd_8_GZ_TS_GTU_start" uuid="c19b6192-8dff-4739-8049-ccadacbfeb19" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="510.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="8"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_9" display-name="Step_9" uuid="9ed4aba5-2ef5-4050-aad2-ff8d797199f2" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_9" display-name="Step_9" uuid="e2e722ce-59d1-4611-9f47-32b9ecf31d96" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="9"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -608,26 +403,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="3"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_9_GZ_Cmd_In_9" display-name="Set_9_GZ_Cmd_In_9" uuid="6088f0c8-5ca1-4f2d-95c5-ff394e85bbc7" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_SP_9_GZ_Cmd_In_9" display-name="Set_SP_9_GZ_Cmd_In_9" uuid="a96ea1f4-115c-427f-b628-079236950739" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 2-4 закрыты"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_9"/>
     <init target="Point" ver="3" value="9"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
+    <init target="Text" ver="3" value="Разгон по Nст закончен"/>
+    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_9"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_9"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="3.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_9_GZ_KPV1_On" display-name="Cmd_9_GZ_KPV1_On" uuid="d825778a-358b-43bd-8eec-64a82a5b4ef3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_9_GZ_GTU_HH" display-name="Cmd_9_GZ_GTU_HH" uuid="7f71600b-d2fe-4093-8318-63600b683b7f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
+    <init target="Text" ver="3" value="Выход на НАРР в ТР"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="9"/>
@@ -636,35 +431,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_9_GZ_TS_GTU_start" display-name="Cmd_9_GZ_TS_GTU_start" uuid="8ff01d7c-0e22-4a5d-8010-2a88cd504783" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="550.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="9"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_9_GZ_TS_GTU_heat" display-name="Cmd_9_GZ_TS_GTU_heat" uuid="73946c51-9d11-4173-a2d7-7e66f2f7d901" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="570.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Идет прогрев на МГ"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="9"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_10" display-name="Step_10" uuid="82f9fdd9-a4fd-43c8-bf53-b1791105f21a" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_10" display-name="Step_10" uuid="b6fc0059-a6ce-4e20-8bf7-36c6618182d8" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="590.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="10"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -673,25 +442,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="3"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_10_GZ_Cmd_In_10" display-name="Set_SP_10_GZ_Cmd_In_10" uuid="2b46b785-57f3-4248-9225-2d3dfbd5f7bf" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_SP_10_GZ_Cmd_In_10" display-name="Set_SP_10_GZ_Cmd_In_10" uuid="84df54f0-6b6c-4fab-b9e6-075ac32deff7" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="590.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="10"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nтк прив. &gt; 7600 об/мин"/>
+    <init target="Text" ver="3" value="Прогрев на НАРР закончен"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_10"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.GZ_Cmd_In_10"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="3.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_10_GZ_KPV1_On" display-name="Cmd_10_GZ_KPV1_On" uuid="e4a1be41-68ce-41ba-8aa9-7bf9e75b696b" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_10_GZ_GTU_HH" display-name="Cmd_10_GZ_GTU_HH" uuid="b221d012-72ec-472e-85c1-56dba7cce86b" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="590.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 открыть"/>
+    <init target="Text" ver="3" value="Выход на НАРР в ТР"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="10"/>
@@ -700,35 +470,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_10_GZ_TS_GTU_start" display-name="Cmd_10_GZ_TS_GTU_start" uuid="19657418-76c1-4297-810e-0972948bd4b9" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="610.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="10"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_10_GZ_AZs_On" display-name="Cmd_10_GZ_AZs_On" uuid="67489983-e44e-4851-bef4-4214cfb9732d" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="630.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АЗ включить"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="10"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_11" display-name="Step_11" uuid="96344e3d-9e80-498a-bb46-45df9b9c5a21" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_11" display-name="Step_11" uuid="555925a5-3fe6-45b0-abcd-256df6971873" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="650.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="11"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -737,154 +481,68 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_11_GZ_Cmd_In_11" display-name="Set_11_GZ_Cmd_In_11" uuid="d814776b-c14d-4dc5-92cf-166c284019e5" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_11_GZ_Cmd_In_11" display-name="Set_11_GZ_Cmd_In_11" uuid="81904385-1566-4274-981e-a7e49f0f27ac" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="650.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 закрыты"/>
+    <init target="Text" ver="3" value="Запуск закончен"/>
     <init target="_Set" ver="3" value="System.GRH.GZ_Cmd_In_11"/>
     <init target="Point" ver="3" value="11"/>
     <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_11_GZ_TS_GTU_start" display-name="Cmd_11_GZ_TS_GTU_start" uuid="194caccb-4b8e-489d-9412-9219f3808986" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_11_GZ_TS_END" display-name="Cmd_11_GZ_TS_END" uuid="587dc41f-bb42-4c5c-80df-61d125563e54" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="650.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
+    <init target="Text" ver="3" value="Запуск закончен"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
     <init target="Point" ver="3" value="11"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_11_GZ_KPV1_Off" display-name="Cmd_11_GZ_KPV1_Off" uuid="06bb91b6-9434-42ec-b87d-9e59c76431d1" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="670.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КПВ 1 и 5 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="11"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_12" display-name="Step_12" uuid="3bc21560-45cd-4c66-afbf-1a729ee45c9b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
-    <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="690.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_Point" ver="3" value="GRH.GZ_Point"/>
-    <init target="Num" ver="3" value="12"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="5"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_12_GZ_Cmd_In_12_1_1" display-name="Set_SP_12_GZ_Cmd_In_12_1_1" uuid="18d90686-260b-45af-82da-744559b177ed" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="690.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nст &gt; 6200 об/мин: рег. СТ"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_12_1_1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_12_GZ_Cmd_In_12_1_2" display-name="Set_SP_12_GZ_Cmd_In_12_1_2" uuid="7905fef5-ed38-4c01-bc4c-18de2181f5f2" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="710.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="T масла на входе ГТД &gt; 30 °С"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_12_1_2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Set_OR_12_1" display-name="Set_OR_12_1" uuid="aa257c72-c35c-4000-ae77-2bd6eefbd57d" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
-    <designed target="X" value="230.0" ver="4"/>
-    <designed target="Y" value="730.0" ver="4"/>
-    <designed target="Rotation" value="0" ver="4"/>
-    <init target="Text" ver="4" value="ИЛИ"/>
-    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
-    <init target="Point" ver="4" value="12"/>
-    <init target="_CurPoint" ver="4" value="System.GRH.GZ_Point"/>
-    <init target="_MOD" ver="4" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_12_GZ_Cmd_In_12_2_1" display-name="Set_SP_12_GZ_Cmd_In_12_2_1" uuid="6723643a-4497-472b-85f6-0ce5481666fc" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="750.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="Nтк &gt; Nтк мин.: рег. ТК"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_12_2_1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_12_GZ_Cmd_In_12_2_2" display-name="Set_SP_12_GZ_Cmd_In_12_2_2" uuid="ae54383e-6b5d-4f58-97bf-ed89bef24ba1" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="770.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.GZ_Point"/>
-    <init target="Text" ver="3" value="T масла на входе ГТД &gt; 30 °С"/>
-    <init target="_Set" ver="3" value="System.GRH.GZ_Par_In_12_2_2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Cmd_12_GZ_TS_GTU_start" display-name="Cmd_12_GZ_TS_GTU_start" uuid="30c45a9a-15cd-403c-9ef4-e47ef5d963dd" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="690.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Запуск двигателя"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.GZ_Point"/>
-    <init target="Point" ver="3" value="12"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="5.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
   <designed target="Width" value="500" ver="2"/>
-  <designed target="Height" value="790.0" ver="2"/>
+  <designed target="Height" value="350.0" ver="2"/>
   <designed target="WindowWidth" value="500" ver="2"/>
-  <designed target="WindowHeight" value="790" ver="2"/>
-  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="eec8de76-c514-4cfc-8b92-2ad7d2896322" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="b9e53192-19d3-4595-81b0-12ce24e6faae" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <designed target="WindowHeight" value="350" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="2871f602-8b3b-44d3-9489-6f62293ecf99" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="eddc690d-fdaa-447e-99b8-173be23017cf" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
     <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="1b1aadad-faf7-42ca-a2d9-e9a8ebf46f6c" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
-        <init target="_init_ApSource" ver="3" ref="here.ApSource_CurrentForm"/>
+      <object access-modifier="private" uuid="81ba33a5-7f71-450e-a4aa-aa67b5574cf2" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="355d70a1-e159-4be2-a8b6-fd5b63322f78" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+  <object access-modifier="private" name="Open_APK" display-name="Open_APK" uuid="663e5ca4-73be-473f-a63d-e733ba68af4c" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_APK" display-name="Handler_Open_APK" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="1ef5edff-e8d6-4a20-8be2-fdaf6b4a0511" base-type="AlgVisual_APK_GPA1" base-type-id="0c7d0a22-1040-40f9-8f21-a165dadf7379" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="47599ea3-fd1f-4b18-bbee-f89ad3420b8c" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
     <designed target="X" value="420" ver="5"/>
     <designed target="Y" value="0" ver="5"/>
     <designed target="ZValue" value="0" ver="5"/>
     <designed target="Rotation" value="0" ver="5"/>
     <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
       <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "APK")) Open_APK.Invoke();
 LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
 if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
     </do-on>

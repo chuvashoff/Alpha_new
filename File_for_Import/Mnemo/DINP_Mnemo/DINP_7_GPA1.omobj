@@ -1,0 +1,67 @@
+<type access-modifier="private" name="DINP_7_GPA1" display-name="DINP_7_GPA1" uuid="12365ec0-5b03-4fb0-8701-557d036a2303" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
+  <designed target="X" value="0" ver="3"/>
+  <designed target="Y" value="0" ver="3"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Rotation" value="0" ver="3"/>
+  <designed target="Scale" value="1" ver="3"/>
+  <designed target="Visible" value="true" ver="3"/>
+  <designed target="Enabled" value="true" ver="3"/>
+  <designed target="Tooltip" value="" ver="3"/>
+  <designed target="Width" value="1780" ver="3"/>
+  <designed target="Height" value="900" ver="3"/>
+  <designed target="PenColor" value="4278190080" ver="3"/>
+  <designed target="PenStyle" value="0" ver="3"/>
+  <designed target="PenWidth" value="1" ver="3"/>
+  <designed target="BrushColor" value="0xffbfbfbf" ver="3"/>
+  <designed target="BrushStyle" value="1" ver="3"/>
+  <designed target="WindowX" value="0" ver="3"/>
+  <designed target="WindowY" value="0" ver="3"/>
+  <designed target="WindowWidth" value="1920" ver="3"/>
+  <designed target="WindowHeight" value="780" ver="3"/>
+  <designed target="WindowCaption" value="7" ver="3"/>
+  <designed target="ShowWindowCaption" value="true" ver="3"/>
+  <designed target="ShowWindowMinimize" value="true" ver="3"/>
+  <designed target="ShowWindowMaximize" value="true" ver="3"/>
+  <designed target="ShowWindowClose" value="true" ver="3"/>
+  <designed target="AlwaysOnTop" value="false" ver="3"/>
+  <designed target="WindowSizeMode" value="2" ver="3"/>
+  <designed target="WindowBorderStyle" value="1" ver="3"/>
+  <designed target="WindowState" value="0" ver="3"/>
+  <designed target="WindowScalingMode" value="0" ver="3"/>
+  <designed target="MonitorNumber" value="0" ver="3"/>
+  <designed target="WindowPosition" value="1" ver="3"/>
+  <designed target="WindowCloseMode" value="0" ver="3"/>
+  <object access-modifier="private" name="Text_433" display-name="Text_433" uuid="913dbd92-c343-4fbd-8c87-e198a227d3fe" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+    <designed target="X" value="50" ver="3"/>
+    <designed target="Y" value="15" ver="3"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <designed target="Scale" value="1" ver="3"/>
+    <designed target="Visible" value="true" ver="3"/>
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="Tooltip" value="" ver="3"/>
+    <designed target="Width" value="524.69" ver="3"/>
+    <designed target="Height" value="26" ver="3"/>
+    <designed target="Text" value="НКУ" ver="3"/>
+    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
+    <designed target="FontColor" value="0xff000000" ver="3"/>
+    <designed target="TextAlignment" value="132" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+  </object>
+  <object access-modifier="private" name="DI_KC2_VOT1_num434" display-name="DI_KC2_VOT1_num434" uuid="0ecee6a6-0742-490d-8855-cf77aff1f591" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+    <designed target="X" value="50" ver="3"/>
+    <designed target="Y" value="47" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="_init_Object" ver="3" value="DI.DI_KC2_VOT1"/>
+    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
+  </object>
+  <designed target="Opacity" value="1" ver="3"/>
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="cc3fcdc6-f0ae-4832-9a4f-a87e50c7d1ae" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+    <designed target="Active" value="true" ver="3"/>
+    <designed target="ReAdvise" value="0" ver="3"/>
+    <init target="ParentSource" ver="3" ref="_init_ApSource"/>
+    <init target="Path" ver="3" ref="_init_GPAPath"/>
+  </object>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="61fcb3e0-730f-49a0-a388-41d6262ec06c" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="2a41980e-d755-4c85-8d79-97916cc90d1a" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+</type>

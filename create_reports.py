@@ -8,8 +8,8 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
     # sl_object_all =
     # { (Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
     # sl_param = {cpu: {Перфискспапки.alg_par: русское имя}}
-    num_cel = 8
-    num_par = 1
+    # num_cel = 8
+    # num_par = 1
 
     thin_border = Border(left=Side(style='thin'),  # thick - толстые границы, thin - тонкие
                          right=Side(style='thin'),
@@ -20,6 +20,8 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
 
     # Для каждого объекта
     for obj in sl_object_all:
+        num_cel = 8
+        num_par = 1
         # Создаём эксельку
         wb = openpyxl.Workbook()
         # Выбираем активный лист
@@ -193,8 +195,8 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
     # sl_object_all =
     # { (Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
     # sl_param = {cpu: {алг_имя(A000): (тип защиты в студии, рус.имя, ед измерения)}}
-    num_cel = 4
-    num_par = 1
+    # num_cel = 4
+    # num_par = 1
 
     thin_border = Border(left=Side(style='thin'),  # thick - толстые границы, thin - тонкие
                          right=Side(style='thin'),
@@ -203,6 +205,8 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
 
     # Для каждого объекта
     for obj in sl_object_all:
+        num_cel = 4
+        num_par = 1
         # Создаём эксельку
         wb = openpyxl.Workbook()
         # Выбираем активный лист
@@ -248,6 +252,8 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
             if cpu in sl_object_all[obj]:
                 # ...для каждого параметра...
                 for par, property_par in sl_par.items():
+                    if 'Проверяется при ПЗ - Нет' in property_par:
+                        continue
                     # Если отсчитали 17 параметров, то добавляем шапку для следующего листа
                     if not (num_par - 1) % 26 and num_par != 1:
                         num_cel += 2
@@ -357,8 +363,8 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
     # { (Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
 
     # sl_param = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
-    num_cel = 4
-    num_par = 1
+    # num_cel = 4
+    # num_par = 1
 
     thin_border = Border(left=Side(style='thin'),  # thick - толстые границы, thin - тонкие
                          right=Side(style='thin'),
@@ -367,6 +373,8 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
 
     # Для каждого объекта
     for obj in sl_object_all:
+        num_cel = 4
+        num_par = 1
         # Создаём эксельку
         wb = openpyxl.Workbook()
         # Выбираем активный лист

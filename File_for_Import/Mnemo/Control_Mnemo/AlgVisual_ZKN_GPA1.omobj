@@ -1,0 +1,569 @@
+<type access-modifier="private" name="AlgVisual_ZKN_GPA1" display-name="AlgVisual_ZKN_GPA1" uuid="0948f39a-6d21-4aa9-be68-e91e4889236c" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+  <designed target="X" value="1" ver="2"/>
+  <designed target="Y" value="1" ver="2"/>
+  <designed target="Rotation" value="0" ver="2"/>
+  <designed target="Scale" value="1" ver="2"/>
+  <designed target="Visible" value="true" ver="2"/>
+  <designed target="Enabled" value="true" ver="2"/>
+  <designed target="Tooltip" value="" ver="2"/>
+  <designed target="PenColor" value="4278190080" ver="2"/>
+  <designed target="PenStyle" value="0" ver="2"/>
+  <designed target="PenWidth" value="1" ver="2"/>
+  <designed target="BrushColor" value="4293980400" ver="2"/>
+  <designed target="BrushStyle" value="1" ver="2"/>
+  <designed target="WindowX" value="0" ver="2"/>
+  <designed target="WindowY" value="0" ver="2"/>
+  <designed target="WindowCaption" value="ZKN" ver="2"/>
+  <designed target="ShowWindowCaption" value="true" ver="2"/>
+  <designed target="ShowWindowMinimize" value="true" ver="2"/>
+  <designed target="ShowWindowMaximize" value="true" ver="2"/>
+  <designed target="ShowWindowClose" value="true" ver="2"/>
+  <designed target="AlwaysOnTop" value="false" ver="2"/>
+  <designed target="WindowSizeMode" value="1" ver="2"/>
+  <designed target="WindowBorderStyle" value="1" ver="2"/>
+  <designed target="WindowState" value="0" ver="2"/>
+  <designed target="WindowScalingMode" value="0" ver="2"/>
+  <designed target="MonitorNumber" value="0" ver="2"/>
+  <designed target="WindowPosition" value="0" ver="2"/>
+  <designed target="WindowCloseMode" value="0" ver="2"/>
+  <designed target="ZValue" value="0" ver="3"/>
+  <designed target="Opacity" value="1" ver="3"/>
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="f6323772-187a-44f0-bb5e-3bef6be4392c" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+    <designed target="X" value="0" ver="2"/>
+    <designed target="Y" value="0" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Tooltip" value="" ver="2"/>
+    <designed target="Width" value="500" ver="2"/>
+    <designed target="Height" value="30" ver="2"/>
+    <designed target="RoundingRadius" value="0" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="BrushColor" value="4278190080" ver="2"/>
+    <designed target="BrushStyle" value="0" ver="2"/>
+    <designed target="ZValue" value="0" ver="3"/>
+    <designed target="Opacity" value="1" ver="3"/>
+    <object access-modifier="private" name="ZKN" display-name="ZKN" uuid="7c4a945b-d52e-415a-8224-52dbfb0285d1" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+      <designed target="X" value="0" ver="2"/>
+      <designed target="Y" value="0" ver="2"/>
+      <designed target="Rotation" value="0" ver="2"/>
+      <designed target="Scale" value="1" ver="2"/>
+      <designed target="Visible" value="true" ver="2"/>
+      <designed target="Enabled" value="true" ver="2"/>
+      <designed target="Tooltip" value="" ver="2"/>
+      <designed target="Width" value="500" ver="2"/>
+      <designed target="Height" value="30" ver="2"/>
+      <designed target="Text" value="Заполнение контура Н" ver="2"/>
+      <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+      <designed target="FontColor" value="4278190080" ver="2"/>
+      <designed target="TextAlignment" value="132" ver="2"/>
+      <designed target="ZValue" value="0" ver="3"/>
+      <designed target="Opacity" value="1" ver="3"/>
+    </object>
+  </object>
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="351b646d-2cda-4955-8ee8-e46072247e8a" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Path" ver="3" value="System.GRH.ZKN_START.Value"/>
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+  </object>
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="5874399b-cf4f-4ad6-b91b-ced1847b714a" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_1_ZKN_Cmd_In_1" display-name="Set_1_ZKN_Cmd_In_1" uuid="e85c3460-4704-4143-b5a8-f3453af80810" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск СГУ завершен"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_1"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_1_ZKN_PSGU_START" display-name="Cmd_Link_1_ZKN_PSGU_START" uuid="c8eaa1b8-c5fd-4cbd-88c1-a7277239049e" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="30.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск СГУ"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSGU_GPA1" display-name="Handler_Open_AlgVisual_PSGU_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="77fb45a6-0222-4298-96a9-8f99b02678ca" base-type="AlgVisual_PSGU_GPA1" base-type-id="ed9edd92-3a7c-4e49-aecc-347dd6efd849" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="30e2dc0a-b608-4e21-a49c-f203f822f005" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_2_ZKN_Cmd_In_2" display-name="Set_2_ZKN_Cmd_In_2" uuid="9e522439-53b6-4e08-8690-524ebf5a4333" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 4 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_2"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_ZKN_Kr4_On" display-name="Cmd_2_ZKN_Kr4_On" uuid="d18d63e8-2196-4eb8-9c4e-7697ab68fcf0" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 4 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="bd7bb2f5-3448-471f-b90c-963733b73166" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_3_ZKN_Cmd_In_3" display-name="Set_3_ZKN_Cmd_In_3" uuid="c713c7dd-2452-4026-a163-17b6a88dc119" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 5 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_3_ZKN_Tmv_Out_3" display-name="Set_SP_3_ZKN_Tmv_Out_3" uuid="3033c4c8-20f4-46bf-8722-fc377563b229" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="Text" ver="3" value="Таймер: Продувка"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Tmv_Out_3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="65971f8b-d4c6-41cb-856e-2046c79166d2" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_4_ZKN_Cmd_In_4" display-name="Set_4_ZKN_Cmd_In_4" uuid="de4c0d27-c2a7-4d93-8086-76932aa37c8f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 5 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_4"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_ZKN_Kr5_Off" display-name="Cmd_4_ZKN_Kr5_Off" uuid="1aa66534-c85a-4bb9-b7ae-86153717ec74" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 5 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="df13c04c-5538-462b-bb00-d8a2328ce22b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="5"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="3"/>
+  </object>
+  <object access-modifier="private" name="Set_5_ZKN_Cmd_In_5_1_1" display-name="Set_5_ZKN_Cmd_In_5_1_1" uuid="52bd128a-fcbe-4b6d-9beb-7551e74e6957" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 5 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_5_1_1"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_5_ZKN_Cmd_In_5_1_2" display-name="Set_SP_5_ZKN_Cmd_In_5_1_2" uuid="4fd013ea-1797-4d24-ade9-5f008ec2d445" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="Text" ver="3" value="Рг на вх. Н &gt; 4,0 МПа"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Par_In_5_1_2"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.ZKN_Cmd_In_5_1_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_5_ZKN_Cmd_In_5_1_3" display-name="Set_5_ZKN_Cmd_In_5_1_3" uuid="edc28469-a9a2-4010-b647-ba81f1c04e39" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="dРг на кране 1 &lt; 0,2 МПа"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_5_1_3"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="deb738b2-19a1-435a-b17c-534e0061c0ab" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_6_ZKN_Cmd_In_6" display-name="Set_6_ZKN_Cmd_In_6" uuid="afe9d1a3-d7e0-4f62-bd1a-69884f54f0da" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Нагнетатель заполнен"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_6"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_6_ZKN_Tmv_Out_6" display-name="Set_SP_6_ZKN_Tmv_Out_6" uuid="6fb39afc-b3c4-4c2e-8285-d444a4462081" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="Text" ver="3" value="Таймер: Стабилизация"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Tmv_Out_6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_6_ZKN_TS_Stab" display-name="Cmd_6_ZKN_TS_Stab" uuid="9a55dd3b-eddd-4b03-ade1-66884eb2b7db" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Стабилизация контура Н"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="2.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="293b8bf6-a682-443e-9d84-054534589842" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_7_ZKN_Cmd_In_7" display-name="Set_7_ZKN_Cmd_In_7" uuid="8c618815-2ec8-4671-843a-80d94139ab34" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Защиты по парам.БГ взведены"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_7"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="be6c4c33-3ce4-43e1-b0cd-7c935f92f46c" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_8_ZKN_Cmd_In_8" display-name="Set_8_ZKN_Cmd_In_8" uuid="1fc06a55-bc8d-4125-b365-973f56861c76" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 1 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_8"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_ZKN_Kr1_On" display-name="Cmd_8_ZKN_Kr1_On" uuid="4fb56533-cdd6-470f-87d4-75b85a7d6f96" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 1 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_9" display-name="Step_9" uuid="35af3947-71d5-4a7a-997e-d07cde92e6cc" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_9_ZKN_Cmd_In_9" display-name="Set_9_ZKN_Cmd_In_9" uuid="4648fd2b-b788-469b-a0c5-4312212666b7" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 4 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_9"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_9_ZKN_Kr4_Off" display-name="Cmd_9_ZKN_Kr4_Off" uuid="e831ad4b-059e-4c97-a8ea-a38e69596bd2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 4 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_10" display-name="Step_10" uuid="56b79eca-6d0d-4eef-b990-b30d32a7c6c6" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_10_ZKN_Cmd_In_10" display-name="Set_10_ZKN_Cmd_In_10" uuid="38fdaae4-8279-4555-a5da-1e8d270bf42f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 6р закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_10"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_ZKN_Kr6r_Off" display-name="Cmd_10_ZKN_Kr6r_Off" uuid="c21225e8-fb71-40bb-a80b-8b38cd10ddbb" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 6р закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_11" display-name="Step_11" uuid="6d69111b-44db-48ca-81e0-3206fb13af09" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Num" ver="3" value="11"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_11_ZKN_Cmd_In_11" display-name="Set_11_ZKN_Cmd_In_11" uuid="923ca05a-a938-48a0-ba6a-1b847416a19a" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 6 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.ZKN_Cmd_In_11"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.ZKN_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_11_ZKN_Kr6_On" display-name="Cmd_11_ZKN_Kr6_On" uuid="5c8b276d-999a-4208-a915-5d1328358ee2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 6 открыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.ZKN_Point"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <designed target="Width" value="500" ver="2"/>
+  <designed target="Height" value="330.0" ver="2"/>
+  <designed target="WindowWidth" value="500" ver="2"/>
+  <designed target="WindowHeight" value="330" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="3b6f5a28-7a5a-4436-906f-689ae4d9ee66" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="765c5f4a-ed54-4f5d-86ec-686da724208b" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="722f91b3-718b-4118-b39c-4000745c9e02" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_KPK" display-name="Open_KPK" uuid="78000f25-d696-40e9-b782-d15c326e48ef" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_KPK" display-name="Handler_Open_KPK" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="69620a5c-dd36-4049-beae-ce6810ebfe05" base-type="AlgVisual_KPK_GPA1" base-type-id="3fad6076-e5f0-4556-b817-a0632f22cf02" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Open_APK" display-name="Open_APK" uuid="66a13623-1243-4061-b7bd-630787f8ae08" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_APK" display-name="Handler_Open_APK" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="5348f2c7-fa4a-43ae-aeff-28170fadc887" base-type="AlgVisual_APK_GPA1" base-type-id="0c7d0a22-1040-40f9-8f21-a165dadf7379" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="59b2e233-3d10-48a2-8b9a-4e6d487136cc" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+    <designed target="X" value="420" ver="5"/>
+    <designed target="Y" value="0" ver="5"/>
+    <designed target="ZValue" value="0" ver="5"/>
+    <designed target="Rotation" value="0" ver="5"/>
+    <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
+      <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
+if (String.EndsWith(OpenFrom, "KPK")) Open_KPK.Invoke();
+if (String.EndsWith(OpenFrom, "APK")) Open_APK.Invoke();
+LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
+if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
+    </do-on>
+  </object>
+</type>

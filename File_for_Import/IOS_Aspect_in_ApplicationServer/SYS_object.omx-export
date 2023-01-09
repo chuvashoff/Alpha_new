@@ -4,7 +4,7 @@
     <ct:object name="Message" access-level="public">
       <attribute type="unit.System.Attributes.Comment" value="Для глобальных сообщений оператора"/>
       <ct:parameter name="cmd_operator" type="bool" direction="out" access-level="public">
-        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:0,&quot;Message&quot;:&quot;___&quot;,&quot;Severity&quot;:10,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:0,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;___&quot;,&quot;Severity&quot;:10,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
+        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:0,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;___&quot;,&quot;Severity&quot;:10,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:0,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;___&quot;,&quot;Severity&quot;:10,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
         <attribute type="unit.System.Attributes.InitialValue" value="false"/>
         <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       </ct:parameter>
@@ -17,22 +17,22 @@
       </ct:handler>
     </ct:object>
     <ct:parameter name="ObjNam" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="ГПА №1;ГПА №2"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="ГПА №1;ГПА №2;ГПА №3;ГПА №4;ГПА №5;ГПА №6;САР"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="ObjAlg" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="GPA1;GPA2"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="GPA1;GPA2;GPA3;GPA4;GPA5;GPA6;SAR"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="ObjNum" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="2"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="7"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="SystemName" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="Степновское ПХГ КЦ3"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="ДКС3 ГП2 БНГКМ"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>

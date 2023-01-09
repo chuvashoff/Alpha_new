@@ -1,5 +1,5 @@
 # Алг.имя_тюнинга;тип(REAL,INT);тег_в_ПЛК;Описание
-# sSetWord - особенный, для него заведён отдельный тип и создаётся такой (раскладывается по битам)
+# sSetWord - особенный, для него заведён отдельный тип и создаётся такой (раскладывается по битам);;;
 sNumGPA;INT;sTunings|sNumGPA;Количество ГПА в цеху
 sSetWord;INT;sTunings|sSetWord;Слово настроечных параметров цеха
 sMainContur;INT;sTunings|sMainContur;Контур по-умолчанию (1 - Рвых, 2 - Рвх, 3 - Ст.сж, 4 - Расход)
@@ -85,9 +85,14 @@ sTiLimKHRSR;REAL;sTunings|sTiLimKHRSR;Ти контура ограничения
 sTdLimKHRSR;REAL;sTunings|sTdLimKHRSR;Тд контура ограничения ПЗ
 sUpDZPoutReload;REAL;sTunings|sUpDZPoutReload;Зона нечувствительности верхняя регулятора Рвых. КХР при перезагрузке
 sDownDZPoutReload;REAL;sTunings|sDownDZPoutReload;Зона нечувствительности нижняя регулятора Рвых. КХР при перезагрузке
-sKpKHRPoutReload;REAL;sTunings|sKpKHRPoutReload;Кр контура регулирования Рвых. КХР при перезагрузке
-sTiKHRPoutReload;REAL;sTunings|sTiKHRPoutReload;Ти контура регулирования Рвых. КХР при перезагрузке
-sTdKHRPoutReload;REAL;sTunings|sTdKHRPoutReload;Тд контура регулирования Рвых. КХР при перезагрузке
+sKpKHRPoutReload;REAL;sTunings|sKpReloadKHRPout;Кр контура регулирования Рвых. КХР при перезагрузке
+sTiKHRPoutReload;REAL;sTunings|sTiReloadKHRPout;Ти контура регулирования Рвых. КХР при перезагрузке
+sTdKHRPoutReload;REAL;sTunings|sTdReloadKHRPout;Тд контура регулирования Рвых. КХР при перезагрузке
+sUpDZPoutLoad;REAL;sTunings|sUpDZPoutLoad;Зона нечувствительности верхняя регулятора Рвых. КХР при загрузке
+sDownDZPoutLoad;REAL;sTunings|sDownDZPoutLoad;Зона нечувствительности нижняя регулятора Рвых. КХР при загрузке
+sKpLoadKHRPout;REAL;sTunings|sKpLoadKHRPout;Кр контура регулирования Рвых. КХР при загрузке цеха
+sTiLoadKHRPout;REAL;sTunings|sTiLoadKHRPout;Ти контура регулирования Рвых. КХР при загрузке цеха
+sTdLoadKHRPout;REAL;sTunings|sTdLoadKHRPout;Тд контура регулирования Рвых. КХР при загрузке цеха
 sPoutZone;REAL;sTunings|sPoutZone;Зона высокого Рвых цеха
 sPinZone;REAL;sTunings|sPinZone;Зона низкого Рвх цеха
 sEZone;REAL;sTunings|sEZone;Зона высокой степени сжатия цеха

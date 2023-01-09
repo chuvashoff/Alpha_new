@@ -33,7 +33,7 @@ def multiple_replace_xml(target_str):
 
 
 def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
-    # sl_par = {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}
+    # sl_par = {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}
     # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
     child_group = ET.SubElement(parent_node, 'ct_object',
                                 name=(f'{name_group[0]}' if isinstance(name_group, tuple) else f"{name_group}"),
@@ -46,6 +46,30 @@ def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
         child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
                                   base_type=f"Types.{tuple_par[0]}",
                                   aspect="Types.PLC_Aspect", access_level="public")
+        # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
+        if name_group in ('AI', 'AE', 'SET'):
+            deadband_hist = 1 / (10 ** int(tuple_par[5])) if tuple_par[5] != '' else 0.01
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+        # Если ИМ АО, то добавляем Set и iPos с гистерезисом
+        elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
+            deadband_hist = 1 / (10 ** int(tuple_par[6])) if tuple_par[6] != '' else 0.01
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+        # Если драйверный параметр, AI и сохраняем историю
+        elif 'DRV' in tuple(parent_node.attrib.values()):
+            if 'Сохраняемый - Да' in tuple_par:
+                if 'AI' in tuple_par[0]:
+                    deadband_hist = 1 / (10 ** int(tuple_par[8])) if tuple_par[8] != '' else 0.01
+                    ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+                    ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+                else:
+                    ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+            else:
+                # Строчки по deadband при отсустствии сохранения добавил в отпуске, нужно собрать сборку
+                deadband_hist = 1
+                ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"False")
+                ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
         for type_attr, value in sl_attr_par[par].items():
             ET.SubElement(child_par, 'attribute', type=f"{type_attr}", value=f"{value}")
     return
@@ -53,8 +77,12 @@ def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
 
 def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, plc_node_tree, sl_agreg):
     # ...то создаём узел AI в IOS-аспекте
-    child_group = ET.SubElement(parent_node, 'ct_object', name=f'{name_group}', access_level="public")
+    child_group = ET.SubElement(parent_node, 'ct_object',
+                                name=f'{name_group[0]}' if isinstance(name_group, tuple) else f"{name_group}",
+                                access_level="public")
     # ...добавляем агрегаторы
+    if isinstance(name_group, tuple):
+        ET.SubElement(child_group, 'attribute', type='unit.System.Attributes.Description', value=f'{name_group[1]}')
     for agreg, type_agreg in sl_agreg.items():
         ET.SubElement(child_group, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                       aspect="Types.IOS_Aspect", access_level="public")
@@ -66,65 +94,65 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
             # ...для каждого параметра контроллера...
             for par, tuple_par in sl_par[cpu].items():
                 # ...создаём структуру параметра
-                base_type = (f"Types.{tuple_par[0].replace('PLC_View', 'IOS_NotHistory_View')}"  #
-                             if 'Сохраняемый - Нет' in tuple_par
-                             else f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}")
-                aspect = ("Types.IOS_NotHistory_Aspect" if 'Сохраняемый - Нет' in tuple_par else "Types.IOS_Aspect")
+                # base_type = (f"Types.{tuple_par[0].replace('PLC_View', 'IOS_NotHistory_View')}"  #
+                #              if 'Сохраняемый - Нет' in tuple_par
+                #              else f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}")
+                # aspect = ("Types.IOS_NotHistory_Aspect" if 'Сохраняемый - Нет' in tuple_par else "Types.IOS_Aspect")
                 child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
-                                          base_type=base_type,
-                                          aspect=aspect,
+                                          base_type=f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}",
+                                          aspect="Types.IOS_Aspect",
                                           original=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}",
                                           access_level="public")
                 ET.SubElement(child_par, 'ct_init-ref',
                               ref="_PLC_View", target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}")
-                # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
-                if name_group in ('AI', 'AE', 'SET'):
-                    deadband_hist = 1/(10**int(tuple_par[5])) if tuple_par[5] != '' else 0.01
-                    object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
-                                                 direction='out', access_level="public")
-                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
-                                  value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                    ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
-                                  value=f"@(object:unit.System.Attributes.Description)")
-                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
-                                  value=f"@(object:Attributes.EUnit)")
-                    ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
-                # Если ИМ АО, то добавляем Set и iPos с гистерезисом
-                elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
-                    deadband_hist = 1/(10**int(tuple_par[6])) if tuple_par[6] != '' else 0.01
-                    for sig, attr_sig in {'Set': ('Задание',), 'iPos': ('Положение',)}.items():
-                        object_sig = ET.SubElement(child_par, 'ct_parameter', name=f'{sig}', type='float32',
-                                                   direction='out', access_level="public")
-                        ET.SubElement(object_sig, 'attribute', type="unit.System.Attributes.Description",
-                                      value=f"{attr_sig[0]}")
-                        ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.Unit",
-                                      value=f"@(object:Attributes.EUnit)")
-                        ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.History",
-                                      value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                        ET.SubElement(child_par, 'ct_formula', source_code=f"_PLC_View.States.{sig}", target=f"{sig}")
-                # Если драйверный параметр, AI и сохраняем историю
-                elif 'System.DRV' in plc_node_tree and 'DRV_AI_IOS_View' in base_type:
-                    deadband_hist = 1/(10**int(tuple_par[8])) if tuple_par[8] != '' else 0.01
-                    object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
-                                                 direction='out', access_level="public")
-                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
-                                  value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                    ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
-                                  value=f"@(object:unit.System.Attributes.Description)")
-                    ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
-                                  value=f"@(object:Attributes.EUnit)")
-                    ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
+                # # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
+                # if name_group in ('AI', 'AE', 'SET'):
+                #     deadband_hist = 1/(10**int(tuple_par[5])) if tuple_par[5] != '' else 0.01
+                #     object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
+                #                                  direction='out', access_level="public")
+                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
+                #                   value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                #     ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
+                #                   value=f"@(object:unit.System.Attributes.Description)")
+                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
+                #                   value=f"@(object:Attributes.EUnit)")
+                #     ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
+                # # Если ИМ АО, то добавляем Set и iPos с гистерезисом
+                # elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
+                #     deadband_hist = 1/(10**int(tuple_par[6])) if tuple_par[6] != '' else 0.01
+                #     for sig, attr_sig in {'Set': ('Задание',), 'iPos': ('Положение',)}.items():
+                #         object_sig = ET.SubElement(child_par, 'ct_parameter', name=f'{sig}', type='float32',
+                #                                    direction='out', access_level="public")
+                #         ET.SubElement(object_sig, 'attribute', type="unit.System.Attributes.Description",
+                #                       value=f"{attr_sig[0]}")
+                #         ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.Unit",
+                #                       value=f"@(object:Attributes.EUnit)")
+                #         ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.History",
+                #                       value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                #         ET.SubElement(child_par, 'ct_formula', source_code=f"_PLC_View.States.{sig}", target=f"{sig}")
+                # # Если драйверный параметр, AI и сохраняем историю
+                # elif 'System.DRV' in plc_node_tree and 'DRV_AI_IOS_View' in base_type:
+                #     deadband_hist = 1/(10**int(tuple_par[8])) if tuple_par[8] != '' else 0.01
+                #     object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
+                #                                  direction='out', access_level="public")
+                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
+                #                   value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
+                #     ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
+                #                   value=f"@(object:unit.System.Attributes.Description)")
+                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
+                #                   value=f"@(object:Attributes.EUnit)")
+                #     ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
 
     return
 
 
 def is_read_ai_ae_set(sheet, type_signal):
-    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков,
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков,
     # количество знаков для истории)}}
     return_sl = {}
     # return_sl_sday = {cpu: {Перфискспапки.alg_par: русское имя}}
     return_sl_sday = {}
-    # return_sl_mnemo = {узел: список параметров узла}
+    # return_sl_mnemo = {cpu: {узел: список параметров узла}}
     return_sl_mnemo = {}
     sl_plc_aspect = {'AI': 'AI.AI_PLC_View', 'AE': 'AE.AE_PLC_View', 'SET': 'SET.SET_PLC_View'}
     # print('Зашли в фукнкцию, максимальное чилсло колонок - ', sheet.max_column)
@@ -140,7 +168,7 @@ def is_read_ai_ae_set(sheet, type_signal):
     index_sday = is_f_ind(cells[0], 'Используется в ведомости')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
-    # Соствялем множество контроллеров, у которых есть данные параметры параметры
+    # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
         if par[0].value is None:
@@ -170,10 +198,13 @@ def is_read_ai_ae_set(sheet, type_signal):
                 par[index_frag_dig].value,
                 frag_dig_hist)})
             # Если не парсим уставки, то заполняем словарь для мнемосхемы
-            if 'SP|' not in par[index_alg_name].value and par[index_node_mnemo].value not in return_sl_mnemo:
-                return_sl_mnemo[par[index_node_mnemo].value] = list()
+            if 'SP|' not in par[index_alg_name].value and par[index_cpu_name].value not in return_sl_mnemo:
+                return_sl_mnemo[par[index_cpu_name].value] = {}
+            if 'SP|' not in par[index_alg_name].value and \
+                    par[index_node_mnemo].value not in return_sl_mnemo[par[index_cpu_name].value]:
+                return_sl_mnemo[par[index_cpu_name].value][par[index_node_mnemo].value] = list()
             if 'SP|' not in par[index_alg_name].value:
-                return_sl_mnemo[par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
+                return_sl_mnemo[par[index_cpu_name].value][par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
 
     return return_sl, return_sl_mnemo, return_sl_sday
 
@@ -205,7 +236,7 @@ def is_read_di(sheet):
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
-    # Соствялем множество контроллеров, у которых есть данные параметры параметры
+    # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
         if par[0].value is None:
@@ -225,16 +256,18 @@ def is_read_di(sheet):
                     sl_color_di.get(par[index_color_off].fill.start_color.index, '404'),
                     sl_color_di.get(par[index_color_on].fill.start_color.index, '404'))})
 
-            # Если есть предупреждение по дискрету и канал не переведён в резерв и не привязан к ИМ
+            # Если есть предупреждение по дискрету и канал не переведён в резерв и не привязан к ИМ,
             # то добавляем в словарь предупреждений по дискретам
             if 'Да' in par[index_wrn].value:
                 cpu_name_par = par[index_cpu_name].value
                 alg_par = par[index_alg_name].value.replace('|', '_')
                 sl_wrn_di[cpu_name_par][alg_par] = (par[index_wrn_text].value, par[index_wrn].value)
 
-            if par[index_node_mnemo].value not in return_sl_mnemo:
-                return_sl_mnemo[par[index_node_mnemo].value] = list()
-            return_sl_mnemo[par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
+            if par[index_cpu_name].value not in return_sl_mnemo:
+                return_sl_mnemo[par[index_cpu_name].value] = {}
+            if par[index_node_mnemo].value not in return_sl_mnemo[par[index_cpu_name].value]:
+                return_sl_mnemo[par[index_cpu_name].value][par[index_node_mnemo].value] = list()
+            return_sl_mnemo[par[index_cpu_name].value][par[index_node_mnemo].value].append(par[index_alg_name].value.replace('|', '_'))
 
     return return_sl_di, sl_wrn_di, return_sl_mnemo
 
@@ -279,7 +312,7 @@ def is_read_im(sheet, sheet_imao):
     index_start_view = is_f_ind(cells[0], 'Тип ИМ', target_count=2)
 
     cells = sheet['A2': get_column_letter(200) + str(sheet.max_row)]
-    # Составляем множество контроллеров, у которых есть данные параметры параметры
+    # Составляем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     sl_cnt = {}
     for par in cells:
@@ -327,7 +360,7 @@ def is_read_im(sheet, sheet_imao):
     index_unit = is_f_ind(cells[0], 'Единицы измерения')
 
     cells = sheet_imao['A2': get_column_letter(200) + str(sheet.max_row)]
-    # Составляем множество контроллеров, у которых есть данные параметры параметры
+    # Составляем множество контроллеров, у которых есть данные параметры
     set_par_cpu_imao = set()
     for par in cells:
         if par[0].value is None:
@@ -570,7 +603,8 @@ def is_create_net(sl_object_all, sheet_net):
                             file_name_check=f'file_out_NET_{objects[0]}.omx-export',
                             new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
                                                                               pretty_print=True, encoding='unicode')),
-                            message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]}')
+                            message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]} '
+                                          f'(Файл NET_{objects[0]})')
     return return_sl_net
 
 
@@ -595,6 +629,13 @@ def is_create_service_signal(sl_object_all):
                               type='bool', direction='out', access_level="public")
                 ET.SubElement(child_eth, 'attribute', type='unit.System.Attributes.Comment',
                               value=f"{sl_num_eth.get(numeth)}")
+
+    child_state = ET.SubElement(child_service, 'ct_object', name='State', access_level="public")
+    ET.SubElement(child_state, 'ct_parameter', name='Server',
+                  type='bool', direction='out', access_level="public")
+    child_hist = ET.SubElement(child_modules, 'ct_object', name='HistoryModule', access_level="public")
+    child_storage = ET.SubElement(child_hist, 'ct_object', name='Storages', access_level="public")
+    ET.SubElement(child_storage, 'ct_object', name='Historian', access_level="public")
 
     # Нормируем и записываем IOS-аспект
     temp = ET.tostring(root_aspect).decode('UTF-8')
@@ -621,7 +662,7 @@ def is_create_sys(sl_object_all: dict, name_prj: str):
                               access_level="public")
     ET.SubElement(child_cmd, 'attribute', type='unit.Server.Attributes.Alarm',
                   value=f'{{"Condition":{{"IsEnabled":"true",'
-                        f'"Subconditions":[{{"AckStrategy":0,'
+                        f'"Subconditions":[{{"AckStrategy":0,"IsEnabled":true,'
                         f'"Message":"___",'
                         f'"Severity":10,"Type":2}},'
                         f'{{"AckStrategy":0,"IsEnabled":true,'
@@ -726,6 +767,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
     index_type_protect = is_f_ind(cells[0], 'Тип защиты')
     index_unit = is_f_ind(cells[0], 'Единица измерения')
     index_cond = is_f_ind(cells[0], 'Условия защиты')
+    index_check_pz = is_f_ind(cells[0], 'Проверяется при ПЗ')
 
     cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
 
@@ -762,7 +804,8 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
                 tmp_eunit = par[index_unit].value
             # В словарь Защит соответсвтующего контроллера добавляем [алг имя, рус. имя, единицы измерения]
             rus_name = f'{par[index_type_protect].value}. {par[index_rus_name].value}'
-            sl_pz[cpu_name_par] += ([par[index_alg_name].value, rus_name, tmp_eunit],)
+            sl_pz[cpu_name_par] += ([par[index_alg_name].value, rus_name, tmp_eunit,
+                                     f'Проверяется при ПЗ - {par[index_check_pz].value}'],)
 
     # В словаре защит алгоритмическое имя меняем на A+ номер
     num_pz = 0
@@ -779,7 +822,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
     return return_sl_pz, sl_pz_xml
 
 
-def is_read_signals(sheet, sl_wrn_di):
+def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
     return_wrn = {}
     return_ts = {}
     return_ppu = {}
@@ -809,6 +852,7 @@ def is_read_signals(sheet, sl_wrn_di):
         'Да (по наличию)': 'WRN_On.WRN_On_PLC_View',
         'Да (по отсутствию)': 'WRN_Off.WRN_Off_PLC_View'
     }
+    sl_cpu_archive = {}
     cells = sheet['A1': get_column_letter(50) + str(50)]
     index_alg_name = is_f_ind(cells[0], 'Алгоритмическое имя')
     index_rus_name = is_f_ind(cells[0], 'Наименование параметра')
@@ -837,9 +881,21 @@ def is_read_signals(sheet, sl_wrn_di):
                           else par[index_alg_name].value[par[index_alg_name].value.find('|') + 1:])
             if 'Режим' in protect:
                 sl_signal_type[protect][par[index_cpu_name].value].update(
-                    {'regNum': ('MODES.regNum_PLC_View', 'Номер режима')})
+                    {'regNum': ('MODES.regNum_PLC_View', 'Номер режима'),
+                     # 'regName': ('MODES.String_PLC_View', 'Имя режима'),
+                     'regColor': ('MODES.regNum_PLC_View', 'Цвет режима'),
+                     # 'MsgName': ('MODES.String_PLC_View', 'Состояние'),
+                     'MsgNameShow': ('MODES.MODES_PLC_View', 'Показывать состояние'),
+                     # 'SubName': ('MODES.String_PLC_View', 'Состояние'),
+                     'SubNameShow': ('MODES.MODES_PLC_View', 'Состояние'),
+                     })
                 tuple_update = ('MODES.MODES_PLC_View', f'Режим "{par[index_rus_name].value}"')
             sl_signal_type[protect][par[index_cpu_name].value].update({key_update: tuple_update})
+        if 'Запись архива' in protect:
+            if par[index_cpu_name].value not in sl_cpu_archive:
+                sl_cpu_archive[par[index_cpu_name].value] = {}
+            alg_name = par[index_alg_name].value[par[index_alg_name].value.find('|') + 1:]
+            sl_cpu_archive[par[index_cpu_name].value].update({alg_name: f"{par[index_rus_name].value}"})
 
         '''
         пока оставил данный кусок кода как наследие от старого кода, возможно подскажет     
@@ -869,7 +925,57 @@ def is_read_signals(sheet, sl_wrn_di):
             for par in sl_par:
                 sl_par[par] = (change_return[1],) + sl_par[par]
 
-    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes
+    # Добавляем ТС, ППУ, ПС по умолчанию
+    for plc, tuple_spec in sl_cpu_spec.items():
+        if 'Main' in tuple_spec:
+            if plc not in return_ts:
+                return_ts.update({plc: {}})
+            return_ts[plc].update({'Unlocking': ('TS.TS_PLC_View', 'Деблокировка')})
+            return_ts[plc].update({'StopGTU': ('TS.TS_PLC_View', 'Разрешена деблокировка защит')})
+            return_ts[plc].update({'ModePZ': ('TS.TS_PLC_View', 'Режим проверки защит')})
+            return_ts[plc].update({'ResetPZ': ('TS.TS_PLC_View', 'Сброс проверки защит')})
+            if plc not in sl_cpu_archive:
+                sl_cpu_archive.update({plc: {}})
+            sl_cpu_archive[plc].update({'UserArh': 'Пользовательский'})
+            if plc not in return_alg:
+                return_alg.update({plc: {}})
+            return_alg[plc].update({'ALG_ExtrCtrlOn': ('ALG.ALG_BOOL_PLC_View', 'Управление от внешней системы')})
+            return_alg[plc].update({
+                'ALG_ExtrQuery': ('ALG.ALG_BOOL_PLC_View', 'Запрос на управление от внешней системы')
+            })
+        if 'Main' in tuple_spec and 'PPU' in tuple_spec:
+            if plc not in return_ts:
+                return_ts.update({plc: {}})
+            return_ts[plc].update({'CheckHR': ('TS.TS_PLC_View', 'Контроль ХР')})
+            return_ts[plc].update({'CheckGR': ('TS.TS_PLC_View', 'Контроль ГР')})
+            if plc not in return_alg:
+                return_alg.update({plc: {}})
+            return_alg[plc].update({'ALG_ShowPPU': ('ALG.ALG_BOOL_PLC_View', 'Проверка ППУ')})
+        if 'PPU' in tuple_spec:
+            if plc not in return_ppu:
+                return_ppu.update({plc: {}})
+            return_ppu[plc].update({
+                f'TunNotRead_{plc}': ('PPU.PPU_PLC_View', f'Ошибка чтения настроечных файлов контроллера {plc}')
+            })
+        if 'Main' in tuple_spec and 'ALR' in tuple_spec:
+            if plc not in return_wrn:
+                return_wrn.update({plc: {}})
+            return_wrn[plc].update({'AllAlrBlk': ('WRN_On.WRN_On_PLC_View', 'Защиты заблокированы')})
+            return_wrn[plc].update({'NowAlrBlk': ('WRN_On.WRN_On_PLC_View', 'Сработала заблокированная защита')})
+
+    # Для каждой записи архива, которую нашли, добавляем две ТСки, которые тянем наверх
+    for plc, sl_archive in sl_cpu_archive.items():
+        if plc not in return_ts:
+            return_ts.update({plc: {}})
+        for alg, text_alg in sl_archive.items():
+            return_ts[plc].update({
+                f'{alg}_START': ('TS.TS_PLC_View', f'Запись архива по событию "{text_alg}" начата')
+            })
+            return_ts[plc].update({
+                f'{alg}_STOP': ('TS.TS_PLC_View', f'Запись архива по событию "{text_alg}" закончена')
+            })
+
+    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive
 
 
 def is_read_drv(sheet, sl_all_drv):
@@ -921,7 +1027,7 @@ def is_read_drv(sheet, sl_all_drv):
     return_ios_drv = {}
     # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
     sl_cpu_drv_signal = {}
-    # Соствялем множество контроллеров, у которых есть данные параметры параметры
+    # Соствялем множество контроллеров, у которых есть данные параметры
     set_par_cpu = set()
     for par in cells:
         if par[0].value is None:
@@ -930,7 +1036,7 @@ def is_read_drv(sheet, sl_all_drv):
         if par[index_drv].value in sl_all_drv:
             set_par_cpu.add(par[index_cpu_name].value)
             # Получаем тип переменной (нужно для удобного отсечения и дальнейшего использования)
-            type_sig_par = par[index_type_sig].value.replace(' (с имитацией)', '')  # учесть тип имитации!!!
+            type_sig_par = par[index_type_sig].value  # .replace(' (с имитацией)', '')  # учесть тип имитации!!!
 
             # Если в словаре sl_cpu_drv_signal нет инфы по cpu, то создаём для него внутренний пустой словарь
             if par[index_cpu_name].value not in sl_cpu_drv_signal:
@@ -956,13 +1062,16 @@ def is_read_drv(sheet, sl_all_drv):
                                 sl_all_drv.get(par[index_drv].value))][par[index_cpu_name].value] = {}
 
             type_sig_in_tuple = sl_type_drv.get(type_sig_par, 'Types.').replace('Types.', '')
-            type_msg_in_tuple = (par[index_type_msg].value if type_sig_par == 'BOOL' else '-')
+            type_msg_in_tuple = (par[index_type_msg].value if 'BOOL' in type_sig_par else '-')
             c_off_in_tuple = (sl_color_di.get(par[index_color_off].fill.start_color.index)
-                              if type_sig_par == 'BOOL' else '0')
+                              if 'BOOL' in type_sig_par else '0')
             c_on_in_tuple = (sl_color_di.get(par[index_color_on].fill.start_color.index)
-                             if type_sig_par == 'BOOL' else '0')
-            unit_in_tuple = (par[index_unit].value if type_sig_par != 'BOOL' else '-')
-            fracdig_in_tuple = (par[index_fracdig].value if type_sig_par in ('FLOAT', 'IECR', 'IEC') else '0')
+                             if 'BOOL' in type_sig_par else '0')
+            unit_in_tuple = (par[index_unit].value if 'BOOL' not in type_sig_par else '-')
+            fracdig_in_tuple = (par[index_fracdig].value if 'FLOAT' in type_sig_par
+                                                            or 'Расчетные' in type_sig_par
+                                                            or 'IECR' in type_sig_par
+                                                            or 'IEC' in type_sig_par else '0')
             history_in_tuple = f'Сохраняемый - {par[index_save_history].value}'
             frag_dig_hist_in_tuple = ''.join(
                 [i for i in str(par[index_fracdig].comment)[:str(par[index_fracdig].comment).find('by')]
@@ -987,6 +1096,8 @@ def is_read_create_grh(sheet, sl_object_all):
 
     # Словарь типов ПЛК-аспектов для алгоритмических переменных
     sl_type_alogritm = {
+        #  if 'Старт режима' not in val[0] else 'GRH.GRH_BOOL_TS_PLC_View'
+        'BOOL_TS': 'Types.GRH.GRH_BOOL_TS_PLC_View',
         'BOOL': 'Types.GRH.GRH_BOOL_PLC_View',
         'INT': 'Types.GRH.GRH_INT_PLC_View',
         'FLOAT': 'Types.GRH.GRH_FLOAT_PLC_View'
@@ -1011,7 +1122,7 @@ def is_read_create_grh(sheet, sl_object_all):
             sl_alg_in_cpu[cpu], sl_command_in_cpu[cpu], sl_mod_cpu[cpu] = is_load_algoritm(
                 controller=cpu, cells=cells, sheet=sheet)
 
-    # Из функции возвращаяем словарь где ключ - cpu, а значение - кортеж переменных GRH
+    # Из функции возвращаяем словарь, где ключ - cpu, а значение - кортеж переменных GRH
     # Также возвращаем словарь вида {cpu: {алг_пар: (тип переменной в студии, русское имя,
     # количество знаков, если есть)}}
     sl_ = dict(zip(sl_alg_in_cpu.keys(), [tuple(value.keys()) for value in sl_alg_in_cpu.values()]))
@@ -1112,3 +1223,124 @@ def f_ind_json(target_str):
         # меняем все target_str на подставляемое
         target_str = target_str.replace(i, j)
     return target_str
+
+
+def is_create_rlock(sl_object_all: dict, sl_cpu_archive: dict):
+    # print(sl_object_all, '\n', sl_cpu_archive)
+    root_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                             xmlns_snmp="automation.snmp", xmlns_ct="automation.control")
+
+    child_obj_rlock = ET.SubElement(root_aspect, 'ct_object', name="Service.rlock",
+                                    access_level="public")
+    ET.SubElement(child_obj_rlock, 'ct_parameter', name='setAlarm', type='bool', direction='in', access_level="public")
+    ET.SubElement(child_obj_rlock, 'ct_parameter', name='setDescription', type='string',
+                  direction='in', access_level="public")
+    ET.SubElement(child_obj_rlock, 'ct_parameter', name='High', type='uint64', direction='in', access_level="public")
+    ET.SubElement(child_obj_rlock, 'ct_parameter', name='Low', type='uint64', direction='in', access_level="public")
+    ET.SubElement(child_obj_rlock, 'ct_parameter', name='setUserAlarm', type='bool',
+                  direction='in', access_level="public")
+    # Для каждого объекта
+    for objects, sl_plc in sl_object_all.items():
+        for plc in sl_plc:
+            if plc in sl_cpu_archive:
+                for signal_arch, rus_name_arch in sl_cpu_archive[plc].items():
+                    ET.SubElement(child_obj_rlock, 'ct_parameter', name=f'Low_{signal_arch}{objects[0]}_tmp',
+                                  type='uint64', direction='in',
+                                  access_level="public")
+                    ET.SubElement(child_obj_rlock, 'ct_parameter', name=f'High_{signal_arch}{objects[0]}_tmp',
+                                  type='uint64', direction='in',
+                                  access_level="public")
+                    ET.SubElement(child_obj_rlock, 'ct_subject-ref', name=f'{objects[0]}_{signal_arch}_START',
+                                  object=f"{objects[0]}.System.TS.{signal_arch}_START", const_access="false",
+                                  aspected="false")
+                    ET.SubElement(child_obj_rlock, 'ct_subject-ref', name=f'{objects[0]}_{signal_arch}_STOP',
+                                  object=f"{objects[0]}.System.TS.{signal_arch}_STOP", const_access="false",
+                                  aspected="false")
+                    object_handler_start = ET.SubElement(
+                        child_obj_rlock, 'ct_handler', name=f'{signal_arch}_Handler_START_{objects[0]}',
+                        source_code=f'if ({objects[0]}_{signal_arch}_START.PLCSignals.Value)\n{{\n'
+                                    f'\tcommit Low_{signal_arch}{objects[0]}_tmp = '
+                                    f'Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);'
+                                    f'//Время до начала события - по + 18000000000,0 - 30 минут\n}}'
+                    )
+                    ET.SubElement(object_handler_start, 'ct_trigger',
+                                  on=f"{objects[0]}_{signal_arch}_START.PLCSignals.Value", cause="change")
+                    object_handler_stop = ET.SubElement(
+                        child_obj_rlock, 'ct_handler', name=f'{signal_arch}_Handler_STOP_{objects[0]}',
+                        source_code=f'if ({objects[0]}_{signal_arch}_STOP.PLCSignals.Value)\n{{\n'
+                                    f'\tcommit setDescription.Value = \"{objects[1]} {rus_name_arch}\";\n'
+                                    f'\tcommit High_{signal_arch}{objects[0]}_tmp = '
+                                    f'Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);'
+                                    f'//Время после события - по + 18000000000,0 - 30 минут\n'
+                                    f'\tcommit Low = Low_{signal_arch}{objects[0]}_tmp;\n'
+                                    f'\tcommit High = High_{signal_arch}{objects[0]}_tmp;\n'
+                                    f'\tcommit setAlarm.Value = true;\n'
+                                    f'\tcommit setAlarm.Value = false;\n}}'
+                    )
+                    ET.SubElement(object_handler_stop, 'ct_trigger',
+                                  on=f"{objects[0]}_{signal_arch}_STOP.PLCSignals.Value", cause="change")
+
+    # Нормируем и записываем IOS-аспект
+    temp = ET.tostring(root_aspect).decode('UTF-8')
+
+    check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                    file_name_check=f'file_rlock.omx-export',
+                    new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                      pretty_print=True, encoding='unicode')),
+                    message_print=f'Требуется заменить IOS-Аспект архивов по событиям (механизм rlock). '
+                                  f'Файл file_rlock.omx-export')
+
+    root_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                             xmlns_snmp="automation.snmp", xmlns_ct="automation.control")
+
+    child_interval_lock = ET.SubElement(root_aspect, 'ct_object', name="IntervalLock",
+                                        access_level="public")
+    obj_high = ET.SubElement(child_interval_lock, 'ct_parameter', name='High', type='uint64',
+                             direction='out', access_level="public")
+    ET.SubElement(obj_high, 'attribute', type='unit.Server.Attributes.History',
+                  value=f"Enable=\"True\" ServerTime=\"False\"")
+
+    obj_low = ET.SubElement(child_interval_lock, 'ct_parameter', name='Low', type='uint64',
+                            direction='out', access_level="public")
+    ET.SubElement(obj_low, 'attribute', type='unit.Server.Attributes.History',
+                  value=f"Enable=\"True\" ServerTime=\"False\"")
+    obj_write_lock = ET.SubElement(child_interval_lock, 'ct_parameter', name='WriteLock', type='bool',
+                                   direction='out', access_level="public")
+    ET.SubElement(obj_write_lock, 'attribute', type='unit.Server.Attributes.History',
+                  value=f"Enable=\"True\" ServerTime=\"False\"")
+    ET.SubElement(obj_write_lock, 'attribute', type='unit.Server.Attributes.Alarm',
+                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                        f'"Subconditions":[{{"AckStrategy":1,"IsEnabled":true,'
+                        f'"Message":"Архивация выполнена",'
+                        f'"Severity":500,"Type":2}},'
+                        f'{{"AckStrategy":1,"IsEnabled":false,'
+                        f'"Message":"___",'
+                        f'"Severity":500,"Type":3}}],'
+                        f'"Type":2}}}}')
+    ET.SubElement(child_interval_lock, 'ct_parameter', name='Description', type='string',
+                  direction='out', access_level="public")
+    ET.SubElement(child_interval_lock, 'ct_subject-ref', name=f'rlock', object=f"rlock", const_access="false",
+                  aspected="false")
+    ET.SubElement(child_interval_lock, 'ct_subject-ref', name=f'_State', object=f"State", const_access="false",
+                  aspected="false")
+
+    object_handler = ET.SubElement(
+        child_interval_lock, 'ct_handler', name=f'Handler',
+        source_code=f'if (rlock.setAlarm.Value && _State.Server.Value) {{\n'
+                    f'\tcommit Description = rlock.setDescription;\n'
+                    f'\tcommit High = rlock.High;\n'
+                    f'\tcommit Low = rlock.Low;\n'
+                    f'\tcommit WriteLock = true;\n}}'
+    )
+    ET.SubElement(object_handler, 'ct_trigger',
+                  on=f"rlock.setAlarm", cause="update")
+
+    # Нормируем и записываем IOS-аспект
+    temp = ET.tostring(root_aspect).decode('UTF-8')
+
+    check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                    file_name_check=f'file_historian_rlock.omx-export',
+                    new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                      pretty_print=True, encoding='unicode')),
+                    message_print=f'Требуется заменить IOS-Аспект архивов по событиям в модуле истории(механизм rlock).'
+                                  f'Файл file_historian_rlock.omx-export')

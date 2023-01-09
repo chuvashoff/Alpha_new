@@ -19,9 +19,15 @@ def is_load_algoritm(controller, cells, sheet):
     sl_algoritm = {}
     # sl_command = {(Режим_alg, русское имя режима): {номер шага: {команда_alg: русский текст команды}}}
     sl_command = {}
-    # Для выдачи команд заполняем sl_algoritm парами алг.имя команды: (руское наименование команды, тип сигнала-BOOL)
+    # Для выдачи команд заполняем sl_algoritm парами алг. имя команды: (русское наименование команды, тип сигнала-BOOL)
+
+    # Флаг создания ТС
+    create_ts = False
     for p in cells:
         # Если установлен нужный контроллер и мы находимся в строке объявления режима
+        if p[0].value == 'Создавать ТС:':
+            if sheet[p[0].row][1].value == 'Да':
+                create_ts = True
         if sheet[p[0].row][3].value == controller and p[0].value == 'Режим':
 
             # Определяем количество шагов в режиме:
@@ -34,7 +40,7 @@ def is_load_algoritm(controller, cells, sheet):
             #
             cmd_eng, cmd_rus = (), ()
             # Добавляем дефолтные переменные для режима
-            cmd_rus += ((f"Старт режима {sheet[p[0].row][2].value}", 'BOOL'),
+            cmd_rus += ((f"Старт режима {sheet[p[0].row][2].value}", 'BOOL_TS' if create_ts else 'BOOL'),
                         (f"Оконачание режима {sheet[p[0].row][2].value}", 'BOOL'),
                         (f"Шаг режима {sheet[p[0].row][2].value}", 'INT'))
             cmd_eng += (f"GRH|{sheet[p[0].row][1].value}_START",
@@ -130,7 +136,8 @@ def is_load_algoritm(controller, cells, sheet):
                     if sheet[j + 1][1].value is not None:
                         # print(p, float(sheet[j + 1][1].value), sheet[j + 1][2].value)
                         # добавляем текст таймера и текст выхода таймера в кортеж русских таймеров
-                        tuple_rus_step_timer += ([sheet[j + 1][2].value], [sheet[j + 1][2].value + '-Вых'],)
+                        text_in = sheet[j + 1][2].value if sheet[j + 1][2].value else ''
+                        tuple_rus_step_timer += ([text_in], [text_in + '-Вых'],)
                         # добавляем значение таймера в кортеж
                         tuple_step_timer_value += ([sheet[j + 1][1].value],)
                     # Если на шаге не установлено таймера
@@ -217,7 +224,7 @@ def is_load_algoritm(controller, cells, sheet):
                                                       ('0',)*len(tuple_rus_step_timer))))))
 
                 # Дополнительный параметры
-                # В выходной словарь функции грузим алг.имя: (Русское текст доп.параметра, тип сигнала-FLOAT, frag_dig)
+                # В выходной словарь функции грузим алг. имя: (Русское текст доп.параметра, тип сигнала-FLOAT, frag_dig)
                 sl_algoritm.update(dict(zip(step_dop_par_out_tmp,
                                             tuple(zip(tuple_dop_par_rus, ('FLOAT',)*len(tuple_dop_par_rus),
                                                       step_dop_par_fragdigits_out_tmp)))))

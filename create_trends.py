@@ -98,7 +98,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             sl_node_alr = {}
             sl_node_modes = {}  # Словарь возможных режимов
             sl_node_drv = {}  # Словарь возможных драйверов
-            # Выбираем  текущий лист в качестве активного
+            # Выбираем текущий лист в качестве активного
             sheet = book[list_config]
             # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
             cells_name = sheet['A1': 'AG1']
@@ -174,7 +174,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
                     # если 'ИМ2Х2', 'ИМ2Х2с', 'ИМ2Х4'
-                    elif par[is_f_ind(cells_name[0], 'Тип ИМ')].value in ('ИМ2Х2', 'ИМ2Х2с', 'ИМ2Х4'):
+                    elif par[is_f_ind(cells_name[0], 'Тип ИМ')].value in ('ИМ2Х2', 'ИМ2Х2с', 'ИМ2Х4', 'ИМ2Х2ПЧ'):
                         move_ = par[is_f_ind(cells_name[0], 'Вкл./откр.')].value  # определяем тип открытия
                         gender_ = par[is_f_ind(cells_name[0], 'Род')].value  # определяем род ИМ
                         # создаём промежуточный словарь с возможными префиксами сигналов
@@ -192,7 +192,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                 # и параметр принадлежит контроллеру объекта
                 elif list_config in ('ИМ(АО)',) and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Да' and \
                         par[cpu_par].value in sl_object_all[obj]:
-                    # sl_tmp  промежуточный словарь с возможными префиксами сигналов
+                    # sl_tmp промежуточный словарь с возможными префиксами сигналов
                     sl_tmp = {'.Set': 'Задание', '.iPos': 'Положение'}
                     for par_pref in sl_tmp:
                         # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
@@ -220,16 +220,20 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                             sl_node_alr[type_protect].update(sl_alr_trends)
                     # Если увидели режим
                     elif type_protect in ('Режим',):
-                        # то добавляем в словарь режимов с ключом рус имени аварии : (алг.имя, единицы измерения - '-')
-                        sl_node_modes[f_ind_json(par[rus_par_ind].value)] = \
+                        # то добавляем в словарь режимов с ключом рус имени аварии: (алг.имя, единицы измерения - '-')
+                        sl_node_modes[f'Режим {f_ind_json(par[rus_par_ind].value)}'] = \
                             (par[alg_name_ind].value.replace('MOD|', '') + '.Value', '-')
+                        if 'Номер режима' not in sl_node_modes:
+                            sl_node_modes['Номер режима'] = ('regNum.Value', '-')
                 # при условии, что парсим лист Драйверов
                 # и параметр принадлежит контроллеру объекта
                 # и указанный драйвер переменной есть в объявленных
                 elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj] \
                         and par[name_drv_ind].value in sl_all_drv and par[index_save_history].value == 'Да':
                     sl_type_unit = {'BOOL': '-', 'INT': par[eunit_drv_ind].value, 'FLOAT': par[eunit_drv_ind].value,
-                                    'IEC': '-', 'Daily': '-', 'IECB': '-', 'IECR': par[eunit_drv_ind].value}
+                                    'IEC': '-', 'Daily': '-', 'IECB': '-', 'IECR': par[eunit_drv_ind].value,
+                                    'INT (с имитацией)': par[eunit_drv_ind].value,
+                                    'FLOAT (с имитацией)': par[eunit_drv_ind].value}
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
                     # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
                     sl_drv_trends = \
@@ -300,7 +304,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             for mode in sorted(sl_node_modes):
                 # ...собираем json
                 lst_json.append(
-                    {"Signal": {"UserTree": f"Режимы/Режим {mode}",
+                    {"Signal": {"UserTree": f"Режимы/{mode}",
                                 "OpcTag":
                                     f"{obj[0]}.System.MODES.{sl_node_modes[mode][0]}",
                                 "EUnit": sl_node_modes[mode][1],
@@ -344,7 +348,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
         for list_config in sl_brk_group_trends:
             # для каждой группы создаём словарь с пустыми словарями для каждого узла
             sl_node_trends = {node: {} for node in tuple_node_trends}
-            # Выбираем  текущий лист в качестве активного
+            # Выбираем текущий лист в качестве активного
             sheet = book[list_config]
             # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
             cells_name = sheet['A1': 'AG1']

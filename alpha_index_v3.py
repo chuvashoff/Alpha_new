@@ -153,12 +153,14 @@ def create_group_system_sig(sub_name, sl_global_sig, template_no_arc_index, sour
     sl_data_cat = {
         'R': 'Analog',
         'I': 'Analog',
-        'B': 'Discrete'
+        'B': 'Discrete',
+        'M': 'Analog'
     }
     sl_type = {
         'R': 'Analog',
         'I': 'Analog',
-        'B': 'Bool'
+        'B': 'Bool',
+        'M': 'String'
     }
     s_out = ''
     for key, value in sl_global_sig.items():
@@ -270,7 +272,7 @@ def create_group_pz(sl_global_pz, lst_pz, tuple_anum, template_no_arc_index, sou
     s_out = ''
     sl_pz_i = {}
     for i in range(len(sl_global_pz)//len(lst_pz)):
-        lst_tmp = []  # В lst_tmp кладём списки [инд. переменной, тип ] в сответствии с lst_pz -нужные подимена
+        lst_tmp = []  # В lst_tmp кладём списки [инд. переменной, тип] в сответствии с lst_pz -нужные подимена
         for j in lst_pz:
             lst_tmp.append(sl_global_pz[f'{j}[{i}]'])
         sl_pz_i[i] = dict(zip(lst_pz, lst_tmp))  # {индекс массива: {подимя: [инд. переменной, тип ]}}
@@ -315,7 +317,8 @@ def create_group_diag(diag_sl, template_no_arc_index, source, template_arc_index
     return s_out
 
 
-def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, template_arc_index, sl_drv_iec):
+def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, template_arc_index, sl_drv_iec,
+                     sl_global_drv_imit):
     sl_data_cat = {
         'R': 'Analog',
         'I': 'Analog',
@@ -342,13 +345,22 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
                                                              type_signal=sl_type[type_iec_par],
                                                              index=sl_global_fast[f'FAST|{iec_par}'],
                                                              data_category=f'DataCategory_{source}_Arc')
+    for key, value in sl_global_drv_imit.items():
+        name_drv = key[0]
+        post_signal = key[1] if key[1] else 'Value'
+        name_signal = key[2]
+        pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+        s_out += Template(template_no_arc_index).substitute(
+            name_signal=f'System.DRV.{name_drv}.{name_signal}.{post_signal}',
+            type_signal=sl_type[value[1]], index=value[0],
+            data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out
 
 
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                  sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
                  sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
-                 buff_size):
+                 buff_size, sl_cpu_drv_signal_with_imit):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -490,6 +502,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_apr = {}
             sl_global_diag = {}
             sl_global_drv = {}
+            sl_global_drv_imit = {}
 
             sl_global_grh = {}
             sl_sar_tun = {}
@@ -687,7 +700,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 line_diag = line.split(',')
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 tag_name = sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][tmp_var]
-                                # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
+                                # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, tag_name)] = [max(int(line_diag[9]),
                                                                               int(line_diag[10])), line_diag[1]]
 
@@ -801,6 +814,10 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             line = line.split(',')
                             if 'regnum' in line[0][line[0].find('|') + 1:].lower():
                                 sl_global_mod['regNum'] = [max(int(line[9]), int(line[10])), line[1]]
+                            elif 'regname' in line[0][line[0].find('|') + 1:].lower():
+                                sl_global_mod['regName'] = [max(int(line[9]), int(line[10])), line[1]]
+                            elif 'regcolor' in line[0][line[0].find('|') + 1:].lower():
+                                sl_global_mod['regColor'] = [max(int(line[9]), int(line[10])), line[1]]
                             else:
                                 sl_global_mod[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])),
                                                                                   line[1]]
@@ -883,7 +900,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 signal_name = \
                                     sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][var_name]
-                                # (алг.имя CPU, имя пер- через словарь соответствия) : [инд. пер, тип пер]
+                                # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, signal_name)] = [max(int(line.split(',')[9]),
                                                                                  int(line.split(',')[10])),
                                                                              line.split(',')[1]]
@@ -913,24 +930,34 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         # если в текущем контроллере объявлены драйвера и строка явно содержит индекс
                         elif line_source[0] in sl_cpu_drv_signal and len(line.split(',')) >= 10:
                             tmp_check = line.split(',')[0]
-                            # если в считанной строке-переменной есть признак какого- либо драйвера
+                            # если в считанной строке-переменной есть признак какого-либо драйвера
                             if tmp_check[1:tmp_check.find('|')] in sl_cpu_drv_signal.get(line_source[0], 'бла'):
                                 tmp_check_drv = tmp_check[1:tmp_check.find('|')]
+                                tmp_check_par = tmp_check[tmp_check.find('|') + 1:]
                                 # если в считанной строке с признаком драйвера обнаружена объявленная переменная
-                                if tmp_check[tmp_check.find('|')+1:] in \
-                                        sl_cpu_drv_signal[line_source[0]][tmp_check_drv]:
-                                    tmp_drv_signal = tmp_check[tmp_check.find('|')+1:]
-                                    # {(алг. имя драйвера, алг. имя переменной): (инд.пер, тип переменной) }
-                                    sl_global_drv[(tmp_check_drv, tmp_drv_signal)] = (max(int(line.split(',')[9]),
-                                                                                          int(line.split(',')[10])),
-                                                                                      line.split(',')[1])
+                                if tmp_check_par in sl_cpu_drv_signal[line_source[0]][tmp_check_drv] and \
+                                        tmp_check_par not in sl_cpu_drv_signal_with_imit[line_source[0]][tmp_check_drv]:
+                                    sl_global_drv[(tmp_check_drv, tmp_check_par)] = (
+                                        max(int(line.split(',')[9]), int(line.split(',')[10])),
+                                        line.split(',')[1])
+                                else:
+                                    # Если драйверная переменная выставлена в конфигураторе без имитации, то выставляем
+                                    for pref in ('', 'coSim_', 'Sim_'):
+                                        if tmp_check_par.startswith(pref) and \
+                                                tmp_check_par.replace(pref, '') in \
+                                                sl_cpu_drv_signal_with_imit[line_source[0]][tmp_check_drv]:
+                                            sl_global_drv_imit[(tmp_check_drv, pref[:-1],
+                                                                tmp_check_par.replace(pref, ''))] = \
+                                                (max(int(line.split(',')[9]),
+                                                     int(line.split(',')[10])),
+                                                 line.split(',')[1])
                         if 'FAST|' in line:
                             tmp_var = get_variable(line=line)
                             line = line.split(',')
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
                             sl_global_fast[line[0][1:]] = max(int(line[9]), int(line[10]))
                             # Ищем переменные контроллерв в FAST
-                            if tmp_var.replace('FAST|', '') \
+                            if sl_for_diag.get(line_source[0]) and tmp_var.replace('FAST|', '') \
                                     in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
                                 sl_global_fast[tmp_var] = max(int(line[9]), int(line[10]))
 
@@ -1097,7 +1124,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 s_all += create_group_drv(drv_sl=sl_global_drv, template_no_arc_index=tmp_ind_no_arc,
                                           source=line_source[0],
                                           sl_global_fast=sl_global_fast, template_arc_index=tmp_ind_arc,
-                                          sl_drv_iec=sl_cpu_drv_iec.get(line_source[0], {}))
+                                          sl_drv_iec=sl_cpu_drv_iec.get(line_source[0], {}),
+                                          sl_global_drv_imit=sl_global_drv_imit)
 
             # повторно открываем глобальный словарь контроллера для сбора диагностики (здесь немного по-другому читаем)
             if os.path.exists(os.path.join(line_source[1], 'global0.var')):
@@ -1124,7 +1152,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 if tag in sl_module_diag_sig.get(curr_module, 'бла'):
                                     # print(tmp_line.split(',')[0][1:], get_variable(line=tmp_line))
 
-                                    # в словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
+                                    # В словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
                                     if (module, tag) not in sl_global_diag:
                                         sl_global_diag[(module, tag)] = [max(int(tmp_line.split(',')[9]),
                                                                              int(tmp_line.split(',')[10])),

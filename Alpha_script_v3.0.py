@@ -2,14 +2,15 @@
 import openpyxl
 import logging
 import warnings
-import lxml.etree
+# import lxml.etree
 import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index
-from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz
+from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv
 from Create_mnemo_visual import create_mnemo_visual
 from create_reports import create_reports, create_reports_pz, create_reports_sday
+# from collections import ChainMap
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -104,6 +105,10 @@ try:
     index_apr_on = is_f_ind(cells[0], 'APR')
     index_path = is_f_ind(cells[0], 'Path')
     index_name_cpu = is_f_ind(cells[0], 'Наименование CPU')
+    index_ppu = is_f_ind(cells[0], 'PPU')
+    index_alr = is_f_ind(cells[0], 'ALR')
+    index_mde = is_f_ind(cells[0], 'MDE')
+    index_main = is_f_ind(cells[0], 'Main')
     cells = sheet['B2':'L21']
     # Словарь {ПЛК: путь к проекту ПЛК}
     sl_cpu_path = {}
@@ -120,6 +125,14 @@ try:
                     print('В файле Tun_TR.txt не указан выбранный тип топливного регулятора')
             if p[index_apr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('АПР',)
+            if p[index_ppu].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('PPU',)
+            if p[index_alr].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('ALR',)
+            if p[index_mde].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('MDE',)
+            if p[index_main].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('Main',)
             # Узнаём пути к контроллерам и забиваем в словарь
             sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
     if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu_spec.txt')):
@@ -208,7 +221,7 @@ try:
 
     # print(datetime.datetime.now(), ' - Начинаем парсить файл')
     # Измеряемые
-    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков,
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков,
     # количество знаков для истории)}}
     # sl_mnemo = {узел: список параметров узла}
     return_sl_ai, sl_mnemo_ai, return_sl_sday = {}, {}, {}
@@ -231,13 +244,13 @@ try:
         return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
 
     # Создаём и набиваем словарь для мнемосхемы наработок
-    sl_mnemo_cnt = {'Наработка': list(), 'Перестановки': list()}
+    sl_mnemo_cnt = {plc: {'Наработка': list(), 'Перестановки': list()} for plc in sl_cnt}
     for cpu, sl_c in sl_cnt.items():
         for nar in sl_c:
             if 'WorkTime' in nar:
-                sl_mnemo_cnt['Наработка'].append(nar)
+                sl_mnemo_cnt[cpu]['Наработка'].append(nar)
             elif 'Swap' in nar:
-                sl_mnemo_cnt['Перестановки'].append(nar)
+                sl_mnemo_cnt[cpu]['Перестановки'].append(nar)
 
     # # sl_cnt = {CPU: {алг.имя : русское имя}}
     # sl_cnt_xml = {CPU: {алг.имя : (тип модуля в студии, русское имя,)}}
@@ -270,7 +283,7 @@ try:
         return_sl_btn = is_read_btn(sheet=book['Кнопки'])
     # print(datetime.datetime.now(), ' - Разпарсили кнопки, парсим защиты и сигналы')
     # Защиты
-    # В чтении защит передаём словари AI и AE с единицами измерения
+    # В чтении защит передаём словари AI и AE с единицами измерения,
     # чтобы определить единицы измрения у защиты при необходимости
     sl_pz, sl_pz_xml = {}, {}
     if 'Сигналы' in book.sheetnames:
@@ -279,14 +292,19 @@ try:
                                              for cpu, sl_par in return_sl_ai.items()},
                                       sl_ae={cpu: {par: value[2] for par, value in sl_par.items()}
                                              for cpu, sl_par in return_sl_ae.items()})
-    # sl_pz -  словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д. словарь для индексов
-    # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, )}}
+    # sl_pz - словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д. словарь для индексов
+    # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, Проверяется при ПЗ - Да/Нет)}}
 
     # Сигналы остальные
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = {}, {}, {}, {}, {}, {}
+    sl_cpu_archive = {}
     if 'Сигналы' in book.sheetnames:
-        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = is_read_signals(sheet=book['Сигналы'],
-                                                                                                  sl_wrn_di=sl_wrn_di)
+        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive = is_read_signals(
+            sheet=book['Сигналы'],
+            sl_wrn_di=sl_wrn_di,
+            sl_cpu_spec=sl_CPU_spec
+        )
+    # print(sl_cpu_archive)
     # print(datetime.datetime.now(), ' - Разпарсили защиты и сигналы, парсим Драйвера')
     # Драйвера
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
@@ -360,6 +378,8 @@ try:
     #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
     #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
+    print(datetime.datetime.now(), ' - Начинаем создавать выходные файлы')
+    is_create_rlock(sl_object_all=sl_object_all, sl_cpu_archive=sl_cpu_archive)
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
     if 'Сеть' in book.sheetnames:
@@ -367,14 +387,14 @@ try:
 
     sl_w = {
         # return_sl_ai =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
         'AI': {'dict': return_sl_ai,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
                'dict_agreg_IOS': sl_agreg
                },
         # return_sl_ae =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
         'AE': {'dict': return_sl_ae,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
@@ -393,7 +413,7 @@ try:
                'dict_agreg_IOS': sl_agreg
                },
         # return_sl_set =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
         'SET': {'dict': return_sl_set,
                 'tuple_attr': ('unit.System.Attributes.Description',
                                'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
@@ -452,7 +472,7 @@ try:
     }
     # sl_object_all = {}  #
     # {(Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
-    print(datetime.datetime.now(), ' - Начинаем создавать выходные файлы')
+    # print(return_alg_grh)
     # {cpu: {алг_имя тюнинга: (плк_тип, рус. описание(имя))}}
     sl_tun_apr = {}
     # Для каждого объекта...
@@ -677,66 +697,79 @@ try:
 
         # Если у текущего объекта есть контроллеры с САР на борту
         if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'САР' in sl_CPU_spec[i]]):
-            child_ios_sar = ET.SubElement(child_object, 'ct_object', name=f"SAR", access_level="public")
-            ET.SubElement(child_ios_sar, 'attribute', type='unit.System.Attributes.Description', value=f'САР')
-            child_ios_sar_im = ET.SubElement(child_ios_sar, 'ct_object', name=f"IM", access_level="public")
-            child_ios_sar_reload = ET.SubElement(child_ios_sar, 'ct_object', name=f"Reload", access_level="public")
-            for i in range(1, 10):
-                ios_km = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_KM{i}",
-                                       base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
-                                       original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}",
-                                       aspect="Types.IOS_Aspect", access_level="public")
-                ET.SubElement(ios_km, 'ct_init-ref',
-                              ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}")
-                ios_mk = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_MK{i}",
-                                       base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
-                                       original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}",
-                                       aspect="Types.IOS_Aspect", access_level="public")
-                ET.SubElement(ios_mk, 'ct_init-ref',
-                              ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}")
-            child_ios_khr = ET.SubElement(child_ios_sar_im, 'ct_object', name=f"KHR",
-                                          base_type='Types.SAR_Classic.KHR_IOS_View',
-                                          aspect="Types.IOS_Aspect",
-                                          original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.IM.KHR",
-                                          access_level="public")
-            ET.SubElement(child_ios_khr, 'ct_init-ref',
-                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.IM.KHR")
-            ET.SubElement(child_ios_khr, 'attribute', type='unit.System.Attributes.Description', value=f'КХР')
-            child_ios_sar_regul = ET.SubElement(child_ios_sar, 'ct_object', name=f"REGUL",
-                                                base_type='Types.SAR_Classic.REGUL_IOS_View',
-                                                aspect="Types.IOS_Aspect",
-                                                original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.REGUL",
-                                                access_level="public")
-            ET.SubElement(child_ios_sar_regul, 'ct_init-ref',
-                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.REGUL")
-            child_ios_sar_wrn = ET.SubElement(child_ios_sar, 'ct_object', name=f"WRN",
-                                              base_type='Types.SAR_Classic.WRN_IOS_View',
-                                              aspect="Types.IOS_Aspect",
-                                              original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.WRN",
-                                              access_level="public")
-            ET.SubElement(child_ios_sar_wrn, 'ct_init-ref',
-                          ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.WRN")
-            if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
-                child_ios_sar_tun = ET.SubElement(child_ios_sar, 'ct_object', name=f"Tuning", access_level="public")
-                with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
-                          'r', encoding='UTF-8') as f_signal:
-                    for line in f_signal:
-                        if '#' in line:
-                            continue
-                        if not line.strip():
-                            break
-                        lst_tun = line.strip().split(';')
-                        if lst_tun[0] == 'sSetWord':
-                            types_tun = f'SAR_tuning_sSetWord'
-                        else:
-                            types_tun = f'SAR_tuning' if lst_tun[1] == 'REAL' else f'SAR_tuning_int'
-                        object_ios_sar_tuning = ET.SubElement(
-                            child_ios_sar_tun, 'ct_object', name=f"{lst_tun[0]}",
-                            base_type=f"Types.{types_tun}.{types_tun}_IOS_View",
-                            original=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}",
-                            aspect="Types.IOS_Aspect", access_level="public")
-                        ET.SubElement(object_ios_sar_tuning, 'ct_init-ref',
-                                      ref="_PLC_View", target=f"PLC_SAR_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}")
+            set_cpu_sar = set([i for i in sl_CPU_spec if 'САР' in sl_CPU_spec[i]])
+            # На случай, если в объекте будут несколько контроллеров с САР, то в IOS аспекте будут созданы несколько
+            for cpu_sar in set_cpu_sar:
+                if cpu_sar in set(sl_object_all[objects].keys()):
+                    child_ios_sar = ET.SubElement(
+                        child_object, 'ct_object',
+                        name=f"SAR" if tuple(sl_object_all[objects].keys()).count(cpu_sar) == 1 else f'SAR_{cpu_sar}',
+                        access_level="public")
+                    ET.SubElement(child_ios_sar, 'attribute', type='unit.System.Attributes.Description', value=f'САР')
+                    child_ios_sar_im = ET.SubElement(child_ios_sar, 'ct_object', name=f"IM", access_level="public")
+                    child_ios_sar_reload = ET.SubElement(child_ios_sar, 'ct_object', name=f"Reload",
+                                                         access_level="public")
+                    for i in range(1, 10):
+                        ios_km = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_KM{i}",
+                                               base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                               original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}",
+                                               aspect="Types.IOS_Aspect", access_level="public")
+                        ET.SubElement(ios_km, 'ct_init-ref',
+                                      ref="_PLC_View",
+                                      target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}")
+                        ios_mk = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_MK{i}",
+                                               base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                               original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}",
+                                               aspect="Types.IOS_Aspect", access_level="public")
+                        ET.SubElement(ios_mk, 'ct_init-ref',
+                                      ref="_PLC_View",
+                                      target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}")
+                    child_ios_khr = ET.SubElement(child_ios_sar_im, 'ct_object', name=f"KHR",
+                                                  base_type='Types.SAR_Classic.KHR_IOS_View',
+                                                  aspect="Types.IOS_Aspect",
+                                                  original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.IM.KHR",
+                                                  access_level="public")
+                    ET.SubElement(child_ios_khr, 'ct_init-ref',
+                                  ref="_PLC_View", target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.IM.KHR")
+                    ET.SubElement(child_ios_khr, 'attribute', type='unit.System.Attributes.Description', value=f'КХР')
+                    child_ios_sar_regul = ET.SubElement(child_ios_sar, 'ct_object', name=f"REGUL",
+                                                        base_type='Types.SAR_Classic.REGUL_IOS_View',
+                                                        aspect="Types.IOS_Aspect",
+                                                        original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.REGUL",
+                                                        access_level="public")
+                    ET.SubElement(child_ios_sar_regul, 'ct_init-ref',
+                                  ref="_PLC_View", target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.REGUL")
+                    child_ios_sar_wrn = ET.SubElement(child_ios_sar, 'ct_object', name=f"WRN",
+                                                      base_type='Types.SAR_Classic.WRN_IOS_View',
+                                                      aspect="Types.IOS_Aspect",
+                                                      original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.WRN",
+                                                      access_level="public")
+                    ET.SubElement(child_ios_sar_wrn, 'ct_init-ref',
+                                  ref="_PLC_View", target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.WRN")
+                    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]),
+                                                   'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                        child_ios_sar_tun = ET.SubElement(child_ios_sar, 'ct_object', name=f"Tuning",
+                                                          access_level="public")
+                        with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
+                                  'r', encoding='UTF-8') as f_signal:
+                            for line in f_signal:
+                                if '#' in line:
+                                    continue
+                                if not line.strip():
+                                    break
+                                lst_tun = line.strip().split(';')
+                                if lst_tun[0] == 'sSetWord':
+                                    types_tun = f'SAR_tuning_sSetWord'
+                                else:
+                                    types_tun = f'SAR_tuning' if lst_tun[1] == 'REAL' else f'SAR_tuning_int'
+                                object_ios_sar_tuning = ET.SubElement(
+                                    child_ios_sar_tun, 'ct_object', name=f"{lst_tun[0]}",
+                                    base_type=f"Types.{types_tun}.{types_tun}_IOS_View",
+                                    original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}",
+                                    aspect="Types.IOS_Aspect", access_level="public")
+                                ET.SubElement(object_ios_sar_tuning, 'ct_init-ref',
+                                              ref="_PLC_View",
+                                              target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Tuning.{lst_tun[0]}")
 
         # Пробегаемся по словарю ключами анпаров, расчётными и дискретными
         for node in ('AI', 'AE', 'DI', 'IM'):
@@ -752,24 +785,26 @@ try:
             set_cpu_apr = set([i for i in sl_CPU_spec if 'АПР' in sl_CPU_spec[i]])
             # На случай, если в объекте будут несколько контроллеров с АПР, то в IOS аспекте будут созданы несколько
             for cpu_apr in set_cpu_apr:
-                child_apr = ET.SubElement(child_object, 'ct_object',
-                                          name=('APR' if len(set_cpu_apr) == 1 else f'APR_{cpu_apr}'),
-                                          aspect="Types.IOS_Aspect", access_level="public")
-                # ...добавляем агрегаторы
-                for agreg, type_agreg in sl_agreg.items():
-                    ET.SubElement(child_apr, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
-                                  aspect="Types.IOS_Aspect", access_level="public")
-                child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
-                                             base_type="Types.APR_IM.APR_IM_IOS_View",
-                                             original=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM",
-                                             aspect="Types.IOS_Aspect", access_level="public")
-                ET.SubElement(child_apr_im, 'ct_init-ref',
-                              ref="_PLC_View", target=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM")
-                if sl_tun_apr:
-                    add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                                    objects=objects, name_group='Tuning',
-                                    sl_par=sl_tun_apr, parent_node=child_apr, plc_node_tree='APR.Tuning',
-                                    sl_agreg={})
+                if cpu_apr in set(sl_object_all[objects].keys()):
+                    child_apr = ET.SubElement(
+                        child_object, 'ct_object',
+                        name=('APR' if tuple(sl_object_all[objects].keys()).count(cpu_apr) == 1 else f'APR_{cpu_apr}'),
+                        aspect="Types.IOS_Aspect", access_level="public")
+                    # ...добавляем агрегаторы
+                    for agreg, type_agreg in sl_agreg.items():
+                        ET.SubElement(child_apr, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                      aspect="Types.IOS_Aspect", access_level="public")
+                    child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
+                                                 base_type="Types.APR_IM.APR_IM_IOS_View",
+                                                 original=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM",
+                                                 aspect="Types.IOS_Aspect", access_level="public")
+                    ET.SubElement(child_apr_im, 'ct_init-ref',
+                                  ref="_PLC_View", target=f"PLC_{cpu_apr}_{objects[2]}.CPU.Tree.APR.IM")
+                    if sl_tun_apr:
+                        add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                        objects=objects, name_group='Tuning',
+                                        sl_par=sl_tun_apr, parent_node=child_apr, plc_node_tree='APR.Tuning',
+                                        sl_agreg={})
 
         # Создаём узел Diag
         child_diag = ET.SubElement(child_object, 'ct_object', name='Diag', access_level="public")
@@ -840,6 +875,52 @@ try:
                                               access_level="public")
                     ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
                                   target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                    if sl_value['Option']:
+                        lst_ai = sl_value['Option'].split(';')[:12]
+                        lst_di = sl_value['Option'].split(';')[12:]
+                        # print(lst_ai)
+                        for i, ai in enumerate([lst_ai[:3], lst_ai[3:6], lst_ai[6:9], lst_ai[9:12]]):
+                            if ''.join(ai) and 'Не используется' not in ai:
+                                # print(i, ai)
+                                object_sig_ai = ET.SubElement(child_alg, 'ct_parameter', name=f'aiValue{i}',
+                                                              type='int32', direction='out', access_level="public")
+                                ET.SubElement(object_sig_ai, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{ai[0]}")
+                                ET.SubElement(child_alg, 'ct_formula',
+                                              source_code=f"_PLC_View.Signals_{sl_value['Type']}.aiValue{i}",
+                                              target=f"aiValue{i}")
+                        for i, di in enumerate(lst_di):
+                            if di and 'Не используется' not in di:
+                                # print(i, di)
+                                description_ps = di.replace('(Инверсия)', '')
+                                object_sig_di = ET.SubElement(child_alg, 'ct_parameter', name=f'dioStatus{i}',
+                                                              type='bool', direction='out', access_level="public")
+                                ET.SubElement(object_sig_di, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{description_ps}")
+                                ET.SubElement(child_alg, 'ct_formula',
+                                              source_code=f"TypeConvert.ToBool"
+                                                          f"(_PLC_View.Signals_{sl_value['Type']}.dioStatus{i})",
+                                              target=f"dioStatus{i}")
+                                if '(Инверсия)' in di:
+                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                        f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":2}},'
+                                                        f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":3}}],'
+                                                        f'"Type":2}}}}')
+                                else:
+                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                        f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":2}},'
+                                                        f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":3}}],'
+                                                        f'"Type":2}}}}')
 
         # Создаём узел System
         child_system = ET.SubElement(child_object, 'ct_object', name='System', access_level="public")
@@ -871,7 +952,7 @@ try:
             for driver in return_ios_drv:
                 # создаём узлы драйверов
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
-                                objects=objects, name_group=driver[0],
+                                objects=objects, name_group=driver,
                                 sl_par=return_ios_drv[driver],
                                 parent_node=child_drv_node,
                                 sl_agreg=sl_agreg,
@@ -960,7 +1041,7 @@ try:
                                                                              значение - тип переменной (R или B)
     sl_cpu_path = Словарь {ПЛК: путь к проекту ПЛК}
     '''
-    # поддержать вытягивание индексов для АС - сделано, но индексы хорошо бы переписать
+    # поддержать вытягивание индексов АС - сделано, но индексы хорошо бы переписать
     # Возможно, подробней рассмотреть аварии(ALR)!!!
 
     # return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes
@@ -974,7 +1055,15 @@ try:
     sl_cpu_drv_iec = {plc: {par: value[0].replace('DRV_AI.DRV_AI_PLC_View', 'R').replace('DRV_DI.DRV_DI_PLC_View', 'B')
                             for par, value in sl_driver.get(('IEC', 'Прочие архивируемые параметры'), {}).items()}
                       for plc, sl_driver in return_sl_cpu_drv.items()}
-
+    # print(return_sl_cpu_drv)
+    sl_cpu_drv_signal_with_imit = {cpu: {} for cpu in return_sl_cpu_drv}
+    for cpu, sl_drv in return_sl_cpu_drv.items():
+        for driver, par_sl in sl_drv.items():
+            sl_cpu_drv_signal_with_imit[cpu].update({driver[0]: tuple()})
+            for param, param_tuple in par_sl.items():
+                if 'IMIT' in param_tuple[0]:
+                    sl_cpu_drv_signal_with_imit[cpu][driver[0]] += (param,)
+    # print(sl_cpu_drv_signal_with_imit)
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                  sl_sig_alg=sl_sig_alg, 
                  sl_sig_mod=sl_sig_mod, 
@@ -997,8 +1086,11 @@ try:
                  sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
                  sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
                  sl_cpu_path=sl_cpu_path,
-                 buff_size=buff_size)
+                 buff_size=buff_size,
+                 sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit)
 
+    # print(return_alr)
+    # print(sl_CPU_spec)
     # добавление отсечки в файл изменений, чтобы разные сборки не сливались
     if os.path.exists('Required_change.txt'):
         with open('Required_change.txt', 'r') as f_test:
@@ -1030,37 +1122,90 @@ try:
     # Проработать вопрос создания мнемосхем для разных объектов!!!
     # return_sl_mnemo = {узел: список параметров узла}
     # Передаём такой словарь, но упорядоченный по узлам, согласно объявлению
+    # print(sl_mnemo_cnt)
     if sl_mnemo_ai:
+        sl_mnemo_ai = {_: {node: sl_mnemo_ai[_].get(node) for node in tuple_mnemo if node in sl_mnemo_ai[_]}
+                       for _ in sl_mnemo_ai}
         create_mnemo_param(name_list='Измеряемые', name_group='AI', name_page='AINP', base_type_param='S_A_INP_Param',
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo_ai.get(node) for node in tuple_mnemo if node in sl_mnemo_ai})
+                           sl_param=sl_mnemo_ai,
+                           # {node: sl_mnemo_ai.get(node) for node in tuple_mnemo if node in sl_mnemo_ai},
+                           sl_object_all=sl_object_all
+                           )
 
     if sl_mnemo_ae:
+        sl_mnemo_ae = {_: {node: sl_mnemo_ae[_].get(node) for node in tuple_mnemo if node in sl_mnemo_ae[_]}
+                       for _ in sl_mnemo_ae}
+        # for _ in sl_mnemo_ae:
+        #     for node in sl_mnemo_ae[_]:
+        #         print(node, len(sl_mnemo_ae[_][node]), sl_mnemo_ae[_][node])
         create_mnemo_param(name_list='Расчетные', name_group='AE', name_page='AEVL', base_type_param='S_A_INP_Param',
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo_ae.get(node) for node in tuple_mnemo if node in sl_mnemo_ae})
+                           sl_param=sl_mnemo_ae,
+                           sl_object_all=sl_object_all
+                           )
 
     if sl_mnemo_di:
+        sl_mnemo_di = {_: {node: sl_mnemo_di[_].get(node) for node in tuple_mnemo if node in sl_mnemo_di[_]}
+                       for _ in sl_mnemo_di}
         create_mnemo_param(name_list='Дискретные', name_group='DI', name_page='DINP', base_type_param='S_D_INP_Param',
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
-                           sl_param={node: sl_mnemo_di.get(node) for node in tuple_mnemo if node in sl_mnemo_di})
+                           sl_param=sl_mnemo_di,
+                           sl_object_all=sl_object_all
+                           )
 
     if sl_cnt:
         create_mnemo_param(name_list='Наработка', name_group='System.CNT', name_page='SCNT', base_type_param='S_CNT',
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
-                           sl_param=sl_mnemo_cnt)
-    if sl_pz:
+                           sl_param=sl_mnemo_cnt,
+                           sl_object_all=sl_object_all
+                           )
+    if sl_pz_xml:
         create_mnemo_pz(name_group='System.PZ', name_page='ПЗ', base_type_param='S_ALR',
                         size_shirina=size_shirina,
                         size_vysota=size_vysota,
-                        param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz])
+                        # param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz],
+                        sl_pz_xml=sl_pz_xml,    # sl_with_check_pz=dict(ChainMap(*sl_pz_xml.values())),
+                        sl_object_all=sl_object_all)
+
     if sl_command_in_cpu and sl_condition_in_cpu and return_modes:
         create_mnemo_visual(sl_object_all=sl_object_all, sl_command_in_cpu=sl_command_in_cpu,
                             sl_condition_in_cpu=sl_condition_in_cpu, sl_mod_cpu=sl_mod_cpu)
+
+    # print(return_ios_drv)
+
+    if return_ios_drv:
+        sl_mnemo_drv = {driver[1]: list() for driver in return_ios_drv}
+        sl_type_drv = {driver[1]: {} for driver in return_ios_drv}
+        for driver in return_ios_drv:
+            for cpu in return_ios_drv[driver]:
+                for drv_par in return_ios_drv[driver][cpu]:
+                    sl_mnemo_drv[driver[1]].append(drv_par)
+                    sl_type_drv[driver[1]].update({drv_par: return_ios_drv[driver][cpu][drv_par][0]})
+        # print(sl_mnemo_drv)
+        # print(sl_type_drv)
+        # print(dict(ChainMap(*return_ios_drv.values())).keys())
+        if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'DRV')):
+            os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'DRV'))
+        if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', 'DRV', 'Systemach')):
+            os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'DRV', 'Systemach'))
+        # Чистим старые мнемосхемы ПЗ
+        for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'DRV')):
+            if file.endswith('.omobj'):
+                os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'DRV', file))
+
+        for driver, sl_one_driver_cpu in return_ios_drv.items():
+            create_mnemo_drv(name_group=f'System.DRV.{driver[0]}',
+                             name_page=f'{driver[0]}',
+                             name_pag_rus=f'{driver[1]}',
+                             size_shirina=size_shirina,
+                             size_vysota=size_vysota,
+                             sl_one_driver_cpu=sl_one_driver_cpu,
+                             sl_object_all=sl_object_all)
 
     print(datetime.datetime.now(), '- Окончание сборки всех файлов')
     input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')
