@@ -1,4 +1,5 @@
-from json import dumps as json_dumps
+from json import dumps as json_dumps, load as json_load
+# from json import load, loads
 from func_for_v3 import check_diff_file, is_f_ind, f_ind_json
 import os
 
@@ -43,8 +44,9 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
         'Включить': 'Отключить'
     }
     # print(sl_object_all)
-    # Словарь модулей и сигналов, по которым нужны тренды диагностики
-    sl_signal_module = {
+    # Словарь модулей и сигналов, по которым нужны тренды диагностики по умолчанию,
+    # в случае ошибок используется он
+    sl_signal_module_default = {
         'M531I': {'Частота канала 1 модуля': ('Canal_01', 'Гц'), 'Частота канала 2 модуля': ('Canal_02', 'Гц'),
                   'Частота канала 3 модуля': ('Canal_03', 'Гц'), 'Частота канала 4 модуля': ('Canal_04', 'Гц'),
                   'Частота канала 5 модуля': ('Canal_05', 'Гц'), 'Частота канала 6 модуля': ('Canal_06', 'Гц'),
@@ -67,9 +69,28 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                    'Частота канала 3 модуля': ('Canal_03', 'Гц'),
                    'Ошибка канала 1 модуля': ('Err_Canal_01', '-'), 'Ошибка канала 2 модуля': ('Err_Canal_02', '-'),
                    'Ошибка канала 3 модуля': ('Err_Canal_03', '-')},
-        'M501E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с')},
-        'M903E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с')},
+        'M501E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с'),
+                  'Температура контроллера': ('CpuTemp', '°C')},
+        'M903E': {'Цикл контроллера': ('TCycle', 'с'), 'Максимальный цикл контроллера': ('TCycleMax', 'с'),
+                  'Температура контроллера': ('CpuTemp', '°C')},
     }
+
+    # sl_signal_module = {}
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Trends', f'Diagnostic.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Trends', f'Diagnostic.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_signal_module = text_json
+        else:
+            print('Файл Systemach/Trends/Diagnostic.json не найден, '
+                  'тренды диагностики железяк будут определены по умолчанию')
+            sl_signal_module = sl_signal_module_default
+    except Exception:
+        print('Файл Systemach/Trends/Diagnostic.json заполнен некорректно, '
+              'тренды диагностики железяк будут определены по умолчанию')
+        sl_signal_module = sl_signal_module_default
+
     # sl_for_diag - словарь диагностики, ключ - cpu, значение - словарь: ключ - имя модуля, значение - тип модуля
     # в случае CPU - ключ - 'CPU', значение - кортеж (имя cpu,тип cpu)
 
@@ -89,7 +110,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
     # Для каждого объекта, прочитанного ранее
     for obj in sl_object_all:
         lst_json = []
-        # Для каждого листа конфигуратора в словаре групп для трендов(ключи словаря опрделили
+        # Для каждого листа конфигуратора в словаре групп для трендов(ключи словаря определили
         # по объявленным мнемосхемам)
         for list_config in sl_group_trends:
             # для каждой группы создаём словарь с пустыми словарями для каждого узла
@@ -112,6 +133,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             name_drv_ind = is_f_ind(cells_name[0], 'Драйвер')
             reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
             index_save_history = is_f_ind(cells_name[0], 'Сохранять в истории')
+            index_fast = is_f_ind(cells_name[0], 'Передача по МЭК')
 
             # Устанавливаем диапазон для чтения параметров
             cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -126,10 +148,12 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                     list_config == 'Входные' and par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
                         par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
-                    sl_par_trends = {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') +
-                                                                          '.Value',
-                                                                          ('-' if list_config == 'Входные' else
-                                                                           par[eunit_ind].value))}
+                    rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
+                        else par[rus_par_ind].value
+                    sl_par_trends = {f_ind_json(rus_name_par): (par[alg_name_ind].value.replace('|', '_') +
+                                                                '.Value',
+                                                                ('-' if list_config == 'Входные' else
+                                                                 par[eunit_ind].value))}
                     # добавляем словарь параметра в словарь узла
                     sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
                 # при условии, что парсим лист ИМов
@@ -175,12 +199,16 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
 
                     # если 'ИМ2Х2', 'ИМ2Х2с', 'ИМ2Х4'
                     elif par[is_f_ind(cells_name[0], 'Тип ИМ')].value in ('ИМ2Х2', 'ИМ2Х2с', 'ИМ2Х4', 'ИМ2Х2ПЧ'):
+                        t_im = par[is_f_ind(cells_name[0], 'Тип ИМ')].value
                         move_ = par[is_f_ind(cells_name[0], 'Вкл./откр.')].value  # определяем тип открытия
                         gender_ = par[is_f_ind(cells_name[0], 'Род')].value  # определяем род ИМ
                         # создаём промежуточный словарь с возможными префиксами сигналов
-                        sl_tmp = {'.oOn': move_, '.oOff': sl_antonym[move_],
-                                  '.stOn': sl_state_im_gender[move_][gender_],
-                                  '.stOff': sl_state_im_gender[move_ + '_off'][gender_]}
+                        sl_tmp = {'.oOn': 'Включить через ПЧ' if t_im == 'ИМ2Х2ПЧ' else move_,
+                                  '.oOff': 'Включить через байпас' if t_im == 'ИМ2Х2ПЧ' else sl_antonym[move_],
+                                  '.stOn': 'Включен через ПЧ' if t_im == 'ИМ2Х2ПЧ'
+                                  else sl_state_im_gender[move_][gender_],
+                                  '.stOff': 'Включен через байпас' if t_im == 'ИМ2Х2ПЧ'
+                                  else sl_state_im_gender[move_ + '_off'][gender_]}
                         for par_pref in sl_tmp:
                             # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                             sl_par_trends = \
@@ -213,7 +241,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                         sl_alr_trends = \
                             {f'{f_ind_json(par[rus_par_ind].value)}': (par[alg_name_ind].value.replace('|', '.') +
                                                                        '.Value', '-')}
-                        # если в словаре аварий отсутвует такая авария, то создаём
+                        # если в словаре аварий отсутствует такая авария, то создаём
                         if type_protect not in sl_node_alr:
                             sl_node_alr[type_protect] = sl_alr_trends
                         else:  # иначе обновляем словарь, который есть
@@ -236,10 +264,12 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                                     'FLOAT (с имитацией)': par[eunit_drv_ind].value}
                     drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
                     # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
+                    rus_name_sig = par[rus_par_ind].value + '(С меткой времени ПЛК)' \
+                        if 'IEC' in par[t_sig_drv_ind].value else par[rus_par_ind].value
                     sl_drv_trends = \
-                        {f'{f_ind_json(par[rus_par_ind].value)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
-                                                                   sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
-                    # если в словаре драйверов отсутвует такой драйвер, то создаём
+                        {f'{f_ind_json(rus_name_sig)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
+                                                         sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
+                    # если в словаре драйверов отсутствует такой драйвер, то создаём
                     if drv_ not in sl_node_drv:
                         sl_node_drv[drv_] = sl_drv_trends
                     else:  # иначе обновляем словарь, который есть
@@ -288,13 +318,13 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                                         "EUnit": sl_node_drv[drv][sig_drv][1],
                                         "Description": sig_drv}})
 
-            # для каждого типа аварии в остортированном словаре типов аварий...
+            # для каждого типа аварии в отсортированном словаре типов аварий...
             for node in sorted(sl_node_alr):
                 # ...для каждой аварии по отсортированному словарю аварий в узле(типе)...
                 for alr in sorted(sl_node_alr[node]):
                     # ...собираем json
                     lst_json.append(
-                        {"Signal": {"UserTree": f"Аварии/{node.replace('/', '|')}/"
+                        {"Signal": {"UserTree": f"Аварии(С меткой времени ПЛК)/{node.replace('/', '|')}/"
                                                 f"{node.replace('/', '|')}. {alr.replace('/', '|')}",
                                     "OpcTag":
                                         f"{obj[0]}.System.{sl_node_alr[node][alr][0]}",
@@ -320,6 +350,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
         eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
         cpu_par = is_f_ind(cells_name[0], 'CPU')
         reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
+        index_fast = is_f_ind(cells_name[0], 'Передача по МЭК')
 
         # Устанавливаем диапазон для чтения параметров
         cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
@@ -332,8 +363,10 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             # если параметр принадлежит контроллеру объекта и не переведено в резерв
             if par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
                 # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
-                sl_node_set[par[rus_par_ind].value] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
-                                                       par[eunit_ind].value)
+                rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
+                    else par[rus_par_ind].value
+                sl_node_set[rus_name_par] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
+                                             par[eunit_ind].value)
         # для каждой уставки в отсортированном словаре уставок
         for a_set_rus in sorted(sl_node_set):
             # ...собираем json
@@ -409,6 +442,29 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                                         f'{sl_signal_module[type_module][signal][0]}',
                                     "EUnit": sl_signal_module[type_module][signal][1],
                                     "Description": f'{signal} {spec_module_name} ({type_module})'}})
+
+        # Для каждого контроллера объекта...
+        # При наличии Сар добавляем на тренды САР
+        for cpu in sl_object_all[obj]:
+            if 'САР' in sl_cpu_spec.get(cpu, ''):
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                    with open(os.path.join('Template_Alpha', 'SAR', f'Tun_SAR.txt'), 'r',
+                              encoding='UTF-8') as f_sar:
+                        for line in f_sar:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            line = line.strip().split(';')
+                            tag = line[0]
+                            descr = line[3]
+                            full_tag = f'{obj[0]}.SAR.Tuning.{tag}.Value'
+                            lst_json.append(
+                                {"Signal": {"UserTree": f"Настройки САР/{descr}",
+                                            "OpcTag":
+                                                f'{full_tag}',
+                                            "EUnit": '-',
+                                            "Description": f'{descr}'}})
 
         # Проверяем и перезаписываем файлы трендов в случае найденных отличий
         check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),

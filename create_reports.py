@@ -1,5 +1,6 @@
 import openpyxl
 import os
+import sys
 from openpyxl.styles import Font, Alignment, numbers
 from openpyxl.styles.borders import Border, Side
 
@@ -7,7 +8,7 @@ from openpyxl.styles.borders import Border, Side
 def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict):
     # sl_object_all =
     # { (Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
-    # sl_param = {cpu: {Перфискспапки.alg_par: русское имя}}
+    # sl_param = {cpu: {Префикс папки.alg_par: русское имя}}
     # num_cel = 8
     # num_par = 1
 
@@ -71,7 +72,8 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
         sheet[f'H2'] = f'=A3'
         sheet[f'H2'].font = Font(size=16, name='Arial', bold=True)
         sheet[f'H2'].alignment = Alignment(horizontal="center", vertical="top")
-        sheet[f'H2'].number_format = numbers.BUILTIN_FORMATS[15]
+        # sheet[f'H2'].number_format = numbers.BUILTIN_FORMATS[15]
+        sheet[f'H2'].number_format = 'dd.mm.yyyy'
 
         for cell, i in {'F7': '="№"', 'G7': '="Наименование  "',
                         'H7': '="ед.изм"'}.items():
@@ -115,7 +117,8 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
                         sheet[f'H{num_cel}'] = f'=H2'
                         sheet[f'H{num_cel}'].font = Font(size=16, name='Arial', bold=True)
                         sheet[f'H{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-                        sheet[f'H{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        # sheet[f'H{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        sheet[f'H{num_cel}'].number_format = 'dd.mm.yyyy'
                         num_cel += 2
                         sheet.row_dimensions[num_cel].height = 20
                         for cell, i in {'F': '="№"', 'G': '="Наименование  "',
@@ -142,6 +145,8 @@ def create_reports_sday(sl_object_all: dict, node_param_rus: str, sl_param: dict
                     for i in range(len(tuple_sh)):
                         sheet[f'{tuple_sh[i]}{num_cel}'] = f'=ArchiveAttributeValue($E{num_cel}, ' \
                                                            f'0, {str_sh[i]}$5, {str_sh[i]}$6, 1)'
+                        # sheet[f'{tuple_sh[i]}{num_cel}'] = f'=ValueOnDate($E{num_cel}, 0, {str_sh[i]}$5)'
+                        # print(11)
                     for i in range(len(str_sh)):
                         sheet[f'{str_sh[i]}{num_cel}'] = f'=IF({str_sh[i]}$4, IF(ISNUMBER({tuple_sh[i]}{num_cel}), ' \
                                                          f'{tuple_sh[i]}{num_cel}, $V{num_cel}), "-")'
@@ -197,6 +202,8 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
     # sl_param = {cpu: {алг_имя(A000): (тип защиты в студии, рус.имя, ед измерения)}}
     # num_cel = 4
     # num_par = 1
+    igrek = 10
+    igrek_delta = 10
 
     thin_border = Border(left=Side(style='thin'),  # thick - толстые границы, thin - тонкие
                          right=Side(style='thin'),
@@ -205,6 +212,7 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
 
     # Для каждого объекта
     for obj in sl_object_all:
+        num_cel_start = 4
         num_cel = 4
         num_par = 1
         # Создаём эксельку
@@ -213,7 +221,7 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
         sheet = wb.active
         sheet.title = 'Лист 1'
         # Заполняем стартовую информацию
-        for col, w in {'P': 7, 'Q': 105}.items():
+        for col, w in {'P': 5, 'Q': 50}.items():
             sheet.column_dimensions[col].width = w
         sheet['A1'] = f'="{obj[0]}."'
         for cell, value in {'A2': '="Получение данных с OPC UA@"', 'B2': '=".TRDELAY;1"', 'C2': '=".TDELAY;1"',
@@ -225,28 +233,31 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
                             'F3': '="Название"', 'G3': '="ед.измерения"'}.items():
             sheet[cell] = value
         # Создаём заголовок
-        sheet.row_dimensions[3].height = 20
-        sheet.row_dimensions[1].height = 25
+        sheet.row_dimensions[3].height = 13
+        sheet.row_dimensions[1].height = 17
         sheet['Q1'] = f'="Протокол проверки защит {obj[1]} на  "'
-        sheet['Q1'].font = Font(size=16, name='Arial', bold=True)
+        sheet['Q1'].font = Font(size=14, name='Arial', bold=True)
         sheet['Q1'].alignment = Alignment(horizontal="right", vertical="top")
         sheet['R1'] = f'=NOW()'
-        sheet['R1'].font = Font(size=16, name='Arial', bold=True)
+        sheet['R1'].font = Font(size=14, name='Arial', bold=True)
         sheet['R1'].alignment = Alignment(horizontal="center", vertical="top")
-        sheet['R1'].number_format = numbers.BUILTIN_FORMATS[15]
+        # sheet['R1'].number_format = numbers.BUILTIN_FORMATS[15]
+        sheet['R1'].number_format = 'dd.mm.yyyy'
         sheet['S1'] = f'=NOW()'
-        sheet['S1'].font = Font(size=16, name='Arial', bold=True)
+        sheet['S1'].font = Font(size=14, name='Arial', bold=True)
         sheet['S1'].alignment = Alignment(horizontal="left", vertical="top")
         sheet['S1'].number_format = numbers.BUILTIN_FORMATS[20]
         for cell, i in {'P3': '="№"', 'Q3': '="Наименование защиты  "',
                         'R3': '="Таймер"', 'S3': '="Задержка"', 'T3': '="Уставка"', 'U3': '="Значение"',
                         'V3': '="Eд.изм"', 'W3': '="Отметка о проверке"'}.items():
             sheet[cell] = i
-            sheet[cell].font = Font(size=14, name='Arial', bold=True)
+            sheet[cell].font = Font(size=12, name='Arial', bold=True)
             sheet[cell].alignment = Alignment(horizontal="center", vertical="center")
             sheet[cell].border = thin_border
 
         # Для каждого контроллера...
+        tuple_page = tuple()
+        num_page = 1
         for cpu, sl_par in sl_param.items():
             # ...при условии, что объект содержит текущий контроллер...
             if cpu in sl_object_all[obj]:
@@ -254,39 +265,43 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
                 for par, property_par in sl_par.items():
                     if 'Проверяется при ПЗ - Нет' in property_par:
                         continue
-                    # Если отсчитали 17 параметров, то добавляем шапку для следующего листа
-                    if not (num_par - 1) % 26 and num_par != 1:
-                        num_cel += 2
+                    # Если отсчитали igrek параметров, то добавляем шапку для следующего листа
+                    if not (num_par - 1) % igrek and num_par != 1:
+                        num_cel += 1
+                        tuple_page += (num_page,)
+                        num_page += 1
+                        igrek_delta = 10
                         for _ in range(3):
-                            sheet.row_dimensions[num_cel].height = 35
-                            for cell, i in {'Q': '="должность"', 'S': '="ФИО"', 'U': '="подпись"'}.items():
-                                sheet[f'{cell}{num_cel}'] = i
-                                sheet[f'{cell}{num_cel}'].font = Font(size=12, name='Arial')
-                                sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-                            for coll in 'QRSTU':
-                                sheet[f'{coll}{num_cel}'].border = Border(top=Side(style='thin'))
+                            sheet.row_dimensions[num_cel].height = 12
+                            # for cell, i in {'Q': '="должность"', 'S': '="ФИО"', 'U': '="подпись"'}.items():
+                            #     sheet[f'{cell}{num_cel}'] = i
+                            #     sheet[f'{cell}{num_cel}'].font = Font(size=5, name='Arial')
+                            #     sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
+                            # for coll in 'QRSTU':
+                            #     sheet[f'{coll}{num_cel}'].border = Border(top=Side(style='thin'))
                             num_cel += 1
 
-                        num_cel += 1
-                        sheet.row_dimensions[num_cel].height = 25
+                        num_cel += 0
+                        sheet.row_dimensions[num_cel].height = 17
                         sheet[f'Q{num_cel}'] = f'="Протокол проверки защит {obj[1]} на "'
-                        sheet[f'Q{num_cel}'].font = Font(size=16, name='Arial', bold=True)
+                        sheet[f'Q{num_cel}'].font = Font(size=14, name='Arial', bold=True)
                         sheet[f'Q{num_cel}'].alignment = Alignment(horizontal="right", vertical="top")
                         sheet[f'R{num_cel}'] = f'=R1'
-                        sheet[f'R{num_cel}'].font = Font(size=16, name='Arial', bold=True)
+                        sheet[f'R{num_cel}'].font = Font(size=14, name='Arial', bold=True)
                         sheet[f'R{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-                        sheet[f'R{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        # sheet[f'R{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        sheet[f'R{num_cel}'].number_format = 'dd.mm.yyyy'
                         sheet[f'S{num_cel}'] = f'=S1'
-                        sheet[f'S{num_cel}'].font = Font(size=16, name='Arial', bold=True)
-                        sheet[f'S{num_cel}'].alignment = Alignment(horizontal="left", vertical="top")
+                        sheet[f'S{num_cel}'].font = Font(size=14, name='Arial', bold=True)
+                        sheet[f'S{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
                         sheet[f'S{num_cel}'].number_format = numbers.BUILTIN_FORMATS[20]
                         num_cel += 2
-                        sheet.row_dimensions[num_cel].height = 20
+                        sheet.row_dimensions[num_cel].height = 15
                         for cell, i in {'P': '="№"', 'Q': '="Наименование защиты  "',
                                         'R': '="Таймер"', 'S': '="Задержка"', 'T': '="Уставка"', 'U': '="Значение"',
                                         'V': '="Eд.изм"', 'W': '="Отметка о проверке"'}.items():
                             sheet[f'{cell}{num_cel}'] = i
-                            sheet[f'{cell}{num_cel}'].font = Font(size=14, name='Arial', bold=True)
+                            sheet[f'{cell}{num_cel}'].font = Font(size=12, name='Arial', bold=True)
                             sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="center")
                             sheet[f'{cell}{num_cel}'].border = thin_border
                         num_cel += 1
@@ -312,14 +327,14 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
                                      'O': f'=CurrAttrValue(J{num_cel}, 0)'}.items():
                         sheet[f'{i}{num_cel}'] = value
                     # Заполняем инфу по параметрам
-                    for i, value in {'R': (f'=IF(N{num_cel}, S{num_cel}, "")', 15),
+                    for i, value in {'R': (f'=IF(N{num_cel}, S{num_cel}, "")', 17),
                                      'S': (f'=CurrAttrValue(C{num_cel}, 0)', 15),
                                      'T': (f'=IF(K{num_cel}=-200, "д.вх.", K{num_cel})', 13),
                                      'U': (f'=IF(L{num_cel}=-200, "д.вх.", IF(N{num_cel}, O{num_cel}, L{num_cel}))',
                                            15),
                                      'V': (f'=CurrAttrValue(G{num_cel}, 0)', 12),
                                      'W': (f'=IF(M{num_cel}, "Блокирована", IF(N{num_cel}, "Проверено", "-"))',
-                                           30)}.items():
+                                           25)}.items():
                         sheet[f'{i}{num_cel}'] = value[0]
                         sheet.column_dimensions[i].width = value[1]
                     # Выставляем формат
@@ -327,31 +342,50 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
                         sheet[f'{i}{num_cel}'].number_format = numbers.BUILTIN_FORMATS[2]
                     # Устанавливаем для ячеек размер шрифта 14, Arial и выставляем границу
                     for i in ('P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W'):
-                        sheet[f'{i}{num_cel}'].font = Font(size=14, name='Arial')
+                        sheet[f'{i}{num_cel}'].font = Font(size=12, name='Arial')
                         sheet[f'{i}{num_cel}'].border = thin_border
                     # Выводим в центр нумерацию, значения и единицы измерения
                     for i, vert_alig in {'P': 'center', 'Q': 'left', 'R': 'center', 'S': 'center',
                                          'T': 'center', 'U': 'center', 'V': 'center', 'W': 'center'}.items():
                         sheet[f'{i}{num_cel}'].alignment = Alignment(horizontal=vert_alig, vertical="center",
                                                                      wrap_text=True)
-                    sheet.row_dimensions[num_cel].height = 20
+                    sheet.row_dimensions[num_cel].height = 38
                     num_cel += 1
                     num_par += 1
+                    igrek_delta -= 1
         # Прячем столбцы с привязками
         for col in ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'):
             sheet.column_dimensions[col].hidden = True
         # Добавляем подпись в конце
-        num_cel += 2
-        for _ in range(3):
-            sheet.row_dimensions[num_cel].height = 35
-            for cell, i in {'Q': '="должность"', 'S': '="ФИО"', 'U': '="подпись"'}.items():
-                sheet[f'{cell}{num_cel}'] = i
-                sheet[f'{cell}{num_cel}'].font = Font(size=12, name='Arial')
-                sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-            for coll in 'QRSTU':
-                sheet[f'{coll}{num_cel}'].border = Border(top=Side(style='thin'))
-            num_cel += 1
+        tuple_page += (num_page,)
+        # num_cel += 1
+        # for _ in range(3):
+        #     sheet.row_dimensions[num_cel].height = 12
+        #     for cell, i in {'Q': '="должность"', 'S': '="ФИО"', 'U': '="подпись"'}.items():
+        #         sheet[f'{cell}{num_cel}'] = i
+        #         sheet[f'{cell}{num_cel}'].font = Font(size=5, name='Arial')
+        #         sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
+        #     for coll in 'QRSTU':
+        #         sheet[f'{coll}{num_cel}'].border = Border(top=Side(style='thin'))
+        #     num_cel += 1
 
+        for _ in range(igrek_delta):
+            sheet.row_dimensions[num_cel].height = 38
+            num_cel += 1
+        cc = igrek + num_cel_start
+        for _ in tuple_page:
+            # print(_, cc)
+            # print(sheet[f'G{_}'].value, end=' ')
+            # tmp = sheet[f'G{_}'].value.replace('=', '').replace('"', '')
+            sheet[f'W{cc}'].value = f'="{_}/{len(tuple_page)}"'
+            sheet[f'W{cc}'].alignment = Alignment(horizontal="right", vertical="center", wrap_text=True)
+            cc += (igrek + 7)
+        # Добавляем колонтитул
+        footer_text = ('_' * 144 + ' ' * 2 + 'должность' + ' ' * 130 + 'ФИО' + ' ' * 50 + 'подпись' + ' ' * 50) * 3
+        sheet.oddFooter.center.text = footer_text
+        sheet.oddFooter.center.size = 10
+        sheet.oddFooter.center.font = "Arial,Bold"
+        # Сохраняем
         wb.save(os.path.join('File_for_Import', 'Reports', f'{node_param_rus} {obj[1]}.xlsx'))
     return
 
@@ -359,10 +393,12 @@ def create_reports_pz(sl_object_all: dict, node_param_rus: str, node_alg_name: s
 def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str, sl_param: dict):
     sl_r = {'AI': 'значений измеряемых параметров', 'AE': 'значений расчётных параметров',
             'System.CNT': 'накопленных значений по наработке'}
+    igrek = 20  # 16
+    igrek_delta = 20
     # sl_object_all =
     # { (Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
 
-    # sl_param = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед измер, короткое имя, количество знаков)}}
+    # sl_param = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед изм., короткое имя, количество знаков)}}
     # num_cel = 4
     # num_par = 1
 
@@ -373,6 +409,7 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
 
     # Для каждого объекта
     for obj in sl_object_all:
+        num_cel_start = 4
         num_cel = 4
         num_par = 1
         # Создаём эксельку
@@ -391,14 +428,15 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
         sheet['B2'] = '=".Value.100;1"'
         # Создаём заголовок
         sheet.row_dimensions[3].height = 20
-        sheet.row_dimensions[1].height = 40
+        sheet.row_dimensions[1].height = 35
         sheet['E1'] = f'="Срез {sl_r.get(node_alg_name)} {obj[1]} на "'
         sheet['E1'].font = Font(size=16, name='Arial',  bold=True)
         sheet['E1'].alignment = Alignment(horizontal="right", vertical="top")
         sheet['F1'] = f'=NOW()'
         sheet['F1'].font = Font(size=16, name='Arial', bold=True)
         sheet['F1'].alignment = Alignment(horizontal="center", vertical="top")
-        sheet['F1'].number_format = numbers.BUILTIN_FORMATS[15]
+        # sheet['F1'].number_format = numbers.BUILTIN_FORMATS[15]
+        sheet['F1'].number_format = 'dd.mm.yyyy'
         sheet['G1'] = f'=NOW()'
         sheet['G1'].font = Font(size=16, name='Arial', bold=True)
         sheet['G1'].alignment = Alignment(horizontal="left", vertical="top")
@@ -409,32 +447,38 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
             sheet[cell].font = Font(size=14, name='Arial',  bold=True)
             sheet[cell].alignment = Alignment(horizontal="center", vertical="center")
             sheet[cell].border = thin_border
-
+        tuple_page = tuple()
+        num_page = 1
         # Для каждого контроллера...
         for cpu, sl_par in sl_param.items():
             # ...при условии, что объект содержит текущий контроллер...
             if cpu in sl_object_all[obj]:
                 # ...для каждого параметра...
                 for par, property_par in sl_par.items():
-                    # Если отсчитали 17 параметров, то добавляем шапку для следующего листа
-                    if not (num_par-1) % 18 and num_par != 1:
-                        num_cel += 2
-                        sheet.row_dimensions[num_cel].height = 35
-                        for cell, i in {'E': '="должность"', 'F': '="ФИО"', 'G': '="подпись"'}.items():
-                            sheet[f'{cell}{num_cel}'] = i
-                            sheet[f'{cell}{num_cel}'].font = Font(size=16, name='Arial', bold=True)
-                            sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-                            sheet[f'{cell}{num_cel}'].border = Border(top=Side(style='thin'))
+                    # Если отсчитали игрек параметров, то добавляем шапку для следующего листа
+                    if not (num_par-1) % igrek and num_par != 1:
+                        # sheet[f'G{num_cel}'] = f'="{num_page}"'
+                        tuple_page += (num_page,)
+                        num_page += 1
+                        igrek_delta = 20
+                        # num_cel += 2
+                        # sheet.row_dimensions[num_cel].height = 35
+                        # for cell, i in {'E': '="должность"', 'F': '="ФИО"', 'G': '="подпись"'}.items():
+                        #     sheet[f'{cell}{num_cel}'] = i
+                        #     sheet[f'{cell}{num_cel}'].font = Font(size=16, name='Arial', bold=True)
+                        #     sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
+                        #     sheet[f'{cell}{num_cel}'].border = Border(top=Side(style='thin'))
 
                         num_cel += 1
-                        sheet.row_dimensions[num_cel].height = 40
-                        sheet[f'E{num_cel}'] = f'="Срез {sl_r.get(node_alg_name)} {obj[1]} на "'
+                        sheet.row_dimensions[num_cel].height = 35
+                        sheet[f'E{num_cel}'] = f'="Срезь {sl_r.get(node_alg_name)} {obj[1]} на "'
                         sheet[f'E{num_cel}'].font = Font(size=16, name='Arial', bold=True)
                         sheet[f'E{num_cel}'].alignment = Alignment(horizontal="right", vertical="top")
                         sheet[f'F{num_cel}'] = f'=F1'
                         sheet[f'F{num_cel}'].font = Font(size=16, name='Arial', bold=True)
                         sheet[f'F{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-                        sheet[f'F{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        # sheet[f'F{num_cel}'].number_format = numbers.BUILTIN_FORMATS[15]
+                        sheet[f'F{num_cel}'].number_format = 'dd.mm.yyyy'
                         sheet[f'G{num_cel}'] = f'=G1'
                         sheet[f'G{num_cel}'].font = Font(size=16, name='Arial', bold=True)
                         sheet[f'G{num_cel}'].alignment = Alignment(horizontal="left", vertical="top")
@@ -456,12 +500,16 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
                     sheet[f'A{num_cel}'] = f'=CONCATENATE($A$2, $A$1, C{num_cel}, $B$2)'
                     sheet[f'B{num_cel}'] = f'=CONCATENATE($A$2, $A$1, C{num_cel}, $B$1)'
                     sheet[f'F{num_cel}'] = f'=CurrAttrValue(B{num_cel}, 0)'
+                    sheet[f'F{num_cel}'].number_format = '0.000'
                     e_unit = (('="-"' if 'Swap' in par else '="час"') if node_alg_name == 'System.CNT'
                               else f'=CurrAttrValue(A{num_cel}, 0)')
                     sheet[f'G{num_cel}'] = e_unit
                     # Устанавливаем для ячеек размер шрифта 14, Arial и выставляем границу
-                    for i in ('C', 'D', 'E', 'A', 'B', 'F', 'G'):
+                    for i in ('B', 'C', 'D', 'E', 'F', 'G'):   # ('C', 'D', 'E', 'A', 'B', 'F', 'G'):
                         sheet[f'{i}{num_cel}'].font = Font(size=14, name='Arial')
+                        sheet[f'{i}{num_cel}'].border = thin_border
+                    for i in ('A', ):   # ('C', 'D', 'E', 'A', 'B', 'F', 'G'):
+                        sheet[f'{i}{num_cel}'].font = Font(size=13.999, name='Arial')
                         sheet[f'{i}{num_cel}'].border = thin_border
                     # Выводим в центр нумерацию, значения и единицы измерения
                     for i, vert_alig in {'D': 'center', 'E': 'left', 'F': 'center', 'G': 'center'}.items():
@@ -470,18 +518,40 @@ def create_reports(sl_object_all: dict, node_param_rus: str, node_alg_name: str,
                     sheet.row_dimensions[num_cel].height = 20
                     num_cel += 1
                     num_par += 1
+                    igrek_delta -= 1
         # Прячем столбцы с привязками
         for col in ('A', 'B', 'C'):
             sheet.column_dimensions[col].hidden = True
         # Добавляем подпись в конце
-        num_cel += 2
-        sheet.row_dimensions[num_cel].height = 35
-        for cell, i in {'E': '="должность"', 'F': '="ФИО"', 'G': '="подпись"'}.items():
-            sheet[f'{cell}{num_cel}'] = i
-            sheet[f'{cell}{num_cel}'].font = Font(size=16, name='Arial', bold=True)
-            sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
-            sheet[f'{cell}{num_cel}'].border = Border(top=Side(style='thin'))
+        # sheet[f'G{num_cel}'] = f'="{num_page}"'
+        tuple_page += (num_page,)
+        # num_cel += 2
+        # sheet.row_dimensions[num_cel].height = 35
+        # for cell, i in {'E': '="должность"', 'F': '="ФИО"', 'G': '="подпись"'}.items():
+        #     sheet[f'{cell}{num_cel}'] = i
+        #     sheet[f'{cell}{num_cel}'].font = Font(size=16, name='Arial', bold=True)
+        #     sheet[f'{cell}{num_cel}'].alignment = Alignment(horizontal="center", vertical="top")
+        #     sheet[f'{cell}{num_cel}'].border = Border(top=Side(style='thin'))
 
+        # print(tuple_page, node_alg_name, obj)
+        # print(node_alg_name, igrek_delta)
+        for _ in range(igrek_delta):
+            sheet.row_dimensions[num_cel].height = 20
+            num_cel += 1
+        cc = igrek + num_cel_start
+        for _ in tuple_page:
+            # print(_, cc)
+            # print(sheet[f'G{_}'].value, end=' ')
+            # tmp = sheet[f'G{_}'].value.replace('=', '').replace('"', '')
+            sheet[f'G{cc}'].value = f'="{_}/{len(tuple_page)}"'
+            sheet[f'G{cc}'].alignment = Alignment(horizontal="right", vertical="center", wrap_text=True)
+            cc += (igrek + 4)
+        # Добавляем колонтитул
+        footer_text = ('_' * 144 + ' ' * 2 + 'должность' + ' ' * 130 + 'ФИО' + ' ' * 50 + 'подпись' + ' ' * 50) * 1
+        sheet.oddFooter.center.text = footer_text
+        sheet.oddFooter.center.size = 10
+        sheet.oddFooter.center.font = "Arial,Bold"
+        # Сохраняем
         wb.save(os.path.join('File_for_Import', 'Reports', f'{node_param_rus} {obj[1]}.xlsx'))
 
     return

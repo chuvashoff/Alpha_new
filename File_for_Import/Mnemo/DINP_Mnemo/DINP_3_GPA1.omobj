@@ -1,4 +1,4 @@
-<type access-modifier="private" name="DINP_3_GPA1" display-name="DINP_3_GPA1" uuid="fe373f9a-1f02-44fd-b0ee-c591ade0e7f8" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
+<type access-modifier="private" name="DINP_3_GPA1" display-name="DINP_3_GPA1" uuid="18ccda9f-7249-4d9b-b233-5977ff925e56" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
   <designed target="X" value="0" ver="3"/>
   <designed target="Y" value="0" ver="3"/>
   <designed target="ZValue" value="0" ver="3"/>
@@ -31,7 +31,7 @@
   <designed target="MonitorNumber" value="0" ver="3"/>
   <designed target="WindowPosition" value="1" ver="3"/>
   <designed target="WindowCloseMode" value="0" ver="3"/>
-  <object access-modifier="private" name="Text_145" display-name="Text_145" uuid="11935960-3424-4190-a421-0edf3a12206d" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Text_145" display-name="Text_145" uuid="e6b01a95-3ddd-49d0-8347-49497ad090cf" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="15" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -42,536 +42,173 @@
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="524.69" ver="3"/>
     <designed target="Height" value="26" ver="3"/>
-    <designed target="Text" value="Диагностика" ver="3"/>
+    <designed target="Text" value="Отсеки" ver="3"/>
     <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
     <designed target="FontColor" value="0xff000000" ver="3"/>
     <designed target="TextAlignment" value="132" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="DI_SQ2_stOn_num146" display-name="DI_SQ2_stOn_num146" uuid="29bea9ba-f8fe-44f1-b722-6ee4a30e6ee0" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_GMT_Brk_num146" display-name="DI_GMT_Brk_num146" uuid="c13f3ef3-9b15-4bb6-8501-5e9f3808b650" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="47" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_SQ2_stOn"/>
+    <init target="_init_Object" ver="3" value="DI.DI_GMT_Brk"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_SQ3_stOn_num147" display-name="DI_SQ3_stOn_num147" uuid="8364f18d-b304-460b-8060-9fc9ad591573" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_AVGM_Work_num147" display-name="DI_AVGM_Work_num147" uuid="acfb2edd-4c80-466b-af18-cefd03a360f8" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="79" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_SQ3_stOn"/>
+    <init target="_init_Object" ver="3" value="DI.DI_AVGM_Work"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G101_U_OK_num148" display-name="DI_G101_U_OK_num148" uuid="3bb3632c-fa6d-4ddf-a9b0-cebb83ce697b" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_AVGM_VnOff_num148" display-name="DI_AVGM_VnOff_num148" uuid="5c02f948-2a85-4d83-bd8a-7b7a15974e40" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="111" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G101_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_AVGM_VnOff"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G102_U_OK_num149" display-name="DI_G102_U_OK_num149" uuid="29c8d907-d932-44c0-aa53-d9a6600bbebd" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_DrPK_Open_num149" display-name="DI_DrPK_Open_num149" uuid="559b4506-b3df-452e-ae6d-a1ec1a3cf546" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="143" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G102_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_DrPK_Open"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G103_U_OK_num150" display-name="DI_G103_U_OK_num150" uuid="8e989aed-28bc-4801-9d19-8aacfddfade6" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_ASPS_Ok_num150" display-name="DI_ASPS_Ok_num150" uuid="640d7667-e0df-4d12-a3af-cebb9bdd9ad9" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="175" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G103_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_ASPS_Ok"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G201_U_OK_num151" display-name="DI_G201_U_OK_num151" uuid="cd8cdf38-b682-4ab9-8f92-7f52f551d11a" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_SKZag_Flt_num151" display-name="DI_SKZag_Flt_num151" uuid="06a917b3-51e3-4d22-b75f-789bdaad3e20" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="207" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G201_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_SKZag_Flt"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G202_U_OK_num152" display-name="DI_G202_U_OK_num152" uuid="f53778a7-2ea2-4d17-b9de-fef7776d991d" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_OD_10_num152" display-name="DI_Zag_OD_10_num152" uuid="7f26ea5e-25d6-4d2d-ae08-523c9dda4000" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="239" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G202_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_OD_10"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G203_U_OK_num153" display-name="DI_G203_U_OK_num153" uuid="1b2cd553-97f2-4449-962c-1315c7805764" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_Ang_10_num153" display-name="DI_Zag_Ang_10_num153" uuid="6a666362-181c-4785-866f-3901768bb996" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="271" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G203_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_Ang_10"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_4S1_StOn_num154" display-name="DI_4S1_StOn_num154" uuid="e9625744-7e6b-448b-9109-03f52e524cf5" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_AVGM_10_num154" display-name="DI_Zag_AVGM_10_num154" uuid="bb1d6c3d-5f70-44f4-8a95-d93b280f8f44" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="303" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_4S1_StOn"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_AVGM_10"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_4S2_StOn_num155" display-name="DI_4S2_StOn_num155" uuid="1f9c461e-48cc-468d-bee5-436e0b2479e4" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_ANG_20_4_num155" display-name="DI_Zag_ANG_20_4_num155" uuid="d7e9d2bc-f158-470a-94dd-5f269bd050eb" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="335" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_4S2_StOn"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_ANG_20_4"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G210_U_OK_num156" display-name="DI_G210_U_OK_num156" uuid="d3914fb7-9461-4f95-95f7-ca02d2e0166d" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Fire_OD_num156" display-name="DI_Fire_OD_num156" uuid="b8f607b2-b256-4c3d-8576-59913a6aeeb5" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="367" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G210_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Fire_OD"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_G211_U_OK_num157" display-name="DI_G211_U_OK_num157" uuid="5a81b16a-3149-4659-9db4-e222b58f8d27" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Fire_Ang_num157" display-name="DI_Fire_Ang_num157" uuid="629a2df0-490e-4024-b8e5-f9504795c466" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="399" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_G211_U_OK"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Fire_Ang"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_VibrD_wH_num158" display-name="DI_VibrD_wH_num158" uuid="3da6c1c5-12f2-4756-9c93-e4f8073cc536" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Fire_BET_num158" display-name="DI_Fire_BET_num158" uuid="d0ecc76c-376a-4148-b48b-8702fbfcb63b" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="431" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VibrD_wH"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Fire_BET"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_VibrD_aH_num159" display-name="DI_VibrD_aH_num159" uuid="1d7620ee-f755-4aea-acef-cf8bde39fbf4" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Fire_SAU_num159" display-name="DI_Fire_SAU_num159" uuid="c9082065-3196-413a-94a8-824111a81996" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="463" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VibrD_aH"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Fire_SAU"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_BEO1_On_num160" display-name="DI_BEO1_On_num160" uuid="7897bfc0-f2da-4422-9e0f-ce2d6e3b8066" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Fire_AVGM_num160" display-name="DI_Fire_AVGM_num160" uuid="54bba7bb-ec07-4728-b3d1-35f04fc1a044" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="495" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_BEO1_On"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Fire_AVGM"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_EO2_ston_num161" display-name="DI_EO2_ston_num161" uuid="d323e56b-16e9-485b-8b34-35725dca1d7c" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_OD_20_1_num161" display-name="DI_Zag_OD_20_1_num161" uuid="be2ed81a-fee3-43f7-916b-1e1b8416c43f" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="527" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EO2_ston"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_OD_20_1"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Text_162" display-name="Text_162" uuid="d8fb498f-98a5-4084-912a-01baf7414a01" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="DI_Zag_OD_20_2_num162" display-name="DI_Zag_OD_20_2_num162" uuid="5d05051a-9725-45c3-8285-8eaadb3986fc" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="559" ver="3"/>
-    <designed target="ZValue" value="0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <designed target="Scale" value="1" ver="3"/>
-    <designed target="Visible" value="true" ver="3"/>
-    <designed target="Enabled" value="true" ver="3"/>
-    <designed target="Tooltip" value="" ver="3"/>
-    <designed target="Width" value="524.69" ver="3"/>
-    <designed target="Height" value="26" ver="3"/>
-    <designed target="Text" value="Двигатель" ver="3"/>
-    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
-    <designed target="FontColor" value="0xff000000" ver="3"/>
-    <designed target="TextAlignment" value="132" ver="3"/>
-    <designed target="Opacity" value="1" ver="3"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_OD_20_2"/>
+    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_ESt_Ready_num163" display-name="DI_ESt_Ready_num163" uuid="c5ddee51-4a51-4591-abb5-28212775edc2" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_ANG_20_1_num163" display-name="DI_Zag_ANG_20_1_num163" uuid="37ca87bd-0224-4320-85d0-213ee6bb9844" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="591" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ESt_Ready"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_ANG_20_1"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_ESt_Flt_num164" display-name="DI_ESt_Flt_num164" uuid="ba19c70f-b5cf-44be-94cc-46f773ebe2f5" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_ANG_20_2_num164" display-name="DI_Zag_ANG_20_2_num164" uuid="2561d1c1-4a45-49f5-bdbb-7cbedb0e6d40" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="623" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ESt_Flt"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_ANG_20_2"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Text_165" display-name="Text_165" uuid="17f0690a-2e17-4d0e-945c-ae8fd967fca8" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="DI_Zag_ANG_20_3_num165" display-name="DI_Zag_ANG_20_3_num165" uuid="9a7566b0-cce6-4a72-8df2-e67ea2bb1493" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="655" ver="3"/>
-    <designed target="ZValue" value="0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <designed target="Scale" value="1" ver="3"/>
-    <designed target="Visible" value="true" ver="3"/>
-    <designed target="Enabled" value="true" ver="3"/>
-    <designed target="Tooltip" value="" ver="3"/>
-    <designed target="Width" value="524.69" ver="3"/>
-    <designed target="Height" value="26" ver="3"/>
-    <designed target="Text" value="НКУ" ver="3"/>
-    <designed target="Font" value="PT Astra Sans,11,-1,5,50,0,0,0,0,0,Обычный" ver="3"/>
-    <designed target="FontColor" value="0xff000000" ver="3"/>
-    <designed target="TextAlignment" value="132" ver="3"/>
-    <designed target="Opacity" value="1" ver="3"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_ANG_20_3"/>
+    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_VOD3_Ready_num166" display-name="DI_VOD3_Ready_num166" uuid="ad93d20d-d547-4146-83a7-868142f419ba" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_AVGM_20_1_num166" display-name="DI_Zag_AVGM_20_1_num166" uuid="a4880660-1649-4c19-8a59-ad3e8a52b24f" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="687" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VOD3_Ready"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_AVGM_20_1"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="DI_VOD3_AOff_num167" display-name="DI_VOD3_AOff_num167" uuid="aa1be5aa-89a1-41e2-8ce0-938bda42cff9" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
+  <object access-modifier="private" name="DI_Zag_AVGM_20_2_num167" display-name="DI_Zag_AVGM_20_2_num167" uuid="fd93758f-88c6-4745-b0a0-b42944fbed01" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
     <designed target="X" value="50" ver="3"/>
     <designed target="Y" value="719" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VOD3_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VOD3_CRS_num168" display-name="DI_VOD3_CRS_num168" uuid="947db50a-e8f7-40fb-b631-390144ebe9d7" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="50" ver="3"/>
-    <designed target="Y" value="751" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VOD3_CRS"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON1_Ready_num169" display-name="DI_VnMON1_Ready_num169" uuid="64f9843a-6a89-4303-9480-a73d3f5fe629" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="15" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON1_AOff_num170" display-name="DI_VnMON1_AOff_num170" uuid="cfa2f84c-ce01-442c-9370-0b5a657d57a6" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="47" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON1_CRS_num171" display-name="DI_VnMON1_CRS_num171" uuid="4ecc0305-b0fb-4e35-a22e-2e3c5fc8cd54" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="79" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON1_CRS"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON2_Ready_num172" display-name="DI_VnMON2_Ready_num172" uuid="95ed1c80-1740-4d59-a711-b48ab5bfa707" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="111" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON2_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON2_AOff_num173" display-name="DI_VnMON2_AOff_num173" uuid="b41afe79-edce-447d-b004-fa161e69cd46" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="143" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON2_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnMON2_CRS_num174" display-name="DI_VnMON2_CRS_num174" uuid="5864e8f2-08bc-45e0-b328-acba56d54df2" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="175" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnMON2_CRS"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsMSN_Ready_num175" display-name="DI_NsMSN_Ready_num175" uuid="1d1c4eec-10d4-4770-bc6e-a58823974a0d" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="207" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsMSN_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsMSN_AOff_num176" display-name="DI_NsMSN_AOff_num176" uuid="c429fb06-d930-4cc5-9892-c45c62ff2eee" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="239" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsMSN_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnBVP_Ready_num177" display-name="DI_EnBVP_Ready_num177" uuid="54e4f097-477e-4ef5-8ff5-5799f7a57063" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="271" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnBVP_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnBVP_AOff_num178" display-name="DI_EnBVP_AOff_num178" uuid="95eb62a4-f455-41d2-becb-67f1de2e1910" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="303" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnBVP_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN3_Ready_num179" display-name="DI_NsN3_Ready_num179" uuid="d54ee647-7ea9-4700-96a1-d204972538d7" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="335" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN3_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN3_AOff_num180" display-name="DI_NsN3_AOff_num180" uuid="2f9c7a30-3b57-473a-9d34-f83da14ac08d" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="367" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN3_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KlPP1_Ready_num181" display-name="DI_KlPP1_Ready_num181" uuid="2f982376-44b1-4f0d-9517-c4d21b9bd695" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="399" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KlPP1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KlPP1_CRS_num182" display-name="DI_KlPP1_CRS_num182" uuid="612552ae-fe0c-4a39-b20c-507d3695a013" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="431" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KlPP1_CRS"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KlPP1_AOff_num183" display-name="DI_KlPP1_AOff_num183" uuid="56bc02e4-33fe-4ea8-bc9a-de65c85bb6d4" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="463" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KlPP1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN1_Ready_num184" display-name="DI_NsN1_Ready_num184" uuid="9087dbdb-4f43-4336-8ca9-8da47f3904ee" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="495" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN1_AOff_num185" display-name="DI_NsN1_AOff_num185" uuid="1e720ee1-f58e-45a8-89bd-33d0d5a59125" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="527" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN2_Ready_num186" display-name="DI_NsN2_Ready_num186" uuid="48ea9da9-bfd8-4a9c-b083-8c314244f609" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="559" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN2_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_NsN2_AOff_num187" display-name="DI_NsN2_AOff_num187" uuid="c783dfe3-caf1-4219-bfb5-6266f63d46ad" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="591" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_NsN2_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KE4_Ready_num188" display-name="DI_KE4_Ready_num188" uuid="e90b0c17-468b-49e0-8c50-f1d9dbb7f2d9" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="623" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KE4_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KE4_AOff_num189" display-name="DI_KE4_AOff_num189" uuid="bfccd6f8-a2f8-4948-bde8-e845f9e3ea9f" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="655" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KE4_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KE1_Ready_num190" display-name="DI_KE1_Ready_num190" uuid="67a27578-2568-440c-932a-45577ea14227" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="687" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KE1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KE1_AOff_num191" display-name="DI_KE1_AOff_num191" uuid="816734ae-dd45-4838-ad3c-26b1de37ffdd" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="719" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KE1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnEnMOD1_Ready_num192" display-name="DI_VnEnMOD1_Ready_num192" uuid="752f40cc-34d2-46c2-b834-9322f282f5f4" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="625" ver="3"/>
-    <designed target="Y" value="751" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnEnMOD1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnEnMOD1_AOff_num193" display-name="DI_VnEnMOD1_AOff_num193" uuid="5d2c9f83-84ae-40c4-9428-fa89354992b1" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="15" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnEnMOD1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_VnEnMOD1_Block_num194" display-name="DI_VnEnMOD1_Block_num194" uuid="2a054048-45bb-447b-90e9-0d26689ec6bc" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="47" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_VnEnMOD1_Block"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV1_Ready_num195" display-name="DI_ZsOV1_Ready_num195" uuid="5620497e-322d-422b-b898-389f8bcd17b1" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="79" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV1_AOff_num196" display-name="DI_ZsOV1_AOff_num196" uuid="4a35cf0c-e284-439d-a482-ce8d68997b97" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="111" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV2_Ready_num197" display-name="DI_ZsOV2_Ready_num197" uuid="a4b08e9d-12d2-4ef6-8529-a604fec14fb3" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="143" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV2_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV2_AOff_num198" display-name="DI_ZsOV2_AOff_num198" uuid="d42cb2d1-2e8e-47b2-8a3b-84a5f73086be" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="175" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV2_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV3_Ready_num199" display-name="DI_ZsOV3_Ready_num199" uuid="943ba831-d003-49d0-85be-e1d9123f03c2" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="207" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV3_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV3_AOff_num200" display-name="DI_ZsOV3_AOff_num200" uuid="6868ec4a-a627-4c2b-9f38-749aa1e02069" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="239" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV3_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV4_Ready_num201" display-name="DI_ZsOV4_Ready_num201" uuid="aa64faa2-d53a-45e2-beb8-bca7eff78188" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="271" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV4_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_ZsOV4_AOff_num202" display-name="DI_ZsOV4_AOff_num202" uuid="0ace5146-ba15-4b58-a3de-75f86586b20c" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="303" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_ZsOV4_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_Kr_AM_Drain_Ready_num203" display-name="DI_Kr_AM_Drain_Ready_num203" uuid="be11455b-c4c9-4c8a-b7c6-77cc438b5df1" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="335" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_Kr_AM_Drain_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_Kr_AM_Drain_AOff_num204" display-name="DI_Kr_AM_Drain_AOff_num204" uuid="35fc6bae-d721-48d6-8a18-df41a744c396" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="367" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_Kr_AM_Drain_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KrSLM_MOCBN_Ready_num205" display-name="DI_KrSLM_MOCBN_Ready_num205" uuid="8b1b6b08-e64d-4bb1-b4d9-35c691a19176" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="399" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KrSLM_MOCBN_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KrSLM_MOCBN_AOff_num206" display-name="DI_KrSLM_MOCBN_AOff_num206" uuid="768d5745-a042-481c-9b05-7c112251fe2f" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="431" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KrSLM_MOCBN_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KrSLM_Ready_num207" display-name="DI_KrSLM_Ready_num207" uuid="9240eb0c-aebe-4b19-9383-212a26d1e276" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="463" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KrSLM_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_KrSLM_AOff_num208" display-name="DI_KrSLM_AOff_num208" uuid="39343463-d406-455a-9353-5a7dc4c8fc2c" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="495" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_KrSLM_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMOD1_Ready_num209" display-name="DI_EnMOD1_Ready_num209" uuid="e00904fb-c64b-4dd9-8f65-04169298be57" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="527" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMOD1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMOD1_AOff_num210" display-name="DI_EnMOD1_AOff_num210" uuid="119c16ea-3a00-4496-9dce-26b2f693e60e" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="559" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMOD1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMOD1_Block_num211" display-name="DI_EnMOD1_Block_num211" uuid="1ba4ad89-3039-4a54-8869-8aac0ae36f11" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="591" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMOD1_Block"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMBN1_Ready_num212" display-name="DI_EnMBN1_Ready_num212" uuid="9fd99e72-0a97-4cdd-a336-37dd7845a18f" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="623" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMBN1_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMBN1_AOff_num213" display-name="DI_EnMBN1_AOff_num213" uuid="55c5cb2c-37b9-4d68-85ae-cda8e53d82dc" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="655" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMBN1_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMBN2_Ready_num214" display-name="DI_EnMBN2_Ready_num214" uuid="59a5469a-b82e-4937-8d79-0be6dade5d5d" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="687" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMBN2_Ready"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_EnMBN2_AOff_num215" display-name="DI_EnMBN2_AOff_num215" uuid="bf3564e2-20d7-475a-b00a-060281102b35" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="719" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_EnMBN2_AOff"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="DI_Sound_Ready_num216" display-name="DI_Sound_Ready_num216" uuid="c1a64418-15a1-4269-bff8-3d0d91402984" base-type="S_D_INP_Param" base-type-id="dbb862d3-e7bc-46b7-95bf-42819dd27277" ver="3">
-    <designed target="X" value="1200" ver="3"/>
-    <designed target="Y" value="751" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="DI.DI_Sound_Ready"/>
+    <init target="_init_Object" ver="3" value="DI.DI_Zag_AVGM_20_2"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="a96d3b04-f459-4fa4-8fd0-71220ec14b63" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="05640cf3-3e26-4cb4-beb1-79c09270ed9c" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <init target="ParentSource" ver="3" ref="_init_ApSource"/>
     <init target="Path" ver="3" ref="_init_GPAPath"/>
   </object>
-  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="da1886c1-237e-48f8-b705-e465a61e68f8" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
-  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="7ed9fadc-1939-4a19-8d2f-3d5c68a05b2e" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="50535137-2f7e-4e87-9673-321c8acf6649" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="4e817cab-1473-43d0-a121-eb1fe05f0936" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
 </type>

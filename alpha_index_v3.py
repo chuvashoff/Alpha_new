@@ -272,7 +272,7 @@ def create_group_pz(sl_global_pz, lst_pz, tuple_anum, template_no_arc_index, sou
     s_out = ''
     sl_pz_i = {}
     for i in range(len(sl_global_pz)//len(lst_pz)):
-        lst_tmp = []  # В lst_tmp кладём списки [инд. переменной, тип] в сответствии с lst_pz -нужные подимена
+        lst_tmp = []  # В lst_tmp кладём списки [инд. переменной, тип] в соответствии с lst_pz -нужные подимена
         for j in lst_pz:
             lst_tmp.append(sl_global_pz[f'{j}[{i}]'])
         sl_pz_i[i] = dict(zip(lst_pz, lst_tmp))  # {индекс массива: {подимя: [инд. переменной, тип ]}}
@@ -360,7 +360,8 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
 def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                  sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
                  sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
-                 buff_size, sl_cpu_drv_signal_with_imit):
+                 buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
+                 sl_pru_config: dict):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -426,8 +427,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'сигналы в карту адресов добавлены не будут')
 
     sl_module_diag_sig = {}
-    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'Module_diag_signal')):
-        for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha',
+    #   os.path.dirname(sys.argv[0])
+    if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'Module_diag_signal')):
+        for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha',
                                             'Systemach', 'Module_diag_signal')):
             sl_module_diag_sig[file] = tuple()
             with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_signal', file),
@@ -443,12 +445,13 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
               'сигналы модулей не будут добавлены в карту адресов')
 
     sl_diag_cpu_sig = {}
+    #  os.path.dirname(sys.argv[0])
 
-    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu')):
+    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'cpu')):
         if file.startswith('Signal_cpu_'):
             name_cpu = file.replace('Signal_cpu_', '')
             sl_diag_cpu_sig[name_cpu] = {}
-            with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu', file), 'r',
+            with open(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'cpu', file), 'r',
                       encoding='UTF-8') as f_signal:
                 for line in f_signal:
                     if '#' in line:
@@ -507,6 +510,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_grh = {}
             sl_sar_tun = {}
             sl_global_sar = {}
+            sl_global_cdo = {}
+            sl_global_pru = {}
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'TR',
                                                                                               f'TR_par_{choice_tr}')):
@@ -691,18 +696,31 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
                         # Ищем переменные диагностики контроллера помимо каталога DIAG|
                         if len(line.split(',')) >= 10:
-                            # Получаем переменную в нижнем регистре и с разделителем
+                            # Получаем переменную с разделителем
                             tmp_var = get_variable(line=line)
                             # Если переменная есть в списке сигналов контроллера
                             # По сути ищем переменные контроллера без разделителей в глобальном словаре
+                            type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
+                                sl_for_diag[line_source[0]]['CPU'][0] in sl_cpu_res.get(line_source[0], 'бла') \
+                                else sl_for_diag[line_source[0]]['CPU'][1]
                             if sl_for_diag.get(line_source[0]) and \
-                                    tmp_var in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
+                                    tmp_var in sl_diag_cpu_sig.get(type_cpu, {}):
                                 line_diag = line.split(',')
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
-                                tag_name = sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][tmp_var]
+                                tag_name = sl_diag_cpu_sig[type_cpu][tmp_var]
                                 # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, tag_name)] = [max(int(line_diag[9]),
                                                                               int(line_diag[10])), line_diag[1]]
+
+                        # Ищем переменные ПРУ
+                        # print(sl_pru_config.get(line_source[0]))
+                        if sl_pru_config.get(line_source[0]) and len(line.split(',')) >= 10:
+                            # Получаем переменную с разделителем
+                            tmp_var = get_variable(line=line)
+                            if tmp_var.replace('|', '_', 1) in sl_pru_config[line_source[0]]:
+                                line_pru = line.split(',')
+                                sl_global_pru[tmp_var.replace('|', '_', 1)] = \
+                                    [max(int(line_pru[9]), int(line_pru[10])), line_pru[1]]
 
                         if 'A_INP|' in line and len(line.split(',')) >= 10:
                             line = line.split(',')
@@ -895,11 +913,13 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         elif 'DIAG|' in line and len(line.split(',')) >= 10:
                             # Получаем диагностику CPU из группы DIAG
                             var_name = get_variable(line=line).replace('DIAG|', '')
+                            type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
+                                sl_for_diag[line_source[0]]['CPU'][0] in sl_cpu_res.get(line_source[0], 'бла') \
+                                else sl_for_diag[line_source[0]]['CPU'][1]
                             if sl_for_diag.get(line_source[0]) and \
-                                    var_name in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
+                                    var_name in sl_diag_cpu_sig.get(type_cpu, {}):
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
-                                signal_name = \
-                                    sl_diag_cpu_sig[sl_for_diag[line_source[0]]['CPU'][1]][var_name]
+                                signal_name = sl_diag_cpu_sig[type_cpu][var_name]
                                 # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
                                 sl_global_diag[(module_cpu, signal_name)] = [max(int(line.split(',')[9]),
                                                                                  int(line.split(',')[10])),
@@ -920,12 +940,16 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             line = line.split(',')
                             tmp_alg_alr = line[0][1:]  # c префиксом ALR|
                             alg_alr = tmp_alg_alr[tmp_alg_alr.find('|')+1:]  # без префикса ALR|
-                            # Если текущий контроллер есть в словаре из конифгуратора...
+                            # Если текущий контроллер есть в словаре из конфигуратора...
                             if line_source[0] in sl_sig_alr:
                                 # ...если ALRка есть в перечне ALRов контроллера из конфигуратора и нет в PZ
                                 if alg_alr in sl_sig_alr.get(line_source[0], 'бла') and alg_alr not in set_tmp_alr:
                                     # ...то считаем, что это АС и добавляем в словарь
                                     test_sl_global_as[alg_alr] = [max(int(line[9]), int(line[10])), line[1]]
+
+                        elif 'CDO|' in line and len(line.split(',')) >= 10:
+                            line = line.split(',')
+                            sl_global_cdo[line[0][line[0].find('|') + 1:]] = [max(int(line[9]), int(line[10])), line[1]]
 
                         # если в текущем контроллере объявлены драйвера и строка явно содержит индекс
                         elif line_source[0] in sl_cpu_drv_signal and len(line.split(',')) >= 10:
@@ -956,9 +980,12 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             line = line.split(',')
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
                             sl_global_fast[line[0][1:]] = max(int(line[9]), int(line[10]))
-                            # Ищем переменные контроллерв в FAST
+                            # Ищем переменные контроллеров в FAST
+                            type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
+                                sl_for_diag[line_source[0]]['CPU'][0] in sl_cpu_res.get(line_source[0], 'бла') \
+                                else sl_for_diag[line_source[0]]['CPU'][1]
                             if sl_for_diag.get(line_source[0]) and tmp_var.replace('FAST|', '') \
-                                    in sl_diag_cpu_sig.get(sl_for_diag[line_source[0]]['CPU'][1], {}):
+                                    in sl_diag_cpu_sig.get(type_cpu, {}):
                                 sl_global_fast[tmp_var] = max(int(line[9]), int(line[10]))
 
             # В словаре sl_global_ai лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
@@ -985,11 +1012,11 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_btn = {key: value for key, value in sl_global_btn.items() if key[:key.find('[')] in lst_btn}
             sl_global_pz = {key: value for key, value in sl_global_pz.items() if key[:key.find('[')] in lst_pz}
             sl_global_set = {key: value for key, value in sl_global_set.items() if key[:key.find('[')] in lst_set}
-            # отсуда и далее до нар ориентируемся на то, что есть в конфигураторе, так как в проекте может быть "мусор"
+            # отсюда и далее до нар ориентируемся на то, что есть в конфигураторе, так как в проекте может быть "мусор"
             # в данных словарях лежит alg имя: [индекс переменной, тип переменной(I, B, R)]
             sl_global_alg = {key: value for key, value in sl_global_alg.items()
                              if key in sl_sig_alg.get(line_source[0], 'бла')}
-            # формирование словаря sl_global_grh добавлено позже для создания алгоритма в новом конифигураторе
+            # формирование словаря sl_global_grh добавлено позже для создания алгоритма в новом конфигураторе
             sl_global_grh = {key[key.find('|') + 1:]: value for key, value in sl_global_grh.items()
                              if key in sl_grh.get(line_source[0], 'бла')}
             sl_global_mod = {key: value for key, value in sl_global_mod.items()
@@ -1001,6 +1028,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_wrn = {key: value for key, value in sl_global_wrn.items()
                              if key in sl_sig_wrn.get(line_source[0], 'бла')}
             sl_global_wrn.update(sl_wrn_di)
+
+            sl_global_cdo = {key: value for key, value in sl_global_cdo.items()
+                             if key in sl_cpu_cdo.get(line_source[0], 'бла')}
 
             # print(line_source[0], len(sl_global_pz))
             # Объединяем множества ИМ в одно для накопления наработок
@@ -1161,6 +1191,20 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 s_all += create_group_diag(diag_sl=sl_global_diag, template_no_arc_index=tmp_ind_no_arc,
                                            source=line_source[0], template_arc_index=tmp_ind_arc,
                                            sl_global_fast=sl_global_fast)
+            # Обработка и запись в карту CDO
+            # print(sl_global_cdo)
+            if sl_global_cdo:
+                s_all += create_group_system_sig('CDO', sl_global_cdo, tmp_ind_no_arc, line_source[0])
+
+            # Обработка и запись в карту МКО
+            if sl_add_cpu_mko.get(line_source[0]):
+                s_all += create_group_add(sl_add=sl_add_cpu_mko.get(line_source[0]),
+                                          template_no_arc_index=tmp_ind_no_arc,
+                                          source=line_source[0])
+
+            # Обработка и запись в карту сигналов ПРУ
+            if sl_global_pru:
+                s_all += create_group_system_sig('PRU', sl_global_pru, tmp_ind_no_arc, line_source[0])
 
             # Проверка изменений, и если есть изменения, то запись
             # Если нет папки File_for_Import, то создадим её
@@ -1189,3 +1233,62 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             # for j in dd.split('\n'):
             #    if '- ' in j or '+ ' in j:
             #        print(j)
+
+
+def read_mko_cpu_index(tuple_all_cpu: tuple, sl_cpu_path: dict):
+    # sl_cpu_mko_index = {cpu: ((полное имя переменной диагностики МКО, индекс), )}
+    sl_cpu_mko_index = {}
+    for cpu, path in sl_cpu_path.items():
+        # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
+        if not os.path.exists(path):
+            # print(f"НЕ НАЙДЕНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
+            continue
+        else:
+            line_source = [cpu.strip(), path.strip()]
+            if cpu not in tuple_all_cpu:
+                continue
+
+            # Если есть глобальный словарь
+            if os.path.exists(os.path.join(line_source[1], 'global0.var')):
+                with open(os.path.join(line_source[1], 'global0.var'), 'rt') as f_global:
+                    for line in f_global:
+                        line = line.strip()
+
+                        if len(line.split(',')) >= 10 and 'from_' in line.lower() \
+                                and re.findall(r'noping\d', line.lower()):
+                            # Получаем переменную с разделителем
+                            tmp_var = get_variable(line=line)
+                            line = line.split(',')
+                            if line_source[0] not in sl_cpu_mko_index:
+                                sl_cpu_mko_index[line_source[0]] = tuple()
+                            tuple_par_mko = (tmp_var, max(int(line[9]), int(line[10])))
+                            add_ = (tmp_var[:tmp_var.rfind('|')].split('_')[-1],
+                                    tmp_var[:tmp_var.rfind('|')].split('_')[1]) \
+                                if tmp_var[:tmp_var.rfind('|')].count('_') > 1 \
+                                else tmp_var[:tmp_var.rfind('|')].split('_')[-1]
+                            tuple_par_mko += (add_,)
+                            if tuple_par_mko not in sl_cpu_mko_index.get(line_source[0],  tuple()):
+                                sl_cpu_mko_index[line_source[0]] += (tuple_par_mko, )
+
+    return sl_cpu_mko_index
+
+
+def create_group_add(sl_add, template_no_arc_index, source):
+    sl_data_cat = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Discrete'
+    }
+    sl_type = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool'
+    }
+    s_out = ''
+    for key, value in sl_add.items():
+        a = key
+        pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+        s_out += Template(template_no_arc_index).substitute(name_signal=f'{a}',
+                                                            type_signal=sl_type[value[1]], index=value[0],
+                                                            data_category=f'DataCategory_{source}_{pref_arc}')
+    return s_out

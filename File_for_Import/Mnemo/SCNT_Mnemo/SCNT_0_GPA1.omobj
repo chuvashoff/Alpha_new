@@ -1,4 +1,4 @@
-<type access-modifier="private" name="SCNT_0_GPA1" display-name="SCNT_0_GPA1" uuid="19c2a793-1466-46ef-92df-5ce6ee300cd7" base-type="00_SubBase" base-type-id="99471dea-1c95-471c-9960-b4f7a539d437" ver="3">
+<type access-modifier="private" name="SCNT_0_GPA1" display-name="SCNT_0_GPA1" uuid="be6a77bc-b116-4366-9b4f-6bb38ca08e23" base-type="00_SubBase" base-type-id="99471dea-1c95-471c-9960-b4f7a539d437" ver="3">
   <designed target="X" value="0" ver="3"/>
   <designed target="Y" value="0" ver="3"/>
   <designed target="ZValue" value="0" ver="3"/>
@@ -31,7 +31,7 @@
   <designed target="MonitorNumber" value="0" ver="3"/>
   <designed target="WindowPosition" value="1" ver="3"/>
   <designed target="WindowCloseMode" value="0" ver="3"/>
-  <object access-modifier="private" name="MainFrame" display-name="MainFrame" uuid="fd118b26-36cd-44cd-b12b-4218df1b3efa" base-type="SCNT_1" base-type-id="71f78e19-ef99-4133-a029-2968b14f02b6" ver="3">
+  <object access-modifier="private" name="MainFrame" display-name="MainFrame" uuid="50a97f78-2ed9-476c-b0f3-a4e411eeecd6" base-type="SCNT_1" base-type-id="71f78e19-ef99-4133-a029-2968b14f02b6" ver="3">
     <designed target="X" value="0" ver="3"/>
     <designed target="Y" value="0" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -54,69 +54,25 @@
   </object>
   <designed target="Opacity" value="1" ver="3"/>
   <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="Opened" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
-    <object access-modifier="private" uuid="d117c01e-4fce-4092-b67f-85e89e675d30" base-type="SCNT_1_GPA1" base-type-id="9f13fe0e-14a1-4ab4-a828-b4870e5b18f4" ver="3">
+    <object access-modifier="private" uuid="70a7eeee-3424-4a93-9ee3-c26043ea31ce" base-type="SCNT_1_GPA1" base-type-id="43dd93a1-25ec-4c09-8461-490ddc15282e" ver="3">
       <init target="Link_SCNT" ver="3" ref="here"/>
       <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
       <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
     </object>
   </do-on>
-  <object access-modifier="private" name="NameOpened" display-name="NameOpened" uuid="5bd32697-b31e-4fc8-b33e-f7f9f41910ec" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="ExtPageButton_1" display-name="ExtPageButton_1" uuid="91245d60-efc7-471b-b8ad-96c964f79cf5" base-type="ExtPageButton" base-type-id="2c2d6f3d-f500-4be6-b80c-620853cd99e3" ver="3">
-    <designed target="X" value="1359" ver="3"/>
-    <designed target="Y" value="840" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <designed target="Width" value="50" ver="3"/>
-    <designed target="Height" value="40" ver="3"/>
-    <designed target="Text" value="1" ver="3"/>
-    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
-    <do-trace access-modifier="private" target="_Name" ver="3">
-      <body>
-        <![CDATA[here.NameOpened]]>
-      </body>
-    </do-trace>
-    <init target="_IDtoOpen" ver="3" value="None"/>
-    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
-      <object access-modifier="private" uuid="7e5accc3-ed69-42c1-b40d-ec6ca1f89480" base-type="SCNT_1_GPA1" base-type-id="9f13fe0e-14a1-4ab4-a828-b4870e5b18f4" ver="3">
-        <init target="Link_SCNT" ver="3" ref="here"/>
-        <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
-        <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="ExtPageButton_2" display-name="ExtPageButton_2" uuid="a00a1c60-f77d-41ec-a61f-2b847fa4b978" base-type="ExtPageButton" base-type-id="2c2d6f3d-f500-4be6-b80c-620853cd99e3" ver="3">
-    <designed target="X" value="1409" ver="3"/>
-    <designed target="Y" value="840" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <designed target="Width" value="50" ver="3"/>
-    <designed target="Height" value="40" ver="3"/>
-    <designed target="Text" value="2" ver="3"/>
-    <designed target="Font" value="PT Astra Sans,16,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
-    <do-trace access-modifier="private" target="_Name" ver="3">
-      <body>
-        <![CDATA[here.NameOpened]]>
-      </body>
-    </do-trace>
-    <init target="_IDtoOpen" ver="3" value="None"/>
-    <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="3" event="MouseClick" frame-link="MainFrame" form-action="open-in-frame" form-by-id="false">
-      <object access-modifier="private" uuid="82f4ea69-36f6-4f5d-9024-eb533f4cd093" base-type="SCNT_2_GPA1" base-type-id="97b00ac5-b502-4619-a783-e73e44941c69" ver="3">
-        <init target="Link_SCNT" ver="3" ref="here"/>
-        <init target="_init_ApSource" ver="3" ref="here.ApSource_Main"/>
-        <init target="_init_GPAPath" ver="3" ref="here._pathToGPA"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="b1d6bdcc-0f59-4ee6-885b-82465879b866" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <object access-modifier="private" name="NameOpened" display-name="NameOpened" uuid="431dd4a9-c468-4131-a534-69192569cf93" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="a8724a07-a974-49ff-8db3-5af9d219f08d" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <init target="ParentSource" ver="3" ref="_init_ApSource"/>
     <init target="Path" ver="3" ref="_init_GPAPath"/>
     <designed target="Path" value="" ver="3"/>
   </object>
-  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="f6b6407a-aa13-4e71-a2a0-0fde00e6657f" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
-  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="fc2dcb26-97e7-459b-b738-71c21a1bb980" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
-  <object access-modifier="private" name="DebugTool_1" display-name="DebugTool_1" uuid="2f9e5e66-d099-4536-80a5-2305620772c7" base-type="DebugTool" base-type-id="43946044-139a-43f4-a7b8-19a6074ffc56" ver="3"/>
-  <object access-modifier="private" name="_pathToGPA" display-name="_pathToGPA" uuid="3e02d475-0bab-4e81-a53d-624004160929" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="ApSource_Main" display-name="ApSource_Main" uuid="e91e4a14-6577-41e9-8831-b240e13f545e" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="e347168f-97fa-4f9e-bfe9-7b1e5e6dde38" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="be18e4cb-1a25-41c5-a7f9-a465b4651f35" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <object access-modifier="private" name="DebugTool_1" display-name="DebugTool_1" uuid="7810dc79-f3bf-4a20-a794-972d32df68c8" base-type="DebugTool" base-type-id="43946044-139a-43f4-a7b8-19a6074ffc56" ver="3"/>
+  <object access-modifier="private" name="_pathToGPA" display-name="_pathToGPA" uuid="12e2e42d-fc05-43d9-a8c9-57751fb08e36" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="ApSource_Main" display-name="ApSource_Main" uuid="cc7f4826-6fa5-48be-b262-fa8ff47cd204" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <designed target="Path" value="" ver="3"/>

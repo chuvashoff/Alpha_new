@@ -107,7 +107,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
     #
 
     # print(tuple_submodes_start)
-    # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
+    # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
     sl_uuid_base = {
         "00_AlgVisual_Base": "4d4dc649-f350-4c61-89d1-6c938208b3fe",
         'Rectangle': '15726dc3-881e-4d8d-b0fa-a8f8237f08ca',
@@ -166,7 +166,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             for line in f_uuid_read:
                 lst_line = line.strip().split(':')
                 sl_page_uuid[lst_line[0]] = lst_line[1]
-        # Если после вычитывания не обнаружили формы для отсуствующих объектов
+        # Если после вычитывания не обнаружили формы для отсутствующих объектов
         # (например, увеличилось количество объектов), то дозаписываем
         with open(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo', 'Systemach', 'uuid_FormAlg'),
                   'a', encoding='UTF-8') as f_uuid_write:
@@ -177,7 +177,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                     sl_page_uuid[f"01_FormAlg_{obj[0]}"] = f'{generate_uuid}'
                     f_uuid_write.write(f'01_FormAlg_{obj[0]}:{generate_uuid}\n')
                 # Пробегаемся по режимам(в том числе по подрежимам данного объекта)
-                # и закидываем их в словарь в случае отсутствия такогового
+                # и закидываем их в словарь в случае отсутствия такового
                 for modes_obj in sl_modes_object.get(obj, ''):
                     if f"AlgVisual_{modes_obj[0]}_{obj[0]}" not in sl_page_uuid:
                         generate_uuid = uuid.uuid4()
@@ -326,7 +326,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             ET.SubElement(root_type, 'designed', target='WindowWidth', value='490', ver="2")
             ET.SubElement(root_type, 'designed', target='WindowHeight', value=f'{y_but + 70}', ver="2")
 
-            # Добавляеям Линк на главную форму
+            # Добавляем Линк на главную форму
             # ET.SubElement(root_type, 'object', access_modifier="private",
             #               name=f"Link_MainControl",
             #               display_name=f"Link_MainControl",
@@ -420,7 +420,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             ET.SubElement(object_headline, 'designed', target='Visible', value="true", ver="2")
             ET.SubElement(object_headline, 'designed', target='Enabled', value="true", ver="2")
             ET.SubElement(object_headline, 'designed', target='Tooltip', value="", ver="2")
-            # пока велечины задал статично
+            # пока величины задал статично
             ET.SubElement(object_headline, 'designed', target='Width', value=f"500", ver="2")
             ET.SubElement(object_headline, 'designed', target='Height', value=f"30", ver="2")
 
@@ -448,7 +448,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
             ET.SubElement(object_headline_text, 'designed', target='Visible', value="true", ver="2")
             ET.SubElement(object_headline_text, 'designed', target='Enabled', value="true", ver="2")
             ET.SubElement(object_headline_text, 'designed', target='Tooltip', value="", ver="2")
-            # пока велечины задал статично
+            # пока величины задал статично
             ET.SubElement(object_headline_text, 'designed', target='Width', value=f"500", ver="2")
             ET.SubElement(object_headline_text, 'designed', target='Height', value=f"30", ver="2")
 
@@ -586,7 +586,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                           ref="here.ApSource_CurrentForm")
                             ET.SubElement(object_cond, 'init', target="_Height", ver="3", value=f"{_height}")
                         # Если есть признак того, что имеется дополнительный параметр с выводом уставки,
-                        # создаём соответстсвующий объект
+                        # создаём соответствующий объект
                         elif cond.replace('Cmd_In', 'Par_In') in conditions:
                             object_cond = ET.SubElement(root_type,
                                                         'object', access_modifier="private",
@@ -618,7 +618,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
                                           ref="here.ApSource_CurrentForm")
                             ET.SubElement(object_cond, 'init', target="_Height", ver="3", value=f"{_height}")
                         # В противном случае считаем, что это просто команда
-                        # создаём соответстсвующий объект
+                        # создаём соответствующий объект
                         else:
                             object_cond = ET.SubElement(root_type,
                                                         'object', access_modifier="private",

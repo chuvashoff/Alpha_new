@@ -41,7 +41,7 @@ def is_load_algoritm(controller, cells, sheet):
             cmd_eng, cmd_rus = (), ()
             # Добавляем дефолтные переменные для режима
             cmd_rus += ((f"Старт режима {sheet[p[0].row][2].value}", 'BOOL_TS' if create_ts else 'BOOL'),
-                        (f"Оконачание режима {sheet[p[0].row][2].value}", 'BOOL'),
+                        (f"Окончание режима {sheet[p[0].row][2].value}", 'BOOL'),
                         (f"Шаг режима {sheet[p[0].row][2].value}", 'INT'))
             cmd_eng += (f"GRH|{sheet[p[0].row][1].value}_START",
                         f"GRH|{sheet[p[0].row][1].value}_END",
@@ -79,7 +79,7 @@ def is_load_algoritm(controller, cells, sheet):
     while p != 'STOP':
         j += 1
         p = cells[j][0].value
-        # Если увидели объяление шагов алгоритма и алгоритм принадлежит текущему контроллеру
+        # Если увидели объявление шагов алгоритма и алгоритм принадлежит текущему контроллеру
         if p == 'Шаг' and sheet[j][3].value == controller:
             mod_name = sheet[j][1].value
             mod_name_rus = sheet[j][2].value
@@ -170,7 +170,7 @@ def is_load_algoritm(controller, cells, sheet):
                 for a in range(len(tuple_rus_step)):
                     for b in range(len(tuple_rus_step[a])):
                         step_out_tmp += (f"GRH|{mod_name}_Cmd_In_{p}_{a + 1}_{b + 1}",)
-                        # если есть в словаре соответствий допонительных параметров
+                        # если есть в словаре соответствий дополнительных параметров
                         if sl_dop_par_tmp.get(tuple_rus_step[a][b]):
                             # то формируем кортеж алгоритмических имён
                             # дополнительных параметров по правилам добавления префиксов,

@@ -1,4 +1,6 @@
 # import datetime
+import os.path
+
 import openpyxl
 import logging
 import warnings
@@ -6,11 +8,15 @@ import warnings
 import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
-from alpha_index_v3 import create_index
+from alpha_index_v3 import create_index, read_mko_cpu_index
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv
 from Create_mnemo_visual import create_mnemo_visual
 from create_reports import create_reports, create_reports_pz, create_reports_sday
+from create_reports_sday import create_reports_sday_v10
+from create_reports_v80 import create_reports_v80, create_reports_pz_v80, create_reports_sday_v80
+from create_reports_v80 import create_reports_sut_v80
 # from collections import ChainMap
+from pathlib import Path
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 try:
@@ -21,8 +27,9 @@ try:
     # # path_config = input('Укажите путь до конфигуратора\n')
     # with open('Source_list_config.txt', 'r', encoding='UTF-8') as f:
     #     path_config = f.readline().strip()
-
-    path_config = os.path.dirname(sys.argv[0])
+    # print(Path.cwd())
+    # path_config = os.path.dirname(sys.argv[0])
+    path_config = os.path.abspath(os.curdir)
     file_config = ''
     # Ищем файл конфигуратора в текущем каталоге
     for file in os.listdir(path_config):
@@ -67,6 +74,54 @@ try:
     for p in cells:
         if p[0].value == 'Количество хранимых записей МЭК':
             buff_size = p[1].value
+    # Читаем архитектуру
+    architecture = 'сингл'
+    server_name_osn = 'server11'
+    server_name_rez = 'server12'
+    for p in cells:
+        if p[0].value == 'Архитектура':
+            lst_architecture = p[1].value.split(';')
+            architecture = 'клиент-сервер' if lst_architecture[0] == 'ON' else 'сингл'
+            if len(lst_architecture) == 49:
+                server_name_osn = lst_architecture[1]
+                server_name_rez = lst_architecture[5]
+            elif len(lst_architecture) == 47:
+                server_name_osn = lst_architecture[1]
+                server_name_rez = lst_architecture[4]
+            break
+    # print(architecture, server_name_osn, server_name_rez)
+
+    # Читаем межконтроллерку (МКО)
+    lst_mko = list()
+
+    sl_mko = {}
+    for p in cells:
+        if p[0].value == 'Обмен между контроллерами':
+            lst_mko = p[1].value.split(';')
+            break
+    if ''.join(lst_mko):
+        for mko in lst_mko:
+            mko = mko.replace('(^)', '')
+            tmp_mko_list = mko.split('->')
+            # print(mko, tmp_mko_list)
+            i = tmp_mko_list[0]
+            obj1 = i[i.find('(')+1:i.find(')')]
+            cpu1 = i[:i.find('(')]
+            j = tmp_mko_list[1]
+            obj2 = j[j.find('(') + 1:j.find(')')]
+            cpu2 = j[:j.find('(')]
+            # print(obj1, obj2)
+            if obj1 == obj2:
+                obj_key = obj1
+            else:
+                obj_key = (obj1, obj2)
+            obj_value_one = (cpu1, cpu2)
+            if obj_key not in sl_mko:
+                sl_mko[obj_key] = (obj_value_one,)
+            elif obj_value_one not in sl_mko.get(obj_key, ''):
+                sl_mko[obj_key] += (obj_value_one,)
+    set_mko_par_cpu = {x for j in [value for _, value in sl_mko.items()] for x in j}
+    # print(set_mko_par_cpu)
     # Читаем состав объектов и заполняем sl_object_all
     cells = sheet['A23': 'U23']
     index_on1 = is_f_ind(cells[0], 'ON1')
@@ -97,19 +152,21 @@ try:
                 sl_TR[line[0]] = (tuple([branch.strip() for branch in line[1].split(',')]) if line[1] else tuple())
 
     choice_tr = ''
-    # sl_CPU_spec - словарь спецдобавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при налчии таковых в cpu
+    # О: sl_CPU_spec - Словарь спец. добавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при наличии таковых в cpu
     sl_CPU_spec = {}
-    cells = sheet['B1':'L1']
+    cells = sheet['B1':'R1']
     index_flr_on = is_f_ind(cells[0], 'FLR')
     index_type_tr = is_f_ind(cells[0], 'Тип ТР')
     index_apr_on = is_f_ind(cells[0], 'APR')
+    index_sar_on = is_f_ind(cells[0], 'SAR')
+    index_dks_on = is_f_ind(cells[0], 'DKS')
     index_path = is_f_ind(cells[0], 'Path')
     index_name_cpu = is_f_ind(cells[0], 'Наименование CPU')
     index_ppu = is_f_ind(cells[0], 'PPU')
     index_alr = is_f_ind(cells[0], 'ALR')
     index_mde = is_f_ind(cells[0], 'MDE')
     index_main = is_f_ind(cells[0], 'Main')
-    cells = sheet['B2':'L21']
+    cells = sheet['B2':'R21']
     # Словарь {ПЛК: путь к проекту ПЛК}
     sl_cpu_path = {}
     for p in cells:
@@ -133,10 +190,54 @@ try:
                 sl_CPU_spec[p[0].value] += ('MDE',)
             if p[index_main].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('Main',)
+            if p[index_sar_on].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('САР',)
+            if p[index_dks_on].value == 'ON':
+                sl_CPU_spec[p[0].value] += ('ДКС',)
             # Узнаём пути к контроллерам и забиваем в словарь
             sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
-    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu_spec.txt')):
-        with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach', 'cpu_spec.txt'),
+            # os.path.dirname(sys.argv[0])
+
+    # МКО из конфигуратора, потом проверить
+    # for _ in sl_mko:
+    #     print(_)
+    #     print(sl_mko[_])
+
+    # sl_mko = {кортеж объектов: (кортеж кортежей контроллеров с обменом друг с другом)}
+    # sl_cpu_mko_index =
+    # {cpu: ((полное имя переменной диагностики МКО, индекс, с кем обмен(кортеж, в случае указания объекта), )}}
+    sl_cpu_mko_index = read_mko_cpu_index(
+        tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
+        sl_cpu_path=sl_cpu_path,
+    )
+    # print()
+    # for c in sl_cpu_mko_index:
+    #     for par in sl_cpu_mko_index[c]:
+    #         print(c, *par)
+    #     print()
+    # sl_obj_cpu_mko_index = {алг.имя объекта:
+    # {cpu: ((полное имя переменной диагностики МКО, индекс, с кем обмен(кортеж, в случае указания объекта), )}}
+    sl_obj_cpu_mko_index = {}
+    for obj_, obj_cpu in {obj[0]: tuple(sl_cpu.keys()) for obj, sl_cpu in sl_object_all.items()}.items():
+        if obj_ not in sl_obj_cpu_mko_index:
+            sl_obj_cpu_mko_index[obj_] = {}
+            for cpu in sl_cpu_mko_index:
+                if cpu in obj_cpu:
+                    sl_obj_cpu_mko_index[obj_].update({cpu: sl_cpu_mko_index[cpu]})
+
+    # print('sl_object_all', sl_object_all)
+    sl_obj_all_cpu = {obj[0]: tuple(sl_cpu.keys()) for obj, sl_cpu in sl_object_all.items()}
+    # print('sl_obj_all_cpu', sl_obj_all_cpu)
+
+    # for obj_ in sl_obj_cpu_mko_index:
+    #     for cpu in sl_obj_cpu_mko_index[obj_]:
+    #         for par in sl_obj_cpu_mko_index[obj_][cpu]:
+    #             print(obj_, cpu, *par)
+    #         print()
+    #     print()
+
+    if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'cpu_spec.txt')):
+        with open(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'cpu_spec.txt'),
                   'r', encoding='UTF-8') as f_signal:
             for line in f_signal:
                 if '#' in line:
@@ -146,7 +247,8 @@ try:
                 cpu_s = line.split(':')[0].strip()
                 spec = line.split(':')[1].strip()
                 if cpu_s in sl_CPU_spec:
-                    sl_CPU_spec[cpu_s] += (spec,)
+                    if spec not in sl_CPU_spec[cpu_s]:
+                        sl_CPU_spec[cpu_s] += (spec,)
                 else:
                     sl_CPU_spec[cpu_s] = (spec,)
     # print(sl_CPU_spec)
@@ -200,12 +302,13 @@ try:
         os.mkdir(os.path.join('File_for_Import', 'Reports'))
 
     # Чистим папку Мнемосхем, чтобы далее создать новые!!!
-    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo')):
+    # os.path.dirname(sys.argv[0])
+    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo')):
         if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', file))
-    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'Control_Mnemo')):
+            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', file))
+    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo')):
         if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'Control_Mnemo', file))
+            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo', file))
     # Очистка файла изменений, если он есть и содержит больше 100 строк
     if os.path.exists('Required_change.txt'):
         with open('Required_change.txt', 'r') as f_test:
@@ -221,27 +324,31 @@ try:
 
     # print(datetime.datetime.now(), ' - Начинаем парсить файл')
     # Измеряемые
-    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков,
+    # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков,
     # количество знаков для истории)}}
     # sl_mnemo = {узел: список параметров узла}
-    return_sl_ai, sl_mnemo_ai, return_sl_sday = {}, {}, {}
+    return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai = {}, {}, {}, {}, {}
     if 'Измеряемые' in book.sheetnames:
-        return_sl_ai, sl_mnemo_ai, return_sl_sday = is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+        return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai = is_read_ai_ae_set(
+            sheet=book['Измеряемые'],
+            type_signal='AI')
     # print(datetime.datetime.now(), ' - Разпарсили Анпары, парсим Расчётные')
     # Расчетные
-    return_sl_ae, sl_mnemo_ae, return_ae_sday = {}, {}, {}
+    return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae = {}, {}, {}, {}, {}
     if 'Расчетные' in book.sheetnames:
-        return_sl_ae, sl_mnemo_ae, return_ae_sday = is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+        return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae = is_read_ai_ae_set(
+            sheet=book['Расчетные'],
+            type_signal='AE')
     # print(datetime.datetime.now(), ' - Разпарсили Расчётные, парсим Дискретные')
     # Дискретные
-    return_sl_di, sl_wrn_di, sl_mnemo_di = {}, {}, {}
+    return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff = {}, {}, {}, {}
     if 'Входные' in book.sheetnames:
-        return_sl_di, sl_wrn_di, sl_mnemo_di = is_read_di(sheet=book['Входные'])
+        return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff = is_read_di(sheet=book['Входные'])
     # print(datetime.datetime.now(), ' - Разпарсили Дискретные, парсим ИМы и ИМАО')
     # ИМ
-    return_sl_im, sl_cnt = {}, {}
+    return_sl_im, sl_cnt, return_sl_im_diff = {}, {}, {}
     if 'ИМ' in book.sheetnames and 'ИМ(АО)' in book.sheetnames:
-        return_sl_im, sl_cnt = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
+        return_sl_im, sl_cnt, return_sl_im_diff = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
 
     # Создаём и набиваем словарь для мнемосхемы наработок
     sl_mnemo_cnt = {plc: {'Наработка': list(), 'Перестановки': list()} for plc in sl_cnt}
@@ -259,17 +366,23 @@ try:
     # print(datetime.datetime.now(), ' - Разпарсили ИМы и ИМАО, собираем диагностику модулей')
     # Диагностика
     # sl_modules_cpu {имя CPU: {имя модуля: (тип модуля в студии, тип модуля, [каналы])}}
-    sl_modules_cpu, sl_for_diag = {}, {}
+    # sl_cpu_res = {имя CPU: (агл.имя основного, алг.имя резервного)}
+    sl_modules_cpu, sl_for_diag, sl_cpu_res, sl_cpu_rus_name = {}, {}, {}, {}
     if {'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)'} <= set(book.sheetnames):
-        sl_modules_cpu, sl_for_diag = is_read_create_diag(book, name_prj, 'Измеряемые', 'Входные', 'Выходные', 'ИМ(АО)')
+        sl_modules_cpu, sl_for_diag, sl_cpu_res, sl_cpu_rus_name = is_read_create_diag(book, name_prj, 'Измеряемые',
+                                                                                       'Входные', 'Выходные', 'ИМ(АО)')
+    # print('sl_cpu_res ', sl_cpu_res)
+    # print('sl_for_diag ', sl_for_diag)
+    # print('sl_modules_cpu', sl_modules_cpu)
+    # print('sl_cpu_rus_name', sl_cpu_rus_name)
     # print(datetime.datetime.now(), ' - Собрали диагностику, парсим уставки')
     # Уставки
-    return_sl_set, sl_set_mnemo_not_use, return_set_sday = {}, {}, {}
+    return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set = {}, {}, {}, {}, {}
     if 'Уставки' in book.sheetnames:
-        return_sl_set, sl_set_mnemo_not_use, return_set_sday = is_read_ai_ae_set(sheet=book['Уставки'],
-                                                                                 type_signal='SET')
+        return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set = is_read_ai_ae_set(
+            sheet=book['Уставки'], type_signal='SET')
     # Собираем словари сменной ведомости в один
-    # return_sl_sday = {cpu: {Перфискспапки.alg_par: русское имя}}
+    # return_sl_sday = {cpu: {Префикс папки.alg_par: русское имя}}
     for sl in (return_ae_sday, return_set_sday):
         for cpu in sl:
             if cpu in return_sl_sday:
@@ -278,13 +391,13 @@ try:
                 return_sl_sday[cpu] = sl[cpu]
     # print(datetime.datetime.now(), ' - Разпарсили уставки, парсим кнопки')
     # Кнопки
-    return_sl_btn = {}
+    return_sl_btn, return_sl_btn_diff = {}, {}
     if 'Кнопки' in book.sheetnames:
-        return_sl_btn = is_read_btn(sheet=book['Кнопки'])
+        return_sl_btn, return_sl_btn_diff = is_read_btn(sheet=book['Кнопки'])
     # print(datetime.datetime.now(), ' - Разпарсили кнопки, парсим защиты и сигналы')
     # Защиты
     # В чтении защит передаём словари AI и AE с единицами измерения,
-    # чтобы определить единицы измрения у защиты при необходимости
+    # чтобы определить единицы измерения у защиты при необходимости
     sl_pz, sl_pz_xml = {}, {}
     if 'Сигналы' in book.sheetnames:
         sl_pz, sl_pz_xml = is_read_pz(sheet=book['Сигналы'],
@@ -295,6 +408,13 @@ try:
     # sl_pz - словарь, в котором ключ - cpu, значение - кортеж алг. имён A+000 и т.д. словарь для индексов
     # sl_pz_xml - {cpu: {алг_имя(A000): (рус. имя, ед измерения, Проверяется при ПЗ - Да/Нет)}}
 
+    # return_sl_pru = {cpu: {алг_пар: (Тип сигнала, русское имя,)}}
+    return_sl_pru = {}
+    if 'ПРУ' in book.sheetnames:
+        return_sl_pru = is_read_pru(sheet=book['ПРУ'])
+
+    # print('return_sl_pru ', return_sl_pru)
+
     # Сигналы остальные
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = {}, {}, {}, {}, {}, {}
     sl_cpu_archive = {}
@@ -304,22 +424,24 @@ try:
             sl_wrn_di=sl_wrn_di,
             sl_cpu_spec=sl_CPU_spec
         )
+    # print('return_wrn', return_wrn)
+    # О
     # print(sl_cpu_archive)
     # print(datetime.datetime.now(), ' - Разпарсили защиты и сигналы, парсим Драйвера')
     # Драйвера
     # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
-    # ед.измер, кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков для истории) }}}
+    # ед. изм., кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков для истории) }}}
     # sl_cpu_drv_signal = {cpu: {Драйвер: (кортеж переменных)}}
     # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
     # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
-    # ед.измер, кол-во знаков) }}}
+    # ед. изм., кол-во знаков) }}}
     sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = {}, {}, {}
     if 'Драйвера' in book.sheetnames:
         sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = is_read_drv(sheet=book['Драйвера'],
                                                                            sl_all_drv=sl_all_drv)
 
-    # Переменные алгоримтов
+    # Переменные алгоритмов
     # словарь команд по cpu sl_command_in_cpu = {cpu: sl_command}
     # sl_command = {(Режим_alg, русское имя режима): {номер шага: {команда_alg: русский текст команды}}}
     sl_grh, return_alg_grh, sl_command_in_cpu = {}, {}, {}
@@ -339,7 +461,7 @@ try:
     # print('sl_command_in_cpu ', sl_command_in_cpu)
     # print('sl_mod_cpu ', sl_mod_cpu)
 
-    # Создаём кортеж всех комманд, чтобы анализировать и отсеивать их
+    # Создаём кортеж всех команд, чтобы анализировать и отсеивать их
     tuple_all_command = tuple([command for cpu in sl_command_in_cpu
                                for mod in sl_command_in_cpu[cpu]
                                for step in sl_command_in_cpu[cpu][mod]
@@ -356,13 +478,16 @@ try:
             # Определяем, к какому режиму относится
             mode = ''
             for m in all_mod_cpu:
-                if cond.startswith(m):
+                if cond.startswith(f"{m}_Cmd_In_") or cond.startswith(f"{m}_Tmv") or cond.startswith(f"{m}_Par"):
                     mode = m
                     break
             # Определяем к какому шагу это относится
+            if not mode:
+                continue
             step = int([i for i in cond.replace(mode, '').split('_') if i.isdigit()][0])
             # print(f'Команда {cond}, Режим {mode}, Шаг {step}')
             # Закидываем в словарь условий перехода
+            # print(mode, cond, f'ШАГ: {step}', f'Переменная : {sl_alg_grh[cond][1]}')
             sl_condition_in_cpu[cpu][mode][int(step)].update({cond: sl_alg_grh[cond][1]})
 
     # # пробегаемся по общему словарю и выдёргиваем оттуда всё, что не касается, старта, стопа, шага и команд
@@ -378,50 +503,70 @@ try:
     #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
     #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
-    print(datetime.datetime.now(), ' - Начинаем создавать выходные файлы')
+    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
     is_create_rlock(sl_object_all=sl_object_all, sl_cpu_archive=sl_cpu_archive)
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
     if 'Сеть' in book.sheetnames:
         return_sl_net = is_create_net(sl_object_all=sl_object_all, sheet_net=book['Сеть'])
 
+    # print(return_sl_ai)
+    # print(sl_mnemo_ai)
+    return_sl_cdo, return_sl_mnemo_cdo, return_sl_diff_cdo = {}, {}, {}
+    if 'Выходные' in book.sheetnames:
+        return_sl_cdo, return_sl_mnemo_cdo, return_sl_diff_cdo = is_read_out(sheet=book['Выходные'], type_signal='CDO')
+    # print(return_sl_cdo)
+    # print(return_sl_mnemo_cdo)
+    # print()
+
     sl_w = {
         # return_sl_ai =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
         'AI': {'dict': return_sl_ai,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-               'dict_agreg_IOS': sl_agreg
+               'dict_agreg_IOS': sl_agreg,
+               'dict_diff': return_sl_ai_diff
                },
         # return_sl_ae =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
         'AE': {'dict': return_sl_ae,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-               'dict_agreg_IOS': sl_agreg
+               'dict_agreg_IOS': sl_agreg,
+               'dict_diff': return_sl_ae_diff
                },
         # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
         'DI': {'dict': return_sl_di,
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
-               'dict_agreg_IOS': sl_agreg
+               'dict_agreg_IOS': sl_agreg,
+               'dict_diff': return_sl_di_diff
                },
-        # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender, ед измер,
+        # return_sl_im = {cpu: {алг_пар: (тип ИМа в студии, русское имя, StartView, Gender, ед изм.,
         # количество знаков(для д.ИМ=0), количество знаков для истории)}}
         'IM': {'dict': return_sl_im,
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.StartView', 'Attributes.Gender', 'Attributes.EUnit', 'Attributes.FracDigits'),
-               'dict_agreg_IOS': sl_agreg
+               'dict_agreg_IOS': sl_agreg,
+               'dict_diff': return_sl_im_diff
                },
         # return_sl_set =
-        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. измер, короткое имя, количество знаков)}}
+        # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
         'SET': {'dict': return_sl_set,
                 'tuple_attr': ('unit.System.Attributes.Description',
                                'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
-                'dict_agreg_IOS': sl_agreg
+                'dict_agreg_IOS': sl_agreg,
+                'dict_diff': return_sl_set_diff
                 },
         # return_sl_btn = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
         'BTN': {'dict': return_sl_btn,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
+                'dict_agreg_IOS': {},
+                'dict_diff': return_sl_btn_diff
+                },
+        # return_sl_pru = {cpu: {алг_пар: (Тип сигнала, русское имя, )}}
+        'PRU': {'dict': return_sl_pru,
+                'tuple_attr': ('unit.System.Attributes.Description',),
                 'dict_agreg_IOS': {}
                 },
         # sl_pz_xml = {cpu: {алг_имя(A000): (тип защиты в студии, рус.имя, ед измерения)}}
@@ -468,13 +613,20 @@ try:
         'GRH': {'dict': return_alg_grh,
                 'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.FracDigits'),
                 'dict_agreg_IOS': {}
-                }
+                },
+        # return_sl_cdo = {cpu: {алг_пар: (ТИП ALG в студии, русское имя, Нестандартный канал Да/Нет, модуль, канал)}}
+        'CDO': {'dict': return_sl_cdo,
+                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.State_Out'),
+                'dict_agreg_IOS': {}
+                },
     }
     # sl_object_all = {}  #
     # {(Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
     # print(return_alg_grh)
     # {cpu: {алг_имя тюнинга: (плк_тип, рус. описание(имя))}}
     sl_tun_apr = {}
+    sl_add_obj_cpu_mko = {}
+    sl_add_cpu_mko = {}
     # Для каждого объекта...
     for objects in sl_object_all:
         # ...создаём корневой узел xml для IOS-аспекта
@@ -503,10 +655,12 @@ try:
             if pref_IP[1] != '000.000.000.':
                 ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][0]}'.split('.')])
                 ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth2", address=ip2)
-            if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach',
+
+                # os.path.dirname(sys.argv[0])
+            if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach',
                                            'cpu', 'unet_tcp_port.txt')):
                 sl_unet = {}
-                with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'Systemach',
+                with open(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach',
                                        'cpu', 'unet_tcp_port.txt'), 'r', encoding='UTF-8') as f_:
                     for line in f_:
                         if '#' in line:
@@ -529,6 +683,15 @@ try:
                               address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
             child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
             ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
+
+            if cpu in sl_cpu_res:
+                child_cpu_res = ET.SubElement(child, 'trei_redundant-master-module', name="R-CPU", cpu="CPU")
+                if pref_IP[0] != '000.000.000.':
+                    ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][1]}'.split('.')])
+                    ET.SubElement(child_cpu_res, 'trei_ethernet-adapter', name="Eth1", address=ip1)
+                if pref_IP[1] != '000.000.000.':
+                    ip2 = '.'.join([a.lstrip('0') for a in f'{pref_IP[1]}{sl_object_all[objects][cpu][1]}'.split('.')])
+                    ET.SubElement(child_cpu_res, 'trei_ethernet-adapter', name="Eth2", address=ip2)
 
             # Если есть контроллер САР, то добавляем в него структуру САР (PLC-аспект)
             if 'САР' in sl_CPU_spec.get(cpu, {}):
@@ -555,9 +718,11 @@ try:
                 ET.SubElement(child_sar, 'ct_object', name=f"WRN",
                               base_type=f"Types.SAR_Classic.WRN_PLC_View",
                               aspect="Types.PLC_Aspect", access_level="public")
-                if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+
+                # os.path.dirname(sys.argv[0])
+                if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
                     child_tun = ET.SubElement(child_sar, 'ct_object', name=f"Tuning", access_level="public")
-                    with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
+                    with open(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
                               'r', encoding='UTF-8') as f_signal:
                         for line in f_signal:
                             if '#' in line:
@@ -577,7 +742,7 @@ try:
                 else:
                     print('Не найден файл тюнингов Template_Alpha/SAR/Tun_SAR.txt, тюнинги не будут добавлены')
 
-            # return_sl = {cpu: {алг_пар: (русское имя, ед измер, короткое имя, количество знаков)}}
+            # return_sl = {cpu: {алг_пар: (русское имя, ед изм., короткое имя, количество знаков)}}
             # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
             # Добавляем в кортежи параметров на первое место тип сигнала в студии
 
@@ -586,15 +751,25 @@ try:
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
+                    sl_w_node_dict_cpu_copy = copy(sl_w[node]['dict'][cpu])
+                    if sl_w[node].get('dict_diff'):
+                        # print(objects[1], sl_w[node]['dict_diff'][cpu])
+                        for alg_par, value_diff in sl_w[node]['dict_diff'][cpu].items():
+                            if f'{objects[1]}(нет)' in value_diff:
+                                # print(objects[1], alg_par)
+                                sl_w_node_dict_cpu_copy[alg_par] = \
+                                    sl_w_node_dict_cpu_copy[alg_par][:1] + (sl_w_node_dict_cpu_copy[alg_par][1] +
+                                                                            '(РЕЗЕРВ)',) + \
+                                    sl_w_node_dict_cpu_copy[alg_par][2:]
                     add_xml_par_plc(name_group=node,
                                     sl_par=sl_w[node]['dict'][cpu],
                                     parent_node=child_app,
                                     sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
-                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
+                                                 for alg_par, value in sl_w_node_dict_cpu_copy.items()})
 
             # Если есть АПР в данном контроллере...
             if 'АПР' in sl_CPU_spec[cpu]:
-                # Добавляем ИМ, просто ссылкаемся на структуру студии, если что, можно заменить
+                # Добавляем ИМ, просто ссылаемся на структуру студии, если что, можно заменить
                 child_apr = ET.SubElement(child_app, 'ct_object', name="APR", access_level="public")
                 child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
                                              base_type="Types.APR_IM.APR_IM_PLC_View",
@@ -629,36 +804,100 @@ try:
             # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
             if cpu in sl_modules_cpu:
                 tuple_attr = ('unit.System.Attributes.Description', 'Attributes.ShortName')
-                sl_tt = {alg_par: dict(zip((tuple_attr if 'CPU' in value
+                name_cpu_main = sl_cpu_res[cpu][0] if cpu in sl_cpu_res else '-'
+                name_cpu_res = sl_cpu_res[cpu][1] if cpu in sl_cpu_res else '-'
+                sl_tt = {alg_par: dict(zip((tuple_attr + ('Attributes.CPU_Name_Main', 'Attributes.CPU_Name_Res')
+                                            if 'CPU' in value
                                             else tuple_attr + tuple([f'Attributes.Channel_{i+1}'
                                                                      for i in range(len(value[2]))])),
-                                           ([(f'Диагностика мастер-модуля {alg_par} ({value[1]})'
-                                             if 'CPU' in value else f'Диагностика модуля {alg_par} ({value[1]})'),
-                                            alg_par] if 'CPU' in value
-                                            else [f'Диагностика модуля {alg_par} ({value[1]})', alg_par] + value[2])))
+                                           ([(f'Мастер-модуль ({value[1]})' if cpu in sl_cpu_res
+                                              else f'Мастер-модуль {alg_par} ({value[1]})'
+                                             if 'CPU' in value else f'Модуль {alg_par} ({value[1]})'),
+                                            alg_par, name_cpu_main, name_cpu_res] if 'CPU' in value
+                                            else [f'Модуль {alg_par} ({value[1]})', alg_par] + value[2])))
                          for alg_par, value in sl_modules_cpu[cpu].items()}
                 add_xml_par_plc(name_group='HW', sl_par=sl_modules_cpu[cpu],
                                 parent_node=child_diag,
                                 sl_attr_par=sl_tt)
 
+            # Добавляем диагностику МКО
+            # sl_obj_cpu_mko_index = {алг.имя объекта:
+            # {cpu: ((полное имя переменной диагностики МКО, индекс, с кем обмен(кортеж, в случае указания объекта), )}}
+            if cpu in sl_obj_cpu_mko_index.get(objects[0], 'бла'):
+                # print(cpu, sl_obj_cpu_mko_index[objects[0]][cpu])
+                # sl_par_add = {f"{cpu}_{signal[0].replace('|', '_')}": ('NoPing.NoPing_PLC_View', signal[1])
+                #               for signal in sl_obj_cpu_mko_index[objects[0]][cpu]}
+                sl_par_add = {}
+                sl_par_msg = {}
+                for signal in sl_obj_cpu_mko_index[objects[0]][cpu]:
+                    second_cpu = signal[-1][1] if isinstance(signal[-1], tuple) else signal[-1]
+                    # Проверка на существование обмена между контроллерами в конфигураторе
+                    if not((cpu, second_cpu) in set_mko_par_cpu or (second_cpu, cpu) in set_mko_par_cpu):
+                        continue
+                    signal_name = f"{cpu}_{signal[0].replace('|', '_')}"
+                    text_line_link = 'основной' if 'noping1' in signal[0].lower() or 'noping3' in signal[0].lower() \
+                        else 'резервной'
+                    if second_cpu in sl_cpu_res and ('noping3' in signal[0].lower() or 'noping4' in signal[0].lower()):
+                        second_cpu_rus = sl_cpu_res.get(second_cpu, '_!')[1]
+                    else:
+                        second_cpu_rus = sl_cpu_rus_name.get(signal[-1][1]) \
+                            if isinstance(signal[-1], tuple) else sl_cpu_rus_name.get(signal[-1])
+                    text_msg = f'Нет связи между контроллерами ' \
+                               f'{sl_cpu_rus_name.get(cpu)} и {second_cpu_rus} по {text_line_link} линии связи'
+                    sl_par_add[signal_name] = ('NoPing.NoPing_PLC_View', signal[1])
+                    sl_par_msg[signal_name] = (text_msg,)
+                    # Если второй контроллер не резервируемый, то удаляем noping3 и noping4
+                    if ('noping3' in signal[0].lower() or 'noping4' in signal[0].lower()) \
+                            and not sl_cpu_res.get(second_cpu) \
+                            and sl_par_add.get(signal_name) \
+                            and sl_par_msg.get(signal_name):
+                        del sl_par_add[signal_name]
+                        del sl_par_msg[signal_name]
+                    # print(f'{cpu}-{second_cpu}',(cpu, second_cpu) in set_mko_par_cpu,
+                    # (second_cpu, cpu) in set_mko_par_cpu)
+
+                if objects not in sl_add_obj_cpu_mko:
+                    sl_add_obj_cpu_mko[objects] = {}
+                sl_add_obj_cpu_mko[objects].update({cpu: sl_par_add})
+                if cpu not in sl_add_cpu_mko:
+                    sl_add_cpu_mko[cpu] = {
+                        f'Diag.Connect.{par}.Value': (val[1], 'B') for par, val in sl_par_add.items()
+                    }
+
+                tuple_attr = ('unit.System.Attributes.Description', )
+                add_xml_par_plc(name_group='Connect', sl_par=sl_par_add,
+                                parent_node=child_diag,
+                                sl_attr_par={alg_par: dict(zip(tuple_attr, value))
+                                             for alg_par, value in sl_par_msg.items()})
+
             # Создаём узел System
             child_system = ET.SubElement(child_app, 'ct_object', name="System", access_level="public")
 
             # Пробегаемся по словарю ключами
-            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH'):
+            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU'):
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
+                    sl_w_node_dict_cpu_copy = copy(sl_w[node]['dict'][cpu])
+                    if sl_w[node].get('dict_diff'):
+                        # print(objects[1], sl_w[node]['dict_diff'][cpu])
+                        for alg_par, value_diff in sl_w[node]['dict_diff'][cpu].items():
+                            if f'{objects[1]}(нет)' in value_diff:
+                                # print(objects[1], alg_par)
+                                sl_w_node_dict_cpu_copy[alg_par] = \
+                                    sl_w_node_dict_cpu_copy[alg_par][:1] + (sl_w_node_dict_cpu_copy[alg_par][1] +
+                                                                            '(РЕЗЕРВ)',) + \
+                                    sl_w_node_dict_cpu_copy[alg_par][2:]
                     add_xml_par_plc(name_group=node,
                                     sl_par=sl_w[node]['dict'][cpu],
                                     parent_node=child_system,
                                     sl_attr_par={alg_par: dict(zip(tuple_attr, value[1:]))
-                                                 for alg_par, value in sl_w[node]['dict'][cpu].items()})
+                                                 for alg_par, value in sl_w_node_dict_cpu_copy.items()})
 
             if cpu in return_sl_cpu_drv:
                 # return_sl_cpu_drv = {cpu: {(Драйвер, рус имя драйвера):
                 # {алг.пар: (Тип переменной, рус имя, тип сообщения, цвет отключения,
-                # цвет включения, ед.измер, кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков) }}}
+                # цвет включения, ед. изм., кол-во знаков, Сохраняемый - Да/Нет, кол-во знаков) }}}
                 child_drv_node = ET.SubElement(child_system, 'ct_object', name="DRV", access_level="public")
                 tuple_attr = ('unit.System.Attributes.Description', 'Attributes.Type_wrn_DRV',
                               'Attributes.sColorOff', 'Attributes.sColorOn',
@@ -706,7 +945,13 @@ try:
                         name=f"SAR" if tuple(sl_object_all[objects].keys()).count(cpu_sar) == 1 else f'SAR_{cpu_sar}',
                         access_level="public")
                     ET.SubElement(child_ios_sar, 'attribute', type='unit.System.Attributes.Description', value=f'САР')
+                    for agreg, type_agreg in sl_agreg.items():
+                        ET.SubElement(child_ios_sar, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                      aspect="Types.IOS_Aspect", access_level="public")
                     child_ios_sar_im = ET.SubElement(child_ios_sar, 'ct_object', name=f"IM", access_level="public")
+                    for agreg, type_agreg in sl_agreg.items():
+                        ET.SubElement(child_ios_sar_im, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                      aspect="Types.IOS_Aspect", access_level="public")
                     child_ios_sar_reload = ET.SubElement(child_ios_sar, 'ct_object', name=f"Reload",
                                                          access_level="public")
                     for i in range(1, 10):
@@ -746,11 +991,12 @@ try:
                                                       access_level="public")
                     ET.SubElement(child_ios_sar_wrn, 'ct_init-ref',
                                   ref="_PLC_View", target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.WRN")
-                    if os.path.exists(os.path.join(os.path.dirname(sys.argv[0]),
+                    # os.path.dirname(sys.argv[0])
+                    if os.path.exists(os.path.join(os.path.abspath(os.curdir),
                                                    'Template_Alpha', 'SAR', 'Tun_SAR.txt')):
                         child_ios_sar_tun = ET.SubElement(child_ios_sar, 'ct_object', name=f"Tuning",
                                                           access_level="public")
-                        with open(os.path.join(os.path.dirname(sys.argv[0]), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
+                        with open(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'SAR', 'Tun_SAR.txt'),
                                   'r', encoding='UTF-8') as f_signal:
                             for line in f_signal:
                                 if '#' in line:
@@ -775,6 +1021,7 @@ try:
         for node in ('AI', 'AE', 'DI', 'IM'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
+                # print(node, sl_w[node]['dict'])
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
                                 objects=objects, name_group=node,
                                 sl_par=sl_w[node]['dict'],
@@ -856,6 +1103,49 @@ try:
                         ET.SubElement(child_connect, 'ct_bind',
                                       source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}.IsConnected",
                                       target=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}', action="set_all")
+                    # Добавляем диагностику по резервным контроллерам, если такие есть
+                    if name_cpu in sl_cpu_res.get(cpu_connect, ''):
+                        name_res = sl_cpu_res[cpu_connect][1]
+                        for num_port in range(1, 3):
+                            child_sig_con = ET.SubElement(child_connect, 'ct_parameter',
+                                                          name=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}_res',
+                                                          type='bool', direction='out', access_level="public")
+                            ET.SubElement(child_sig_con, 'attribute', type='unit.Server.Attributes.Alarm',
+                                          value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                f'"Message":". Нет связи с {name_res}. Порт {num_port}",'
+                                                f'"Severity":40,"Type":2}},'
+                                                f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                f'"Message":". Нет связи с {name_res}. Порт {num_port}",'
+                                                f'"Severity":40,"Type":3}}],'
+                                                f'"Type":2}}}}')
+                            ET.SubElement(child_sig_con, 'attribute', type='unit.System.Attributes.InitialValue',
+                                          value='true')
+                            ET.SubElement(child_connect, 'ct_subject-ref',
+                                          name=f'_{cpu_connect}_{objects[2]}_Eth{num_port}_res',
+                                          object=f"Service.Modules."
+                                                 f"UNET Client.PLC_{cpu_connect}_{objects[2]}.R-CPU_Eth{num_port}",
+                                          const_access="false", aspected="false", access_level="public")
+                            ET.SubElement(child_connect, 'ct_bind',
+                                          source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}_res.IsConnected",
+                                          target=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}_res',
+                                          action="set_all")
+
+            # Добавляем диагностику МКО, если такая есть
+            if sl_obj_cpu_mko_index.get(objects[0]) and sl_add_obj_cpu_mko.get(objects):
+                # print(sl_add_obj_cpu_mko)
+                for cpu, sl_par_mko in sl_add_obj_cpu_mko[objects].items():
+                    for par_mko_noping, tuple_par in sl_par_mko.items():
+                        child_par = ET.SubElement(child_connect, 'ct_object', attrib={
+                            'name': f"{par_mko_noping}",
+                            'base-type': f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}",
+                            'aspect':  "Types.IOS_Aspect",
+                            'original': f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.Connect.{par_mko_noping}",
+                            'access-level': 'public'
+                        })
+                        ET.SubElement(child_par, 'ct_init-ref',
+                                      ref="_PLC_View",
+                                      target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.Diag.Connect.{par_mko_noping}")
 
         # Формируем узел NET, при условии, что в данном объекте что-то такое есть
         if objects[0] in return_sl_net:
@@ -866,15 +1156,78 @@ try:
                               aspect="Types.IOS_Aspect", access_level="public")
             for alg, sl_value in return_sl_net[objects[0]].items():
                 if "checkip" in sl_value['Type'].lower():
-                    pass
+                    # pass
+                    # print(alg, sl_value)
+                    child_checkip = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
+                                                  access_level="public")
+                    ET.SubElement(child_checkip, 'attribute', type=f"unit.System.Attributes.Description",
+                                  value=f"{sl_value.get('Unit', 'юнит не определён')}")
+                    # ...добавляем агрегаторы
+                    for agreg, type_agreg in sl_agreg.items():
+                        ET.SubElement(child_checkip, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                      aspect="Types.IOS_Aspect", access_level="public")
+                    ET.SubElement(child_checkip, 'ct_subject-ref', name=f'_State', object=f"Service.State",
+                                  const_access="false",
+                                  aspected="false")
+                    for ip_key, port in {'IP': "Порт 1", 'IP_res': "Порт 2"}.items():
+                        if sl_value.get(ip_key):
+                            # print(ip_key, sl_value.get(ip_key))
+                            ET.SubElement(child_checkip, 'ct_object', name=f'Ping_{ip_key}',
+                                          access_level="public", base_type="Types.Ping")
+
+                            child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
+                                                              name=f'Ping_status_{ip_key}',
+                                                              access_level="public", direction='out', type='bool')
+                            # ET.SubElement(child_ping_status, 'attribute', type="unit.Server.Attributes.Replicate",
+                            #               value=f"false")
+                            ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
+                                          value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                f'"Message":". {port}. Нет связи",'
+                                                f'"Severity":40,"Type":2}},'
+                                                f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                f'"Message":". {port}. Нет связи",'
+                                                f'"Severity":40,"Type":3}}],'
+                                                f'"Type":2}}}}')
+                            #
+
+                            object_handler = ET.SubElement(
+                                child_checkip, 'ct_handler', name=f'On_Ping_Status_{ip_key}',
+                                source_code=f'if (_State.Server.Value && Ping_{ip_key}.Status.Value '
+                                            f'&& !Ping_status_{ip_key}.Value) {{\n'
+                                            f'\tcommit Ping_status_{ip_key} = true;\n'
+                                            f'\t}} else if (_State.Server.Value && !Ping_{ip_key}.Status.Value '
+                                            f'&& Ping_status_{ip_key}.Value '
+                                            f'|| Ping_status_{ip_key}.Quality< 192) {{\n'
+                                            f'\tcommit Ping_status_{ip_key} = false;\n'
+                                            f'}}'
+                            )
+                            ET.SubElement(object_handler, 'ct_trigger',
+                                          on=f"Ping_{ip_key}.Status", cause="update")
                 else:
                     child_alg = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
                                               base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
                                               aspect="Types.IOS_Aspect",
                                               original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
                                               access_level="public")
+                    ET.SubElement(child_alg, 'attribute', type=f"unit.System.Attributes.Description",
+                                  value=f"{sl_value['Unit']}")
                     ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
                                   target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                    ET.SubElement(child_alg, 'ct_subject-ref', name=f'_State', object=f"Service.State",
+                                  const_access="false",
+                                  aspected="false")
+                    object_handler = ET.SubElement(
+                        child_alg, 'ct_handler', name=f'On_Ping_Status',
+                        source_code=f'if (_State.Server.Value && Ping_IP.Status.Value && !Ping_status.Value) {{\n'
+                                    f'\tcommit Ping_status = true;\n'
+                                    f'\t}} else if (_State.Server.Value && !Ping_IP.Status.Value && Ping_status.Value '
+                                    f'|| Ping_status.Quality< 192) {{\n'
+                                    f'\tcommit Ping_status = false;\n'
+                                    f'}}'
+                    )
+                    ET.SubElement(object_handler, 'ct_trigger',
+                                  on=f"Ping_IP.Status", cause="update")
                     if sl_value['Option']:
                         lst_ai = sl_value['Option'].split(';')[:12]
                         lst_di = sl_value['Option'].split(';')[12:]
@@ -882,12 +1235,18 @@ try:
                         for i, ai in enumerate([lst_ai[:3], lst_ai[3:6], lst_ai[6:9], lst_ai[9:12]]):
                             if ''.join(ai) and 'Не используется' not in ai:
                                 # print(i, ai)
+                                diap = float(len([_ for _ in range(int(ai[1]), int(ai[2]))]))
+                                # print(diap)
                                 object_sig_ai = ET.SubElement(child_alg, 'ct_parameter', name=f'aiValue{i}',
-                                                              type='int32', direction='out', access_level="public")
+                                                              type='float32', direction='out', access_level="public")
                                 ET.SubElement(object_sig_ai, 'attribute', type="unit.System.Attributes.Description",
                                               value=f"{ai[0]}")
+                                # <attribute type="unit.Server.Attributes.Replicate" value="false" />
+                                ET.SubElement(object_sig_ai, 'attribute', type="unit.Server.Attributes.Replicate",
+                                              value=f"false")
                                 ET.SubElement(child_alg, 'ct_formula',
-                                              source_code=f"_PLC_View.Signals_{sl_value['Type']}.aiValue{i}",
+                                              source_code=f"{float(ai[1])} + (TypeConvert.ToFloat(_PLC_View.Signals_"
+                                                          f"{sl_value['Type']}.aiValue{i})/65535)*{diap}",
                                               target=f"aiValue{i}")
                         for i, di in enumerate(lst_di):
                             if di and 'Не используется' not in di:
@@ -897,6 +1256,8 @@ try:
                                                               type='bool', direction='out', access_level="public")
                                 ET.SubElement(object_sig_di, 'attribute', type="unit.System.Attributes.Description",
                                               value=f"{description_ps}")
+                                ET.SubElement(object_sig_di, 'attribute', type="unit.Server.Attributes.Replicate",
+                                              value=f"false")
                                 ET.SubElement(child_alg, 'ct_formula',
                                               source_code=f"TypeConvert.ToBool"
                                                           f"(_PLC_View.Signals_{sl_value['Type']}.dioStatus{i})",
@@ -930,7 +1291,7 @@ try:
                           aspect="Types.IOS_Aspect", access_level="public")
 
         # Пробегаемся по словарю ключами
-        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH'):
+        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
@@ -1007,10 +1368,16 @@ try:
         # print(datetime.datetime.now(), f' - Создали аспект IOS-аспект {objects[0]}')
 
     # Создание сервисных сигналов
-    is_create_service_signal(sl_object_all=sl_object_all)
+    is_create_service_signal(sl_object_all=sl_object_all, sl_cpu_res=sl_cpu_res, architecture=architecture,
+                             server_name_osn=server_name_osn, server_name_rez=server_name_rez,
+                             sl_cpu_archive=sl_cpu_archive)
 
     # Создаём папку SYS
-    is_create_sys(sl_object_all=sl_object_all, name_prj=name_prj)
+    is_create_sys(sl_object_all=sl_object_all, name_prj=name_prj, return_sl_net=return_sl_net,
+                  architecture=architecture, sl_agreg=sl_agreg)
+    # # В случае клиент-серверной архитектуры создаём сообщения о резервном переходе
+    # if architecture == 'клиент-сервер':
+    #     is_create_service_snmp(server_name_rez=server_name_rez)
 
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
@@ -1027,7 +1394,7 @@ try:
     sl_sig_ts - словарь ТС, ключ - cpu, значение - кортеж ТС
     sl_sig_wrn - словарь ПС, ключ - cpu, значение - кортеж ПС(в том числе DI_)
     sl_pz - словарь защит,  ключ - cpu, значение - кортеж (первая авария в ПЛК, последняя авария в ПЛК)
-    sl_CPU_spec - словарь спецдобавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при налчии таковых в cpu
+    sl_CPU_spec - словарь спец. добавок, ключ - cpu, значение - кортеж ('ТР', 'АПР') при наличии таковых в cpu
     sl_for_diag - словарь диагностики, ключ - cpu, значение - словарь: ключ - имя модуля, значение - тип модуля
                                                    в случае CPU - ключ - 'CPU', значение - кортеж (имя cpu,тип cpu)
     sl_cpu_drv_signal - словарь драйверов, ключ - cpu, значение - словарь - ключ - драйвер, значение - кортеж переменных
@@ -1064,6 +1431,9 @@ try:
                 if 'IMIT' in param_tuple[0]:
                     sl_cpu_drv_signal_with_imit[cpu][driver[0]] += (param,)
     # print(sl_cpu_drv_signal_with_imit)
+    # print('sl_add_obj_cpu_mko', sl_add_obj_cpu_mko)
+    # print('sl_obj_cpu_mko_index', sl_obj_cpu_mko_index)
+    # print('sl_add_cpu_mko', sl_add_cpu_mko)
     create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                  sl_sig_alg=sl_sig_alg, 
                  sl_sig_mod=sl_sig_mod, 
@@ -1087,7 +1457,12 @@ try:
                  sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
                  sl_cpu_path=sl_cpu_path,
                  buff_size=buff_size,
-                 sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit)
+                 sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit,
+                 sl_cpu_cdo={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_cdo.items()},
+                 sl_cpu_res=sl_cpu_res,
+                 sl_add_cpu_mko=sl_add_cpu_mko,
+                 sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()}
+                 )
 
     # print(return_alr)
     # print(sl_CPU_spec)
@@ -1100,25 +1475,44 @@ try:
                 f_test.write('-' * 70 + '\n')
     # Если есть аналоговые параметры, то делаем шаблон Reports
     if return_sl_ai:
-        create_reports(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
-                       sl_param=return_sl_ai)
+        # Пока заблокирована функция для новых репортов
+        # create_reports(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
+        #                sl_param=return_sl_ai)
+        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
+                           sl_param=return_sl_ai)
     # Если есть расчётные параметры, то делаем шаблон Reports
     if return_sl_ae:
-        create_reports(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
-                       sl_param=return_sl_ae)
+        # Пока заблокирована функция для новых репортов
+        # create_reports(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
+        #                sl_param=return_sl_ae)
+        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
+                           sl_param=return_sl_ae)
     # Если есть наработки, то делаем шаблон Reports
     if sl_cnt_xml:
-        create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
-                       sl_param=sl_cnt_xml)
+        # Пока заблокирована функция для новых репортов
+        # create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
+        #                sl_param=sl_cnt_xml)
+        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
+                           sl_param=sl_cnt_xml)
     # Если есть защиты, то делаем шаблон Reports
     if sl_pz_xml:
-        create_reports_pz(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
-                          node_alg_name='System.PZ', sl_param=sl_pz_xml)
+        # Пока заблокирована функция для новых репортов
+        # create_reports_pz(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
+        #                   node_alg_name='System.PZ', sl_param=sl_pz_xml)
+        create_reports_pz_v80(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
+                              node_alg_name='System.PZ', sl_param=sl_pz_xml)
 
     if return_sl_sday:
         create_reports_sday(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость', sl_param=return_sl_sday)
+    else:
+        try:
+            create_reports_sday_v80(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
+            create_reports_sday_v10(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
+            create_reports_sut_v80(sl_object_all=sl_object_all, node_param_rus='Суточная ведомость')
+        except (Exception, KeyError, IndexError):
+            print('Файлы DailyList заполнены некорректно, обновите сменную ведомость')
 
-    # Создаём мнемосхемы (их изменение не котролируется по причине смены uuid, позже будет доработано)
+    # Создаём мнемосхемы (их изменение не контролируется по причине смены uuid, позже будет доработано)
     # Проработать вопрос создания мнемосхем для разных объектов!!!
     # return_sl_mnemo = {узел: список параметров узла}
     # Передаём такой словарь, но упорядоченный по узлам, согласно объявлению
@@ -1171,11 +1565,21 @@ try:
                         # param_pz=[one_pz for tuple_pz in [sl_pz[cpu] for cpu in sl_pz] for one_pz in tuple_pz],
                         sl_pz_xml=sl_pz_xml,    # sl_with_check_pz=dict(ChainMap(*sl_pz_xml.values())),
                         sl_object_all=sl_object_all)
-
+    # print()
+    # for i in sl_condition_in_cpu:
+    #     for mm in sl_condition_in_cpu[i]:
+    #         print(mm, sl_condition_in_cpu[i][mm])
     if sl_command_in_cpu and sl_condition_in_cpu and return_modes:
         create_mnemo_visual(sl_object_all=sl_object_all, sl_command_in_cpu=sl_command_in_cpu,
                             sl_condition_in_cpu=sl_condition_in_cpu, sl_mod_cpu=sl_mod_cpu)
-
+    if return_sl_mnemo_cdo:
+        create_mnemo_param(name_list='Проверка выходов', name_group='System.CDO', name_page='CDO',
+                           base_type_param='S_CDO_Param',
+                           size_shirina=size_shirina,
+                           size_vysota=size_vysota,
+                           sl_param=return_sl_mnemo_cdo,
+                           sl_object_all=sl_object_all
+                           )
     # print(return_ios_drv)
 
     if return_ios_drv:
@@ -1194,9 +1598,10 @@ try:
         if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', 'DRV', 'Systemach')):
             os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'DRV', 'Systemach'))
         # Чистим старые мнемосхемы ПЗ
-        for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'DRV')):
+        # os.path.dirname(sys.argv[0])
+        for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV')):
             if file.endswith('.omobj'):
-                os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'DRV', file))
+                os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV', file))
 
         for driver, sl_one_driver_cpu in return_ios_drv.items():
             create_mnemo_drv(name_group=f'System.DRV.{driver[0]}',
@@ -1215,7 +1620,8 @@ except (Exception, KeyError):
     logging.basicConfig(filename='error.log', filemode='a', datefmt='%d.%m.%y %H:%M:%S',
                         format='%(levelname)s - %(message)s - %(asctime)s')
     logging.exception("Ошибка выполнения")
-    for file in os.listdir(os.path.dirname(sys.argv[0])):
+    # os.path.dirname(sys.argv[0])
+    for file in os.listdir(os.path.abspath(os.curdir)):
         if file.endswith('.omx-export') or file.endswith('.json'):
             os.remove(file)
     input('Во время сборки произошла ошибка, сформирован файл error.log. Нажмите Enter для выхода...')

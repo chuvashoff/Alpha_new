@@ -31,10 +31,11 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
         os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo', 'Systemach'))
 
     # Чистим старые мнемосхемы ПЗ
-    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import',
+    #  os.path.dirname(sys.argv[0])
+    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
                                         'Mnemo', f'{name_page}_Mnemo')):
         if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import',
+            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
                                    'Mnemo', f'{name_page}_Mnemo', file))
 
     # СЛОВАРЬ УНИКАЛЬНЫХ ОБЪЕКТОВ
@@ -42,7 +43,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
     # При этом, если есть полное совпадение контроллеров, то дублирования нет
     sl_cpus_object = {}
     for obj, sl_cpu in sl_object_all.items():
-        cpus = tuple(sorted(sl_cpu.keys()))
+        cpus = tuple(sl_cpu.keys())  # cpus = tuple(sorted(sl_cpu.keys()))
         if cpus not in sl_cpus_object:
             sl_cpus_object[cpus] = obj
 
@@ -50,7 +51,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
         '1920x900': (1780, 900, 780),
         '1920x780': (1780, 780, 780)
     }
-    # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
+    # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
     sl_uuid_base = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
@@ -63,19 +64,22 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
         'Frame': '71f78e19-ef99-4133-a029-2968b14f02b6',
         'notifying_string': '14976fbf-36ab-415f-abc3-9f8fdc217351',
         'ExtPageButton': '2c2d6f3d-f500-4be6-b80c-620853cd99e3',
-        'DebugTool': '43946044-139a-43f4-a7b8-19a6074ffc56'
+        'DebugTool': '43946044-139a-43f4-a7b8-19a6074ffc56',
+        'S_CDO_Param': 'a3ddb55c-c549-4179-9564-f12cc1d85879'
     }
     # Словарь размеров элементов, тут по заполнению всё понятно
     sl_size_element = {'AI': {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)},
                        'AE': {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)},
                        'DI': {'size_el': ((525 + 50), (26 + 6)), 'size_text': (524.69, 26)},
-                       'System.CNT': {'size_el': ((545 + 30), (24 + 6)), 'size_text': (545, 24)}
+                       'System.CNT': {'size_el': ((545 + 30), (24 + 6)), 'size_text': (545, 24)},
+                       'System.CDO': {'size_el': ((591 + 2), (40 + 6)), 'size_text': (590.567, 24)},
                        }
     # Словарь расположения первого элемента, тут вроде всё понятно тоже - первый X, второй Y
     sl_start = {'AI': (3, 15),
                 'AE': (3, 15),
                 'DI': (50, 15),
-                'System.CNT': (30, 15)
+                'System.CNT': (30, 15),
+                'System.CDO': (3, 15)
                 }
     gor_base = sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[0]
     vert_base = sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[1]
@@ -84,7 +88,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
     # два пикселя по горизонтали между элементами
     par_gor_count = floor(gor_base / sl_size_element.get(name_group, {'size_el': (500, 0)})['size_el'][0])
     # Узнаём, сколько целых параметров влезет по вертикали
-    # 6 пикеселей по вертикали между элементами, 90 - запас для кнопок переключения
+    # 6 пикселей по вертикали между элементами, 90 - запас для кнопок переключения
     par_vert_count = floor((vert_base - 90 - sl_start.get(name_group, (0, 500))[1]) /
                            sl_size_element.get(name_group, {'size_el': (0, 500)})['size_el'][1])
     # Узнаём количество параметров на один лист
@@ -97,7 +101,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
     # только в том случае, если у него определены какие-то режимы
     for cpus, obj in sl_cpus_object.items():
         sl_param_object = {}
-        for plc in sorted(set(set(cpus) & set(sl_param.keys()))):
+        for plc in (_ for _ in cpus if _ in set(sl_param.keys())):  # sorted(set(set(cpus) & set(sl_param.keys())))
             for node in sl_param[plc]:
                 if node not in sl_param_object:
                     sl_param_object[node] = sl_param[plc][node]
@@ -136,7 +140,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
                 # Если в словаре листа нет текущего узла, то добавляем туда узел с пустым кортежем будущих переменных
                 if node not in sl_list_par[par[0]]:
                     sl_list_par[par[0]].update({node: tuple()})
-                # После этого на соотвествующем листе в соответствующий узел добавляем перебираемый параметр
+                # После этого на соответствующем листе в соответствующий узел добавляем перебираемый параметр
                 sl_list_par[par[0]][node] += (par[1],)
 
         if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo', 'Systemach', 'uuid')):
@@ -157,7 +161,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
                 for line in f_uuid_read:
                     lst_line = line.strip().split(':')
                     sl_page_uuid[lst_line[0]] = lst_line[1]
-            # Если после вычитывания не обнаружили формы для отсуствующих объектов
+            # Если после вычитывания не обнаружили формы для отсутствующих объектов
             # (например, увеличилось количество объектов), то дозаписываем
             with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo', 'Systemach', 'uuid'),
                       'a', encoding='UTF-8') as f_uuid_write:
@@ -529,9 +533,10 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
         os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'PZ_Mnemo', 'Systemach'))
 
     # Чистим старые мнемосхемы ПЗ
-    for file in os.listdir(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'PZ_Mnemo')):
+    #  os.path.dirname(sys.argv[0])
+    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo')):
         if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.dirname(sys.argv[0]), 'File_for_Import', 'Mnemo', 'PZ_Mnemo', file))
+            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo', file))
     # print(sl_with_check_pz)
     # param_pz = [_ for _ in param_pz if 'Проверяется при ПЗ - Да' in sl_with_check_pz[_]]
 
@@ -540,7 +545,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
     # При этом, если есть полное совпадение контроллеров, то дублирования нет
     sl_cpus_object = {}
     for obj, sl_cpu in sl_object_all.items():
-        cpus = tuple(sorted(sl_cpu.keys()))
+        cpus = tuple(sl_cpu.keys())  # cpus = tuple(sorted(sl_cpu.keys()))
         if cpus not in sl_cpus_object:
             sl_cpus_object[cpus] = obj
     # print(sl_cpus_object)
@@ -549,7 +554,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
         '1920x900': (1920, 900, 780),
         '1920x780': (1920, 780, 780)
     }
-    # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
+    # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
     sl_uuid_base = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
@@ -580,7 +585,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
     # два пикселя по горизонтали между элементами, 591 - ширина элемента параметра
     par_gor_count = floor(gor_base / sl_size_element.get(name_group, {'size_el': (500, 0)})['size_el'][0])
     # Узнаём, сколько целых параметров влезет по вертикали
-    # 6 пикеселей по вертикали между элементами, 92 - запас для кнопок переключения
+    # 6 пикселей по вертикали между элементами, 92 - запас для кнопок переключения
     par_vert_count = floor((vert_base - sl_start.get(name_group, (0, 500))[1]) /
                            sl_size_element.get(name_group, {'size_el': (0, 500)})['size_el'][1])
     # Узнаём количество параметров на один лист
@@ -606,7 +611,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
             for line in f_uuid_read:
                 lst_line = line.strip().split(':')
                 sl_page_uuid[lst_line[0]] = lst_line[1]
-        # Если после вычитывания не обнаружили формы для отсуствующих объектов
+        # Если после вычитывания не обнаружили формы для отсутствующих объектов
         # (например, увеличилось количество объектов), то дозаписываем
         with open(os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo', 'Systemach', 'uuid_PZ'),
                   'a', encoding='UTF-8') as f_uuid_write:
@@ -1145,7 +1150,7 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
     # При этом, если есть полное совпадение контроллеров, то дублирования нет
     sl_cpus_object = {}
     for obj, sl_cpu in sl_object_all.items():
-        cpus = tuple(sorted(sl_cpu.keys()))
+        cpus = tuple(sl_cpu.keys())  # cpus = tuple(sorted(sl_cpu.keys()))
         if cpus not in sl_cpus_object:
             sl_cpus_object[cpus] = obj
     # print(sl_cpus_object)
@@ -1154,7 +1159,7 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
         '1920x900': (1780, 900, 780),
         '1920x780': (1780, 780, 780)
     }
-    # Словарь ID для типовых структур, возможно потом будет считваться с файла или как-то по-другому
+    # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
     sl_uuid_base = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
@@ -1226,7 +1231,7 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
             for line in f_uuid_read:
                 lst_line = line.strip().split(':')
                 sl_page_uuid[lst_line[0]] = lst_line[1]
-        # Если после вычитывания не обнаружили формы для отсуствующих объектов
+        # Если после вычитывания не обнаружили формы для отсутствующих объектов
         # (например, увеличилось количество объектов), то дозаписываем
         with open(os.path.join('File_for_Import', 'Mnemo', 'DRV', 'Systemach', 'uuid_drv'),
                   'a', encoding='UTF-8') as f_uuid_write:
