@@ -4,6 +4,51 @@ import sys
 from math import floor  # , ceil
 from func_for_v3 import *
 from collections import ChainMap
+from json import dumps as json_dumps, load as json_load
+# from difflib import SequenceMatcher
+
+
+def check_diff_mnemo(new_data, check_path, file_name_check, message_print):
+    def replace_uuid(input_string):
+        pattern = r'uuid=".+?"'
+        replacement = 'id'
+        output_string = re.sub(pattern, replacement, input_string)
+        return output_string
+
+    # print(os.path.join(check_path, file_name_check))
+    if os.path.exists(os.path.join(check_path, file_name_check)):
+        # считываем имеющейся файл
+        with open(os.path.join(check_path, file_name_check), 'r', encoding='UTF-8') as f_check:
+            old_data = f_check.read()
+        # differ = difflib.Differ()
+        # diff = differ.compare(new_data.split('\n'), old_data.split('\n'))
+        # matcher = SequenceMatcher(None, replace_uuid(new_data), replace_uuid(old_data))
+        # print(matcher.ratio(), matcher.ratio() < 1.0)
+        # Если данные отличаются
+        # if matcher.ratio() < 1.0:
+        if replace_uuid(new_data) != replace_uuid(old_data):
+            # Если нет папки Old, то создаём её
+            if not os.path.exists(os.path.join(check_path, 'Old')):
+                os.mkdir(os.path.join(check_path, 'Old'))
+            # Переносим старую файл в папку Old
+            os.replace(os.path.join(check_path, file_name_check),
+                       os.path.join(check_path, 'Old', file_name_check))
+            sleep(0.5)
+            # Записываем новый файл
+            with open(os.path.join(check_path, file_name_check), 'w', encoding='UTF-8') as f_wr:
+                f_wr.write(new_data)
+            # пишем, что надо заменить
+            print(message_print)
+            with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
+                f_change.write(f'{datetime.datetime.now()} - {message_print}\n')
+    # Если в целевой(указанной) папке нет формируемого файла, то создаём его и пишем, что заменить
+    else:
+        with open(os.path.join(check_path, file_name_check), 'w', encoding='UTF-8') as f_wr:
+            f_wr.write(new_data)
+        print(message_print)
+        with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
+            f_change.write(f'{datetime.datetime.now()} - {message_print}\n')
+    return
 
 
 def multiple_replace_xml_mnemo(target_str):
@@ -32,11 +77,12 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
 
     # Чистим старые мнемосхемы ПЗ
     #  os.path.dirname(sys.argv[0])
-    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
-                                        'Mnemo', f'{name_page}_Mnemo')):
-        if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
-                                   'Mnemo', f'{name_page}_Mnemo', file))
+
+    # for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
+    #                                     'Mnemo', f'{name_page}_Mnemo')):
+    #     if file.endswith('.omobj'):
+    #         os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import',
+    #                                'Mnemo', f'{name_page}_Mnemo', file))
 
     # СЛОВАРЬ УНИКАЛЬНЫХ ОБЪЕКТОВ
     # Формируем словарь вида {кортеж контроллеров: (Объект, рус имя объекта, индекс объекта)}
@@ -52,7 +98,7 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
         '1920x780': (1780, 780, 780)
     }
     # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
-    sl_uuid_base = {
+    sl_uuid_base_default = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
         'S_A_INP_Param': '937a763e-eb58-4ded-b5a0-b58f4abd7ee7',
@@ -67,6 +113,21 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
         'DebugTool': '43946044-139a-43f4-a7b8-19a6074ffc56',
         'S_CDO_Param': 'a3ddb55c-c549-4179-9564-f12cc1d85879'
     }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_uuid_base = text_json
+        else:
+            print('Файл Systemach/Mnemo/uuid_base_elements.json не найден, '
+                  'uuid базовых элементов будут определены по умолчанию')
+            sl_uuid_base = sl_uuid_base_default
+    except Exception:
+        print('Файл Systemach/Mnemo/uuid_base_elements.json заполнен некорректно, '
+              'uuid базовых элементов будут определены по умолчанию')
+        sl_uuid_base = sl_uuid_base_default
+
     # Словарь размеров элементов, тут по заполнению всё понятно
     sl_size_element = {'AI': {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)},
                        'AE': {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)},
@@ -322,11 +383,18 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_type).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo',
-                                   f'{name_page}_{page}_{obj[0]}.omobj'),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo'),
+                             file_name_check=f'{name_page}_{page}_{obj[0]}.omobj',
+                             message_print=f'Требуется заменить мнемосхему {name_page}_{page}_{obj[0]}.omobj'
+                             )
+            # with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo',
+            #                        f'{name_page}_{page}_{obj[0]}.omobj'),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
 
         # Создаём нулевую мнемосхему параметров
         if sl_list_par:
@@ -516,10 +584,17 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_list).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo', f'{name_page}_0_{obj[0]}.omobj'),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo'),
+                             file_name_check=f'{name_page}_0_{obj[0]}.omobj',
+                             message_print=f'Требуется заменить мнемосхему {name_page}_0_{obj[0]}.omobj'
+                             )
+            # with open(os.path.join('File_for_Import', 'Mnemo', f'{name_page}_Mnemo', f'{name_page}_0_{obj[0]}.omobj'),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
     return
 
 
@@ -534,9 +609,11 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
 
     # Чистим старые мнемосхемы ПЗ
     #  os.path.dirname(sys.argv[0])
-    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo')):
-        if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo', file))
+
+    # for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo')):
+    #     if file.endswith('.omobj'):
+    #         os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'PZ_Mnemo', file))
+
     # print(sl_with_check_pz)
     # param_pz = [_ for _ in param_pz if 'Проверяется при ПЗ - Да' in sl_with_check_pz[_]]
 
@@ -555,7 +632,7 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
         '1920x780': (1920, 780, 780)
     }
     # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
-    sl_uuid_base = {
+    sl_uuid_base_default = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
         'S_ALR': '401676e6-e678-4938-bc7a-8a3382258f93',
@@ -572,6 +649,21 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
         'Button': '61e46e4a-827f-4dd2-ac8a-b68bcaddf442',
         'Alpha.Reports': '665556a0-5ea4-4768-8935-9ab18d0eb2a0'
     }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_uuid_base = text_json
+        else:
+            print('Файл Systemach/Mnemo/uuid_base_elements.json не найден, '
+                  'uuid базовых элементов будут определены по умолчанию')
+            sl_uuid_base = sl_uuid_base_default
+    except Exception:
+        print('Файл Systemach/Mnemo/uuid_base_elements.json заполнен некорректно, '
+              'uuid базовых элементов будут определены по умолчанию')
+        sl_uuid_base = sl_uuid_base_default
+
     # Словарь размеров элементов, тут по заполнению всё понятно
     sl_size_element = {'System.PZ': {'size_el': ((940 + 19.889), 30), 'size_text': (940, 30)}
                        }
@@ -870,10 +962,17 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
 
                 # Нормируем и записываем страницу мнемосхемы
                 temp = ET.tostring(root_type).decode('UTF-8')
-                with open(os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo', f'{name_page}_{page}_{obj[0]}.omobj'),
-                          'w', encoding='UTF-8') as f_out:
-                    f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                               pretty_print=True, encoding='unicode')))
+                check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                         pretty_print=True,
+                                                                                         encoding='unicode')),
+                                 check_path=os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo'),
+                                 file_name_check=f'{name_page}_{page}_{obj[0]}.omobj',
+                                 message_print=f'Требуется заменить мнемосхему {name_page}_{page}_{obj[0]}.omobj'
+                                 )
+                # with open(os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo', f'{name_page}_{page}_{obj[0]}.omobj'),
+                #           'w', encoding='UTF-8') as f_out:
+                #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                #                                                                pretty_print=True, encoding='unicode')))
 
             # Создаём главное окно ПЗ_0 ()
             root_list = ET.Element(
@@ -1130,10 +1229,17 @@ def create_mnemo_pz(name_group: str, name_page: str, base_type_param: str,
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_list).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo', f'{name_page}_0_{obj[0]}.omobj'),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo'),
+                             file_name_check=f'{name_page}_0_{obj[0]}.omobj',
+                             message_print=f'Требуется заменить мнемосхему {name_page}_0_{obj[0]}.omobj'
+                             )
+            # with open(os.path.join('File_for_Import', 'Mnemo', 'PZ_Mnemo', f'{name_page}_0_{obj[0]}.omobj'),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
 
     return
 
@@ -1160,7 +1266,7 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
         '1920x780': (1780, 780, 780)
     }
     # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
-    sl_uuid_base = {
+    sl_uuid_base_default = {
         '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
         'S_ALR': '401676e6-e678-4938-bc7a-8a3382258f93',
@@ -1177,14 +1283,32 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
         'Button': '61e46e4a-827f-4dd2-ac8a-b68bcaddf442',
         'Alpha.Reports': '665556a0-5ea4-4768-8935-9ab18d0eb2a0'
     }
-    sl_base_drv_param = {
+    sl_base_drv_param_default = {
         'DRV_AI.DRV_AI_PLC_View': ('S_DRV_AI_Discription', '803e851d-f716-4341-a237-717afdf13c9b'),
         'DRV_DI.DRV_DI_PLC_View': ('S_DRV_DI_Discription', '16abad7a-2e37-4edd-ad30-7317f4832b95'),
         'DRV_INT.DRV_INT_PLC_View': ('S_DRV_INT_Discription', '3ab70fca-70f2-492f-a7a6-92d58d785afd'),
-        'DRV_AI.DRV_AI_IMIT_PLC_View': ('S_DRV_AI_Discription', '803e851d-f716-4341-a237-717afdf13c9bb'),
+        'DRV_AI.DRV_AI_IMIT_PLC_View': ('S_DRV_AI_Discription', '803e851d-f716-4341-a237-717afdf13c9b'),
         'DRV_DI.DRV_DI_IMIT_PLC_View': ('S_DRV_DI_Discription', '16abad7a-2e37-4edd-ad30-7317f4832b95'),
         'DRV_INT.DRV_INT_IMIT_PLC_View': ('S_DRV_INT_Discription', '3ab70fca-70f2-492f-a7a6-92d58d785afd'),
     }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_uuid_base = text_json
+            sl_base_drv_param = text_json
+        else:
+            print('Файл Systemach/Mnemo/uuid_base_elements.json не найден, '
+                  'uuid базовых элементов будут определены по умолчанию')
+            sl_uuid_base = sl_uuid_base_default
+            sl_base_drv_param = sl_base_drv_param_default
+    except Exception:
+        print('Файл Systemach/Mnemo/uuid_base_elements.json заполнен некорректно, '
+              'uuid базовых элементов будут определены по умолчанию')
+        sl_uuid_base = sl_uuid_base_default
+        sl_base_drv_param = sl_base_drv_param_default
+
     # Словарь размеров элементов, тут по заполнению всё понятно
     sl_size_element = {name_group: {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)}
                        }
@@ -1410,10 +1534,17 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
 
                 # Нормируем и записываем страницу мнемосхемы
                 temp = ET.tostring(root_type).decode('UTF-8')
-                with open(os.path.join('File_for_Import', 'Mnemo', 'DRV', f'{name_page}_{page}_{obj[0]}.omobj'),
-                          'w', encoding='UTF-8') as f_out:
-                    f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                               pretty_print=True, encoding='unicode')))
+                check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                         pretty_print=True,
+                                                                                         encoding='unicode')),
+                                 check_path=os.path.join('File_for_Import', 'Mnemo', 'DRV'),
+                                 file_name_check=f'{name_page}_{page}_{obj[0]}.omobj',
+                                 message_print=f'Требуется заменить мнемосхему {name_page}_{page}_{obj[0]}.omobj'
+                                 )
+                # with open(os.path.join('File_for_Import', 'Mnemo', 'DRV', f'{name_page}_{page}_{obj[0]}.omobj'),
+                #           'w', encoding='UTF-8') as f_out:
+                #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                #                                                                pretty_print=True, encoding='unicode')))
 
             # Создаём главное окно ПЗ_0 ()
             root_list = ET.Element(
@@ -1600,9 +1731,16 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_list).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', 'DRV', f'{name_page}_0_{obj[0]}.omobj'),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', 'DRV'),
+                             file_name_check=f'{name_page}_0_{obj[0]}.omobj',
+                             message_print=f'Требуется заменить мнемосхему {name_page}_0_{obj[0]}.omobj'
+                             )
+            # with open(os.path.join('File_for_Import', 'Mnemo', 'DRV', f'{name_page}_0_{obj[0]}.omobj'),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
 
     return

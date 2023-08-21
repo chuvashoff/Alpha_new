@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AlgVisual_PTG_GPA1" display-name="AlgVisual_PTG_GPA1" uuid="1840e7f3-6cc0-402d-89af-47bbbd8c088d" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+<type access-modifier="private" name="AlgVisual_PTG_GPA1" display-name="AlgVisual_PTG_GPA1" uuid="362c2c90-80c3-422c-9670-8367401f1c8f" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
   <designed target="X" value="1" ver="2"/>
   <designed target="Y" value="1" ver="2"/>
   <designed target="Rotation" value="0" ver="2"/>
@@ -28,7 +28,7 @@
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="ZValue" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Headline" display-name="Headline" uuid="b6ed54f8-e011-4b6b-8533-9a898a0ff5ce" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="074d0d31-3db2-49f3-af51-65b3c6ddca1f" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
     <designed target="X" value="0" ver="2"/>
     <designed target="Y" value="0" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -46,7 +46,7 @@
     <designed target="BrushStyle" value="0" ver="2"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
-    <object access-modifier="private" name="PTG" display-name="PTG" uuid="1cc26bc8-5fdc-4cac-be9b-055e348eed8e" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+    <object access-modifier="private" name="PTG" display-name="PTG" uuid="c4fcf506-66b8-4140-a69e-b591041f92b4" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
       <designed target="X" value="0" ver="2"/>
       <designed target="Y" value="0" ver="2"/>
       <designed target="Rotation" value="0" ver="2"/>
@@ -64,11 +64,11 @@
       <designed target="Opacity" value="1" ver="3"/>
     </object>
   </object>
-  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="ca5aecde-83bb-4358-ac25-0048d20ca82d" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="0777debf-a6c7-4a32-8cd0-7855c1be2d94" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Path" ver="3" value="System.GRH.PTG_START.Value"/>
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
   </object>
-  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="fe6530a0-087f-419a-abd0-88aa3dd18da8" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="8c9669c3-c4af-430f-bfbb-b5efc5a4af9b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -79,14 +79,14 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_1_PTG_Cmd_In_1_1_1" display-name="Set_1_PTG_Cmd_In_1_1_1" uuid="58b64e17-7e7a-4d8f-a4aa-49ec36ce2018" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_1_PTG_Cmd_In_1" display-name="Set_1_PTG_Cmd_In_1" uuid="3702d0e1-a2d4-4b42-a20c-b57cc5d92bd8" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_1_1_1"/>
+    <init target="Text" ver="3" value="Кран 12 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_1"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
@@ -94,35 +94,22 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_1_PTG_Cmd_In_1_1_2" display-name="Set_1_PTG_Cmd_In_1_1_2" uuid="33afab97-ce9c-4bfd-a15a-26a42a252b2d" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="50.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 9 закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_1_1_2"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_1_PTG_Kr9_Off" display-name="Cmd_1_PTG_Kr9_Off" uuid="29af9fce-7c33-4ad0-88bd-97b5fc69ce1f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_PTG_Kr12_ON" display-name="Cmd_1_PTG_Kr12_ON" uuid="22998ff1-0519-4ba4-bdea-8784a7b6b078" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 9 закрыть"/>
+    <init target="Text" ver="3" value="Кран 12 открыть"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="1c0975e9-9738-414f-b1c7-aa3c6fd6e57b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="70151b2f-63a2-4d28-b778-cd785e2eeb62" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -131,13 +118,13 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="1"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_2_PTG_Cmd_In_2" display-name="Set_2_PTG_Cmd_In_2" uuid="733e635b-e9a9-4027-88c1-ba198b63b10d" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_2_PTG_Cmd_In_2" display-name="Set_2_PTG_Cmd_In_2" uuid="b86163c0-1903-4e30-8756-bd90dca1583d" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 12бис открыт"/>
+    <init target="Text" ver="3" value=""/>
     <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_2"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
@@ -146,20 +133,19 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_2_PTG_Kr12bis_On" display-name="Cmd_2_PTG_Kr12bis_On" uuid="c97425c2-09cb-49be-a8d2-94574badba17" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
+  <object access-modifier="private" name="Set_SP_2_PTG_Tmv_Out_2" display-name="Set_SP_2_PTG_Tmv_Out_2" uuid="9a0b3599-2589-494f-bb3b-04cefdc51f17" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 12бис открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
     <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
+    <init target="Text" ver="3" value="Таймер: Продувка ТГ"/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Tmv_Out_2"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="125310a3-b4aa-4bbd-8978-8772deef18be" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="03c8071c-5378-42d4-9b8c-2303b8cc9009" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -172,19 +158,33 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_3_PTG_Tmv_Out_3" display-name="Set_SP_3_PTG_Tmv_Out_3" uuid="5d8910f7-33cc-43c6-a11f-f333fe66e457" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_3_PTG_Cmd_In_3" display-name="Set_3_PTG_Cmd_In_3" uuid="ae728648-eadf-403f-a496-f5ce9a7d6965" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 9 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_3"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="Text" ver="3" value="Таймер: Продувка ТГ"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Tmv_Out_3"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_3_PTG_Kr9_OF" display-name="Cmd_3_PTG_Kr9_OF" uuid="5fcb3607-aec6-4153-8041-1ce84635ad91" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кран 9 закрыть"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
+    <init target="Point" ver="3" value="3"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="de336a1e-eab2-42bc-89f1-c1b0369eae6f" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="eaac705e-86b7-4cc0-b3d4-88d576fc43dc" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -195,37 +195,50 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="1"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_4_PTG_Cmd_In_4" display-name="Set_4_PTG_Cmd_In_4" uuid="707c75c9-e46c-471f-836d-a646d5254f79" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_SP_4_PTG_Cmd_In_4_1_1" display-name="Set_SP_4_PTG_Cmd_In_4_1_1" uuid="9260d088-b98c-43b3-a3a3-bb2812dc6990" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КСТГ закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_4"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
+    <init target="Text" ver="3" value="Ртг перед СК &gt; 1,85 МПа"/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Par_In_4_1_1"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.PTG_Cmd_In_4_1_1"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_PTG_KSTG_Off" display-name="Cmd_4_PTG_KSTG_Off" uuid="bdf7c89d-76ed-4741-a1b7-9dd11a0a5885" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Set_SP_4_PTG_Cmd_In_4_1_2" display-name="Set_SP_4_PTG_Cmd_In_4_1_2" uuid="42803e1f-66b4-4a44-8c3a-688e7bd6891a" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
+    <init target="Text" ver="3" value="Стабилизация 10 сек."/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Par_In_4_1_2"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.PTG_Cmd_In_4_1_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_4_PTG_TS_ZAP" display-name="Cmd_4_PTG_TS_ZAP" uuid="95ad3f75-6158-4cae-9e88-4fd5883a0dba" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="КСТГ закрыть"/>
+    <init target="Text" ver="3" value="Стабилизация ТГ"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="32db24fd-de8d-471d-be6b-f3167f3f39f9" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="45ccb6d3-4591-4b96-b8bd-cfc21b74e855" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -234,27 +247,14 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_5_PTG_Cmd_In_5_1_1" display-name="Set_5_PTG_Cmd_In_5_1_1" uuid="a20a3498-1dfb-429c-b9ac-c24a29312232" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 12 открыт"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_5_1_1"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Set_5_PTG_Cmd_In_5_1_2" display-name="Set_5_PTG_Cmd_In_5_1_2" uuid="15fde423-5b19-4ed2-8ecc-9bc796fb45cc" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_5_PTG_Cmd_In_5" display-name="Set_5_PTG_Cmd_In_5" uuid="bca5369a-2b6f-4b6f-8b10-88830dd9d6b7" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="150.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 12бис закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_5_1_2"/>
+    <init target="Text" ver="3" value="Пуск ТГ завершен"/>
+    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_5"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
@@ -262,169 +262,65 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_5_PTG_Kr12_On" display-name="Cmd_5_PTG_Kr12_On" uuid="2716bf97-0f53-44e0-b5d5-698b3ecb36f9" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_5_PTG_TS_END" display-name="Cmd_5_PTG_TS_END" uuid="117a1d7d-4a6b-46a9-bcf8-f49471f09e56" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 12 открыть"/>
+    <init target="Text" ver="3" value="Пуск ТГ завершен"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
     <init target="Point" ver="3" value="5"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="2.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="a20d3f89-32b8-4bc1-a175-8a0bafa73084" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
-    <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="6"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_Point" ver="3" value="GRH.PTG_Point"/>
-    <init target="Num" ver="3" value="6"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_6_PTG_Cmd_In_6_1_1" display-name="Set_SP_6_PTG_Cmd_In_6_1_1" uuid="794c696d-c78c-46bd-9a60-2e2845b8652d" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="6"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="Text" ver="3" value="Ртг &gt; 2,75 МПа"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Par_In_6_1_1"/>
-    <init target="_Condition_step" ver="5" value="System.GRH.PTG_Cmd_In_6_1_1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Set_6_PTG_Cmd_In_6_1_2" display-name="Set_6_PTG_Cmd_In_6_1_2" uuid="4a87534c-c1f3-402f-9b45-53a09b75ecc1" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="190.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Ртг &lt; 3.1 МПа"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_6_1_2"/>
-    <init target="Point" ver="3" value="6"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="1a956474-ebd1-4737-9128-f47432d1e141" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
-    <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="210.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_Point" ver="3" value="GRH.PTG_Point"/>
-    <init target="Num" ver="3" value="7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
-  </object>
-  <object access-modifier="private" name="Set_7_PTG_Cmd_In_7" display-name="Set_7_PTG_Cmd_In_7" uuid="89da4fa5-690c-4de4-82ea-2301ce0904e5" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="210.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Ртг в норме 10 сек"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_7"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Set_SP_7_PTG_Tmv_Rev_7" display-name="Set_SP_7_PTG_Tmv_Rev_7" uuid="ac1ed61d-2848-4a87-9a30-37662477c331" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="230.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="7"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="Text" ver="3" value="Обратный таймер"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Tmv_Rev_7"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-  </object>
-  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="14ce5f4c-8e78-41ef-8f0b-1be743d46c8c" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
-    <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="250.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Point" ver="3" value="8"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_Point" ver="3" value="GRH.PTG_Point"/>
-    <init target="Num" ver="3" value="8"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="1"/>
-  </object>
-  <object access-modifier="private" name="Set_8_PTG_Cmd_In_8" display-name="Set_8_PTG_Cmd_In_8" uuid="e4e71151-2d7b-4f73-87fe-2fdacae99b43" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="250.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Защита по Ртг взведена"/>
-    <init target="_Set" ver="3" value="System.GRH.PTG_Cmd_In_8"/>
-    <init target="Point" ver="3" value="8"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.PTG_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_8_PTG_ZH_Ptg_On" display-name="Cmd_8_PTG_ZH_Ptg_On" uuid="b64946f6-cb93-4215-aa37-3bbd185ecc05" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="250.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Взвести защиты по Ртг"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.PTG_Point"/>
-    <init target="Point" ver="3" value="8"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
   <designed target="Width" value="500" ver="2"/>
-  <designed target="Height" value="270.0" ver="2"/>
+  <designed target="Height" value="170.0" ver="2"/>
   <designed target="WindowWidth" value="500" ver="2"/>
-  <designed target="WindowHeight" value="270" ver="2"/>
-  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="37601274-7139-4f2c-a3f7-0575c79e9139" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="80cb87c5-d61d-4121-b856-dd8d94bd9e11" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <designed target="WindowHeight" value="170" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="770d5043-cc79-4e25-8233-b893c96bb6d6" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="096f987c-c1fa-48c2-894a-8c988c927733" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
     <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="b1606e7f-1b72-45ff-9574-8fe3cc0180f9" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+      <object access-modifier="private" uuid="b59931a3-4e3c-42fa-aeee-65a20caaec40" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
         <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Open_APK" display-name="Open_APK" uuid="91dc2e48-647a-4d1e-bd15-156d9fcd5ae9" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <object access-modifier="private" name="Open_KPK" display-name="Open_KPK" uuid="e83a374e-ad7f-4d3b-9259-caeee43834ac" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
-    <do-on access-modifier="private" name="Handler_Open_APK" display-name="Handler_Open_APK" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="bda07236-3251-42f3-9bcf-ec7e4911c612" base-type="AlgVisual_APK_GPA1" base-type-id="2e130824-a67a-49e8-8c25-265e67016582" ver="3">
+    <do-on access-modifier="private" name="Handler_Open_KPK" display-name="Handler_Open_KPK" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="afdef3a1-e884-4960-b593-40c9d2d7f902" base-type="AlgVisual_KPK_GPA1" base-type-id="70292f56-6ad5-4ecb-914a-a56452b68d1b" ver="3">
         <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="871bec7c-d7bf-4e15-8169-0b51e2f228af" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+  <object access-modifier="private" name="Open_APM" display-name="Open_APM" uuid="a19d6c23-cb3e-41c5-8daa-c501a10fdc7b" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+    <designed target="Enabled" value="true" ver="3"/>
+    <designed target="InvokeTrigger" value="false" ver="3"/>
+    <do-on access-modifier="private" name="Handler_Open_APM" display-name="Handler_Open_APM" ver="3" event="Invoked" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="30ff9e88-7eda-4de6-bc22-ec7d4776ebec" base-type="AlgVisual_APM_GPA1" base-type-id="adf2e8c2-bf8a-437d-adb0-fc34b9d7108e" ver="3">
+        <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5" ref="here.OpenFrom"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="f122c852-826e-440c-a666-761b52f39a1e" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
     <designed target="X" value="420" ver="5"/>
     <designed target="Y" value="0" ver="5"/>
     <designed target="ZValue" value="0" ver="5"/>
     <designed target="Rotation" value="0" ver="5"/>
     <do-on access-modifier="private" name="Handler_mouse_click" display-name="Handler_mouse_click" ver="3" event="MouseClick">
       <body kind="om"><![CDATA[if (String.EndsWith(OpenFrom, "01_FormAlg")) Open_01_FormAlg.Invoke();
-if (String.EndsWith(OpenFrom, "APK")) Open_APK.Invoke();
+if (String.EndsWith(OpenFrom, "KPK")) Open_KPK.Invoke();
+if (String.EndsWith(OpenFrom, "APM")) Open_APM.Invoke();
 LIndex : int4 = String.LastIndexOf(OpenFrom, ";");
 if (LIndex > 0) OpenFrom = String.Remove(OpenFrom, LIndex, String.Length(OpenFrom) - LIndex);]]></body>
     </do-on>

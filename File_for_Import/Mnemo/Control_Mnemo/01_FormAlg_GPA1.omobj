@@ -27,11 +27,11 @@
   <designed target="WindowPosition" value="0" ver="2"/>
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="Opacity" value="1" ver="2"/>
-  <object access-modifier="private" name="MOD_GZ" display-name="MOD_GZ" uuid="1be4dcf8-3d9c-44ad-8894-9eb45791e644" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_GZ" display-name="MOD_GZ" uuid="457a194e-62de-491f-9070-45d7533324b0" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.GZ_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_GZ" display-name="Alg_GZ" uuid="09086d66-8cc8-48ba-abcb-fbf4db61e870" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_GZ" display-name="Alg_GZ" uuid="e30e0aa3-e756-4fe4-83db-a91d3382ec6f" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="17" ver="2"/>
     <designed target="Y" value="10" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -40,7 +40,7 @@
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Запуск ГТД" ver="2"/>
+    <designed target="Text" value="Запуск Д" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -81,7 +81,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_GZ" display-name="Handler_Open_GZ" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="72396f24-8151-4d12-a21d-f7cc98f97649" base-type="AlgVisual_GZ_GPA1" base-type-id="6f77d4c0-d577-4088-acd1-17ac59125bbe" ver="5">
+      <object access-modifier="private" uuid="df9d63f7-31eb-4e11-909f-c452483944bf" base-type="AlgVisual_GZ_GPA1" base-type-id="2a1f29e6-64fc-4e12-a543-e708f994df02" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="GZ"/>
@@ -91,333 +91,13 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_NO" display-name="MOD_NO" uuid="477f067f-5cac-438f-80a1-c1d8c0e8cfbf" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.NO_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_NO" display-name="Alg_NO" uuid="c08de990-3f53-40f9-8d1b-3be21db7c762" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="10" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Останов ГТД" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_NO]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_NO" display-name="Handler_Open_NO" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="ebb98574-9bca-4398-8cdc-7b9040275a26" base-type="AlgVisual_NO_GPA1" base-type-id="3140a720-89d5-4d0c-a53e-1d6b5df6d44d" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="NO"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_AOss" display-name="MOD_AOss" uuid="93e31dc5-ce30-4886-9c69-6f54f58275fb" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.AOss_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_AOss" display-name="Alg_AOss" uuid="19406aab-b55c-4d49-b6e3-8200500afad5" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="60" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="АОсс" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_AOss]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_AOss" display-name="Handler_Open_AOss" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="7470d85c-c3b5-4538-aa5a-0e2ef21e9a87" base-type="AlgVisual_AOss_GPA1" base-type-id="057aea94-72f5-4d2c-b822-16c8fb803079" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="AOss"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_AObs" display-name="MOD_AObs" uuid="51ff6704-ca7b-4861-a36e-2261ab97ead5" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.AObs_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_AObs" display-name="Alg_AObs" uuid="83afd18f-2ff0-4654-9a97-b6a286ba50bd" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="60" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="АОбс" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_AObs]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_AObs" display-name="Handler_Open_AObs" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="48d26947-0e89-40fc-9308-89011dfc3aac" base-type="AlgVisual_AObs_GPA1" base-type-id="2eee6319-0f8b-404f-aa75-a851fa76b13a" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="AObs"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_NOss" display-name="MOD_NOss" uuid="49ddd4f1-b08b-4cfc-80fb-d0176e0811a7" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.NOss_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_NOss" display-name="Alg_NOss" uuid="df893580-2db7-41b6-bd92-40bfed041f6e" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="110" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="НОсс/ВОсс" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_NOss]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_NOss" display-name="Handler_Open_NOss" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="bdf61f63-dfde-49d7-a0b8-ddfe1243c5c0" base-type="AlgVisual_NOss_GPA1" base-type-id="eb066893-89af-4fcc-8f01-61dda48629d9" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="NOss"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_NObs" display-name="MOD_NObs" uuid="e7ef4b05-7330-484e-9a36-07fb72856b19" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.NObs_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_NObs" display-name="Alg_NObs" uuid="5996cf9a-88d9-4257-b5fe-d7fb04a05dd3" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="110" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="НОбс/ВОбс" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_NObs]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_NObs" display-name="Handler_Open_NObs" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="97a9a5b8-538e-46fc-b4a2-a8a02c848f96" base-type="AlgVisual_NObs_GPA1" base-type-id="d82c6229-5b7f-4cb2-8282-8383d6e17049" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="NObs"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_APZ" display-name="MOD_APZ" uuid="322d849b-fca3-4100-b0f4-fb4731b4e99e" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_APZ" display-name="MOD_APZ" uuid="8559e61d-b7bf-499d-a885-5845c2ba1219" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.APZ_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_APZ" display-name="Alg_APZ" uuid="3b96b80c-7476-44fb-924e-ddb9086c337c" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="160" ver="2"/>
+  <object access-modifier="private" name="Alg_APZ" display-name="Alg_APZ" uuid="0e71f7c0-9ac5-45ed-92d8-31c56b10a1ae" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="10" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
@@ -465,7 +145,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_APZ" display-name="Handler_Open_APZ" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="bc5147da-14fd-431e-8dd5-7007e542a91b" base-type="AlgVisual_APZ_GPA1" base-type-id="43a84db2-4709-4c26-bc0c-5f3ef28e6e18" ver="5">
+      <object access-modifier="private" uuid="dbd2c367-33f1-4707-bc90-6a693366ef2b" base-type="AlgVisual_APZ_GPA1" base-type-id="2b3c32e7-e0d7-42e3-99f8-7d7ff664409e" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="APZ"/>
@@ -475,77 +155,13 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_HP" display-name="MOD_HP" uuid="47dd7018-4a18-4aef-b3b5-d4fb058768dc" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.HP_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_HP" display-name="Alg_HP" uuid="3eebc120-f766-4d56-a301-de0fb9089dd0" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="160" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="ХП/Промывка" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_HP]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_HP" display-name="Handler_Open_HP" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="bc40707b-42e6-41fa-9616-73f6463eda16" base-type="AlgVisual_HP_GPA1" base-type-id="21dd2d21-80e4-4989-9df4-9128af7cfa28" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="HP"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_KPK" display-name="MOD_KPK" uuid="f261b48d-50af-4093-947a-a9e1c1837667" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_KPK" display-name="MOD_KPK" uuid="141955d9-1aaa-44d4-839c-2118315f036b" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.KPK_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_KPK" display-name="Alg_KPK" uuid="f829b385-35b6-4791-a716-7657b657d686" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_KPK" display-name="Alg_KPK" uuid="c2eeae12-5af0-413e-8ab6-5e8f30683e05" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="210" ver="2"/>
+    <designed target="Y" value="60" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
@@ -593,7 +209,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_KPK" display-name="Handler_Open_KPK" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="f01fab96-c82d-4e6f-8168-5033e45af22b" base-type="AlgVisual_KPK_GPA1" base-type-id="fc2560f4-ffec-4f6f-bebd-ad617ccf1f07" ver="5">
+      <object access-modifier="private" uuid="79204cd5-b6ad-44cd-bd87-edf738f085e3" base-type="AlgVisual_KPK_GPA1" base-type-id="70292f56-6ad5-4ecb-914a-a56452b68d1b" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="KPK"/>
@@ -603,20 +219,20 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_APK" display-name="MOD_APK" uuid="c3cfd212-f493-47eb-9056-4ef94de69e9c" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_HP" display-name="MOD_HP" uuid="6b3249d2-1f4a-414d-bcc4-cafbc5c68b18" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.APK_START.Value"/>
+    <init target="Path" ver="3" value="System.GRH.HP_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_APK" display-name="Alg_APK" uuid="fccf149b-35d4-4cd6-89de-537f87e5e1d4" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_HP" display-name="Alg_HP" uuid="bcfecf89-78f8-4139-94eb-4ae79a28f750" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="210" ver="2"/>
+    <designed target="Y" value="60" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="АПК/АПМ" ver="2"/>
+    <designed target="Text" value="ХП" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -648,7 +264,7 @@
     <designed target="DisabledPenWidth" value="1" ver="2"/>
     <do-trace access-modifier="private" target="BrushColor" ver="3">
       <conditional-expr>
-        <condition><![CDATA[MOD_APK]]></condition>
+        <condition><![CDATA[MOD_HP]]></condition>
         <expr><![CDATA[0xff008000]]></expr>
       </conditional-expr>
       <default-expr>
@@ -656,22 +272,406 @@
       </default-expr>
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_APK" display-name="Handler_Open_APK" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="23dc7dcd-aafd-4b42-b8f9-3cbfe6d2f436" base-type="AlgVisual_APK_GPA1" base-type-id="2e130824-a67a-49e8-8c25-265e67016582" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_HP" display-name="Handler_Open_HP" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="2d661cc6-e231-46f1-8089-2531c22d5241" base-type="AlgVisual_HP_GPA1" base-type-id="af701ceb-0c68-467a-a6d5-688742e52d54" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="APK"/>
+        <designed target="WindowCaption" ver="5" value="HP"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="X" ver="5" value="1"/>
         <init target="Y" ver="5" value="1"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_PBA" display-name="MOD_PBA" uuid="602ed709-8487-49b4-8647-e446f492e5e5" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_APM" display-name="MOD_APM" uuid="36946a96-2aad-40eb-b048-004192eb3415" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.PBA_START.Value"/>
+    <init target="Path" ver="3" value="System.GRH.APM_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_PBA" display-name="Alg_PBA" uuid="6a17e6f4-4a4d-4fe5-b7fe-96295920dbb1" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_APM" display-name="Alg_APM" uuid="0ad15a8b-b6cb-4e14-9471-840b048f3dc4" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="110" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="АПК/АПМ/АПХХ" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_APM]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_APM" display-name="Handler_Open_APM" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="3d1b3079-0503-4fa5-9a4a-a3c14f94b831" base-type="AlgVisual_APM_GPA1" base-type-id="adf2e8c2-bf8a-437d-adb0-fc34b9d7108e" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="APM"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_AOss" display-name="MOD_AOss" uuid="80f5253a-4e18-4dc9-a88c-016d8e74afe3" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.AOss_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_AOss" display-name="Alg_AOss" uuid="81a4cdd4-3270-4503-b54d-e3b5e33ba50a" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="110" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="АОсс" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_AOss]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_AOss" display-name="Handler_Open_AOss" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="5b143575-2169-41f5-ab1c-0c102cdee77a" base-type="AlgVisual_AOss_GPA1" base-type-id="925c0a93-33b9-43b8-9c69-2aff7a2fec6d" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="AOss"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_AObs" display-name="MOD_AObs" uuid="7520fcec-0218-4536-a5c4-25f1b0d8e41f" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.AObs_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_AObs" display-name="Alg_AObs" uuid="d1f30250-6475-4fae-87d6-d153babeb025" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="160" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="АОбс" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_AObs]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_AObs" display-name="Handler_Open_AObs" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="d88e1da6-b213-4396-9b07-56ac7b1f7c4a" base-type="AlgVisual_AObs_GPA1" base-type-id="3d528f74-c45a-4108-b331-ad4e12ac76a8" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="AObs"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_NOss" display-name="MOD_NOss" uuid="abd4143a-dc73-4ca5-b4b5-9b8b83284e0a" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.NOss_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_NOss" display-name="Alg_NOss" uuid="19db8a5b-a41f-4000-b246-65afb7547c79" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="160" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="НОсс" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_NOss]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_NOss" display-name="Handler_Open_NOss" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="1907b176-63a9-4198-bd95-7161c8c4e4a1" base-type="AlgVisual_NOss_GPA1" base-type-id="9eddec5c-0dfe-4f2e-9636-3a0cab251094" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="NOss"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_NObs" display-name="MOD_NObs" uuid="ebc3e095-f844-4668-9e60-e24d514a64f0" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.NObs_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_NObs" display-name="Alg_NObs" uuid="868d4b81-0471-4c94-ae7e-1794319c7dec" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="210" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="НОбс" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_NObs]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_NObs" display-name="Handler_Open_NObs" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="f4048427-0db3-43e3-8b50-276535fac97a" base-type="AlgVisual_NObs_GPA1" base-type-id="e862136b-7cbd-441e-a08e-2d4d523e0608" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="NObs"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_OZ" display-name="MOD_OZ" uuid="99e91b91-f0a7-446e-823a-98d0b271c282" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.OZ_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_OZ" display-name="Alg_OZ" uuid="835ae804-b506-4348-89f0-15c695368988" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="210" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="ОЗ" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_OZ]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_OZ" display-name="Handler_Open_OZ" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="afc8033d-742b-451f-9417-991ad6259388" base-type="AlgVisual_OZ_GPA1" base-type-id="75e0e525-2b37-4f58-8383-62263428d55c" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="OZ"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_HH_K" display-name="MOD_HH_K" uuid="f5108e5b-1326-4907-aed1-ee560305bb01" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.HH_K_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_HH_K" display-name="Alg_HH_K" uuid="664b637c-e1c2-4c1d-81bb-5559fcbb8559" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="17" ver="2"/>
     <designed target="Y" value="260" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -680,7 +680,263 @@
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Пуск БВ" ver="2"/>
+    <designed target="Text" value="Переход ХХ -&gt; К" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_HH_K]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_HH_K" display-name="Handler_Open_HH_K" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="caa5afa9-81cf-4405-92fa-b1034840552f" base-type="AlgVisual_HH_K_GPA1" base-type-id="a94881bd-4c54-42dd-b84f-08a6521e73de" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="HH_K"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_K_HH" display-name="MOD_K_HH" uuid="dcc3d8cb-470e-4e35-9458-6e4138b8f48e" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.K_HH_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_K_HH" display-name="Alg_K_HH" uuid="b6613567-2643-4212-a577-b9431e9d12be" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="260" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Переход К -&gt; ХХ" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_K_HH]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_K_HH" display-name="Handler_Open_K_HH" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="ff29bf60-7a0a-4670-8a03-1586e54d71cd" base-type="AlgVisual_K_HH_GPA1" base-type-id="98640b65-d50e-4417-b4ca-6184caf9ef37" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="K_HH"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_K_M" display-name="MOD_K_M" uuid="b973c968-1ce6-4829-aa10-a6111d4986db" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.K_M_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_K_M" display-name="Alg_K_M" uuid="7a2b32d2-6304-45cb-96b4-65d2aa48e044" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="310" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Переход К -&gt; М" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_K_M]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_K_M" display-name="Handler_Open_K_M" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="8dc158d4-a87d-4ca1-9eac-9c15e9e19b7f" base-type="AlgVisual_K_M_GPA1" base-type-id="0ed2f0a6-9088-4f4b-9d2f-4cb329c3ada0" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="K_M"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_M_K" display-name="MOD_M_K" uuid="dac2162b-36c9-4ec8-a071-14e1be0aa3a1" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.M_K_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_M_K" display-name="Alg_M_K" uuid="4c95d4e4-f467-414a-9d81-ea3aaca52986" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="310" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Переход М -&gt; К" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_M_K]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_M_K" display-name="Handler_Open_M_K" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="933deb18-bbdf-4029-8998-6e89c1f4647c" base-type="AlgVisual_M_K_GPA1" base-type-id="a9887faf-8a70-4922-adce-72ea10244327" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="M_K"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_PBA" display-name="MOD_PBA" uuid="ec938a27-1fbe-4a12-9703-caaec3471b54" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.PBA_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_PBA" display-name="Alg_PBA" uuid="b04dc602-08e3-45d6-9853-888114e111f6" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="360" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Пуск СО БВ" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -721,7 +977,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_PBA" display-name="Handler_Open_PBA" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a03a67ff-c6cb-4337-97e0-896a272498c5" base-type="AlgVisual_PBA_GPA1" base-type-id="f654a7c7-16ab-42d0-bc5e-5d6a94d81aa0" ver="5">
+      <object access-modifier="private" uuid="9d124338-1454-48b1-86cd-39e70fb122ff" base-type="AlgVisual_PBA_GPA1" base-type-id="caacbf4b-a0d0-46e4-9f93-b8772c1421e8" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="PBA"/>
@@ -731,20 +987,84 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_PMSN" display-name="MOD_PMSN" uuid="28d16e38-4a88-4c0e-81a5-489f79471e40" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_SBA" display-name="MOD_SBA" uuid="e3a9cf9f-fd39-48f9-9c13-63d359c0a656" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.PMSN_START.Value"/>
+    <init target="Path" ver="3" value="System.GRH.SBA_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_PMSN" display-name="Alg_PMSN" uuid="5c08b968-0a67-408d-be95-1587a2eda05e" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_SBA" display-name="Alg_SBA" uuid="6b2fd344-2f46-477c-9f75-256fc7730cef" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="260" ver="2"/>
+    <designed target="Y" value="360" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Пуск МСН" ver="2"/>
+    <designed target="Text" value="Стоп СО БВ" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_SBA]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_SBA" display-name="Handler_Open_SBA" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="611ca821-e4ba-4b83-a54c-72481f40f172" base-type="AlgVisual_SBA_GPA1" base-type-id="4d800246-f17a-4324-867b-54c6a10b336d" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="SBA"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_PMSN" display-name="MOD_PMSN" uuid="92a34f5a-64ed-4dcf-8eec-d59b86becafc" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.PMSN_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_PMSN" display-name="Alg_PMSN" uuid="6ff351f3-a7ac-419f-aff5-2febebc6c5ea" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="410" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Пуск маслосистемы ЦБК" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -785,7 +1105,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_PMSN" display-name="Handler_Open_PMSN" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="d8555e4c-cf18-436a-a2f9-7800f83f74ad" base-type="AlgVisual_PMSN_GPA1" base-type-id="f26b0cc4-006d-4cf8-a28e-132fe059da23" ver="5">
+      <object access-modifier="private" uuid="b157b91f-c854-4504-80f9-09b5bb35fce3" base-type="AlgVisual_PMSN_GPA1" base-type-id="d02a0dda-a1d1-4a1c-b4a5-9869ea2f7b8e" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="PMSN"/>
@@ -795,84 +1115,20 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_PSGU" display-name="MOD_PSGU" uuid="2f37f623-cf4a-4c80-9a39-8e99549e0305" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_SMSN" display-name="MOD_SMSN" uuid="d33070d3-0f7d-470f-a758-a97911885aff" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.PSGU_START.Value"/>
+    <init target="Path" ver="3" value="System.GRH.SMSN_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_PSGU" display-name="Alg_PSGU" uuid="cad12575-c4ca-46b3-9b2f-08d7f11d0ec6" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="310" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="ПУСК СГУ" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_PSGU]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_PSGU" display-name="Handler_Open_PSGU" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="18427eb4-d699-4702-8d7d-4a5785f54a29" base-type="AlgVisual_PSGU_GPA1" base-type-id="31a1060a-1465-4714-8396-6208df7600dd" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="PSGU"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_PMSD" display-name="MOD_PMSD" uuid="5d23afcf-0c48-4891-84b4-58672a0fc089" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.PMSD_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_PMSD" display-name="Alg_PMSD" uuid="bafd95a7-ac52-4fba-8dc1-7267622de494" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_SMSN" display-name="Alg_SMSN" uuid="e83e61f3-8ba2-4e4d-a893-08a2e6bd3910" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="310" ver="2"/>
+    <designed target="Y" value="410" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Прокачка МСД" ver="2"/>
+    <designed target="Text" value="Останов маслосистемы ЦБК" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -904,7 +1160,7 @@
     <designed target="DisabledPenWidth" value="1" ver="2"/>
     <do-trace access-modifier="private" target="BrushColor" ver="3">
       <conditional-expr>
-        <condition><![CDATA[MOD_PMSD]]></condition>
+        <condition><![CDATA[MOD_SMSN]]></condition>
         <expr><![CDATA[0xff008000]]></expr>
       </conditional-expr>
       <default-expr>
@@ -912,95 +1168,31 @@
       </default-expr>
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_PMSD" display-name="Handler_Open_PMSD" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="dcb071f8-b5ee-4d91-9664-415e2d1a2d11" base-type="AlgVisual_PMSD_GPA1" base-type-id="d472ff84-ac21-4ab3-b43b-ce639564971e" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_SMSN" display-name="Handler_Open_SMSN" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="7898c00a-2764-42f0-9beb-1b454fe54748" base-type="AlgVisual_SMSN_GPA1" base-type-id="1d8b4884-0991-49e5-a956-88462e4eab38" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="PMSD"/>
+        <designed target="WindowCaption" ver="5" value="SMSN"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="X" ver="5" value="1"/>
         <init target="Y" ver="5" value="1"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_SMSD" display-name="MOD_SMSD" uuid="03098eda-163c-4a57-95a3-cf2afdc56665" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.SMSD_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_SMSD" display-name="Alg_SMSD" uuid="2a518d7c-0968-4037-8c66-831041463727" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="360" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Останов МСД" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_SMSD]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_SMSD" display-name="Handler_Open_SMSD" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a70d2078-9418-44fa-9acf-8a788c623980" base-type="AlgVisual_SMSD_GPA1" base-type-id="eb03d95f-9322-4db7-9a08-97ec41a5b35e" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="SMSD"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_ZKN" display-name="MOD_ZKN" uuid="c0e8416d-55a4-42d7-8148-3dfb0aa360f5" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_ZKN" display-name="MOD_ZKN" uuid="f1a62e5c-7d87-4abb-ba64-1f85544d5d1f" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.ZKN_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_ZKN" display-name="Alg_ZKN" uuid="ee175686-c167-4ba7-aa50-225d0790f798" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="360" ver="2"/>
+  <object access-modifier="private" name="Alg_ZKN" display-name="Alg_ZKN" uuid="f0fb6daf-560d-4c46-8ae0-5392b35992d1" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="460" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Заполнение контура Н" ver="2"/>
+    <designed target="Text" value="Заполнение контура ЦБК" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -1041,7 +1233,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_ZKN" display-name="Handler_Open_ZKN" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="ed7d5563-afb7-4485-adc2-6436d324e907" base-type="AlgVisual_ZKN_GPA1" base-type-id="d09010eb-fb36-42e7-9dd7-84788cf13dfa" ver="5">
+      <object access-modifier="private" uuid="5921ba53-30ed-4d45-a8e9-b3c5c2497fff" base-type="AlgVisual_ZKN_GPA1" base-type-id="0ee8fe4f-0af6-4b88-9eba-0669c8a0729d" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="ZKN"/>
@@ -1051,13 +1243,77 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_PTG" display-name="MOD_PTG" uuid="233ff4e6-1273-4db1-827b-743bc24d95ef" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_Empty" display-name="MOD_Empty" uuid="7a27ddad-4657-4e18-97f6-0bbcf0c73633" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.Empty_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_Empty" display-name="Alg_Empty" uuid="692d62d6-ce2d-479e-bdbf-a3104f946e78" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="460" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Стравливание контура" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_Empty]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_Empty" display-name="Handler_Open_Empty" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="d74651ba-89bb-4c6d-aba3-4b8429ba4468" base-type="AlgVisual_Empty_GPA1" base-type-id="c65e6261-0bca-4067-9d4c-620ada050358" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="Empty"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_PTG" display-name="MOD_PTG" uuid="128cb9fd-3ae9-4223-9a00-9b9981f943f4" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.PTG_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_PTG" display-name="Alg_PTG" uuid="b0e6b637-8137-4ad9-9051-dd718cf5d2d6" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_PTG" display-name="Alg_PTG" uuid="e5e3319e-3e5d-4d45-a425-df86f7d43ef2" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="410" ver="2"/>
+    <designed target="Y" value="510" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
@@ -1105,7 +1361,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_PTG" display-name="Handler_Open_PTG" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="1c3cf92b-a2c5-4d24-92d7-f3036fccd104" base-type="AlgVisual_PTG_GPA1" base-type-id="1840e7f3-6cc0-402d-89af-47bbbd8c088d" ver="5">
+      <object access-modifier="private" uuid="9f560578-cad0-44af-80a6-1ca3bc701d89" base-type="AlgVisual_PTG_GPA1" base-type-id="362c2c90-80c3-422c-9670-8367401f1c8f" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="PTG"/>
@@ -1115,13 +1371,13 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_STG" display-name="MOD_STG" uuid="fe3fad23-2847-49f0-b817-9a1f85496cca" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_STG" display-name="MOD_STG" uuid="c555139d-bf4b-4ffe-be48-3bcddf19b666" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="Path" ver="3" value="System.GRH.STG_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_STG" display-name="Alg_STG" uuid="9c01b147-bbb1-444b-ba78-5659d17aeac9" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_STG" display-name="Alg_STG" uuid="1aca4a28-dd8e-461e-8a68-38749fce95c3" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="410" ver="2"/>
+    <designed target="Y" value="510" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
     <designed target="Scale" value="1" ver="2"/>
     <designed target="Visible" value="true" ver="2"/>
@@ -1169,7 +1425,7 @@
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
     <do-on access-modifier="private" name="Handler_Open_STG" display-name="Handler_Open_STG" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="ff526731-13ad-437e-a96a-ae1d6e1cb8f2" base-type="AlgVisual_STG_GPA1" base-type-id="2e57ec93-3c17-4296-afbc-3df0ffd20d17" ver="5">
+      <object access-modifier="private" uuid="3a874f9b-fcba-4776-b24e-711f0a270a1c" base-type="AlgVisual_STG_GPA1" base-type-id="3819c24a-e1a8-4eb5-86c4-b02d6ee9cc87" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
         <designed target="WindowCaption" ver="5" value="STG"/>
@@ -1179,267 +1435,11 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="MOD_Empty" display-name="MOD_Empty" uuid="de2509a8-75cb-4621-8bd7-cdf86d0673b9" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="MOD_PUT" display-name="MOD_PUT" uuid="c7d3e90e-ffb8-4347-aa1a-67e1ee4c1b45" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.Empty_START.Value"/>
+    <init target="Path" ver="3" value="System.GRH.PUT_START.Value"/>
   </object>
-  <object access-modifier="private" name="Alg_Empty" display-name="Alg_Empty" uuid="176b0f69-a0f1-42d6-a934-d0887a0b8cc2" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="460" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Стравливание" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_Empty]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_Empty" display-name="Handler_Open_Empty" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a1bb1eaf-9aa3-40b8-a3d0-0bfc484f782e" base-type="AlgVisual_Empty_GPA1" base-type-id="88ed4cc6-6a9b-479d-99a9-c067cea7caf1" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="Empty"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_SCBN" display-name="MOD_SCBN" uuid="ef8da9ab-ecbd-4740-98f4-b072bfd723f0" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.SCBN_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_SCBN" display-name="Alg_SCBN" uuid="daf952ac-a49a-49ee-8c36-f2755551db7a" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="460" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="Останов систем ЦБН" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_SCBN]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_SCBN" display-name="Handler_Open_SCBN" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="7a036573-cc86-4b05-959d-91cdf90eaa18" base-type="AlgVisual_SCBN_GPA1" base-type-id="d24b6e69-875f-417c-adff-5e4947b759dc" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="SCBN"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_KM" display-name="MOD_KM" uuid="5d5b5fec-9a5e-4ef6-87ae-d320782297b0" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.KM_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_KM" display-name="Alg_KM" uuid="5875a2fe-8047-4003-8c69-83c9b3dad6a1" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="17" ver="2"/>
-    <designed target="Y" value="510" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="К-М" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_KM]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_KM" display-name="Handler_Open_KM" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a5bc996b-4b3d-4a92-95fa-286ad9ea2679" base-type="AlgVisual_KM_GPA1" base-type-id="92769c62-f498-4b50-b5a3-97e641c9d8a0" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="KM"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_MK" display-name="MOD_MK" uuid="7eb30c4a-6e29-41ac-b53b-6f37206b0341" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.MK_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_MK" display-name="Alg_MK" uuid="f79f7959-ab34-4c4d-b343-eef56d420d39" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
-    <designed target="X" value="252" ver="2"/>
-    <designed target="Y" value="510" ver="2"/>
-    <designed target="Rotation" value="0" ver="2"/>
-    <designed target="Scale" value="1" ver="2"/>
-    <designed target="Visible" value="true" ver="2"/>
-    <designed target="Enabled" value="true" ver="2"/>
-    <designed target="Width" value="225" ver="2"/>
-    <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="М-К" ver="2"/>
-    <designed target="TextAlignment" value="132" ver="2"/>
-    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
-    <designed target="FontColor" value="0xffffffff" ver="2"/>
-    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
-    <designed target="BrushColor" value="0xff27567a" ver="2"/>
-    <designed target="BrushStyle" value="1" ver="2"/>
-    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
-    <designed target="OnClickBrushStyle" value="1" ver="2"/>
-    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
-    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
-    <designed target="PenColor" value="4278190080" ver="2"/>
-    <designed target="PenStyle" value="1" ver="2"/>
-    <designed target="PenWidth" value="1" ver="2"/>
-    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
-    <designed target="OnClickPenStyle" value="1" ver="2"/>
-    <designed target="OnClickPenWidth" value="3" ver="2"/>
-    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
-    <designed target="OnHoverPenStyle" value="1" ver="2"/>
-    <designed target="OnHoverPenWidth" value="2" ver="2"/>
-    <designed target="ZValue" value="0" ver="2"/>
-    <designed target="Opacity" value="1" ver="2"/>
-    <designed target="Checkable" value="false" ver="2"/>
-    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
-    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
-    <designed target="DisabledBrushStyle" value="1" ver="2"/>
-    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
-    <designed target="DisabledPenStyle" value="1" ver="2"/>
-    <designed target="DisabledPenWidth" value="1" ver="2"/>
-    <do-trace access-modifier="private" target="BrushColor" ver="3">
-      <conditional-expr>
-        <condition><![CDATA[MOD_MK]]></condition>
-        <expr><![CDATA[0xff008000]]></expr>
-      </conditional-expr>
-      <default-expr>
-        <expr><![CDATA[0xff27567a]]></expr>
-      </default-expr>
-    </do-trace>
-    <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_MK" display-name="Handler_Open_MK" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="12841590-28fe-4751-92b2-fbe8066683b7" base-type="AlgVisual_MK_GPA1" base-type-id="0eef1467-51f9-48a5-9360-8a1faaf462e2" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="MK"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="X" ver="5" value="1"/>
-        <init target="Y" ver="5" value="1"/>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="MOD_SMD_HP" display-name="MOD_SMD_HP" uuid="9bd550e5-cbc2-4b68-9ce9-d5e40ed4ff9f" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
-    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="Path" ver="3" value="System.GRH.SMD_HP_START.Value"/>
-  </object>
-  <object access-modifier="private" name="Alg_SMD_HP" display-name="Alg_SMD_HP" uuid="50d720ab-c8c4-41a0-b973-879ff04a9755" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+  <object access-modifier="private" name="Alg_PUT" display-name="Alg_PUT" uuid="93fd31a1-5c7d-4af5-a353-4c4deae1e21c" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
     <designed target="X" value="17" ver="2"/>
     <designed target="Y" value="560" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -1448,7 +1448,7 @@
     <designed target="Enabled" value="true" ver="2"/>
     <designed target="Width" value="225" ver="2"/>
     <designed target="Height" value="35" ver="2"/>
-    <designed target="Text" value="ХП/Промывка" ver="2"/>
+    <designed target="Text" value="Пуск УТО" ver="2"/>
     <designed target="TextAlignment" value="132" ver="2"/>
     <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
     <designed target="FontColor" value="0xffffffff" ver="2"/>
@@ -1480,7 +1480,7 @@
     <designed target="DisabledPenWidth" value="1" ver="2"/>
     <do-trace access-modifier="private" target="BrushColor" ver="3">
       <conditional-expr>
-        <condition><![CDATA[MOD_SMD_HP]]></condition>
+        <condition><![CDATA[MOD_PUT]]></condition>
         <expr><![CDATA[0xff008000]]></expr>
       </conditional-expr>
       <default-expr>
@@ -1488,11 +1488,267 @@
       </default-expr>
     </do-trace>
     <designed target="Checked" value="false" ver="4"/>
-    <do-on access-modifier="private" name="Handler_Open_SMD_HP" display-name="Handler_Open_SMD_HP" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="af66a5e4-6030-4849-90c9-97313920ded9" base-type="AlgVisual_SMD_HP_GPA1" base-type-id="6e4962c3-7781-47c3-b407-c9cfdaaf7fb3" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_PUT" display-name="Handler_Open_PUT" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="5e926d8a-30ee-4fe4-a929-c305fd562cf9" base-type="AlgVisual_PUT_GPA1" base-type-id="0378afbd-ba39-476f-9807-9359bbaf5574" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="OpenFrom" ver="5" value="01_FormAlg"/>
-        <designed target="WindowCaption" ver="5" value="SMD_HP"/>
+        <designed target="WindowCaption" ver="5" value="PUT"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_SUT" display-name="MOD_SUT" uuid="434d4db4-6c65-4963-9b90-acc9af1434e5" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.SUT_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_SUT" display-name="Alg_SUT" uuid="b7c797a1-17d0-493c-9357-45d18854d2f8" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="560" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Останов УТО" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_SUT]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_SUT" display-name="Handler_Open_SUT" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="d6e41b44-7573-4319-a6e5-00217af070ba" base-type="AlgVisual_SUT_GPA1" base-type-id="6081ffd3-01ad-450d-9845-93eecbafbbb2" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="SUT"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_RstVOD" display-name="MOD_RstVOD" uuid="0e200b62-4846-455f-a316-354c6f912592" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.RstVOD_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_RstVOD" display-name="Alg_RstVOD" uuid="fccf291a-1527-4302-b659-7ae4e5f407d7" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="610" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Сброс ПЧ ВОД1" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_RstVOD]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_RstVOD" display-name="Handler_Open_RstVOD" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="9d109010-e8d1-484a-9710-04dc890c1d95" base-type="AlgVisual_RstVOD_GPA1" base-type-id="09a70343-1c39-4859-9b3f-bbc7421851f3" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="RstVOD"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_RstVMOD" display-name="MOD_RstVMOD" uuid="a9fdc2ab-de58-4ff5-ab34-7b68a0f273c7" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.RstVMOD_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_RstVMOD" display-name="Alg_RstVMOD" uuid="3d3c5f65-3ab3-4483-942e-86699c09de72" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="252" ver="2"/>
+    <designed target="Y" value="610" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Сброс ПЧ ВМОД1" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_RstVMOD]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_RstVMOD" display-name="Handler_Open_RstVMOD" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="d3fcced1-f6f5-4b0b-b732-a21640e7aa27" base-type="AlgVisual_RstVMOD_GPA1" base-type-id="1e115e74-1152-47f8-993d-7ef639a5ef2f" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="RstVMOD"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="X" ver="5" value="1"/>
+        <init target="Y" ver="5" value="1"/>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="MOD_RstVMON" display-name="MOD_RstVMON" uuid="b6ce8cc5-cb40-40f1-9e26-689c222a31ec" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+    <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="Path" ver="3" value="System.GRH.RstVMON_START.Value"/>
+  </object>
+  <object access-modifier="private" name="Alg_RstVMON" display-name="Alg_RstVMON" uuid="8c88f77b-f0f6-4f01-acc0-84e488f20424" base-type="Button" base-type-id="61e46e4a-827f-4dd2-ac8a-b68bcaddf442" ver="3">
+    <designed target="X" value="17" ver="2"/>
+    <designed target="Y" value="660" ver="2"/>
+    <designed target="Rotation" value="0" ver="2"/>
+    <designed target="Scale" value="1" ver="2"/>
+    <designed target="Visible" value="true" ver="2"/>
+    <designed target="Enabled" value="true" ver="2"/>
+    <designed target="Width" value="225" ver="2"/>
+    <designed target="Height" value="35" ver="2"/>
+    <designed target="Text" value="Сброс ПЧ ВМОН1" ver="2"/>
+    <designed target="TextAlignment" value="132" ver="2"/>
+    <designed target="Font" value="PT Astra Sans,14,-1,5,50,0,0,0,0,0,Обычный" ver="2"/>
+    <designed target="FontColor" value="0xffffffff" ver="2"/>
+    <designed target="OnClickFontColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverFontColor" value="4278190080" ver="2"/>
+    <designed target="BrushColor" value="0xff27567a" ver="2"/>
+    <designed target="BrushStyle" value="1" ver="2"/>
+    <designed target="OnClickBrushColor" value="4288716960" ver="2"/>
+    <designed target="OnClickBrushStyle" value="1" ver="2"/>
+    <designed target="OnHoverBrushColor" value="4294967295" ver="2"/>
+    <designed target="OnHoverBrushStyle" value="1" ver="2"/>
+    <designed target="PenColor" value="4278190080" ver="2"/>
+    <designed target="PenStyle" value="1" ver="2"/>
+    <designed target="PenWidth" value="1" ver="2"/>
+    <designed target="OnClickPenColor" value="4278190080" ver="2"/>
+    <designed target="OnClickPenStyle" value="1" ver="2"/>
+    <designed target="OnClickPenWidth" value="3" ver="2"/>
+    <designed target="OnHoverPenColor" value="4278190080" ver="2"/>
+    <designed target="OnHoverPenStyle" value="1" ver="2"/>
+    <designed target="OnHoverPenWidth" value="2" ver="2"/>
+    <designed target="ZValue" value="0" ver="2"/>
+    <designed target="Opacity" value="1" ver="2"/>
+    <designed target="Checkable" value="false" ver="2"/>
+    <designed target="DisabledFontColor" value="4278190080" ver="2"/>
+    <designed target="DisabledBrushColor" value="4288716960" ver="2"/>
+    <designed target="DisabledBrushStyle" value="1" ver="2"/>
+    <designed target="DisabledPenColor" value="4288716960" ver="2"/>
+    <designed target="DisabledPenStyle" value="1" ver="2"/>
+    <designed target="DisabledPenWidth" value="1" ver="2"/>
+    <do-trace access-modifier="private" target="BrushColor" ver="3">
+      <conditional-expr>
+        <condition><![CDATA[MOD_RstVMON]]></condition>
+        <expr><![CDATA[0xff008000]]></expr>
+      </conditional-expr>
+      <default-expr>
+        <expr><![CDATA[0xff27567a]]></expr>
+      </default-expr>
+    </do-trace>
+    <designed target="Checked" value="false" ver="4"/>
+    <do-on access-modifier="private" name="Handler_Open_RstVMON" display-name="Handler_Open_RstVMON" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="84007ce1-6bb9-488f-aac6-94690ecebce8" base-type="AlgVisual_RstVMON_GPA1" base-type-id="07809c92-0a1a-4f1e-b24c-3331aecd86ab" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="OpenFrom" ver="5" value="01_FormAlg"/>
+        <designed target="WindowCaption" ver="5" value="RstVMON"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="X" ver="5" value="1"/>
         <init target="Y" ver="5" value="1"/>
@@ -1500,9 +1756,9 @@
     </do-on>
   </object>
   <designed target="Width" value="490" ver="2"/>
-  <designed target="Height" value="630" ver="2"/>
+  <designed target="Height" value="730" ver="2"/>
   <designed target="WindowWidth" value="490" ver="2"/>
-  <designed target="WindowHeight" value="630" ver="2"/>
+  <designed target="WindowHeight" value="730" ver="2"/>
   <do-on access-modifier="private" name="Handler_1" display-name="Handler_1" ver="5" event="Opened">
     <body kind="om"><![CDATA[here.Link_MainControl.ALG._MainH = me.Height;
 here.Link_MainControl.ALG._MainW = me.Width;]]></body>

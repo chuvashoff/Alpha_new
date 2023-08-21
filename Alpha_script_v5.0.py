@@ -306,9 +306,9 @@ try:
     for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo')):
         if file.endswith('.omobj'):
             os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', file))
-    for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo')):
-        if file.endswith('.omobj'):
-            os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo', file))
+    # for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo')):
+    #     if file.endswith('.omobj'):
+    #         os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'Control_Mnemo', file))
     # Очистка файла изменений, если он есть и содержит больше 100 строк
     if os.path.exists('Required_change.txt'):
         with open('Required_change.txt', 'r') as f_test:
@@ -503,7 +503,7 @@ try:
     #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
     #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
-    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
+    # print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
     is_create_rlock(sl_object_all=sl_object_all, sl_cpu_archive=sl_cpu_archive)
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
@@ -519,6 +519,7 @@ try:
     # print(return_sl_mnemo_cdo)
     # print()
 
+    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
     sl_w = {
         # return_sl_ai =
         # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
@@ -628,6 +629,10 @@ try:
     sl_add_obj_cpu_mko = {}
     sl_add_cpu_mko = {}
     # Для каждого объекта...
+    progress_ios_plc = len(sl_object_all) + sum([len(sl_) for _, sl_ in sl_object_all.items()])
+    # print(progress_ios_plc)
+    progress_bar = ' ' * 100
+    progress_percent = 0
     for objects in sl_object_all:
         # ...создаём корневой узел xml для IOS-аспекта
         root_ios_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
@@ -933,6 +938,10 @@ try:
                                                                               pretty_print=True, encoding='unicode')),
                             message_print=f'Требуется заменить ПЛК-аспект контроллера {cpu}_{objects[2]}')
             # print(datetime.datetime.now(), f' - Создали аспект {cpu}_{objects[2]}')
+            progress_percent += 1
+            cur_percent = progress_percent * 100 / progress_ios_plc
+            # rprint(f"Процент создания/проверки IOS и PLC Аспектов:{round(cur_percent, 2)}%")
+            # print(f"[{progress_bar.replace(' ', '=', round(cur_percent))}]")
 
         # Если у текущего объекта есть контроллеры с САР на борту
         if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'САР' in sl_CPU_spec[i]]):
@@ -1366,7 +1375,12 @@ try:
                                                                           pretty_print=True, encoding='unicode')),
                         message_print=f'Требуется заменить IOS-аспект объекта {objects[0]}')
         # print(datetime.datetime.now(), f' - Создали аспект IOS-аспект {objects[0]}')
+        progress_percent += 1
+        cur_percent = progress_percent * 100 / progress_ios_plc
+        # rprint(f"Процент создания/проверки IOS и PLC Аспектов:{round(cur_percent, 2)}%")
+        # print(f"[{progress_bar.replace(' ', '=', round(cur_percent))}]")
 
+    # print()
     # Создание сервисных сигналов
     is_create_service_signal(sl_object_all=sl_object_all, sl_cpu_res=sl_cpu_res, architecture=architecture,
                              server_name_osn=server_name_osn, server_name_rez=server_name_rez,
@@ -1599,9 +1613,10 @@ try:
             os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'DRV', 'Systemach'))
         # Чистим старые мнемосхемы ПЗ
         # os.path.dirname(sys.argv[0])
-        for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV')):
-            if file.endswith('.omobj'):
-                os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV', file))
+
+        # for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV')):
+        #     if file.endswith('.omobj'):
+        #         os.remove(os.path.join(os.path.abspath(os.curdir), 'File_for_Import', 'Mnemo', 'DRV', file))
 
         for driver, sl_one_driver_cpu in return_ios_drv.items():
             create_mnemo_drv(name_group=f'System.DRV.{driver[0]}',

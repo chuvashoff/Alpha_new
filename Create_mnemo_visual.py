@@ -1,7 +1,7 @@
 import uuid
 from math import floor, ceil
 from func_for_v3 import *
-from Create_mnemo_v3 import multiple_replace_xml_mnemo
+from Create_mnemo_v3 import multiple_replace_xml_mnemo, check_diff_mnemo, json_load
 # from lxml.etree import CDATA
 
 
@@ -108,7 +108,7 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
 
     # print(tuple_submodes_start)
     # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
-    sl_uuid_base = {
+    sl_uuid_base_default = {
         "00_AlgVisual_Base": "4d4dc649-f350-4c61-89d1-6c938208b3fe",
         'Rectangle': '15726dc3-881e-4d8d-b0fa-a8f8237f08ca',
         'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
@@ -131,6 +131,21 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
         '01_MainControl': 'c1882486-6ced-4543-a63a-eb1e5f0c3cf8',
         '00_FormAlg_Base': '8970c7d2-2f62-4029-b1a6-48d46a91463b'
     }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_uuid_base = text_json
+        else:
+            print('Файл Systemach/Mnemo/uuid_base_elements.json не найден, '
+                  'uuid базовых элементов будут определены по умолчанию')
+            sl_uuid_base = sl_uuid_base_default
+    except Exception:
+        print('Файл Systemach/Mnemo/uuid_base_elements.json заполнен некорректно, '
+              'uuid базовых элементов будут определены по умолчанию')
+        sl_uuid_base = sl_uuid_base_default
+
     gor_base = 500  # sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[0]
     # vert_base = 270  # sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1780, 900))[1]
     # Для каждого объекта...
@@ -343,11 +358,20 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_type).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo',
-                                   f"01_FormAlg_{obj[0]}.omobj"),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo'),
+                             file_name_check=f"01_FormAlg_{obj[0]}.omobj",
+                             message_print=f'Требуется заменить мнемосхему 01_FormAlg_{obj[0]}.omobj'
+                             )
+
+            # with open(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo',
+            #                        f"01_FormAlg_{obj[0]}.omobj"),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
+
             # sl_create[obj] = sorted(tuple(_sl_cpu_obj.keys()))
     # print(sl_create.values())
 
@@ -867,11 +891,20 @@ def create_mnemo_visual(sl_object_all: dict, sl_command_in_cpu: dict, sl_conditi
 
             # Нормируем и записываем страницу мнемосхемы
             temp = ET.tostring(root_type).decode('UTF-8')
-            with open(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo',
-                                   f"{name_mnemo}.omobj"),
-                      'w', encoding='UTF-8') as f_out:
-                f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                           pretty_print=True, encoding='unicode')))
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo'),
+                             file_name_check=f"{name_mnemo}.omobj",
+                             message_print=f'Требуется заменить мнемосхему {name_mnemo}.omobj'
+                             )
+
+            # with open(os.path.join('File_for_Import', 'Mnemo', 'Control_Mnemo',
+            #                        f"{name_mnemo}.omobj"),
+            #           'w', encoding='UTF-8') as f_out:
+            #     f_out.write(multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+            #                                                                pretty_print=True, encoding='unicode')))
+
             # sl_create[tuple(sorted(tuple(_sl_cpu_obj.keys())))] += (f"AlgVisual_{tuple_mod[0]}",)
 
 

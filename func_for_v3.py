@@ -10,6 +10,12 @@ from time import sleep
 import xml.etree.ElementTree as ET
 import lxml.etree
 from openpyxl.utils import get_column_letter
+import shutil
+terminal_x, _ = shutil.get_terminal_size((80, 20))
+
+
+def rprint(line):
+    print('\r{:{width}}'.format(line, width=terminal_x), end='')
 
 
 def multiple_replace_xml(target_str):
@@ -548,8 +554,10 @@ def is_read_create_diag(book, name_prj, *sheets_signal):
         if p[view_module_index].value == 'Контроллер':
             sl_cpu_rus_name[p[cpu_index].value] = p[name_module_index].value
         # Собираем резервируемые контроллеры
-        if p[0].comment:
+        if p[0].comment and p[view_module_index].value == 'Контроллер':
             name_res = str(p[0].comment)[str(p[0].comment).find(' ') + 1: str(p[0].comment).find('by')].strip()
+            name_res = name_res.replace('\n', '')
+            name_res = name_res[name_res.find(':')+1:]
             name_osn = p[0].value
             sl_cpu_res[p[cpu_index].value] = (name_osn, name_res)
         if sl_modules_channel.get(p[type_module_index].value):
@@ -1457,9 +1465,9 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
             sl_cpu_archive[plc].update({'UserArh': 'Пользовательский'})
             if plc not in return_alg:
                 return_alg.update({plc: {}})
-            return_alg[plc].update({'ALG_ExtrCtrlOn': ('ALG.ALG_BOOL_PLC_View', 'Управление от внешней системы')})
+            return_alg[plc].update({'ALG_ExtrCtrlOn': ('In_Out.In_Out_BOOL_PLC_View', 'Управление от внешней системы')})
             return_alg[plc].update({
-                'ALG_ExtrQuery': ('ALG.ALG_BOOL_PLC_View', 'Запрос на управление от внешней системы')
+                'ALG_ExtrQuery': ('In_Out.In_Out_BOOL_PLC_View', 'Запрос на управление от внешней системы')
             })
         if 'Main' in tuple_spec and 'PPU' in tuple_spec:
             if plc not in return_ts:

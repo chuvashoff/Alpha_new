@@ -37,6 +37,26 @@
 #
 #
 # tt = ""
-import re
-pattern = r"GRH\|.*?_"
-print(re.sub(r'_START$', '', re.sub(pattern, '', 'GRH|HP_SMD_HP_START')))
+import time
+import shutil
+
+terminal_x, _ = shutil.get_terminal_size((80, 20))
+
+
+def rprint(line):
+    print('\r{:{width}}'.format(line, width=terminal_x), end='')
+
+
+rprint('123456')
+time.sleep(1)
+rprint('234')
+time.sleep(1)
+
+
+
+import alpha_domain_pyclient as ng
+
+#GRH|AOss_Cmd_In_3,B,65535,N,S,R,0       ,,0,5626,0   ,65535,0    ,0,0,0,0,////AOss: Команда
+#IVG|T            ,R,65535,N,S,R,0.000000,, ,4097,2673,0    ,65535,0,0,0,0,0,////AT8-1. Температура
+#GRH|AObs_Point   ,I,65535,N,S,R,0       ,, ,0   ,2666,0    ,65535,0,0,0,0,0,////: Шаг
+

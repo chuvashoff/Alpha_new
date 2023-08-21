@@ -1,4 +1,4 @@
-<type access-modifier="private" name="CalcP_1_GPA1" display-name="CalcP_1_GPA1" uuid="38c7aeeb-d0d9-4e66-8dbf-6b16032403e9" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
+<type access-modifier="private" name="CalcP_1_GPA1" display-name="CalcP_1_GPA1" uuid="f8af1c22-d114-40a5-a043-9c12073229d5" base-type="00_SubPage" base-type-id="3fe01b7a-fed7-41d2-aa19-ca3e78391035" ver="3">
   <designed target="X" value="0" ver="3"/>
   <designed target="Y" value="0" ver="3"/>
   <designed target="ZValue" value="0" ver="3"/>
@@ -32,7 +32,7 @@
   <designed target="WindowPosition" value="1" ver="3"/>
   <designed target="WindowCloseMode" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Description_list" display-name="Description_list" uuid="81218ce9-78d8-4569-89d9-7a573af0d0ec" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
+  <object access-modifier="private" name="Description_list" display-name="Description_list" uuid="b386b940-8696-499a-90ec-8f9035b38df4" base-type="Text" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="3">
     <designed target="X" value="40.5" ver="3"/>
     <designed target="Y" value="13" ver="3"/>
     <designed target="ZValue" value="0" ver="3"/>
@@ -43,109 +43,81 @@
     <designed target="Tooltip" value="" ver="3"/>
     <designed target="Width" value="535" ver="3"/>
     <designed target="Height" value="30" ver="3"/>
-    <designed target="Text" value="Драйвер Вычисляемые страница 1" ver="3"/>
+    <designed target="Text" value="Драйвер Расчетные страница 1" ver="3"/>
     <designed target="Font" value="PT Astra Sans,20,-1,5,75,0,0,0,0,0,Полужирный" ver="3"/>
     <designed target="FontColor" value="0xff000000" ver="3"/>
     <designed target="TextAlignment" value="129" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
   </object>
-  <object access-modifier="private" name="Параметр_1_Nst_otn" display-name="Параметр_1_Nst_otn" uuid="ee66a0da-281b-4b01-ab04-9a340215d1db" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_1_NUMHP" display-name="Параметр_1_NUMHP" uuid="4844662d-ad46-458a-9258-4791aa6b8b3f" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="92" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.Nst_otn"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMHP"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_2_Qn" display-name="Параметр_2_Qn" uuid="09bedad5-9940-4fbd-b0f3-26495b03cd5d" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_2_NUMPM" display-name="Параметр_2_NUMPM" uuid="c35041d4-fbc5-4f81-b516-af5ec4519fda" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="122" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.Qn"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMPM"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_3_PressRatio" display-name="Параметр_3_PressRatio" uuid="4b1dc847-37ec-469a-afed-8d0e55cdacb6" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_3_NUMGZ" display-name="Параметр_3_NUMGZ" uuid="caaa9a56-8563-4c6a-984b-4ebe546619c2" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="152" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.PressRatio"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMGZ"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_4_Pv_outDRate" display-name="Параметр_4_Pv_outDRate" uuid="8ba9e1d1-4f76-4a13-9908-dfbd4c5df325" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_4_NUMUZ" display-name="Параметр_4_NUMUZ" uuid="481d7ace-a3e1-43d3-8fe0-1ca81f53ba0d" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="182" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.Pv_outDRate"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMUZ"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_5_KprT" display-name="Параметр_5_KprT" uuid="3e13b563-8c91-41c3-99f7-c852be34930c" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_5_NUMNZ" display-name="Параметр_5_NUMNZ" uuid="a6c5fd71-6997-46bf-98aa-3665f664926a" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="212" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.KprT"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMNZ"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_6_KprPtg" display-name="Параметр_6_KprPtg" uuid="370aa507-6e53-42bc-a992-a072575bbfb7" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_6_NUMLZ" display-name="Параметр_6_NUMLZ" uuid="53061fba-bc28-48bc-9c2c-24b052516740" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="242" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.KprPtg"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMLZ"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_7_NndRate" display-name="Параметр_7_NndRate" uuid="729f6e22-ad22-46d7-becb-edaa732e351b" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_7_NUMNO" display-name="Параметр_7_NUMNO" uuid="305330a5-15a5-42a3-add7-128501843d0d" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="272" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NndRate"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMNO"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_8_timeNnd" display-name="Параметр_8_timeNnd" uuid="d0d58bd3-5dd3-4ef4-ab18-5e8634650114" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_8_NUMAO" display-name="Параметр_8_NUMAO" uuid="17aa6d13-2b62-410c-980b-dbf21ccda2af" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="302" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.timeNnd"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NUMAO"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_9_NvdRate" display-name="Параметр_9_NvdRate" uuid="7bb8ddbe-7882-4420-b8e0-d9f1a0364ca3" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
+  <object access-modifier="private" name="Параметр_9_TINAR" display-name="Параметр_9_TINAR" uuid="f46c4616-fa51-4605-8250-919cf68e7a42" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
     <designed target="X" value="11.111" ver="3"/>
     <designed target="Y" value="332" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NvdRate"/>
+    <init target="_init_Object" ver="3" value="System.DRV.CalcP.TINAR"/>
     <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
   </object>
-  <object access-modifier="private" name="Параметр_10_timeNvd" display-name="Параметр_10_timeNvd" uuid="529ec683-90c1-4f00-b86a-624354985678" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="362" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.timeNvd"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="Параметр_11_NstRate" display-name="Параметр_11_NstRate" uuid="d2a08650-17a6-4b65-b277-147b8bbdfccf" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="392" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.NstRate"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="Параметр_12_timeNst" display-name="Параметр_12_timeNst" uuid="ba122eed-5a5f-4927-9b35-c9a410e8b547" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="422" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.timeNst"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="Параметр_13_TstRate" display-name="Параметр_13_TstRate" uuid="af1ceb39-8c9f-49b9-8de8-d1eb80924edd" base-type="S_DRV_AI_Discription" base-type-id="803e851d-f716-4341-a237-717afdf13c9b" ver="3">
-    <designed target="X" value="11.111" ver="3"/>
-    <designed target="Y" value="452" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="_init_Object" ver="3" value="System.DRV.CalcP.TstRate"/>
-    <init target="_AbonentPath" ver="5" ref="here._init_GPAPath"/>
-  </object>
-  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="38b03dd3-77a2-4625-a69a-0b76015b839f" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
+  <object access-modifier="private" name="ApSource_CurrentForm" display-name="ApSource_CurrentForm" uuid="e963ccb4-b428-441e-81ca-65c65aba0d9b" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" ver="3">
     <designed target="Active" value="true" ver="3"/>
     <designed target="ReAdvise" value="0" ver="3"/>
     <init target="ParentSource" ver="3" ref="_init_ApSource"/>
     <init target="Path" ver="3" ref="_init_GPAPath"/>
   </object>
-  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="563e3b0b-8058-4272-b910-2385971bbf11" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
-  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="d5aa69cd-4d1e-45b7-a9e1-e765f7ab5a09" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
+  <param access-modifier="private" name="_init_ApSource" display-name="_init_ApSource" uuid="822e3417-be85-4d32-ac1d-7db1e9fb939c" base-type="ApSource" base-type-id="966603da-f05e-4b4d-8ef0-919efbf8ab2c" base-const="true" base-ref="true" ver="3"/>
+  <param access-modifier="private" name="_init_GPAPath" display-name="_init_GPAPath" uuid="3f188edc-ea34-43a4-81c8-bd37e9bb121d" base-type="string" base-type-id="76403785-f3d5-41a7-9eb6-d19d2aa2d95d" ver="3"/>
 </type>
