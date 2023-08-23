@@ -870,6 +870,76 @@
               <attribute type="Attributes.Channel_2" value="Частота вращения КВД для БЗД"/>
               <attribute type="Attributes.Channel_3" value="Частота вращения КНД для БЗД"/>
             </ct:object>
+            <ct:object name="AD111" base-type="Types.DIAG_M542TC.DIAG_M542TC_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Модуль AD111 (M542TC)"/>
+              <attribute type="Attributes.ShortName" value="AD111"/>
+              <attribute type="Attributes.Channel_1" value="Температура газов за ТНД (т. 1)"/>
+              <attribute type="Attributes.Channel_2" value="Температура газов за ТНД (т. 2)"/>
+              <attribute type="Attributes.Channel_3" value="Температура газов за ТНД (т. 3)"/>
+              <attribute type="Attributes.Channel_4" value="Температура газов за ТНД (т. 4)"/>
+              <attribute type="Attributes.Channel_5" value="Температура газов за ТНД (т. 5)"/>
+              <attribute type="Attributes.Channel_6" value="Температура газов за ТНД (т. 6)"/>
+              <attribute type="Attributes.Channel_7" value="Температура газов за ТНД (т. 7)"/>
+              <attribute type="Attributes.Channel_8" value="Температура газов за ТНД (т. 8)"/>
+              <attribute type="Attributes.Channel_9" value="Температура воздуха на выходе КНД (т.1)"/>
+              <attribute type="Attributes.Channel_10" value="Температура воздуха под КШТ (т.1)"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Температура холодного спая"/>
+            </ct:object>
+            <ct:object name="AD112" base-type="Types.DIAG_M542TC.DIAG_M542TC_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Модуль AD112 (M542TC)"/>
+              <attribute type="Attributes.ShortName" value="AD112"/>
+              <attribute type="Attributes.Channel_1" value="Температура газов за ТНД (т. 9)"/>
+              <attribute type="Attributes.Channel_2" value="Температура газов за ТНД (т. 10)"/>
+              <attribute type="Attributes.Channel_3" value="Температура газов за ТНД (т. 11)"/>
+              <attribute type="Attributes.Channel_4" value="Температура газов за ТНД (т. 12)"/>
+              <attribute type="Attributes.Channel_5" value="Температура газов за ТНД (т. 13)"/>
+              <attribute type="Attributes.Channel_6" value="Температура газов за ТНД (т. 14)"/>
+              <attribute type="Attributes.Channel_7" value="Температура газов за ТНД (т. 15)"/>
+              <attribute type="Attributes.Channel_8" value="Температура газов за ТНД (т. 16)"/>
+              <attribute type="Attributes.Channel_9" value="Температура воздуха на выходе КНД (т.2)"/>
+              <attribute type="Attributes.Channel_10" value="Температура воздуха под КШТ (т.2)"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Температура холодного спая 2"/>
+            </ct:object>
+            <ct:object name="AD113" base-type="Types.DIAG_M531TR.DIAG_M531TR_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Модуль AD113 (M531TR)"/>
+              <attribute type="Attributes.ShortName" value="AD113"/>
+              <attribute type="Attributes.Channel_1" value="Температура воздуха на входе двигателя (т.1)"/>
+              <attribute type="Attributes.Channel_2" value="Температура воздуха на входе двигателя (т.2)"/>
+              <attribute type="Attributes.Channel_3" value="Температура воздуха на входе двигателя (т.3)"/>
+              <attribute type="Attributes.Channel_4" value="Температура топливного газа"/>
+              <attribute type="Attributes.Channel_5" value="Температура газа на всасывании ЦБН"/>
+              <attribute type="Attributes.Channel_6" value="Температура газа на нагнетании ЦБН"/>
+              <attribute type="Attributes.Channel_7" value="Температура воздуха на управление ВНА"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
+            </ct:object>
+            <ct:object name="AD114" base-type="Types.DIAG_M542A.DIAG_M542A_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Модуль AD114 (M542A)"/>
+              <attribute type="Attributes.ShortName" value="AD114"/>
+              <attribute type="Attributes.Channel_1" value="Давление газа на нагнетании ЦБН"/>
+              <attribute type="Attributes.Channel_2" value="Давление газа на всасывании ЦБН"/>
+              <attribute type="Attributes.Channel_3" value="dP газа на конфузоре ЦБК"/>
+              <attribute type="Attributes.Channel_4" value="Давление воздуха за КВД"/>
+              <attribute type="Attributes.Channel_5" value="Давление топливного газа перед ТРК"/>
+              <attribute type="Attributes.Channel_6" value="Давление топливного газа после ТРК-1"/>
+              <attribute type="Attributes.Channel_7" value="Давление топливного газа перед диафр."/>
+              <attribute type="Attributes.Channel_8" value="dP топливного газа на диафр."/>
+              <attribute type="Attributes.Channel_9" value="ТРК-1 положение"/>
+              <attribute type="Attributes.Channel_10" value="Р имульсного газа на управление  АПРК"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Положение АПРК"/>
+              <attribute type="Attributes.Channel_16" value="Резерв"/>
+            </ct:object>
             <ct:object name="AD121" base-type="Types.DIAG_M531V.DIAG_M531V_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Модуль AD121 (M531V)"/>
               <attribute type="Attributes.ShortName" value="AD121"/>
@@ -881,6 +951,42 @@
               <attribute type="Attributes.Channel_6" value="Резерв"/>
               <attribute type="Attributes.Channel_7" value="АПРК"/>
               <attribute type="Attributes.Channel_8" value="Резерв"/>
+            </ct:object>
+            <ct:object name="AD131" base-type="Types.DIAG_M552DS.DIAG_M552DS_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
+              <attribute type="unit.System.Attributes.Description" value="Модуль AD131 (M552DS)"/>
+              <attribute type="Attributes.ShortName" value="AD131"/>
+              <attribute type="Attributes.Channel_1" value="ВНА положение -10°"/>
+              <attribute type="Attributes.Channel_2" value="ВНА положение +15°"/>
+              <attribute type="Attributes.Channel_3" value="СК открыт"/>
+              <attribute type="Attributes.Channel_4" value="СК закрыт"/>
+              <attribute type="Attributes.Channel_5" value="ТРК-1. Электронный блок. Ошибка"/>
+              <attribute type="Attributes.Channel_6" value="ТРК-1. Электронный блок. Неисправность"/>
+              <attribute type="Attributes.Channel_7" value="Резерв"/>
+              <attribute type="Attributes.Channel_8" value="Резерв"/>
+              <attribute type="Attributes.Channel_9" value="АПРК открыт"/>
+              <attribute type="Attributes.Channel_10" value="АПРК закрыт"/>
+              <attribute type="Attributes.Channel_11" value="Резерв"/>
+              <attribute type="Attributes.Channel_12" value="Резерв"/>
+              <attribute type="Attributes.Channel_13" value="Резерв"/>
+              <attribute type="Attributes.Channel_14" value="Резерв"/>
+              <attribute type="Attributes.Channel_15" value="Резерв"/>
+              <attribute type="Attributes.Channel_16" value="Резерв"/>
+              <attribute type="Attributes.Channel_17" value="Переключатель в положении &quot;Больше&quot;"/>
+              <attribute type="Attributes.Channel_18" value="Переключатель в положении &quot;Меньше&quot;"/>
+              <attribute type="Attributes.Channel_19" value="КЦ: КПР №1 включить"/>
+              <attribute type="Attributes.Channel_20" value="КЦ: КПР №2 включить"/>
+              <attribute type="Attributes.Channel_21" value="КЦ: КАО включить"/>
+              <attribute type="Attributes.Channel_22" value="КЦ: КНО включить (канал удержания)"/>
+              <attribute type="Attributes.Channel_23" value="КЦ: КОСК включить"/>
+              <attribute type="Attributes.Channel_24" value="КЦ: КПГ включить"/>
+              <attribute type="Attributes.Channel_25" value="КЦ: СПВ включить"/>
+              <attribute type="Attributes.Channel_26" value="КЦ: КНО включить (канал закрытия)"/>
+              <attribute type="Attributes.Channel_27" value="Резерв"/>
+              <attribute type="Attributes.Channel_28" value="Резерв"/>
+              <attribute type="Attributes.Channel_29" value="Резерв"/>
+              <attribute type="Attributes.Channel_30" value="БЭАО сработал"/>
+              <attribute type="Attributes.Channel_31" value="Сработал СТ ПЛК 2"/>
+              <attribute type="Attributes.Channel_32" value="Авария от ПЛК 2 в ПЛК1"/>
             </ct:object>
             <ct:object name="AD141" base-type="Types.DIAG_M551O.DIAG_M551O_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
               <attribute type="unit.System.Attributes.Description" value="Модуль AD141 (M551O)"/>

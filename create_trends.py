@@ -96,7 +96,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
 
     # В словаре sl_for_diag оставляем только те конструкции, где есть частотные модуля или модуль БЗА
     sl_for_diag = {cpu: {module_name: module_type for module_name, module_type in sl_modules.items()
-                         if module_type in ('M531I', 'M532I', 'M582IS') or module_name == 'CPU'}
+                         if module_type in sl_signal_module or module_name == 'CPU'}  # ('M531I', 'M532I', 'M582IS')
                    for cpu, sl_modules in sl_for_diag.items()}
     # Приводим sl_for_diag к удобоваримому виду, чтобы было красиво
     # {'GTU': {'AD100': 'M501E', 'AD101': 'M531I', 'AD1': 'M582IS'}, 'GPA': {'AD200': 'M501E'}}

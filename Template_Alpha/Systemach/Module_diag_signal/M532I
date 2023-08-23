@@ -1,3 +1,6 @@
+# В файлах данного типа можно комментировать, используя знак # - тег не будет искаться в ПЛК
+# В том случае, если имена тега в контроллере и в ПЛК-аспекте модуля в/в совпадают, то пишется только одно имя
+# В том случае, если имена не совпадают, то пишется структура -  имя тега плк: соответствующее имя тега плк-аспекта
 Freq_CH_01
 Freq_CH_02
 Freq_CH_03
@@ -15,13 +18,13 @@ Err_CH_06
 Err_CH_07
 Err_CH_08
 Err_hard
-Err_line1
-Err_line2
+Stbus_line1_err: Err_line1
+Stbus_line2_err: Err_line2
 ERR_Power
 Line1_Err
 Line2_Err
 MODERR
 MODSTAT
 PO
-Err_ext_conn
+Err_ext_con: Err_ext_conn
 Not_support

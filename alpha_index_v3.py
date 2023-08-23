@@ -427,11 +427,13 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                   'сигналы в карту адресов добавлены не будут')
 
     sl_module_diag_sig = {}
+    sl_module_diag_sig_conform = {}
     #   os.path.dirname(sys.argv[0])
     if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'Module_diag_signal')):
         for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha',
                                             'Systemach', 'Module_diag_signal')):
             sl_module_diag_sig[file] = tuple()
+            sl_module_diag_sig_conform[file] = {}
             with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_signal', file),
                       'r', encoding='UTF-8') as f_signal:
                 for line in f_signal:
@@ -439,12 +441,20 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         continue
                     if not line.strip():
                         break
-                    sl_module_diag_sig[file] += (line.strip(),)
+                    if ':' not in line.strip():
+                        sl_module_diag_sig[file] += (line.strip(),)
+                    else:
+                        s = line.strip()
+                        key = s[:s.find(':')].strip()
+                        value = s[s.find(':')+1:].strip()
+                        sl_module_diag_sig[file] += (key,)
+                        sl_module_diag_sig_conform[file].update({key: value})
     else:
         print(f'Не найдена папка сигналов модулей Template_Alpha/Systemach/Module_diag_signal, '
               'сигналы модулей не будут добавлены в карту адресов')
 
     sl_diag_cpu_sig = {}
+    # print(sl_module_diag_sig_conform)
     #  os.path.dirname(sys.argv[0])
 
     for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'cpu')):
@@ -937,7 +947,13 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                                                             'бла'):
                                             # print(signal, var_name)
                                             index_par = line[:line.find(',//')].split(',')[-8]
-                                            sl_global_diag[(alg_module, signal)] = [index_par, line.split(',')[1]]
+                                            # Проверяем наличие сигнала в словаре соответствия
+                                            if sl_module_diag_sig_conform.get(sl_for_diag[line_source[0]][alg_module]) \
+                                                    and sl_module_diag_sig_conform[sl_for_diag[line_source[0]][alg_module]].get(signal):
+                                                signal_in = sl_module_diag_sig_conform[sl_for_diag[line_source[0]][alg_module]].get(signal)
+                                            else:
+                                                signal_in = signal
+                                            sl_global_diag[(alg_module, signal_in)] = [index_par, line.split(',')[1]]
 
                         elif 'ALR|' in line and 'ALR|Delay' not in line and len(line.split(',')) >= 10:
                             index_par = line[:line.find(',//')].split(',')[-8]
@@ -1185,13 +1201,17 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                     curr_module = ''
                                 tag = get_variable(line=tmp_line)
                                 if tag in sl_module_diag_sig.get(curr_module, 'бла'):
+                                    if tag not in sl_module_diag_sig_conform.get(curr_module, 'бла'):
+                                        tag_in = tag
+                                    else:
+                                        tag_in = sl_module_diag_sig_conform[curr_module].get(tag)
                                     # print(tmp_line.split(',')[0][1:], get_variable(line=tmp_line))
 
                                     # В словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
-                                    if (module, tag) not in sl_global_diag:
+                                    if (module, tag_in) not in sl_global_diag:
                                         index_par = tmp_line[:tmp_line.find(',//')].split(',')[-8]
-                                        sl_global_diag[(module, tag)] = [index_par,
-                                                                         tmp_line.split(',')[1]]
+                                        sl_global_diag[(module, tag_in)] = [index_par,
+                                                                            tmp_line.split(',')[1]]
             if sl_global_diag:
                 s_all += create_group_diag(diag_sl=sl_global_diag, template_no_arc_index=tmp_ind_no_arc,
                                            source=line_source[0], template_arc_index=tmp_ind_arc,

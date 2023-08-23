@@ -177,7 +177,7 @@ try:
             if p[index_flr_on].value == 'ON':
                 sl_CPU_spec[p[0].value] += ('ТР',)
                 choice_tr = p[index_type_tr].value
-                if choice_tr not in sl_TR and not sl_TR:
+                if choice_tr not in sl_TR and sl_TR:
                     choice_tr = ''
                     print('В файле Tun_TR.txt не указан выбранный тип топливного регулятора')
             if p[index_apr_on].value == 'ON':
