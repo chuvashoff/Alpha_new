@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AlgVisual_HP_GPA1" display-name="AlgVisual_HP_GPA1" uuid="af701ceb-0c68-467a-a6d5-688742e52d54" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+<type access-modifier="private" name="AlgVisual_HP_GPA1" display-name="AlgVisual_HP_GPA1" uuid="48f9374b-7981-451e-8cbb-0d5643c1fec0" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
   <designed target="X" value="1" ver="2"/>
   <designed target="Y" value="1" ver="2"/>
   <designed target="Rotation" value="0" ver="2"/>
@@ -28,7 +28,7 @@
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="ZValue" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Headline" display-name="Headline" uuid="07eb87b7-e608-46e4-ab81-ac388836a7c7" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="1a19b3fd-0c12-48ed-9c68-a200d7669937" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
     <designed target="X" value="0" ver="2"/>
     <designed target="Y" value="0" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -46,7 +46,7 @@
     <designed target="BrushStyle" value="0" ver="2"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
-    <object access-modifier="private" name="HP" display-name="HP" uuid="c3dc590c-a8da-4c22-be54-5a749e84804e" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+    <object access-modifier="private" name="HP" display-name="HP" uuid="aaacbb5e-ba58-46a4-94cc-e2dd53ce37f4" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
       <designed target="X" value="0" ver="2"/>
       <designed target="Y" value="0" ver="2"/>
       <designed target="Rotation" value="0" ver="2"/>
@@ -64,11 +64,11 @@
       <designed target="Opacity" value="1" ver="3"/>
     </object>
   </object>
-  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="b4cce497-7fa7-4327-9a10-3b6e8b95e1ff" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="677459df-a0fa-4a65-b5e0-5fb24d3f4b06" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Path" ver="3" value="System.GRH.HP_START.Value"/>
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
   </object>
-  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="1ed4e7af-0d18-4cca-a5bc-dc40a92901a1" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="3c1dc779-aa63-4739-a764-5c0a1e9f7dd4" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -79,36 +79,49 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="1"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_SP_1_HP_Tmv_Out_1" display-name="Set_SP_1_HP_Tmv_Out_1" uuid="fabd3096-e405-4799-b663-6827a9ac16cb" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_1_HP_Cmd_In_1" display-name="Set_1_HP_Cmd_In_1" uuid="0bd266cd-c7a0-4a3b-b55f-abae7c2b071f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value=""/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_1"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
-    <init target="Text" ver="3" value="Таймер: Предпусковая сигнал."/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_1_HP_Tmv_Out_1" display-name="Set_SP_1_HP_Tmv_Out_1" uuid="05326fa2-a496-451e-b20d-c56b2f99a850" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="1"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Таймер: "/>
     <init target="_Set" ver="3" value="System.GRH.HP_Tmv_Out_1"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_1_HP_Alarm_ON" display-name="Cmd_1_HP_Alarm_ON" uuid="106ed3e1-e3ee-4b36-9656-314661c6c06a" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_HP_GPArab" display-name="Cmd_1_HP_GPArab" uuid="6c4c231a-2458-4a7e-8f44-24228b56f3c4" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Предпусковая сигнализация"/>
+    <init target="Text" ver="3" value="Предпусковая сигнализация перед ХП"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.HP_Point"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="f9a69f41-4f7f-4da9-8e69-81aaeb4bb566" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="e431b1d0-39ee-4b5c-b512-2d286e1144d1" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -117,14 +130,14 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="1"/>
+    <init target="_Height" ver="3" value="3"/>
   </object>
-  <object access-modifier="private" name="Set_2_HP_Cmd_In_2" display-name="Set_2_HP_Cmd_In_2" uuid="646e7df9-a8c6-4f77-9e64-6dda04a7ee00" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_2_HP_Cmd_In_2_1_1" display-name="Set_2_HP_Cmd_In_2_1_1" uuid="91063cfb-de2a-40f8-b5c9-ee9634fd8e12" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="50.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Пуск БВ завершен"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_2"/>
+    <init target="Text" ver="3" value="Есть газ в Нагнетателе"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_2_1_1"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
@@ -132,19 +145,43 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_Link_2_HP_PBA_START" display-name="Cmd_Link_2_HP_PBA_START" uuid="46984cc2-64d2-40ff-ab8a-60386947cfd1" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="50.0" ver="3"/>
+  <object access-modifier="private" name="Set_OR_2_1" display-name="Set_OR_2_1" uuid="8ebaab93-b0a8-48ba-96af-0758188d5acb" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="90.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="2"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_2_HP_Cmd_In_2_2_1" display-name="Set_2_HP_Cmd_In_2_2_1" uuid="26f1c12d-e17a-4090-ae4d-91e1702ab208" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Пус барьерного воздуха"/>
+    <init target="Text" ver="3" value="Пуск БВ завершён"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_2_2_1"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_2_HP_PMSD_START" display-name="Cmd_Link_2_HP_PMSD_START" uuid="680bdb3a-dc6f-4067-8a63-02bf3defebca" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск МСД"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_Height" ver="3" value="1.5"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PBA_GPA1" display-name="Handler_Open_AlgVisual_PBA_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a492e727-01ff-46ee-8a22-5e7118c88207" base-type="AlgVisual_PBA_GPA1" base-type-id="caacbf4b-a0d0-46e4-9f93-b8772c1421e8" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PMSD_GPA1" display-name="Handler_Open_AlgVisual_PMSD_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="2db7dd7f-359c-487b-9ef9-f2e87467a22d" base-type="AlgVisual_PMSD_GPA1" base-type-id="e0558c29-aa33-4507-9be5-3c90072051b6" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -153,9 +190,30 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="6e60d6fb-b479-4c0e-ada7-9adedf3d2d78" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Cmd_Link_2_HP_PSBV_START" display-name="Cmd_Link_2_HP_PSBV_START" uuid="5d69d6b2-a554-4d6a-b327-634ec6e3a16f" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="100.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск БВ"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.5"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSBV_GPA1" display-name="Handler_Open_AlgVisual_PSBV_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="678fa7ca-bfce-4158-acb0-ad68a3cd0629" base-type="AlgVisual_PSBV_GPA1" base-type-id="a87e84f0-8dab-4b5b-961c-2cdb8edcbada" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="f09348cf-c1d0-4fe6-8085-378f74044822" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -164,47 +222,34 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="3"/>
   </object>
-  <object access-modifier="private" name="Set_3_HP_Cmd_In_3_1_1" display-name="Set_3_HP_Cmd_In_3_1_1" uuid="b4b1e54e-1482-4d5b-b391-b9d876e49026" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_3_HP_Cmd_In_3" display-name="Set_3_HP_Cmd_In_3" uuid="0daad8fe-e031-46e9-827f-3bb5a994fd49" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Пуск МСН завершен"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_3_1_1"/>
+    <init target="Text" ver="3" value="Пуск МСН завершён"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_3"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_Height" ver="3" value="3.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_3_HP_Cmd_In_3_1_2" display-name="Set_3_HP_Cmd_In_3_1_2" uuid="d44c02f4-f067-46b8-80be-d20e63cd1da1" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Готовность ГТД к ХП"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_3_1_2"/>
-    <init target="Point" ver="3" value="3"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_3_HP_PMSN_START" display-name="Cmd_Link_3_HP_PMSN_START" uuid="e0d5611b-22a8-44ce-b5b5-5fde73281fc4" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+  <object access-modifier="private" name="Cmd_Link_3_HP_PMSD_START" display-name="Cmd_Link_3_HP_PMSD_START" uuid="bf6143e4-3bec-4378-9395-7f2d0f896f90" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="70.0" ver="3"/>
+    <designed target="Y" value="130.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Пуск маслосистемы Н"/>
+    <init target="Text" ver="3" value="Пуск МСД"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PMSN_GPA1" display-name="Handler_Open_AlgVisual_PMSN_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="ec3c3e9c-0922-4e92-b033-4fa6b63908b0" base-type="AlgVisual_PMSN_GPA1" base-type-id="d02a0dda-a1d1-4a1c-b4a5-9869ea2f7b8e" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PMSD_GPA1" display-name="Handler_Open_AlgVisual_PMSD_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="4aacb0c7-de63-4772-8245-6c93e7f56aa9" base-type="AlgVisual_PMSD_GPA1" base-type-id="e0558c29-aa33-4507-9be5-3c90072051b6" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -213,9 +258,51 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="99ae1f20-d8b9-4334-a6bc-68360b04550b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Cmd_Link_3_HP_PSBV_START" display-name="Cmd_Link_3_HP_PSBV_START" uuid="ca83617c-c3d5-41eb-a5d0-e439231e66f1" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск БВ"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSBV_GPA1" display-name="Handler_Open_AlgVisual_PSBV_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="a36d93fc-e941-4c6e-9869-e54cc925bb1d" base-type="AlgVisual_PSBV_GPA1" base-type-id="a87e84f0-8dab-4b5b-961c-2cdb8edcbada" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_3_HP_PMSN_START" display-name="Cmd_Link_3_HP_PMSN_START" uuid="ef73fc42-42ce-4e88-96b7-685cd03c0222" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск МСН"/>
+    <init target="Point" ver="3" value="3"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PMSN_GPA1" display-name="Handler_Open_AlgVisual_PMSN_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="64d59327-2a5d-496f-98d8-5d5d5b256d8f" base-type="AlgVisual_PMSN_GPA1" base-type-id="1ddf9836-6df4-4e0e-a9e1-b9205dd686c8" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="d8a57c64-4882-41a3-94e4-7911da13d37c" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -224,50 +311,126 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="2"/>
+    <init target="_Height" ver="3" value="4"/>
   </object>
-  <object access-modifier="private" name="Set_SP_4_HP_Cmd_In_4" display-name="Set_SP_4_HP_Cmd_In_4" uuid="ba06eade-c5ae-4e5c-ba63-fa039d58fced" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_4_HP_Cmd_In_4_1_1" display-name="Set_4_HP_Cmd_In_4_1_1" uuid="918e4751-c935-4a6a-87d3-79403824bb73" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск газ.упл. завершён ИЛИ Есть газ в Нагнетателе"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_4_1_1"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
-    <init target="Text" ver="3" value="Идет холодная прокрутка"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Par_In_4"/>
-    <init target="_Condition_step" ver="5" value="System.GRH.HP_Cmd_In_4"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="2.0"/>
-  </object>
-  <object access-modifier="private" name="Cmd_4_HP_TS_GO" display-name="Cmd_4_HP_TS_GO" uuid="a6b23a90-ccd7-4e60-9138-9558eda48ff7" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="110.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ХП ГТД"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_HP_ElSt_1sp_ON" display-name="Cmd_4_HP_ElSt_1sp_ON" uuid="e04a8cda-deda-4c0c-9e17-075ccd7ff09a" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
+  <object access-modifier="private" name="Set_4_HP_Cmd_In_4_1_2" display-name="Set_4_HP_Cmd_In_4_1_2" uuid="dbd909f7-68bd-46b4-a407-f72fd75c3b3f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ЭСТ-1/2. 1-ю скор. включить"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Готов к ХП"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_4_1_2"/>
     <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="5be11bcf-32c6-4ae2-8e7b-867bc5ff70ea" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Set_4_HP_Cmd_In_4_1_3" display-name="Set_4_HP_Cmd_In_4_1_3" uuid="bd44aa7a-e3d0-4206-86b2-acb404ad0679" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск МСД завершён"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_4_1_3"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_4_HP_Cmd_In_4_1_4" display-name="Set_4_HP_Cmd_In_4_1_4" uuid="e905039c-89e0-454a-a33b-1c9bae8c7acf" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыта Заслонка ПТ УТО"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_4_1_4"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_4_HP_PMSD_START" display-name="Cmd_Link_4_HP_PMSD_START" uuid="2270757e-57ad-4e4d-94ac-1a0a76100a21" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск МСД"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.333"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PMSD_GPA1" display-name="Handler_Open_AlgVisual_PMSD_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="a7c7f728-78fb-49c9-a77c-37b7df2fe900" base-type="AlgVisual_PMSD_GPA1" base-type-id="e0558c29-aa33-4507-9be5-3c90072051b6" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_4_HP_PSBV_START" display-name="Cmd_Link_4_HP_PSBV_START" uuid="eb1ab2d9-f931-455d-9517-8fcd8d914925" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="216.66" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск БВ"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.333"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSBV_GPA1" display-name="Handler_Open_AlgVisual_PSBV_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="91d94fff-dcc3-4cdb-9655-e7d8ee2a3c43" base-type="AlgVisual_PSBV_GPA1" base-type-id="a87e84f0-8dab-4b5b-961c-2cdb8edcbada" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_4_HP_PSGU_START" display-name="Cmd_Link_4_HP_PSGU_START" uuid="d25b4d73-0970-445d-85fa-ed95b2649283" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="243.32" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Пуск газовых уплотнений"/>
+    <init target="Point" ver="3" value="4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.333"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSGU_GPA1" display-name="Handler_Open_AlgVisual_PSGU_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="36b460cd-7401-491a-a80e-6f57ca833314" base-type="AlgVisual_PSGU_GPA1" base-type-id="989e05fd-b129-447b-b52b-5650a12a7b2e" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="9a05450a-02d6-4cc1-aa7d-458eedd857f2" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -278,24 +441,24 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="1"/>
   </object>
-  <object access-modifier="private" name="Set_SP_5_HP_Cmd_In_5" display-name="Set_SP_5_HP_Cmd_In_5" uuid="6524cea9-934f-48c8-84bc-a113a9c3b6b5" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_5_HP_Cmd_In_5" display-name="Set_5_HP_Cmd_In_5" uuid="5ea46a66-8a71-4a08-9590-74c75c69c595" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Прокрутка завершена"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_5"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
-    <init target="Text" ver="3" value="Нулевые обороты"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Par_In_5"/>
-    <init target="_Condition_step" ver="5" value="System.GRH.HP_Cmd_In_5"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_5_HP_Vibeg" display-name="Cmd_5_HP_Vibeg" uuid="5c38e71d-60f0-4b69-85df-dd8b85543b65" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_5_HP_startHP" display-name="Cmd_5_HP_startHP" uuid="4d2c47f7-80f5-4088-a097-8001e273b763" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Выбег с ХП"/>
+    <init target="Text" ver="3" value="Прокрутка"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.HP_Point"/>
     <init target="Point" ver="3" value="5"/>
@@ -304,9 +467,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="bf6dbd3d-b098-421d-b614-72c55e5a2016" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="9f47d710-4ae9-4a28-b607-6b68e80ecf3b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="6"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -315,87 +478,283 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="4"/>
+    <init target="_Height" ver="3" value="2"/>
   </object>
-  <object access-modifier="private" name="Set_6_HP_Cmd_In_6_1_1" display-name="Set_6_HP_Cmd_In_6_1_1" uuid="b0c41d5f-4444-4e09-b149-3acb4e50d8ce" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_SP_6_HP_Cmd_In_6_1_1" display-name="Set_SP_6_HP_Cmd_In_6_1_1" uuid="baccb5ba-6a0b-490e-9b7c-21548b844299" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Газ в контуре"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_6_1_1"/>
     <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Nгг &lt;= 3000"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Par_In_6_1_1"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.HP_Cmd_In_6_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_6_HP_Cmd_In_6_1_2" display-name="Set_SP_6_HP_Cmd_In_6_1_2" uuid="41362990-03f0-49eb-afa0-1ce8542061ea" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Pм вх. Д &lt;= 0.05"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Par_In_6_1_2"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.HP_Cmd_In_6_1_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="01dd11c4-e04e-4547-baec-977a3cf302b0" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.HP_Point"/>
+    <init target="Num" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_7_HP_Cmd_In_7" display-name="Set_7_HP_Cmd_In_7" uuid="457a13d4-b6c4-42b8-8be6-8c73d6fcdd3f" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="КЭ4 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_7"/>
+    <init target="Point" ver="3" value="7"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_OR_6_1" display-name="Set_OR_6_1" uuid="4ff3a60a-955c-48fe-a971-e7d4ab2e03b9" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
-    <designed target="X" value="230.0" ver="4"/>
-    <designed target="Y" value="190.0" ver="4"/>
-    <designed target="Rotation" value="0" ver="4"/>
-    <init target="Text" ver="4" value="ИЛИ"/>
-    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
-    <init target="Point" ver="4" value="6"/>
-    <init target="_CurPoint" ver="4" value="System.GRH.HP_Point"/>
-    <init target="_MOD" ver="4" ref="here._MOD"/>
+  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="a29fe2dc-7421-4c02-b073-53ae1d8d5518" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="350.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.HP_Point"/>
+    <init target="Num" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_8_HP_Cmd_In_8_1_1" display-name="Set_SP_8_HP_Cmd_In_8_1_1" uuid="4a82ce41-c00f-4e07-839f-8e935f0ec6c4" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="350.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Nгг &lt;= 100"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Par_In_8_1_1"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.HP_Cmd_In_8_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <init target="_Height" ver="3" value="1.0"/>
   </object>
-  <object access-modifier="private" name="Set_6_HP_Cmd_In_6_2_1" display-name="Set_6_HP_Cmd_In_6_2_1" uuid="7d812451-510d-42af-96b8-76f6701bcea2" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_8_HP_Cmd_In_8_1_2" display-name="Set_8_HP_Cmd_In_8_1_2" uuid="881074e8-ebd5-4aeb-95c7-aa97457a1aad" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="210.0" ver="3"/>
+    <designed target="Y" value="370.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Защита по Рмсм снята"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_6_2_1"/>
-    <init target="Point" ver="3" value="6"/>
+    <init target="Text" ver="3" value="МНД Н2.1 включен"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_8_1_2"/>
+    <init target="Point" ver="3" value="8"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_6_HP_Cmd_In_6_2_2" display-name="Set_6_HP_Cmd_In_6_2_2" uuid="6081083d-3272-4a93-a56e-edc31ea85902" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="230.0" ver="3"/>
+  <object access-modifier="private" name="Step_9" display-name="Step_9" uuid="694f32e3-b9a0-42cc-8f30-66f6476578d9" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="390.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Защита по Рбв снята"/>
-    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_6_2_2"/>
-    <init target="Point" ver="3" value="6"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.HP_Point"/>
+    <init target="Num" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="2"/>
+  </object>
+  <object access-modifier="private" name="Set_9_HP_Cmd_In_9" display-name="Set_9_HP_Cmd_In_9" uuid="d8df74ac-494b-4dc5-b93a-e6b9ebf38a19" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="390.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value=""/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_9"/>
+    <init target="Point" ver="3" value="9"/>
     <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_6_HP_FINISHED" display-name="Cmd_6_HP_FINISHED" uuid="8bd5b1fe-caa0-4881-89d5-24e4c71dc310" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Set_SP_9_HP_Tmv_Out_9" display-name="Set_SP_9_HP_Tmv_Out_9" uuid="9b9b9004-8790-4df4-9f1a-34e74f5020fe" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="410.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="Text" ver="3" value="Таймер: Задержка"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Tmv_Out_9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Step_10" display-name="Step_10" uuid="7de1af2b-b3d4-4cb7-8ce7-e190548714ce" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="430.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.HP_Point"/>
+    <init target="Num" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="5"/>
+  </object>
+  <object access-modifier="private" name="Set_10_HP_Cmd_In_10" display-name="Set_10_HP_Cmd_In_10" uuid="26316acf-d26d-4a60-86fe-843453321b56" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="430.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="МНД Н2.1 отключен"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_10"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="5.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_HP_Kr_PM_GTD_Off" display-name="Cmd_10_HP_Kr_PM_GTD_Off" uuid="60971536-3e8c-41e7-8aa1-b2983d6632ae" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Y" value="430.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="ХП завершена"/>
+    <init target="Text" ver="3" value="Закрыть КЭ2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.HP_Point"/>
-    <init target="Point" ver="3" value="6"/>
+    <init target="Point" ver="3" value="10"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="4.0"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_HP_Kr13_Off" display-name="Cmd_10_HP_Kr13_Off" uuid="55f433a8-d0f7-46b9-81f2-e35313287ff1" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="450.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр13"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_HP_PNS_Off" display-name="Cmd_10_HP_PNS_Off" uuid="037d234c-75f7-4b45-b836-02fc12ceea31" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="470.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить ПНС"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_HP_MNDE_GTD_Off" display-name="Cmd_10_HP_MNDE_GTD_Off" uuid="66ccd72a-53fd-4f47-b4ae-05594ec9b962" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="490.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить МНД(Н2.1)"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_10_HP_ZhP_Tmsm_OF" display-name="Cmd_10_HP_ZhP_Tmsm_OF" uuid="d6f4ea80-16d7-4d9c-be50-b3b76ca51373" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="510.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиту Рмсм и Тмсм"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_11" display-name="Step_11" uuid="ce00b1a6-9549-4b9c-9674-2467a3468466" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.HP_Point"/>
+    <init target="Num" ver="3" value="11"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_11_HP_Cmd_In_11" display-name="Set_11_HP_Cmd_In_11" uuid="0f4f88ce-7bfa-44d6-b202-064ffe816831" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="КЭ4 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.HP_Cmd_In_11"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.HP_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_11_HP_Kr_PM_MNDE_Off" display-name="Cmd_11_HP_Kr_PM_MNDE_Off" uuid="a5836d3c-8501-4514-b149-3cc50bd1367c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть КЭ4"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.HP_Point"/>
+    <init target="Point" ver="3" value="11"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
   <designed target="Width" value="500" ver="2"/>
-  <designed target="Height" value="250.0" ver="2"/>
+  <designed target="Height" value="550.0" ver="2"/>
   <designed target="WindowWidth" value="500" ver="2"/>
-  <designed target="WindowHeight" value="250" ver="2"/>
-  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="f26afa28-1c5f-4a31-af9f-e84db955690f" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="36ec703f-47f1-4d6b-b66e-4deb685c6f96" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <designed target="WindowHeight" value="550" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="26b4c39f-fa9a-4d93-807c-3fa3a003cd20" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="62056046-fc74-4f23-bbe4-043c15277655" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
     <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="2299f285-dd78-423a-b701-7cc3e99940a4" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+      <object access-modifier="private" uuid="0a333a3a-6941-4940-9226-2a740b2428b4" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
         <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="043cf564-5ac2-461f-b407-62e0f8824a60" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="ddd3e854-0658-4d25-92e1-2c542dc987e7" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
     <designed target="X" value="420" ver="5"/>
     <designed target="Y" value="0" ver="5"/>
     <designed target="ZValue" value="0" ver="5"/>

@@ -55,7 +55,9 @@ def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
                                   aspect="Types.PLC_Aspect", access_level="public")
         # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
         if name_group in ('AI', 'AE', 'SET'):
-            deadband_hist = 1 / (10 ** int(tuple_par[5])) if tuple_par[5] != '' else 0.01
+            tuple_hist = tuple_par[4]
+            par_hist = tuple_hist[1]
+            deadband_hist = 1 / (10 ** int(par_hist)) if par_hist != '' else 0.01
             ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
             ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
         # Если ИМ АО, то добавляем Set и iPos с гистерезисом
@@ -79,6 +81,8 @@ def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
                 ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
         # for type_attr, value in sl_attr_par[par].items():
         for type_attr, value in sl_attr_par.get(par, {}).items():
+            if type_attr == "Attributes.FracDigits" and isinstance(value, tuple):
+                value = value[0]
             ET.SubElement(child_par, 'attribute', type=f"{type_attr}", value=f"{value}")
     return
 
@@ -155,6 +159,8 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
 
 
 def is_read_ai_ae_set(sheet, type_signal):
+    # return_sl_add_pars = {cpu: {алг_пар: (тип параметра в студии, русское имя,)}}
+    return_sl_add_pars = {}
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков,
     # количество знаков для истории)}}
     return_sl = {}
@@ -177,6 +183,10 @@ def is_read_ai_ae_set(sheet, type_signal):
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
     index_sday = is_f_ind(cells[0], 'Используется в ведомости')
     index_fast = is_f_ind(cells[0], 'Передача по МЭК')
+    index_input_sig = is_f_ind(cells[0], 'Входной сигнал')
+    index_module = is_f_ind(cells[0], 'Номер модуля')
+    index_canal = is_f_ind(cells[0], 'Номер канала')
+    index_no_standart = is_f_ind(cells[0], 'Нестандартный канал')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры
@@ -201,7 +211,7 @@ def is_read_ai_ae_set(sheet, type_signal):
                 return_sl_diff[par[index_cpu_name].value] = {}
             return_sl_diff[par[index_cpu_name].value].update({
                 par[index_alg_name].value.replace('|', '_'):
-                    str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                    par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
             if par[index_sday].value == 'Да':
                 if par[index_cpu_name].value not in return_sl_sday:
@@ -210,16 +220,17 @@ def is_read_ai_ae_set(sheet, type_signal):
                     {f"{type_signal}.{par[index_alg_name].value.replace('|', '_')}": par[index_rus_name].value})
 
             frag_dig_hist = ''.join([i for i
-                                     in str(par[index_frag_dig].comment)[:str(par[index_frag_dig].comment).find('by')]
+                                     in par[index_frag_dig].comment.text
                                      if i.isdigit()]) if par[index_frag_dig].comment else par[index_frag_dig].value
 
+            module_canal = f'{par[index_module].value}.Канал {par[index_canal].value}' if par[index_no_standart].value == 'Нет' else '-'
             return_sl[par[index_cpu_name].value].update({par[index_alg_name].value.replace('|', '_'): (
                 sl_plc_aspect.get(type_signal, 'Пустой тип'),
                 par[index_rus_name].value,
                 par[index_unit].value,
                 par[index_short_name].value,
-                par[index_frag_dig].value,
-                frag_dig_hist
+                (par[index_frag_dig].value, frag_dig_hist),
+                module_canal
             )})
             # Если не парсим уставки, то заполняем словарь для мнемосхемы
             if 'SP|' not in par[index_alg_name].value and par[index_cpu_name].value not in return_sl_mnemo:
@@ -236,8 +247,18 @@ def is_read_ai_ae_set(sheet, type_signal):
                     sl_cpu_fast[par[index_cpu_name].value] = (par[index_alg_name].value,)
                 else:
                     sl_cpu_fast[par[index_cpu_name].value] += (par[index_alg_name].value,)
+            if type_signal == 'AI' and par[index_input_sig].value == 'Частота':
+                if par[index_cpu_name].value not in return_sl_add_pars:
+                    return_sl_add_pars[par[index_cpu_name].value] = {}
+                alg_tmp = par[index_alg_name].value
+                alg_tmp = f"DIAG_{alg_tmp[alg_tmp.find('|')+1:]}"
+                return_sl_add_pars[par[index_cpu_name].value].update({
+                    alg_tmp: ('Add_Pars.BOOL_FLT_PLC_View', f'{par[index_rus_name].value}. Обрыв')
+                })
 
-    return return_sl, return_sl_mnemo, return_sl_sday, return_sl_diff, sl_cpu_fast
+    # Убираем элементы с пустыми значениями
+    return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
+    return return_sl, return_sl_mnemo, return_sl_sday, return_sl_diff, sl_cpu_fast, return_sl_add_pars
 
 
 def is_read_di(sheet):
@@ -266,6 +287,9 @@ def is_read_di(sheet):
     index_wrn = is_f_ind(cells[0], 'Предупреждение')
     index_wrn_text = is_f_ind(cells[0], 'Текст предупреждения')
     index_node_mnemo = is_f_ind(cells[0], 'Узел')
+    index_module = is_f_ind(cells[0], 'Номер модуля')
+    index_canal = is_f_ind(cells[0], 'Номер канала')
+    index_no_standart = is_f_ind(cells[0], 'Нестандартный канал')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры
@@ -288,14 +312,17 @@ def is_read_di(sheet):
                 return_sl_diff[par[index_cpu_name].value] = {}
             return_sl_diff[par[index_cpu_name].value].update({
                 par[index_alg_name].value.replace('|', '_'):
-                    str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                    par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
+            module_canal = f'{par[index_module].value}.Канал {par[index_canal].value}' if par[index_no_standart].value == 'Нет' else '-'
             return_sl_di[par[index_cpu_name].value].update(
                 {par[index_alg_name].value.replace('|', '_'): (
                     sl_plc_aspect.get(par[index_control_cel].value),
                     par[index_rus_name].value,
                     sl_color_di.get(par[index_color_off].fill.start_color.index, '404'),
-                    sl_color_di.get(par[index_color_on].fill.start_color.index, '404'))})
+                    sl_color_di.get(par[index_color_on].fill.start_color.index, '404'),
+                    module_canal
+                )})
 
             # Если есть предупреждение по дискрету и канал не переведён в резерв и не привязан к ИМ,
             # то добавляем в словарь предупреждений по дискретам
@@ -312,6 +339,8 @@ def is_read_di(sheet):
                 par[index_alg_name].value.replace('|', '_')
             )
 
+    # Убираем элементы с пустыми значениями
+    return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
     return return_sl_di, sl_wrn_di, return_sl_mnemo, return_sl_diff
 
 
@@ -320,6 +349,8 @@ def is_read_im(sheet, sheet_imao):
     # количество знаков для истории)}}
     return_sl_im = {}
     return_sl_diff = {}
+    # return_sl_drv_iec_update = {cpu: {алг_пар: русское имя-описание }}
+    return_sl_drv_iec_update = {}
 
     sl_im_plc = {}
     # Словарь соответствия типа ИМ и его ПЛК аспекта
@@ -403,7 +434,15 @@ def is_read_im(sheet, sheet_imao):
 
             return_sl_diff[par[index_cpu_name].value].update({
                 par[index_alg_name].value:
-                    str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                    par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
+            if par[index_swap].value == 'Да' and par[index_cpu_name].comment:
+                return_sl_diff[par[index_cpu_name].value].update({
+                    par[index_alg_name].value + '_Swap':
+                        par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
+            if par[index_work_time].value == 'Да' and par[index_cpu_name].comment:
+                return_sl_diff[par[index_cpu_name].value].update({
+                    par[index_alg_name].value + '_WorkTime':
+                        par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
     # Обрабатываем ИМ АО
     cells = sheet_imao['A1': get_column_letter(200) + str(200)]
@@ -417,6 +456,10 @@ def is_read_im(sheet, sheet_imao):
     index_cpu_name = is_f_ind(cells[0], 'CPU')
     index_frag_dig = is_f_ind(cells[0], 'Количество знаков')
     index_unit = is_f_ind(cells[0], 'Единицы измерения')
+    index_fast = is_f_ind(cells[0], 'Передача по МЭК выхода модуля')
+    index_no_standart = is_f_ind(cells[0], 'Нестандартный канал')
+    index_addr_canal1 = is_f_ind(cells[0], 'Адрес канала 1')
+    index_addr_canal2 = is_f_ind(cells[0], 'Адрес канала 2')
 
     cells = sheet_imao['A2': get_column_letter(200) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры
@@ -435,7 +478,7 @@ def is_read_im(sheet, sheet_imao):
                 # количество знаков для истории)}}
                 return_sl_im[par[index_cpu_name].value] = {}
             frag_dig_hist = ''.join([i for i
-                                     in str(par[index_frag_dig].comment)[:str(par[index_frag_dig].comment).find('by')]
+                                     in par[index_frag_dig].comment.text
                                      if i.isdigit()]) if par[index_frag_dig].comment else par[index_frag_dig].value
 
             # Обрабатываем и составляем словарь отличий между параметрами по объектам
@@ -456,9 +499,24 @@ def is_read_im(sheet, sheet_imao):
 
                 return_sl_diff[par[index_cpu_name].value].update({
                     par[index_alg_name].value:
-                        str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                        par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
-    return return_sl_im, sl_cnt, return_sl_diff
+            if par[index_fast].value == "Да" and par[index_no_standart].value == "Да" and \
+                    par[index_addr_canal1].value != "FALSE" and par[index_addr_canal2].value != "FALSE":
+                if par[index_cpu_name].value not in return_sl_drv_iec_update:
+                    return_sl_drv_iec_update[par[index_cpu_name].value] = {}
+                return_sl_drv_iec_update[par[index_cpu_name].value].update(
+                    {
+                        f'AO_{par[index_alg_name].value}_Out1': ('Add_Pars.FLOAT_PLC_View',
+                                                                 f'{par[index_rus_name].value}. Канал 1'),
+                        f'AO_{par[index_alg_name].value}_Out2': ('Add_Pars.FLOAT_PLC_View',
+                                                                 f'{par[index_rus_name].value}. Канал 2')
+                     }
+                )
+
+    # Убираем элементы с пустыми значениями
+    return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
+    return return_sl_im, sl_cnt, return_sl_diff, return_sl_drv_iec_update
 
 
 def is_read_create_diag(book, name_prj, *sheets_signal):
@@ -599,18 +657,20 @@ def is_read_create_diag(book, name_prj, *sheets_signal):
         cells_run = sheet_run['A2': 'O' + str(sheet_run.max_row)]
         # пробегаемся по параметрам на листе
         for par in cells_run:
+            if par[0].value is None or par[1].value is None:
+                break
             # Если сигнал не резервный...
             if par[reserve_par_index].value == 'Нет':
                 # если не указан НЕстандартный канал, то вносим в список
                 if par[no_stand_index].value == 'Нет':
-                    tmp_ind = int(par[num_canal_index].value) - 1
+                    tmp_ind = int(float(par[num_canal_index].value)) - 1
                     if sl_modules_cpu.get(par[cpu_par_index].value) and \
                             sl_modules_cpu[par[cpu_par_index].value].get(par[name_module_par_index].value):
                         sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_index].value][1][tmp_ind] = \
                             par[name_par_index].value
                 # если выбран контроль цепи и контроль стандартный, то также добавляем в список
                 if par[control_index].value == 'Да' and par[no_stand_kc_index].value == 'Нет':
-                    tmp_ind = int(par[num_canal_kc_index].value) - 1
+                    tmp_ind = int(float(par[num_canal_kc_index].value)) - 1
                     if sl_modules_cpu.get(par[cpu_par_index].value) and \
                             sl_modules_cpu[par[cpu_par_index].value].get(par[name_module_par_kc_index].value):
                         sl_modules_cpu[par[cpu_par_index].value][par[name_module_par_kc_index].value][1][tmp_ind] = \
@@ -652,14 +712,78 @@ def is_create_net(sl_object_all, sheet_net):
             break
         if par[index_object_name].value not in return_sl_net:
             return_sl_net[par[index_object_name].value] = {}
-        return_sl_net[par[index_object_name].value].update({par[index_alg_name].value: {
-            'Unit': par[index_rus_name].value,
-            'Type': par[index_type].value,
-            'IP': '.'.join([a.lstrip('0') for a in par[index_ip].value.split('.')]),
-            'IP_res': ('.'.join([a.lstrip('0') for a in par[index_ip_res].value.split('.')])
-                       if par[index_ip_res].fill.start_color.index == '00000000' else ''),
-            'Option': (par[index_option].value if par[index_type].value in tuple_net_with_option else '')}})
 
+        # Если помечен как сервер или составное и при этом не контроль IP (не checkip), то пропускаем
+        if ('<SRV>' in par[index_alg_name].value or '<PART>' in par[index_alg_name].value) \
+                and 'checkip' not in str(par[index_type].value).lower():
+            continue
+        # Если помечен как сервер и составное одновременно, то пропускаем
+        if "<SRV>" in par[index_alg_name].value and '<PART>' in par[index_alg_name].value:
+            continue
+        elif "<SRV>" in par[index_alg_name].value:
+            alg_name = par[index_alg_name].value.replace('<SRV>', '')
+            lst_ip = ['.'.join([a.lstrip('0') for a in par[i].value.split('.')]) for i in [index_ip, index_ip_res] if
+                      par[i].fill.start_color.index == '00000000' and par[i].value]
+            # Наименование адаптеров сервера задаётся в комментариях в IP
+            lst_adapter = [par[i].comment.text[par[i].comment.text.find(':')+1:].strip() if
+                           ':' in par[i].comment.text else par[i].comment.text.strip() for i in [index_ip, index_ip_res]
+                           if par[i].comment and par[i].fill.start_color.index == '00000000' and par[i].value]
+
+            if alg_name not in return_sl_net[par[index_object_name].value]:
+                return_sl_net[par[index_object_name].value].update({alg_name: {
+                    'Unit': par[index_rus_name].value,
+                    'Type': par[index_type].value,
+                    'SType': '<SRV>',
+                    'IPs': lst_ip,
+                    'adapters': lst_adapter,
+                    'Option': (par[index_option].value if par[index_type].value in tuple_net_with_option else '')}})
+            else:
+                lst_ip = [ip for ip in lst_ip if ip not in return_sl_net[par[index_object_name].value][alg_name]['IPs']]
+                return_sl_net[par[index_object_name].value][alg_name]['IPs'].extend(lst_ip)
+
+                lst_adapter = [adapt for adapt in lst_adapter
+                               if adapt not in return_sl_net[par[index_object_name].value][alg_name]['adapters']]
+                return_sl_net[par[index_object_name].value][alg_name]['adapters'].extend(lst_adapter)
+                # for ip in lst_ip:
+                #     if ip not in return_sl_net[par[index_object_name].value][alg_name]['IPs']:
+                #         return_sl_net[par[index_object_name].value][alg_name]['IPs'].append(ip)
+
+                # for i in [index_ip, index_ip_res]:
+                #     if par[i].fill.start_color.index == '00000000' and par[i].value:
+                #         ip = '.'.join([a.lstrip('0') for a in par[i].value.split('.')])
+                #         if ip not in return_sl_net[par[index_object_name].value][alg_name]['IPs']:
+                #             return_sl_net[par[index_object_name].value][alg_name]['IPs'].append(ip)
+
+        elif "<PART>" in par[index_alg_name].value:
+            alg_name = par[index_alg_name].value.replace('<PART>', '')
+            lst_ip = ['.'.join([a.lstrip('0') for a in par[i].value.split('.')]) for i in [index_ip, index_ip_res] if
+                      par[i].fill.start_color.index == '00000000' and par[i].value]
+
+            if alg_name not in return_sl_net[par[index_object_name].value]:
+                return_sl_net[par[index_object_name].value].update({alg_name: {
+                    'Unit': par[index_rus_name].value,
+                    'Type': par[index_type].value,
+                    'SType': '<PART>',
+                    'IPs': lst_ip,
+                    'Option': (par[index_option].value if par[index_type].value in tuple_net_with_option else '')}})
+            else:
+                pass
+                for i in [index_ip, index_ip_res]:
+                    if par[i].fill.start_color.index == '00000000' and par[i].value:
+                        ip = '.'.join([a.lstrip('0') for a in par[i].value.split('.')])
+                        if ip not in return_sl_net[par[index_object_name].value][alg_name]['IPs']:
+                            return_sl_net[par[index_object_name].value][alg_name]['IPs'].append(ip)
+        else:
+            return_sl_net[par[index_object_name].value].update({par[index_alg_name].value: {
+                'Unit': par[index_rus_name].value,
+                'Type': par[index_type].value,
+                'SType': '-',
+                'IP': '.'.join([a.lstrip('0') for a in par[index_ip].value.split('.')]),
+                'IP_res': ('.'.join([a.lstrip('0') for a in par[index_ip_res].value.split('.')])
+                           if par[index_ip_res].fill.start_color.index == '00000000' else ''),
+                'Option': (par[index_option].value if par[index_type].value in tuple_net_with_option else '')}})
+
+    # print(return_sl_net)
     # Для каждого объекта
     for objects in sl_object_all:
         # Если нашли объект в словаре
@@ -667,10 +791,65 @@ def is_create_net(sl_object_all, sheet_net):
             root_plc_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
                                          xmlns_snmp="automation.snmp", xmlns_ct="automation.control")
             for alg, sl_value in return_sl_net[objects[0]].items():
-                child_alg = ET.SubElement(root_plc_aspect, 'dp_computer', name=f"{objects[0]}_{alg}")
-                ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth1", address=sl_value['IP'])
-                if sl_value['IP_res']:
-                    ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth2", address=sl_value['IP_res'])
+                # Если устройство не определено как сервер, то нужно добавить данное устройство как отдельное
+                if sl_value.get('SType') and '<SRV>' != sl_value.get('SType'):
+                    child_alg = ET.SubElement(root_plc_aspect, 'dp_computer', name=f"{objects[0]}_{alg}")
+                    # Если устройство определено как составное, то добавляем адаптеры со всеми найденными ip
+                    if '<PART>' == sl_value.get('SType') and sl_value.get('IPs'):
+                        for i, ip in enumerate(sl_value.get('IPs'), start=1):
+                            ET.SubElement(child_alg, 'dp_ethernet-adapter', name=f"Eth{i}", address=f'{ip}')
+                    else:
+                        ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth1", address=sl_value['IP'])
+                        if sl_value['IP_res']:
+                            ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth2", address=sl_value['IP_res'])
+                    # Если устройство не определено как пинугшечка, то добавляем SNMP
+                    if "checkip" not in sl_value['Type'].lower():
+                        child_runtime = ET.SubElement(child_alg, 'dp_external-runtime', name="Runtime")
+                        ET.SubElement(child_runtime, 'snmp_snmp-agent', name="SnmpAgent",
+                                      poll_port="161", poll_password="public", notification_port="162",
+                                      notification_password="public", protocol_version="Snmp_v1",
+                                      security_level="NoAuthNoPriv", auth_protocol="MD5", priv_protocol="AES",
+                                      address_map="Application.SnmpLinkMap")
+                        child_app = ET.SubElement(child_runtime, 'dp_application-object', name="Application",
+                                                  access_level="public")
+                        ET.SubElement(child_app, 'snmp_snmp-link-map', name="SnmpLinkMap",
+                                      file='SNMP\\' + f'{sl_value["Type"]}_map.xml')
+                        child_data = ET.SubElement(child_app, 'ct_object', name="Data", access_level="public")
+                        child_data_app = ET.SubElement(child_data, 'ct_object', name="Data",
+                                                       base_type=f"Types.SNMP_Switch.{sl_value['Type']}_PLC_View",
+                                                       aspect="Types.PLC_Aspect",
+                                                       access_level="public")
+                        ET.SubElement(child_data_app, 'attribute', type="unit.System.Attributes.Description",
+                                      value=f"{sl_value['Unit']}")
+
+            # Нормируем и записываем IOS-аспект
+            temp = ET.tostring(root_plc_aspect).decode('UTF-8')
+
+            check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                            file_name_check=f'file_out_NET_{objects[0]}.omx-export',
+                            new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                              pretty_print=True, encoding='unicode')),
+                            message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]} '
+                                          f'(Файл file_out_NET_{objects[0]})')
+
+    # Собираем общий Net, Системный
+    if 'Система' in return_sl_net:
+        root_plc_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                                     xmlns_snmp="automation.snmp", xmlns_ct="automation.control")
+        for alg, sl_value in return_sl_net['Система'].items():
+            # Если устройство не определено как сервер, то нужно добавить данное устройство как отдельное
+            if sl_value.get('SType') and '<SRV>' != sl_value.get('SType'):
+                child_alg = ET.SubElement(root_plc_aspect, 'dp_computer', name=f"System_{alg}")
+                # Если устройство определено как составное, то добавляем адаптеры со всеми найденными ip
+                if '<PART>' == sl_value.get('SType') and sl_value.get('IPs'):
+                    for i, ip in enumerate(sl_value.get('IPs'), start=1):
+                        ET.SubElement(child_alg, 'dp_ethernet-adapter', name=f"Eth{i}", address=f'{ip}')
+                else:
+                    ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth1", address=sl_value['IP'])
+                    if sl_value['IP_res']:
+                        ET.SubElement(child_alg, 'dp_ethernet-adapter', name="Eth2", address=sl_value['IP_res'])
+
+                # Если устройство не определено как пинугшечка, то добавляем SNMP
                 if "checkip" not in sl_value['Type'].lower():
                     child_runtime = ET.SubElement(child_alg, 'dp_external-runtime', name="Runtime")
                     ET.SubElement(child_runtime, 'snmp_snmp-agent', name="SnmpAgent",
@@ -690,16 +869,15 @@ def is_create_net(sl_object_all, sheet_net):
                     ET.SubElement(child_data_app, 'attribute', type="unit.System.Attributes.Description",
                                   value=f"{sl_value['Unit']}")
 
-            # Нормируем и записываем IOS-аспект
-            temp = ET.tostring(root_plc_aspect).decode('UTF-8')
+        # Нормируем и записываем IOS-аспект
+        temp = ET.tostring(root_plc_aspect).decode('UTF-8')
 
-            check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
-                            file_name_check=f'file_out_NET_{objects[0]}.omx-export',
-                            new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
-                                                                              pretty_print=True, encoding='unicode')),
-                            message_print=f'Требуется заменить ПЛК-аспект сети объекта {objects[0]} '
-                                          f'(Файл NET_{objects[0]})')
-
+        check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                        file_name_check=f'file_out_NET_System.omx-export',
+                        new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                          pretty_print=True, encoding='unicode')),
+                        message_print=f'Требуется заменить ПЛК-аспект сети объекта Система '
+                                      f'(Файл file_out_NET_System)')
     # Собираем карту пингушечки
     # return_sl_net = {Объект: {алг.имя: {параметры столбцов: значение}}}
     # print(return_sl_net)
@@ -718,21 +896,106 @@ def is_create_net(sl_object_all, sheet_net):
     for obj, sl_device_net in return_sl_net.items():
         for device, sl_device_par in sl_device_net.items():
             if obj != 'Система':
-                for ip_key, adapter in {'IP': "Eth1", 'IP_res': "Eth2"}.items():
-                    if sl_device_par.get(ip_key):
-                        name_node = f'{obj}.Diag.NET.{obj}_{device}.Ping_{ip_key}'
-                        for signal_function in ('Enable', 'ResetStat', 'FailCount',
-                                                'LastError', 'LastFailDuration', 'Status', 'SuccCount',
-                                                'TimeOut', 'TotalFailDuration',
-                                                'Filtered.FailedAttemptsCount', 'Filtered.Status',
-                                                'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+                if sl_device_par.get('IPs'):
+                    if sl_device_par.get('SType') and '<SRV>' != sl_device_par.get('SType'):
+                        for i, ip in enumerate(sl_device_par.get('IPs'), start=1):
+                            name_node = f'{obj}.Diag.NET.{device}.Ping_IP{i}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
 
-                            s_all += Template(tmp_signal_netdiag).substitute(
-                                name_signal=f'{name_node}.{signal_function}',
-                                device=f'{obj}_{device}',
-                                adapter=adapter,
-                                function=signal_function
-                            )
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'{obj}_{device}',
+                                    adapter=f"Eth{i}",
+                                    function=signal_function
+                                )
+                    if sl_device_par.get('SType') and '<SRV>' == sl_device_par.get('SType') \
+                            and sl_device_par.get('adapters') \
+                            and len(sl_device_par.get('IPs', '')) == len(sl_device_par.get('adapters', '')):
+                        for i, ip in enumerate(sl_device_par.get('IPs'), start=1):
+                            # this_adapter = sl_device_par['adapters'][i-1]
+                            name_node = f'{obj}.Diag.NET.{device}.Ping_IP{i}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'{device}',
+                                    adapter=f"{sl_device_par['adapters'][i-1]}",
+                                    function=signal_function
+                                )
+
+                else:
+                    for ip_key, adapter in {'IP': "Eth1", 'IP_res': "Eth2"}.items():
+                        if sl_device_par.get(ip_key):
+                            name_node = f'{obj}.Diag.NET.{device}.Ping_{ip_key}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'{obj}_{device}',
+                                    adapter=adapter,
+                                    function=signal_function
+                                )
+            else:
+                if sl_device_par.get('IPs'):
+                    if sl_device_par.get('SType') and '<SRV>' != sl_device_par.get('SType'):
+                        for i, ip in enumerate(sl_device_par.get('IPs'), start=1):
+                            name_node = f'SYS.Diagnostic.{device}.Ping_IP{i}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'System_{device}',
+                                    adapter=f"Eth{i}",
+                                    function=signal_function
+                                )
+                    if sl_device_par.get('SType') and '<SRV>' == sl_device_par.get('SType') \
+                            and sl_device_par.get('adapters') \
+                            and len(sl_device_par.get('IPs', '')) == len(sl_device_par.get('adapters', '')):
+                        for i, ip in enumerate(sl_device_par.get('IPs'), start=1):
+                            # this_adapter = sl_device_par['adapters'][i-1]
+                            name_node = f'{obj}.Diag.NET.{device}.Ping_IP{i}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'{device}',
+                                    adapter=f"{sl_device_par['adapters'][i-1]}",
+                                    function=signal_function
+                                )
+                else:
+                    for ip_key, adapter in {'IP': "Eth1", 'IP_res': "Eth2"}.items():
+                        if sl_device_par.get(ip_key):
+                            name_node = f'SYS.Diagnostic.{device}.Ping_{ip_key}'
+                            for signal_function in ('Enable', 'ResetStat', 'FailCount',
+                                                    'LastError', 'LastFailDuration', 'Status', 'SuccCount',
+                                                    'TimeOut', 'TotalFailDuration',
+                                                    'Filtered.FailedAttemptsCount', 'Filtered.Status',
+                                                    'Filtered.SuccAttemptsCount', 'IPaddress', 'RTTTime'):
+                                s_all += Template(tmp_signal_netdiag).substitute(
+                                    name_signal=f'{name_node}.{signal_function}',
+                                    device=f'System_{device}',
+                                    adapter=adapter,
+                                    function=signal_function
+                                )
 
     # Проверка изменений, и если есть изменения, то запись
     # Если нет папки File_for_Import, то создадим её
@@ -753,21 +1016,30 @@ def is_create_net(sl_object_all, sheet_net):
 
 
 def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture: str,
-                             server_name_osn: str, server_name_rez: str, sl_cpu_archive: dict):
+                             server_name_osn: str, server_name_rez: str, sl_cpu_archive: dict, all_cpu_select: dict):
     sl_num_eth = {1: 'Основная сеть', 2: 'Резервная сеть'}
     # Новая часть
     root_aspect = ET.Element('omx', xmlns="system", xmlns_ct="automation.control", xmlns_r="automation.reference")
     child_service = ET.SubElement(root_aspect, 'ct_object', name='Service', access_level="public")
     ET.SubElement(child_service, 'attribute', type="unit.Server.Attributes.Replicate", value="false")
     child_modules = ET.SubElement(child_service, 'ct_object', name='Modules', access_level="public")
-    child_unet = ET.SubElement(child_modules, 'ct_object', name='UNET Client', access_level="public")
-    ET.SubElement(child_unet, 'attribute', type="unit.System.Attributes.Comment", value="для диагностики связи с ПЛК")
+    # child_unet = ET.SubElement(child_modules, 'ct_object', name='UNET Client', access_level="public")
+    # ET.SubElement(child_unet, 'attribute', type="unit.System.Attributes.Comment", value="для диагностики связи с ПЛК")
 
-    # Для каждого объекта...
-    for objects in sl_object_all:
-        # ...для каждого контроллера...
-        for cpu in sl_object_all[objects]:
-            child_plc = ET.SubElement(child_unet, 'ct_object', name=f'PLC_{cpu}_{objects[2]}', access_level="public")
+    # all_cpu = tuple([f"{cpu}!{obj[2]}".rstrip('') for obj in sl_object_all for cpu in sl_object_all[obj]])
+    # n = 1
+    # all_cpu_select = [all_cpu[i:i+n] for i in range(0, len(all_cpu), n)]
+    # print(all_cpu)
+    # print(all_cpu_select)
+
+    for i, group_cpu in all_cpu_select.items():
+        child_unet = ET.SubElement(child_modules, 'ct_object', name=f'UNET Client{i}', access_level="public")
+        ET.SubElement(child_unet, 'attribute', type="unit.System.Attributes.Comment",
+                      value="для диагностики связи с ПЛК")
+        for cpu in group_cpu:
+            # print(cpu[:cpu.find('!')])
+            child_plc = ET.SubElement(child_unet, 'ct_object', name=f"PLC_{cpu.replace('!', '_')}",
+                                      access_level="public")
             for numeth in range(1, 3):
                 child_eth = ET.SubElement(child_plc, 'ct_object', name=f'CPU_Eth{numeth}', access_level="public")
                 ET.SubElement(child_eth, 'ct_parameter', name='IsConnected',
@@ -775,13 +1047,33 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
                 ET.SubElement(child_eth, 'attribute', type='unit.System.Attributes.Comment',
                               value=f"{sl_num_eth.get(numeth)}")
             # Добавляем диагностику по резервным контроллерам, если такие есть
-            if cpu in sl_cpu_res:
+            if cpu[:cpu.find('!')] in sl_cpu_res:
                 for numeth in range(1, 3):
                     child_eth = ET.SubElement(child_plc, 'ct_object', name=f'R-CPU_Eth{numeth}', access_level="public")
                     ET.SubElement(child_eth, 'ct_parameter', name='IsConnected',
                                   type='bool', direction='out', access_level="public")
                     ET.SubElement(child_eth, 'attribute', type='unit.System.Attributes.Comment',
                                   value=f"{sl_num_eth.get(numeth)} резервного ПЛК")
+
+    # # Для каждого объекта...
+    # for objects in sl_object_all:
+    #     # ...для каждого контроллера...
+    #     for cpu in sl_object_all[objects]:
+    #         child_plc = ET.SubElement(child_unet, 'ct_object', name=f'PLC_{cpu}_{objects[2]}', access_level="public")
+    #         for numeth in range(1, 3):
+    #             child_eth = ET.SubElement(child_plc, 'ct_object', name=f'CPU_Eth{numeth}', access_level="public")
+    #             ET.SubElement(child_eth, 'ct_parameter', name='IsConnected',
+    #                           type='bool', direction='out', access_level="public")
+    #             ET.SubElement(child_eth, 'attribute', type='unit.System.Attributes.Comment',
+    #                           value=f"{sl_num_eth.get(numeth)}")
+    #         # Добавляем диагностику по резервным контроллерам, если такие есть
+    #         if cpu in sl_cpu_res:
+    #             for numeth in range(1, 3):
+    #                 child_eth = ET.SubElement(child_plc, 'ct_object', name=f'R-CPU_Eth{numeth}', access_level="public")
+    #                 ET.SubElement(child_eth, 'ct_parameter', name='IsConnected',
+    #                               type='bool', direction='out', access_level="public")
+    #                 ET.SubElement(child_eth, 'attribute', type='unit.System.Attributes.Comment',
+    #                               value=f"{sl_num_eth.get(numeth)} резервного ПЛК")
 
     child_state = ET.SubElement(child_service, 'ct_object', name='State', access_level="public")
     ET.SubElement(child_state, 'ct_parameter', name='Server',
@@ -1073,7 +1365,7 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
         snmp = ET.SubElement(root_aspect, 'srv:snmp-manager', name="SNMP ManagerLocal")
         for agent in ('SNMP_AgentLocal.SnmpAgent', f'{server_name_rez}.SNMP_AgentLocal.SnmpAgent'):
             ET.SubElement(snmp, 'srv:agent-config', attrib={'agent': agent, 'requests-interval': '30',
-                                                                   'response-interval': "1000"})
+                                                            'response-interval': "1000"})
         ET.SubElement(snmp, 'eth:ethernet-adapter-binding', adapter="LocalEthernet")
 
         # Нормируем и записываем IOS-аспект
@@ -1088,11 +1380,68 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
                           f'(файл SNMP ManagerLocal.omx-export)'
         )
 
+    # Создаём модули UNET-Client !!! !!!
+    root_aspect = ET.Element('omx', attrib={'xmlns': "system", 'xmlns:trei': "trei", "xmlns:r": "automation.reference",
+                                            "xmlns:dp": "automation.deployment", "xmlns:srv": "server"})
+    temporary_serv = ET.SubElement(root_aspect, 'srv:io-server', attrib={"name": "Temporary_server",
+                                                                         "debug-output": "false"})
+    ET.SubElement(temporary_serv, 'attribute', type="unit.System.Attributes.Comment",
+                  value="Для временного использования и последующего копирования. "
+                        "Все элементы из данного временного сервера копируются "
+                        "в основной сервер, после чего данный сервер удаляется")
+    for num, cpus in all_cpu_select.items():
+        child_unet = ET.SubElement(temporary_serv, 'trei:unet-client',
+                                   attrib={'name': f'UNET Client{num}',
+                                           'archives-path': f'./UNETClient',
+                                           'set-source-timestamp-when-quality-changed': "true",
+                                           'dont-change-quality-at-archive-read': "false",
+                                           'logging-required': "false"})
+        for cpu in cpus:
+            link_cpu = f"PLC_{cpu.replace('!', '_')}"
+            cpu = cpu[:cpu.find('!')]
+            # Добавляем категории данных для всех определённых на данный модуль контроллеры
+            for data_cat, param in {'Arc': ("archive-background-restore",  # 'data-kind'
+                                            '20' if cpu == 'GTU' else '100',  # 'plc-update-rate'
+                                            '35' if cpu == 'GTU' else '90'  # 'request-interval'
+                                            ),
+                                    'NoArcAnalog': ("operative",  # 'data-kind'
+                                                    '20' if cpu == 'GTU' else '100',  # 'plc-update-rate'
+                                                    '470' if cpu == 'GTU' else '90'  # 'request-interval'
+                                                    ),
+                                    'NoArcDiscrete': ("operative",  # 'data-kind'
+                                                      '20' if cpu == 'GTU' else '100',  # 'plc-update-rate'
+                                                      '18' if cpu == 'GTU' else '90'  # 'request-interval'
+                                                      )
+                                    }.items():
+                ET.SubElement(child_unet, 'trei:data-category-options',
+                              attrib={"name": f'DataCategory_{cpu}_{data_cat}',
+                                      'data-kind': param[0],
+                                      'plc-update-rate': param[1],
+                                      'request-interval': param[2],
+                                      'use-replication-for-requests-sync': "false"
+                                      })
+            # Добавляем линки контроллеров
+            sub_link = ET.SubElement(temporary_serv, 'dp:ref-to', module=f"{link_cpu}.CPU.Tree")
+            ET.SubElement(sub_link, 'dp:deliver-with', attrib={"adapter": f'UNET Client{num}', "read-only": "false",
+                                                               "data-mapping-spec": "all"})
+
+    # Нормируем и записываем IOS-аспект
+    temp = ET.tostring(root_aspect).decode('UTF-8')
+
+    check_diff_file(
+        check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+        file_name_check=f'Temporary_serv(импортируется в сервер для последующего использования).omx-export',
+        new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                          pretty_print=True, encoding='unicode')),
+        message_print=f'Требуется заменить структуры основном сервере из Temporary_server'
+                      f'(файл Temporary_serv.omx-export)'
+    )
     return
 
 
 # Функция создания узла SYS
-def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, architecture: str, sl_agreg: dict):
+def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, architecture: str, sl_agreg: dict,
+                  server_name_osn: str, server_name_rez: str):
     root_aspect = ET.Element('omx', xmlns="system", xmlns_ct="automation.control", xmlns_r="automation.reference")
     child_sys = ET.SubElement(root_aspect, 'ct_object', name='SYS', access_level="public")
     ET.SubElement(child_sys, 'attribute', type="unit.System.Attributes.Description", value="Система")
@@ -1194,43 +1543,217 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
             ET.SubElement(child_diagnostic, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                           aspect="Types.IOS_Aspect", access_level="public")
 
-        ET.SubElement(child_diagnostic, 'ct_subject-ref', name=f'_State', object=f"Service.State",
-                      const_access="false",
-                      aspected="false")
-        for alg, sl_value in return_sl_net.get('Cистема', {}).items():
-            for ip_key, port in {'IP': "Порт 1", 'IP_res': "Порт 2"}.items():
-                if sl_value.get(ip_key):
-                    ET.SubElement(child_diagnostic, 'ct_object', name=f'{alg}_Ping_{ip_key}',
-                                  access_level="public", base_type="Types.Ping")
-                    child_ping_status = ET.SubElement(child_diagnostic, 'ct_parameter',
-                                                      name=f'{alg}_Ping_status_{ip_key}',
-                                                      access_level="public", direction='out', type='bool')
-                    ET.SubElement(child_ping_status, 'attribute', type="unit.Server.Attributes.Replicate",
-                                  value=f"false")
-                    rus_name_unit = sl_value.get('Unit', '')
-                    ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
-                                  value=f'{{"Condition":{{"IsEnabled":"true",'
-                                        f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
-                                        f'"Message":". {rus_name_unit}. {port}. Нет связи",'
-                                        f'"Severity":40,"Type":2}},'
-                                        f'{{"AckStrategy":2,"IsDeactivation":true,'
-                                        f'"Message":". {rus_name_unit}. {port}. Нет связи",'
-                                        f'"Severity":40,"Type":3}}],'
-                                        f'"Type":2}}}}')
+        for alg, sl_value in return_sl_net.get('Система', {}).items():
+            # Если устройство определено как пингушечка
+            if "checkip" in sl_value.get('Type', 'бла').lower():
+                # Создаём объект
+                child_checkip = ET.SubElement(child_diagnostic, 'ct_object', name=f'{alg}',
+                                              access_level="public")
+                # Добавляем описание
+                ET.SubElement(child_checkip, 'attribute', type=f"unit.System.Attributes.Description",
+                              value=f"{sl_value.get('Unit', 'юнит не определён')}")
+                # ...добавляем агрегаторы
+                for agreg, type_agreg in sl_agreg.items():
+                    ET.SubElement(child_checkip, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                  aspect="Types.IOS_Aspect", access_level="public")
+                # Добавляем ссылку на сервер
+                ET.SubElement(child_checkip, 'ct_subject-ref', name=f'_State', object=f"Service.State",
+                              const_access="false",
+                              aspected="false")
 
+                # Проверяем на наличие SType, на всякий
+                if sl_value.get('SType'):
+                    # Если устройство не определено как составное или сервер, то добавляем обработку двух портов
+                    if sl_value.get('SType') not in ('<SRV>', '<PART>'):
+                        # ...добавляем обработку двух портов
+                        for ip_key, port in {'IP': "Порт 1", 'IP_res': "Порт 2"}.items():
+                            if sl_value.get(ip_key):
+                                ET.SubElement(child_checkip, 'ct_object', name=f'Ping_{ip_key}',
+                                              access_level="public", base_type="Types.Ping")
+                                child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
+                                                                  name=f'Ping_status_{ip_key}',
+                                                                  access_level="public", direction='out', type='bool')
+                                # ET.SubElement(child_ping_status, 'attribute', type="unit.Server.Attributes.Replicate",
+                                #               value=f"false")
+                                rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
+                                ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
+                                              value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Message":". {port}. Нет связи",'
+                                                    f'"Severity":40,"Type":2}},'
+                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'"Message":". {port}. Нет связи",'
+                                                    f'"Severity":40,"Type":3}}],'
+                                                    f'"Type":2}}}}')
+
+                                object_handler = ET.SubElement(
+                                    child_checkip, 'ct_handler', name=f'On_Ping_Status_{ip_key}',
+                                    source_code=f'if (_State.Server.Value && Ping_{ip_key}.Status.Value '
+                                                f'&& !Ping_status_{ip_key}.Value) {{\n'
+                                                f'\tcommit Ping_status_{ip_key} = true;\n'
+                                                f'\t}} else if (_State.Server.Value && !Ping_{ip_key}.Status.Value '
+                                                f'&& Ping_status_{ip_key}.Value '
+                                                f'|| Ping_status_{ip_key}.Quality< 192) {{\n'
+                                                f'\tcommit Ping_status_{ip_key} = false;\n'
+                                                f'}}'
+                                )
+                                ET.SubElement(object_handler, 'ct_trigger',
+                                              on=f"Ping_{ip_key}.Status", cause="update")
+                    else:
+                        # Если устройство определено как составное или сервер,
+                        # то добавляем обработку всех найденных портов, перечисленный в IPs
+                        if sl_value.get('IPs'):
+                            for i, ip in enumerate(sl_value.get('IPs'), start=1):
+                                ET.SubElement(child_checkip, 'ct_object', name=f'Ping_IP{i}',
+                                              access_level="public", base_type="Types.Ping")
+                                child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
+                                                                  name=f'Ping_status_IP{i}',
+                                                                  access_level="public", direction='out', type='bool')
+                                rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
+                                ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
+                                              value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Message":". Порт{i}. Нет связи",'
+                                                    f'"Severity":40,"Type":2}},'
+                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'"Message":". Порт{i}. Нет связи",'
+                                                    f'"Severity":40,"Type":3}}],'
+                                                    f'"Type":2}}}}')
+
+                                object_handler = ET.SubElement(
+                                    child_checkip, 'ct_handler', name=f'On_Ping_Status_IP{i}',
+                                    source_code=f'if (_State.Server.Value && Ping_IP{i}.Status.Value '
+                                                f'&& !Ping_status_IP{i}.Value) {{\n'
+                                                f'\tcommit Ping_status_IP{i} = true;\n'
+                                                f'\t}} else if (_State.Server.Value && !Ping_IP{i}.Status.Value '
+                                                f'&& Ping_status_IP{i}.Value '
+                                                f'|| Ping_status_IP{i}.Quality< 192) {{\n'
+                                                f'\tcommit Ping_status_IP{i} = false;\n'
+                                                f'}}'
+                                )
+                                ET.SubElement(object_handler, 'ct_trigger',
+                                              on=f"Ping_IP{i}.Status", cause="update")
+                        # Если устройство определено как сервер...
+                        if sl_value.get('SType') == '<SRV>' and architecture:
+                            # ...если архитектура определена как сингл, то добавляем чтение HW-диагностики
+                            if architecture == 'сингл':
+                                sub_diag_plc_serv = ET.SubElement(child_checkip, 'ct_object', name=f'HW_Diag',
+                                                                  access_level="public", aspect="Types.IOS_Aspect",
+                                                                  original="SNMP_Agent.Application.Diag_PLC",
+                                                                  base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                ET.SubElement(sub_diag_plc_serv, 'ct_init-ref', ref="_Diag_PLC",
+                                              target="SNMP_Agent.Application.Diag_PLC")
+                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits1",
+                                              value=f"4")
+                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits2",
+                                              value=f"4")
+                            # если же архитектура определена как клиент-серверная, то добавляем для двух серверов
+                            elif architecture == 'клиент-сервер' and server_name_osn and server_name_rez:
+                                sub_diag_plc_serv = ET.SubElement(
+                                    child_checkip, 'ct_object',
+                                    name=f'HW_Diag_{server_name_osn}',
+                                    access_level="public", aspect="Types.IOS_Aspect",
+                                    original="SNMP_Agent.Application.Diag_PLC")
+                                ET.SubElement(sub_diag_plc_serv, 'ct_init-ref', ref="_Diag_PLC",
+                                              target="SNMP_Agent.Application.Diag_PLC",
+                                              base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits1",
+                                              value=f"4")
+                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits2",
+                                              value=f"4")
+
+                                sub_diag_plc_serv2 = ET.SubElement(
+                                    child_checkip, 'ct_object',
+                                    name=f'HW_Diag_{server_name_rez}',
+                                    access_level="public", aspect="Types.IOS_Aspect",
+                                    original=f"{server_name_rez}.SNMP_Agent.Application.Diag_PLC",
+                                    base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                ET.SubElement(sub_diag_plc_serv2, 'ct_init-ref', ref="_Diag_PLC",
+                                              target=f"{server_name_rez}.SNMP_Agent.Application.Diag_PLC")
+                                ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits1",
+                                              value=f"4")
+                                ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits2",
+                                              value=f"4")
+            else:
+                if sl_value.get('SType') and sl_value.get('SType') not in ('<SRV>', '<PART>'):
+                    child_alg = ET.SubElement(child_net, 'ct_object', name=f'{alg}',
+                                              base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
+                                              aspect="Types.IOS_Aspect",
+                                              original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
+                                              access_level="public")
+                    ET.SubElement(child_alg, 'attribute', type=f"unit.System.Attributes.Description",
+                                  value=f"{sl_value['Unit']}")
+                    ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
+                                  target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                    ET.SubElement(child_alg, 'ct_subject-ref', name=f'_State', object=f"Service.State",
+                                  const_access="false",
+                                  aspected="false")
                     object_handler = ET.SubElement(
-                        child_checkip, 'ct_handler', name=f'{alg}_On_Ping_Status_{ip_key}',
-                        source_code=f'if (_State.Server.Value && {alg}_Ping_{ip_key}.Status.Value '
-                                    f'&& !{alg}_Ping_status_{ip_key}.Value) {{\n'
-                                    f'\tcommit {alg}_Ping_status_{ip_key} = true;\n'
-                                    f'\t}} else if (_State.Server.Value && !{alg}_Ping_{ip_key}.Status.Value '
-                                    f'&& {alg}_Ping_status_{ip_key}.Value '
-                                    f'|| {alg}_Ping_status_{ip_key}.Quality< 192) {{\n'
-                                    f'\tcommit {alg}_Ping_status_{ip_key} = false;\n'
+                        child_alg, 'ct_handler', name=f'On_Ping_Status',
+                        source_code=f'if (_State.Server.Value && Ping_IP.Status.Value && !Ping_status.Value) {{\n'
+                                    f'\tcommit Ping_status = true;\n'
+                                    f'\t}} else if (_State.Server.Value && !Ping_IP.Status.Value && Ping_status.Value '
+                                    f'|| Ping_status.Quality< 192) {{\n'
+                                    f'\tcommit Ping_status = false;\n'
                                     f'}}'
                     )
                     ET.SubElement(object_handler, 'ct_trigger',
-                                  on=f"{alg}_Ping_{ip_key}.Status", cause="update")
+                                  on=f"Ping_IP.Status", cause="update")
+                    if sl_value['Option']:
+                        lst_ai = sl_value['Option'].split(';')[:12]
+                        lst_di = sl_value['Option'].split(';')[12:]
+                        # print(lst_ai)
+                        for i, ai in enumerate([lst_ai[:3], lst_ai[3:6], lst_ai[6:9], lst_ai[9:12]]):
+                            if ''.join(ai) and 'Не используется' not in ai:
+                                # print(i, ai)
+                                diap = float(len([_ for _ in range(int(ai[1]), int(ai[2]))]))
+                                # print(diap)
+                                object_sig_ai = ET.SubElement(child_alg, 'ct_parameter', name=f'aiValue{i}',
+                                                              type='float32', direction='out', access_level="public")
+                                ET.SubElement(object_sig_ai, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{ai[0]}")
+                                # <attribute type="unit.Server.Attributes.Replicate" value="false" />
+                                ET.SubElement(object_sig_ai, 'attribute', type="unit.Server.Attributes.Replicate",
+                                              value=f"false")
+                                ET.SubElement(child_alg, 'ct_formula',
+                                              source_code=f"{float(ai[1])} + (TypeConvert.ToFloat(_PLC_View.Signals_"
+                                                          f"{sl_value['Type']}.aiValue{i})/65535)*{diap}",
+                                              target=f"aiValue{i}")
+                        for i, di in enumerate(lst_di):
+                            if di and 'Не используется' not in di:
+                                # print(i, di)
+                                description_ps = di.replace('(Инверсия)', '')
+                                object_sig_di = ET.SubElement(child_alg, 'ct_parameter', name=f'dioStatus{i}',
+                                                              type='bool', direction='out', access_level="public")
+                                ET.SubElement(object_sig_di, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{description_ps}")
+                                ET.SubElement(object_sig_di, 'attribute', type="unit.Server.Attributes.Replicate",
+                                              value=f"false")
+                                ET.SubElement(child_alg, 'ct_formula',
+                                              source_code=f"TypeConvert.ToBool"
+                                                          f"(_PLC_View.Signals_{sl_value['Type']}.dioStatus{i}) "
+                                                          f"&& _State.Server",
+                                              target=f"dioStatus{i}")
+                                if '(Инверсия)' in di:
+                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                        f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":2}},'
+                                                        f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":3}}],'
+                                                        f'"Type":2}}}}')
+                                else:
+                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                        f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":2}},'
+                                                        f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                        f'"Message":". {description_ps}",'
+                                                        f'"Severity":40,"Type":3}}],'
+                                                        f'"Type":2}}}}')
 
     # Нормируем и записываем IOS-аспект
     temp = ET.tostring(root_aspect).decode('UTF-8')
@@ -1277,8 +1800,10 @@ def is_read_btn(sheet):
             return_sl_diff[par[index_cpu_name].value] = {}
         return_sl_diff[par[index_cpu_name].value].update({
             'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]:
-                str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
+    # Убираем элементы с пустыми значениями
+    return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
     return return_sl, return_sl_diff
 
 
@@ -1312,8 +1837,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
                 sl_pz[cpu_name_par] = ()
             # Далее узнаём единицы измерения защиты
             if par[index_unit].value == '-999.0':
-                tmp_eunit = str(par[index_unit].comment)[str(par[index_unit].comment).find(' ') + 1:
-                                                         str(par[index_unit].comment).find('by')]
+                tmp_eunit = str(par[index_unit].comment.text) if par[index_unit].comment else ''
                 # Для каждого слова в условии защиты ищем первую BND| и определяем по словарям
                 # AI, и AE какие единицы измерения писать, на тот случай, если комменты не правдивы
                 for word in par[index_cond].value.split():
@@ -1353,6 +1877,7 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
     return_alr = {}
     return_modes = {}
     return_alg = {}
+    return_sl_diff = {}
     sl_signal_type = {
         'ТС': return_ts,
         'ТС (без условий)': return_ts,
@@ -1417,6 +1942,12 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
                      })
                 tuple_update = ('MODES.MODES_PLC_View', f'Режим "{par[index_rus_name].value}"')
             sl_signal_type[protect][par[index_cpu_name].value].update({key_update: tuple_update})
+            # Обрабатываем и составляем словарь отличий между параметрами по объектам
+            if par[index_cpu_name].value not in return_sl_diff:
+                return_sl_diff[par[index_cpu_name].value] = {}
+
+            return_sl_diff[par[index_cpu_name].value].update({
+                key_update: par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
         if 'Запись архива' in protect:
             if par[index_cpu_name].value not in sl_cpu_archive:
                 sl_cpu_archive[par[index_cpu_name].value] = {}
@@ -1507,7 +2038,9 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
                 f'{alg}_STOP': ('TS.TS_PLC_View', f'Запись архива по событию "{text_alg}" закончена')
             })
 
-    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive
+    # Убираем элементы с пустыми значениями
+    return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
+    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff
 
 
 def is_read_drv(sheet, sl_all_drv):
@@ -1606,8 +2139,9 @@ def is_read_drv(sheet, sl_all_drv):
                                                             or 'IEC' in type_sig_par else '0')
             history_in_tuple = f'Сохраняемый - {par[index_save_history].value}'
             frag_dig_hist_in_tuple = ''.join(
-                [i for i in str(par[index_fracdig].comment)[:str(par[index_fracdig].comment).find('by')]
-                 if i.isdigit()]) if par[index_fracdig].comment else par[index_fracdig].value
+                [i for i in str(par[index_fracdig].comment.text) if i.isdigit()]) \
+                if par[index_fracdig].comment else par[index_fracdig].value
+            # str(par[index_fracdig].comment)[:str(par[index_fracdig].comment).find('by')
 
             tuple_par = (type_sig_in_tuple, par[index_rus_name].value, type_msg_in_tuple,
                          c_off_in_tuple, c_on_in_tuple, unit_in_tuple, fracdig_in_tuple, history_in_tuple,
@@ -2137,7 +2671,7 @@ def is_read_out(sheet, type_signal):
                 return_sl_diff[par[index_cpu_name].value] = {}
             return_sl_diff[par[index_cpu_name].value].update({
                 par[index_alg_name].value.replace('|', '_'):
-                    str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
+                    par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
             # if par[index_sday].value == 'Да':
             #     if par[index_cpu_name].value not in return_sl_sday:
@@ -2214,3 +2748,13 @@ def is_read_pru(sheet):
         #         str(par[index_cpu_name].comment).split()[1].split(';') if par[index_cpu_name].comment else ''})
 
     return return_sl
+
+
+# Функция обновления одного вложенного словаря другим похожим словарём
+def is_update_dict(main_dict: dict[dict], sub_dict: dict[dict]):
+    for i, j in sub_dict.items():
+        if i in main_dict:
+            main_dict[i].update(j)
+        else:
+            main_dict[i] = j
+    return main_dict

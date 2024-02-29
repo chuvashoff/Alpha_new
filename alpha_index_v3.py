@@ -361,7 +361,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                  sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
                  sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
                  buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
-                 sl_pru_config: dict):
+                 sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -384,13 +384,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
     lst_im1x0 = tuple()
     lst_im1x1 = tuple()
     lst_im1x2 = tuple()
+    lst_im1x2pz = tuple()
     lst_im2x2 = tuple()
     lst_im_ao = tuple()
     lst_btn = tuple()
     lst_pz = tuple()
     lst_set = tuple()
     for file in ('Signal_ae', 'Signal_ai', 'Signal_di', 'Signal_ai_di', 'Signal_im1x0', 'Signal_im1x1', 'Signal_im1x2',
-                 'Signal_im2x2', 'Signal_imao', 'Signal_btn', 'Signal_pz', 'Signal_set'):
+                 'Signal_im2x2', 'Signal_imao', 'Signal_btn', 'Signal_pz', 'Signal_set', 'Signal_im1x2pz'):
         if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'{file}')):
             with open(os.path.join('Template_Alpha', 'Systemach', f'{file}'), 'r', encoding='UTF-8') as f_signal:
                 for line in f_signal:
@@ -412,6 +413,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                         lst_im1x1 += (line.strip(),)
                     elif file == 'Signal_im1x2':
                         lst_im1x2 += (line.strip(),)
+                    elif file == 'Signal_im1x2pz':
+                        lst_im1x2pz += (line.strip(),)
                     elif file == 'Signal_im2x2':
                         lst_im2x2 += (line.strip(),)
                     elif file == 'Signal_imao':
@@ -491,6 +494,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_im1x0, sl_tmp_im1x0 = {}, {}
             sl_global_im1x1, sl_tmp_im1x1 = {}, {}
             sl_global_im1x2, sl_tmp_im1x2 = {}, {}
+            sl_global_im1x2pz, sl_tmp_im1x2pz = {}, {}
             sl_global_im2x2, sl_tmp_im2x2 = {}, {}
             sl_global_im_ao, sl_tmp_im_ao = {}, {}
             sl_global_btn, sl_tmp_btn = {}, {}
@@ -498,6 +502,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_cnt = {}
             set_all_im = set()  # sl_all_im - для ИМ с наработками
             set_cnt_im1x0, set_cnt_im1x1, set_cnt_im1x2, set_cnt_im2x2 = set(), set(), set(), set()
+            set_cnt_im1x2pz = set()
             sl_global_fast_alr = {}
             set_tmp_alr = set()
             test_sl_global_as = {}
@@ -525,6 +530,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_sar = {}
             sl_global_cdo = {}
             sl_global_pru = {}
+            sl_add_par = {}
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'TR',
                                                                                               f'TR_par_{choice_tr}')):
@@ -586,56 +592,62 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             sl_sar_tun[f"{line.strip().split(';')[0].lower()}.Reload"] = line.strip().split(';')[1]
 
             # Если есть файл аналогов
-            if os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
+            if sl_ai_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
                 with open(os.path.join(line_source[1], '0_par_A.st'), 'rt') as f_par_a:
                     text = f_par_a.read().split('\n')
                 sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|', par_config=sl_ai_config.get(line_source[0], tuple()))
 
             # Если есть файл расчётных
-            if os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
+            if sl_ae_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
                 with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
                     text = f_par_evl.read().split('\n')
                 sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], tuple()))
 
             # Если есть файл дискретных
-            if os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
+            if sl_di_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
                 with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
                     text = f_par_d.read().split('\n')
                 sl_tmp_di = create_sl(text, 'DI_', 'D_INP|', par_config=sl_di_config.get(line_source[0], tuple()))
                 sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|', par_config=sl_di_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x0
-            if os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
+            if {'IM1x0', 'IM1x0inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x0.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
                 sl_tmp_im1x0, set_cnt_im1x0 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x1
-            if os.path.exists(os.path.join(line_source[1], '0_IM_1x1.st')):
+            if {'IM1x1', 'IM1x1inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x1.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x1.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
                 sl_tmp_im1x1, set_cnt_im1x1 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x2
-            if os.path.exists(os.path.join(line_source[1], '0_IM_1x2.st')):
+            if {'IM1x2', 'IM1x2inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2.st')):
                 with open(os.path.join(line_source[1], '0_IM_1x2.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
                 sl_tmp_im1x2, set_cnt_im1x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
+            # Если есть файл ИМ_1x2pz
+            if {'IM1x2pz'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2pz.st')):
+                with open(os.path.join(line_source[1], '0_IM_1x2pz.st'), 'rt') as f_im:
+                    text = f_im.read().split('\n')
+                sl_tmp_im1x2pz, set_cnt_im1x2pz = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+
             # Если есть файл ИМ_2x2
-            if os.path.exists(os.path.join(line_source[1], '0_IM_2x2.st')):
+            if {'IM2x2', 'IM2x4', 'IM2x2PCH'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_2x2.st')):
                 with open(os.path.join(line_source[1], '0_IM_2x2.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
                 sl_tmp_im2x2, set_cnt_im2x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_АО
-            if os.path.exists(os.path.join(line_source[1], '0_IM_AO.st')):
+            if {'IM_AO'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_AO.st')):
                 with open(os.path.join(line_source[1], '0_IM_AO.st'), 'rt') as f_im:
                     text = f_im.read().split('\n')
                 sl_tmp_im_ao, bla_ = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл кнопок
-            if os.path.exists(os.path.join(line_source[1], '0_BTN.st')):
+            if sl_btn_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_BTN.st')):
                 with open(os.path.join(line_source[1], '0_BTN.st'), 'rt') as f_btn:
                     text = f_btn.read().split('\n')
                 tuple_btn_config = sl_btn_config.get(line_source[0], tuple())
@@ -653,7 +665,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 set_tmp_alr = create_sl_pz(text)
 
             # Если есть файл уставок
-            if os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
+            if sl_set_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
                 with open(os.path.join(line_source[1], '0_Par_Set.st'), 'rt') as f_set:
                     text = f_set.read().split('\n')
                 sl_tmp_set = create_sl(text, 'SP_', 'A_SET|', par_config=sl_set_config.get(line_source[0], tuple()))
@@ -794,6 +806,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             else:
                                 sl_global_im1x2['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
 
+                        elif 'IM_1x2pz|' in line and len(line.split(',')) >= 10:
+                            index_par = line[:line.find(',//')].split(',')[-8]
+                            line = line.split(',')
+                            if 'msg' not in line[0]:
+                                sl_global_im1x2pz[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
+                            else:
+                                sl_global_im1x2pz['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+
                         elif 'IM_2x2|' in line and len(line.split(',')) >= 10:
                             index_par = line[:line.find(',//')].split(',')[-8]
                             line = line.split(',')
@@ -853,7 +873,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                             sl_global_ppu[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
 
                         elif 'TS|' in line and len(line.split(',')) >= 10:
-                            index_par= line[:line.find(',//')].split(',')[-8]
+                            index_par = line[:line.find(',//')].split(',')[-8]
                             line = line.split(',')
                             sl_global_ts[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
 
@@ -983,7 +1003,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 if tmp_check_par in sl_cpu_drv_signal[line_source[0]][tmp_check_drv] and \
                                         tmp_check_par not in sl_cpu_drv_signal_with_imit[line_source[0]][tmp_check_drv]:
                                     index_par = line[:line.find(',//')].split(',')[-8]
-                                    sl_global_drv[(tmp_check_drv, tmp_check_par)] = ( index_par, line.split(',')[1])
+                                    sl_global_drv[(tmp_check_drv, tmp_check_par)] = (index_par, line.split(',')[1])
                                 else:
                                     # Если драйверная переменная выставлена в конфигураторе без имитации, то выставляем
                                     for pref in ('', 'coSim_', 'Sim_'):
@@ -995,6 +1015,16 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                                                 tmp_check_par.replace(pref, ''))] = \
                                                 (index_par,
                                                  line.split(',')[1])
+
+                        # Обрабатываем need_add (пока только по ветке FAST)
+                        if sl_need_add_pars.get(line_source[0]) and 'FAST|' in line:
+                            tmp_var = get_variable(line=line).replace('FAST|', '')
+                            if tmp_var in sl_need_add_pars.get(line_source[0]):
+                                index_par = line[:line.find(',//')].split(',')[-8]
+                                type_sig = line.split(',')[1]
+                                # print(tmp_var, index_par, type_sig)
+                                sl_add_par[f'System.Pars.{tmp_var}'] = (index_par, type_sig)
+
                         if 'FAST|' in line:
                             tmp_var = get_variable(line=line)
                             index_par = line[:line.find(',//')].split(',')[-8]
@@ -1028,6 +1058,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             sl_global_im1x0 = {key: value for key, value in sl_global_im1x0.items() if key[:key.find('[')] in lst_im1x0}
             sl_global_im1x1 = {key: value for key, value in sl_global_im1x1.items() if key[:key.find('[')] in lst_im1x1}
             sl_global_im1x2 = {key: value for key, value in sl_global_im1x2.items() if key[:key.find('[')] in lst_im1x2}
+            sl_global_im1x2pz = {key: value for key, value in sl_global_im1x2pz.items() if key[:key.find('[')] in lst_im1x2pz}
             sl_global_im2x2 = {key: value for key, value in sl_global_im2x2.items() if key[:key.find('[')] in lst_im2x2}
             sl_global_im_ao = {key: value for key, value in sl_global_im_ao.items() if key[:key.find('[')] in lst_im_ao}
             sl_global_btn = {key: value for key, value in sl_global_btn.items() if key[:key.find('[')] in lst_btn}
@@ -1055,7 +1086,7 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
             # print(line_source[0], len(sl_global_pz))
             # Объединяем множества ИМ в одно для накопления наработок
-            for jj in [set_cnt_im1x0, set_cnt_im1x1, set_cnt_im1x2, set_cnt_im2x2]:
+            for jj in [set_cnt_im1x0, set_cnt_im1x1, set_cnt_im1x2, set_cnt_im2x2, set_cnt_im1x2pz]:
                 set_all_im.update(jj)
             sl_global_cnt = {key: value for key, value in sl_global_cnt.items() if key in set_all_im}
 
@@ -1095,6 +1126,10 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
             # Обработка и запись в карту ИМ1x2
             if sl_global_im1x2 and sl_tmp_im1x2:
                 s_all += create_group_im(sl_global_im1x2, sl_tmp_im1x2, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
+                                         line_source[0])
+            # Обработка и запись в карту ИМ1x2pz
+            if sl_global_im1x2pz and sl_tmp_im1x2pz:
+                s_all += create_group_im(sl_global_im1x2pz, sl_tmp_im1x2pz, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
                                          line_source[0])
 
             # Обработка и запись в карту ИМ2x2
@@ -1223,9 +1258,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
             # Обработка и запись в карту МКО
             if sl_add_cpu_mko.get(line_source[0]):
-                s_all += create_group_add(sl_add=sl_add_cpu_mko.get(line_source[0]),
-                                          template_no_arc_index=tmp_ind_no_arc,
-                                          source=line_source[0])
+                s_all += create_group_add_noarc(sl_add=sl_add_cpu_mko.get(line_source[0]),
+                                                template_no_arc_index=tmp_ind_no_arc,
+                                                source=line_source[0])
+
+            # Добавляем add-параметры
+            if sl_add_par:
+                s_all += create_group_add_arc(sl_add=sl_add_par,
+                                              template_arc=tmp_ind_arc, source=line_source[0], post_pref_par='.Value')
 
             # Обработка и запись в карту сигналов ПРУ
             if sl_global_pru:
@@ -1264,6 +1304,8 @@ def read_mko_cpu_index(tuple_all_cpu: tuple, sl_cpu_path: dict):
     # sl_cpu_mko_index = {cpu: ((полное имя переменной диагностики МКО, индекс), )}
     sl_cpu_mko_index = {}
     for cpu, path in sl_cpu_path.items():
+        if cpu is None or path is None:
+            continue
         # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
         if not os.path.exists(path):
             # print(f"НЕ НАЙДЕНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
@@ -1299,7 +1341,7 @@ def read_mko_cpu_index(tuple_all_cpu: tuple, sl_cpu_path: dict):
     return sl_cpu_mko_index
 
 
-def create_group_add(sl_add, template_no_arc_index, source):
+def create_group_add_noarc(sl_add, template_no_arc_index, source):
     sl_data_cat = {
         'R': 'Analog',
         'I': 'Analog',
@@ -1318,3 +1360,42 @@ def create_group_add(sl_add, template_no_arc_index, source):
                                                             type_signal=sl_type[value[1]], index=value[0],
                                                             data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out
+
+
+def create_group_add_arc(sl_add: dict, template_arc, source, post_pref_par: str):
+    sl_data_cat = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Discrete'
+    }
+    sl_type = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool'
+    }
+    s_out = ''
+    for key, value in sl_add.items():
+        a = key
+        pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+        s_out += Template(template_arc).substitute(name_signal=f'{a}{post_pref_par}',
+                                                   type_signal=sl_type[value[1]], index=value[0],
+                                                   data_category=f'DataCategory_{source}_{pref_arc}')
+    return s_out
+
+
+'''
+def create_group_alr(sl_global_fast_alr, template_arc_index, source):
+    sl_type = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool'
+    }
+    s_out = ''
+    for key, value in sl_global_fast_alr.items():
+        a = key
+        pref_arc = 'Arc'  # для проекта Бованенково убрать '.Value'
+        s_out += Template(template_arc_index).substitute(name_signal=f'System.ALR.{a}.Value',
+                                                         type_signal=sl_type[value[1]], index=value[0],
+                                                         data_category=f'DataCategory_{source}_{pref_arc}')
+    return s_out
+'''

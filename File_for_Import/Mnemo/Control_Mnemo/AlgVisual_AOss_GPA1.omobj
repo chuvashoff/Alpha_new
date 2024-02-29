@@ -1,4 +1,4 @@
-<type access-modifier="private" name="AlgVisual_AOss_GPA1" display-name="AlgVisual_AOss_GPA1" uuid="925c0a93-33b9-43b8-9c69-2aff7a2fec6d" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
+<type access-modifier="private" name="AlgVisual_AOss_GPA1" display-name="AlgVisual_AOss_GPA1" uuid="d239e05d-cad1-4915-95f1-87408d31e8b0" base-type="00_AlgVisual_Base" base-type-id="4d4dc649-f350-4c61-89d1-6c938208b3fe" ver="2">
   <designed target="X" value="1" ver="2"/>
   <designed target="Y" value="1" ver="2"/>
   <designed target="Rotation" value="0" ver="2"/>
@@ -28,7 +28,7 @@
   <designed target="WindowCloseMode" value="0" ver="2"/>
   <designed target="ZValue" value="0" ver="3"/>
   <designed target="Opacity" value="1" ver="3"/>
-  <object access-modifier="private" name="Headline" display-name="Headline" uuid="0d80f3ac-5971-47d6-ba89-decd0dc53068" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
+  <object access-modifier="private" name="Headline" display-name="Headline" uuid="cfeae9b8-06c5-4c97-8fa5-1fbb55a784e9" base-type="Rectangle" base-type-id="15726dc3-881e-4d8d-b0fa-a8f8237f08ca" ver="2">
     <designed target="X" value="0" ver="2"/>
     <designed target="Y" value="0" ver="2"/>
     <designed target="Rotation" value="0" ver="2"/>
@@ -46,7 +46,7 @@
     <designed target="BrushStyle" value="0" ver="2"/>
     <designed target="ZValue" value="0" ver="3"/>
     <designed target="Opacity" value="1" ver="3"/>
-    <object access-modifier="private" name="AOss" display-name="AOss" uuid="dae23e75-8a27-4608-9b44-1df1b81b0d2e" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
+    <object access-modifier="private" name="AOss" display-name="AOss" uuid="5f06a7cf-85c4-4793-aaf5-088ae3fc1043" base-type="Rectangle" base-type-id="21d59f8d-2ca4-4592-92ca-b4dc48992a0f" ver="2">
       <designed target="X" value="0" ver="2"/>
       <designed target="Y" value="0" ver="2"/>
       <designed target="Rotation" value="0" ver="2"/>
@@ -64,11 +64,11 @@
       <designed target="Opacity" value="1" ver="3"/>
     </object>
   </object>
-  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="53e9a96b-13ac-43c9-8c7d-f56c7b013c15" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
+  <object access-modifier="private" name="_MOD" display-name="_MOD" uuid="83ddef1f-9ec9-4520-af41-ee5482193a18" base-type="ApItemBool" base-type-id="e3f11724-0f76-4497-8d01-38fbb82fb844" ver="3">
     <init target="Path" ver="3" value="System.GRH.AOss_START.Value"/>
     <init target="Source" ver="3" ref="here.ApSource_CurrentForm"/>
   </object>
-  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="a8218723-0cd0-4b0e-921b-4bb393cee542" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_1" display-name="Step_1" uuid="d466449d-88c0-4c31-ac83-63dd86b8f8e5" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
@@ -79,50 +79,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="5"/>
+    <init target="_Height" ver="3" value="3"/>
   </object>
-  <object access-modifier="private" name="Set_1_AOss_Cmd_In_1_1_1" display-name="Set_1_AOss_Cmd_In_1_1_1" uuid="c8142a80-ff18-4b03-be53-bc2d9a60bfca" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_1_AOss_Cmd_In_1" display-name="Set_1_AOss_Cmd_In_1" uuid="5ba09094-008b-441c-8745-bfd4c44c4bce" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="СК закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_1_1_1"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_1"/>
     <init target="Point" ver="3" value="1"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.667"/>
+    <init target="_Height" ver="3" value="3.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_OR_1_1" display-name="Set_OR_1_1" uuid="51d2925c-2d93-4bd5-b284-764493eeda5d" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
-    <designed target="X" value="230.0" ver="4"/>
-    <designed target="Y" value="63.34" ver="4"/>
-    <designed target="Rotation" value="0" ver="4"/>
-    <init target="Text" ver="4" value="ИЛИ"/>
-    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
-    <init target="Point" ver="4" value="1"/>
-    <init target="_CurPoint" ver="4" value="System.GRH.AOss_Point"/>
-    <init target="_MOD" ver="4" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.667"/>
-  </object>
-  <object access-modifier="private" name="Set_1_AOss_Cmd_In_1_2_1" display-name="Set_1_AOss_Cmd_In_1_2_1" uuid="1097713b-4564-4791-ad7b-dedc8a1bf556" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="96.68" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 12 закрыт"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_1_2_1"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.667"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_1_AOss_Stop_toTR" display-name="Cmd_1_AOss_Stop_toTR" uuid="9d5ab729-7514-4944-b318-9fec7caa508f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_AOss_Kr2_Off" display-name="Cmd_1_AOss_Kr2_Off" uuid="53e3bb24-9a6a-425c-aebd-98422b8b04a5" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="30.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов в ТР"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="1"/>
@@ -131,11 +107,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_1_AOss_SK_OF" display-name="Cmd_1_AOss_SK_OF" uuid="9a64d87c-c077-4d7a-a23d-cb84e4107c06" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_1_AOss_Kr6r_On" display-name="Cmd_1_AOss_Kr6r_On" uuid="3a7b8625-0275-4422-89ca-68d549ec6efc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="50.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК закрыть"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="1"/>
@@ -144,35 +120,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_1_AOss_APRK_ON" display-name="Cmd_1_AOss_APRK_ON" uuid="4f7dfc08-940e-4d14-9ba4-3b508a2f6729" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_Link_1_AOss_OSTG_START" display-name="Cmd_Link_1_AOss_OSTG_START" uuid="09f84be8-2023-4029-9b01-c981022c7382" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="70.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АПРК открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_1_AOss_Kr2_4_OF" display-name="Cmd_1_AOss_Kr2_4_OF" uuid="3660fe7b-cdf0-4190-93c2-c5bd66ec9fc2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="90.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 2 и 4 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="1"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_1_AOss_STG_START" display-name="Cmd_Link_1_AOss_STG_START" uuid="27f86e1c-bb66-448c-993f-fabca295efbd" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="110.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Останов ТГ"/>
     <init target="Point" ver="3" value="1"/>
@@ -181,8 +131,8 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_STG_GPA1" display-name="Handler_Open_AlgVisual_STG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="c1f2b28f-9568-47b3-8df9-535ff86878f5" base-type="AlgVisual_STG_GPA1" base-type-id="3819c24a-e1a8-4eb5-86c4-b02d6ee9cc87" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="5c4e7b77-f0a2-4957-8b85-cce2e17ce153" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -191,9 +141,9 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="c2f743dd-7f77-462e-adf6-2a534964939b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_2" display-name="Step_2" uuid="c22412a3-5462-4a7c-90e1-2dca5fa6e138" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -202,76 +152,50 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="8"/>
+    <init target="_Height" ver="3" value="6"/>
   </object>
-  <object access-modifier="private" name="Set_SP_2_AOss_Cmd_In_2" display-name="Set_SP_2_AOss_Cmd_In_2" uuid="8479ee37-1f1a-4959-b1da-1d0dad8e84eb" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_SP_2_AOss_Cmd_In_2" display-name="Set_SP_2_AOss_Cmd_In_2" uuid="40e81cb7-ace9-46e2-a8a5-0e6057a8511a" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="130.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
-    <init target="Text" ver="3" value="Nтн &lt; 1000 об/мин"/>
+    <init target="Text" ver="3" value="Обороты СТ &lt;= 100"/>
     <init target="_Set" ver="3" value="System.GRH.AOss_Par_In_2"/>
     <init target="_Condition_step" ver="5" value="System.GRH.AOss_Cmd_In_2"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="8.0"/>
+    <init target="_Height" ver="3" value="6.0"/>
   </object>
-  <object access-modifier="private" name="Cmd_2_AOss_Stop_toTR" display-name="Cmd_2_AOss_Stop_toTR" uuid="53c2d19b-e3ce-4058-8ae7-d742cce3ec52" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_2_AOss_Kr2_Off" display-name="Cmd_2_AOss_Kr2_Off" uuid="f25d0199-e8e2-4750-8091-86bc23c38919" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="90.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_AOss_Kr6r_On" display-name="Cmd_2_AOss_Kr6r_On" uuid="ba540148-78d5-413f-a16d-f0efa6f6de8c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="110.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_2_AOss_OSTG_START" display-name="Cmd_Link_2_AOss_OSTG_START" uuid="570c2aa9-66b5-4897-815a-a69722a5a1de" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
     <designed target="Y" value="130.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов в ТР"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_2_AOss_SK_OF" display-name="Cmd_2_AOss_SK_OF" uuid="d9de6e20-e385-47c0-83f0-60441c5290b2" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="150.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_2_AOss_APRK_ON" display-name="Cmd_2_AOss_APRK_ON" uuid="04d23b9e-662d-4c05-98f8-b58d0839fa94" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="170.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АПРК открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_2_AOss_Kr2_4_OF" display-name="Cmd_2_AOss_Kr2_4_OF" uuid="eaec5069-7d2d-457f-8b68-5a288f78e5bd" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="190.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 2 и 4 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_2_AOss_STG_START" display-name="Cmd_Link_2_AOss_STG_START" uuid="e5180cf9-5f1a-48fb-b30a-c43b1a9c1928" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Останов ТГ"/>
     <init target="Point" ver="3" value="2"/>
@@ -280,8 +204,8 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_STG_GPA1" display-name="Handler_Open_AlgVisual_STG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="aefff1e9-a698-47df-a825-80a0a10e5441" base-type="AlgVisual_STG_GPA1" base-type-id="3819c24a-e1a8-4eb5-86c4-b02d6ee9cc87" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="aa8cba5c-7ffd-4619-971c-87295922ed11" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -290,45 +214,19 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Cmd_2_AOss_Kr1_OF" display-name="Cmd_2_AOss_Kr1_OF" uuid="2c1779dd-bb4d-4d8d-9c27-cce3aa1ff8b0" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_Link_2_AOss_PSBV_START" display-name="Cmd_Link_2_AOss_PSBV_START" uuid="6a14f83d-02c1-4dba-99e4-5396bd46e90b" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="230.0" ver="3"/>
+    <designed target="Y" value="150.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 1 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_2_AOss_Kr6_OF" display-name="Cmd_2_AOss_Kr6_OF" uuid="cde7bd6c-58ef-4543-970e-3d886df15c75" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="250.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="2"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_2_AOss_Empty_START" display-name="Cmd_Link_2_AOss_Empty_START" uuid="e92a8701-08bb-45f0-97f4-388aed92a622" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="270.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Стравливание контура"/>
+    <init target="Text" ver="3" value="Пуск БВ"/>
     <init target="Point" ver="3" value="2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_Empty_GPA1" display-name="Handler_Open_AlgVisual_Empty_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="730b466a-34af-496f-9a6e-c771fa8e353c" base-type="AlgVisual_Empty_GPA1" base-type-id="c65e6261-0bca-4067-9d4c-620ada050358" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_PSBV_GPA1" display-name="Handler_Open_AlgVisual_PSBV_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="72a0e746-a023-42a3-8a76-10997b32d508" base-type="AlgVisual_PSBV_GPA1" base-type-id="a87e84f0-8dab-4b5b-961c-2cdb8edcbada" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -337,9 +235,35 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="baa54906-44e1-4249-bd62-62ff57355215" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Cmd_2_AOss_PNS_On" display-name="Cmd_2_AOss_PNS_On" uuid="7c6c8e6c-9119-4d59-a244-96c61efb7ce3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="170.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Включить ПНС"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_2_AOss_UTO_stop" display-name="Cmd_2_AOss_UTO_stop" uuid="e219b779-c4b0-4ecc-ba9e-d061a2ad12e4" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="190.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="УТО в исходное положение"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_3" display-name="Step_3" uuid="eb225b8a-1e76-4385-9e35-bb10f75db61b" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="290.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -348,52 +272,52 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="8"/>
+    <init target="_Height" ver="3" value="6"/>
   </object>
-  <object access-modifier="private" name="Set_SP_3_AOss_Cmd_In_3_1_1" display-name="Set_SP_3_AOss_Cmd_In_3_1_1" uuid="d5883e4d-4b34-4154-87a8-3583c9f6f1b8" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+  <object access-modifier="private" name="Set_3_AOss_Cmd_In_3_1_1" display-name="Set_3_AOss_Cmd_In_3_1_1" uuid="90a38861-a213-4f69-afb9-f91624d06c8b" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="290.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кр1 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_3_1_1"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
-    <init target="Text" ver="3" value="Нулевые обороты"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Par_In_3_1_1"/>
-    <init target="_Condition_step" ver="5" value="System.GRH.AOss_Cmd_In_3_1_1"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="4.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_3_AOss_Cmd_In_3_1_2" display-name="Set_3_AOss_Cmd_In_3_1_2" uuid="76688250-bde2-4749-9594-270344532a91" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_3_AOss_Cmd_In_3_1_2" display-name="Set_3_AOss_Cmd_In_3_1_2" uuid="dfd68c0d-b7ee-4e99-8f7e-8c00ec3acd0a" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Стравливание завершено"/>
+    <init target="Text" ver="3" value="Кр4 закрыт"/>
     <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_3_1_2"/>
     <init target="Point" ver="3" value="3"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="4.0"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_Stop_toTR" display-name="Cmd_3_AOss_Stop_toTR" uuid="4fa6e691-99bd-4556-b668-1265ae285ef3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
+  <object access-modifier="private" name="Set_3_AOss_Cmd_In_3_1_3" display-name="Set_3_AOss_Cmd_In_3_1_3" uuid="e0e35c53-5010-445c-be84-32a51fa323f6" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
     <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов в ТР"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Text" ver="3" value="Кр6 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_3_1_3"/>
     <init target="Point" ver="3" value="3"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="2.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_SK_OF" display-name="Cmd_3_AOss_SK_OF" uuid="f4717149-4681-47d8-a45d-a247d30da856" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_3_AOss_Kr2_Off" display-name="Cmd_3_AOss_Kr2_Off" uuid="bfe062af-8f13-4094-bff9-a021f09ccc77" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="310.0" ver="3"/>
+    <designed target="Y" value="210.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК закрыть"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="3"/>
@@ -402,11 +326,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_APRK_ON" display-name="Cmd_3_AOss_APRK_ON" uuid="456459c4-ec8c-46e4-a659-7345aba4702f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_3_AOss_Kr6r_On" display-name="Cmd_3_AOss_Kr6r_On" uuid="e253d336-e243-48a7-baaa-9aca5b71efec" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="330.0" ver="3"/>
+    <designed target="Y" value="230.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АПРК открыть"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="3"/>
@@ -415,22 +339,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_Kr2_4_OF" display-name="Cmd_3_AOss_Kr2_4_OF" uuid="bdb2904d-9687-4692-9990-958bc1da3a99" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_Link_3_AOss_OSTG_START" display-name="Cmd_Link_3_AOss_OSTG_START" uuid="d098d9eb-57cd-4f41-9fee-a1f449f4cc90" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="350.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 2 и 4 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="3"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_3_AOss_STG_START" display-name="Cmd_Link_3_AOss_STG_START" uuid="a9d502a8-6eec-49cc-8090-1659d2767b34" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="370.0" ver="3"/>
+    <designed target="Y" value="250.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Останов ТГ"/>
     <init target="Point" ver="3" value="3"/>
@@ -439,8 +350,8 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_STG_GPA1" display-name="Handler_Open_AlgVisual_STG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="3de808f1-1629-4f28-818c-e6341f2831d7" base-type="AlgVisual_STG_GPA1" base-type-id="3819c24a-e1a8-4eb5-86c4-b02d6ee9cc87" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="7072205a-ebb4-4f3f-a873-028fed1fadd6" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -449,11 +360,11 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_Kr1_OF" display-name="Cmd_3_AOss_Kr1_OF" uuid="fbd2d28c-1e20-48a9-9855-37b3be573bae" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_3_AOss_Kr1_Off" display-name="Cmd_3_AOss_Kr1_Off" uuid="9d9a9dbf-b19c-43dd-831d-5da07981eb59" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="390.0" ver="3"/>
+    <designed target="Y" value="270.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 1 закрыть"/>
+    <init target="Text" ver="3" value="Закрыть Кр1"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="3"/>
@@ -462,11 +373,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_3_AOss_Kr6_OF" display-name="Cmd_3_AOss_Kr6_OF" uuid="2c403357-c95b-4c1d-8d06-52674e7a7882" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_3_AOss_Kr4_Off" display-name="Cmd_3_AOss_Kr4_Off" uuid="5bcc2f0e-b99b-4d74-8e79-b50f99637884" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="410.0" ver="3"/>
+    <designed target="Y" value="290.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6 закрыть"/>
+    <init target="Text" ver="3" value="Закрыть Кр4"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="3"/>
@@ -475,30 +386,22 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_Link_3_AOss_Empty_START" display-name="Cmd_Link_3_AOss_Empty_START" uuid="75110153-c4d2-49ae-b067-e4fb79faed9c" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+  <object access-modifier="private" name="Cmd_3_AOss_Kr6_Off" display-name="Cmd_3_AOss_Kr6_Off" uuid="bfd29722-f651-4e1a-8dfa-6bd4c35920cb" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="430.0" ver="3"/>
+    <designed target="Y" value="310.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Стравливание контура"/>
-    <init target="Point" ver="3" value="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр6"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="3"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_Empty_GPA1" display-name="Handler_Open_AlgVisual_Empty_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="a4a859cc-2852-4fd5-bf4f-731c00b55a0c" base-type="AlgVisual_Empty_GPA1" base-type-id="c65e6261-0bca-4067-9d4c-620ada050358" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="OpenFrom" ver="5">
-          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
-        </init>
-      </object>
-    </do-on>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="2646bb6f-55b4-44a1-bec8-1178bc82ac08" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_4" display-name="Step_4" uuid="7f08d4d8-5751-495a-a9f8-1ade8e56f088" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="450.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -507,52 +410,26 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
-    <init target="_Height" ver="3" value="9"/>
+    <init target="_Height" ver="3" value="4"/>
   </object>
-  <object access-modifier="private" name="Set_4_AOss_Cmd_In_4_1_1" display-name="Set_4_AOss_Cmd_In_4_1_1" uuid="4973a042-ed34-41d2-abef-3f56b5ccabee" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_4_AOss_Cmd_In_4" display-name="Set_4_AOss_Cmd_In_4" uuid="0b7b5e58-9d65-4326-a43a-7e8e9c5562df" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="450.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов ТГ завершен"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_4_1_1"/>
+    <init target="Text" ver="3" value="Кр5 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_4"/>
     <init target="Point" ver="3" value="4"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
     <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="3.0"/>
+    <init target="_Height" ver="3" value="4.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Set_4_AOss_Cmd_In_4_1_2" display-name="Set_4_AOss_Cmd_In_4_1_2" uuid="d41ce6b6-e60f-4f08-8271-d4d4ac658ccb" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="510.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Защита по Рмсм снята"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_4_1_2"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="3.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Set_4_AOss_Cmd_In_4_1_3" display-name="Set_4_AOss_Cmd_In_4_1_3" uuid="6611648a-35c5-407f-8a67-b4e8554fd894" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
-    <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="570.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Защита по Рбв снята"/>
-    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_4_1_3"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="3.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_4_AOss_Stop_toTR" display-name="Cmd_4_AOss_Stop_toTR" uuid="b8b11f04-31d0-4cde-916f-eed532954d22" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_4_AOss_Kr2_Off" display-name="Cmd_4_AOss_Kr2_Off" uuid="5c25a59b-d140-42ab-b33b-6821b3ad755e" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="450.0" ver="3"/>
+    <designed target="Y" value="330.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов в ТР"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="4"/>
@@ -561,11 +438,11 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_AOss_SK_OF" display-name="Cmd_4_AOss_SK_OF" uuid="b5dc18a9-8bae-427b-bae4-92ebcd4d7610" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_4_AOss_Kr6r_On" display-name="Cmd_4_AOss_Kr6r_On" uuid="016e4fc0-8a7c-457d-8c84-612117771f91" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="470.0" ver="3"/>
+    <designed target="Y" value="350.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="СК закрыть"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="4"/>
@@ -574,35 +451,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_AOss_APRK_ON" display-name="Cmd_4_AOss_APRK_ON" uuid="76386f9b-fa11-43f9-b5a4-2460ebc7c6c5" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_Link_4_AOss_OSTG_START" display-name="Cmd_Link_4_AOss_OSTG_START" uuid="7fc346f6-5433-4d32-9b1d-4b0e2277a20a" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="490.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АПРК открыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_4_AOss_Kr2_4_OF" display-name="Cmd_4_AOss_Kr2_4_OF" uuid="95ece48d-4582-446d-8e6c-669ffb1306fc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="510.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 2 и 4 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_4_AOss_STG_START" display-name="Cmd_Link_4_AOss_STG_START" uuid="5e170aea-08ba-4968-b6d8-1aa491bf237e" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Y" value="370.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Text" ver="3" value="Останов ТГ"/>
     <init target="Point" ver="3" value="4"/>
@@ -611,8 +462,8 @@
     <init target="_MOD" ver="3" ref="here._MOD"/>
     <init target="_Height" ver="3" value="1.0"/>
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_STG_GPA1" display-name="Handler_Open_AlgVisual_STG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="da8e20f2-c145-4d6d-a989-78e5a8405657" base-type="AlgVisual_STG_GPA1" base-type-id="3819c24a-e1a8-4eb5-86c4-b02d6ee9cc87" ver="5">
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="4c75f02e-0032-4833-bdbf-4941e0d8c384" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
         <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
         <init target="OpenFrom" ver="5">
@@ -621,11 +472,11 @@
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Cmd_4_AOss_Kr1_OF" display-name="Cmd_4_AOss_Kr1_OF" uuid="256f8c47-ecf2-450c-8d8a-ea9f04bf4c79" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+  <object access-modifier="private" name="Cmd_4_AOss_Kr5_On" display-name="Cmd_4_AOss_Kr5_On" uuid="95ff768c-4324-4502-859f-39b92b3ee2ac" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="550.0" ver="3"/>
+    <designed target="Y" value="390.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Краны 1 закрыть"/>
+    <init target="Text" ver="3" value="Открыть Кр5"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="4"/>
@@ -634,64 +485,9 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_4_AOss_Kr6_OF" display-name="Cmd_4_AOss_Kr6_OF" uuid="f077cb60-ef63-457e-a589-d22add8e0d40" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="570.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Кран 6 закрыть"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <designed target="Opacity" value="1" ver="4"/>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_4_AOss_SMSN_START" display-name="Cmd_Link_4_AOss_SMSN_START" uuid="b581744e-a84e-43b4-b59e-8151ef498ca7" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="590.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов МСК"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_SMSN_GPA1" display-name="Handler_Open_AlgVisual_SMSN_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="1a7f8c41-67c7-4ecf-b036-d9bf5311e8b6" base-type="AlgVisual_SMSN_GPA1" base-type-id="1d8b4884-0991-49e5-a956-88462e4eab38" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="OpenFrom" ver="5">
-          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
-        </init>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_4_AOss_SBA_START" display-name="Cmd_Link_4_AOss_SBA_START" uuid="6c063c53-0c57-421a-826d-714239d5a850" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="610.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Прекращение подачи БВ"/>
-    <init target="Point" ver="3" value="4"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_SBA_GPA1" display-name="Handler_Open_AlgVisual_SBA_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="8dedb7ea-bde2-4ae3-8965-9d75103a53aa" base-type="AlgVisual_SBA_GPA1" base-type-id="4d800246-f17a-4324-867b-54c6a10b336d" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="OpenFrom" ver="5">
-          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
-        </init>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="df96dafe-01a9-4805-9542-4d4e17f8a6ac" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+  <object access-modifier="private" name="Step_5" display-name="Step_5" uuid="d404403d-ddb8-4e60-bf23-fc848f2bad82" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
     <designed target="X" value="0.0" ver="3"/>
-    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Y" value="410.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_init_Object" ver="3" value="System"/>
@@ -702,11 +498,11 @@
     <designed target="Opacity" value="1" ver="4"/>
     <init target="_Height" ver="3" value="3"/>
   </object>
-  <object access-modifier="private" name="Set_5_AOss_Cmd_In_5" display-name="Set_5_AOss_Cmd_In_5" uuid="571bc615-0f6f-4ecf-b264-fec39784c9b0" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+  <object access-modifier="private" name="Set_5_AOss_Cmd_In_5" display-name="Set_5_AOss_Cmd_In_5" uuid="f3bf1b31-0f34-4b2f-b305-eca70908eae5" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
     <designed target="X" value="230.0" ver="3"/>
-    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Y" value="410.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Деблокировка"/>
+    <init target="Text" ver="3" value="Нет газа в Нагнетателе"/>
     <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_5"/>
     <init target="Point" ver="3" value="5"/>
     <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
@@ -715,53 +511,11 @@
     <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
-  <object access-modifier="private" name="Cmd_Link_5_AOss_SMSN_START" display-name="Cmd_Link_5_AOss_SMSN_START" uuid="d621c051-8bc9-481c-be28-0c11e43dfe97" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+  <object access-modifier="private" name="Cmd_5_AOss_Kr2_Off" display-name="Cmd_5_AOss_Kr2_Off" uuid="1ea8eefc-acc7-46fc-b9ff-d0d6bdbacb66" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
     <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Y" value="410.0" ver="3"/>
     <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Останов МСК"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_SMSN_GPA1" display-name="Handler_Open_AlgVisual_SMSN_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="9b703a22-ae01-4dbc-8e5c-d34cdf76cca1" base-type="AlgVisual_SMSN_GPA1" base-type-id="1d8b4884-0991-49e5-a956-88462e4eab38" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="OpenFrom" ver="5">
-          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
-        </init>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="Cmd_Link_5_AOss_SBA_START" display-name="Cmd_Link_5_AOss_SBA_START" uuid="4c276ab5-dca1-4f01-92d8-e38c9a754b7a" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="650.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="Прекращение подачи БВ"/>
-    <init target="Point" ver="3" value="5"/>
-    <init target="_init_Object" ver="3" value="System"/>
-    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
-    <init target="_MOD" ver="3" ref="here._MOD"/>
-    <init target="_Height" ver="3" value="1.0"/>
-    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
-    <do-on access-modifier="private" name="Handler_Open_AlgVisual_SBA_GPA1" display-name="Handler_Open_AlgVisual_SBA_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="b8ae5190-23da-4c0f-96e9-38fcbb54b81f" base-type="AlgVisual_SBA_GPA1" base-type-id="4d800246-f17a-4324-867b-54c6a10b336d" ver="5">
-        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
-        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
-        <init target="OpenFrom" ver="5">
-          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
-        </init>
-      </object>
-    </do-on>
-  </object>
-  <object access-modifier="private" name="Cmd_5_AOss_Finished" display-name="Cmd_5_AOss_Finished" uuid="8fd59506-e81f-4742-af59-5f1e015e0fa3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
-    <designed target="X" value="30.0" ver="3"/>
-    <designed target="Y" value="670.0" ver="3"/>
-    <designed target="Rotation" value="0" ver="3"/>
-    <init target="Text" ver="3" value="АОсс завершен"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
     <init target="_init_Object" ver="3" value="System"/>
     <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
     <init target="Point" ver="3" value="5"/>
@@ -770,22 +524,553 @@
     <init target="_Height" ver="3" value="1.0"/>
     <designed target="Opacity" value="1" ver="4"/>
   </object>
+  <object access-modifier="private" name="Cmd_5_AOss_Kr6r_On" display-name="Cmd_5_AOss_Kr6r_On" uuid="3faf77d0-3fac-4ec8-9cff-964d4710e23c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="430.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_5_AOss_OSTG_START" display-name="Cmd_Link_5_AOss_OSTG_START" uuid="1908e814-4bcf-4c38-95a8-14b220e6c8cf" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="450.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ"/>
+    <init target="Point" ver="3" value="5"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="0dc9d437-1552-4c19-95b3-d66f2d1a75a4" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Step_6" display-name="Step_6" uuid="811668e7-7714-4d34-8a9b-045021879036" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="470.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.AOss_Point"/>
+    <init target="Num" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_6_AOss_Cmd_In_6_1_1" display-name="Set_SP_6_AOss_Cmd_In_6_1_1" uuid="4dcfa2da-d3b1-4572-ac07-64061a11e1a0" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="470.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="Text" ver="3" value="Кл Г-Г открыт 10%"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Par_In_6_1_1"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.AOss_Cmd_In_6_1_1"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_6_AOss_Cmd_In_6_1_2" display-name="Set_6_AOss_Cmd_In_6_1_2" uuid="682cde12-b357-429a-a76e-9e33d03aef6d" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="490.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value=""/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_6_1_2"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_OR_6_1" display-name="Set_OR_6_1" uuid="b5e5a168-4938-46be-8e68-668946c6172d" base-type="Set_OR" base-type-id="d5a005dc-a385-4809-bc3d-b38255b27418" ver="4">
+    <designed target="X" value="230.0" ver="4"/>
+    <designed target="Y" value="510.0" ver="4"/>
+    <designed target="Rotation" value="0" ver="4"/>
+    <init target="Text" ver="4" value="ИЛИ"/>
+    <init target="_init_APSource" ver="4" ref="here.ApSource_CurrentForm"/>
+    <init target="Point" ver="4" value="6"/>
+    <init target="_CurPoint" ver="4" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="4" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_6_AOss_Tmv_Out_6" display-name="Set_SP_6_AOss_Tmv_Out_6" uuid="724036c3-721d-4667-b341-900f64a418c3" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="Text" ver="3" value="Таймер: Задержка"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Tmv_Out_6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+  </object>
+  <object access-modifier="private" name="Cmd_6_AOss_Kr2_Off" display-name="Cmd_6_AOss_Kr2_Off" uuid="6a8b4a8e-ea9b-4ba8-879f-5747a99e64bc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="470.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_6_AOss_Kr6r_On" display-name="Cmd_6_AOss_Kr6r_On" uuid="8fcf1e34-11a7-4e9a-935d-6a7870cb3f83" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="490.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_6_AOss_OSTG_START" display-name="Cmd_Link_6_AOss_OSTG_START" uuid="15a12052-ca59-4128-92e0-9ff3654d1674" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="510.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="f57eac06-e911-4735-b025-6ad00563ec0b" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_6_AOss_Reg_KlGG_Off" display-name="Cmd_6_AOss_Reg_KlGG_Off" uuid="26bc429c-9ff3-466a-a605-fe2285716967" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="530.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить регулирование Кл Г-Г"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="6"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_7" display-name="Step_7" uuid="4232beef-9fc4-4549-b7ac-d765196b9fd9" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="550.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.AOss_Point"/>
+    <init target="Num" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="4"/>
+  </object>
+  <object access-modifier="private" name="Set_7_AOss_Cmd_In_7" display-name="Set_7_AOss_Cmd_In_7" uuid="ccb4dbc8-113b-454b-9f9d-a7f839b82192" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="550.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кр13 закрыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_7"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="4.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_7_AOss_Kr2_Off" display-name="Cmd_7_AOss_Kr2_Off" uuid="8786041b-f89d-4270-89bd-3887ac374893" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="550.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_7_AOss_Kr6r_On" display-name="Cmd_7_AOss_Kr6r_On" uuid="d8cd28f5-9c38-45fd-8117-7a845dc8e2bc" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="570.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_7_AOss_OSTG_START" display-name="Cmd_Link_7_AOss_OSTG_START" uuid="73151be4-8053-42dd-9915-8a84dda467aa" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="590.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="06f02a35-d125-4ace-a3cb-7846b635d6b5" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_7_AOss_Kr13_Off" display-name="Cmd_7_AOss_Kr13_Off" uuid="46b084cd-36c3-4952-bc5d-eda6082d167c" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="610.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр13"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="7"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_8" display-name="Step_8" uuid="6d34f9d7-9025-424d-b497-7403edd303fc" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.AOss_Point"/>
+    <init target="Num" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="7"/>
+  </object>
+  <object access-modifier="private" name="Set_8_AOss_Cmd_In_8" display-name="Set_8_AOss_Cmd_In_8" uuid="fe4048bb-70da-4f78-8083-23dd28b88a66" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кр14 открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_8"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="7.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_Kr2_Off" display-name="Cmd_8_AOss_Kr2_Off" uuid="c6a202f1-72b5-4724-a738-00268eb432c8" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="630.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_Kr6r_On" display-name="Cmd_8_AOss_Kr6r_On" uuid="8761dad4-9ac7-4e49-ba91-b857de4cca95" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="650.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_8_AOss_OSTG_START" display-name="Cmd_Link_8_AOss_OSTG_START" uuid="49762e0f-3702-4828-b014-7dfde9ed6d0a" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="670.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="313a7838-3a6f-449e-91c9-0ce8f2f4b4f1" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_Kr14_On" display-name="Cmd_8_AOss_Kr14_On" uuid="b44dae42-e35f-4e54-bacb-6b008acbe8f5" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="690.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр14"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_Kr_SAM_CBN_On" display-name="Cmd_8_AOss_Kr_SAM_CBN_On" uuid="f4c5e4dc-5e56-4de1-ae61-5365aa8675f3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="710.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр САМ ЦБН"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_PNS_Off" display-name="Cmd_8_AOss_PNS_Off" uuid="ee61a557-b6be-4659-88be-e0f581c3690f" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="730.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить ПНС"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_8_AOss_ZhP_Tmsm_OF" display-name="Cmd_8_AOss_ZhP_Tmsm_OF" uuid="67c1cb91-ce54-4fae-819c-de4e91733797" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="750.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиту Рмсм и Тмсм"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="8"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_9" display-name="Step_9" uuid="eb820b48-0a2e-4df4-a606-d4af9decd094" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="770.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.AOss_Point"/>
+    <init target="Num" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="6"/>
+  </object>
+  <object access-modifier="private" name="Set_9_AOss_Cmd_In_9_1_1" display-name="Set_9_AOss_Cmd_In_9_1_1" uuid="8a08fab0-f657-4f09-b870-7e77554ceed1" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="770.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кр САМ ЦБН открыт"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_9_1_1"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Set_SP_9_AOss_Cmd_In_9_1_2" display-name="Set_SP_9_AOss_Cmd_In_9_1_2" uuid="68a820a0-8169-43d3-9d2a-3eb67631fe77" base-type="Set_SP" base-type-id="976b60b5-5800-4f93-9840-42353d513f6a" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="810.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="Text" ver="3" value="Nгг &lt;= 100"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Par_In_9_1_2"/>
+    <init target="_Condition_step" ver="5" value="System.GRH.AOss_Cmd_In_9_1_2"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="2.0"/>
+  </object>
+  <object access-modifier="private" name="Set_9_AOss_Cmd_In_9_1_3" display-name="Set_9_AOss_Cmd_In_9_1_3" uuid="fe717cf7-0720-4373-bfd0-4cb44c544cd8" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="850.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ завершён"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_9_1_3"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="2.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_9_AOss_Kr2_Off" display-name="Cmd_9_AOss_Kr2_Off" uuid="f61f3670-87f0-4878-84ea-eb2ad8c9af41" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="770.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Закрыть Кр2"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_9_AOss_Kr6r_On" display-name="Cmd_9_AOss_Kr6r_On" uuid="d832e72c-6542-40f9-a729-532cda541eb3" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="790.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр6Р"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_Link_9_AOss_OSTG_START" display-name="Cmd_Link_9_AOss_OSTG_START" uuid="f273603b-f3ca-4659-9214-5c179f1aedf2" base-type="Cmd_Link" base-type-id="b8eea571-a5ec-4ed6-911a-9541f23b7cad" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="810.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Останов ТГ"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <do-on access-modifier="private" name="Handler_Open_AlgVisual_OSTG_GPA1" display-name="Handler_Open_AlgVisual_OSTG_GPA1" ver="5" event="MouseClick" form-action="open" form-by-id="false">
+      <object access-modifier="private" uuid="67b41b23-1301-414c-9620-5746c39214de" base-type="AlgVisual_OSTG_GPA1" base-type-id="8c30bb29-23bb-418f-9845-f4e2e41ecdba" ver="5">
+        <init target="_AbonentPath" ver="5" ref="here._AbonentPath"/>
+        <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
+        <init target="OpenFrom" ver="5">
+          <expr><![CDATA[here.OpenFrom + ";" + here.WindowCaption]]></expr>
+        </init>
+      </object>
+    </do-on>
+  </object>
+  <object access-modifier="private" name="Cmd_9_AOss_Kr_SAM_CBN_On" display-name="Cmd_9_AOss_Kr_SAM_CBN_On" uuid="59e54b36-71f4-46dd-aef6-1f408393f0ae" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="830.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Открыть Кр САМ ЦБН"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_9_AOss_PNS_Off" display-name="Cmd_9_AOss_PNS_Off" uuid="b98ef107-be63-490f-9019-3861248a5daa" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="850.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Отключить ПНС"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Cmd_9_AOss_ZhP_Tmsm_OF" display-name="Cmd_9_AOss_ZhP_Tmsm_OF" uuid="07f8ab87-560a-4111-8795-bafd1664e427" base-type="Cmd" base-type-id="b557930e-9c1e-452c-a60c-d16e1cbcf50f" ver="3">
+    <designed target="X" value="30.0" ver="3"/>
+    <designed target="Y" value="870.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Снять защиту Рмсм и Тмсм"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_TAG" ver="3" value="GRH.AOss_Point"/>
+    <init target="Point" ver="3" value="9"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
+  <object access-modifier="private" name="Step_10" display-name="Step_10" uuid="d70e3296-8297-4e28-813b-909add91b39d" base-type="Step" base-type-id="afb45021-6965-4de3-9d8a-c9a825bf814d" ver="3">
+    <designed target="X" value="0.0" ver="3"/>
+    <designed target="Y" value="890.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_init_Object" ver="3" value="System"/>
+    <init target="_Point" ver="3" value="GRH.AOss_Point"/>
+    <init target="Num" ver="3" value="10"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+    <init target="_Height" ver="3" value="1"/>
+  </object>
+  <object access-modifier="private" name="Set_10_AOss_Cmd_In_10" display-name="Set_10_AOss_Cmd_In_10" uuid="65acecd1-0fe1-407d-9bb6-6c9e2ee63c49" base-type="Set" base-type-id="51bbe086-73b0-4b6f-b6b2-69bf899f1d51" ver="3">
+    <designed target="X" value="230.0" ver="3"/>
+    <designed target="Y" value="890.0" ver="3"/>
+    <designed target="Rotation" value="0" ver="3"/>
+    <init target="Text" ver="3" value="Кноманда Деблокировка"/>
+    <init target="_Set" ver="3" value="System.GRH.AOss_Cmd_In_10"/>
+    <init target="Point" ver="3" value="10"/>
+    <init target="_CurPoint" ver="3" value="System.GRH.AOss_Point"/>
+    <init target="_MOD" ver="3" ref="here._MOD"/>
+    <init target="_Height" ver="3" value="1.0"/>
+    <init target="_init_APSource" ver="3" ref="here.ApSource_CurrentForm"/>
+    <designed target="Opacity" value="1" ver="4"/>
+  </object>
   <designed target="Width" value="500" ver="2"/>
-  <designed target="Height" value="690.0" ver="2"/>
+  <designed target="Height" value="910.0" ver="2"/>
   <designed target="WindowWidth" value="500" ver="2"/>
-  <designed target="WindowHeight" value="690" ver="2"/>
-  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="789363ef-515d-4231-8395-357c513bc2c7" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
-  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="d0216b52-96cf-4c75-b0ad-d672e27b644a" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
+  <designed target="WindowHeight" value="910" ver="2"/>
+  <object access-modifier="private" name="OpenFrom" display-name="OpenFrom" uuid="778cc15b-b73e-4522-b179-075c6d76e987" base-type="notifying_string" base-type-id="14976fbf-36ab-415f-abc3-9f8fdc217351" ver="3"/>
+  <object access-modifier="private" name="Open_01_FormAlg" display-name="Open_01_FormAlg" uuid="ec4c7b31-15dc-44a3-8852-399c2390520e" base-type="Action" base-type-id="a9ee9770-1c4a-44c9-b815-157d9fc2ab95" ver="3">
     <designed target="Enabled" value="true" ver="3"/>
     <designed target="InvokeTrigger" value="false" ver="3"/>
     <do-on access-modifier="private" name="Handler_Open_01_FormAlg" display-name="Handler_Open_01_FormAlg" ver="3" event="Invoked" form-action="open" form-by-id="false">
-      <object access-modifier="private" uuid="64c836cf-9ce3-4f8e-91e7-e25b41d02911" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
+      <object access-modifier="private" uuid="424aefd7-783b-4693-8829-143ad49a0d17" base-type="01_FormAlg_GPA1" base-type-id="f7d5f21d-c4e8-4ce8-932e-ef2d8b44d2eb" ver="3">
         <init target="_AbonentPath" ver="3" ref="here._AbonentPath"/>
         <init target="Link_MainControl" ver="5" ref="here.Link_MainControl"/>
       </object>
     </do-on>
   </object>
-  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="429b10f2-dbcb-4927-adc2-ee3716aa8074" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
+  <object access-modifier="private" name="Back_Button" display-name="Back_Button" uuid="a8301f68-daea-4395-a8ef-e4a4fe0ec17f" base-type="Back" base-type-id="808d0619-d21b-4102-b931-0c8f315bfcc1" ver="5">
     <designed target="X" value="420" ver="5"/>
     <designed target="Y" value="0" ver="5"/>
     <designed target="ZValue" value="0" ver="5"/>

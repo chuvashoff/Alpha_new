@@ -4,7 +4,7 @@ from func_for_v3 import check_diff_file, is_f_ind, f_ind_json
 import os
 
 
-def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
+def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag, sl_need_add: dict[dict]):
     # ТРЕНДЫ- JSON
 
     # Определение объявленных мнемосхем с листа настроек
@@ -86,7 +86,7 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
             print('Файл Systemach/Trends/Diagnostic.json не найден, '
                   'тренды диагностики железяк будут определены по умолчанию')
             sl_signal_module = sl_signal_module_default
-    except Exception:
+    except (Exception, KeyError):
         print('Файл Systemach/Trends/Diagnostic.json заполнен некорректно, '
               'тренды диагностики железяк будут определены по умолчанию')
         sl_signal_module = sl_signal_module_default
@@ -150,6 +150,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
                         else par[rus_par_ind].value
+                    if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                        rus_name_par += ' (РЕЗЕРВ)'
                     sl_par_trends = {f_ind_json(rus_name_par): (par[alg_name_ind].value.replace('|', '_') +
                                                                 '.Value',
                                                                 ('-' if list_config == 'Входные' else
@@ -163,8 +165,11 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                     if par[is_f_ind(cells_name[0], 'Тип ИМ')].value in ('ИМ1Х0', 'ИМ1Х0и'):
                         move_ = par[is_f_ind(cells_name[0], 'Вкл./откр.')].value  # определяем тип открытия
                         # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
+                        rus_name_par = par[rus_par_ind].value
+                        if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                            rus_name_par += ' (РЕЗЕРВ)'
                         sl_par_trends = \
-                            {f'{f_ind_json(par[rus_par_ind].value)}. {move_}': (par[alg_name_ind].value + '.oOn', '-')}
+                            {f'{f_ind_json(rus_name_par)}. {move_}': (par[alg_name_ind].value + '.oOn', '-')}
                         # добавляем словарь параметра в словарь узла
                         sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
@@ -174,11 +179,14 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                         gender_ = par[is_f_ind(cells_name[0], 'Род')].value  # определяем род ИМ
                         # создаём промежуточный словарь с возможными префиксами сигналов
                         sl_tmp = {'.oOn': move_, '.stOn': sl_state_im_gender[move_][gender_]}
+                        rus_name_par = par[rus_par_ind].value
+                        if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                            rus_name_par += ' (РЕЗЕРВ)'
                         for par_pref in sl_tmp:
                             # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                             sl_par_trends = \
-                                {f"{f_ind_json(par[rus_par_ind].value)}. {sl_tmp[par_pref]}": (par[alg_name_ind].value +
-                                                                                               par_pref, '-')}
+                                {f"{f_ind_json(rus_name_par)}. {sl_tmp[par_pref]}": (par[alg_name_ind].value +
+                                                                                     par_pref, '-')}
                             # добавляем словарь параметра в словарь узла
                             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
@@ -189,11 +197,14 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                         # создаём промежуточный словарь с возможными префиксами сигналов
                         sl_tmp = {'.oOn': move_, '.stOn': sl_state_im_gender[move_][gender_],
                                   '.stOff': sl_state_im_gender[move_ + '_off'][gender_]}
+                        rus_name_par = par[rus_par_ind].value
+                        if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                            rus_name_par += ' (РЕЗЕРВ)'
                         for par_pref in sl_tmp:
                             # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                             sl_par_trends = \
-                                {f'{f_ind_json(par[rus_par_ind].value)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
-                                                                                               par_pref, '-')}
+                                {f'{f_ind_json(rus_name_par)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
+                                                                                     par_pref, '-')}
                             # добавляем словарь параметра в словарь узла
                             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
@@ -209,11 +220,14 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                                   else sl_state_im_gender[move_][gender_],
                                   '.stOff': 'Включен через байпас' if t_im == 'ИМ2Х2ПЧ'
                                   else sl_state_im_gender[move_ + '_off'][gender_]}
+                        rus_name_par = par[rus_par_ind].value
+                        if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                            rus_name_par += ' (РЕЗЕРВ)'
                         for par_pref in sl_tmp:
                             # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                             sl_par_trends = \
-                                {f'{f_ind_json(par[rus_par_ind].value)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
-                                                                                               par_pref, '-')}
+                                {f'{f_ind_json(rus_name_par)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
+                                                                                     par_pref, '-')}
                             # добавляем словарь параметра в словарь узла
                             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
                 # при условии, что парсим лист ИМ(АО) и выделена как ИМ
@@ -222,12 +236,15 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                         par[cpu_par].value in sl_object_all[obj]:
                     # sl_tmp промежуточный словарь с возможными префиксами сигналов
                     sl_tmp = {'.Set': 'Задание', '.iPos': 'Положение'}
+                    rus_name_par = par[rus_par_ind].value
+                    if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                        rus_name_par += ' (РЕЗЕРВ)'
                     for par_pref in sl_tmp:
                         # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                         sl_par_trends = \
-                            {f'{f_ind_json(par[rus_par_ind].value)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
-                                                                                           par_pref,
-                                                                                           par[eunit_ind].value)}
+                            {f'{f_ind_json(rus_name_par)}. {sl_tmp[par_pref]}': (par[alg_name_ind].value +
+                                                                                 par_pref,
+                                                                                 par[eunit_ind].value)}
                         # добавляем словарь параметра в словарь узла
                         sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 
@@ -266,6 +283,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                     # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
                     rus_name_sig = par[rus_par_ind].value + '(С меткой времени ПЛК)' \
                         if 'IEC' in par[t_sig_drv_ind].value else par[rus_par_ind].value
+                    if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                        rus_name_sig += ' (РЕЗЕРВ)'
                     sl_drv_trends = \
                         {f'{f_ind_json(rus_name_sig)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
                                                          sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
@@ -365,6 +384,8 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                 # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                 rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
                     else par[rus_par_ind].value
+                if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                    rus_name_par += ' (РЕЗЕРВ)'
                 sl_node_set[rus_name_par] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
                                              par[eunit_ind].value)
         # для каждой уставки в отсортированном словаре уставок
@@ -376,6 +397,16 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                                 f"{obj[0]}.System.SET.{sl_node_set[a_set_rus][0]}",
                             "EUnit": sl_node_set[a_set_rus][1],
                             "Description": a_set_rus}})
+
+        # Добавляем дополнительные параметры если в объекте есть контроллеры с данными параметрами
+        for _, pars in {c: p for c, p in sl_need_add.items() if c in set(sl_object_all[obj].keys())}.items():
+            for p, param_p in pars.items():
+                lst_json.append(
+                    {"Signal": {"UserTree": f"Дополнительные параметры/{param_p[1]}",
+                                "OpcTag":
+                                    f"{obj[0]}.System.Pars.{p}.Value",
+                                "EUnit": '-',
+                                "Description": param_p[1]}})
 
         # Дополнительный перебор для сбора отказов
         for list_config in sl_brk_group_trends:
@@ -403,10 +434,13 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag):
                 if (list_config in ('Измеряемые', 'Расчетные') or list_config == 'Входные' and
                     par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
                         par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
+                    rus_name_par = par[rus_par_ind].value
+                    if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                        rus_name_par += ' (РЕЗЕРВ)'
                     # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
                     sl_par_trends = \
-                        {f_ind_json(par[rus_par_ind].value): (par[alg_name_ind].value.replace('|', '_') + '.fValue',
-                                                              '-')}
+                        {f_ind_json(rus_name_par): (par[alg_name_ind].value.replace('|', '_') + '.fValue',
+                                                    '-')}
                     # добавляем словарь параметра в словарь узла
                     sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
 

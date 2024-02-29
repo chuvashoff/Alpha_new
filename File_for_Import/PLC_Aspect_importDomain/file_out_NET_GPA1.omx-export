@@ -1,45 +1,14 @@
 <omx xmlns="system" xmlns:dp="automation.deployment" xmlns:snmp="automation.snmp" xmlns:ct="automation.control">
-  <dp:computer name="GPA1_US101_MES3508">
-    <dp:ethernet-adapter name="Eth1" address="10.98.132.16"/>
-    <dp:external-runtime name="Runtime">
-      <snmp:snmp-agent name="SnmpAgent" poll-port="161" poll-password="public" notification-port="162" notification-password="public" protocol-version="Snmp_v1" security-level="NoAuthNoPriv" auth-protocol="MD5" priv-protocol="AES" address-map="Application.SnmpLinkMap"/>
-      <dp:application-object name="Application" access-level="public">
-        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\SWITCH_ELTEX_MES3508_map.xml"/>
-        <ct:object name="Data" access-level="public">
-          <ct:object name="Data" base-type="Types.SNMP_Switch.SWITCH_ELTEX_MES3508_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="US101"/>
-          </ct:object>
-        </ct:object>
-      </dp:application-object>
-    </dp:external-runtime>
+  <dp:computer name="GPA1_U3">
+    <dp:ethernet-adapter name="Eth1" address="192.168.3.16"/>
   </dp:computer>
-  <dp:computer name="GPA1_US102_MES3508">
-    <dp:ethernet-adapter name="Eth1" address="10.98.133.16"/>
-    <dp:external-runtime name="Runtime">
-      <snmp:snmp-agent name="SnmpAgent" poll-port="161" poll-password="public" notification-port="162" notification-password="public" protocol-version="Snmp_v1" security-level="NoAuthNoPriv" auth-protocol="MD5" priv-protocol="AES" address-map="Application.SnmpLinkMap"/>
-      <dp:application-object name="Application" access-level="public">
-        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\SWITCH_ELTEX_MES3508_map.xml"/>
-        <ct:object name="Data" access-level="public">
-          <ct:object name="Data" base-type="Types.SNMP_Switch.SWITCH_ELTEX_MES3508_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="US102"/>
-          </ct:object>
-        </ct:object>
-      </dp:application-object>
-    </dp:external-runtime>
+  <dp:computer name="GPA1_U5">
+    <dp:ethernet-adapter name="Eth1" address="192.168.4.16"/>
   </dp:computer>
-  <dp:computer name="GPA1_US104_S341">
-    <dp:ethernet-adapter name="Eth1" address="10.98.132.17"/>
-    <dp:ethernet-adapter name="Eth2" address="10.98.133.17"/>
-    <dp:external-runtime name="Runtime">
-      <snmp:snmp-agent name="SnmpAgent" poll-port="161" poll-password="public" notification-port="162" notification-password="public" protocol-version="Snmp_v1" security-level="NoAuthNoPriv" auth-protocol="MD5" priv-protocol="AES" address-map="Application.SnmpLinkMap"/>
-      <dp:application-object name="Application" access-level="public">
-        <snmp:snmp-link-map name="SnmpLinkMap" file="SNMP\SWITCH_TREI_S34X_map.xml"/>
-        <ct:object name="Data" access-level="public">
-          <ct:object name="Data" base-type="Types.SNMP_Switch.SWITCH_TREI_S34X_PLC_View" aspect="Types.PLC_Aspect" access-level="public">
-            <attribute type="unit.System.Attributes.Description" value="US104"/>
-          </ct:object>
-        </ct:object>
-      </dp:application-object>
-    </dp:external-runtime>
+  <dp:computer name="GPA1_BR2_5">
+    <dp:ethernet-adapter name="Eth1" address="192.168.3.15"/>
+  </dp:computer>
+  <dp:computer name="GPA1_PRU">
+    <dp:ethernet-adapter name="Eth1" address="192.168.3.18"/>
   </dp:computer>
 </omx>

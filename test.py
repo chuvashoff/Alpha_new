@@ -40,21 +40,31 @@
 import time
 import shutil
 
-terminal_x, _ = shutil.get_terminal_size((80, 20))
 
 
-def rprint(line):
-    print('\r{:{width}}'.format(line, width=terminal_x), end='')
+# terminal_x, _ = shutil.get_terminal_size((80, 20))
+#
+#
+# def rprint(line):
+#     print('\r{:{width}}'.format(line, width=terminal_x), end='')
+#
+#
+# rprint('123456')
+# time.sleep(1)
+# rprint('234')
+# time.sleep(1)
+#
+#
+#
+# import alpha_domain_pyclient as ng
+
+import array as  arr
+
+numbers = arr.array('i', [10, 20, 30])
+
+print(numbers[-1])
 
 
-rprint('123456')
-time.sleep(1)
-rprint('234')
-time.sleep(1)
-
-
-
-import alpha_domain_pyclient as ng
 
 #GRH|AOss_Cmd_In_3,B,65535,N,S,R,0       ,,0,5626,0   ,65535,0    ,0,0,0,0,////AOss: Команда
 #IVG|T            ,R,65535,N,S,R,0.000000,, ,4097,2673,0    ,65535,0,0,0,0,0,////AT8-1. Температура

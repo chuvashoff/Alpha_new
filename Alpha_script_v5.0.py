@@ -9,12 +9,13 @@ import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index, read_mko_cpu_index
-from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv
+from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv, create_mnemo_drv_general
 from Create_mnemo_visual import create_mnemo_visual
 from create_reports import create_reports, create_reports_pz, create_reports_sday
 from create_reports_sday import create_reports_sday_v10
 from create_reports_v80 import create_reports_v80, create_reports_pz_v80, create_reports_sday_v80
 from create_reports_v80 import create_reports_sut_v80
+from json import load as json_load
 # from collections import ChainMap
 from pathlib import Path
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
@@ -67,8 +68,10 @@ try:
     for p in cells:
         if p[0].value == 'Ширина мнемосхемы, в пикселях':
             size_shirina = int(p[1].value)
+            # print(size_shirina, 'size_shirina')
         if p[0].value == 'Высота мнемосхемы, в пикселях':
             size_vysota = int(p[1].value)
+            # print(size_vysota, 'size_vysota')
             break
     buff_size = '50'
     for p in cells:
@@ -140,6 +143,42 @@ try:
                     tmp_dig_ip2 = (last_dig_ip if '(' not in last_dig_ip else last_dig_ip[last_dig_ip.find('(') + 1:-1])
                     sl_tmp[p[i - 10].value] = (tmp_dig_ip1, tmp_dig_ip2)
             sl_object_all[p[1].value, p[2].value, p[0].value.replace('Объект', '').strip()] = sl_tmp
+
+    # Создаём словарь вида {алг.имя объекта: рус имя объекта}
+    sl_object_rus_name = {i[0]: i[1] for i in sl_object_all}
+
+    sl_project_settings_default = {
+        "Module": {
+            "Unet_Client": [0, 1]
+        }
+    }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', f'Project_settings.json')):
+            with open(os.path.join('Template_Alpha', 'Project_settings.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_project_settings = text_json
+        else:
+            print('Файл Systemach/Project_settings.json не найден, '
+                  'Настройки будут использованы по умолчанию')
+            sl_project_settings = sl_project_settings_default
+        u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
+        unet_start = int(u[0])
+        n_unet = int(u[1])
+    except (Exception, KeyError):
+        print('Файл Systemach/Project_settings.json заполнен некорректно, '
+              'Настройки будут использованы по умолчанию')
+        sl_project_settings = sl_project_settings_default
+        u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
+        unet_start = u[0]
+        n_unet = u[1]
+
+    # all_cpu - кортеж со всеми контроллерами с цифрой объекта
+    all_cpu = tuple([f"{cpu}!{obj[2]}".rstrip('') for obj in sl_object_all for cpu in sl_object_all[obj]])
+    # all_cpu_select - словарь кортежей контроллеров с цифрой объекта с разбивкой
+    # по указанному количеству элементов в каждом кортеже, ключи - порядковый номер UNET-модуля, учитывается стартовый
+    all_cpu_select = [all_cpu[i:i + n_unet] for i in range(0, len(all_cpu), n_unet)]
+    all_cpu_select = dict(zip(range(unet_start, len(all_cpu_select) + unet_start), all_cpu_select))
 
     # Мониторинг ТР и АПР в контроллере
     sl_TR = {}
@@ -315,7 +354,8 @@ try:
             check_test = f_test.readlines()
         if len(check_test) > 100:
             with open('Required_change.txt', 'w') as f_test:
-                f_test.write('-' * 70 + '\n')
+                last_change = [i for i in ''.join(check_test).split(f"{'-'* 70}\n") if i][-1]
+                f_test.write(f"{'-'* 70}\n{last_change}\n")
 
     sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
                 'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
@@ -328,17 +368,17 @@ try:
     # количество знаков для истории)}}
     # sl_mnemo = {узел: список параметров узла}
     return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai = {}, {}, {}, {}, {}
+    return_sl_ai_add_pars = {}
     if 'Измеряемые' in book.sheetnames:
-        return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai = is_read_ai_ae_set(
-            sheet=book['Измеряемые'],
-            type_signal='AI')
+        return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai, return_sl_ai_add_pars = \
+            is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
     # print(datetime.datetime.now(), ' - Разпарсили Анпары, парсим Расчётные')
     # Расчетные
     return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae = {}, {}, {}, {}, {}
+    return_sl_ae_add_pars = {}
     if 'Расчетные' in book.sheetnames:
-        return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae = is_read_ai_ae_set(
-            sheet=book['Расчетные'],
-            type_signal='AE')
+        return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae, return_sl_ae_add_pars = \
+            is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
     # print(datetime.datetime.now(), ' - Разпарсили Расчётные, парсим Дискретные')
     # Дискретные
     return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff = {}, {}, {}, {}
@@ -347,8 +387,10 @@ try:
     # print(datetime.datetime.now(), ' - Разпарсили Дискретные, парсим ИМы и ИМАО')
     # ИМ
     return_sl_im, sl_cnt, return_sl_im_diff = {}, {}, {}
+    return_sl_all_add_pars = {}
     if 'ИМ' in book.sheetnames and 'ИМ(АО)' in book.sheetnames:
-        return_sl_im, sl_cnt, return_sl_im_diff = is_read_im(sheet=book['ИМ'], sheet_imao=book['ИМ(АО)'])
+        return_sl_im, sl_cnt, return_sl_im_diff, return_sl_all_add_pars = is_read_im(sheet=book['ИМ'],
+                                                                                     sheet_imao=book['ИМ(АО)'])
 
     # Создаём и набиваем словарь для мнемосхемы наработок
     sl_mnemo_cnt = {plc: {'Наработка': list(), 'Перестановки': list()} for plc in sl_cnt}
@@ -378,9 +420,10 @@ try:
     # print(datetime.datetime.now(), ' - Собрали диагностику, парсим уставки')
     # Уставки
     return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set = {}, {}, {}, {}, {}
+    return_sl_set_add_pars = {}
     if 'Уставки' in book.sheetnames:
-        return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set = is_read_ai_ae_set(
-            sheet=book['Уставки'], type_signal='SET')
+        return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set, return_sl_set_add_pars = \
+            is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
     # Собираем словари сменной ведомости в один
     # return_sl_sday = {cpu: {Префикс папки.alg_par: русское имя}}
     for sl in (return_ae_sday, return_set_sday):
@@ -418,12 +461,15 @@ try:
     # Сигналы остальные
     return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes = {}, {}, {}, {}, {}, {}
     sl_cpu_archive = {}
+    return_sl_diff_sig = {}
     if 'Сигналы' in book.sheetnames:
-        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive = is_read_signals(
-            sheet=book['Сигналы'],
-            sl_wrn_di=sl_wrn_di,
-            sl_cpu_spec=sl_CPU_spec
-        )
+        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff_sig = \
+            is_read_signals(
+                sheet=book['Сигналы'],
+                sl_wrn_di=sl_wrn_di,
+                sl_cpu_spec=sl_CPU_spec
+            )
+    # print(return_sl_diff_sig)
     # print('return_wrn', return_wrn)
     # О
     # print(sl_cpu_archive)
@@ -438,8 +484,17 @@ try:
     # ед. изм., кол-во знаков) }}}
     sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = {}, {}, {}
     if 'Драйвера' in book.sheetnames:
-        sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = is_read_drv(sheet=book['Драйвера'],
-                                                                           sl_all_drv=sl_all_drv)
+        sl_cpu_drv_signal, return_sl_cpu_drv, return_ios_drv = is_read_drv(
+            sheet=book['Драйвера'],
+            sl_all_drv=sl_all_drv
+        )
+
+    # print(return_sl_all_add_pars)
+    # print(return_sl_ai_add_pars)
+    # print(return_sl_ai)
+    # print('sl_cpu_drv_signal', sl_cpu_drv_signal)
+    # print('return_sl_cpu_drv', return_sl_cpu_drv)
+    # print('return_ios_drv', return_ios_drv)
 
     # Переменные алгоритмов
     # словарь команд по cpu sl_command_in_cpu = {cpu: sl_command}
@@ -519,13 +574,14 @@ try:
     # print(return_sl_mnemo_cdo)
     # print()
 
-    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
+    print(datetime.datetime.now(), '- Фиксики начинают создавать и проверять выходные файлы')
     sl_w = {
         # return_sl_ai =
         # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
         'AI': {'dict': return_sl_ai,
                'tuple_attr': ('unit.System.Attributes.Description',
-                              'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits'),
+                              'Attributes.EUnit', 'Attributes.ShortName', 'Attributes.FracDigits',
+                              'Attributes.Module_Canal'),
                'dict_agreg_IOS': sl_agreg,
                'dict_diff': return_sl_ai_diff
                },
@@ -539,7 +595,8 @@ try:
                },
         # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
         'DI': {'dict': return_sl_di,
-               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn'),
+               'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn',
+                              'Attributes.Module_Canal'),
                'dict_agreg_IOS': sl_agreg,
                'dict_diff': return_sl_di_diff
                },
@@ -578,7 +635,8 @@ try:
         # sl_cnt_xml = {CPU: {алг.имя : (тип модуля в студии, русское имя,)}}
         'CNT': {'dict': sl_cnt_xml,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
-                'dict_agreg_IOS': {}
+                'dict_agreg_IOS': {},
+                'dict_diff': {_: {p: _ for p, _ in sl_val.items() if p.endswith(('_Swap', '_WorkTime'))} for _, sl_val in return_sl_im_diff.items()}
                 },
         # return_ts = {cpu: {алг_пар: (ТИП TS в студии, русское имя, )}}
         'TS': {'dict': return_ts,
@@ -620,6 +678,11 @@ try:
                 'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.State_Out'),
                 'dict_agreg_IOS': {}
                 },
+        # return_sl_cdo = {cpu: {алг_пар: (ТИП ALG в студии, русское имя, Нестандартный канал Да/Нет, модуль, канал)}}
+        'Pars': {'dict': is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars),
+                 'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.EUnit'),
+                 'dict_agreg_IOS': {}
+                 },
     }
     # sl_object_all = {}  #
     # {(Объект, рус имя объекта, индекс объекта): {контроллер: (ip основной, ip резервный, индекс объекта)} }
@@ -703,17 +766,42 @@ try:
                 child_sar = ET.SubElement(child_app, 'ct_object', name=f"SAR", access_level="public")
                 child_sar_im = ET.SubElement(child_sar, 'ct_object', name=f"IM", access_level="public")
                 child_sar_reload = ET.SubElement(child_sar, 'ct_object', name=f"Reload", access_level="public")
-                for i in range(1, 10):
-                    reload_km = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_KM{i}",
-                                              base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
-                                              aspect="Types.PLC_Aspect", access_level="public")
-                    ET.SubElement(reload_km, 'attribute', type="unit.System.Attributes.Description",
-                                  value=f"Загрузка ГПА{i} в магистраль")
-                    reload_mk = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_MK{i}",
-                                              base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
-                                              aspect="Types.PLC_Aspect", access_level="public")
-                    ET.SubElement(reload_mk, 'attribute', type="unit.System.Attributes.Description",
-                                  value=f"Разгрузка ГПА{i} на кольцо")
+
+                flag_reload_standart = False
+                if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox')):
+                    with open(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox'), 'r', encoding='UTF-8') as f_:
+                        for line in f_:
+                            if '#' in line:
+                                continue
+                            if not line.strip():
+                                break
+                            lst_sar_reload = [i.strip() for i in line.strip().split(';')]
+                            if len(lst_sar_reload) == 3:
+                                reload_sar = ET.SubElement(
+                                    child_sar_reload, 'ct_object', name=f"{lst_sar_reload[1]}",
+                                    base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
+                                    aspect="Types.PLC_Aspect", access_level="public"
+                                )
+                                ET.SubElement(reload_sar, 'attribute', type="unit.System.Attributes.Description",
+                                              value=f"{lst_sar_reload[2]}")
+                            else:
+                                flag_reload_standart = True
+                                break
+                else:
+                    flag_reload_standart = True
+                if flag_reload_standart:
+                    for i in range(1, 10):
+                        reload_km = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_KM{i}",
+                                                  base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
+                                                  aspect="Types.PLC_Aspect", access_level="public")
+                        ET.SubElement(reload_km, 'attribute', type="unit.System.Attributes.Description",
+                                      value=f"Загрузка ГПА{i} в магистраль")
+                        reload_mk = ET.SubElement(child_sar_reload, 'ct_object', name=f"GPA_MK{i}",
+                                                  base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_PLC_View",
+                                                  aspect="Types.PLC_Aspect", access_level="public")
+                        ET.SubElement(reload_mk, 'attribute', type="unit.System.Attributes.Description",
+                                      value=f"Разгрузка ГПА{i} на кольцо")
+
                 ET.SubElement(child_sar_im, 'ct_object', name=f"KHR",
                               base_type=f"Types.SAR_Classic.KHR_PLC_View",
                               aspect="Types.PLC_Aspect", access_level="public")
@@ -773,7 +861,7 @@ try:
                                                  for alg_par, value in sl_w_node_dict_cpu_copy.items()})
 
             # Если есть АПР в данном контроллере...
-            if 'АПР' in sl_CPU_spec[cpu]:
+            if 'АПР' in sl_CPU_spec.get(cpu, {}):
                 # Добавляем ИМ, просто ссылаемся на структуру студии, если что, можно заменить
                 child_apr = ET.SubElement(child_app, 'ct_object', name="APR", access_level="public")
                 child_apr_im = ET.SubElement(child_apr, 'ct_object', name="IM",
@@ -815,7 +903,7 @@ try:
                                             if 'CPU' in value
                                             else tuple_attr + tuple([f'Attributes.Channel_{i+1}'
                                                                      for i in range(len(value[2]))])),
-                                           ([(f'Мастер-модуль ({value[1]})' if cpu in sl_cpu_res
+                                           ([(f'Мастер-модуля ({", ".join(sl_cpu_res.get(cpu))}) ({value[1]})' if cpu in sl_cpu_res
                                               else f'Мастер-модуль {alg_par} ({value[1]})'
                                              if 'CPU' in value else f'Модуль {alg_par} ({value[1]})'),
                                             alg_par, name_cpu_main, name_cpu_res] if 'CPU' in value
@@ -836,6 +924,10 @@ try:
                 sl_par_msg = {}
                 for signal in sl_obj_cpu_mko_index[objects[0]][cpu]:
                     second_cpu = signal[-1][1] if isinstance(signal[-1], tuple) else signal[-1]
+                    first_obj_rus = objects[1]
+                    second_obj_rus = sl_object_rus_name.get(signal[-1][0], '_') \
+                        if isinstance(signal[-1], tuple) else objects[1]
+
                     # Проверка на существование обмена между контроллерами в конфигураторе
                     if not((cpu, second_cpu) in set_mko_par_cpu or (second_cpu, cpu) in set_mko_par_cpu):
                         continue
@@ -848,7 +940,8 @@ try:
                         second_cpu_rus = sl_cpu_rus_name.get(signal[-1][1]) \
                             if isinstance(signal[-1], tuple) else sl_cpu_rus_name.get(signal[-1])
                     text_msg = f'Нет связи между контроллерами ' \
-                               f'{sl_cpu_rus_name.get(cpu)} и {second_cpu_rus} по {text_line_link} линии связи'
+                               f'{sl_cpu_rus_name.get(cpu)} ({first_obj_rus}) и ' \
+                               f'{second_cpu_rus} ({second_obj_rus}) по {text_line_link} линии связи'
                     sl_par_add[signal_name] = ('NoPing.NoPing_PLC_View', signal[1])
                     sl_par_msg[signal_name] = (text_msg,)
                     # Если второй контроллер не резервируемый, то удаляем noping3 и noping4
@@ -860,6 +953,9 @@ try:
                         del sl_par_msg[signal_name]
                     # print(f'{cpu}-{second_cpu}',(cpu, second_cpu) in set_mko_par_cpu,
                     # (second_cpu, cpu) in set_mko_par_cpu)
+                    # print(first_obj_rus, second_obj_rus)
+                    # print(signal, 'signal')
+                    # print(text_msg, 'text_msg')
 
                 if objects not in sl_add_obj_cpu_mko:
                     sl_add_obj_cpu_mko[objects] = {}
@@ -869,6 +965,8 @@ try:
                         f'Diag.Connect.{par}.Value': (val[1], 'B') for par, val in sl_par_add.items()
                     }
 
+                # print('sl_par_add', sl_par_add)
+                # print('sl_par_msg', sl_par_msg)
                 tuple_attr = ('unit.System.Attributes.Description', )
                 add_xml_par_plc(name_group='Connect', sl_par=sl_par_add,
                                 parent_node=child_diag,
@@ -879,7 +977,7 @@ try:
             child_system = ET.SubElement(child_app, 'ct_object', name="System", access_level="public")
 
             # Пробегаемся по словарю ключами
-            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU'):
+            for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU', 'Pars'):
                 # если у текущего контроллера есть анпары или...
                 if cpu in sl_w[node]['dict']:
                     tuple_attr = sl_w[node]['tuple_attr']
@@ -963,21 +1061,50 @@ try:
                                       aspect="Types.IOS_Aspect", access_level="public")
                     child_ios_sar_reload = ET.SubElement(child_ios_sar, 'ct_object', name=f"Reload",
                                                          access_level="public")
-                    for i in range(1, 10):
-                        ios_km = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_KM{i}",
-                                               base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
-                                               original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}",
-                                               aspect="Types.IOS_Aspect", access_level="public")
-                        ET.SubElement(ios_km, 'ct_init-ref',
-                                      ref="_PLC_View",
-                                      target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}")
-                        ios_mk = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_MK{i}",
-                                               base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
-                                               original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}",
-                                               aspect="Types.IOS_Aspect", access_level="public")
-                        ET.SubElement(ios_mk, 'ct_init-ref',
-                                      ref="_PLC_View",
-                                      target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}")
+                    flag_reload_standart = False
+                    if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox')):
+                        with open(os.path.join('Template_Alpha', 'SAR', 'Reload_checkbox'), 'r',
+                                  encoding='UTF-8') as f_:
+                            for line in f_:
+                                if '#' in line:
+                                    continue
+                                if not line.strip():
+                                    break
+                                lst_sar_reload = [i.strip() for i in line.strip().split(';')]
+                                if len(lst_sar_reload) == 3:
+                                    ios_reload = ET.SubElement(
+                                        child_ios_sar_reload, 'ct_object', name=f"{lst_sar_reload[1]}",
+                                        base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                        original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.{lst_sar_reload[1]}",
+                                        aspect="Types.IOS_Aspect", access_level="public"
+                                    )
+                                    ET.SubElement(
+                                        ios_reload, 'ct_init-ref',
+                                        ref="_PLC_View",
+                                        target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.{lst_sar_reload[1]}"
+                                    )
+                                else:
+                                    flag_reload_standart = True
+                    else:
+                        flag_reload_standart = True
+
+                    if flag_reload_standart:
+                        for i in range(1, 10):
+                            ios_km = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_KM{i}",
+                                                   base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                                   original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}",
+                                                   aspect="Types.IOS_Aspect", access_level="public")
+                            ET.SubElement(ios_km, 'ct_init-ref',
+                                          ref="_PLC_View",
+                                          target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_KM{i}")
+                            ios_mk = ET.SubElement(child_ios_sar_reload, 'ct_object', name=f"GPA_MK{i}",
+                                                   base_type=f"Types.SAR_Switch_Reload.SAR_Switch_Reload_IOS_View",
+                                                   original=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}",
+                                                   aspect="Types.IOS_Aspect", access_level="public")
+                            ET.SubElement(ios_mk, 'ct_init-ref',
+                                          ref="_PLC_View",
+                                          target=f"PLC_{cpu_sar}_{objects[2]}.CPU.Tree.SAR.Reload.GPA_MK{i}")
+
                     child_ios_khr = ET.SubElement(child_ios_sar_im, 'ct_object', name=f"KHR",
                                                   base_type='Types.SAR_Classic.KHR_IOS_View',
                                                   aspect="Types.IOS_Aspect",
@@ -1087,8 +1214,13 @@ try:
             for cpu_connect in sl_object_all[objects]:
                 name_cpu = ''.join([key for key, value in sl_modules_cpu.get(cpu_connect, {}).items()
                                     if 'CPU' in value])
+
+                num_unet = ''.join([f"{num_u}" for num_u, i in all_cpu_select.items()
+                                    if f'{cpu_connect}!{objects[2]}' in i])
+
                 # Если имя непустое, то есть ПЛК объявлен на листе модулей, то добавляем по нему коннект в объект
-                if name_cpu:
+                # также проверяем существование определённого номера модуля юнет
+                if name_cpu and num_unet and int(num_unet) in all_cpu_select:
                     for num_port in range(1, 3):
                         child_sig_con = ET.SubElement(child_connect, 'ct_parameter',
                                                       name=f'Connect_{cpu_connect}{objects[2]}_port_{num_port}',
@@ -1107,7 +1239,7 @@ try:
                         ET.SubElement(child_connect, 'ct_subject-ref',
                                       name=f'_{cpu_connect}_{objects[2]}_Eth{num_port}',
                                       object=f"Service.Modules."
-                                             f"UNET Client.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
+                                             f"UNET Client{num_unet}.PLC_{cpu_connect}_{objects[2]}.CPU_Eth{num_port}",
                                       const_access="false", aspected="false", access_level="public")
                         ET.SubElement(child_connect, 'ct_bind',
                                       source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}.IsConnected",
@@ -1133,7 +1265,7 @@ try:
                             ET.SubElement(child_connect, 'ct_subject-ref',
                                           name=f'_{cpu_connect}_{objects[2]}_Eth{num_port}_res',
                                           object=f"Service.Modules."
-                                                 f"UNET Client.PLC_{cpu_connect}_{objects[2]}.R-CPU_Eth{num_port}",
+                                                 f"UNET Client{num_unet}.PLC_{cpu_connect}_{objects[2]}.R-CPU_Eth{num_port}",
                                           const_access="false", aspected="false", access_level="public")
                             ET.SubElement(child_connect, 'ct_bind',
                                           source=f"_{cpu_connect}_{objects[2]}_Eth{num_port}_res.IsConnected",
@@ -1164,10 +1296,10 @@ try:
                 ET.SubElement(child_net, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                               aspect="Types.IOS_Aspect", access_level="public")
             for alg, sl_value in return_sl_net[objects[0]].items():
-                if "checkip" in sl_value['Type'].lower():
+                if "checkip" in sl_value.get('Type', 'бла').lower():
                     # pass
                     # print(alg, sl_value)
-                    child_checkip = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
+                    child_checkip = ET.SubElement(child_net, 'ct_object', name=f'{alg}',  # {objects[0]}_
                                                   access_level="public")
                     ET.SubElement(child_checkip, 'attribute', type=f"unit.System.Attributes.Description",
                                   value=f"{sl_value.get('Unit', 'юнит не определён')}")
@@ -1178,119 +1310,158 @@ try:
                     ET.SubElement(child_checkip, 'ct_subject-ref', name=f'_State', object=f"Service.State",
                                   const_access="false",
                                   aspected="false")
-                    for ip_key, port in {'IP': "Порт 1", 'IP_res': "Порт 2"}.items():
-                        if sl_value.get(ip_key):
-                            # print(ip_key, sl_value.get(ip_key))
-                            ET.SubElement(child_checkip, 'ct_object', name=f'Ping_{ip_key}',
-                                          access_level="public", base_type="Types.Ping")
+                    # Если устройство не определено как составное или сервер, то добавляем обработку двух портов
+                    if sl_value.get('SType') and sl_value.get('SType') not in ('<SRV>', '<PART>'):
+                        # ...добавляем обработку двух портов
+                        for ip_key, port in {'IP': "Порт 1", 'IP_res': "Порт 2"}.items():
+                            if sl_value.get(ip_key):
+                                # print(ip_key, sl_value.get(ip_key))
+                                ET.SubElement(child_checkip, 'ct_object', name=f'Ping_{ip_key}',
+                                              access_level="public", base_type="Types.Ping")
 
-                            child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
-                                                              name=f'Ping_status_{ip_key}',
-                                                              access_level="public", direction='out', type='bool')
-                            # ET.SubElement(child_ping_status, 'attribute', type="unit.Server.Attributes.Replicate",
-                            #               value=f"false")
-                            ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
-                                          value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
-                                                f'"Message":". {port}. Нет связи",'
-                                                f'"Severity":40,"Type":2}},'
-                                                f'{{"AckStrategy":2,"IsEnabled":true,'
-                                                f'"Message":". {port}. Нет связи",'
-                                                f'"Severity":40,"Type":3}}],'
-                                                f'"Type":2}}}}')
-                            #
+                                child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
+                                                                  name=f'Ping_status_{ip_key}',
+                                                                  access_level="public", direction='out', type='bool')
+                                # ET.SubElement(child_ping_status, 'attribute', type="unit.Server.Attributes.Replicate",
+                                #               value=f"false")
+                                ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
+                                              value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'"Message":". {port}. Нет связи",'
+                                                    f'"Severity":40,"Type":2}},'
+                                                    f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Message":". {port}. Нет связи",'
+                                                    f'"Severity":40,"Type":3}}],'
+                                                    f'"Type":2}}}}')
+                                #
 
-                            object_handler = ET.SubElement(
-                                child_checkip, 'ct_handler', name=f'On_Ping_Status_{ip_key}',
-                                source_code=f'if (_State.Server.Value && Ping_{ip_key}.Status.Value '
-                                            f'&& !Ping_status_{ip_key}.Value) {{\n'
-                                            f'\tcommit Ping_status_{ip_key} = true;\n'
-                                            f'\t}} else if (_State.Server.Value && !Ping_{ip_key}.Status.Value '
-                                            f'&& Ping_status_{ip_key}.Value '
-                                            f'|| Ping_status_{ip_key}.Quality< 192) {{\n'
-                                            f'\tcommit Ping_status_{ip_key} = false;\n'
-                                            f'}}'
-                            )
-                            ET.SubElement(object_handler, 'ct_trigger',
-                                          on=f"Ping_{ip_key}.Status", cause="update")
+                                object_handler = ET.SubElement(
+                                    child_checkip, 'ct_handler', name=f'On_Ping_Status_{ip_key}',
+                                    source_code=f'if (_State.Server.Value && Ping_{ip_key}.Status.Value '
+                                                f'&& !Ping_status_{ip_key}.Value) {{\n'
+                                                f'\tcommit Ping_status_{ip_key} = true;\n'
+                                                f'\t}} else if (_State.Server.Value && !Ping_{ip_key}.Status.Value '
+                                                f'&& Ping_status_{ip_key}.Value '
+                                                f'|| Ping_status_{ip_key}.Quality< 192) {{\n'
+                                                f'\tcommit Ping_status_{ip_key} = false;\n'
+                                                f'}}'
+                                )
+                                ET.SubElement(object_handler, 'ct_trigger',
+                                              on=f"Ping_{ip_key}.Status", cause="update")
+                    else:
+                        # Если устройство определено как составное или сервер, то добавляем обработку
+                        # всех найденных портов
+                        if sl_value.get('IPs'):
+                            for i, ip in enumerate(sl_value.get('IPs'), start=1):
+                                ET.SubElement(child_checkip, 'ct_object', name=f'Ping_IP{i}',
+                                              access_level="public", base_type="Types.Ping")
+                                child_ping_status = ET.SubElement(child_checkip, 'ct_parameter',
+                                                                  name=f'Ping_status_IP{i}',
+                                                                  access_level="public", direction='out', type='bool')
+                                rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
+                                ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
+                                              value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Message":". Порт{i}. Нет связи",'
+                                                    f'"Severity":40,"Type":2}},'
+                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'"Message":". Порт{i}. Нет связи",'
+                                                    f'"Severity":40,"Type":3}}],'
+                                                    f'"Type":2}}}}')
+
+                                object_handler = ET.SubElement(
+                                    child_checkip, 'ct_handler', name=f'On_Ping_Status_IP{i}',
+                                    source_code=f'if (_State.Server.Value && Ping_IP{i}.Status.Value '
+                                                f'&& !Ping_status_IP{i}.Value) {{\n'
+                                                f'\tcommit Ping_status_IP{i} = true;\n'
+                                                f'\t}} else if (_State.Server.Value && !Ping_IP{i}.Status.Value '
+                                                f'&& Ping_status_IP{i}.Value '
+                                                f'|| Ping_status_IP{i}.Quality< 192) {{\n'
+                                                f'\tcommit Ping_status_IP{i} = false;\n'
+                                                f'}}'
+                                )
+                                ET.SubElement(object_handler, 'ct_trigger',
+                                              on=f"Ping_IP{i}.Status", cause="update")
                 else:
-                    child_alg = ET.SubElement(child_net, 'ct_object', name=f'{objects[0]}_{alg}',
-                                              base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
-                                              aspect="Types.IOS_Aspect",
-                                              original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
-                                              access_level="public")
-                    ET.SubElement(child_alg, 'attribute', type=f"unit.System.Attributes.Description",
-                                  value=f"{sl_value['Unit']}")
-                    ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
-                                  target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
-                    ET.SubElement(child_alg, 'ct_subject-ref', name=f'_State', object=f"Service.State",
-                                  const_access="false",
-                                  aspected="false")
-                    object_handler = ET.SubElement(
-                        child_alg, 'ct_handler', name=f'On_Ping_Status',
-                        source_code=f'if (_State.Server.Value && Ping_IP.Status.Value && !Ping_status.Value) {{\n'
-                                    f'\tcommit Ping_status = true;\n'
-                                    f'\t}} else if (_State.Server.Value && !Ping_IP.Status.Value && Ping_status.Value '
-                                    f'|| Ping_status.Quality< 192) {{\n'
-                                    f'\tcommit Ping_status = false;\n'
-                                    f'}}'
-                    )
-                    ET.SubElement(object_handler, 'ct_trigger',
-                                  on=f"Ping_IP.Status", cause="update")
-                    if sl_value['Option']:
-                        lst_ai = sl_value['Option'].split(';')[:12]
-                        lst_di = sl_value['Option'].split(';')[12:]
-                        # print(lst_ai)
-                        for i, ai in enumerate([lst_ai[:3], lst_ai[3:6], lst_ai[6:9], lst_ai[9:12]]):
-                            if ''.join(ai) and 'Не используется' not in ai:
-                                # print(i, ai)
-                                diap = float(len([_ for _ in range(int(ai[1]), int(ai[2]))]))
-                                # print(diap)
-                                object_sig_ai = ET.SubElement(child_alg, 'ct_parameter', name=f'aiValue{i}',
-                                                              type='float32', direction='out', access_level="public")
-                                ET.SubElement(object_sig_ai, 'attribute', type="unit.System.Attributes.Description",
-                                              value=f"{ai[0]}")
-                                # <attribute type="unit.Server.Attributes.Replicate" value="false" />
-                                ET.SubElement(object_sig_ai, 'attribute', type="unit.Server.Attributes.Replicate",
-                                              value=f"false")
-                                ET.SubElement(child_alg, 'ct_formula',
-                                              source_code=f"{float(ai[1])} + (TypeConvert.ToFloat(_PLC_View.Signals_"
-                                                          f"{sl_value['Type']}.aiValue{i})/65535)*{diap}",
-                                              target=f"aiValue{i}")
-                        for i, di in enumerate(lst_di):
-                            if di and 'Не используется' not in di:
-                                # print(i, di)
-                                description_ps = di.replace('(Инверсия)', '')
-                                object_sig_di = ET.SubElement(child_alg, 'ct_parameter', name=f'dioStatus{i}',
-                                                              type='bool', direction='out', access_level="public")
-                                ET.SubElement(object_sig_di, 'attribute', type="unit.System.Attributes.Description",
-                                              value=f"{description_ps}")
-                                ET.SubElement(object_sig_di, 'attribute', type="unit.Server.Attributes.Replicate",
-                                              value=f"false")
-                                ET.SubElement(child_alg, 'ct_formula',
-                                              source_code=f"TypeConvert.ToBool"
-                                                          f"(_PLC_View.Signals_{sl_value['Type']}.dioStatus{i})",
-                                              target=f"dioStatus{i}")
-                                if '(Инверсия)' in di:
-                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
-                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                        f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
-                                                        f'"Message":". {description_ps}",'
-                                                        f'"Severity":40,"Type":2}},'
-                                                        f'{{"AckStrategy":2,"IsEnabled":true,'
-                                                        f'"Message":". {description_ps}",'
-                                                        f'"Severity":40,"Type":3}}],'
-                                                        f'"Type":2}}}}')
-                                else:
-                                    ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
-                                                  value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                        f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
-                                                        f'"Message":". {description_ps}",'
-                                                        f'"Severity":40,"Type":2}},'
-                                                        f'{{"AckStrategy":2,"IsDeactivation":true,'
-                                                        f'"Message":". {description_ps}",'
-                                                        f'"Severity":40,"Type":3}}],'
-                                                        f'"Type":2}}}}')
+                    if sl_value.get('SType') and sl_value.get('SType') not in ('<SRV>', '<PART>'):
+                        child_alg = ET.SubElement(child_net, 'ct_object', name=f'{alg}',  # {objects[0]}_
+                                                  base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
+                                                  aspect="Types.IOS_Aspect",
+                                                  original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
+                                                  access_level="public")
+                        ET.SubElement(child_alg, 'attribute', type=f"unit.System.Attributes.Description",
+                                      value=f"{sl_value['Unit']}")
+                        ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
+                                      target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                        ET.SubElement(child_alg, 'ct_subject-ref', name=f'_State', object=f"Service.State",
+                                      const_access="false",
+                                      aspected="false")
+                        object_handler = ET.SubElement(
+                            child_alg, 'ct_handler', name=f'On_Ping_Status',
+                            source_code=f'if (_State.Server.Value && Ping_IP.Status.Value && !Ping_status.Value) {{\n'
+                                        f'\tcommit Ping_status = true;\n'
+                                        f'\t}} else if (_State.Server.Value && !Ping_IP.Status.Value && Ping_status.Value '
+                                        f'|| Ping_status.Quality< 192) {{\n'
+                                        f'\tcommit Ping_status = false;\n'
+                                        f'}}'
+                        )
+                        ET.SubElement(object_handler, 'ct_trigger',
+                                      on=f"Ping_IP.Status", cause="update")
+                        if sl_value['Option']:
+                            lst_ai = sl_value['Option'].split(';')[:12]
+                            lst_di = sl_value['Option'].split(';')[12:]
+                            # print(lst_ai)
+                            for i, ai in enumerate([lst_ai[:3], lst_ai[3:6], lst_ai[6:9], lst_ai[9:12]]):
+                                if ''.join(ai) and 'Не используется' not in ai:
+                                    # print(i, ai)
+                                    diap = float(len([_ for _ in range(int(ai[1]), int(ai[2]))]))
+                                    # print(diap)
+                                    object_sig_ai = ET.SubElement(child_alg, 'ct_parameter', name=f'aiValue{i}',
+                                                                  type='float32', direction='out', access_level="public")
+                                    ET.SubElement(object_sig_ai, 'attribute', type="unit.System.Attributes.Description",
+                                                  value=f"{ai[0]}")
+                                    # <attribute type="unit.Server.Attributes.Replicate" value="false" />
+                                    ET.SubElement(object_sig_ai, 'attribute', type="unit.Server.Attributes.Replicate",
+                                                  value=f"false")
+                                    ET.SubElement(child_alg, 'ct_formula',
+                                                  source_code=f"{float(ai[1])} + (TypeConvert.ToFloat(_PLC_View.Signals_"
+                                                              f"{sl_value['Type']}.aiValue{i})/65535)*{diap}",
+                                                  target=f"aiValue{i}")
+                            for i, di in enumerate(lst_di):
+                                if di and 'Не используется' not in di:
+                                    # print(i, di)
+                                    description_ps = di.replace('(Инверсия)', '')
+                                    object_sig_di = ET.SubElement(child_alg, 'ct_parameter', name=f'dioStatus{i}',
+                                                                  type='bool', direction='out', access_level="public")
+                                    ET.SubElement(object_sig_di, 'attribute', type="unit.System.Attributes.Description",
+                                                  value=f"{description_ps}")
+                                    ET.SubElement(object_sig_di, 'attribute', type="unit.Server.Attributes.Replicate",
+                                                  value=f"false")
+                                    ET.SubElement(child_alg, 'ct_formula',
+                                                  source_code=f"TypeConvert.ToBool"
+                                                              f"(_PLC_View.Signals_{sl_value['Type']}.dioStatus{i}) "
+                                                              f"&& _State.Server",
+                                                  target=f"dioStatus{i}")
+                                    if '(Инверсия)' in di:
+                                        ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                      value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                            f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                                            f'"Message":". {description_ps}",'
+                                                            f'"Severity":40,"Type":2}},'
+                                                            f'{{"AckStrategy":2,"IsEnabled":true,'
+                                                            f'"Message":". {description_ps}",'
+                                                            f'"Severity":40,"Type":3}}],'
+                                                            f'"Type":2}}}}')
+                                    else:
+                                        ET.SubElement(object_sig_di, 'attribute', type='unit.Server.Attributes.Alarm',
+                                                      value=f'{{"Condition":{{"IsEnabled":"true",'
+                                                            f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                            f'"Message":". {description_ps}",'
+                                                            f'"Severity":40,"Type":2}},'
+                                                            f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                            f'"Message":". {description_ps}",'
+                                                            f'"Severity":40,"Type":3}}],'
+                                                            f'"Type":2}}}}')
 
         # Создаём узел System
         child_system = ET.SubElement(child_object, 'ct_object', name='System', access_level="public")
@@ -1300,7 +1471,7 @@ try:
                           aspect="Types.IOS_Aspect", access_level="public")
 
         # Пробегаемся по словарю ключами
-        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU'):
+        for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU', 'Pars'):
             # Если у текущего объекта есть контроллеры с анпарами...
             if set(sl_object_all[objects].keys()) & set(sl_w[node]['dict'].keys()):
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
@@ -1384,18 +1555,21 @@ try:
     # Создание сервисных сигналов
     is_create_service_signal(sl_object_all=sl_object_all, sl_cpu_res=sl_cpu_res, architecture=architecture,
                              server_name_osn=server_name_osn, server_name_rez=server_name_rez,
-                             sl_cpu_archive=sl_cpu_archive)
+                             sl_cpu_archive=sl_cpu_archive,
+                             all_cpu_select=all_cpu_select)
 
     # Создаём папку SYS
     is_create_sys(sl_object_all=sl_object_all, name_prj=name_prj, return_sl_net=return_sl_net,
-                  architecture=architecture, sl_agreg=sl_agreg)
+                  architecture=architecture, sl_agreg=sl_agreg,
+                  server_name_osn=server_name_osn, server_name_rez=server_name_rez)
     # # В случае клиент-серверной архитектуры создаём сообщения о резервном переходе
     # if architecture == 'клиент-сервер':
     #     is_create_service_snmp(server_name_rez=server_name_rez)
 
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
-                     sl_for_diag=sl_for_diag)
+                     sl_for_diag=sl_for_diag,
+                     sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
 
     book.close()
 
@@ -1469,24 +1643,26 @@ try:
                  sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
                  sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
                  sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
+                 sl_cpu_type_im={cpu: {sl_par[_][0].split('.')[0] for _ in sl_par} for cpu, sl_par in return_sl_im.items()},
                  sl_cpu_path=sl_cpu_path,
                  buff_size=buff_size,
                  sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit,
                  sl_cpu_cdo={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_cdo.items()},
                  sl_cpu_res=sl_cpu_res,
                  sl_add_cpu_mko=sl_add_cpu_mko,
-                 sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()}
+                 sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
+                 sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars)
                  )
 
     # print(return_alr)
     # print(sl_CPU_spec)
-    # добавление отсечки в файл изменений, чтобы разные сборки не сливались
-    if os.path.exists('Required_change.txt'):
-        with open('Required_change.txt', 'r') as f_test:
-            check_test = f_test.readlines()[-1]
-        if check_test != '-' * 70 + '\n':
-            with open('Required_change.txt', 'a') as f_test:
-                f_test.write('-' * 70 + '\n')
+    # # добавление отсечки в файл изменений, чтобы разные сборки не сливались
+    # if os.path.exists('Required_change.txt'):
+    #     with open('Required_change.txt', 'r') as f_test:
+    #         check_test = f_test.readlines()[-1]
+    #     if check_test != '-' * 70 + '\n':
+    #         with open('Required_change.txt', 'a') as f_test:
+    #             f_test.write('-' * 70 + '\n')
     # Если есть аналоговые параметры, то делаем шаблон Reports
     if return_sl_ai:
         # Пока заблокирована функция для новых репортов
@@ -1596,17 +1772,26 @@ try:
                            )
     # print(return_ios_drv)
 
+    # return_ios_drv = {(Драйвер, рус имя драйвера): {cpu:
+    # {алг.пар: (Тип переменной в студии, рус имя, тип сообщения, цвет отключения, цвет включения,
+    # ед. изм., кол-во знаков) }}}
     if return_ios_drv:
-        sl_mnemo_drv = {driver[1]: list() for driver in return_ios_drv}
+        # sl_mnemo_drv = {driver[1]: list() for driver in return_ios_drv}
         sl_type_drv = {driver[1]: {} for driver in return_ios_drv}
         for driver in return_ios_drv:
             for cpu in return_ios_drv[driver]:
                 for drv_par in return_ios_drv[driver][cpu]:
-                    sl_mnemo_drv[driver[1]].append(drv_par)
+                    # sl_mnemo_drv[driver[1]].append(drv_par)
                     sl_type_drv[driver[1]].update({drv_par: return_ios_drv[driver][cpu][drv_par][0]})
-        # print(sl_mnemo_drv)
+        # for i, j in sl_mnemo_drv.items():
+        #     print(i, j)
         # print(sl_type_drv)
         # print(dict(ChainMap(*return_ios_drv.values())).keys())
+
+        sl_mnemo_drv = {drv: {cpu: [i for i in sl_p] for cpu, sl_p in sl_d.items()} for drv, sl_d in return_ios_drv.items()}
+        # print(sl_mnemo_drv)
+        # {cpu: [i for i in sl_p] for cpu, sl_p in sl_d.items}
+
         if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'DRV')):
             os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'DRV'))
         if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', 'DRV', 'Systemach')):
@@ -1626,6 +1811,22 @@ try:
                              size_vysota=size_vysota,
                              sl_one_driver_cpu=sl_one_driver_cpu,
                              sl_object_all=sl_object_all)
+
+        create_mnemo_drv_general(sl_object_all=sl_object_all,
+                                 name_group="System.DRV",
+                                 size_shirina=size_shirina,
+                                 size_vysota=size_vysota,
+                                 sl_mnemo_drv=sl_mnemo_drv,
+                                 sl_type_drv=sl_type_drv,  name_page=f'DRV',
+                                 sl_all_drv=sl_all_drv)
+
+    # добавление отсечки в файл изменений, чтобы разные сборки не сливались
+    if os.path.exists('Required_change.txt'):
+        with open('Required_change.txt', 'r') as f_test:
+            check_test = f_test.readlines()[-1]
+        if check_test != '-' * 70 + '\n':
+            with open('Required_change.txt', 'a') as f_test:
+                f_test.write('-' * 70 + '\n')
 
     print(datetime.datetime.now(), '- Окончание сборки всех файлов')
     input(f'{datetime.datetime.now()} - Сборка файлов завершена успешно. Нажмите Enter для выхода...')

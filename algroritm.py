@@ -112,10 +112,18 @@ def is_load_algoritm(controller, cells, sheet):
                     if sheet[j + 1][4].value is not None:
                         # В данном виде в списках есть ИЛИ и OR. По ним делим в структуры
                         lst_rus_alg = sheet[j + 1][4].value.split('\n')
-                        tuple_rus_step = ((lst_rus_alg[:lst_rus_alg.index('ИЛИ')] if 'ИЛИ' in lst_rus_alg
-                                           else lst_rus_alg),
-                                          (lst_rus_alg[lst_rus_alg.index('ИЛИ') + 1:] if 'ИЛИ' in lst_rus_alg else []))
+
+                        # tuple_rus_step = ((lst_rus_alg[:lst_rus_alg.index('ИЛИ')] if 'ИЛИ' in lst_rus_alg
+                        #                    else lst_rus_alg),
+                        #                   (lst_rus_alg[lst_rus_alg.index('ИЛИ') + 1:] if 'ИЛИ' in lst_rus_alg else []))
+                        # Дробим по ИЛИ на список списков, потом будем шагать по нему по принципу -
+                        # Первая цифра
+                        tuple_rus_step = tuple([_.split('@#') for _ in '@#'.join(lst_rus_alg).split('@#ИЛИ@#')])
+                        # print(mod_name)
+                        # print(lst_rus_alg)
                         # print(p, tuple_rus_step)
+                        # print(p, [_.split('@#') for _ in '@#'.join(lst_rus_alg).split('@#ИЛИ@#')])
+
                         # print(p, [step for group_step in tuple_rus_step for step in group_step])
                         '''
                         lst_eng_alg = [f"{i.strip(' AND')}" if i != 'OR' else 'OR'

@@ -5,7 +5,16 @@ from math import floor  # , ceil
 from func_for_v3 import *
 from collections import ChainMap
 from json import dumps as json_dumps, load as json_load
+from tkinter import Tk, font
 # from difflib import SequenceMatcher
+
+
+def get_text_width(text, font_name, font_size):
+    root = Tk()
+    font_obj = font.Font(family=font_name, size=font_size)
+    width = font_obj.measure(text)
+    root.destroy()  # закрываем временный экземпляр Tk()
+    return width
 
 
 def check_diff_mnemo(new_data, check_path, file_name_check, message_print):
@@ -1744,3 +1753,552 @@ def create_mnemo_drv(name_group: str, name_page: str, name_pag_rus: str,
             #                                                                pretty_print=True, encoding='unicode')))
 
     return
+
+
+def create_mnemo_drv_general(sl_object_all: dict, name_group: str, size_shirina: int, size_vysota: int,
+                             sl_mnemo_drv: dict, sl_type_drv: dict, name_page: str, sl_all_drv: dict):
+    sl_page_uuid = {}
+    # uuid.uuid4()
+    if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo')):
+        os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo'))
+    if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach')):
+        os.mkdir(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach'))
+
+    # СЛОВАРЬ УНИКАЛЬНЫХ ОБЪЕКТОВ
+    # Формируем словарь вида {кортеж контроллеров: (Объект, рус имя объекта, индекс объекта)}
+    # При этом, если есть полное совпадение контроллеров, то дублирования нет
+    sl_cpus_object = {}
+    for obj, sl_cpu in sl_object_all.items():
+        cpus = tuple(sl_cpu.keys())  # cpus = tuple(sorted(sl_cpu.keys()))
+        if cpus not in sl_cpus_object:
+            sl_cpus_object[cpus] = obj
+
+    sl_size = {
+        '1920x900': (1780, 900, 780),
+        '1920x780': (1780, 780, 780)
+    }
+
+    # Словарь ID для типовых структур, возможно потом будет считываться с файла или как-то по-другому
+    sl_uuid_base_default = {
+        '00_SubPage': '3fe01b7a-fed7-41d2-aa19-ca3e78391035',
+        'Text': '21d59f8d-2ca4-4592-92ca-b4dc48992a0f',
+        'S_ALR': '401676e6-e678-4938-bc7a-8a3382258f93',
+        'Line': '4dd08b15-1502-453f-a174-2c0a5aa850ba',
+        'Point': '467f1af0-7bb4-4a61-b6fb-06e7bfd530d6',
+        'ApSource': '966603da-f05e-4b4d-8ef0-919efbf8ab2c',
+        'string': '76403785-f3d5-41a7-9eb6-d19d2aa2d95d',
+        '00_SubBase': '99471dea-1c95-471c-9960-b4f7a539d437',
+        'Frame': '71f78e19-ef99-4133-a029-2968b14f02b6',
+        'notifying_string': '14976fbf-36ab-415f-abc3-9f8fdc217351',
+        'ExtPageButton': '2c2d6f3d-f500-4be6-b80c-620853cd99e3',
+        'DebugTool': '43946044-139a-43f4-a7b8-19a6074ffc56',
+        '00_Base': '4f3aa327-d38a-4afe-8913-c7729acaafc0',
+        'Button': '61e46e4a-827f-4dd2-ac8a-b68bcaddf442',
+        'Alpha.Reports': '665556a0-5ea4-4768-8935-9ab18d0eb2a0'
+    }
+    sl_base_drv_param_default = {
+        'DRV_AI.DRV_AI_PLC_View': ('S_DRV_AI_Discription', '803e851d-f716-4341-a237-717afdf13c9b'),
+        'DRV_DI.DRV_DI_PLC_View': ('S_DRV_DI_Discription', '16abad7a-2e37-4edd-ad30-7317f4832b95'),
+        'DRV_INT.DRV_INT_PLC_View': ('S_DRV_INT_Discription', '3ab70fca-70f2-492f-a7a6-92d58d785afd'),
+        'DRV_AI.DRV_AI_IMIT_PLC_View': ('S_DRV_AI_Discription', '803e851d-f716-4341-a237-717afdf13c9b'),
+        'DRV_DI.DRV_DI_IMIT_PLC_View': ('S_DRV_DI_Discription', '16abad7a-2e37-4edd-ad30-7317f4832b95'),
+        'DRV_INT.DRV_INT_IMIT_PLC_View': ('S_DRV_INT_Discription', '3ab70fca-70f2-492f-a7a6-92d58d785afd'),
+    }
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', 'Mnemo', f'uuid_base_elements.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_uuid_base = text_json
+            sl_base_drv_param = text_json
+        else:
+            print('Файл Systemach/Mnemo/uuid_base_elements.json не найден, '
+                  'uuid базовых элементов будут определены по умолчанию')
+            sl_uuid_base = sl_uuid_base_default
+            sl_base_drv_param = sl_base_drv_param_default
+    except (Exception, KeyError):
+        print('Файл Systemach/Mnemo/uuid_base_elements.json заполнен некорректно, '
+              'uuid базовых элементов будут определены по умолчанию')
+        sl_uuid_base = sl_uuid_base_default
+        sl_base_drv_param = sl_base_drv_param_default
+
+    # Словарь размеров элементов, тут по заполнению всё понятно
+    sl_size_element = {name_group: {'size_el': ((591 + 2), (24 + 6)), 'size_text': (590.567, 24)}
+                       }
+
+    # Словарь расположения первого элемента, тут вроде всё понятно тоже - первый X, второй Y
+    sl_start = {name_group: (11.111, 158)
+                }
+    gor_base = sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1920, 900))[0]
+    vert_base = sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1920, 900))[1]
+    window_height = sl_size.get(f'{str(size_shirina)}x{str(size_vysota)}', (1920, 900, 780))[2]
+    # Узнаём, сколько целых параметров влезет по горизонтали
+    # два пикселя по горизонтали между элементами, 591 - ширина элемента параметра
+    par_gor_count = floor(gor_base / sl_size_element.get(name_group, {'size_el': (500, 0)})['size_el'][0])
+    # Узнаём, сколько целых параметров влезет по вертикали
+    # 6 пикеселей по вертикали между элементами, 92 - запас для кнопок переключения
+    par_vert_count = floor((vert_base - sl_start.get(name_group, (0, 500))[1]) /
+                           sl_size_element.get(name_group, {'size_el': (0, 500)})['size_el'][1])
+    # Узнаём количество параметров на один лист
+    par_one_list = (par_gor_count * par_vert_count)
+
+    # Если не существует файла uuid_drv, то создаём его и записываем uuid форм вызовов алгоритмов
+    # для каждого объекта
+
+    sl_page_uuid = {}
+
+    # print(sl_mnemo_drv)
+    # for name_driver in sl_mnemo_drv:
+    #     print(f'---------------{name_driver}---------------')
+    #     for name_plc in sl_mnemo_drv[name_driver]:
+    #         print(f'========{name_plc}===========')
+    #         print(sl_mnemo_drv[name_driver][name_plc])
+
+    # Обрабатываем и создаём мнемосхемы только для тех уникальных объектов, контроллеры которых содержат драйвера
+    set_cpu_with_drv = {j for _, i in sl_mnemo_drv.items() for j in i}
+    # for cpus, obj in sl_cpus_object.items():
+    for cpus, obj in {i: j for i, j in sl_cpus_object.items() if set(i) & set_cpu_with_drv}.items():
+        # print(cpus)
+        sl_param_object = {}
+        for name_driver, sl_cpu_par in sl_mnemo_drv.items():
+            if name_driver not in sl_param_object:
+                sl_param_object[name_driver] = list()
+            for plc in (_ for _ in cpus if _ in set(sl_cpu_par.keys())):
+                sl_param_object[name_driver] += sl_cpu_par.get(plc, list())
+        # print(sl_param_object)
+
+        for node_drv in sl_param_object:
+            start_list = 1
+            count = 0
+            for j in range(len(sl_param_object[node_drv])):
+                count += 1
+                sl_param_object[node_drv][j] = (start_list, sl_param_object[node_drv][j])
+                if count == par_one_list:
+                    count = 1
+                    start_list += 1
+
+        # print(sl_param_object)
+        # for i in sl_param_object:
+        #     print(i)
+        #     print(sl_param_object[i])
+        sl_list_par = {}
+        for name_driver in sl_param_object:
+            for par in sl_param_object[name_driver]:
+                if f'{name_driver[0]}_{par[0]}' not in sl_list_par:
+                    sl_list_par[f'{name_driver[0]}_{par[0]}'] = (par[1],)
+                else:
+                    sl_list_par[f'{name_driver[0]}_{par[0]}'] += (par[1],)
+
+        # print(sl_list_par)
+        # for li in sl_list_par:
+        #     print(li)
+        #     print(sl_list_par[li])
+
+        if not os.path.exists(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach', 'uuid')):
+            with open(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach', 'uuid'),
+                      'w', encoding='UTF-8') as f_uuid_write:
+                if sl_list_par:
+                    generate_uuid = uuid.uuid4()
+                    sl_page_uuid[f"{name_page}_0_{obj[0]}"] = f'{generate_uuid}'
+                    f_uuid_write.write(f'{name_page}_0_{obj[0]}:{generate_uuid}\n')
+                for number_list in sl_list_par:
+                    generate_uuid = uuid.uuid4()
+                    sl_page_uuid[f"{number_list}_{obj[0]}"] = f'{generate_uuid}'
+                    f_uuid_write.write(f'{number_list}_{obj[0]}:{generate_uuid}\n')
+        else:
+            # Если файл существует, то считываем и записываем в словарь
+            with open(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach', 'uuid'),
+                      'r', encoding='UTF-8') as f_uuid_read:
+                for line in f_uuid_read:
+                    lst_line = line.strip().split(':')
+                    sl_page_uuid[lst_line[0]] = lst_line[1]
+            # Если после вычитывания не обнаружили формы для отсутствующих объектов
+            # (например, увеличилось количество объектов), то дозаписываем
+            with open(os.path.join('File_for_Import', 'Mnemo', f'General_DRV_Mnemo', 'Systemach', 'uuid'),
+                      'a', encoding='UTF-8') as f_uuid_write:
+                if f"{name_page}_0_{obj[0]}" not in sl_page_uuid and sl_list_par:
+                    generate_uuid = uuid.uuid4()
+                    sl_page_uuid[f"{name_page}_0_{obj[0]}"] = f'{generate_uuid}'
+                    f_uuid_write.write(f'{name_page}_0_{obj[0]}:{generate_uuid}\n')
+                for number_list in sl_list_par:
+                    if f"{number_list}_{obj[0]}" not in sl_page_uuid:
+                        generate_uuid = uuid.uuid4()
+                        sl_page_uuid[f"{number_list}_{obj[0]}"] = f'{generate_uuid}'
+                        f_uuid_write.write(f'{number_list}_{obj[0]}:{generate_uuid}\n')
+
+        # print(sl_all_drv)
+        # print(sl_type_drv)
+        first_page = ''
+        # Для каждого листа в словаре листов с параметрами...
+        for page, drv_pars in sl_list_par.items():
+            if not first_page:
+                first_page = page
+            # На всякий случай ещё раз проверяем
+            if f'{page}_{obj[0]}' not in sl_page_uuid:
+                generate_uuid_page = uuid.uuid4()
+                sl_page_uuid[f'{page}_{obj[0]}'] = f'{generate_uuid_page}'
+                with open(os.path.join('File_for_Import', 'Mnemo', 'General_DRV_Mnemo', 'Systemach', 'uuid'),
+                          'a', encoding='UTF-8') as f_uuid_write:
+                    f_uuid_write.write(f'{page}_{obj[0]}:{generate_uuid_page}\n')
+
+            # print(obj[0], page)
+            name_drv_eng = page[:page.rfind('_')]
+            name_drv_rus = sl_all_drv.get(name_drv_eng, 'Unknown driver')
+            # ...создаём родительский узел листа
+            root_type = ET.Element(
+                'type', access_modifier="private", name=f"{page}_{obj[0]}",
+                display_name=f"{page}_{obj[0]}",
+                uuid=f"{sl_page_uuid[f'{page}_{obj[0]}']}",
+                base_type="00_SubPage",
+                base_type_id=f"{sl_uuid_base.get('00_SubPage', '3fe01b7a-fed7-41d2-aa19-ca3e78391035')}",
+                ver="3")
+            # ...заполняем стандартную информацию
+            ET.SubElement(root_type, 'designed', target='X', value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target='Y', value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target='ZValue', value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target='Rotation', value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target='Scale', value="1", ver="3")
+            ET.SubElement(root_type, 'designed', target='Visible', value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target='Enabled', value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target='Tooltip', value="", ver="3")
+            ET.SubElement(root_type, 'designed', target='Width', value=f"{gor_base}", ver="3")
+            ET.SubElement(root_type, 'designed', target='Height', value=f"{vert_base}", ver="3")
+            ET.SubElement(root_type, 'designed', target='PenColor', value="4278190080", ver="3")
+            ET.SubElement(root_type, 'designed', target='PenStyle', value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target='PenWidth', value="1", ver="3")
+            ET.SubElement(root_type, 'designed', target='BrushColor', value="0xffbfbfbf", ver="3")
+            ET.SubElement(root_type, 'designed', target="BrushStyle", value="1", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowX", value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowY", value="0", ver="3")
+
+            # Вносим размеры мнемосхемы, пока так, позже может измениться
+            ET.SubElement(root_type, 'designed', target="WindowWidth", value=f"{size_shirina}", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowHeight", value=f"{window_height}", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowCaption",
+                          value=f"{name_drv_rus} {page[page.rfind('_')+1:]}", ver="3")
+
+            ET.SubElement(root_type, 'designed', target="ShowWindowCaption", value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target="ShowWindowMinimize", value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target="ShowWindowMaximize", value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target="ShowWindowClose", value="true", ver="3")
+            ET.SubElement(root_type, 'designed', target="AlwaysOnTop", value="false", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowSizeMode", value="2", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowBorderStyle", value="1", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowState", value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowScalingMode", value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target="MonitorNumber", value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowPosition", value="1", ver="3")
+            ET.SubElement(root_type, 'designed', target="WindowCloseMode", value="0", ver="3")
+            ET.SubElement(root_type, 'designed', target="Opacity", value="1", ver="3")
+
+            # Добавляем Текст с описанием листа
+            num_sub_text_discription = ET.SubElement(root_type, 'object', access_modifier="private",
+                                                     name=f"Description_list",
+                                                     display_name=f"Description_list",
+                                                     uuid=f"{uuid.uuid4()}",
+                                                     base_type="Text",
+                                                     base_type_id=sl_uuid_base.get('Text', ''), ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='X', value="40.5", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Y', value="110", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='ZValue', value="0", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Rotation', value="0", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Scale', value="1", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Visible', value="true", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Enabled', value="true", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Tooltip', value="", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Width', value="535", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target='Height', value="30", ver="3")
+
+            ET.SubElement(num_sub_text_discription, 'designed', target='Text',
+                          value=f"{name_drv_rus} страница {page[page.rfind('_')+1:]}", ver="3")  # f"Драйвер
+            ET.SubElement(num_sub_text_discription, 'designed', target="Font",
+                          value="PT Astra Sans,14,-1,5,75,0,0,0,0,0,Полужирный", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target="FontColor", value="0xff000000", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target="TextAlignment", value="129", ver="3")
+            ET.SubElement(num_sub_text_discription, 'designed', target="Opacity", value="1", ver="3")
+
+            # Добавляем параметры
+            x_start = sl_start.get(name_group, (3, 10))[0]
+            y_start = sl_start.get(name_group, (3, 10))[1]
+            x_point = x_start
+            y_point = y_start
+            count_par = 0
+            # num_text = 0
+            for one_drv_par in drv_pars:
+                # num_text += 1
+                num_text = drv_pars.index(one_drv_par) + 1
+                # print(name_drv_eng)
+                # print(name_drv_rus)
+                type_param_get = sl_type_drv.get(name_drv_rus).get(one_drv_par)
+                base_type_param = sl_base_drv_param.get(type_param_get, ('None', 'None'))
+
+                num_sub_par = ET.SubElement(root_type, 'object', access_modifier="private",
+                                            name=f"Параметр_{num_text}_{one_drv_par}",
+                                            display_name=f"Параметр_{num_text}_{one_drv_par}",
+                                            uuid=f"{uuid.uuid4()}",
+                                            base_type=f"{base_type_param[0]}",
+                                            base_type_id=f"{base_type_param[1]}", ver="3")
+
+                ET.SubElement(num_sub_par, 'designed', target="X", value=f"{x_point}", ver="3")
+                ET.SubElement(num_sub_par, 'designed', target="Y", value=f"{y_point}", ver="3")
+                y_point += sl_size_element.get(name_group, {'size_el': (0, 500)})['size_el'][1]
+                count_par += 1
+                if count_par == par_vert_count:
+                    count_par = 0
+                    y_point = y_start
+                    x_point += sl_size_element.get(name_group, {'size_el': (500, 0)})['size_el'][0]
+
+                ET.SubElement(num_sub_par, 'designed', target="Rotation", value="0", ver="3")
+                ET.SubElement(num_sub_par, 'init', target="_init_Object",
+                              ver="3", value=f"{name_group}.{name_drv_eng}.{one_drv_par}")
+                ET.SubElement(num_sub_par, 'init', target="_AbonentPath", ver="5", ref="here._init_GPAPath")
+
+            # Ещё одна базовая информация
+            apsource_currentform = ET.SubElement(root_type, 'object', access_modifier="private",
+                                                 name="ApSource_CurrentForm",
+                                                 display_name="ApSource_CurrentForm",
+                                                 uuid=f"{uuid.uuid4()}",
+                                                 base_type="ApSource",
+                                                 base_type_id=sl_uuid_base.get('ApSource', ''), ver="3")
+            ET.SubElement(apsource_currentform, 'designed', target="Active", value="true", ver="3")
+            ET.SubElement(apsource_currentform, 'designed', target="ReAdvise", value="0", ver="3")
+            ET.SubElement(apsource_currentform, 'init', target="ParentSource", ver="3", ref="_init_ApSource")
+            ET.SubElement(apsource_currentform, 'init', target="Path", ver="3", ref="_init_GPAPath")
+
+            ET.SubElement(root_type, 'param', access_modifier="private", name="_init_ApSource",
+                          display_name="_init_ApSource",
+                          uuid=f"{uuid.uuid4()}",
+                          base_type="ApSource", base_type_id=sl_uuid_base.get('ApSource', ''),
+                          base_const="true", base_ref="true", ver="3")
+            ET.SubElement(root_type, 'param', access_modifier="private", name="_init_GPAPath",
+                          display_name="_init_GPAPath",
+                          uuid=f"{uuid.uuid4()}",
+                          base_type="string", base_type_id=sl_uuid_base.get('string', ''), ver="3")
+
+            # Нормируем и записываем страницу мнемосхемы
+            temp = ET.tostring(root_type).decode('UTF-8')
+            check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                     pretty_print=True,
+                                                                                     encoding='unicode')),
+                             check_path=os.path.join('File_for_Import', 'Mnemo', 'General_DRV_Mnemo'),
+                             file_name_check=f'{page}_{obj[0]}.omobj',
+                             message_print=f'Требуется заменить мнемосхему {page}_{obj[0]}.omobj '
+                                           f'(Mnemo/General_DRV_Mnemo/{page}_{obj[0]}.omobj)')
+        # Создаём главное 0-окно
+        root_list = ET.Element(
+            'type', access_modifier="private", name=f"{name_page}_0_{obj[0]}",
+            display_name=f"{name_page}_0_{obj[0]}",
+            uuid=sl_page_uuid.get(f'{name_page}_0_{obj[0]}'),
+            base_type="00_SubBase",
+            base_type_id=f"{sl_uuid_base.get('00_SubBase', '99471dea-1c95-471c-9960-b4f7a539d437')}",
+            ver="3"
+        )
+        # ...заполняем стандартную информацию
+        ET.SubElement(root_list, 'designed', target='X', value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target='Y', value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target='ZValue', value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target='Rotation', value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target='Scale', value="1", ver="3")
+        ET.SubElement(root_list, 'designed', target='Visible', value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target='Enabled', value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target='Tooltip', value="", ver="3")
+        ET.SubElement(root_list, 'designed', target='Width', value=f"{gor_base}", ver="3")
+        ET.SubElement(root_list, 'designed', target='Height', value=f"{vert_base}", ver="3")
+        ET.SubElement(root_list, 'designed', target='PenColor', value="4278190080", ver="3")
+        ET.SubElement(root_list, 'designed', target='PenStyle', value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target='PenWidth', value="1", ver="3")
+        ET.SubElement(root_list, 'designed', target='BrushColor', value="0xffbfbfbf", ver="3")
+        ET.SubElement(root_list, 'designed', target="BrushStyle", value="1", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowX", value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowY", value="0", ver="3")
+
+        # Вносим размеры мнемосхемы, пока так, позже может измениться
+        ET.SubElement(root_list, 'designed', target="WindowWidth", value=f"{size_shirina}", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowHeight", value=f"{window_height}", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowCaption", value=f"Драйверы", ver="3")
+
+        ET.SubElement(root_list, 'designed', target="ShowWindowCaption", value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target="ShowWindowMinimize", value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target="ShowWindowMaximize", value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target="ShowWindowClose", value="true", ver="3")
+        ET.SubElement(root_list, 'designed', target="AlwaysOnTop", value="false", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowSizeMode", value="2", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowBorderStyle", value="1", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowState", value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowScalingMode", value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target="MonitorNumber", value="0", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowPosition", value="1", ver="3")
+        ET.SubElement(root_list, 'designed', target="WindowCloseMode", value="0", ver="3")
+
+        obj_frame = ET.SubElement(
+            root_list, 'object', access_modifier="private", name="MainFrame",
+            display_name="MainFrame",
+            uuid=f"{uuid.uuid4()}",
+            base_type=f"{first_page}",
+            base_type_id=f"{sl_uuid_base.get('Frame', '71f78e19-ef99-4133-a029-2968b14f02b6')}",
+            ver="3"
+        )
+        # ...заполняем стандартную информацию фрейма
+        ET.SubElement(obj_frame, 'designed', target='X', value="0", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Y', value="0", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='ZValue', value="0", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Rotation', value="0", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Scale', value="1", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Visible', value="true", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Opacity', value="1", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Enabled', value="true", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Tooltip', value="", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Width', value=f"{gor_base}", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='Height', value=f"{vert_base}", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='PenColor', value="4278190080", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='PenStyle', value="1", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='PenWidth', value="1", ver="3")
+        ET.SubElement(obj_frame, 'designed', target='BrushColor', value="4278190080", ver="3")
+        ET.SubElement(obj_frame, 'designed', target="BrushStyle", value="0", ver="3")
+        ET.SubElement(obj_frame, 'designed', target="OverrideScaling", value="false", ver="3")
+        ET.SubElement(obj_frame, 'designed', target="ShowScrollBars", value="true", ver="3")
+        ET.SubElement(obj_frame, 'designed', target="MoveByMouse", value="false", ver="3")
+
+        ET.SubElement(root_list, 'designed', target="Opacity", value="1", ver="3")
+
+        do_on_action = ET.SubElement(root_list, 'do-on', access_modifier="private", name="Handler_1",
+                                     display_name="Handler_1", ver="3", event="Opened", frame_link="MainFrame",
+                                     form_action="open-in-frame",
+                                     form_by_id="false")
+        obj_do_on_action = ET.SubElement(do_on_action, 'object', access_modifier="private",
+                                         uuid=f"{uuid.uuid4()}",
+                                         base_type=f"{first_page}_{obj[0]}",
+                                         base_type_id=f"{sl_page_uuid.get(f'{first_page}_{obj[0]}')}",
+                                         ver="3")
+        ET.SubElement(obj_do_on_action, 'init', target=f"Link_DRV", ver="3", ref="here")
+        ET.SubElement(obj_do_on_action, 'init', target="_init_ApSource", ver="3", ref="here.ApSource_Main")
+        ET.SubElement(obj_do_on_action, 'init', target="_init_GPAPath", ver="3", ref="here._pathToGPA")
+
+        ET.SubElement(
+            root_list, 'object', access_modifier="private",
+            name="NameOpened", display_name="NameOpened",
+            uuid=f"{uuid.uuid4()}", base_type="notifying_string",
+            base_type_id=f"{sl_uuid_base.get('notifying_string', '14976fbf-36ab-415f-abc3-9f8fdc217351')}",
+            ver="3"
+        )
+
+        # Добавляем кнопки переключения листов
+        # x_button_start = gor_base - (500 + 50 * len(sl_list_par))
+        x_button_start = 1.0
+        y_button_start = 10.0
+        height_button = 30
+        page_number = 0
+        x_swift = 0
+        y_swift = 0
+
+        for page in sl_list_par:
+            page_number += 1
+            name_drv_eng = page[:page.rfind('_')]
+            name_drv_rus = sl_all_drv.get(name_drv_eng, 'Unknown driver')
+
+            # print(page, name_drv_rus)
+            # x_swift = (page_number - 1) * 50
+            # print(name_drv_rus, x_swift, gor_base)
+            obj_button = ET.SubElement(
+                root_list, 'object', access_modifier="private",
+                name=f"ExtPageButton_{page_number}", display_name=f"ExtPageButton_{page_number}",
+                uuid=f"{uuid.uuid4()}",
+                base_type="ExtPageButton",
+                base_type_id=f"{sl_uuid_base.get('ExtPageButton', '2c2d6f3d-f500-4be6-b80c-620853cd99e3')}",
+                ver="3")
+            ET.SubElement(obj_button, 'designed', target='X', value=f"{x_button_start + x_swift}", ver="3")
+            ET.SubElement(obj_button, 'designed', target='Y', value=f"{y_button_start + y_swift}", ver="3")  # vert_base - 60
+            ET.SubElement(obj_button, 'designed', target='Rotation', value="0", ver="3")
+            # ET.SubElement(obj_button, 'designed', target='Width', value=f"{50*(len(page)/3}", ver="3")
+            name_but = f"{name_drv_rus} {page[page.rfind('_')+1:]}"
+            width_but = get_text_width(name_but, "PT Sans", 12) + 4
+            # print(width)
+            ET.SubElement(obj_button, 'designed', target='Width', value=f"{round(width_but, 2)}", ver="3")
+            ET.SubElement(obj_button, 'designed', target='Height', value=f"{height_button}", ver="3")
+            ET.SubElement(obj_button, 'designed', target='Text', value=f"{name_but}", ver="3")
+            ET.SubElement(obj_button, 'designed', target='Font',
+                          value="PT Astra Sans,12,-1,5,75,0,0,0,0,0,Полужирный", ver="3")
+
+            tagret_name = ET.SubElement(obj_button, 'do-trace', access_modifier="private", target='_Name', ver="3")
+            body = ET.SubElement(tagret_name, 'body')
+            ET.SubElement(body, 'forCDATA')
+            ET.SubElement(obj_button, 'init', target='_IDtoOpen', ver="3",
+                          value=f"{sl_page_uuid.get(f'{page}_{obj[0]}')}")
+
+            do_on_action = ET.SubElement(obj_button, 'do-on', access_modifier="private", name="Handler_1",
+                                         display_name="Handler_1", ver="3", event="MouseClick",
+                                         frame_link="MainFrame",
+                                         form_action="open-in-frame",
+                                         form_by_id="false")
+            obj_do_on_action = ET.SubElement(do_on_action, 'object', access_modifier="private",
+                                             uuid=f"{uuid.uuid4()}",
+                                             base_type=f"{page}_{obj[0]}",
+                                             base_type_id=f"{sl_page_uuid.get(f'{page}_{obj[0]}')}",
+                                             ver="3")
+            ET.SubElement(obj_do_on_action, 'init', target=f"Link_DRV", ver="3", ref="here")
+            ET.SubElement(obj_do_on_action, 'init', target="_init_ApSource", ver="3", ref="here.ApSource_Main")
+            ET.SubElement(obj_do_on_action, 'init', target="_init_GPAPath", ver="3", ref="here._pathToGPA")
+
+            x_swift = x_swift + width_but
+            if (x_swift + width_but) >= (gor_base - 20):
+                x_swift = 0
+                y_swift += height_button
+
+        # Добавляем ещё стандартной инфы
+        apsource_currentform = ET.SubElement(root_list, 'object', access_modifier="private",
+                                             name="ApSource_CurrentForm",
+                                             display_name="ApSource_CurrentForm",
+                                             uuid=f"{uuid.uuid4()}",
+                                             base_type="ApSource",
+                                             base_type_id=sl_uuid_base.get('ApSource', ''), ver="3")
+        ET.SubElement(apsource_currentform, 'designed', target="Active", value="true", ver="3")
+        ET.SubElement(apsource_currentform, 'designed', target="ReAdvise", value="0", ver="3")
+        ET.SubElement(apsource_currentform, 'init', target="ParentSource", ver="3", ref="_init_ApSource")
+        ET.SubElement(apsource_currentform, 'init', target="Path", ver="3", ref="_init_GPAPath")
+        ET.SubElement(apsource_currentform, 'designed', target="Path", value="", ver="3")
+
+        ET.SubElement(root_list, 'param', access_modifier="private", name="_init_ApSource",
+                      display_name="_init_ApSource",
+                      uuid=f"{uuid.uuid4()}",
+                      base_type="ApSource", base_type_id=sl_uuid_base.get('ApSource', ''),
+                      base_const="true", base_ref="true", ver="3")
+        ET.SubElement(root_list, 'param', access_modifier="private", name="_init_GPAPath",
+                      display_name="_init_GPAPath",
+                      uuid=f"{uuid.uuid4()}",
+                      base_type="string", base_type_id=sl_uuid_base.get('string', ''), ver="3")
+
+        ET.SubElement(root_list, 'object', access_modifier="private",
+                      name="DebugTool_1", display_name="DebugTool_1",
+                      uuid=f"{uuid.uuid4()}",
+                      base_type="DebugTool",
+                      base_type_id=sl_uuid_base.get('DebugTool', ''), ver="3")
+        ET.SubElement(root_list, 'object', access_modifier="private",
+                      name="_pathToGPA", display_name="_pathToGPA",
+                      uuid=f"{uuid.uuid4()}",
+                      base_type="notifying_string",
+                      base_type_id=sl_uuid_base.get('notifying_string', ''), ver="3")
+        apsource_main = ET.SubElement(root_list, 'object', access_modifier="private",
+                                      name="ApSource_Main", display_name="ApSource_Main",
+                                      uuid=f"{uuid.uuid4()}",
+                                      base_type="ApSource",
+                                      base_type_id=sl_uuid_base.get('ApSource', ''), ver="3")
+        ET.SubElement(apsource_main, 'designed', target="Active", value="true", ver="3")
+        ET.SubElement(apsource_main, 'designed', target="ReAdvise", value="0", ver="3")
+        ET.SubElement(apsource_main, 'designed', target="Path", value="", ver="3")
+        ET.SubElement(apsource_main, 'init', target="ParentSource", ver="3", ref="here._init_ApSource")
+
+        ET.SubElement(root_list, 'init', target="_pathToGPA", ver="3", ref="here._init_GPAPath")
+
+        # Нормируем и записываем страницу мнемосхемы
+        temp = ET.tostring(root_list).decode('UTF-8')
+        check_diff_mnemo(new_data=multiple_replace_xml_mnemo(lxml.etree.tostring(lxml.etree.fromstring(temp),
+                                                                                 pretty_print=True,
+                                                                                 encoding='unicode')),
+                         check_path=os.path.join('File_for_Import', 'Mnemo', 'General_DRV_Mnemo'),
+                         file_name_check=f'{name_page}_0_{obj[0]}.omobj',
+                         message_print=f'Требуется заменить мнемосхему {name_page}_0_{obj[0]}.omobj '
+                                       f'(Mnemo/General_DRV_Mnemo/{name_page}_0_{obj[0]}.omobj)'
+                         )
+    return
+
+
