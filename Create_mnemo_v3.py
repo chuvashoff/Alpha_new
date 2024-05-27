@@ -75,7 +75,7 @@ def multiple_replace_xml_mnemo(target_str):
 
 # Функция создания мнемосхем параметров
 def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_type_param: str,
-                       size_shirina: int, size_vysota: int, sl_param: dict, sl_object_all: dict):
+                       size_shirina: int, size_vysota: int, sl_param: dict, sl_object_all: dict, tuple_mnemo: tuple = ""):
     # print(sl_param)
     sl_page_uuid = {}
     # uuid.uuid4()
@@ -179,6 +179,13 @@ def create_mnemo_param(name_list: str, name_group: str, name_page: str, base_typ
                     sl_param_object[node].extend(sl_param[plc][node])
             # sl_param_object.update(sl_param[plc])
 
+        # Если параметров нет, то скипаем
+        if not sl_param_object:
+            continue
+        # Если задан кортеж сортировки, то сортируем
+        if tuple_mnemo:
+            # print(name_list, '----------------')
+            sl_param_object = {node: sl_param_object.get(node) for node in tuple_mnemo if sl_param_object.get(node)}
         # for i in sl_param_object:
         #     print(name_page, cpus, i, len(sl_param_object[i]))
         # # print(cpus, sl_param_object)
@@ -1929,6 +1936,8 @@ def create_mnemo_drv_general(sl_object_all: dict, name_group: str, size_shirina:
         # print(sl_all_drv)
         # print(sl_type_drv)
         first_page = ''
+        # для подсчёта страниц, чтобы удалить номер страницы, если страница одна
+        check_count_page = tuple([_[:_.rfind('_')] for _ in sl_list_par])
         # Для каждого листа в словаре листов с параметрами...
         for page, drv_pars in sl_list_par.items():
             if not first_page:
@@ -1974,8 +1983,10 @@ def create_mnemo_drv_general(sl_object_all: dict, name_group: str, size_shirina:
             # Вносим размеры мнемосхемы, пока так, позже может измениться
             ET.SubElement(root_type, 'designed', target="WindowWidth", value=f"{size_shirina}", ver="3")
             ET.SubElement(root_type, 'designed', target="WindowHeight", value=f"{window_height}", ver="3")
+            count_list_drv = check_count_page.count(page[:page.rfind('_')])
+            name_but = f"{name_drv_rus} {page[page.rfind('_') + 1:]}" if count_list_drv > 1 else f"{name_drv_rus}"
             ET.SubElement(root_type, 'designed', target="WindowCaption",
-                          value=f"{name_drv_rus} {page[page.rfind('_')+1:]}", ver="3")
+                          value=f"{name_but}", ver="3")
 
             ET.SubElement(root_type, 'designed', target="ShowWindowCaption", value="true", ver="3")
             ET.SubElement(root_type, 'designed', target="ShowWindowMinimize", value="true", ver="3")
@@ -2210,7 +2221,8 @@ def create_mnemo_drv_general(sl_object_all: dict, name_group: str, size_shirina:
             ET.SubElement(obj_button, 'designed', target='Y', value=f"{y_button_start + y_swift}", ver="3")  # vert_base - 60
             ET.SubElement(obj_button, 'designed', target='Rotation', value="0", ver="3")
             # ET.SubElement(obj_button, 'designed', target='Width', value=f"{50*(len(page)/3}", ver="3")
-            name_but = f"{name_drv_rus} {page[page.rfind('_')+1:]}"
+            count_list_drv = check_count_page.count(page[:page.rfind('_')])
+            name_but = f"{name_drv_rus} {page[page.rfind('_')+1:]}" if count_list_drv > 1 else f"{name_drv_rus}"
             width_but = get_text_width(name_but, "PT Sans", 12) + 4
             # print(width)
             ET.SubElement(obj_button, 'designed', target='Width', value=f"{round(width_but, 2)}", ver="3")

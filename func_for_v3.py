@@ -31,7 +31,8 @@ def multiple_replace_xml(target_str):
                       'protocol_version': 'protocol-version', 'security_level': 'security-level',
                       'auth_protocol': 'auth-protocol', 'priv_protocol': 'priv-protocol',
                       'source_code': 'source-code', 'ct_trigger': 'ct:trigger', 'ct_handler': 'ct:handler',
-                      'ct_formula': 'ct:formula', 'format_version': 'format-version', 'ct_timer': 'ct:timer'}
+                      'ct_formula': 'ct:formula', 'format_version': 'format-version', 'ct_timer': 'ct:timer',
+                      'soft_version': 'soft-version'}
     # получаем заменяемое: подставляемое из словаря в цикле
     for i, j in replace_values.items():
         # меняем все target_str на подставляемое
@@ -290,6 +291,7 @@ def is_read_di(sheet):
     index_module = is_f_ind(cells[0], 'Номер модуля')
     index_canal = is_f_ind(cells[0], 'Номер канала')
     index_no_standart = is_f_ind(cells[0], 'Нестандартный канал')
+    index_inverse = is_f_ind(cells[0], 'Инверсия канала')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры
@@ -321,7 +323,8 @@ def is_read_di(sheet):
                     par[index_rus_name].value,
                     sl_color_di.get(par[index_color_off].fill.start_color.index, '404'),
                     sl_color_di.get(par[index_color_on].fill.start_color.index, '404'),
-                    module_canal
+                    module_canal,
+                    "true" if par[index_inverse].value == "Да" else "false"
                 )})
 
             # Если есть предупреждение по дискрету и канал не переведён в резерв и не привязан к ИМ,
@@ -968,7 +971,7 @@ def is_create_net(sl_object_all, sheet_net):
                             and len(sl_device_par.get('IPs', '')) == len(sl_device_par.get('adapters', '')):
                         for i, ip in enumerate(sl_device_par.get('IPs'), start=1):
                             # this_adapter = sl_device_par['adapters'][i-1]
-                            name_node = f'{obj}.Diag.NET.{device}.Ping_IP{i}'
+                            name_node = f'SYS.Diagnostic.{device}.Ping_IP{i}'
                             for signal_function in ('Enable', 'ResetStat', 'FailCount',
                                                     'LastError', 'LastFailDuration', 'Status', 'SuccCount',
                                                     'TimeOut', 'TotalFailDuration',
@@ -1653,7 +1656,8 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                     child_checkip, 'ct_object',
                                     name=f'HW_Diag_{server_name_osn}',
                                     access_level="public", aspect="Types.IOS_Aspect",
-                                    original="SNMP_Agent.Application.Diag_PLC")
+                                    original="SNMP_Agent.Application.Diag_PLC",
+                                    base_type="Types.SNMP_Diag.Diag_IOS_View")
                                 ET.SubElement(sub_diag_plc_serv, 'ct_init-ref', ref="_Diag_PLC",
                                               target="SNMP_Agent.Application.Diag_PLC",
                                               base_type="Types.SNMP_Diag.Diag_IOS_View")
@@ -1676,15 +1680,15 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                               value=f"4")
             else:
                 if sl_value.get('SType') and sl_value.get('SType') not in ('<SRV>', '<PART>'):
-                    child_alg = ET.SubElement(child_net, 'ct_object', name=f'{alg}',
+                    child_alg = ET.SubElement(child_diagnostic, 'ct_object', name=f'{alg}',
                                               base_type=f"Types.SNMP_Switch.{sl_value['Type']}_IOS_View",
                                               aspect="Types.IOS_Aspect",
-                                              original=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data",
+                                              original=f"Domain.System_{alg}.Runtime.Application.Data.Data",
                                               access_level="public")
                     ET.SubElement(child_alg, 'attribute', type=f"unit.System.Attributes.Description",
                                   value=f"{sl_value['Unit']}")
                     ET.SubElement(child_alg, 'ct_init-ref', ref="_PLC_View",
-                                  target=f"Domain.{objects[0]}_{alg}.Runtime.Application.Data.Data")
+                                  target=f"Domain.System_{alg}.Runtime.Application.Data.Data")
                     ET.SubElement(child_alg, 'ct_subject-ref', name=f'_State', object=f"Service.State",
                                   const_access="false",
                                   aspected="false")
@@ -1883,6 +1887,8 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
         'ТС (без условий)': return_ts,
         'ТС (сообщение)': return_ts,
         'ТС (подрежим)': return_ts,
+        'ТС (взвод защиты)': return_ts,
+        'ТС (взвод защиты без условий)': return_ts,
         'ГР': return_ppu,
         'ХР': return_ppu,
         'АОсс': return_alr,

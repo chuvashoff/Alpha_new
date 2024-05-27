@@ -6,7 +6,9 @@ import re
 import string
 import sys
 
+from chardet import detect as chardet_detect
 from func_for_v3 import *
+
 
 
 def create_sl(text, str_check, str_check_block, par_config):
@@ -59,14 +61,14 @@ def create_sl_pz(text):
 def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_index, template_no_arc_index,
                      pref_par, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global_par.items():
@@ -74,7 +76,7 @@ def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_i
         tmp_sub_name = key[:key.find('[')]
         if tmp_i not in sl_local_par:
             continue
-        if 'FAST|' in sl_local_par[tmp_i] and re.fullmatch(r'Value', key[:key.find('[')]):
+        if 'FAST|' in sl_local_par[tmp_i] and re.fullmatch(r'Value', key[:key.find('[')]) and sl_global_fast.get(sl_local_par[tmp_i]):
             value[0] = sl_global_fast[sl_local_par[tmp_i]]
             a = sl_local_par[tmp_i][sl_local_par[tmp_i].find('|')+1:]
             temp = template_arc_index
@@ -90,14 +92,14 @@ def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_i
 
 def create_group_im(sl_global_im, sl_local_im, sl_global_fast, template_arc_index, template_no_arc_index, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global_im.items():
@@ -126,14 +128,14 @@ def create_group_im(sl_global_im, sl_local_im, sl_global_fast, template_arc_inde
 
 def create_group_btn(sl_global_btn, sl_local_btn, template_no_arc_index, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global_btn.items():
@@ -151,16 +153,16 @@ def create_group_btn(sl_global_btn, sl_local_btn, template_no_arc_index, source)
 
 def create_group_system_sig(sub_name, sl_global_sig, template_no_arc_index, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete',
-        'M': 'Analog'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete',
+        'string': 'Analog'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool',
-        'M': 'String'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool',
+        'string': 'String'
     }
     s_out = ''
     for key, value in sl_global_sig.items():
@@ -174,14 +176,14 @@ def create_group_system_sig(sub_name, sl_global_sig, template_no_arc_index, sour
 
 def create_group_tr(sl_global, template_no_arc_index, pref_par, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global.items():
@@ -195,14 +197,14 @@ def create_group_tr(sl_global, template_no_arc_index, pref_par, source):
 
 def create_group_sar(sl_global, template_no_arc_index, pref_par, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global.items():
@@ -216,14 +218,14 @@ def create_group_sar(sl_global, template_no_arc_index, pref_par, source):
 
 def create_group_apr(sl_global, sl_global_fast, template_no_arc_index, template_arc_index, pref_par, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global.items():
@@ -244,9 +246,9 @@ def create_group_apr(sl_global, sl_global_fast, template_no_arc_index, template_
 
 def create_group_alr(sl_global_fast_alr, template_arc_index, source):
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_global_fast_alr.items():
@@ -260,14 +262,14 @@ def create_group_alr(sl_global_fast_alr, template_arc_index, source):
 
 def create_group_pz(sl_global_pz, lst_pz, tuple_anum, template_no_arc_index, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     sl_pz_i = {}
@@ -290,21 +292,19 @@ def create_group_pz(sl_global_pz, lst_pz, tuple_anum, template_no_arc_index, sou
 
 def create_group_diag(diag_sl, template_no_arc_index, source, template_arc_index, sl_global_fast):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in diag_sl.items():
         module = key[0]
         signal = key[1]
-        # if module in ('BR1', 'BR2'):
-        #     print(module, signal, sl_global_fast)
         if f'FAST|{signal}' in sl_global_fast:
             temp = template_arc_index
             pref_arc = 'Arc'
@@ -322,14 +322,14 @@ def create_group_diag(diag_sl, template_no_arc_index, source, template_arc_index
 def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, template_arc_index, sl_drv_iec,
                      sl_global_drv_imit):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in drv_sl.items():
@@ -359,11 +359,11 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
     return s_out
 
 
-def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
-                 sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
-                 sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
-                 buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
-                 sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict):
+def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
+                    sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
+                    sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
+                    buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
+                    sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -672,45 +672,62 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                     text = f_set.read().split('\n')
                 sl_tmp_set = create_sl(text, 'SP_', 'A_SET|', par_config=sl_set_config.get(line_source[0], tuple()))
 
-            # Если есть глобальный словарь
-            if os.path.exists(os.path.join(line_source[1], 'global0.var')):
-                with open(os.path.join(line_source[1], 'global0.var'), 'rt') as f_global:
+            # if os.path.exists(os.path.join(line_source[1], 'base.csv')):
+            #     with open(os.path.join(line_source[1], 'base.csv'), 'rt') as f_global:
+            #         title_key = f_global.readline().strip().split(';')
+            #         print(title_key)
+            #         print(dict(zip(title_key, [None]*len(title_key))))
+            #         print(70*'--')
+            #         i = 0
+            #         for line in f_global:
+            #             i += 1
+            #             if i > 10:
+            #                 break
+            #             print(line.strip())
+
+            # Если есть база тегов
+            if os.path.exists(os.path.join(line_source[1], 'base.csv')):
+                with open(os.path.join(line_source[1], 'base.csv'), 'rb') as f_check:
+                    data = f_check.read()
+                result = chardet_detect(data)
+                encoding = result.get('encoding', '')
+                print(f"Кодировка файла {os.path.join(line_source[1], 'base.csv')}: {encoding}")
+                with open(os.path.join(line_source[1], 'base.csv'), 'rt',
+                          encoding=encoding if encoding else 'UTF-8') as f_global:
+                    title_key = f_global.readline().strip().split(';')
                     for line in f_global:
                         line = line.strip()
+                        current_dict_tag = dict(zip(title_key, line.split(';')))
+
                         # Получаем сигналы SARa
-                        if sl_sar_tun and len(line.split(',')) >= 10:
+                        if sl_sar_tun and current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем переменную
-                            tmp_var = get_variable_lower(line=line)
+                            tmp_var = current_dict_tag.get('Name', '').lower()
                             if tmp_var in sl_sar_tun:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_sar = line.split(',')
-                                sl_global_sar[f'Tuning.{sl_sar_tun[tmp_var]}.Value'] = [index_par, line_sar[1]]
-
+                                index_par = current_dict_tag.get('Offset')
+                                sl_global_sar[f'Tuning.{sl_sar_tun[tmp_var]}.Value'] = [index_par,
+                                                                                        current_dict_tag.get('Type')]
                             elif f'{tmp_var}.REGUL' in sl_sar_tun:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_sar = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 tm = sl_sar_tun[f'{tmp_var}.REGUL']
-                                sl_global_sar[f'REGUL.{tm}'] = [index_par, line_sar[1]]
+                                sl_global_sar[f'REGUL.{tm}'] = [index_par, current_dict_tag.get('Type')]
                             elif f'{tmp_var}.WRN' in sl_sar_tun:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_sar = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 tm = sl_sar_tun[f'{tmp_var}.WRN']
-                                sl_global_sar[f'WRN.{tm}'] = [index_par, line_sar[1]]
+                                sl_global_sar[f'WRN.{tm}'] = [index_par, current_dict_tag.get('Type')]
                             elif f'{tmp_var}.Signal_KHR' in sl_sar_tun:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_sar = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 tm = sl_sar_tun[f'{tmp_var}.Signal_KHR']
-                                sl_global_sar[f'IM.KHR.{tm}'] = [index_par, line_sar[1]]
+                                sl_global_sar[f'IM.KHR.{tm}'] = [index_par, current_dict_tag.get('Type')]
                             elif f'{tmp_var}.Reload' in sl_sar_tun:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_sar = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 tm = sl_sar_tun[f'{tmp_var}.Reload']
-                                sl_global_sar[f'Reload.{tm}.Value'] = [index_par, line_sar[1]]
+                                sl_global_sar[f'Reload.{tm}.Value'] = [index_par, current_dict_tag.get('Type')]
 
-                        # Получаем сигналы топливного регулятора
-                        if lst_tr_par and len(line.split(',')) >= 10:
-                            # Получаем переменную в нижнем регистре и с разделителем
-                            tmp_var = get_variable_lower(line=line)
+                        if lst_tr_par and current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            tmp_var = current_dict_tag.get('Name', '').lower()
                             # Делим по разделителю
                             lst_tmp_var = tmp_var.split('|')
                             # Если есть разделитель...
@@ -720,14 +737,14 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 # Выясняем, что за переменная в перечне и вносим в словарь и есть ли она
                                 if '.'.join(lst_tmp_var) in lst_tr_par_lower:
                                     index_lst = lst_tr_par_lower.index('.'.join(lst_tmp_var))
-                                    index_par = line[:line.find(',//')].split(',')[-8]
-                                    line_tr = line.split(',')
-                                    sl_global_tr[lst_tr_par[index_lst]] = [index_par, line_tr[1]]
+                                    index_par = current_dict_tag.get('Offset')
+                                    sl_global_tr[lst_tr_par[index_lst]] = [index_par, current_dict_tag.get('Type')]
 
                         # Ищем переменные диагностики контроллера помимо каталога DIAG|
-                        if len(line.split(',')) >= 10:
+                        if current_dict_tag.get('Name') and \
+                                current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем переменную с разделителем
-                            tmp_var = get_variable(line=line)
+                            tmp_var = current_dict_tag.get('Name')
                             # Если переменная есть в списке сигналов контроллера
                             # По сути ищем переменные контроллера без разделителей в глобальном словаре
                             type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
@@ -735,242 +752,145 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                 else sl_for_diag[line_source[0]]['CPU'][1]
                             if sl_for_diag.get(line_source[0]) and \
                                     tmp_var in sl_diag_cpu_sig.get(type_cpu, {}):
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_diag = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 tag_name = sl_diag_cpu_sig[type_cpu][tmp_var]
                                 # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
-                                sl_global_diag[(module_cpu, tag_name)] = [index_par, line_diag[1]]
+                                sl_global_diag[(module_cpu, tag_name)] = [index_par, current_dict_tag.get('Type')]
 
-                            # Анализируем фасты на тот случай, если сигнал диагностики ТОЛЬКО фастовый
-                            tmp_var_fast = tmp_var.replace('FAST|', '') if tmp_var.startswith('FAST|') else ''
-                            if sl_for_diag.get(line_source[0]) and tmp_var_fast and \
-                                    tmp_var_fast in sl_diag_cpu_sig.get(type_cpu, {}):
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_diag = line.split(',')
-                                module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
-                                tag_name = sl_diag_cpu_sig[type_cpu][tmp_var_fast]
-                                # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
-                                sl_global_diag[(module_cpu, tag_name)] = [index_par, line_diag[1]]
-
-                        # Ищем переменные ПРУ
                         # print(sl_pru_config.get(line_source[0]))
-                        if sl_pru_config.get(line_source[0]) and len(line.split(',')) >= 10:
+                        # Ищем переменные ПРУ
+                        if sl_pru_config.get(line_source[0]) and current_dict_tag.get('Name') and \
+                                current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем переменную с разделителем
-                            tmp_var = get_variable(line=line)
+                            tmp_var = current_dict_tag.get('Name')
                             if tmp_var.replace('|', '_', 1) in sl_pru_config[line_source[0]]:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line_pru = line.split(',')
-                                sl_global_pru[tmp_var.replace('|', '_', 1)] = [index_par, line_pru[1]]
+                                index_par = current_dict_tag.get('Offset')
+                                sl_global_pru[tmp_var.replace('|', '_', 1)] = [index_par, current_dict_tag.get('Type')]
 
-                        if 'A_INP|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_ai[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_ai['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                        for pref_tag, struct_tag in {
+                            'A_INP|': sl_global_ai,
+                            'A_EVL|': sl_global_ae,
+                            'D_INP|': sl_global_di,
+                            'D_INP_AI|': sl_global_ai_di,
+                            'IM_1x0|': sl_global_im1x0,
+                            'IM_1x1|': sl_global_im1x1,
+                            'IM_1x2|': sl_global_im1x2,
+                            'IM_1x2pz|': sl_global_im1x2pz,
+                            'IM_2x2|': sl_global_im2x2,
+                            'IM_AO|': sl_global_im_ao
+                        }.items():
+                            if pref_tag in current_dict_tag.get('Name', '') \
+                                    and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
 
-                        elif 'A_EVL|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_ae[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_ae['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                index_par = current_dict_tag.get('Offset')
+                                alg_name = current_dict_tag.get('Name').replace(pref_tag, '')
 
-                        elif 'D_INP|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_di[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_di['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                if 'msg' not in alg_name:
+                                    struct_tag[alg_name] = [index_par, current_dict_tag.get('Type')]
+                                else:
+                                    struct_tag[f'Message.{alg_name}'] = [index_par, current_dict_tag.get('Type')]
 
-                        elif 'D_INP_AI|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_ai_di[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_ai_di['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                        for pref_tag, struct_tag in {
+                            'BTN|': sl_global_btn,
+                            'IM|': sl_global_cnt,
+                            'FAST|ALR_': sl_global_fast_alr,
+                            'ALG|': sl_global_alg,
+                            'GRH|': sl_global_grh,   # в новом конфигураторе - в ветку GRH.
+                            'MOD|': sl_global_mod,
+                            'PPU|': sl_global_ppu,
+                            'TS|': sl_global_ts,
+                            'WRN|': sl_global_wrn,
+                            'MOD_PZ|': sl_global_pz,
+                            'A_SET|': sl_global_set,
+                            'CDO|': sl_global_cdo
+                        }.items():
+                            if pref_tag in current_dict_tag.get('Name', '') \
+                                    and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
 
-                        elif 'IM_1x0|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im1x0[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im1x0['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                index_par = current_dict_tag.get('Offset')
+                                alg_name = current_dict_tag.get('Name').replace(pref_tag, '')
+                                type_tag = current_dict_tag.get('Type')
 
-                        elif 'IM_1x1|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im1x1[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im1x1['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                if pref_tag == 'IM|' and ('WorkTime' in alg_name or 'Swap' in alg_name):
+                                    struct_tag[alg_name] = [index_par, type_tag]
 
-                        elif 'IM_1x2|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im1x2[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im1x2['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                elif pref_tag == 'ALG|':
+                                    struct_tag[f'ALG_{alg_name}'] = [index_par, type_tag]
 
-                        elif 'IM_1x2pz|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im1x2pz[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im1x2pz['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                elif pref_tag == 'GRH|':
+                                    struct_tag[f'GRH|{alg_name}'] = [index_par, type_tag]
 
-                        elif 'IM_2x2|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im2x2[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im2x2['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                elif pref_tag == 'MOD|':
 
-                        elif 'IM_AO|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'msg' not in line[0]:
-                                sl_global_im_ao[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-                            else:
-                                sl_global_im_ao['Message.' + line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                    if 'regnum' in alg_name.lower():
+                                        struct_tag['regNum'] = [index_par, type_tag]
+                                    elif 'regname' in alg_name.lower():
+                                        struct_tag['regName'] = [index_par, type_tag]
+                                    elif 'regcolor' in alg_name.lower():
+                                        struct_tag['regColor'] = [index_par, type_tag]
+                                    else:
+                                        struct_tag[alg_name] = [index_par, type_tag]
 
-                        elif 'BTN|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_btn[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
+                                else:
+                                    struct_tag[alg_name] = [index_par, type_tag]
 
-                        elif 'IM|' in line and len(line.split(',')) >= 10 and ('WorkTime' in line or 'Swap' in line):
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_cnt[line[0][line[0].find('|')+1:]] = [index_par, line[1]]
-
-                        elif 'FAST|ALR_' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line_alr = line.split(',')
-                            sl_global_fast_alr[line_alr[0][line_alr[0].find('_')+1:]] = [index_par, line_alr[1]]
-
-                        elif 'ALG|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_alg[f"ALG_{line[0][line[0].find('|')+1:]}"] = [index_par, line[1]]
-
-                        elif 'GRH|' in line and len(line.split(',')) >= 10:  # в новом конфигураторе - в ветку GRH.
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_grh[f"{line[0][1:]}"] = [index_par, line[1]]
-
-                        elif 'MOD|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            if 'regnum' in line[0][line[0].find('|') + 1:].lower():
-                                sl_global_mod['regNum'] = [index_par, line[1]]
-                            elif 'regname' in line[0][line[0].find('|') + 1:].lower():
-                                sl_global_mod['regName'] = [index_par, line[1]]
-                            elif 'regcolor' in line[0][line[0].find('|') + 1:].lower():
-                                sl_global_mod['regColor'] = [index_par, line[1]]
-                            else:
-                                sl_global_mod[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        elif 'PPU|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_ppu[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        elif 'TS|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_ts[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        elif 'WRN|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_wrn[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        elif 'MOD_PZ|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_pz[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        elif 'A_SET|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_set[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
-
-                        # elif ('svk2|' in line or 'svk|' in line) and len(line.split(',')) >= 10:
-                        #     line = line.split(',')
-                        #     if f"SVK.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
-                        #         sl_global_tr[f"SVK.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
-                        #                                                                       int(line[10])),
-                        #                                                                   line[1]]
-                        #
-                        # elif 'dis|' in line and len(line.split(',')) >= 10:
-                        #     line = line.split(',')
-                        #     if f"DIS.{line[0][line[0].find('|') + 1:]}" in lst_tr_par:
-                        #         sl_global_tr[f"DIS.{line[0][line[0].find('|') + 1:]}"] = [max(int(line[9]),
-                        #                                                                       int(line[10])),
-                        #                                                                   line[1]]
-                        elif 'APR|' in line and len(line.split(',')) >= 10:
-                            # Получаем переменную в нижнем регистре и с разделителем и убираем "мусор"
-                            tmp_var = get_variable_lower(line=line).replace('[', '').replace(']', '').replace('apr|',
-                                                                                                              '')
+                        if 'APR|' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            tmp_var = current_dict_tag.get('Name', '').lower().replace('apr|', '').replace('[', '').replace(']', '')
                             # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
                             if tmp_var in lst_apr_par_lower:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 index_lst = lst_apr_par_lower.index(tmp_var)
                                 key_apr = f"IM.{lst_apr_par[index_lst]}"
-                                sl_global_apr[key_apr] = [index_par, line[1]]
-                            # line = line.split(',')
-                            # if line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '') in lst_apr_par:
-                            #     key_apr = f"IM.{line[0][line[0].find('|') + 1:].replace('[', '').replace(']', '')}"
-                            #     sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
+                                sl_global_apr[key_apr] = [index_par, current_dict_tag.get('Type')]
+                            tmp_var = current_dict_tag.get('Name', '').replace('apr|', '').replace('[', '').replace(']', '')
+                            if tmp_var in lst_apr_par_lower:
+                                index_par = current_dict_tag.get('Offset')
+                                key_apr = f"IM.{tmp_var}"
+                                sl_global_apr[key_apr] = [index_par, current_dict_tag.get('Type')]
 
-                        elif 'sTunings|' in line and len(line.split(',')) >= 10:
+                        if 'sTunings|' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем переменную в нижнем регистре и с разделителем и добавляем перфикс тюнинга
-                            tmp_var = get_variable_lower(line=line).replace('stunings|', 'tuning.')
+                            tmp_var = current_dict_tag.get('Name').lower().replace('stunings|', 'tuning.')
                             # Если переменная есть в перечне и выясняем что, за переменная и добавляем в словарь
                             if tmp_var in lst_apr_par_lower:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 index_lst = lst_apr_par_lower.index(tmp_var)
                                 key_apr = f"{lst_apr_par[index_lst]}.Value"
-                                sl_global_apr[key_apr] = [index_par, line[1]]
-                            # line = line.split(',')
-                            # if f"Tuning.{line[0][line[0].find('|') + 1:]}" in lst_apr_par:
-                            #     key_apr = f"Tuning.{line[0][line[0].find('|') + 1:]}.Value"
-                            #     sl_global_apr[key_apr] = [max(int(line[9]), int(line[10])), line[1]]
-                        elif 'SRCalc' in line and len(line.split(',')) >= 10:
+                                sl_global_apr[key_apr] = [index_par, current_dict_tag.get('Type')]
+                            tmp_var = current_dict_tag.get('Name').replace('sTunings|', '')
+                            if tmp_var in lst_apr_par:
+                                key_apr = f"Tuning.{tmp_var}.Value"
+                                index_par = current_dict_tag.get('Offset')
+                                sl_global_apr[key_apr] = [index_par, current_dict_tag.get('Type')]
+
+                        if 'SRCalc' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем переменную в нижнем регистре и с разделителем и добавляем перфикс тюнинга
-                            tmp_var = get_variable_lower(line=line).replace('srcalc|', 'srcalc.')
+                            tmp_var = current_dict_tag.get('Name').lower().replace('srcalc|', 'srcalc.')
                             if tmp_var in lst_apr_par_lower:
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                line = line.split(',')
+                                index_par = current_dict_tag.get('Offset')
                                 index_lst = lst_apr_par_lower.index(tmp_var)
                                 key_apr = f"IM.{lst_apr_par[index_lst]}"
-                                sl_global_apr[key_apr] = [index_par, line[1]]
+                                sl_global_apr[key_apr] = [index_par, current_dict_tag.get('Type')]
 
-                        elif 'DIAG|' in line and len(line.split(',')) >= 10:
+                        if 'DIAG|' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             # Получаем диагностику CPU из группы DIAG
-                            var_name = get_variable(line=line).replace('DIAG|', '')
+                            var_name = current_dict_tag.get('Name').replace('DIAG|', '')
                             type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
                                 sl_for_diag[line_source[0]]['CPU'][0] in sl_cpu_res.get(line_source[0], 'бла') \
                                 else sl_for_diag[line_source[0]]['CPU'][1]
+
                             if sl_for_diag.get(line_source[0]) and \
                                     var_name in sl_diag_cpu_sig.get(type_cpu, {}):
                                 module_cpu = sl_for_diag[line_source[0]]['CPU'][0]
                                 signal_name = sl_diag_cpu_sig[type_cpu][var_name]
                                 # (алг.имя CPU, имя пер-через словарь соответствия) : [инд. пер, тип пер]
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                sl_global_diag[(module_cpu, signal_name)] = [index_par, line.split(',')[1]]
+                                index_par = current_dict_tag.get('Offset')
+                                sl_global_diag[(module_cpu, signal_name)] = [index_par, current_dict_tag.get('Type')]
                             else:
                                 # Анализируем переменные узла DIAG на предмет привязки к модулям в/в
                                 for alg_module in sl_for_diag.get(line_source[0], {}):
@@ -979,76 +899,103 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                         if signal in sl_module_diag_sig.get(sl_for_diag[line_source[0]][alg_module],
                                                                             'бла'):
                                             # print(signal, var_name)
-                                            index_par = line[:line.find(',//')].split(',')[-8]
+                                            index_par = current_dict_tag.get('Offset')
                                             # Проверяем наличие сигнала в словаре соответствия
                                             if sl_module_diag_sig_conform.get(sl_for_diag[line_source[0]][alg_module]) \
                                                     and sl_module_diag_sig_conform[sl_for_diag[line_source[0]][alg_module]].get(signal):
                                                 signal_in = sl_module_diag_sig_conform[sl_for_diag[line_source[0]][alg_module]].get(signal)
                                             else:
                                                 signal_in = signal
-                                            sl_global_diag[(alg_module, signal_in)] = [index_par, line.split(',')[1]]
+                                            sl_global_diag[(alg_module, signal_in)] = [index_par, current_dict_tag.get('Type')]
 
-                        elif 'ALR|' in line and 'ALR|Delay' not in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            tmp_alg_alr = line[0][1:]  # c префиксом ALR|
-                            alg_alr = tmp_alg_alr[tmp_alg_alr.find('|')+1:]  # без префикса ALR|
+                        # Для сбора диагностики прямо из модулей делаем
+                        if sl_for_diag.get(line_source[0]) and current_dict_tag.get('Name', '').count('.') >= 2 \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            name_tag_split = current_dict_tag.get('Name', '').split('.')
+                            module = name_tag_split[0]
+                            tag = current_dict_tag.get('Name', 'бла').replace(module, '')
+                            curr_module = sl_for_diag.get(line_source[0], {}).get(module, '')
+                            if tag in sl_module_diag_sig.get(curr_module, 'бла'):
+                                if tag not in sl_module_diag_sig_conform.get(curr_module, 'бла'):
+                                    tag_in = tag
+                                else:
+                                    tag_in = sl_module_diag_sig_conform[curr_module].get(tag)
+
+                                # В словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
+                                if (module, tag_in) not in sl_global_diag:
+                                    index_par = current_dict_tag.get('Offset')
+                                    sl_global_diag[(module, tag_in)] = [index_par, current_dict_tag.get('Type')]
+
+                        if 'ALR|' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            tmp_alg_alr = current_dict_tag.get('Name')  # c префиксом ALR|
+                            alg_alr = tmp_alg_alr.replace('ALR|', '')  # без префикса ALR|
                             # Если текущий контроллер есть в словаре из конфигуратора...
                             if line_source[0] in sl_sig_alr:
                                 # ...если ALRка есть в перечне ALRов контроллера из конфигуратора и нет в PZ
                                 if alg_alr in sl_sig_alr.get(line_source[0], 'бла') and alg_alr not in set_tmp_alr:
                                     # ...то считаем, что это АС и добавляем в словарь
-                                    test_sl_global_as[alg_alr] = [index_par, line[1]]
-
-                        elif 'CDO|' in line and len(line.split(',')) >= 10:
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
-                            sl_global_cdo[line[0][line[0].find('|') + 1:]] = [index_par, line[1]]
+                                    test_sl_global_as[alg_alr] = [index_par, current_dict_tag.get('Type')]
 
                         # если в текущем контроллере объявлены драйвера и строка явно содержит индекс
-                        elif line_source[0] in sl_cpu_drv_signal and len(line.split(',')) >= 10:
-                            tmp_check = line.split(',')[0]
+                        if line_source[0] in sl_cpu_drv_signal and current_dict_tag.get('Name') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            tmp_check = current_dict_tag.get('Name')
                             # если в считанной строке-переменной есть признак какого-либо драйвера
-                            if tmp_check[1:tmp_check.find('|')] in sl_cpu_drv_signal.get(line_source[0], 'бла'):
-                                tmp_check_drv = tmp_check[1:tmp_check.find('|')]
+                            if tmp_check[:tmp_check.find('|')] in sl_cpu_drv_signal.get(line_source[0], 'бла'):
+                                tmp_check_drv = tmp_check[:tmp_check.find('|')]
                                 tmp_check_par = tmp_check[tmp_check.find('|') + 1:]
                                 # если в считанной строке с признаком драйвера обнаружена объявленная переменная
                                 if tmp_check_par in sl_cpu_drv_signal[line_source[0]][tmp_check_drv] and \
                                         tmp_check_par not in sl_cpu_drv_signal_with_imit[line_source[0]][tmp_check_drv]:
-                                    index_par = line[:line.find(',//')].split(',')[-8]
-                                    sl_global_drv[(tmp_check_drv, tmp_check_par)] = (index_par, line.split(',')[1])
+                                    index_par = current_dict_tag.get('Offset')
+                                    sl_global_drv[(tmp_check_drv, tmp_check_par)] = (index_par, current_dict_tag.get('Type'))
                                 else:
                                     # Если драйверная переменная выставлена в конфигураторе без имитации, то выставляем
                                     for pref in ('', 'coSim_', 'Sim_'):
                                         if tmp_check_par.startswith(pref) and \
                                                 tmp_check_par.replace(pref, '') in \
                                                 sl_cpu_drv_signal_with_imit[line_source[0]][tmp_check_drv]:
-                                            index_par = line[:line.find(',//')].split(',')[-8]
+                                            index_par = current_dict_tag.get('Offset')
                                             sl_global_drv_imit[(tmp_check_drv, pref[:-1],
                                                                 tmp_check_par.replace(pref, ''))] = \
                                                 (index_par,
-                                                 line.split(',')[1])
+                                                 current_dict_tag.get('Type'))
 
                         # Обрабатываем need_add (пока только по ветке FAST)
-                        if sl_need_add_pars.get(line_source[0]) and 'FAST|' in line:
-                            tmp_var = get_variable(line=line).replace('FAST|', '')
+                        if sl_need_add_pars.get(line_source[0]) and 'FAST|' in current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type') and \
+                                current_dict_tag.get('Archive', '') != 'false' and \
+                                current_dict_tag.get('Archive count', '') != '0':
+                            tmp_var = current_dict_tag.get('Name').replace('FAST|', '')
                             if tmp_var in sl_need_add_pars.get(line_source[0]):
-                                index_par = line[:line.find(',//')].split(',')[-8]
-                                type_sig = line.split(',')[1]
+                                index_par = current_dict_tag.get('Offset')
+                                type_sig = current_dict_tag.get('Type')
                                 # print(tmp_var, index_par, type_sig)
                                 sl_add_par[f'System.Pars.{tmp_var}'] = (index_par, type_sig)
 
-                        if 'FAST|' in line:
-                            tmp_var = get_variable(line=line)
-                            index_par = line[:line.find(',//')].split(',')[-8]
-                            line = line.split(',')
+                        if 'FAST|' in current_dict_tag.get('Name', '') and current_dict_tag.get('Archive', '') == 'false':
+                            pass
+                            # ???
+                            # print(f"Ошибка: В контроллере {line_source[0]} "
+                            #       f"у переменной {current_dict_tag.get('Name', '')} не установлена архивация")
+
+                            # with open('Required_change.txt', 'a', encoding='UTF-8') as f_change:
+                            #     f_change.write(f"{datetime.datetime.now()} - "
+                            #                    f"Ошибка: у переменной {current_dict_tag.get('Name', '')} "
+                            #                    f"не установлена архивация\n")
+                        if current_dict_tag.get('Offset') and current_dict_tag.get('Archive', '') != 'false' \
+                                and current_dict_tag.get('Archive count', '') != '0' \
+                                and 'FAST|' in current_dict_tag.get('Name', ''):
+                            tmp_var = current_dict_tag.get('Name').replace('FAST|', '')
+                            index_par = current_dict_tag.get('Offset')
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
-                            sl_global_fast[line[0][1:]] = index_par
+                            sl_global_fast[f'FAST|{tmp_var}'] = index_par
                             # Ищем переменные контроллеров в FAST
                             type_cpu = sl_for_diag[line_source[0]]['CPU'][1] + '_Res' if \
                                 sl_for_diag[line_source[0]]['CPU'][0] in sl_cpu_res.get(line_source[0], 'бла') \
                                 else sl_for_diag[line_source[0]]['CPU'][1]
-                            if sl_for_diag.get(line_source[0]) and tmp_var.replace('FAST|', '') \
+                            if sl_for_diag.get(line_source[0]) and tmp_var \
                                     in sl_diag_cpu_sig.get(type_cpu, {}):
                                 sl_global_fast[tmp_var] = index_par
 
@@ -1226,40 +1173,6 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                                           sl_drv_iec=sl_cpu_drv_iec.get(line_source[0], {}),
                                           sl_global_drv_imit=sl_global_drv_imit)
 
-            # повторно открываем глобальный словарь контроллера для сбора диагностики (здесь немного по-другому читаем)
-            if os.path.exists(os.path.join(line_source[1], 'global0.var')):
-                with open(os.path.join(line_source[1], 'global0.var'), 'rt') as f_global:
-                    while 8:
-                        line = f_global.readline().strip()
-                        if not line:
-                            break
-                        if line.split(',')[0][1:] in sl_for_diag.get(line_source[0], 'бла'):
-                            module = line.split(',')[0][1:]  # алгоритмическое имя модуля
-                            while 8:
-                                tmp_line = f_global.readline().strip()
-                                if tmp_line == '/':  # конец описания модуля отделяется двумя строками по / в каждой
-                                    tmp_line = f_global.readline().strip()
-                                    if tmp_line == '/':
-                                        break
-                                if not tmp_line:
-                                    break
-                                if sl_for_diag.get(line_source[0]):
-                                    curr_module = sl_for_diag[line_source[0]][module]  # тип модуля
-                                else:
-                                    curr_module = ''
-                                tag = get_variable(line=tmp_line)
-                                if tag in sl_module_diag_sig.get(curr_module, 'бла'):
-                                    if tag not in sl_module_diag_sig_conform.get(curr_module, 'бла'):
-                                        tag_in = tag
-                                    else:
-                                        tag_in = sl_module_diag_sig_conform[curr_module].get(tag)
-                                    # print(tmp_line.split(',')[0][1:], get_variable(line=tmp_line))
-
-                                    # В словаре диагностики (алг.имя модуля, имя пер) : [инд. пер, тип пер]
-                                    if (module, tag_in) not in sl_global_diag:
-                                        index_par = tmp_line[:tmp_line.find(',//')].split(',')[-8]
-                                        sl_global_diag[(module, tag_in)] = [index_par,
-                                                                            tmp_line.split(',')[1]]
             if sl_global_diag:
                 s_all += create_group_diag(diag_sl=sl_global_diag, template_no_arc_index=tmp_ind_no_arc,
                                            source=line_source[0], template_arc_index=tmp_ind_arc,
@@ -1271,7 +1184,8 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
 
             # Обработка и запись в карту МКО
             if sl_add_cpu_mko.get(line_source[0]):
-                s_all += create_group_add_noarc(sl_add=sl_add_cpu_mko.get(line_source[0]),
+                sl_in = {par: (value[0], 'bool') for par, value in sl_add_cpu_mko.get(line_source[0], {}).items()}
+                s_all += create_group_add_noarc(sl_add=sl_in,
                                                 template_no_arc_index=tmp_ind_no_arc,
                                                 source=line_source[0])
 
@@ -1298,9 +1212,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
                 print(f'Карта адресов контроллера {line_source[0]} не обновлена')
             else:
                 check_diff_file(check_path=os.path.join('File_for_Import', 'Maps'),
-                                file_name_check=f'trei_map_{line_source[0]}.xml',
+                                file_name_check=f'trei_map_U2_{line_source[0]}.xml',
                                 new_data=new_map,
-                                message_print=f'Требуется заменить карту адресов контроллера {line_source[0]}')
+                                message_print=f'Требуется заменить карту адресов контроллера U2 {line_source[0]}')
 
             # совместно с модулем difflib можно в будущем определить отличающиеся строки - на будущее
             # new_map_file = new_map_file.splitlines(keepends=True)
@@ -1356,14 +1270,14 @@ def read_mko_cpu_index(tuple_all_cpu: tuple, sl_cpu_path: dict):
 
 def create_group_add_noarc(sl_add, template_no_arc_index, source):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_add.items():
@@ -1377,14 +1291,14 @@ def create_group_add_noarc(sl_add, template_no_arc_index, source):
 
 def create_group_add_arc(sl_add: dict, template_arc, source, post_pref_par: str):
     sl_data_cat = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Discrete'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Discrete'
     }
     sl_type = {
-        'R': 'Analog',
-        'I': 'Analog',
-        'B': 'Bool'
+        'real': 'Analog',
+        'int': 'Analog',
+        'bool': 'Bool'
     }
     s_out = ''
     for key, value in sl_add.items():

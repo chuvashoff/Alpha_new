@@ -9,6 +9,7 @@ import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
 from alpha_index_v3 import create_index, read_mko_cpu_index
+from alpha_index_v3u2 import create_index_u2
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv, create_mnemo_drv_general
 from Create_mnemo_visual import create_mnemo_visual
 from create_reports import create_reports, create_reports_pz, create_reports_sday
@@ -150,6 +151,9 @@ try:
     sl_project_settings_default = {
         "Module": {
             "Unet_Client": [0, 1]
+        },
+        "Protocol": {
+            "Unet_version": 1
         }
     }
     try:
@@ -165,6 +169,7 @@ try:
         u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
         unet_start = int(u[0])
         n_unet = int(u[1])
+        unet_version = int(sl_project_settings.get("Protocol", {}).get("Unet_version", 1))
     except (Exception, KeyError):
         print('Файл Systemach/Project_settings.json заполнен некорректно, '
               'Настройки будут использованы по умолчанию')
@@ -172,6 +177,7 @@ try:
         u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
         unet_start = u[0]
         n_unet = u[1]
+        unet_version = sl_project_settings.get("Protocol", {}).get("Unet_version", 1)
 
     # all_cpu - кортеж со всеми контроллерами с цифрой объекта
     all_cpu = tuple([f"{cpu}!{obj[2]}".rstrip('') for obj in sl_object_all for cpu in sl_object_all[obj]])
@@ -355,7 +361,7 @@ try:
         if len(check_test) > 100:
             with open('Required_change.txt', 'w') as f_test:
                 last_change = [i for i in ''.join(check_test).split(f"{'-'* 70}\n") if i][-1]
-                f_test.write(f"{'-'* 70}\n{last_change}\n")
+                f_test.write(f"{'-'* 70}\n{last_change.strip()}\n")
 
     sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
                 'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
@@ -558,7 +564,7 @@ try:
     #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
     #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
-    # print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
+    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
     is_create_rlock(sl_object_all=sl_object_all, sl_cpu_archive=sl_cpu_archive)
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
@@ -574,7 +580,7 @@ try:
     # print(return_sl_mnemo_cdo)
     # print()
 
-    print(datetime.datetime.now(), '- Фиксики начинают создавать и проверять выходные файлы')
+    # print(datetime.datetime.now(), '- Фиксики начинают создавать и проверять выходные файлы')
     sl_w = {
         # return_sl_ai =
         # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
@@ -596,7 +602,7 @@ try:
         # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
         'DI': {'dict': return_sl_di,
                'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.sColorOff', 'Attributes.sColorOn',
-                              'Attributes.Module_Canal'),
+                              'Attributes.Module_Canal', 'Attributes.Inverse_Canal'),
                'dict_agreg_IOS': sl_agreg,
                'dict_diff': return_sl_di_diff
                },
@@ -716,7 +722,12 @@ try:
             root_plc_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
                                          xmlns_trei="trei", xmlns_ct="automation.control")
             child = ET.SubElement(root_plc_aspect, 'trei_trei', name=f"PLC_{cpu}_{objects[2]}")
-            child_cpu = ET.SubElement(child, 'trei_master-module', name="CPU")
+            if unet_version == 2:
+                child_cpu = ET.SubElement(child, 'trei_master-module', name="CPU",
+                                          soft_version=f"UnimodPro{unet_version}")
+            else:
+                child_cpu = ET.SubElement(child, 'trei_master-module', name="CPU")
+
             if pref_IP[0] != '000.000.000.':
                 ip1 = '.'.join([a.lstrip('0') for a in f'{pref_IP[0]}{sl_object_all[objects][cpu][0]}'.split('.')])
                 ET.SubElement(child_cpu, 'trei_ethernet-adapter', name="Eth1", address=ip1)
@@ -750,7 +761,11 @@ try:
                 ET.SubElement(child_cpu, 'trei_unet-server', name="UnetServer",
                               address_map=f"PLC_{cpu}_{objects[2]}.CPU.Tree.UnetAddressMap", port="6021")
             child_app = ET.SubElement(child_cpu, 'dp_application-object', name="Tree", access_level="public")
-            ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
+            if unet_version == 2:
+                ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap",
+                              protocol_version=f"{'UNET2' if unet_version == 2 else 'UNET'}")
+            else:
+                ET.SubElement(child_app, 'trei_unet-address-map', name="UnetAddressMap")
 
             if cpu in sl_cpu_res:
                 child_cpu_res = ET.SubElement(child, 'trei_redundant-master-module', name="R-CPU", cpu="CPU")
@@ -1622,37 +1637,76 @@ try:
     # print('sl_add_obj_cpu_mko', sl_add_obj_cpu_mko)
     # print('sl_obj_cpu_mko_index', sl_obj_cpu_mko_index)
     # print('sl_add_cpu_mko', sl_add_cpu_mko)
-    create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
-                 sl_sig_alg=sl_sig_alg, 
-                 sl_sig_mod=sl_sig_mod, 
-                 sl_sig_ppu=sl_sig_ppu,
-                 sl_sig_ts=sl_sig_ts, 
-                 sl_sig_wrn=sl_sig_wrn, 
-                 sl_pz=sl_pz, 
-                 sl_cpu_spec=sl_CPU_spec, 
-                 sl_for_diag=sl_for_diag,
-                 sl_cpu_drv_signal=sl_cpu_drv_signal,
-                 sl_grh=sl_grh,
-                 sl_sig_alr=sl_sig_alr,
-                 choice_tr=choice_tr,
-                 sl_cpu_drv_iec=sl_cpu_drv_iec,
-                 # Передаём словари вида {cpu: кортеж алг. переменных}, чтобы отсечь мусор, который может быть в ПЛК
-                 sl_ai_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ai.items()},
-                 sl_ae_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ae.items()},
-                 sl_di_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_di.items()},
-                 sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
-                 sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
-                 sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
-                 sl_cpu_type_im={cpu: {sl_par[_][0].split('.')[0] for _ in sl_par} for cpu, sl_par in return_sl_im.items()},
-                 sl_cpu_path=sl_cpu_path,
-                 buff_size=buff_size,
-                 sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit,
-                 sl_cpu_cdo={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_cdo.items()},
-                 sl_cpu_res=sl_cpu_res,
-                 sl_add_cpu_mko=sl_add_cpu_mko,
-                 sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
-                 sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars)
-                 )
+    if unet_version == 1 or unet_version == "1":
+        create_index(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
+                     sl_sig_alg=sl_sig_alg,
+                     sl_sig_mod=sl_sig_mod,
+                     sl_sig_ppu=sl_sig_ppu,
+                     sl_sig_ts=sl_sig_ts,
+                     sl_sig_wrn=sl_sig_wrn,
+                     sl_pz=sl_pz,
+                     sl_cpu_spec=sl_CPU_spec,
+                     sl_for_diag=sl_for_diag,
+                     sl_cpu_drv_signal=sl_cpu_drv_signal,
+                     sl_grh=sl_grh,
+                     sl_sig_alr=sl_sig_alr,
+                     choice_tr=choice_tr,
+                     sl_cpu_drv_iec=sl_cpu_drv_iec,
+                     # Передаём словари вида {cpu: кортеж алг. переменных},
+                     # чтобы отсечь мусор, который может быть в ПЛК
+                     sl_ai_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ai.items()},
+                     sl_ae_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ae.items()},
+                     sl_di_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_di.items()},
+                     sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
+                     sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
+                     sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
+                     sl_cpu_type_im={cpu: {sl_par[_][0].split('.')[0] for _ in sl_par} for cpu, sl_par in
+                                     return_sl_im.items()},
+                     sl_cpu_path=sl_cpu_path,
+                     buff_size=buff_size,
+                     sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit,
+                     sl_cpu_cdo={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_cdo.items()},
+                     sl_cpu_res=sl_cpu_res,
+                     sl_add_cpu_mko=sl_add_cpu_mko,
+                     sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
+                     sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars)
+                     )
+    elif unet_version == 2 or unet_version == "2":
+        create_index_u2(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
+                        sl_sig_alg=sl_sig_alg,
+                        sl_sig_mod=sl_sig_mod,
+                        sl_sig_ppu=sl_sig_ppu,
+                        sl_sig_ts=sl_sig_ts,
+                        sl_sig_wrn=sl_sig_wrn,
+                        sl_pz=sl_pz,
+                        sl_cpu_spec=sl_CPU_spec,
+                        sl_for_diag=sl_for_diag,
+                        sl_cpu_drv_signal=sl_cpu_drv_signal,
+                        sl_grh=sl_grh,
+                        sl_sig_alr=sl_sig_alr,
+                        choice_tr=choice_tr,
+                        sl_cpu_drv_iec=sl_cpu_drv_iec,
+                        # Передаём словари вида {cpu: кортеж алг. переменных},
+                        # чтобы отсечь мусор, который может быть в ПЛК
+                        sl_ai_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ai.items()},
+                        sl_ae_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_ae.items()},
+                        sl_di_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_di.items()},
+                        sl_set_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_set.items()},
+                        sl_btn_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_btn.items()},
+                        sl_im_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_im.items()},
+                        sl_cpu_type_im={cpu: {sl_par[_][0].split('.')[0] for _ in sl_par} for cpu, sl_par in
+                                        return_sl_im.items()},
+                        sl_cpu_path=sl_cpu_path,
+                        buff_size=buff_size,
+                        sl_cpu_drv_signal_with_imit=sl_cpu_drv_signal_with_imit,
+                        sl_cpu_cdo={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_cdo.items()},
+                        sl_cpu_res=sl_cpu_res,
+                        sl_add_cpu_mko={},  # sl_add_cpu_mko, !!!
+                        sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
+                        sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars,
+                                                        sub_dict=return_sl_ai_add_pars)
+                        )
+
 
     # print(return_alr)
     # print(sl_CPU_spec)
@@ -1715,7 +1769,8 @@ try:
                            size_vysota=size_vysota,
                            sl_param=sl_mnemo_ai,
                            # {node: sl_mnemo_ai.get(node) for node in tuple_mnemo if node in sl_mnemo_ai},
-                           sl_object_all=sl_object_all
+                           sl_object_all=sl_object_all,
+                           tuple_mnemo=tuple_mnemo
                            )
 
     if sl_mnemo_ae:
@@ -1728,7 +1783,8 @@ try:
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
                            sl_param=sl_mnemo_ae,
-                           sl_object_all=sl_object_all
+                           sl_object_all=sl_object_all,
+                           tuple_mnemo=tuple_mnemo
                            )
 
     if sl_mnemo_di:
@@ -1738,7 +1794,8 @@ try:
                            size_shirina=size_shirina,
                            size_vysota=size_vysota,
                            sl_param=sl_mnemo_di,
-                           sl_object_all=sl_object_all
+                           sl_object_all=sl_object_all,
+                           tuple_mnemo=tuple_mnemo
                            )
 
     if sl_cnt:
