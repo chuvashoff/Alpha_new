@@ -482,6 +482,9 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
     progress_percent = 0
     for cpu, path in sl_cpu_path.items():
         # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
+        if path is None or not path:
+            print(f"НЕ УКАЗАНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
+            continue
         if not os.path.exists(path):
             print(f"НЕ НАЙДЕНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
             continue
@@ -834,7 +837,6 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
 
                                 else:
                                     struct_tag[alg_name] = [index_par, type_tag]
-
                         if 'APR|' in current_dict_tag.get('Name', '') \
                                 and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             tmp_var = current_dict_tag.get('Name', '').lower().replace('apr|', '').replace('[', '').replace(']', '')
@@ -930,6 +932,7 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                                 and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
                             tmp_alg_alr = current_dict_tag.get('Name')  # c префиксом ALR|
                             alg_alr = tmp_alg_alr.replace('ALR|', '')  # без префикса ALR|
+                            index_par = current_dict_tag.get('Offset')
                             # Если текущий контроллер есть в словаре из конфигуратора...
                             if line_source[0] in sl_sig_alr:
                                 # ...если ALRка есть в перечне ALRов контроллера из конфигуратора и нет в PZ

@@ -482,6 +482,9 @@ def create_index(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, s
     progress_percent = 0
     for cpu, path in sl_cpu_path.items():
         # Если нет папки контроллера, то сообщаем об этом юзеру и идём дальше
+        if path is None or not path:
+            print(f"НЕ УКАЗАНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
+            continue
         if not os.path.exists(path):
             print(f"НЕ НАЙДЕНА ПАПКА ПРОЕКТА КОНТРОЛЛЕРА {cpu}, КАРТА АДРЕСОВ НЕ БУДЕТ ОБНОВЛЕНА")
             continue

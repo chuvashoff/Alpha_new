@@ -8,6 +8,7 @@ import warnings
 import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
+# from read_jtr import is_create_trends_jtr
 from alpha_index_v3 import create_index, read_mko_cpu_index
 from alpha_index_v3u2 import create_index_u2
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv, create_mnemo_drv_general
@@ -564,7 +565,7 @@ try:
     #                     and int(step) in sl_condition_in_cpu[cpu][mod]:
     #                 sl_condition_in_cpu[cpu][mod][int(step)].update({alg: tuple_property_alg[1]})
 
-    print(datetime.datetime.now(), ' - Фиксики начинают создавать и проверять выходные файлы')
+    print(datetime.datetime.now(), '- Фиксики начинают создавать и проверять выходные файлы')
     is_create_rlock(sl_object_all=sl_object_all, sl_cpu_archive=sl_cpu_archive)
     # Сеть(коммутаторы) - уже новая функция
     return_sl_net = {}
@@ -612,7 +613,8 @@ try:
                'tuple_attr': ('unit.System.Attributes.Description',
                               'Attributes.StartView', 'Attributes.Gender', 'Attributes.EUnit', 'Attributes.FracDigits'),
                'dict_agreg_IOS': sl_agreg,
-               'dict_diff': return_sl_im_diff
+               # 'dict_diff': return_sl_im_diff
+               'dict_diff': {_: {p: _ for p, _ in sl_val.items() if not (p.endswith(('_Swap', '_WorkTime')))} for _, sl_val in return_sl_im_diff.items()}
                },
         # return_sl_set =
         # {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}}
@@ -863,6 +865,7 @@ try:
                     if sl_w[node].get('dict_diff'):
                         # print(objects[1], sl_w[node]['dict_diff'][cpu])
                         for alg_par, value_diff in sl_w[node]['dict_diff'][cpu].items():
+                            # print(node, alg_par, value_diff, sl_w_node_dict_cpu_copy.get(alg_par), f'{objects[1]}(нет)' in value_diff)
                             if f'{objects[1]}(нет)' in value_diff:
                                 # print(objects[1], alg_par)
                                 sl_w_node_dict_cpu_copy[alg_par] = \
@@ -1506,7 +1509,10 @@ try:
                               aspect="Types.IOS_Aspect", access_level="public")
             # для каждого драйвера...
             for driver in return_ios_drv:
-                # создаём узлы драйверов
+                # print(objects[0], driver, set(return_ios_drv[driver].keys()) & set(sl_object_all[objects].keys()))
+                # создаём узлы драйверов, если в объекте есть контроллеры данного драйвреа
+                if not (set(return_ios_drv[driver].keys()) & set(sl_object_all[objects].keys())):
+                    continue
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
                                 objects=objects, name_group=driver,
                                 sl_par=return_ios_drv[driver],
@@ -1585,6 +1591,10 @@ try:
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
                      sl_for_diag=sl_for_diag,
                      sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
+    #
+    # is_create_trends_jtr(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
+    #                      sl_for_diag=sl_for_diag,
+    #                      sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
 
     book.close()
 
@@ -1706,7 +1716,6 @@ try:
                         sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars,
                                                         sub_dict=return_sl_ai_add_pars)
                         )
-
 
     # print(return_alr)
     # print(sl_CPU_spec)
