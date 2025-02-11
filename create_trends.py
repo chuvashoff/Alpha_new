@@ -4,7 +4,8 @@ from func_for_v3 import check_diff_file, is_f_ind, f_ind_json
 import os
 
 
-def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag, sl_need_add: dict[dict]):
+def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag, sl_need_add: dict[dict],
+                     return_sl_obj_add: dict[dict[dict]], sl_add_structure_type_trends: dict):
     # ТРЕНДЫ- JSON
 
     # Определение объявленных мнемосхем с листа настроек
@@ -499,6 +500,27 @@ def is_create_trends(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_diag, 
                                                 f'{full_tag}',
                                             "EUnit": '-',
                                             "Description": f'{descr}'}})
+
+        # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+        if obj[:2] in return_sl_obj_add:
+            # print(obj)
+            # print(return_sl_obj_add)
+            # print(sl_add_structure_type_trends)
+            for cpu, vals_group in return_sl_obj_add.get(obj[:2]).items():
+                for group_type, vals_par in vals_group.items():
+                    if group_type in sl_add_structure_type_trends:
+                        for par in vals_par:
+                            descr = vals_par[par][3] if vals_par[par][3] else par
+                            e_unit = vals_par[par][1]
+                            for tag in sl_add_structure_type_trends.get(group_type, ''):
+                                full_tag = f'{obj[0]}.{obj[0]}.{group_type}.{par}.{tag}'
+                                lst_json.append(
+                                    {"Signal": {"UserTree": f"{obj[1]}/{par}/{descr}",
+                                                "OpcTag":
+                                                    f'{full_tag}',
+                                                "EUnit": f'{e_unit}',
+                                                "Description": f'{descr}'}})
+
 
         # Проверяем и перезаписываем файлы трендов в случае найденных отличий
         check_diff_file(check_path=os.path.join('File_for_Import', 'Trends'),

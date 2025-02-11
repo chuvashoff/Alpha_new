@@ -8,8 +8,8 @@ import warnings
 import sys
 from func_for_v3 import *
 from create_trends import is_create_trends
-# from read_jtr import is_create_trends_jtr
-from alpha_index_v3 import create_index, read_mko_cpu_index
+from create_trends_jtr import is_create_trends_jtr
+from alpha_index_v3 import create_index, read_mko_cpu_index, create_index_add
 from alpha_index_v3u2 import create_index_u2
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv, create_mnemo_drv_general
 from Create_mnemo_visual import create_mnemo_visual
@@ -157,6 +157,12 @@ try:
             "Unet_version": 1
         }
     }
+    # forFM
+    # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+    # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+    # return_sl_cpu_add_ip = {cpu: ip}
+    return_sl_obj_add, return_sl_cpu_add_index, return_sl_cpu_add_ip = {}, {}, {}
+    sl_add_structure_type_trends = {}
     try:
         if os.path.exists(os.path.join('Template_Alpha', f'Project_settings.json')):
             with open(os.path.join('Template_Alpha', 'Project_settings.json'), 'r',
@@ -180,6 +186,37 @@ try:
         n_unet = u[1]
         unet_version = sl_project_settings.get("Protocol", {}).get("Unet_version", 1)
 
+    try:
+        if "Add_Structure+" in sl_project_settings and isinstance(sl_project_settings.get("Add_Structure+"), dict):
+            return_sl_obj_add, return_sl_cpu_add_index, return_sl_cpu_add_ip = is_read_add_struct(
+                dict_add=sl_project_settings.get("Add_Structure+"))
+        if "Add_Structure_type_trends+" in sl_project_settings and isinstance(sl_project_settings.get("Add_Structure_type_trends+"), dict):
+            sl_add_structure_type_trends = sl_project_settings.get("Add_Structure_type_trends+")
+    except (Exception, KeyError):
+        print("Добавление по типу FM пошло не по плану :/ ")
+
+    # Добавляем объекты в общий словарь
+    for add_obj in return_sl_obj_add:
+        if add_obj[0] not in [_[0] for _ in sl_object_all]:  # Эта ветка, если таких объектов нет
+            sl_tmp = {add_obj + (len(sl_object_all) + 1,): {}}
+            for add_cpu in return_sl_obj_add[add_obj]:
+                ipp = return_sl_cpu_add_ip.get(add_cpu, '')
+                ipp = ipp[ipp.rfind('.')+1:]
+                sl_tmp[add_obj + (len(sl_object_all) + 1,)].update({add_cpu: (ipp, ipp)})
+            sl_object_all.update(sl_tmp)
+        else:  # Эта ветка, когда объекты такие есть
+            find_obj = ''
+            for i in sl_object_all:
+                if add_obj[0] in i:
+                    find_obj = i
+                    break
+            if not find_obj: continue
+            for add_cpu in return_sl_obj_add[add_obj]:
+                if add_cpu not in sl_object_all.get(find_obj, ''):
+                    ipp = return_sl_cpu_add_ip.get(add_cpu, '')
+                    ipp = ipp[ipp.rfind('.')+1:]
+                    sl_object_all[find_obj].update({add_cpu: (ipp, ipp)})
+    # print(sl_object_all)
     # all_cpu - кортеж со всеми контроллерами с цифрой объекта
     all_cpu = tuple([f"{cpu}!{obj[2]}".rstrip('') for obj in sl_object_all for cpu in sl_object_all[obj]])
     # all_cpu_select - словарь кортежей контроллеров с цифрой объекта с разбивкой
@@ -686,7 +723,6 @@ try:
                 'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.State_Out'),
                 'dict_agreg_IOS': {}
                 },
-        # return_sl_cdo = {cpu: {алг_пар: (ТИП ALG в студии, русское имя, Нестандартный канал Да/Нет, модуль, канал)}}
         'Pars': {'dict': is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars),
                  'tuple_attr': ('unit.System.Attributes.Description', 'Attributes.EUnit'),
                  'dict_agreg_IOS': {}
@@ -709,8 +745,9 @@ try:
         root_ios_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
                                      xmlns_trei="trei", xmlns_ct="automation.control")
         child_object = ET.SubElement(root_ios_aspect, 'ct_object', name=f"{objects[0]}", access_level="public")
-        ET.SubElement(child_object, 'attribute', type=f"unit.System.Attributes.Description",
-                      value=f"{objects[1]}")
+        if objects[1]:
+            ET.SubElement(child_object, 'attribute', type=f"unit.System.Attributes.Description",
+                          value=f"{objects[1]}")
         # ...добавляем агрегаторы
         for agreg, type_agreg in sl_agreg.items():
             ET.SubElement(child_object, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
@@ -921,7 +958,7 @@ try:
                                             if 'CPU' in value
                                             else tuple_attr + tuple([f'Attributes.Channel_{i+1}'
                                                                      for i in range(len(value[2]))])),
-                                           ([(f'Мастер-модуля ({", ".join(sl_cpu_res.get(cpu))}) ({value[1]})' if cpu in sl_cpu_res
+                                           ([(f'Мастер-модуля {", ".join(sl_cpu_res.get(cpu))} ({value[1]})' if cpu in sl_cpu_res
                                               else f'Мастер-модуль {alg_par} ({value[1]})'
                                              if 'CPU' in value else f'Модуль {alg_par} ({value[1]})'),
                                             alg_par, name_cpu_main, name_cpu_res] if 'CPU' in value
@@ -1031,7 +1068,7 @@ try:
                                                  for alg_par, value in sl_sig_drv.items()})
 
             # Если есть ТР в данном контроллере...
-            if 'ТР' in sl_CPU_spec[cpu] and sl_TR:
+            if 'ТР' in sl_CPU_spec.get(cpu, '') and sl_TR:
                 # Создаём узел TR, если в настроечном файле есть выбранный топливник
                 if choice_tr in sl_TR:
                     if len(sl_TR[choice_tr]) == 1:
@@ -1045,6 +1082,23 @@ try:
                             ET.SubElement(child_TR, 'ct_object', name=f"{sub_node_tr.replace('TR_', '')}",
                                           base_type=f'Types.TR.{choice_tr}.{sub_node_tr}.{sub_node_tr}_PLC_View',
                                           aspect="Types.PLC_Aspect", access_level="public")
+
+            # Обрабатываем добавляемые извне структуры
+            # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+            # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+            if cpu in return_sl_cpu_add_index:
+                # child_add = ET.SubElement(child_app, 'ct_object', name="Diag", access_level="public")
+                # print(return_sl_obj_add)
+                for add_obj,cpu_value_add_obj in return_sl_obj_add.items():
+                    if cpu in cpu_value_add_obj:
+                        child_add = ET.SubElement(child_app, 'ct_object', name=f"{add_obj[0]}", access_level="public")
+                        tuple_attr_a = ('Attributes.EUnit', 'Attributes.FracDigits','unit.System.Attributes.Description')
+                        for sub_group, sl_pars_add in cpu_value_add_obj.get(cpu, {}).items():
+                            add_xml_par_plc_additional(name_group=sub_group,
+                                                       sl_par=sl_pars_add,
+                                                       parent_node=child_add,
+                                                       sl_attr_par={alg_par: dict(zip(tuple_attr_a, value[1:]))
+                                                         for alg_par, value in sl_pars_add.items()})
 
             # Нормируем и записываем PLC-аспект
             temp = ET.tostring(root_plc_aspect).decode('UTF-8')
@@ -1559,6 +1613,25 @@ try:
                             ET.SubElement(child_sub, 'ct_init-ref',
                                           ref="_PLC_View", target=f"PLC_{cpu_tr}_{objects[2]}.CPU.Tree.System."
                                                                   f"TR.{sub_node_tr.replace('TR_', '')}")
+        # Обрабатываем добавляемые извне структуры
+        # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+        # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+
+        if objects[:2] in return_sl_obj_add:
+            child_adds = ET.SubElement(child_object, 'ct_object', name=f'{objects[0]}', access_level="public")
+            # ...добавляем агрегаторы
+            for agreg, type_agreg in sl_agreg.items():
+                ET.SubElement(child_adds, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                              aspect="Types.IOS_Aspect", access_level="public")
+
+            for added_cpu, vals_node in return_sl_obj_add.get(objects[:2], {}).items():
+                for added_nodes, vals_par in vals_node.items():
+                    add_xml_par_ios_additional(set_cpu_object=set(sl_object_all[objects].keys()),
+                                               objects=objects, name_group=added_nodes,
+                                               sl_par={added_cpu: vals_par},
+                                               parent_node=child_adds, sl_agreg=sl_agreg,
+                                               plc_node_tree=f"{objects[0]}.{added_nodes}")
+
         # Нормируем и записываем IOS-аспект
         temp = ET.tostring(root_ios_aspect).decode('UTF-8')
         check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
@@ -1582,19 +1655,23 @@ try:
     # Создаём папку SYS
     is_create_sys(sl_object_all=sl_object_all, name_prj=name_prj, return_sl_net=return_sl_net,
                   architecture=architecture, sl_agreg=sl_agreg,
-                  server_name_osn=server_name_osn, server_name_rez=server_name_rez)
+                  server_name_osn=server_name_osn, server_name_rez=server_name_rez, choice_tr=choice_tr)
     # # В случае клиент-серверной архитектуры создаём сообщения о резервном переходе
     # if architecture == 'клиент-сервер':
     #     is_create_service_snmp(server_name_rez=server_name_rez)
 
+    # нужно добавить в тренды добавленные извне структуры
+    # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+    # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
     # Создаём тренды
     is_create_trends(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
                      sl_for_diag=sl_for_diag,
-                     sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
-    #
-    # is_create_trends_jtr(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
-    #                      sl_for_diag=sl_for_diag,
-    #                      sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
+                     sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars),
+                     return_sl_obj_add=return_sl_obj_add, sl_add_structure_type_trends=sl_add_structure_type_trends)
+
+    is_create_trends_jtr(book=book, sl_object_all=sl_object_all, sl_cpu_spec=sl_CPU_spec, sl_all_drv=sl_all_drv,
+                         sl_for_diag=sl_for_diag,
+                         sl_need_add=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars))
 
     book.close()
 
@@ -1681,6 +1758,11 @@ try:
                      sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
                      sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars)
                      )
+        # создаём индексы добавленных контроллеров
+        # Обрабатываем добавляемые извне структуры
+        # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+        # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+        create_index_add(return_sl_cpu_add_index=return_sl_cpu_add_index)
     elif unet_version == 2 or unet_version == "2":
         create_index_u2(tuple_all_cpu=tuple([cpu for obj in sl_object_all for cpu in sl_object_all[obj]]),
                         sl_sig_alg=sl_sig_alg,

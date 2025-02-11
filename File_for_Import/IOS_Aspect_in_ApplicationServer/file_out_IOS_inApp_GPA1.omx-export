@@ -1,6 +1,6 @@
 <omx xmlns="system" xmlns:dp="automation.deployment" xmlns:trei="trei" xmlns:ct="automation.control">
   <ct:object name="GPA1" access-level="public">
-    <attribute type="unit.System.Attributes.Description" value="ГПА1"/>
+    <attribute type="unit.System.Attributes.Description" value="ГПА-1"/>
     <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
     <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
     <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
@@ -11,63 +11,6 @@
       <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
       <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
       <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-      <ct:object name="HW" access-level="public">
-        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="AD200" base-type="Types.DIAG_CPU.DIAG_CPU_M501E_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GPA_1.CPU.Tree.Diag.HW.AD200" access-level="public">
-          <ct:init-ref ref="_PLC_View" target="PLC_GPA_1.CPU.Tree.Diag.HW.AD200"/>
-        </ct:object>
-        <ct:object name="AD100" base-type="Types.DIAG_CPU.DIAG_CPU_M501E_IOS_View" aspect="Types.IOS_Aspect" original="PLC_GTU_1.CPU.Tree.Diag.HW.AD100" access-level="public">
-          <ct:init-ref ref="_PLC_View" target="PLC_GTU_1.CPU.Tree.Diag.HW.AD100"/>
-        </ct:object>
-        <ct:object name="НКУ_AD100" base-type="Types.DIAG_CPU.DIAG_CPU_M501E_IOS_View" aspect="Types.IOS_Aspect" original="PLC_NKU_1.CPU.Tree.Diag.HW.НКУ_AD100" access-level="public">
-          <ct:init-ref ref="_PLC_View" target="PLC_NKU_1.CPU.Tree.Diag.HW.НКУ_AD100"/>
-        </ct:object>
-      </ct:object>
-      <ct:object name="Connect" access-level="public">
-        <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-        <ct:parameter name="Connect_GTU1_port_1" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_GTU_1_Eth1" object="Service.Modules.UNET Client1.PLC_GTU_1.CPU_Eth1" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_GTU_1_Eth1.IsConnected" target="Connect_GTU1_port_1" action="set_all"/>
-        <ct:parameter name="Connect_GTU1_port_2" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_GTU_1_Eth2" object="Service.Modules.UNET Client1.PLC_GTU_1.CPU_Eth2" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_GTU_1_Eth2.IsConnected" target="Connect_GTU1_port_2" action="set_all"/>
-        <ct:parameter name="Connect_GPA1_port_1" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_GPA_1_Eth1" object="Service.Modules.UNET Client1.PLC_GPA_1.CPU_Eth1" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_GPA_1_Eth1.IsConnected" target="Connect_GPA1_port_1" action="set_all"/>
-        <ct:parameter name="Connect_GPA1_port_2" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с AD200. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_GPA_1_Eth2" object="Service.Modules.UNET Client1.PLC_GPA_1.CPU_Eth2" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_GPA_1_Eth2.IsConnected" target="Connect_GPA1_port_2" action="set_all"/>
-        <ct:parameter name="Connect_NKU1_port_1" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с НКУ_AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с НКУ_AD100. Порт 1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_NKU_1_Eth1" object="Service.Modules.UNET Client1.PLC_NKU_1.CPU_Eth1" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_NKU_1_Eth1.IsConnected" target="Connect_NKU1_port_1" action="set_all"/>
-        <ct:parameter name="Connect_NKU1_port_2" type="bool" direction="out" access-level="public">
-          <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Нет связи с НКУ_AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Нет связи с НКУ_AD100. Порт 2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
-          <attribute type="unit.System.Attributes.InitialValue" value="true"/>
-        </ct:parameter>
-        <ct:subject-ref name="_NKU_1_Eth2" object="Service.Modules.UNET Client1.PLC_NKU_1.CPU_Eth2" const-access="false" aspected="false" access-level="public"/>
-        <ct:bind source="_NKU_1_Eth2.IsConnected" target="Connect_NKU1_port_2" action="set_all"/>
-      </ct:object>
     </ct:object>
     <ct:object name="System" access-level="public">
       <ct:object name="Agregator_Important_IOS" base-type="Types.MSG_Agregator.Agregator_Important_IOS" aspect="Types.IOS_Aspect" access-level="public"/>

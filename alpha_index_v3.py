@@ -7,6 +7,7 @@ import string
 import sys
 
 from func_for_v3 import *
+from read_template_tr import tuple_tag
 
 
 def create_sl(text, str_check, str_check_block, par_config):
@@ -1415,3 +1416,59 @@ def create_group_alr(sl_global_fast_alr, template_arc_index, source):
                                                          data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out
 '''
+
+def create_index_add(return_sl_cpu_add_index: dict):
+    buff_size = 50
+    tmp_ind_arc = '  <item Binding="Introduced">\n' \
+                  '    <node-path>$name_signal</node-path>\n' \
+                  '    <protocoltype>$type_signal</protocoltype>\n' \
+                  '    <index>$index</index>\n' \
+                  f'    <buffer-length>{buff_size}</buffer-length>\n' \
+                  '    <archivation-period>1</archivation-period>\n' \
+                  '    <category>$data_category</category>\n' \
+                  '  </item>\n'
+    tmp_ind_no_arc = '  <item Binding="Introduced">\n' \
+                     '    <node-path>$name_signal</node-path>\n' \
+                     '    <protocoltype>$type_signal</protocoltype>\n' \
+                     '    <index>$index</index>\n' \
+                     '    <category>$data_category</category>\n' \
+                     '  </item>\n'
+
+    sl_data_cat = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Discrete',
+        'N': 'Analog'
+    }
+    sl_type = {
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool',
+        'N': 'Double'
+    }
+    # return_sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+    # print(return_sl_cpu_add_index)
+    for cpu, vals_tag in return_sl_cpu_add_index.items():
+        s_out = ''
+        for tuple_key, index_tag in vals_tag.items():
+            tag = tuple_key[0]
+            type_tag = tuple_key[1]
+            pref_arc = f"NoArc{sl_data_cat[type_tag]}"
+            s_out += Template(tmp_ind_no_arc).substitute(name_signal=f'{tag}',
+                                                         type_signal=sl_type[type_tag],
+                                                         index=index_tag,
+                                                         data_category=f'DataCategory_{cpu}_{pref_arc}')
+
+        # Проверка на пустую карту, то есть в том случае, когда
+        new_map = '<root format-version=\"0\">\n' + s_out.rstrip() + '\n</root>'
+        if new_map == '<root format-version=\"0\">\n' + '\n</root>':
+            print(f'Карта добавленного контроллера {cpu} пустая, не обновлена')
+        else:
+            check_diff_file(check_path=os.path.join('File_for_Import', 'Maps'),
+                            file_name_check=f'ADD_trei_map_{cpu}.xml',
+                            new_data=new_map,
+                            message_print=f'Требуется импортировать карту адресов контроллера {cpu} - '
+                                          f'File_for_Import/Maps/ADD_trei_map_{cpu}.xml')
+
+    return
+

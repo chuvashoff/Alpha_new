@@ -329,7 +329,10 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
     sl_type = {
         'real': 'Analog',
         'int': 'Analog',
-        'bool': 'Bool'
+        'bool': 'Bool',
+        'R': 'Analog',
+        'I': 'Analog',
+        'B': 'Bool'
     }
     s_out = ''
     for key, value in drv_sl.items():

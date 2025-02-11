@@ -1086,8 +1086,18 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
     child_historian = ET.SubElement(child_storage, 'ct_object', name='Historian', access_level="public")
 
     if architecture == 'клиент-сервер':
-        # Добавляем структуру InervalLock в Historian (оставляем только папочки)
         for serv_name in (server_name_osn, server_name_rez):
+            # Добавляем структуру для диагностики связи HistoryModule и Historian
+            child_diag_connect_hist_1 = ET.SubElement(child_storage, 'ct_object',
+                                                      attrib={'name': f'Database_{serv_name}',
+                                                              'access-level': 'public'})
+            child_diag_connect_hist_2 = ET.SubElement(child_diag_connect_hist_1, 'ct_object',
+                                                      attrib={'name': f'Database_{serv_name}',
+                                                              'access-level': 'public'})
+            ET.SubElement(child_diag_connect_hist_2, 'ct_parameter', name='Connected', type='bool',
+                          direction='out', access_level="public")
+
+            # Добавляем структуру InervalLock в Historian (оставляем только папочки)
             child_hist_serv = ET.SubElement(child_historian, 'ct_object',
                                             attrib={'name': f'Database_{serv_name}', 'access-level': 'public'})
             child_hist_serv_2 = ET.SubElement(child_hist_serv, 'ct_object',
@@ -1349,8 +1359,10 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
     elif architecture == 'сингл':
         child_hist_serv = ET.SubElement(child_historian, 'ct_object',
                                         attrib={'name': f'Database', 'access-level': 'public'})
-        ET.SubElement(child_hist_serv, 'ct_object',
-                      attrib={'name': f'Database', 'access-level': 'public'})
+        diag2 = ET.SubElement(child_hist_serv, 'ct_object',
+                              attrib={'name': f'Database', 'access-level': 'public'})
+        ET.SubElement(diag2, 'ct_parameter', name='Connected', type='bool',
+                      direction='out', access_level="public")
 
     # Нормируем и записываем IOS-аспект
     temp = ET.tostring(root_aspect).decode('UTF-8')
@@ -1399,6 +1411,7 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
                                            'set-source-timestamp-when-quality-changed': "true",
                                            'dont-change-quality-at-archive-read': "false",
                                            'logging-required': "false"})
+        set_add_cpu_cat = set()
         for cpu in cpus:
             link_cpu = f"PLC_{cpu.replace('!', '_')}"
             cpu = cpu[:cpu.find('!')]
@@ -1416,13 +1429,15 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
                                                       '18' if cpu == 'GTU' else '90'  # 'request-interval'
                                                       )
                                     }.items():
-                ET.SubElement(child_unet, 'trei:data-category-options',
-                              attrib={"name": f'DataCategory_{cpu}_{data_cat}',
-                                      'data-kind': param[0],
-                                      'plc-update-rate': param[1],
-                                      'request-interval': param[2],
-                                      'use-replication-for-requests-sync': "false"
-                                      })
+                if f'DataCategory_{cpu}_{data_cat}' not in set_add_cpu_cat:
+                    ET.SubElement(child_unet, 'trei:data-category-options',
+                                  attrib={"name": f'DataCategory_{cpu}_{data_cat}',
+                                          'data-kind': param[0],
+                                          'plc-update-rate': param[1],
+                                          'request-interval': param[2],
+                                          'use-replication-for-requests-sync': "false"
+                                          })
+                    set_add_cpu_cat.add(f'DataCategory_{cpu}_{data_cat}')
             # Добавляем линки контроллеров
             sub_link = ET.SubElement(temporary_serv, 'dp:ref-to', module=f"{link_cpu}.CPU.Tree")
             ET.SubElement(sub_link, 'dp:deliver-with', attrib={"adapter": f'UNET Client{num}', "read-only": "false",
@@ -1444,7 +1459,7 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
 
 # Функция создания узла SYS
 def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, architecture: str, sl_agreg: dict,
-                  server_name_osn: str, server_name_rez: str):
+                  server_name_osn: str, server_name_rez: str, choice_tr: str):
     root_aspect = ET.Element('omx', xmlns="system", xmlns_ct="automation.control", xmlns_r="automation.reference")
     child_sys = ET.SubElement(root_aspect, 'ct_object', name='SYS', access_level="public")
     ET.SubElement(child_sys, 'attribute', type="unit.System.Attributes.Description", value="Система")
@@ -1538,9 +1553,90 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                           source_code=f"commit {par} = _SNMP.{par};")
             ET.SubElement(child_handler, 'ct_trigger', on=f'_SNMP.{par}', cause="change")
 
+    child_diagnostic = ET.SubElement(child_sys, 'ct_object', name=f'Diagnostic',
+                                     access_level="public")
+    # Добавляем ссылки и теги сообщений по отсутствию связи с historian
+    if architecture == 'клиент-сервер':
+        for i_server in (server_name_osn, server_name_rez):
+            ET.SubElement(child_diagnostic, 'ct_subject-ref', name=f'_Database_{i_server}',
+                          object=f"Service.Modules.HistoryModule.Storages.Database_{i_server}.Database_{i_server}",
+                          const_access="false",
+                          aspected="false")
+            child_alarm = ET.SubElement(child_diagnostic, 'ct_parameter',
+                                        attrib={
+                                            'name': f'Alarm_connectHistorian_{i_server}', 'type': "bool",
+                                            'direction': "out", 'access-level': "public"
+                                        })
+            ET.SubElement(child_alarm, 'attribute', type='unit.Server.Attributes.Alarm',
+                          value=f'{{"Condition":{{"IsEnabled":"true",'
+                                f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                f'"Message":". НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА {i_server}","Severity":40,"Type":2}},'
+                                f'{{"AckStrategy":2,"IsEnabled":true,'
+                                f'"Message":". НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА {i_server}","Severity":40,"Type":3}}],'
+                                f'"Type":2}}}}'
+                          )
+            ET.SubElement(child_diagnostic, 'ct_bind',
+                          source=f"_Database_{i_server}.Connected",
+                          target=f'Alarm_connectHistorian_{i_server}', action="set_all")
+            if choice_tr in ('ПС90','ПС90_10МВт'):
+                child_alarm_ps90 = ET.SubElement(child_diagnostic, 'ct_parameter',
+                                            attrib={
+                                                'name': f'Alarm_connectHistorian_{i_server}_ps90', 'type': "bool",
+                                                'direction': "out", 'access-level': "public"
+                                            })
+                ET.SubElement(child_alarm_ps90, 'attribute', type='unit.Server.Attributes.Alarm',
+                              value=f'{{"Condition":{{"IsEnabled":"true",'
+                                    f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                    f'"Message":". Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ","Severity":40,"Type":2}},'
+                                    f'{{"AckStrategy":2,"IsEnabled":true,'
+                                    f'"Message":". Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ","Severity":40,"Type":3}}],'
+                                    f'"Type":2}}}}'
+                              )
+                ET.SubElement(child_diagnostic, 'ct_bind',
+                              source=f"_Database_{i_server}.Connected",
+                              target=f'Alarm_connectHistorian_{i_server}_ps90', action="set_all")
+    elif architecture == 'сингл':
+        ET.SubElement(child_diagnostic, 'ct_subject-ref', name=f'_Database',
+                      object=f"Service.Modules.HistoryModule.Storages.Database.Database",
+                      const_access="false",
+                      aspected="false")
+        child_alarm = ET.SubElement(child_diagnostic, 'ct_parameter',
+                                    attrib={
+                                        'name': f'Alarm_connectHistorian', 'type': "bool",
+                                        'direction': "out", 'access-level': "public"
+                                    })
+        ET.SubElement(child_alarm, 'attribute', type='unit.Server.Attributes.Alarm',
+                      value=f'{{"Condition":{{"IsEnabled":"true",'
+                            f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                            f'"Message":". НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ","Severity":40,"Type":2}},'
+                            f'{{"AckStrategy":2,"IsEnabled":true,'
+                            f'"Message":". НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ","Severity":40,"Type":3}}],'
+                            f'"Type":2}}}}'
+                      )
+        ET.SubElement(child_diagnostic, 'ct_bind',
+                      source=f"_Database.Connected",
+                      target=f'Alarm_connectHistorian', action="set_all")
+        if choice_tr in ('ПС90','ПС90_10МВт'):
+            child_alarm_ps90 = ET.SubElement(child_diagnostic, 'ct_parameter',
+                                             attrib={
+                                                 'name': f'Alarm_connectHistorian_ps90', 'type': "bool",
+                                                 'direction': "out", 'access-level': "public"
+                                             })
+            ET.SubElement(child_alarm_ps90, 'attribute', type='unit.Server.Attributes.Alarm',
+                          value=f'{{"Condition":{{"IsEnabled":"true",'
+                                f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
+                                f'"Message":". Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ","Severity":40,"Type":2}},'
+                                f'{{"AckStrategy":2,"IsEnabled":true,'
+                                f'"Message":". Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ","Severity":40,"Type":3}}],'
+                                f'"Type":2}}}}'
+                          )
+            ET.SubElement(child_diagnostic, 'ct_bind',
+                          source=f"_Database.Connected",
+                          target=f'Alarm_connectHistorian_ps90', action="set_all")
+
     if 'Система' in return_sl_net:
-        child_diagnostic = ET.SubElement(child_sys, 'ct_object', name=f'Diagnostic',
-                                         access_level="public")
+        # child_diagnostic = ET.SubElement(child_sys, 'ct_object', name=f'Diagnostic',
+        #                                  access_level="public")
         # ...добавляем агрегаторы
         for agreg, type_agreg in sl_agreg.items():
             ET.SubElement(child_diagnostic, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
@@ -1875,7 +1971,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
 
 
 def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
-    return_wrn = {}
+    return_wrn = sl_wrn_di
     return_ts = {}
     return_ppu = {}
     return_alr = {}
@@ -1972,10 +2068,11 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
                                                                                     is_cor_chr(par[par_name].value),
                                                                                     'Защита')
         '''
-    # Есть более изящное решение, если приравнять сразу return_wrn = sl_wrn_di в самом начале, но нужно проверить!!!
-    for cpu in return_wrn:
-        if cpu in sl_wrn_di:
-            return_wrn[cpu].update(sl_wrn_di[cpu])
+    # Есть более изящное решение, если приравнять сразу return_wrn = sl_wrn_di в самом начале, но нужно проверить -
+    # сделялъ
+    # for cpu in return_wrn:
+    #     if cpu in sl_wrn_di:
+    #         return_wrn[cpu].update(sl_wrn_di[cpu])
     return_wrn = {cpu: {alg: (sl_type_wrn.get(val[1]), val[0])
                         for alg, val in value.items()} for cpu, value in return_wrn.items()}
 
@@ -2227,6 +2324,9 @@ def is_read_create_grh(sheet, sl_object_all):
 
 
 def check_diff_file(check_path, file_name_check, new_data, message_print):
+    # Если не существует директории, то рекурсивно создаём
+    if not os.path.exists(check_path):
+        os.makedirs(check_path, exist_ok=True)
     # Если в целевой(указанной) папке уже есть формируемый файл
     if os.path.exists(os.path.join(check_path, file_name_check)):
         # считываем имеющейся файл
@@ -2764,3 +2864,127 @@ def is_update_dict(main_dict: dict[dict], sub_dict: dict[dict]):
         else:
             main_dict[i] = j
     return main_dict
+
+
+def is_read_add_struct(dict_add: dict):
+    # sl_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
+    sl_add = {}
+    # sl_cpu_add_index = {cpu: {(полный тег, тип тега): индекс}}
+    sl_cpu_add_index = {}
+    # sl_cpu_add_ip = {cpu: ip}
+    sl_cpu_add_ip = {}
+    for name_add_obj, par_struct in dict_add.items():
+        name_add_obj = tuple([_.strip() for _ in name_add_obj.split(',')])
+        name_add_cpu = par_struct[0]
+        name_struct = par_struct[1]
+        cpu_ip = par_struct[3]
+        if name_add_obj not in sl_add:
+            sl_add[name_add_obj] = {name_add_cpu: {}}
+        elif name_add_cpu not in sl_add[name_add_obj]:
+            sl_add[name_add_obj].update({name_add_cpu: {}})
+
+        if name_add_cpu not in sl_cpu_add_index:
+            sl_cpu_add_index[name_add_cpu] = {}
+
+        if name_add_cpu not in sl_cpu_add_ip:
+            sl_cpu_add_ip[name_add_cpu] = cpu_ip
+
+        if os.path.exists(par_struct[2]) and os.path.exists(os.path.join(par_struct[2], 'global0.var')):
+            with open(os.path.join(par_struct[2], 'global0.var'), 'rt') as f_add:
+                for line in f_add:
+                    line = line.strip()
+                    if f'{name_struct}|' in line:
+                        # FM|IM22|PZRG_K101|iOn
+                        tmp_var_lst = get_variable(line=line).split("|")
+                        type_var = tmp_var_lst[1]
+                        name_var = tmp_var_lst[2]
+                        tag_var = tmp_var_lst[-1]
+                        index_var = line[:line.find(',//')].split(',')[-8]
+                        description_tag = line.split(",")[-1]
+                        description_tag = description_tag[description_tag.rfind('/')+1:]
+                        eunit = line.split(",")[-1].split('//')
+                        eunit = eunit[1] if len(eunit)>=2 else ''
+                        eunit = eunit if eunit else '-'
+
+                        if type_var not in sl_add[name_add_obj][name_add_cpu]:
+                            sl_add[name_add_obj][name_add_cpu][type_var] = {}
+                        if name_var not in sl_add[name_add_obj][name_add_cpu][type_var]:
+                            sl_add[name_add_obj][name_add_cpu][type_var].update({
+                                name_var: (f'Types_{name_struct}.{type_var}.{type_var}_PLC_View', eunit, '3', description_tag)
+                            })
+                        full_tag = f'{name_add_obj[0]}.{type_var}.{name_var}.{tag_var}'
+                        index_tag = line.split(",")[1]
+                        if full_tag not in sl_cpu_add_index[name_add_cpu]:
+                            sl_cpu_add_index[name_add_cpu].update({
+                                (full_tag, index_tag): index_var
+                            })
+    #for obj in sl_add:
+    #    for cpu in sl_add[obj]:
+    #        for tipe in sl_add[obj][cpu]:
+    #            for par in sl_add[obj][cpu][tipe]:
+    #                print(tipe, par)
+    # print(sl_cpu_add_index)
+    return sl_add, sl_cpu_add_index, sl_cpu_add_ip
+
+
+def add_xml_par_plc_additional(name_group, sl_par, parent_node, sl_attr_par):
+    # sl_par = {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}
+    # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
+    child_group = ET.SubElement(parent_node, 'ct_object',
+                                name=(f'{name_group[0]}' if isinstance(name_group, tuple) else f"{name_group}"),
+                                access_level="public")
+    if isinstance(name_group, tuple):
+        ET.SubElement(child_group, 'attribute', type='unit.System.Attributes.Description', value=f'{name_group[1]}')
+    # Для каждого параметра в текущем контроллере
+    # создаём конструкцию параметра
+    for par, tuple_par in sl_par.items():
+        child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
+                                  base_type=f"{tuple_par[0]}",
+                                  aspect="Types.PLC_Aspect", access_level="public")
+        ET.SubElement(child_par, 'attribute', type=f"Attributes.ShortName", value=f"ADD")
+        ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+
+        if "IM" in name_group:
+            # 'Attributes.StartView', 'Attributes.Gender'
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.StartView", value=f"1")
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.Gender", value=f"1")
+
+        par_hist = sl_attr_par.get(par, {}).get('Attributes.FracDigits', '')
+        if str(par_hist).isdigit():
+            deadband_hist = 1 / (10 ** int(par_hist)) if par_hist != '' else 0.01
+            ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+
+        # for type_attr, value in sl_attr_par[par].items():
+        for type_attr, value in sl_attr_par.get(par, {}).items():
+            ET.SubElement(child_par, 'attribute', type=f"{type_attr}", value=f"{value}")
+    return
+
+
+def add_xml_par_ios_additional(set_cpu_object, objects, name_group, sl_par, parent_node, plc_node_tree, sl_agreg):
+    # ...то создаём узел AI в IOS-аспекте
+    child_group = ET.SubElement(parent_node, 'ct_object',
+                                name=f'{name_group[0]}' if isinstance(name_group, tuple) else f"{name_group}",
+                                access_level="public")
+    # ...добавляем агрегаторы
+    if isinstance(name_group, tuple):
+        ET.SubElement(child_group, 'attribute', type='unit.System.Attributes.Description', value=f'{name_group[1]}')
+    for agreg, type_agreg in sl_agreg.items():
+        ET.SubElement(child_group, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                      aspect="Types.IOS_Aspect", access_level="public")
+    # Для каждого контроллера в структуре анпаров...
+    for cpu in sl_par:
+        # Для каждого параметра...
+        # Если перебираемый контроллер принадлежит объекту
+        if cpu in set_cpu_object:
+            # ...для каждого параметра контроллера...
+            for par, tuple_par in sl_par[cpu].items():
+                # ...создаём структуру параметра
+                child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
+                                          base_type=f"{tuple_par[0].replace('PLC_View', 'IOS_View')}",
+                                          aspect="Types.IOS_Aspect",
+                                          original=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}",
+                                          access_level="public")
+                ET.SubElement(child_par, 'ct_init-ref',
+                              ref="_PLC_View", target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}")
+    return
+
