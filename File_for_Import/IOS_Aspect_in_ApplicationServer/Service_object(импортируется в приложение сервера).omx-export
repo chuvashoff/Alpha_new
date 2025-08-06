@@ -1,0 +1,103 @@
+<omx xmlns="system" xmlns:ct="automation.control" xmlns:r="automation.reference">
+  <ct:object name="Service" access-level="public">
+    <attribute type="unit.Server.Attributes.Replicate" value="false"/>
+    <ct:object name="Modules" access-level="public">
+      <ct:object name="UNET Client1" access-level="public">
+        <attribute type="unit.System.Attributes.Comment" value="для диагностики связи с ПЛК"/>
+        <ct:object name="PLC_KC_1" access-level="public">
+          <ct:object name="CPU_Eth1" access-level="public">
+            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
+            <attribute type="unit.System.Attributes.Comment" value="Основная сеть"/>
+          </ct:object>
+          <ct:object name="CPU_Eth2" access-level="public">
+            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
+            <attribute type="unit.System.Attributes.Comment" value="Резервная сеть"/>
+          </ct:object>
+          <ct:object name="R-CPU_Eth1" access-level="public">
+            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
+            <attribute type="unit.System.Attributes.Comment" value="Основная сеть резервного ПЛК"/>
+          </ct:object>
+          <ct:object name="R-CPU_Eth2" access-level="public">
+            <ct:parameter name="IsConnected" type="bool" direction="out" access-level="public"/>
+            <attribute type="unit.System.Attributes.Comment" value="Резервная сеть резервного ПЛК"/>
+          </ct:object>
+        </ct:object>
+      </ct:object>
+      <ct:object name="HistoryModule" access-level="public">
+        <ct:object name="Storages" access-level="public">
+          <ct:object name="Historian" access-level="public">
+            <ct:object name="Database_Server-CDKS-1" access-level="public">
+              <ct:object name="Database_Server-CDKS-1" access-level="public"/>
+            </ct:object>
+            <ct:object name="Database_Server-CDKS-2" access-level="public">
+              <ct:object name="Database_Server-CDKS-2" access-level="public"/>
+            </ct:object>
+          </ct:object>
+          <ct:object name="Database_Server-CDKS-1" access-level="public">
+            <ct:object name="Database_Server-CDKS-1" access-level="public">
+              <ct:parameter name="Connected" type="bool" direction="out" access-level="public"/>
+            </ct:object>
+          </ct:object>
+          <ct:object name="Database_Server-CDKS-2" access-level="public">
+            <ct:object name="Database_Server-CDKS-2" access-level="public">
+              <ct:parameter name="Connected" type="bool" direction="out" access-level="public"/>
+            </ct:object>
+          </ct:object>
+        </ct:object>
+      </ct:object>
+    </ct:object>
+    <ct:object name="State" access-level="public">
+      <ct:parameter name="Server" type="bool" direction="out" access-level="public"/>
+    </ct:object>
+    <ct:object name="Redundancy" access-level="public">
+      <ct:parameter name="Switch" type="bool" direction="out" access-level="public"/>
+      <ct:formula source-code="false" target="Switch"/>
+      <ct:object name="Channel1" access-level="public">
+        <ct:parameter name="ConnectionEstablished" type="bool" direction="out" access-level="public"/>
+      </ct:object>
+      <ct:object name="Channel2" access-level="public">
+        <ct:parameter name="ConnectionEstablished" type="bool" direction="out" access-level="public"/>
+      </ct:object>
+    </ct:object>
+    <ct:object name="SNMP" access-level="public">
+      <attribute type="unit.Server.Attributes.Replicate" value="false"/>
+      <ct:object name="Computer1" base-type="Types.SNMP.Server_IOS_View" access-level="public" aspect="Types.IOS_Aspect" original="SNMP_Agent.Application.SNMP">
+        <ct:init-ref ref="_Server_PLC" target="SNMP_Agent.Application.SNMP"/>
+      </ct:object>
+      <ct:object name="Computer2" base-type="Types.SNMP.Server_IOS_View" access-level="public" aspect="Types.IOS_Aspect" original="Server-CDKS-2.SNMP_Agent.Application.SNMP">
+        <ct:init-ref ref="_Server_PLC" target="Server-CDKS-2.SNMP_Agent.Application.SNMP"/>
+      </ct:object>
+      <ct:object name="ComputerLocal" base-type="Types.SNMP.Server_IOS_View" access-level="public" aspect="Types.IOS_Aspect" original="SNMP_AgentLocal.Application.SNMP">
+        <ct:init-ref ref="_Server_PLC" target="SNMP_AgentLocal.Application.SNMP"/>
+      </ct:object>
+      <ct:subject-ref name="ConnectionStatus" object="Redundancy.Channel1" const-access="false" aspected="false"/>
+      <ct:subject-ref name="ConnectionStatus2" object="Redundancy.Channel2" const-access="false" aspected="false"/>
+      <ct:parameter name="prevConnect1" type="bool" direction="out" access-level="public"/>
+      <ct:parameter name="prevConnect2" type="bool" direction="out" access-level="public"/>
+      <ct:parameter name="tmpValue" type="string" direction="out" access-level="public"/>
+      <ct:parameter name="tmpValue2" type="string" direction="out" access-level="public"/>
+      <ct:parameter name="Counter" type="uint64" direction="out" access-level="public">
+        <attribute type="unit.Server.Attributes.Replicate" value="true"/>
+        <attribute type="unit.System.Attributes.InitialValue" value="1000"/>
+        <attribute type="unit.Server.Attributes.InitialQuality" value="192"/>
+      </ct:parameter>
+      <ct:parameter name="Value" type="string" direction="out" access-level="public"/>
+      <ct:parameter name="Value2" type="string" direction="out" access-level="public"/>
+      <ct:timer name="Timer" period="100"/>
+      <ct:subject-ref name="State" object="State" const-access="false" aspected="false"/>
+      <ct:handler name="Handler_ConnectionLost" source-code="if (ConnectionStatus.ConnectionEstablished == false &amp;&amp; ConnectionStatus2.ConnectionEstablished == false)&#10;{&#10;&#9;localName: string = ComputerLocal.computerName.Value;&#10;&#9;remoteName: string = &quot;&quot;;&#9;&#10;&#9;if (localName == Computer1.computerName.Value) &#10;&#9;{&#10;&#9;&#9;remoteName = Computer2.computerName.Value;&#10;&#9;} else &#10;&#9;{&#10;&#9;&#9;remoteName = Computer1.computerName.Value;&#10;&#9;}&#10;&#9;tmpValue2 = &quot;&quot;;&#10;&#9;tmpValue = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;1\&quot; SoundEnabled=\&quot;0\&quot; AckRequired =\&quot;1\&quot; Sound=\&quot;\&quot; Message=\&quot;. На сервере '&quot; + localName +&quot;' отсутствует связь с резервным сервером '&quot;+ remoteName +&quot;'.\&quot; Severity=\&quot;40\&quot;/&gt;&quot;;&#10;}&#10;else&#10;{&#10;&#9;tmpValue = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;0\&quot; /&gt;&quot;;&#10;&#10;}&#10;if (ConnectionStatus.ConnectionEstablished != prevConnect1 &amp;&amp; ConnectionStatus2.ConnectionEstablished != prevConnect2) {&#10;&#9;Counter = 0;&#10;&#9;prevConnect1 = ConnectionStatus.ConnectionEstablished;&#10;&#9;prevConnect2 = ConnectionStatus2.ConnectionEstablished;&#10;}&#10;">
+        <ct:trigger on="ConnectionStatus.ConnectionEstablished" cause="update"/>
+        <ct:trigger on="ConnectionStatus2.ConnectionEstablished" cause="update"/>
+      </ct:handler>
+      <ct:handler name="Handler_SwitchActive" source-code="if (State.Server &amp;&amp; (ConnectionStatus.ConnectionEstablished || ConnectionStatus2.ConnectionEstablished))&#10;{&#10;&#9;localName: string = ComputerLocal.computerName.Value;&#10;  remoteName: string = &quot;&quot;;&#10;  if (localName == Computer1.computerName.Value)&#10;{&#10;&#9;&#9;remoteName = Computer2.computerName.Value;&#10;&#9;} else &#10;&#9;{&#10;&#9;&#9;remoteName = Computer1.computerName.Value;&#10;&#9;};&#10;&#9;Counter = 0;&#10;&#10;&#9;tmpValue2 = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;1\&quot; SoundEnabled=\&quot;0\&quot;  AckRequired =\&quot;1\&quot; Sound=\&quot;\&quot; Message=\&quot;. Произошел резервный переход. Активный сервер '&quot; + localName +&quot;'\&quot; Severity=\&quot;40\&quot;/&gt;&quot;;&#10;}&#10;">
+        <ct:trigger on="State.Server" cause="update"/>
+      </ct:handler>
+      <ct:handler name="Handler_SwitchRed" source-code="if (State.Server &amp;&amp; (ConnectionStatus.ConnectionEstablished || ConnectionStatus2.ConnectionEstablished))&#10;{&#10;&#9;localName: string = ComputerLocal.computerName.Value;&#10;  remoteName: string = &quot;&quot;;&#10;  if (localName == Computer1.computerName.Value)&#10;{&#10;&#9;&#9;remoteName = Computer2.computerName.Value;&#10;&#9;} else &#10;&#9;{&#10;&#9;&#9;remoteName = Computer1.computerName.Value;&#10;&#9;};&#10;&#9;Counter = 0;&#10;&#10;&#9;tmpValue = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;1\&quot; SoundEnabled=\&quot;0\&quot;  AckRequired =\&quot;1\&quot; Sound=\&quot;\&quot; Message=\&quot;. Произошел резервный переход. Резервный сервер '&quot; + remoteName +&quot;'\&quot; Severity=\&quot;40\&quot;/&gt;&quot;;&#10;}&#10;">
+        <ct:trigger on="State.Server" cause="update"/>
+      </ct:handler>
+      <ct:handler name="Handler" source-code="Counter = Counter + 1;&#10;if (Counter == 20) &#10;{&#10;&#9;if (ConnectionStatus.ConnectionEstablished || ConnectionStatus2.ConnectionEstablished) {&#10;&#9;&#9;Value = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;0\&quot; /&gt;&quot;;&#10;&#9;Value2 = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;0\&quot; /&gt;&quot;;&#10;&#9;}&#10;};&#10;&#10;if (Counter == 21)&#10;{&#10;&#9;Value = tmpValue;&#10;&#9;Value2 = tmpValue2;&#10;};&#10;&#10;if (Counter == 70)&#10;{&#10;&#9;if (ConnectionStatus.ConnectionEstablished || ConnectionStatus2.ConnectionEstablished) {&#10;&#9;&#9;Value = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;0\&quot; /&gt;&quot;;&#10;&#9;Value2 = &quot;&lt;Subcondition Type=\&quot;Dynamic\&quot; Enabled=\&quot;0\&quot; /&gt;&quot;;&#9;&#10;&#9;}&#10;}&#10;">
+        <ct:trigger on="Timer" cause="update"/>
+      </ct:handler>
+    </ct:object>
+  </ct:object>
+</omx>

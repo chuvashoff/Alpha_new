@@ -1,8 +1,8 @@
 # from my_func import is_f_ind
 from string import Template
-from copy import copy
+from copy import copy, deepcopy
 import os
-import re
+# import re
 from algroritm import is_load_algoritm
 import datetime
 from time import sleep
@@ -40,7 +40,7 @@ def multiple_replace_xml(target_str):
     return target_str
 
 
-def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
+def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par, default_types=True):
     # sl_par = {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков)}
     # sl_attr_par - словарь атрибутов параметра {алг_пар: {тип атрибута: значение атрибута}}
     child_group = ET.SubElement(parent_node, 'ct_object',
@@ -52,43 +52,48 @@ def add_xml_par_plc(name_group, sl_par, parent_node, sl_attr_par):
     # создаём конструкцию параметра
     for par, tuple_par in sl_par.items():
         child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
-                                  base_type=f"Types.{tuple_par[0]}",
+                                  base_type=f"Types.{tuple_par[0]}" if default_types else f"{tuple_par[0]}",
                                   aspect="Types.PLC_Aspect", access_level="public")
-        # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
-        if name_group in ('AI', 'AE', 'SET'):
-            tuple_hist = tuple_par[4]
-            par_hist = tuple_hist[1]
-            deadband_hist = 1 / (10 ** int(par_hist)) if par_hist != '' else 0.01
-            ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
-            ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
-        # Если ИМ АО, то добавляем Set и iPos с гистерезисом
-        elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
-            deadband_hist = 1 / (10 ** int(tuple_par[6])) if tuple_par[6] != '' else 0.01
-            ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
-            ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
-        # Если драйверный параметр, AI и сохраняем историю
-        elif 'DRV' in tuple(parent_node.attrib.values()):
-            if 'Сохраняемый - Да' in tuple_par:
-                if 'AI' in tuple_par[0]:
-                    deadband_hist = 1 / (10 ** int(tuple_par[8])) if tuple_par[8] != '' else 0.01
-                    ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
-                    ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
-                else:
-                    ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
-            else:
-                # Строчки по deadband при отсутствии сохранения добавил в отпуске, нужно собрать сборку
-                deadband_hist = 1
-                ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"False")
+        if default_types:
+            # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
+            if name_group in ('AI', 'AE', 'SET'):
+                tuple_hist = tuple_par[4]
+                par_hist = tuple_hist[1]
+                deadband_hist = 1 / (10 ** int(par_hist)) if par_hist != '' else 0.01
+                ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
                 ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
-        # for type_attr, value in sl_attr_par[par].items():
-        for type_attr, value in sl_attr_par.get(par, {}).items():
-            if type_attr == "Attributes.FracDigits" and isinstance(value, tuple):
-                value = value[0]
-            ET.SubElement(child_par, 'attribute', type=f"{type_attr}", value=f"{value}")
+            # Если ИМ АО, то добавляем Set и iPos с гистерезисом
+            elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
+                deadband_hist = 1 / (10 ** int(tuple_par[6])) if tuple_par[6] != '' else 0.01
+                ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+                ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+            # Если драйверный параметр, AI и сохраняем историю
+            elif 'DRV' in tuple(parent_node.attrib.values()):
+                if 'Сохраняемый - Да' in tuple_par:
+                    if 'AI' in tuple_par[0]:
+                        deadband_hist = 1 / (10 ** int(tuple_par[8])) if tuple_par[8] != '' else 0.01
+                        ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+                        ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+                    else:
+                        ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"True")
+                else:
+                    # Строчки по deadband при отсутствии сохранения добавил в отпуске, нужно собрать сборку
+                    deadband_hist = 1
+                    ET.SubElement(child_par, 'attribute', type=f"Attributes.Enable_History", value=f"False")
+                    ET.SubElement(child_par, 'attribute', type=f"Attributes.DeadBand_History", value=f"{deadband_hist}")
+            # for type_attr, value in sl_attr_par[par].items():
+            for type_attr, value in sl_attr_par.get(par, {}).items():
+                if type_attr == "Attributes.FracDigits" and isinstance(value, tuple):
+                    value = value[0]
+                ET.SubElement(child_par, 'attribute', type=f"{type_attr}", value=f"{value}")
+        else:
+            for specual_attr, value_attr in tuple_par[1].items():
+                ET.SubElement(child_par, 'attribute', type=f"{specual_attr}", value=f"{value_attr}")
     return
 
 
-def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, plc_node_tree, sl_agreg):
+def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, plc_node_tree, sl_agreg,
+                    default_types=True, add_local_agreg = False):
     # ...то создаём узел AI в IOS-аспекте
     child_group = ET.SubElement(parent_node, 'ct_object',
                                 name=f'{name_group[0]}' if isinstance(name_group, tuple) else f"{name_group}",
@@ -112,12 +117,16 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
                 #              else f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}")
                 # aspect = ("Types.IOS_NotHistory_Aspect" if 'Сохраняемый - Нет' in tuple_par else "Types.IOS_Aspect")
                 child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
-                                          base_type=f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}",
+                                          base_type=f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}" if default_types else f"{tuple_par[0].replace('PLC_View', 'IOS_View')}",
                                           aspect="Types.IOS_Aspect",
                                           original=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}",
                                           access_level="public")
                 ET.SubElement(child_par, 'ct_init-ref',
                               ref="_PLC_View", target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}")
+                if add_local_agreg:
+                    for agreg, type_agreg in sl_agreg.items():
+                        ET.SubElement(child_par, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                      aspect="Types.IOS_Aspect", access_level="public")
                 # # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
                 # if name_group in ('AI', 'AE', 'SET'):
                 #     deadband_hist = 1/(10**int(tuple_par[5])) if tuple_par[5] != '' else 0.01
@@ -1442,6 +1451,15 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
             sub_link = ET.SubElement(temporary_serv, 'dp:ref-to', module=f"{link_cpu}.CPU.Tree")
             ET.SubElement(sub_link, 'dp:deliver-with', attrib={"adapter": f'UNET Client{num}', "read-only": "false",
                                                                "data-mapping-spec": "all"})
+            ET.SubElement(child_unet, 'trei:unet-server-link',
+                          attrib={"server": f"{link_cpu}.CPU.UnetServer",
+                                  "standby-mode": "keep-connections-alive",
+                                  "timeout": "1001",
+                                  "write-behavior-on-disconnect": "dismiss-all",
+                                  "archive-read-with-bounds": "true",
+                                  "archived-data-reading-mode": "account-position-in-archive"
+                                  }
+                          )
 
     # Нормируем и записываем IOS-аспект
     temp = ET.tostring(root_aspect).decode('UTF-8')
@@ -1677,10 +1695,10 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                 rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
                                 ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
                                               value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
                                                     f'"Message":". {port}. Нет связи",'
                                                     f'"Severity":40,"Type":2}},'
-                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'{{"AckStrategy":2,"IsEnabled":true,'
                                                     f'"Message":". {port}. Нет связи",'
                                                     f'"Severity":40,"Type":3}}],'
                                                     f'"Type":2}}}}')
@@ -1711,10 +1729,10 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                 rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
                                 ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
                                               value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
                                                     f'"Message":". Порт{i}. Нет связи",'
                                                     f'"Severity":40,"Type":2}},'
-                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'{{"AckStrategy":2,"IsEnabled":true,'
                                                     f'"Message":". Порт{i}. Нет связи",'
                                                     f'"Severity":40,"Type":3}}],'
                                                     f'"Type":2}}}}')
@@ -1748,32 +1766,34 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
                                               value=f"4")
                             # если же архитектура определена как клиент-серверная, то добавляем для двух серверов
                             elif architecture == 'клиент-сервер' and server_name_osn and server_name_rez:
-                                sub_diag_plc_serv = ET.SubElement(
-                                    child_checkip, 'ct_object',
-                                    name=f'HW_Diag_{server_name_osn}',
-                                    access_level="public", aspect="Types.IOS_Aspect",
-                                    original="SNMP_Agent.Application.Diag_PLC",
-                                    base_type="Types.SNMP_Diag.Diag_IOS_View")
-                                ET.SubElement(sub_diag_plc_serv, 'ct_init-ref', ref="_Diag_PLC",
-                                              target="SNMP_Agent.Application.Diag_PLC",
-                                              base_type="Types.SNMP_Diag.Diag_IOS_View")
-                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits1",
-                                              value=f"4")
-                                ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits2",
-                                              value=f"4")
+                                if alg == server_name_osn or alg not in (server_name_osn, server_name_rez):
+                                    sub_diag_plc_serv = ET.SubElement(
+                                        child_checkip, 'ct_object',
+                                        name=f'HW_Diag_{server_name_osn}',
+                                        access_level="public", aspect="Types.IOS_Aspect",
+                                        original="SNMP_Agent.Application.Diag_PLC",
+                                        base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                    ET.SubElement(sub_diag_plc_serv, 'ct_init-ref', ref="_Diag_PLC",
+                                                  target="SNMP_Agent.Application.Diag_PLC",
+                                                  base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                    ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits1",
+                                                  value=f"4")
+                                    ET.SubElement(sub_diag_plc_serv, 'attribute', type=f"Attributes.AllocationUnits2",
+                                                  value=f"4")
 
-                                sub_diag_plc_serv2 = ET.SubElement(
-                                    child_checkip, 'ct_object',
-                                    name=f'HW_Diag_{server_name_rez}',
-                                    access_level="public", aspect="Types.IOS_Aspect",
-                                    original=f"{server_name_rez}.SNMP_Agent.Application.Diag_PLC",
-                                    base_type="Types.SNMP_Diag.Diag_IOS_View")
-                                ET.SubElement(sub_diag_plc_serv2, 'ct_init-ref', ref="_Diag_PLC",
-                                              target=f"{server_name_rez}.SNMP_Agent.Application.Diag_PLC")
-                                ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits1",
-                                              value=f"4")
-                                ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits2",
-                                              value=f"4")
+                                if alg == server_name_rez or alg not in (server_name_osn, server_name_rez):
+                                    sub_diag_plc_serv2 = ET.SubElement(
+                                        child_checkip, 'ct_object',
+                                        name=f'HW_Diag_{server_name_rez}',
+                                        access_level="public", aspect="Types.IOS_Aspect",
+                                        original=f"{server_name_rez}.SNMP_Agent.Application.Diag_PLC",
+                                        base_type="Types.SNMP_Diag.Diag_IOS_View")
+                                    ET.SubElement(sub_diag_plc_serv2, 'ct_init-ref', ref="_Diag_PLC",
+                                                  target=f"Domain.{server_name_rez}.SNMP_Agent.Application.Diag_PLC")
+                                    ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits1",
+                                                  value=f"4")
+                                    ET.SubElement(sub_diag_plc_serv2, 'attribute', type=f"Attributes.AllocationUnits2",
+                                                  value=f"4")
             else:
                 if sl_value.get('SType') and sl_value.get('SType') not in ('<SRV>', '<PART>'):
                     child_alg = ET.SubElement(child_diagnostic, 'ct_object', name=f'{alg}',
@@ -2988,3 +3008,64 @@ def add_xml_par_ios_additional(set_cpu_object, objects, name_group, sl_par, pare
                               ref="_PLC_View", target=f"PLC_{cpu}_{objects[2]}.CPU.Tree.{plc_node_tree}.{par}")
     return
 
+def is_read_fb(sheet, sheet_name: str):
+    # print(f'Размеры листа: {sheet.max_column}({get_column_letter(sheet.max_column)}) на {sheet.max_row}')
+    # {cpu: {алг_пар: (тип параметра в студии, {Константа: значение константы}})}}
+    sl_struct = {}
+
+    # {cpu: кортеж тегов контроллера}
+    sl_struct_tags = {}
+    cells = sheet['A1': get_column_letter(sheet.max_column) + str(sheet.max_row)]  # sheet.max_column
+    index_alg_name = is_f_ind(cells[0], 'Переменные')
+    # index_rus_name = is_f_ind(cells[0], 'Наименование')
+    # index_type = is_f_ind(cells[0], 'Тип')
+    index_read = is_f_ind(cells[0], 'Чтение')
+    index_write = is_f_ind(cells[0], 'Запись')
+
+    cells = sheet['A2': get_column_letter(sheet.max_column) + str(sheet.max_row)]
+    # print(sheet_name)
+    flag_par = ""
+    tags_par = tuple()
+    tags_const = tuple()
+    sl_attrib_index = dict()
+    for par in cells:
+        if par[0].value is None:
+            break
+        if par[index_alg_name].value in ('VAR_INPUT', 'VAR_OUTPUT', 'CONST', 'VAR'):
+            flag_par = par[index_alg_name].value
+            if flag_par == "VAR":
+                sl_attrib_index.update({name_col: is_f_ind(par, name_col) for name_col in ('CPU', 'Наименование') + tags_const if is_f_ind(par, name_col) != 0})
+            continue
+        if flag_par in ('VAR_INPUT', 'VAR_OUTPUT'):
+            if par[index_read].value == "+" or par[index_write].value == "+":
+                tags_par += ( par[index_alg_name].value,)
+        # print(tags_par)
+
+        if flag_par == 'CONST':
+            tags_const += ( par[index_alg_name].value,)
+        # if tags_const: print(tags_const)
+
+        if flag_par == "VAR":
+            if sl_attrib_index.get('CPU') and par[sl_attrib_index.get('CPU')].value:
+                # tuple_par = tuple([i for i in sl_attrib_index if i != "CPU"])
+
+                # {cpu: {алг_пар: (тип параметра в студии, {Константа: значение константы}})}}
+                sl_par_in_return_sl = {
+                    par[0].value: (f'FB_Types.{sheet_name}.{sheet_name}_PLC_View',
+                                   {f'FB_Attributes.{sheet_name}.{co}' if co != "Наименование" else 'unit.System.Attributes.Description': par[ind_co].value for co, ind_co in sl_attrib_index.items() if co != 'CPU' and par[ind_co].value}
+                                   )
+                }
+                if par[sl_attrib_index.get('CPU')].value not in sl_struct:
+                    sl_struct[par[sl_attrib_index.get('CPU')].value] = sl_par_in_return_sl
+                else:
+                    sl_struct[par[sl_attrib_index.get('CPU')].value].update(sl_par_in_return_sl)
+
+                tups_tag = tuple([f"{sheet_name.replace('_', '|',1)}|{par[0].value}|{i}" for i in tags_par])
+                if par[sl_attrib_index.get('CPU')].value not in sl_struct_tags:
+                    sl_struct_tags[par[sl_attrib_index.get('CPU')].value] = tups_tag
+                else:
+                    sl_struct_tags[par[sl_attrib_index.get('CPU')].value] += tups_tag
+        # print(par[index_alg_name].value)
+
+    # print(sl_attrib_index)
+    return sl_struct, sl_struct_tags

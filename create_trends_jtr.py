@@ -59,16 +59,16 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
         'Измеряемые': ('Аналоговые входные', 'AI'),
         'Расчетные': ('Расчетные параметры', 'AE'),
         'Входные': ('Дискретные входные', 'DI'),
-        'ИМ': ('Исполнительные механизмы', 'IM'),
-        'ИМ(АО)': ('Исполнительные механизмы', 'IM'),
+        'ИМ': ('ИМ', 'IM'),
+        'ИМ(АО)': ('Аналоговые ИМ', 'IM'),
         'Драйвера': ('Сигналы от драйверов', 'System.DRV'),
         'Сигналы': ()
     }
-    sl_brk_group_trends = {
-        'Измеряемые': ('Отказы аналоговых входных', 'AI'),
-        'Расчетные': ('Отказы расчетных параметров', 'AE'),
-        'Входные': ('Отказы дискретных входных', 'DI')
-    }
+    # sl_brk_group_trends = {
+    #     'Измеряемые': ('Отказы аналоговых входных', 'AI'),
+    #     'Расчетные': ('Отказы расчетных параметров', 'AE'),
+    #     'Входные': ('Отказы дискретных входных', 'DI')
+    # }
     sl_state_im_gender = {
         'Включить': {'М': 'Включен', 'Ж': 'Включена', 'С': 'Включено'},
         'Открыть': {'М': 'Открыт', 'Ж': 'Открыта', 'С': 'Открыто'},
@@ -142,6 +142,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                                                                                          sl_for_diag[cpu]['CPU'][1])
                    for module_name, module_type in sl_for_diag[cpu].items()}
         sl_for_diag[cpu] = tmp_dic
+    # оставляем в словаре только те элементы, которые не с пустыми значениями
+    sl_for_diag = {i: j for i, j in sl_for_diag.items() if j}
 
     # Для каждого объекта, прочитанного ранее
     for obj in sl_object_all:
@@ -163,7 +165,7 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
             cells_name = sheet['A1': 'AZ1']
             rus_par_ind = is_f_ind(cells_name[0], 'Наименование параметра')
             alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
-            eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
+            # eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
             node_name_ind = is_f_ind(cells_name[0], 'Узел')
             eunit_drv_ind = is_f_ind(cells_name[0], 'Единица измерения')
             t_sig_drv_ind = is_f_ind(cells_name[0], 'Тип')
@@ -211,15 +213,17 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                             if par[i].value == 'Да':
                                 lst_levels.append({'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.{teg}",
                                                    'lineStyleId': teg})
-                    dict_child = {'name': 'Value', "description": f'{f_ind_json(rus_name_par)}',
+                    dict_child = {'name': 'Value',
+                                  "description": f'{f_ind_json(rus_name_par)}',
                                   'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.Value",
                                   'dataType': data_type}
                     if lst_levels:
                         dict_child.update({'levels': lst_levels})
                     # Добавляем отказы
-                    dict_f_child = {'name': 'fValue', "description": f'Отказ - {f_ind_json(rus_name_par)}',
-                                  'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.fValue",
-                                  'dataType': 'bool'}
+                    dict_f_child = {'name': 'fValue',
+                                    "description": f'Отказ - {f_ind_json(rus_name_par)}',
+                                    'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.fValue",
+                                    'dataType': 'bool'}
                     lst_children_par.append(dict_child)
                     lst_children_par.append(dict_f_child)
                     sl_par_trends = {f_ind_json(rus_name_par): (par[alg_name_ind].value.replace('|', '_'), lst_children_par)}
@@ -239,7 +243,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                             rus_name_par += ' (РЕЗЕРВ)'
                         pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
                         lst_children_par = list()
-                        dict_child = {'name': 'oOn', "description": f'{f_ind_json(rus_name_par)}. {move_}',
+                        dict_child = {'name': 'oOn',
+                                      "description": f'{f_ind_json(rus_name_par)}. {move_}',
                                       'tag': f"{pref_tag}.{par[alg_name_ind].value}.oOn",
                                       'dataType': 'bool'}
                         lst_children_par.append(dict_child)
@@ -259,7 +264,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                         pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
                         lst_children_par = list()
                         for postf, movef in sl_tmp.items():
-                            dict_child = {'name': postf, "description": f"{f_ind_json(rus_name_par)}. {movef}",
+                            dict_child = {'name': postf,
+                                          "description": f"{f_ind_json(rus_name_par)}. {movef}",
                                           'tag': f"{pref_tag}.{par[alg_name_ind].value}.{postf}",
                                           'dataType': 'bool'}
                             lst_children_par.append(dict_child)
@@ -281,7 +287,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                         pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
                         lst_children_par = list()
                         for postf, movef in sl_tmp.items():
-                            dict_child = {'name': postf, "description": f"{f_ind_json(rus_name_par)}. {movef}",
+                            dict_child = {'name': postf,
+                                          "description": f"{f_ind_json(rus_name_par)}. {movef}",
                                           'tag': f"{pref_tag}.{par[alg_name_ind].value}.{postf}",
                                           'dataType': 'bool'}
                             lst_children_par.append(dict_child)
@@ -308,7 +315,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                         pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
                         lst_children_par = list()
                         for postf, movef in sl_tmp.items():
-                            dict_child = {'name': postf, "description": f"{f_ind_json(rus_name_par)}. {movef}",
+                            dict_child = {'name': postf,
+                                          "description": f"{f_ind_json(rus_name_par)}. {movef}",
                                           'tag': f"{pref_tag}.{par[alg_name_ind].value}.{postf}",
                                           'dataType': 'bool'}
                             lst_children_par.append(dict_child)
@@ -329,7 +337,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                     pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
                     lst_children_par = list()
                     for postf, movef in sl_tmp.items():
-                        dict_child = {'name': postf, "description": f"{f_ind_json(rus_name_par)}. {movef}",
+                        dict_child = {'name': postf,
+                                      "description": f"{f_ind_json(rus_name_par)}. {movef}",
                                       'tag': f"{pref_tag}.{par[alg_name_ind].value}.{postf}",
                                       'dataType': 'float'}
                         lst_children_par.append(dict_child)
@@ -347,7 +356,8 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                         pref_tag = f"{obj[0]}.System.ALR"
                         alg_name = par[alg_name_ind].value.replace('ALR|','')
                         # lst_children_par = list()
-                        dict_child = {'name': alg_name, "description": f'{f_ind_json(par[rus_par_ind].value)}',
+                        dict_child = {'name': alg_name,
+                                      "description": f'{f_ind_json(par[rus_par_ind].value)}',
                                       'tag': f"{pref_tag}.{alg_name}.Value",
                                       'dataType': 'bool'}
                         # lst_children_par.append(dict_child)
@@ -368,36 +378,53 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                             if dict_child_r not in lst_node_modes:
                                 lst_node_modes.append(dict_child_r)
                             check_add_regnum = True
-                        dict_child = {'name': alg_name, "description": f'Режим {f_ind_json(par[rus_par_ind].value)}',
+                        dict_child = {'name': alg_name,
+                                      "description": f'Режим {f_ind_json(par[rus_par_ind].value)}',
                                       'tag': f"{pref_tag}.{alg_name}.Value",
                                       'dataType': 'bool'}
                         if dict_child not in lst_node_modes:
                             lst_node_modes.append(dict_child)
 
-            #     # при условии, что парсим лист Драйверов
-            #     # и параметр принадлежит контроллеру объекта
-            #     # и указанный драйвер переменной есть в объявленных
-            #     elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj] \
-            #             and par[name_drv_ind].value in sl_all_drv and par[index_save_history].value == 'Да':
-            #         sl_type_unit = {'BOOL': '-', 'INT': par[eunit_drv_ind].value, 'FLOAT': par[eunit_drv_ind].value,
-            #                         'IEC': '-', 'Daily': '-', 'IECB': '-', 'IECR': par[eunit_drv_ind].value,
-            #                         'INT (с имитацией)': par[eunit_drv_ind].value,
-            #                         'FLOAT (с имитацией)': par[eunit_drv_ind].value}
-            #         drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
-            #         # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
-            #         rus_name_sig = par[rus_par_ind].value + '(С меткой времени ПЛК)' \
-            #             if 'IEC' in par[t_sig_drv_ind].value else par[rus_par_ind].value
-            #         if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
-            #             rus_name_sig += ' (РЕЗЕРВ)'
-            #         sl_drv_trends = \
-            #             {f'{f_ind_json(rus_name_sig)}': (f'{drv_}.' + par[alg_name_ind].value + '.Value',
-            #                                              sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
-            #         # если в словаре драйверов отсутствует такой драйвер, то создаём
-            #         if drv_ not in sl_node_drv:
-            #             sl_node_drv[drv_] = sl_drv_trends
-            #         else:  # иначе обновляем словарь, который есть
-            #             sl_node_drv[drv_].update(sl_drv_trends)
-            # # на этапе парсинга листа ИМАО добавляем в тренды АПР
+                # при условии, что парсим лист Драйверов
+                # и параметр принадлежит контроллеру объекта
+                # и указанный драйвер переменной есть в объявленных
+                elif list_config in ('Драйвера',) and par[cpu_par].value in sl_object_all[obj] \
+                        and par[name_drv_ind].value in sl_all_drv and par[index_save_history].value == 'Да':
+                    sl_type_unit = {'BOOL': '-',
+                                    'INT': par[eunit_drv_ind].value,
+                                    'FLOAT': par[eunit_drv_ind].value,
+                                    'IEC': '-', 'Daily': '-',
+                                    'IECB': '-',
+                                    'IECR': par[eunit_drv_ind].value,
+                                    'INT (с имитацией)': par[eunit_drv_ind].value,
+                                    'FLOAT (с имитацией)': par[eunit_drv_ind].value}
+                    sl_data_type = dict(zip(sl_type_unit.keys(), ('bool', 'int4', 'float', 'float', 'bool', 'float', 'int4', 'float')))
+                    drv_ = par[is_f_ind(cells_name[0], 'Драйвер')].value
+                    # создаём промежуточный словарь сигнала драйвера {рус.имя: (алг.имя, единицы измерения - '-')}
+                    rus_name_sig = par[rus_par_ind].value + '(С меткой времени ПЛК)' \
+                        if 'IEC' in par[t_sig_drv_ind].value else par[rus_par_ind].value
+                    if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                        rus_name_sig += ' (РЕЗЕРВ)'
+                    pref_tag = f"{obj[0]}.{sl_group_trends[list_config][1]}"
+
+                    dict_child = {'name': f'{drv_}-{par[alg_name_ind].value}',
+                                  "description": f'{f_ind_json(rus_name_sig)}',
+                                  'tag': f"{pref_tag}.{drv_}.{par[alg_name_ind].value}.Value",
+                                  'dataType': sl_data_type.get(par[t_sig_drv_ind].value, 'float')}
+
+                    # sl_drv_trends = \
+                    #     {f'{f_ind_json(rus_name_sig)}': (f'{pref_tag}.{drv_}.' + par[alg_name_ind].value + '.Value',
+                    #                                      sl_type_unit.get(par[t_sig_drv_ind].value, '-'))}
+                    # sl_drv_trends = {f'{f_ind_json(rus_name_sig)}': dict_child}
+                    # если в словаре драйверов отсутствует такой драйвер, то создаём
+                    if drv_ not in sl_node_drv:
+                        sl_node_drv[drv_] = [dict_child,]
+                        # sl_node_drv[drv_] = sl_drv_trends
+                    else:  # иначе обновляем словарь, который есть
+                        sl_node_drv[drv_].append(dict_child)
+                        # sl_node_drv[drv_].update(sl_drv_trends)
+
+            # на этапе парсинга листа ИМАО добавляем в тренды АПР
             # if list_config == 'ИМ(АО)':
             #     # создаём множество пересечений контроллеров АПР и контроллеров объекта
             #     # чтобы далее проверить, не пустое ли оно и в объект загрузить апр
@@ -406,12 +433,17 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
             #     if 'АПР' in [item for sublist in [i for i in sl_cpu_spec.values() if i] for item in sublist] and \
             #             set_check_apr:
             #         sl_tmp = {'Set': 'Задание', 'Pos': 'Положение'}
+            #         child_sig_apr = list()
             #         for par_pref in sl_tmp:
-            #             lst_json.append(
-            #                 {"Signal": {"UserTree": f'Исполнительные механизмы/Главная/АПРК. {sl_tmp[par_pref]}',
-            #                             "OpcTag": f'{obj[0]}.APR.IM.{par_pref}',
-            #                             "EUnit": '%',
-            #                             "Description": f'АПРК. {sl_tmp[par_pref]}'}})
+            #             dict_child = {'name': f'АПРК-{par_pref}',
+            #                           "description": f"АПРК. {sl_tmp.get(par_pref, '')}",
+            #                           'tag': f'{obj[0]}.APR.IM.{par_pref}',
+            #                           'dataType': 'float'}
+            #             child_sig_apr.append(dict_child)
+            #         if sl_for_json.get('АПР'):
+            #             sl_for_json['АПР'].append({'name': 'АПРК', 'children': child_sig_apr})
+            #         else:
+            #             sl_for_json['АПР'] = [{'name': 'АПРК', 'children': child_sig_apr},]
 
             # sl_par_trends = {f_ind_json(rus_name_par): (ar[alg_name_ind].value.replace('|', '_'), lst_children_par)}
             # sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
@@ -423,185 +455,187 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                 # ...для каждого параметра по отсортированному словарю параметров в узле...
                 lst_tmp_node = list()
                 for param in sorted(sl_node_trends[node]):
-                    # ...собираем json
-                    # print(node, param, sl_node_trends[node][param])
-                    # lst_json.append(
-                    #     {"Signal": {"UserTree": f"{sl_group_trends[list_config][0]}/"
-                    #                             f"{node.replace('/', '|')}/{param.replace('/', '|')}",
-                    #                 "OpcTag":
-                    #                     f'{obj[0]}.{sl_group_trends[list_config][1]}.{sl_node_trends[node][param][0]}',
-                    #                 "EUnit": sl_node_trends[node][param][1],
-                    #                 "Description": param}})
-                    # lst_json.append({'name': sl_node_trends[node][param][0], "description": param,
-                    #                  'children': sl_node_trends[node][param][1]})
                     lst_tmp_node.append({'name': sl_node_trends[node][param][0], "description": param,
                                          'children': sl_node_trends[node][param][1]})
                 if lst_tmp_node:
                     # lst_json.append({'name': node, 'children': lst_tmp_node})
-                    sl_for_json[sl_group_trends[list_config][0]].append({'name': node, 'children': lst_tmp_node})
+                    sl_for_json[sl_group_trends[list_config][0]].append({'name': node, "description": node, 'children': lst_tmp_node})
 
             sl_for_json["Аварии"] = list()
             # для каждого типа аварии в отсортированном словаре типов аварий...
             for node_alr in sorted(sl_node_alr):
-                sl_for_json["Аварии"].append({'name': node_alr, 'children': sl_node_alr[node_alr]})
+                sl_for_json["Аварии"].append({'name': node_alr, "description": node_alr, 'children': sl_node_alr[node_alr]})
             sl_for_json["Режимы"] = lst_node_modes
 
-        #     # для каждого узла-драйвера в отсортированном словаре драйверов...
-        #     for drv in sorted(sl_node_drv):
-        #         # ... для каждого сигнала драйвера по отсортированному словарю сигналов в узле-драйвере
-        #         for sig_drv in sorted(sl_node_drv[drv]):
-        #             # ...собираем json
-        #             # дополнительная проверка наличия драйвера в объявленных
-        #             if drv in sl_all_drv:
-        #                 lst_json.append(
-        #                     {"Signal": {"UserTree": f"{sl_group_trends['Драйвера'][0]}/"
-        #                                             f"{sl_all_drv[drv].replace('/', '|')}/{sig_drv.replace('/', '|')}",
-        #                                 "OpcTag":
-        #                                     f"{obj[0]}.{sl_group_trends['Драйвера'][1]}.{sl_node_drv[drv][sig_drv][0]}",
-        #                                 "EUnit": sl_node_drv[drv][sig_drv][1],
-        #                                 "Description": sig_drv}})
+            # sl_for_json["Сигналы от драйверов"] = list()
+            for drv in sorted(sl_node_drv):
+                drv_rus_name = sl_all_drv.get(drv, 'Неизвестный драйвер')
+                sl_for_json["Сигналы от драйверов"].append({'name': drv_rus_name, "description": drv_rus_name, 'children': sl_node_drv[drv]})
+            # print(sl_for_json["Сигналы от драйверов"])
+
+            # if sl_node_drv:
+            #     print(sl_node_drv)
+            #     print(sl_all_drv)
+            # for drv in sorted(sl_node_drv):
+            #     for sig_drv in sorted(sl_node_drv[drv]):
+            #         if sl_node_drv.get(drv):
+            #             pass
+
+        # Добавляем АПР
+        # создаём множество пересечений контроллеров АПР и контроллеров объекта
+        # чтобы далее проверить, не пустое ли оно и в объект загрузить апр
+        set_check_apr = set([key for key, value in sl_cpu_spec.items() if 'АПР' in value]) & \
+                        set(sl_object_all[obj])
+        if 'АПР' in [item for sublist in [i for i in sl_cpu_spec.values() if i] for item in sublist] and \
+                set_check_apr:
+            sl_tmp = {'Set': 'Задание', 'Pos': 'Положение'}
+            sl_for_json['АПР'] = list()
+            lst_tunings = list()
+            if os.path.exists(os.path.join('Template_Alpha', 'APR', 'Tun_APR.txt')):
+                with open(os.path.join('Template_Alpha', 'APR', f'Tun_APR.txt'), 'r',
+                          encoding='UTF-8') as f_sar:
+                    for line in f_sar:
+                        if '#' in line:
+                            continue
+                        if not line.strip():
+                            break
+                        line = line.strip().split(';')
+                        tag = line[0]
+                        descr = line[1]
+                        full_tag = f'{obj[0]}.APR.Tuning.{tag}.Value'
+                        dict_child = {'name': descr,
+                                      "description": descr,
+                                      'tag': full_tag,
+                                      'dataType': 'float'}
+                        lst_tunings.append(dict_child)
+            sl_for_json["АПР"].append({'name': f"Настройки АПР", "description": "Настройки АПР", 'children': lst_tunings})
+            child_sig_apr = list()
+            for par_pref in sl_tmp:
+                dict_child = {'name': f'АПРК-{par_pref}',
+                              "description": f"АПРК, {sl_tmp.get(par_pref, '')}",
+                              'tag': f'{obj[0]}.APR.IM.{par_pref}',
+                              'dataType': 'float'}
+                child_sig_apr.append(dict_child)
+            sl_for_json['АПР'].append({'name': 'АПРК', "description": "АПРК", 'children': child_sig_apr})
         #
+        # Добавляем САР
+        # Для каждого контроллера объекта...
+        if 'САР' in ['САР' for i in set(sl_object_all[obj].keys()) & set(sl_cpu_spec.keys()) if
+                     'САР' in sl_cpu_spec[i]]:
+            sl_for_json["САР"] = list()
+            lst_tunings = list()
+            if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt')):
+                with open(os.path.join('Template_Alpha', 'SAR', f'Tun_SAR.txt'), 'r',
+                          encoding='UTF-8') as f_sar:
+                    for line in f_sar:
+                        if '#' in line:
+                            continue
+                        if not line.strip():
+                            break
+                        line = line.strip().split(';')
+                        tag = line[0]
+                        descr = line[3]
+                        full_tag = f'{obj[0]}.SAR.Tuning.{tag}.Value'
+                        dict_child = {'name': descr,
+                                      "description": descr,
+                                      'tag': full_tag,
+                                      'dataType': 'float'}
+                        lst_tunings.append(dict_child)
+            sl_for_json["САР"].append({'name': f"Настройки САР", "description": "Настройки САР", 'children': lst_tunings})
+            lst_khr = list()
+            for pref_tag, descr_tag in {'Set': 'Задание', 'Pos': 'Положение'}.items():
+                dict_child = {'name': f'КХР, {descr_tag}',
+                              "description": f'КХР, {descr_tag}',
+                              'tag': f'{obj[0]}.SAR.IM.KHR.{pref_tag}',
+                              'dataType': 'float'}
+                lst_khr.append(dict_child)
+            sl_for_json["САР"].append({'name': f"КХР", "description": "КХР", 'children': lst_khr})
         #
-        # # Добавление уставок на тренды
-        # # Выбираем лист уставок в качестве активного
-        # sheet = book['Уставки']
-        # # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
-        # cells_name = sheet['A1': 'AG1']
-        # rus_par_ind = is_f_ind(cells_name[0], 'Наименование параметра')
-        # alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
-        # eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
-        # cpu_par = is_f_ind(cells_name[0], 'CPU')
-        # reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
-        # index_fast = is_f_ind(cells_name[0], 'Передача по МЭК')
+
+        # Добавление уставок на тренды.
+        # Выбираем лист уставок в качестве активного
+        sheet = book['Уставки']
+        # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
+        cells_name = sheet['A1': 'AG1']
+        rus_par_ind = is_f_ind(cells_name[0], 'Наименование параметра')
+        alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
+        eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
+        cpu_par = is_f_ind(cells_name[0], 'CPU')
+        reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
+        index_fast = is_f_ind(cells_name[0], 'Передача по МЭК')
+        index_node = is_f_ind(cells_name[0], 'Узел')
+
+        # Устанавливаем диапазон для чтения параметров
+        cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
+        sl_node_set = {}
+        # пробегаемся по параметрам листа
+        for par in cells_read:
+            # Если конец строки, то заканчиваем обработку ячеек
+            if par[rus_par_ind].value is None:
+                break
+            # если параметр принадлежит контроллеру объекта и не переведено в резерв
+            if par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
+                # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
+                rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
+                    else par[rus_par_ind].value
+                if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
+                    rus_name_par += ' (РЕЗЕРВ)'
+                name_node = par[index_node].value
+                dict_child = {'name': f'{rus_name_par}',
+                              "description": f"{rus_name_par}",
+                              'tag': f"{obj[0]}.System.SET.{par[alg_name_ind].value.replace('|', '_') + '.Value'}",
+                              'dataType': 'float'}
+                if name_node not in sl_node_set:
+                    sl_node_set[name_node] = [dict_child,]
+                else:
+                    sl_node_set[name_node].append(dict_child)
+
+        sl_for_json["Уставки"] = list()
+        # для каждой узла уставок в отсортированном словаре уставок
+        for node_set in sorted(sl_node_set):
+            sl_for_json["Уставки"].append({'name': node_set, "description": node_set, 'children': sl_node_set[node_set]})
+
+        # print(sl_need_add)
+        sl_for_json["Дополнительные параметры"] = list()
+        # Добавляем дополнительные параметры если в объекте есть контроллеры с данными параметрами
+        for _, pars in {c: p for c, p in sl_need_add.items() if c in set(sl_object_all[obj].keys())}.items():
+            for p, param_p in pars.items():
+                data_type = 'bool' if 'bool' in param_p[0].lower() else 'float'
+                dict_child = {'name': f'{param_p[1]}',
+                              "description": f"{param_p[1]}",
+                              'tag': f"{obj[0]}.System.Pars.{p}.Value",
+                              'dataType': data_type}
+                sl_for_json["Дополнительные параметры"].append(dict_child)
+
+        # Добавляем на тренды диагностику по интересным модулям
+        # Если в словаре диагностики интересных модулей есть устройства объекта...
+        if set(sl_object_all[obj].keys()) & set(sl_for_diag.keys()):
+            sl_for_json["Диагностика"] = list()
+            # Для каждого контроллера объекта...
+            for cpu in sl_object_all[obj]:
+                # ...для каждого спец модуля контроллера (частотный или бза)
+                # при этом проверяем, что у контроллера вообще есть такие модуля, если нет, то перебора не будет
+                for spec_module_name in sl_for_diag.get(cpu, {}):
+                    lst_spec_module = list()
+                    # узнаём тип текущего перебираемого модуля
+                    type_module = sl_for_diag[cpu][spec_module_name]
+                    # для сигналов модуля, описанных в словаре sl_signal_module добавляем тренды
+                    for signal in sl_signal_module.get(type_module, ''):
+                        try:
+                            data_type_sig = sl_signal_module[type_module][signal][2]
+                        except IndexError:
+                            data_type_sig = 'float'
+                        # print(f"{spec_module_name} ({type_module})", signal, data_type_sig)
+                        tegg = f'{obj[0]}.Diag.HW.{spec_module_name}.{sl_signal_module[type_module][signal][0]}'
+                        dict_child = {'name': f'{signal} {spec_module_name} ({type_module})',
+                                      "description": f'{signal} {spec_module_name} ({type_module})',
+                                      'tag': tegg,
+                                      'dataType': data_type_sig}
+                        lst_spec_module.append(dict_child)
+                    sl_for_json["Диагностика"].append({'name': f"{spec_module_name} ({type_module})",
+                                                      "description": f"{spec_module_name} ({type_module})",
+                                                       'children': lst_spec_module})
         #
-        # # Устанавливаем диапазон для чтения параметров
-        # cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
-        # sl_node_set = {}
-        # # пробегаемся по параметрам листа
-        # for par in cells_read:
-        #     # Если конец строки, то заканчиваем обработку ячеек
-        #     if par[rus_par_ind].value is None:
-        #         break
-        #     # если параметр принадлежит контроллеру объекта и не переведено в резерв
-        #     if par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
-        #         # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
-        #         rus_name_par = par[rus_par_ind].value + '(С меткой времени ПЛК)' if par[index_fast].value == 'Да' \
-        #             else par[rus_par_ind].value
-        #         if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
-        #             rus_name_par += ' (РЕЗЕРВ)'
-        #         sl_node_set[rus_name_par] = (par[alg_name_ind].value.replace('|', '_') + '.Value',
-        #                                      par[eunit_ind].value)
-        # # для каждой уставки в отсортированном словаре уставок
-        # for a_set_rus in sorted(sl_node_set):
-        #     # ...собираем json
-        #     lst_json.append(
-        #         {"Signal": {"UserTree": f"Уставки/{a_set_rus.replace('/', '|')}",
-        #                     "OpcTag":
-        #                         f"{obj[0]}.System.SET.{sl_node_set[a_set_rus][0]}",
-        #                     "EUnit": sl_node_set[a_set_rus][1],
-        #                     "Description": a_set_rus}})
-        #
-        # # Добавляем дополнительные параметры если в объекте есть контроллеры с данными параметрами
-        # for _, pars in {c: p for c, p in sl_need_add.items() if c in set(sl_object_all[obj].keys())}.items():
-        #     for p, param_p in pars.items():
-        #         lst_json.append(
-        #             {"Signal": {"UserTree": f"Дополнительные параметры/{param_p[1]}",
-        #                         "OpcTag":
-        #                             f"{obj[0]}.System.Pars.{p}.Value",
-        #                         "EUnit": '-',
-        #                         "Description": param_p[1]}})
-        #
-        # # Дополнительный перебор для сбора отказов
-        # for list_config in sl_brk_group_trends:
-        #     # для каждой группы создаём словарь с пустыми словарями для каждого узла
-        #     sl_node_trends = {node: {} for node in tuple_node_trends}
-        #     # Выбираем текущий лист в качестве активного
-        #     sheet = book[list_config]
-        #     # Устанавливаем Диапазон считывания для первой строки (узнать индексы столбцов)
-        #     cells_name = sheet['A1': 'AG1']
-        #     rus_par_ind = is_f_ind(cells_name[0], 'Наименование параметра')
-        #     alg_name_ind = is_f_ind(cells_name[0], 'Алгоритмическое имя')
-        #     # eunit_ind = is_f_ind(cells_name[0], 'Единицы измерения')
-        #     node_name_ind = is_f_ind(cells_name[0], 'Узел')
-        #     reserve_par_ind = is_f_ind(cells_name[0], 'Резервный')
-        #
-        #     # Устанавливаем диапазон для чтения параметров
-        #     cells_read = sheet['A2': 'AG' + str(sheet.max_row)]
-        #     # пробегаемся по параметрам листа
-        #     for par in cells_read:
-        #         # Если конец строки, то заканчиваем обработку ячеек
-        #         if par[rus_par_ind].value is None:
-        #             break
-        #         # при условии, что находимся на листе 'Измеряемые', 'Расчетные' или на Входные и сигнал не привязан к ИМ
-        #         # и параметр принадлежит контроллеру объекта и не переведено в резерв
-        #         if (list_config in ('Измеряемые', 'Расчетные') or list_config == 'Входные' and
-        #             par[is_f_ind(cells_name[0], 'ИМ')].value == 'Нет') and \
-        #                 par[cpu_par].value in sl_object_all[obj] and par[reserve_par_ind].value == 'Нет':
-        #             rus_name_par = par[rus_par_ind].value
-        #             if par[cpu_par].comment and f'{obj[1]}(нет)' in par[cpu_par].comment.text.split(';'):
-        #                 rus_name_par += ' (РЕЗЕРВ)'
-        #             # создаём промежуточный словарь {рус.имя: (алг.имя, единицы измерения)}
-        #             sl_par_trends = \
-        #                 {f_ind_json(rus_name_par): (par[alg_name_ind].value.replace('|', '_') + '.fValue',
-        #                                             '-')}
-        #             # добавляем словарь параметра в словарь узла
-        #             sl_node_trends[par[node_name_ind].value].update(sl_par_trends)
-        #
-        #     # для каждого узла(мнемосхемы)...
-        #     for node in sl_node_trends:
-        #         # ...для каждого параметра по отсортированному словарю параметров в узле...
-        #         for param in sorted(sl_node_trends[node]):
-        #             # ...собираем json
-        #             lst_json.append(
-        #                 {"Signal": {"UserTree": f"{sl_brk_group_trends[list_config][0]}/"
-        #                                         f"{node.replace('/', '|')}/Отказ - {param.replace('/', '|')}",
-        #                             "OpcTag":
-        #                                 f'{obj[0]}.{sl_brk_group_trends[list_config][1]}.'
-        #                                 f'{sl_node_trends[node][param][0]}',
-        #                             "EUnit": sl_node_trends[node][param][1],
-        #                             "Description": f'Отказ - {param}'}})
-        #
-        # # Добавляем на тренды диагностику по интересным модулям
-        # # Для каждого контроллера объекта...
-        # for cpu in sl_object_all[obj]:
-        #     # ...для каждого спец модуля контроллера (частотный или бза)
-        #     # при этом проверяем, что у контроллера вообще есть такие модуля, если нет, то перебора не будет
-        #     for spec_module_name in sl_for_diag.get(cpu, {}):
-        #         # узнаём тип текущего перебираемого модуля
-        #         type_module = sl_for_diag[cpu][spec_module_name]
-        #         # для сигналов модуля, описанных в словаре sl_signal_module добавляем тренды
-        #         for signal in sl_signal_module.get(type_module, ''):
-        #             lst_json.append(
-        #                 {"Signal": {"UserTree": f"Диагностика/{spec_module_name} ({type_module})/"
-        #                                         f"{signal} {spec_module_name}",
-        #                             "OpcTag":
-        #                                 f'{obj[0]}.Diag.HW.{spec_module_name}.'
-        #                                 f'{sl_signal_module[type_module][signal][0]}',
-        #                             "EUnit": sl_signal_module[type_module][signal][1],
-        #                             "Description": f'{signal} {spec_module_name} ({type_module})'}})
-        #
-        # # Для каждого контроллера объекта...
-        # # При наличии Сар добавляем на тренды САР
-        # for cpu in sl_object_all[obj]:
-        #     if 'САР' in sl_cpu_spec.get(cpu, ''):
-        #         if os.path.exists(os.path.join('Template_Alpha', 'SAR', 'Tun_SAR.txt')):
-        #             with open(os.path.join('Template_Alpha', 'SAR', f'Tun_SAR.txt'), 'r',
-        #                       encoding='UTF-8') as f_sar:
-        #                 for line in f_sar:
-        #                     if '#' in line:
-        #                         continue
-        #                     if not line.strip():
-        #                         break
-        #                     line = line.strip().split(';')
-        #                     tag = line[0]
-        #                     descr = line[3]
-        #                     full_tag = f'{obj[0]}.SAR.Tuning.{tag}.Value'
-        #                     lst_json.append(
-        #                         {"Signal": {"UserTree": f"Настройки САР/{descr}",
-        #                                     "OpcTag":
-        #                                         f'{full_tag}',
-        #                                     "EUnit": '-',
-        #                                     "Description": f'{descr}'}})
 
         # {'id': ('sBndaH', 'sBndwH', 'sBndwL', 'sBndaL'),
         #                             'visible': ('True',)*4,
@@ -614,7 +648,10 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                                      (False,)*4,
                                      ('Верхняя аварийная уставка', 'Верхняя предупредительная уставка',
                                       'Нижняя предупредительная уставка', 'Нижняя аварийная уставка'),
-                                     ({'color': '0xffff0000', 'brushStyle': 2, 'thickness': 1},)*4)
+                                     ({'color': '0xffff0000', 'brushStyle': 2, "isHistorized": False, 'thickness': 1},
+                                      {'color': '0xffffff00', 'brushStyle': 2, "isHistorized": False, 'thickness': 1},
+                                      {'color': '0xffffff00', 'brushStyle': 2, "isHistorized": False, 'thickness': 1},
+                                      {'color': '0xffff0000', 'brushStyle': 2, "isHistorized": False, 'thickness': 1}))
         #
         lst_LineStyleDictionary = list()
         for num, sig in enumerate(tuple_LineStyleDictionary[0]):

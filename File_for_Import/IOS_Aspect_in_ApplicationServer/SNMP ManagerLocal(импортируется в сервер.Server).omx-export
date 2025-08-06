@@ -1,0 +1,7 @@
+<omx xmlns="system" xmlns:srv="server" xmlns:eth="automation.ethernet">
+  <srv:snmp-manager name="SNMP ManagerLocal">
+    <srv:agent-config agent="SNMP_AgentLocal.SnmpAgent" requests-interval="30" response-interval="1000"/>
+    <srv:agent-config agent="Server-CDKS-2.SNMP_AgentLocal.SnmpAgent" requests-interval="30" response-interval="1000"/>
+    <eth:ethernet-adapter-binding adapter="LocalEthernet"/>
+  </srv:snmp-manager>
+</omx>

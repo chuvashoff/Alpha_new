@@ -1,0 +1,52 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:snmp="automation.snmp" xmlns:ct="automation.control">
+  <ct:object name="Service.rlock" access-level="public">
+    <ct:parameter name="setAlarm" type="bool" direction="in" access-level="public"/>
+    <ct:parameter name="setDescription" type="string" direction="in" access-level="public"/>
+    <ct:parameter name="High" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="Low" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="setUserAlarm" type="bool" direction="in" access-level="public"/>
+    <ct:parameter name="Low_Aoss_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_Aoss_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="KC1_Aoss_Arh_START" object="KC1.System.TS.Aoss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="KC1_Aoss_Arh_STOP" object="KC1.System.TS.Aoss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="Aoss_Arh_Handler_START_KC1" source-code="if (KC1_Aoss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_Aoss_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="KC1_Aoss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="Aoss_Arh_Handler_STOP_KC1" source-code="if (KC1_Aoss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 АОсс&quot;;&#10;&#9;commit High_Aoss_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_Aoss_ArhKC1_tmp;&#10;&#9;commit High = High_Aoss_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="KC1_Aoss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_Aobs_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_Aobs_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="KC1_Aobs_Arh_START" object="KC1.System.TS.Aobs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="KC1_Aobs_Arh_STOP" object="KC1.System.TS.Aobs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="Aobs_Arh_Handler_START_KC1" source-code="if (KC1_Aobs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_Aobs_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="KC1_Aobs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="Aobs_Arh_Handler_STOP_KC1" source-code="if (KC1_Aobs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 АОбс&quot;;&#10;&#9;commit High_Aobs_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_Aobs_ArhKC1_tmp;&#10;&#9;commit High = High_Aobs_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="KC1_Aobs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_MK_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_MK_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="KC1_MK_Arh_START" object="KC1.System.TS.MK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="KC1_MK_Arh_STOP" object="KC1.System.TS.MK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="MK_Arh_Handler_START_KC1" source-code="if (KC1_MK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_MK_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="KC1_MK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="MK_Arh_Handler_STOP_KC1" source-code="if (KC1_MK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 М-К&quot;;&#10;&#9;commit High_MK_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_MK_ArhKC1_tmp;&#10;&#9;commit High = High_MK_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="KC1_MK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_UserArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_UserArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="KC1_UserArh_START" object="KC1.System.TS.UserArh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="KC1_UserArh_STOP" object="KC1.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="UserArh_Handler_START_KC1" source-code="if (KC1_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="KC1_UserArh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="UserArh_Handler_STOP_KC1" source-code="if (KC1_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 Пользовательский&quot;;&#10;&#9;commit High_UserArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhKC1_tmp;&#10;&#9;commit High = High_UserArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="KC1_UserArh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="Hanlder_User_one" source-code="if (setUserAlarm.Value)&#10;{&#10;&#9;commit High = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после начала события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="setUserAlarm" cause="change"/>
+    </ct:handler>
+  </ct:object>
+</omx>

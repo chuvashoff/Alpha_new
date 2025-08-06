@@ -4,7 +4,7 @@ import re
 # from string import Template
 # from my_func import *
 import string
-import sys
+# import sys
 
 from chardet import detect as chardet_detect
 from func_for_v3 import *
@@ -366,7 +366,7 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                     sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
                     sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
                     buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
-                    sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict):
+                    sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict, sl_need_add_pars_struct: dict):
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -539,6 +539,7 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
             sl_global_cdo = {}
             sl_global_pru = {}
             sl_add_par = {}
+            sl_add_par_struct = {}
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'TR',
                                                                                               f'TR_par_{choice_tr}')):
@@ -704,6 +705,15 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                     for line in f_global:
                         line = line.strip()
                         current_dict_tag = dict(zip(title_key, line.split(';')))
+
+                        # Определяем добавляемые неархивируемые теги, если таковые нужны
+                        if sl_need_add_pars_struct.get(line_source[0]) and current_dict_tag.get('Name', '') \
+                                and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                            tmp_var_may_be_fb = current_dict_tag.get('Name', '')
+                            if tmp_var_may_be_fb in sl_need_add_pars_struct.get(line_source[0]):
+                                # index_par_fb = current_dict_tag.get('Offset')
+                                sl_add_par_struct[f"System.{tmp_var_may_be_fb.replace('|', '.')}"] = (
+                                current_dict_tag.get('Offset'), current_dict_tag.get('Type'))
 
                         # Получаем сигналы SARa
                         if sl_sar_tun and current_dict_tag.get('Name', '') \
@@ -1006,6 +1016,8 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                                 sl_global_fast[tmp_var] = index_par
 
             # В словаре sl_global_ai лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
+            # print("sl_global_ai", sl_global_ai)
+            # print(lst_ai)
             sl_global_ai = {key: value for key, value in sl_global_ai.items() if key[:key.find('[')] in lst_ai}
             sl_global_ae = {key: value for key, value in sl_global_ae.items() if key[:key.find('[')] in lst_ae}
             for key, value in sl_global_di.items():
@@ -1199,6 +1211,10 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
             if sl_add_par:
                 s_all += create_group_add_arc(sl_add=sl_add_par,
                                               template_arc=tmp_ind_arc, source=line_source[0], post_pref_par='.Value')
+            if sl_add_par_struct:
+                s_all += create_group_add_noarc(sl_add=sl_add_par_struct,
+                                                 template_no_arc_index=tmp_ind_no_arc,
+                                                 source=line_source[0], post_pref_par='')
 
             # Обработка и запись в карту сигналов ПРУ
             if sl_global_pru:
@@ -1274,7 +1290,7 @@ def read_mko_cpu_index(tuple_all_cpu: tuple, sl_cpu_path: dict):
     return sl_cpu_mko_index
 
 
-def create_group_add_noarc(sl_add, template_no_arc_index, source):
+def create_group_add_noarc(sl_add, template_no_arc_index, source, post_pref_par: str=""):
     sl_data_cat = {
         'real': 'Analog',
         'int': 'Analog',
@@ -1289,7 +1305,7 @@ def create_group_add_noarc(sl_add, template_no_arc_index, source):
     for key, value in sl_add.items():
         a = key
         pref_arc = f'NoArc{sl_data_cat[value[1]]}'
-        s_out += Template(template_no_arc_index).substitute(name_signal=f'{a}',
+        s_out += Template(template_no_arc_index).substitute(name_signal=f'{a}{post_pref_par}',
                                                             type_signal=sl_type[value[1]], index=value[0],
                                                             data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out

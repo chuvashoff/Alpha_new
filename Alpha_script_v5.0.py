@@ -1,5 +1,6 @@
 # import datetime
-import os.path
+# import os.path
+import copy
 
 import openpyxl
 import logging
@@ -18,6 +19,7 @@ from create_reports_sday import create_reports_sday_v10
 from create_reports_v80 import create_reports_v80, create_reports_pz_v80, create_reports_sday_v80
 from create_reports_v80 import create_reports_sut_v80
 from json import load as json_load
+from re import fullmatch
 # from collections import ChainMap
 from pathlib import Path
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
@@ -130,9 +132,9 @@ try:
     # Читаем состав объектов и заполняем sl_object_all
     cells = sheet['A23': 'U23']
     index_on1 = is_f_ind(cells[0], 'ON1')
-    cells = sheet['A24': 'U38']
+    cells = sheet['A24': 'U54']
     for p in cells:
-        if p[1].value is None:
+        if p[1].value is None or p[0].value is None or 'Объект' not in p[0].value:
             break
         else:
             # промежуточный словарь, для загрузки в общий
@@ -150,6 +152,10 @@ try:
     sl_object_rus_name = {i[0]: i[1] for i in sl_object_all}
 
     sl_project_settings_default = {
+        "Settings_script": {
+            "Create_general_plc": False,
+            "Create_general_ios": False
+        },
         "Module": {
             "Unet_Client": [0, 1]
         },
@@ -177,6 +183,8 @@ try:
         unet_start = int(u[0])
         n_unet = int(u[1])
         unet_version = int(sl_project_settings.get("Protocol", {}).get("Unet_version", 1))
+        global_flag_plc = sl_project_settings.get("Settings_script",{}).get("Create_general_plc", False)
+        global_flag_ios = sl_project_settings.get("Settings_script",{}).get("Create_general_ios", False)
     except (Exception, KeyError):
         print('Файл Systemach/Project_settings.json заполнен некорректно, '
               'Настройки будут использованы по умолчанию')
@@ -185,6 +193,8 @@ try:
         unet_start = u[0]
         n_unet = u[1]
         unet_version = sl_project_settings.get("Protocol", {}).get("Unet_version", 1)
+        global_flag_plc = sl_project_settings.get("Settings_script", {}).get("Create_general_plc", False)
+        global_flag_ios = sl_project_settings.get("Settings_script", {}).get("Create_general_ios", False)
 
     try:
         if "Add_Structure+" in sl_project_settings and isinstance(sl_project_settings.get("Add_Structure+"), dict):
@@ -618,6 +628,21 @@ try:
     # print(return_sl_mnemo_cdo)
     # print()
 
+    # Выделяем листы с FB_ в начале названия
+    fb_sheets = [elem for elem in book.sheetnames if fullmatch(r'^FB_.+', elem)]
+    # Создаём словарь с ключами листов и значениями - словарь cpu с параметрами и их комплектующими
+    sl_fb_sctruct = {i:{} for i in fb_sheets}
+    sl_general_cpu_structur_tags = {}
+
+    for fb_sheet in sl_fb_sctruct:
+        sl_fb_sctruct[fb_sheet], sl_cpu_structur_tags = is_read_fb(sheet=book[fb_sheet], sheet_name=fb_sheet)
+        for plk in sl_cpu_structur_tags:
+            if plk not in sl_general_cpu_structur_tags:
+                sl_general_cpu_structur_tags[plk] = sl_cpu_structur_tags[plk]
+            else:
+                sl_general_cpu_structur_tags[plk] += sl_cpu_structur_tags[plk]
+
+        # cells = book[fb_sheet]['A2': get_column_letter(sheet.max_column) + str(sheet.max_row)][0].
     # print(datetime.datetime.now(), '- Фиксики начинают создавать и проверять выходные файлы')
     sl_w = {
         # return_sl_ai =
@@ -740,6 +765,14 @@ try:
     # print(progress_ios_plc)
     progress_bar = ' ' * 100
     progress_percent = 0
+    # global_flag_plc = False
+    # global_flag_ios = False
+    if global_flag_plc:
+        global_root_plc_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                                     xmlns_trei="trei", xmlns_ct="automation.control")
+    if  global_flag_ios:
+        global_root_ios_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
+                                            xmlns_trei="trei", xmlns_ct="automation.control")
     for objects in sl_object_all:
         # ...создаём корневой узел xml для IOS-аспекта
         root_ios_aspect = ET.Element('omx', xmlns="system", xmlns_dp="automation.deployment",
@@ -788,7 +821,7 @@ try:
                         cpu_unet = line.split(':')[0].strip()
                         ports = tuple(sorted(set([i.strip() for i in line.split(':')[1].strip().split(',')
                                                   if i.strip().isdigit()])))
-                        sl_unet[cpu_unet] = ports
+                        sl_unet[cpu_unet] = [ports[0]]
                 if cpu in sl_unet:
                     for port in sl_unet[cpu]:
                         ET.SubElement(child_cpu, 'trei_unet-server', name=f"UnetServer_{port}",
@@ -1031,6 +1064,21 @@ try:
             # Создаём узел System
             child_system = ET.SubElement(child_app, 'ct_object', name="System", access_level="public")
 
+            if sl_fb_sctruct:
+                # Если контроллер есть среди структур, то делаем для данного контроллера - добавляем в PLC-Аспект
+                if cpu in set([item for sublist in [sl_fb_sctruct[_].keys() for _ in sl_fb_sctruct] for item in sublist]):
+                    child_fb = ET.SubElement(child_system, 'ct_object', name="FB", access_level="public")
+                    for struct, sl_cpu_pars_struct in sl_fb_sctruct.items():
+                        if sl_cpu_pars_struct.get(cpu):
+                            # print(cpu, sl_cpu_pars_struct.get(cpu))
+                            add_xml_par_plc(name_group=f"{struct.replace('FB_', '',1)}",
+                                            sl_par=sl_cpu_pars_struct.get(cpu, {}),
+                                            parent_node=child_fb,
+                                            sl_attr_par={},
+                                            default_types=False
+                                            )
+
+
             # Пробегаемся по словарю ключами
             for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU', 'Pars'):
                 # если у текущего контроллера есть анпары или...
@@ -1112,6 +1160,10 @@ try:
             cur_percent = progress_percent * 100 / progress_ios_plc
             # rprint(f"Процент создания/проверки IOS и PLC Аспектов:{round(cur_percent, 2)}%")
             # print(f"[{progress_bar.replace(' ', '=', round(cur_percent))}]")
+
+            if global_flag_plc:
+                global_plc_child_object = deepcopy(child)
+                global_root_plc_aspect.append(global_plc_child_object)
 
         # Если у текущего объекта есть контроллеры с САР на борту
         if set(sl_object_all[objects].keys()) & set([i for i in sl_CPU_spec if 'САР' in sl_CPU_spec[i]]):
@@ -1433,10 +1485,10 @@ try:
                                 rus_name_unit = sl_value.get('Unit', '')  # Раньше добавлялось в ПС, хз зачем
                                 ET.SubElement(child_ping_status, 'attribute', type='unit.Server.Attributes.Alarm',
                                               value=f'{{"Condition":{{"IsEnabled":"true",'
-                                                    f'"Subconditions":[{{"AckStrategy":2,"IsEnabled":true,'
+                                                    f'"Subconditions":[{{"AckStrategy":2,"IsDeactivation":true,'
                                                     f'"Message":". Порт{i}. Нет связи",'
                                                     f'"Severity":40,"Type":2}},'
-                                                    f'{{"AckStrategy":2,"IsDeactivation":true,'
+                                                    f'{{"AckStrategy":2,"IsEnabled":true,'
                                                     f'"Message":". Порт{i}. Нет связи",'
                                                     f'"Severity":40,"Type":3}}],'
                                                     f'"Type":2}}}}')
@@ -1542,6 +1594,25 @@ try:
             ET.SubElement(child_system, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                           aspect="Types.IOS_Aspect", access_level="public")
 
+        if sl_fb_sctruct:
+            # Если есть пересечения между контроллерами объекта и структур, то делаем - добавляем IOS-Аспекты
+            if set(sl_object_all[objects].keys()) & set([item for sublist in [sl_fb_sctruct[_].keys() for _ in sl_fb_sctruct] for item in sublist]):
+                child_fb = ET.SubElement(child_system, 'ct_object', name="FB", access_level="public")
+                # ...добавляем агрегаторы
+                for agreg, type_agreg in sl_agreg.items():
+                    ET.SubElement(child_fb, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
+                                  aspect="Types.IOS_Aspect", access_level="public")
+
+                for struct, sl_cpu_pars_struct in sl_fb_sctruct.items():
+                    name_group_fb = f"{struct.replace('FB_', '',1)}"
+                    add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
+                                    objects=objects, name_group=name_group_fb,
+                                    sl_par=sl_cpu_pars_struct,
+                                    parent_node=child_fb, sl_agreg=sl_agreg,
+                                    plc_node_tree=f'System.FB.{name_group_fb}',
+                                    default_types=False,
+                                    add_local_agreg=True)
+
         # Пробегаемся по словарю ключами
         for node in ('SET', 'BTN', 'PZ', 'CNT', 'TS', 'PPU', 'ALR', 'ALG', 'WRN', 'MODES', 'GRH', 'CDO', 'PRU', 'Pars'):
             # Если у текущего объекта есть контроллеры с анпарами...
@@ -1644,7 +1715,26 @@ try:
         cur_percent = progress_percent * 100 / progress_ios_plc
         # rprint(f"Процент создания/проверки IOS и PLC Аспектов:{round(cur_percent, 2)}%")
         # print(f"[{progress_bar.replace(' ', '=', round(cur_percent))}]")
+        if global_flag_ios:
+            global_ios_child_object = deepcopy(child_object)
+            global_root_ios_aspect.append(global_ios_child_object)
 
+
+    if global_flag_plc:
+        global_plc_tmp = ET.tostring(global_root_plc_aspect).decode('UTF-8')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'PLC_Aspect_importDomain'),
+                        file_name_check=f'file_out_plc_global.omx-export',
+                        new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(global_plc_tmp),
+                                                                          pretty_print=True, encoding='unicode')),
+                        message_print=f'Требуется заменить общий ПЛК-аспект контроллеров')
+
+    if global_flag_ios:
+        global_ios_tmp = ET.tostring(global_root_ios_aspect).decode('UTF-8')
+        check_diff_file(check_path=os.path.join('File_for_Import', 'IOS_Aspect_in_ApplicationServer'),
+                        file_name_check=f'file_out_IOS_inApp_global.omx-export',
+                        new_data=multiple_replace_xml(lxml.etree.tostring(lxml.etree.fromstring(global_ios_tmp),
+                                                                          pretty_print=True, encoding='unicode')),
+                        message_print=f'Требуется заменить общий IOS-аспект объектов')
     # print()
     # Создание сервисных сигналов
     is_create_service_signal(sl_object_all=sl_object_all, sl_cpu_res=sl_cpu_res, architecture=architecture,
@@ -1756,8 +1846,8 @@ try:
                      sl_cpu_res=sl_cpu_res,
                      sl_add_cpu_mko=sl_add_cpu_mko,
                      sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
-                     sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars)
-                     )
+                     sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars),
+                     sl_need_add_pars_struct=sl_general_cpu_structur_tags)
         # создаём индексы добавленных контроллеров
         # Обрабатываем добавляемые извне структуры
         # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
@@ -1796,7 +1886,8 @@ try:
                         sl_add_cpu_mko={},  # sl_add_cpu_mko, !!!
                         sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
                         sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars,
-                                                        sub_dict=return_sl_ai_add_pars)
+                                                        sub_dict=return_sl_ai_add_pars),
+                        sl_need_add_pars_struct=sl_general_cpu_structur_tags
                         )
 
     # print(return_alr)

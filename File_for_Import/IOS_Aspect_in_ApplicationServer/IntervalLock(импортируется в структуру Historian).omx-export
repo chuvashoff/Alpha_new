@@ -1,0 +1,20 @@
+<omx xmlns="system" xmlns:dp="automation.deployment" xmlns:snmp="automation.snmp" xmlns:ct="automation.control">
+  <ct:object name="IntervalLock" access-level="public">
+    <ct:parameter name="High" type="uint64" direction="out" access-level="public">
+      <attribute type="unit.Server.Attributes.History" value="Enable=&quot;True&quot; ServerTime=&quot;False&quot;"/>
+    </ct:parameter>
+    <ct:parameter name="Low" type="uint64" direction="out" access-level="public">
+      <attribute type="unit.Server.Attributes.History" value="Enable=&quot;True&quot; ServerTime=&quot;False&quot;"/>
+    </ct:parameter>
+    <ct:parameter name="WriteLock" type="bool" direction="out" access-level="public">
+      <attribute type="unit.Server.Attributes.History" value="Enable=&quot;True&quot; ServerTime=&quot;False&quot;"/>
+      <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:1,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;Архивация выполнена&quot;,&quot;Severity&quot;:500,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:1,&quot;IsEnabled&quot;:false,&quot;Message&quot;:&quot;___&quot;,&quot;Severity&quot;:500,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
+    </ct:parameter>
+    <ct:parameter name="Description" type="string" direction="out" access-level="public"/>
+    <ct:subject-ref name="rlock" object="rlock" const-access="false" aspected="false"/>
+    <ct:subject-ref name="_State" object="State" const-access="false" aspected="false"/>
+    <ct:handler name="Handler" source-code="if (rlock.setAlarm.Value &amp;&amp; _State.Server.Value) {&#10;&#9;commit Description = rlock.setDescription;&#10;&#9;commit High = rlock.High;&#10;&#9;commit Low = rlock.Low;&#10;&#9;commit WriteLock = true;&#10;}">
+      <ct:trigger on="rlock.setAlarm" cause="update"/>
+    </ct:handler>
+  </ct:object>
+</omx>
