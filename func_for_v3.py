@@ -2,7 +2,8 @@
 from string import Template
 from copy import copy, deepcopy
 import os
-# import re
+import re
+# from urllib3.util import wait_for_write
 from algroritm import is_load_algoritm
 import datetime
 from time import sleep
@@ -112,10 +113,6 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
             # ...для каждого параметра контроллера...
             for par, tuple_par in sl_par[cpu].items():
                 # ...создаём структуру параметра
-                # base_type = (f"Types.{tuple_par[0].replace('PLC_View', 'IOS_NotHistory_View')}"  #
-                #              if 'Сохраняемый - Нет' in tuple_par
-                #              else f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}")
-                # aspect = ("Types.IOS_NotHistory_Aspect" if 'Сохраняемый - Нет' in tuple_par else "Types.IOS_Aspect")
                 child_par = ET.SubElement(child_group, 'ct_object', name=f"{par}",
                                           base_type=f"Types.{tuple_par[0].replace('PLC_View', 'IOS_View')}" if default_types else f"{tuple_par[0].replace('PLC_View', 'IOS_View')}",
                                           aspect="Types.IOS_Aspect",
@@ -127,48 +124,18 @@ def add_xml_par_ios(set_cpu_object, objects, name_group, sl_par, parent_node, pl
                     for agreg, type_agreg in sl_agreg.items():
                         ET.SubElement(child_par, 'ct_object', name=f'{agreg}', base_type=f"{type_agreg}",
                                       aspect="Types.IOS_Aspect", access_level="public")
-                # # Если 'AI', 'AE', 'SET', то добавляем Value с гистерезисом
-                # if name_group in ('AI', 'AE', 'SET'):
-                #     deadband_hist = 1/(10**int(tuple_par[5])) if tuple_par[5] != '' else 0.01
-                #     object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
-                #                                  direction='out', access_level="public")
-                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
-                #                   value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                #     ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
-                #                   value=f"@(object:unit.System.Attributes.Description)")
-                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
-                #                   value=f"@(object:Attributes.EUnit)")
-                #     ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
-                # # Если ИМ АО, то добавляем Set и iPos с гистерезисом
-                # elif name_group in ('IM',) and 'IM_AO' in tuple_par[0]:
-                #     deadband_hist = 1/(10**int(tuple_par[6])) if tuple_par[6] != '' else 0.01
-                #     for sig, attr_sig in {'Set': ('Задание',), 'iPos': ('Положение',)}.items():
-                #         object_sig = ET.SubElement(child_par, 'ct_parameter', name=f'{sig}', type='float32',
-                #                                    direction='out', access_level="public")
-                #         ET.SubElement(object_sig, 'attribute', type="unit.System.Attributes.Description",
-                #                       value=f"{attr_sig[0]}")
-                #         ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.Unit",
-                #                       value=f"@(object:Attributes.EUnit)")
-                #         ET.SubElement(object_sig, 'attribute', type="unit.Server.Attributes.History",
-                #                       value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                #         ET.SubElement(child_par, 'ct_formula', source_code=f"_PLC_View.States.{sig}", target=f"{sig}")
-                # # Если драйверный параметр, AI и сохраняем историю
-                # elif 'System.DRV' in plc_node_tree and 'DRV_AI_IOS_View' in base_type:
-                #     deadband_hist = 1/(10**int(tuple_par[8])) if tuple_par[8] != '' else 0.01
-                #     object_value = ET.SubElement(child_par, 'ct_parameter', name='Value', type='float32',
-                #                                  direction='out', access_level="public")
-                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.History",
-                #                   value=f"Enable=\"True\" Deadband=\"{deadband_hist}\" ServerTime=\"False\"")
-                #     ET.SubElement(object_value, 'attribute', type="unit.System.Attributes.Description",
-                #                   value=f"@(object:unit.System.Attributes.Description)")
-                #     ET.SubElement(object_value, 'attribute', type="unit.Server.Attributes.Unit",
-                #                   value=f"@(object:Attributes.EUnit)")
-                #     ET.SubElement(child_par, 'ct_formula', source_code="_PLC_View.States.Value", target="Value")
-
     return
 
 
-def is_read_ai_ae_set(sheet, type_signal):
+def is_read_ai_ae_set(sheet, type_signal, sl_cpu_struct_number: dict, sl_type_cpu_from_settings: dict):
+    sl_type_cpu_from_settings_ai_ae_set = {
+        name_cpu: {
+            name_struct: param_struct.get('Name_type', '') for name_struct, param_struct in sl_type_struct.items()
+            if name_struct in ('AI', 'AE', 'SET') and param_struct.get('Name_type')
+        }
+        for name_cpu, sl_type_struct in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings_ai_ae_set)
+    # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
     # return_sl_add_pars = {cpu: {алг_пар: (тип параметра в студии, русское имя,)}}
     return_sl_add_pars = {}
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков,
@@ -204,6 +171,14 @@ def is_read_ai_ae_set(sheet, type_signal):
     for par in cells:
         if par[0].value is None:
             break
+        if par[index_cpu_name].value in sl_cpu_struct_number:
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = f"FAST|{par[index_alg_name].value.replace('|', '_')}" if par[index_fast].value == 'Да' else \
+                par[index_alg_name].value.replace('|', '_')
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct, )
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct, )
         # set_par_cpu.add(par[index_cpu_name].value)
         # Проверка комментария
         # if par[index_cpu_name].comment:
@@ -234,8 +209,10 @@ def is_read_ai_ae_set(sheet, type_signal):
                                      if i.isdigit()]) if par[index_frag_dig].comment else par[index_frag_dig].value
 
             module_canal = f'{par[index_module].value}.Канал {par[index_canal].value}' if par[index_no_standart].value == 'Нет' else '-'
+            cpu_signal = par[index_cpu_name].value
+            tipe_signal = sl_type_cpu_from_settings_ai_ae_set.get(cpu_signal, {}).get(type_signal, '')
             return_sl[par[index_cpu_name].value].update({par[index_alg_name].value.replace('|', '_'): (
-                sl_plc_aspect.get(type_signal, 'Пустой тип'),
+                tipe_signal if tipe_signal else sl_plc_aspect.get(type_signal, 'Пустой тип'),
                 par[index_rus_name].value,
                 par[index_unit].value,
                 par[index_short_name].value,
@@ -268,10 +245,18 @@ def is_read_ai_ae_set(sheet, type_signal):
 
     # Убираем элементы с пустыми значениями
     return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
-    return return_sl, return_sl_mnemo, return_sl_sday, return_sl_diff, sl_cpu_fast, return_sl_add_pars
+    return return_sl, return_sl_mnemo, return_sl_sday, return_sl_diff, sl_cpu_fast, return_sl_add_pars, sl_cpu_struct_number
 
 
-def is_read_di(sheet):
+def is_read_di(sheet, sl_cpu_struct_number: dict, sl_type_cpu_from_settings: dict):
+    sl_type_cpu_from_settings_di = {
+        name_cpu: {
+            name_struct: param_struct.get('Name_type', '') for name_struct, param_struct in sl_type_struct.items()
+            if name_struct in ('DI', 'DI_AI') and param_struct.get('Name_type')
+        }
+        for name_cpu, sl_type_struct in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings_di)
+    # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
     # return_sl_di = {cpu: {алг_пар: (тип параметра в студии, русское имя, sColorOff, sColorOn)}}
     return_sl_di = {}
     return_sl_diff = {}
@@ -282,6 +267,13 @@ def is_read_di(sheet):
     sl_color_di = {'FF969696': '0', 'FF00B050': '1', 'FFFFFF00': '2', 'FFFF0000': '3'}
     # Словарь соответствия типа сигнала(DI или DI_AI) и его ПЛК-Аспекта
     sl_plc_aspect = {'Да': 'DI.DI_PLC_View', 'Нет': 'DI.DI_PLC_View', 'AI': 'DI_AI.DI_AI_PLC_View'}
+    sl_type_cpu_from_settings_di_use = {
+        name_cpu: {
+            i[0]: struct_di_diai.get(i[1], '') for i in (('Да','DI'), ('Нет','DI'), ('AI','DI_AI'))
+        }
+        for name_cpu, struct_di_diai in sl_type_cpu_from_settings_di.items()
+    }
+    # print(sl_type_cpu_from_settings_di_use)
     # Словарь предупреждений {CPU : {алг.имя : (рус.имя, тип наличия)}}
     sl_wrn_di = {}
 
@@ -301,6 +293,7 @@ def is_read_di(sheet):
     index_canal = is_f_ind(cells[0], 'Номер канала')
     index_no_standart = is_f_ind(cells[0], 'Нестандартный канал')
     index_inverse = is_f_ind(cells[0], 'Инверсия канала')
+    index_fast = is_f_ind(cells[0], 'Передача по МЭК')
 
     cells = sheet['A2': get_column_letter(100) + str(sheet.max_row)]
     # Составляем множество контроллеров, у которых есть данные параметры
@@ -308,6 +301,15 @@ def is_read_di(sheet):
     for par in cells:
         if par[0].value is None:
             break
+        if par[index_cpu_name].value in sl_cpu_struct_number and par[index_im].value == 'Нет':
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = f"FAST|{par[index_alg_name].value.replace('|', '_')}" if par[index_fast].value == 'Да' else \
+                par[index_alg_name].value.replace('|', '_')
+            type_signal = 'DI_AI' if par[index_control_cel].value == "AI" else 'DI'
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct, )
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct, )
         # set_par_cpu.add(par[index_cpu_name].value)
         if par[index_cpu_name].value not in sl_wrn_di:
             sl_wrn_di[par[index_cpu_name].value] = {}
@@ -326,9 +328,13 @@ def is_read_di(sheet):
                     par[index_cpu_name].comment.text.split(';') if par[index_cpu_name].comment else ''})
 
             module_canal = f'{par[index_module].value}.Канал {par[index_canal].value}' if par[index_no_standart].value == 'Нет' else '-'
+
+            cpu_signal = par[index_cpu_name].value
+            tipe_signal = sl_type_cpu_from_settings_di_use.get(cpu_signal, {}).get(par[index_control_cel].value, '')
+
             return_sl_di[par[index_cpu_name].value].update(
                 {par[index_alg_name].value.replace('|', '_'): (
-                    sl_plc_aspect.get(par[index_control_cel].value),
+                    tipe_signal if tipe_signal else sl_plc_aspect.get(par[index_control_cel].value),
                     par[index_rus_name].value,
                     sl_color_di.get(par[index_color_off].fill.start_color.index, '404'),
                     sl_color_di.get(par[index_color_on].fill.start_color.index, '404'),
@@ -353,10 +359,28 @@ def is_read_di(sheet):
 
     # Убираем элементы с пустыми значениями
     return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
-    return return_sl_di, sl_wrn_di, return_sl_mnemo, return_sl_diff
+    return return_sl_di, sl_wrn_di, return_sl_mnemo, return_sl_diff, sl_cpu_struct_number
 
 
-def is_read_im(sheet, sheet_imao):
+def is_read_im(sheet, sheet_imao, sl_cpu_struct_number, sl_type_cpu_from_settings: dict):
+    sl_type_cpu_from_settings_im = {
+        name_cpu: {
+            name_struct: param_struct.get('Name_type', '') for name_struct, param_struct in sl_type_struct.items()
+            if 'ИМ' in name_struct and param_struct.get('Name_type')
+        }
+        for name_cpu, sl_type_struct in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings_im)
+    def cut_until_last_number(text: str) -> str:
+        if text == 'ИМ1Х2пз':
+            return text
+        # Ищем все числа в строке
+        matches = list(re.finditer(r'\d+', text))
+        if not matches:
+            return text  # если чисел нет, вернуть исходную строку
+
+        last_number = matches[-1]  # берём последнее число
+        return text[:last_number.end()]  # обрезаем до конца последнего числа
+    # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
     # return_sl_im = {cpu: {алг_пар: (русское имя, StartView, Gender, ед изм., количество знаков(для д.ИМ=0),
     # количество знаков для истории)}}
     return_sl_im = {}
@@ -406,6 +430,14 @@ def is_read_im(sheet, sheet_imao):
     for par in cells:
         if par[0].value is None:
             break
+        if par[index_cpu_name].value in sl_cpu_struct_number:
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = par[index_alg_name].value
+            type_signal = cut_until_last_number(par[index_type_im].value)
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct, )
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct, )
         # set_par_cpu.add(par[index_cpu_name].value)
         # Проверка комментария
         # if par[index_cpu_name].comment:
@@ -416,12 +448,28 @@ def is_read_im(sheet, sheet_imao):
                 sl_cnt[par[index_cpu_name].value] = {}
             sl_cnt[par[index_cpu_name].value].update(
                 {par[index_alg_name].value + '_WorkTime': par[index_rus_name].value})
+
+            if par[index_cpu_name].value in sl_cpu_struct_number:
+                name_struct_cnt = f'{par[index_alg_name].value}_WorkTime'
+                type_signal_cnt = f'{cut_until_last_number(par[index_type_im].value)}_CNT'
+                if type_signal_cnt not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                    sl_cpu_struct_number[par[index_cpu_name].value][type_signal_cnt] = (name_struct_cnt,)
+                else:
+                    sl_cpu_struct_number[par[index_cpu_name].value][type_signal_cnt] += (name_struct_cnt,)
         # Если считаем перестановки, то добавляем в словарь sl_cnt = {CPU: {алг.имя : русское имя}}
         if par[index_swap].value == 'Да':
             if par[index_cpu_name].value not in sl_cnt:
                 sl_cnt[par[index_cpu_name].value] = {}
             sl_cnt[par[index_cpu_name].value].update(
                 {par[index_alg_name].value + '_Swap': par[index_rus_name].value})
+
+            if par[index_cpu_name].value in sl_cpu_struct_number:
+                name_struct_cnt = f'{par[index_alg_name].value}_Swap'
+                type_signal_cnt = f'{cut_until_last_number(par[index_type_im].value)}_CNT'
+                if type_signal_cnt not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                    sl_cpu_struct_number[par[index_cpu_name].value][type_signal_cnt] = (name_struct_cnt,)
+                else:
+                    sl_cpu_struct_number[par[index_cpu_name].value][type_signal_cnt] += (name_struct_cnt,)
 
         # Обрабатываем и составляем словарь отличий между параметрами по объектам
         if par[index_cpu_name].value not in return_sl_diff:
@@ -433,10 +481,12 @@ def is_read_im(sheet, sheet_imao):
             # return_sl_im = {cpu: {алг_пар: (тип ИМа, русское имя, StartView, Gender, ед изм. (для д.ИМ='-'),
             # количество знаков(для д.ИМ=0), количество знаков для истории)}}
             return_sl_im[par[index_cpu_name].value] = {}
-        if par[index_type_im].value in sl_im_plc:
+        cpu_signal = par[index_cpu_name].value
+        tipe_signal = sl_type_cpu_from_settings_im.get(cpu_signal, {}).get(par[index_type_im].value, '')
+        if par[index_type_im].value in sl_im_plc or tipe_signal:
             # print(par[index_save_history].value) !!!
             return_sl_im[par[index_cpu_name].value].update(
-                {par[index_alg_name].value: (sl_im_plc.get(par[index_type_im].value),
+                {par[index_alg_name].value: (tipe_signal if tipe_signal else sl_im_plc.get(par[index_type_im].value),
                                              par[index_rus_name].value,
                                              ''.join([i for i in par[index_start_view].value if i.isdigit()]),
                                              sl_gender.get(par[index_gender].value),
@@ -483,6 +533,14 @@ def is_read_im(sheet, sheet_imao):
         # Проверка комментария
         # if par[index_cpu_name].comment:
         #     print(str(par[index_cpu_name].comment).split()[1].split(';'))
+        if par[index_cpu_name].value in sl_cpu_struct_number and par[index_yes_im].value == 'Да':
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = f'{par[index_alg_name].value}'
+            type_signal = 'ИМАО'
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct, )
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct, )
 
         if par[index_yes_im].value == 'Да' and par[index_res].value == 'Нет':
             if par[index_cpu_name].value not in return_sl_im:
@@ -499,9 +557,11 @@ def is_read_im(sheet, sheet_imao):
                 # количество знаков для истории)}}
                 return_sl_diff[par[index_cpu_name].value] = {}
 
-            if 'ИМАО' in sl_im_plc:
+            cpu_signal = par[index_cpu_name].value
+            tipe_signal = sl_type_cpu_from_settings_im.get(cpu_signal, {}).get('ИМАО', '')
+            if 'ИМАО' in sl_im_plc or tipe_signal:
                 return_sl_im[par[index_cpu_name].value].update(
-                    {par[index_alg_name].value: (sl_im_plc.get('ИМАО'),
+                    {par[index_alg_name].value: (tipe_signal if tipe_signal else sl_im_plc.get('ИМАО'),
                                                  par[index_rus_name].value,
                                                  ''.join([i for i in par[index_start_view].value if i.isdigit()]),
                                                  sl_gender.get(par[index_gender].value),
@@ -528,7 +588,7 @@ def is_read_im(sheet, sheet_imao):
 
     # Убираем элементы с пустыми значениями
     return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
-    return return_sl_im, sl_cnt, return_sl_diff, return_sl_drv_iec_update
+    return return_sl_im, sl_cnt, return_sl_diff, return_sl_drv_iec_update, sl_cpu_struct_number
 
 
 def is_read_create_diag(book, name_prj, *sheets_signal):
@@ -1366,7 +1426,7 @@ def is_create_service_signal(sl_object_all: dict, sl_cpu_res: dict, architecture
         ET.SubElement(object_handler_1, 'ct_trigger',
                       on=f"Timer", cause="update")
     elif architecture == 'сингл':
-        child_hist_serv = ET.SubElement(child_historian, 'ct_object',
+        child_hist_serv = ET.SubElement(child_storage, 'ct_object',
                                         attrib={'name': f'Database', 'access-level': 'public'})
         diag2 = ET.SubElement(child_hist_serv, 'ct_object',
                               attrib={'name': f'Database', 'access-level': 'public'})
@@ -1596,7 +1656,7 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
             ET.SubElement(child_diagnostic, 'ct_bind',
                           source=f"_Database_{i_server}.Connected",
                           target=f'Alarm_connectHistorian_{i_server}', action="set_all")
-            if choice_tr in ('ПС90','ПС90_10МВт'):
+            if choice_tr in ('ПС90', 'ПС90_10МВт'):
                 child_alarm_ps90 = ET.SubElement(child_diagnostic, 'ct_parameter',
                                             attrib={
                                                 'name': f'Alarm_connectHistorian_{i_server}_ps90', 'type': "bool",
@@ -1634,7 +1694,7 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
         ET.SubElement(child_diagnostic, 'ct_bind',
                       source=f"_Database.Connected",
                       target=f'Alarm_connectHistorian', action="set_all")
-        if choice_tr in ('ПС90','ПС90_10МВт'):
+        if choice_tr in ('ПС90', 'ПС90_10МВт'):
             child_alarm_ps90 = ET.SubElement(child_diagnostic, 'ct_parameter',
                                              attrib={
                                                  'name': f'Alarm_connectHistorian_ps90', 'type': "bool",
@@ -1886,7 +1946,15 @@ def is_create_sys(sl_object_all: dict, name_prj: str, return_sl_net: dict, archi
     return
 
 
-def is_read_btn(sheet):
+def is_read_btn(sheet, sl_cpu_struct_number: dict,sl_type_cpu_from_settings : dict):
+    sl_type_cpu_from_settings_btn= {
+        name_cpu: {
+            name_struct: param_struct.get('Name_type', '') for name_struct, param_struct in sl_type_struct.items()
+            if name_struct in ('BTN', ) and param_struct.get('Name_type')
+        }
+        for name_cpu, sl_type_struct in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings_btn)
+    # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
     # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
     return_sl = {}
     return_sl_diff = {}
@@ -1901,13 +1969,25 @@ def is_read_btn(sheet):
     for par in cells:
         if par[0].value is None:
             break
+        if par[index_cpu_name].value in sl_cpu_struct_number:
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = f'BTN_{par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]}'
+            type_signal = 'BTN'
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct,)
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct,)
         # set_par_cpu.add(par[index_cpu_name].value)
         if par[index_cpu_name].value not in return_sl:
             # return_sl = {cpu: {алг_пар: (Тип кнопки в студии, русское имя, )}}
             return_sl[par[index_cpu_name].value] = {}
+
+        cpu_signal = par[index_cpu_name].value
+        tipe_signal = sl_type_cpu_from_settings_btn.get(cpu_signal, {}).get('BTN', '')
+
         return_sl[par[index_cpu_name].value].update({
             'BTN_' + par[index_alg_name].value[par[index_alg_name].value.find('|')+1:]: (
-                'BTN.BTN_PLC_View',
+                tipe_signal if tipe_signal else 'BTN.BTN_PLC_View',
                 par[index_rus_name].value)
         })
         # Проверка комментария
@@ -1924,7 +2004,7 @@ def is_read_btn(sheet):
 
     # Убираем элементы с пустыми значениями
     return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
-    return return_sl, return_sl_diff
+    return return_sl, return_sl_diff, sl_cpu_struct_number
 
 
 def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
@@ -1937,6 +2017,7 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
     index_unit = is_f_ind(cells[0], 'Единица измерения')
     index_cond = is_f_ind(cells[0], 'Условия защиты')
     index_check_pz = is_f_ind(cells[0], 'Проверяется при ПЗ')
+    index_frag_dig = is_f_ind(cells[0], 'Количество знаков')
 
     cells = sheet['A2': get_column_letter(50) + str(sheet.max_row)]
 
@@ -1972,8 +2053,16 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
                 tmp_eunit = par[index_unit].value
             # В словарь Защит соответствующего контроллера добавляем [алг имя, рус. имя, единицы измерения]
             rus_name = f'{par[index_type_protect].value}. {par[index_rus_name].value}'
+            if par[index_frag_dig].value == '-999.0':
+                if par[index_frag_dig].comment:
+                    frag_dig = ''.join([i for i in str(par[index_frag_dig].comment.text) if i.isdigit()])
+                else:
+                    frag_dig = 0
+            else:
+                frag_dig = par[index_frag_dig].value
+
             sl_pz[cpu_name_par] += ([par[index_alg_name].value, rus_name, tmp_eunit,
-                                     f'Проверяется при ПЗ - {par[index_check_pz].value}'],)
+                                     f'Проверяется при ПЗ - {par[index_check_pz].value}', frag_dig],)
 
     # В словаре защит алгоритмическое имя меняем на A+ номер
     num_pz = 0
@@ -1990,7 +2079,8 @@ def is_read_pz(sheet, sl_ai: dict, sl_ae: dict):
     return return_sl_pz, sl_pz_xml
 
 
-def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
+def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict, sl_cpu_struct_number: dict):
+    # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
     return_wrn = sl_wrn_di
     return_ts = {}
     return_ppu = {}
@@ -2040,6 +2130,16 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
             break
         # Если тип защиты есть в словаре типовых сигналов:
         protect = par[index_type_protect].value
+
+        if par[index_cpu_name].value in sl_cpu_struct_number and 'ALR' in par[index_alg_name].value and 'АС' not in protect:
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            name_struct = f'{par[index_alg_name].value}'. replace('ALR|', '')
+            type_signal = 'Защиты'
+            if type_signal not in sl_cpu_struct_number[par[index_cpu_name].value]:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] = (name_struct,)
+            else:
+                sl_cpu_struct_number[par[index_cpu_name].value][type_signal] += (name_struct,)
+
         if protect in sl_signal_type:
             if par[index_cpu_name].value not in sl_signal_type[protect]:
                 sl_signal_type[protect][par[index_cpu_name].value] = {}
@@ -2055,11 +2155,11 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
             if 'Режим' in protect:
                 sl_signal_type[protect][par[index_cpu_name].value].update(
                     {'regNum': ('MODES.regNum_PLC_View', 'Номер режима'),
-                     # 'regName': ('MODES.String_PLC_View', 'Имя режима'),
+                     'regName': ('MODES.String_PLC_View', 'Имя режима'),
                      'regColor': ('MODES.regNum_PLC_View', 'Цвет режима'),
-                     # 'MsgName': ('MODES.String_PLC_View', 'Состояние'),
+                     'MsgName': ('MODES.String_PLC_View', 'Состояние'),
                      'MsgNameShow': ('MODES.MODES_NoMsg_PLC_View', 'Показывать состояние'),
-                     # 'SubName': ('MODES.String_PLC_View', 'Состояние'),
+                     'SubName': ('MODES.String_PLC_View', 'Имя подрежима'),
                      'SubNameShow': ('MODES.MODES_NoMsg_PLC_View', 'Состояние'),
                      })
                 tuple_update = ('MODES.MODES_PLC_View', f'Режим "{par[index_rus_name].value}"')
@@ -2163,7 +2263,7 @@ def is_read_signals(sheet, sl_wrn_di, sl_cpu_spec: dict):
 
     # Убираем элементы с пустыми значениями
     return_sl_diff = {_: {p: [j for j in i if j] for p, i in sl_v.items() if i} for _, sl_v in return_sl_diff.items()}
-    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff
+    return return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff, sl_cpu_struct_number
 
 
 def is_read_drv(sheet, sl_all_drv):

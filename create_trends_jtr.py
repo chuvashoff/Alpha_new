@@ -213,6 +213,7 @@ def is_create_trends_jtr(book, sl_object_all, sl_cpu_spec, sl_all_drv, sl_for_di
                             if par[i].value == 'Да':
                                 lst_levels.append({'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.{teg}",
                                                    'lineStyleId': teg})
+                                # Тут можно добавить description уровня
                     dict_child = {'name': 'Value',
                                   "description": f'{f_ind_json(rus_name_par)}',
                                   'tag': f"{pref_tag}.{par[alg_name_ind].value.replace('|', '_')}.Value",

@@ -14,7 +14,8 @@ from alpha_index_v3 import create_index, read_mko_cpu_index, create_index_add
 from alpha_index_v3u2 import create_index_u2
 from Create_mnemo_v3 import create_mnemo_param, create_mnemo_pz, create_mnemo_drv, create_mnemo_drv_general
 from Create_mnemo_visual import create_mnemo_visual
-from create_reports import create_reports, create_reports_pz, create_reports_sday
+from create_reports import create_reports, create_reports_pz, create_reports_sday_old_format, create_reports_sday
+from create_reports import create_reports_sut
 from create_reports_sday import create_reports_sday_v10
 from create_reports_v80 import create_reports_v80, create_reports_pz_v80, create_reports_sday_v80
 from create_reports_v80 import create_reports_sut_v80
@@ -72,10 +73,8 @@ try:
     for p in cells:
         if p[0].value == 'Ширина мнемосхемы, в пикселях':
             size_shirina = int(p[1].value)
-            # print(size_shirina, 'size_shirina')
         if p[0].value == 'Высота мнемосхемы, в пикселях':
             size_vysota = int(p[1].value)
-            # print(size_vysota, 'size_vysota')
             break
     buff_size = '50'
     for p in cells:
@@ -132,7 +131,8 @@ try:
     # Читаем состав объектов и заполняем sl_object_all
     cells = sheet['A23': 'U23']
     index_on1 = is_f_ind(cells[0], 'ON1')
-    cells = sheet['A24': 'U54']
+    # cells = sheet['A24': 'U54']
+    cells = sheet['A24': f'U{sheet.max_row}']
     for p in cells:
         if p[1].value is None or p[0].value is None or 'Объект' not in p[0].value:
             break
@@ -160,7 +160,8 @@ try:
             "Unet_Client": [0, 1]
         },
         "Protocol": {
-            "Unet_version": 1
+            "Unet_version": 1,
+            "Alpha.Reports": 1
         }
     }
     # forFM
@@ -176,23 +177,25 @@ try:
                 text_json = json_load(f_sig)
             sl_project_settings = text_json
         else:
-            print('Файл Systemach/Project_settings.json не найден, '
+            print('Файл Template_Alpha/Project_settings.json не найден, '
                   'Настройки будут использованы по умолчанию')
             sl_project_settings = sl_project_settings_default
         u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
         unet_start = int(u[0])
         n_unet = int(u[1])
         unet_version = int(sl_project_settings.get("Protocol", {}).get("Unet_version", 1))
-        global_flag_plc = sl_project_settings.get("Settings_script",{}).get("Create_general_plc", False)
-        global_flag_ios = sl_project_settings.get("Settings_script",{}).get("Create_general_ios", False)
+        reports_protocol_version = int(sl_project_settings.get("Protocol", {}).get("Alpha.Reports", 0))
+        global_flag_plc = sl_project_settings.get("Settings_script", {}).get("Create_general_plc", False)
+        global_flag_ios = sl_project_settings.get("Settings_script", {}).get("Create_general_ios", False)
     except (Exception, KeyError):
-        print('Файл Systemach/Project_settings.json заполнен некорректно, '
+        print('Файл Template_Alpha/Project_settings.json заполнен некорректно, '
               'Настройки будут использованы по умолчанию')
         sl_project_settings = sl_project_settings_default
         u = sl_project_settings.get("Module", {}).get("Unet_Client", [0, 1])
         unet_start = u[0]
         n_unet = u[1]
         unet_version = sl_project_settings.get("Protocol", {}).get("Unet_version", 1)
+        reports_protocol_version = int(sl_project_settings.get("Protocol", {}).get("Alpha.Reports", 0))
         global_flag_plc = sl_project_settings.get("Settings_script", {}).get("Create_general_plc", False)
         global_flag_ios = sl_project_settings.get("Settings_script", {}).get("Create_general_ios", False)
 
@@ -211,7 +214,7 @@ try:
             sl_tmp = {add_obj + (len(sl_object_all) + 1,): {}}
             for add_cpu in return_sl_obj_add[add_obj]:
                 ipp = return_sl_cpu_add_ip.get(add_cpu, '')
-                ipp = ipp[ipp.rfind('.')+1:]
+                ipp = ipp[ipp.rfind('.') + 1:]
                 sl_tmp[add_obj + (len(sl_object_all) + 1,)].update({add_cpu: (ipp, ipp)})
             sl_object_all.update(sl_tmp)
         else:  # Эта ветка, когда объекты такие есть
@@ -224,7 +227,7 @@ try:
             for add_cpu in return_sl_obj_add[add_obj]:
                 if add_cpu not in sl_object_all.get(find_obj, ''):
                     ipp = return_sl_cpu_add_ip.get(add_cpu, '')
-                    ipp = ipp[ipp.rfind('.')+1:]
+                    ipp = ipp[ipp.rfind('.') + 1:]
                     sl_object_all[find_obj].update({add_cpu: (ipp, ipp)})
     # print(sl_object_all)
     # all_cpu - кортеж со всеми контроллерами с цифрой объекта
@@ -255,6 +258,7 @@ try:
     index_dks_on = is_f_ind(cells[0], 'DKS')
     index_path = is_f_ind(cells[0], 'Path')
     index_name_cpu = is_f_ind(cells[0], 'Наименование CPU')
+    index_type_cpu = is_f_ind(cells[0], 'Type')
     index_ppu = is_f_ind(cells[0], 'PPU')
     index_alr = is_f_ind(cells[0], 'ALR')
     index_mde = is_f_ind(cells[0], 'MDE')
@@ -262,6 +266,7 @@ try:
     cells = sheet['B2':'R21']
     # Словарь {ПЛК: путь к проекту ПЛК}
     sl_cpu_path = {}
+    sl_type_cpu_from_settings = {}
     for p in cells:
         if p[0].value is None:
             break
@@ -290,7 +295,28 @@ try:
             # Узнаём пути к контроллерам и забиваем в словарь
             sl_cpu_path[p[index_name_cpu].value] = p[index_path].value
             # os.path.dirname(sys.argv[0])
+            if p[index_type_cpu].value and p[index_name_cpu].value:
+                sl_type_cpu_from_settings[p[index_name_cpu].value] = p[index_type_cpu].value
 
+    # print(sl_type_cpu_from_settings)
+    sl_cpu_type_special_default = {}
+    try:
+        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'Types_cpu_special.json')):
+            with open(os.path.join('Template_Alpha', 'Systemach', f'Types_cpu_special.json'), 'r',
+                      encoding='UTF-8') as f_sig:
+                text_json = json_load(f_sig)
+            sl_cpu_type_special = text_json
+        else:
+            print('Файл Systemach/Types_cpu_special.json не найден, '
+                  'Настройки специальных типов не будут использованы')
+            sl_cpu_type_special = sl_cpu_type_special_default
+    except (Exception, KeyError):
+        print('Файл Systemach/Types_cpu_special.json заполнен некорректно, '
+              'Настройки специальных типов не будут использованы')
+        sl_cpu_type_special = sl_cpu_type_special_default
+    sl_type_cpu_from_settings = {cpu_name: sl_cpu_type_special.get(cpu_type, {})
+                                 for cpu_name, cpu_type in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings)
     # МКО из конфигуратора, потом проверить
     # for _ in sl_mko:
     #     print(_)
@@ -408,14 +434,18 @@ try:
             check_test = f_test.readlines()
         if len(check_test) > 100:
             with open('Required_change.txt', 'w') as f_test:
-                last_change = [i for i in ''.join(check_test).split(f"{'-'* 70}\n") if i][-1]
-                f_test.write(f"{'-'* 70}\n{last_change.strip()}\n")
+                last_change = [i for i in ''.join(check_test).split(f"{'-' * 70}\n") if i][-1]
+                f_test.write(f"{'-' * 70}\n{last_change.strip()}\n")
 
     sl_agreg = {'Agregator_Important_IOS': 'Types.MSG_Agregator.Agregator_Important_IOS',
                 'Agregator_LessImportant_IOS': 'Types.MSG_Agregator.Agregator_LessImportant_IOS',
                 'Agregator_N_IOS': 'Types.MSG_Agregator.Agregator_N_IOS',
                 'Agregator_Repair_IOS': 'Types.MSG_Agregator.Agregator_Repair_IOS'}
 
+    # print(sl_cpu_path)
+    # sl_cpu_struct_number {cpu: {тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}}
+    # Здесь создаём болванку, а потом по мере чтения листов заполняем
+    sl_cpu_struct_number = {cpu: {} for cpu in sl_cpu_path.keys()}
     # print(datetime.datetime.now(), ' - Начинаем парсить файл')
     # Измеряемые
     # return_sl = {cpu: {алг_пар: (тип параметра в студии, русское имя, ед. изм., короткое имя, количество знаков,
@@ -424,27 +454,34 @@ try:
     return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai = {}, {}, {}, {}, {}
     return_sl_ai_add_pars = {}
     if 'Измеряемые' in book.sheetnames:
-        return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai, return_sl_ai_add_pars = \
-            is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI')
+        return_sl_ai, sl_mnemo_ai, return_sl_sday, return_sl_ai_diff, sl_cpu_fast_ai, return_sl_ai_add_pars, sl_cpu_struct_number = \
+            is_read_ai_ae_set(sheet=book['Измеряемые'], type_signal='AI', sl_cpu_struct_number=sl_cpu_struct_number,
+                              sl_type_cpu_from_settings=sl_type_cpu_from_settings)
     # print(datetime.datetime.now(), ' - Разпарсили Анпары, парсим Расчётные')
     # Расчетные
     return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae = {}, {}, {}, {}, {}
     return_sl_ae_add_pars = {}
     if 'Расчетные' in book.sheetnames:
-        return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae, return_sl_ae_add_pars = \
-            is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE')
+        return_sl_ae, sl_mnemo_ae, return_ae_sday, return_sl_ae_diff, sl_cpu_fast_ae, return_sl_ae_add_pars, sl_cpu_struct_number = \
+            is_read_ai_ae_set(sheet=book['Расчетные'], type_signal='AE', sl_cpu_struct_number=sl_cpu_struct_number,
+                              sl_type_cpu_from_settings=sl_type_cpu_from_settings)
     # print(datetime.datetime.now(), ' - Разпарсили Расчётные, парсим Дискретные')
     # Дискретные
     return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff = {}, {}, {}, {}
     if 'Входные' in book.sheetnames:
-        return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff = is_read_di(sheet=book['Входные'])
+        return_sl_di, sl_wrn_di, sl_mnemo_di, return_sl_di_diff, sl_cpu_struct_number = \
+            is_read_di(sheet=book['Входные'], sl_cpu_struct_number=sl_cpu_struct_number,
+                       sl_type_cpu_from_settings=sl_type_cpu_from_settings)
     # print(datetime.datetime.now(), ' - Разпарсили Дискретные, парсим ИМы и ИМАО')
     # ИМ
     return_sl_im, sl_cnt, return_sl_im_diff = {}, {}, {}
     return_sl_all_add_pars = {}
     if 'ИМ' in book.sheetnames and 'ИМ(АО)' in book.sheetnames:
-        return_sl_im, sl_cnt, return_sl_im_diff, return_sl_all_add_pars = is_read_im(sheet=book['ИМ'],
-                                                                                     sheet_imao=book['ИМ(АО)'])
+        return_sl_im, sl_cnt, return_sl_im_diff, return_sl_all_add_pars, sl_cpu_struct_number = is_read_im(
+            sheet=book['ИМ'],
+            sheet_imao=book['ИМ(АО)'],
+            sl_cpu_struct_number=sl_cpu_struct_number,
+            sl_type_cpu_from_settings=sl_type_cpu_from_settings)
 
     # Создаём и набиваем словарь для мнемосхемы наработок
     sl_mnemo_cnt = {plc: {'Наработка': list(), 'Перестановки': list()} for plc in sl_cnt}
@@ -476,8 +513,9 @@ try:
     return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set = {}, {}, {}, {}, {}
     return_sl_set_add_pars = {}
     if 'Уставки' in book.sheetnames:
-        return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set, return_sl_set_add_pars = \
-            is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET')
+        return_sl_set, sl_set_mnemo_not_use, return_set_sday, return_sl_set_diff, sl_cpu_fast_set, return_sl_set_add_pars, sl_cpu_struct_number = \
+            is_read_ai_ae_set(sheet=book['Уставки'], type_signal='SET', sl_cpu_struct_number=sl_cpu_struct_number,
+                              sl_type_cpu_from_settings=sl_type_cpu_from_settings)
     # Собираем словари сменной ведомости в один
     # return_sl_sday = {cpu: {Префикс папки.alg_par: русское имя}}
     for sl in (return_ae_sday, return_set_sday):
@@ -490,7 +528,10 @@ try:
     # Кнопки
     return_sl_btn, return_sl_btn_diff = {}, {}
     if 'Кнопки' in book.sheetnames:
-        return_sl_btn, return_sl_btn_diff = is_read_btn(sheet=book['Кнопки'])
+        return_sl_btn, return_sl_btn_diff, sl_cpu_struct_number = is_read_btn(
+            sheet=book['Кнопки'],
+            sl_cpu_struct_number=sl_cpu_struct_number,
+            sl_type_cpu_from_settings=sl_type_cpu_from_settings)
     # print(datetime.datetime.now(), ' - Разпарсили кнопки, парсим защиты и сигналы')
     # Защиты
     # В чтении защит передаём словари AI и AE с единицами измерения,
@@ -517,11 +558,12 @@ try:
     sl_cpu_archive = {}
     return_sl_diff_sig = {}
     if 'Сигналы' in book.sheetnames:
-        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff_sig = \
+        return_ts, return_ppu, return_alr, return_alg, return_wrn, return_modes, sl_cpu_archive, return_sl_diff_sig, sl_cpu_struct_number = \
             is_read_signals(
                 sheet=book['Сигналы'],
                 sl_wrn_di=sl_wrn_di,
-                sl_cpu_spec=sl_CPU_spec
+                sl_cpu_spec=sl_CPU_spec,
+                sl_cpu_struct_number=sl_cpu_struct_number
             )
     # print(return_sl_diff_sig)
     # print('return_wrn', return_wrn)
@@ -631,7 +673,7 @@ try:
     # Выделяем листы с FB_ в начале названия
     fb_sheets = [elem for elem in book.sheetnames if fullmatch(r'^FB_.+', elem)]
     # Создаём словарь с ключами листов и значениями - словарь cpu с параметрами и их комплектующими
-    sl_fb_sctruct = {i:{} for i in fb_sheets}
+    sl_fb_sctruct = {i: {} for i in fb_sheets}
     sl_general_cpu_structur_tags = {}
 
     for fb_sheet in sl_fb_sctruct:
@@ -706,7 +748,8 @@ try:
         'CNT': {'dict': sl_cnt_xml,
                 'tuple_attr': ('unit.System.Attributes.Description', ),
                 'dict_agreg_IOS': {},
-                'dict_diff': {_: {p: _ for p, _ in sl_val.items() if p.endswith(('_Swap', '_WorkTime'))} for _, sl_val in return_sl_im_diff.items()}
+                'dict_diff': {_: {p: _ for p, _ in sl_val.items() if p.endswith(('_Swap', '_WorkTime'))} for _, sl_val
+                              in return_sl_im_diff.items()}
                 },
         # return_ts = {cpu: {алг_пар: (ТИП TS в студии, русское имя, )}}
         'TS': {'dict': return_ts,
@@ -1041,9 +1084,6 @@ try:
                         del sl_par_msg[signal_name]
                     # print(f'{cpu}-{second_cpu}',(cpu, second_cpu) in set_mko_par_cpu,
                     # (second_cpu, cpu) in set_mko_par_cpu)
-                    # print(first_obj_rus, second_obj_rus)
-                    # print(signal, 'signal')
-                    # print(text_msg, 'text_msg')
 
                 if objects not in sl_add_obj_cpu_mko:
                     sl_add_obj_cpu_mko[objects] = {}
@@ -1053,8 +1093,6 @@ try:
                         f'Diag.Connect.{par}.Value': (val[1], 'B') for par, val in sl_par_add.items()
                     }
 
-                # print('sl_par_add', sl_par_add)
-                # print('sl_par_msg', sl_par_msg)
                 tuple_attr = ('unit.System.Attributes.Description', )
                 add_xml_par_plc(name_group='Connect', sl_par=sl_par_add,
                                 parent_node=child_diag,
@@ -1137,10 +1175,10 @@ try:
             if cpu in return_sl_cpu_add_index:
                 # child_add = ET.SubElement(child_app, 'ct_object', name="Diag", access_level="public")
                 # print(return_sl_obj_add)
-                for add_obj,cpu_value_add_obj in return_sl_obj_add.items():
+                for add_obj, cpu_value_add_obj in return_sl_obj_add.items():
                     if cpu in cpu_value_add_obj:
                         child_add = ET.SubElement(child_app, 'ct_object', name=f"{add_obj[0]}", access_level="public")
-                        tuple_attr_a = ('Attributes.EUnit', 'Attributes.FracDigits','unit.System.Attributes.Description')
+                        tuple_attr_a = ('Attributes.EUnit', 'Attributes.FracDigits', 'unit.System.Attributes.Description')
                         for sub_group, sl_pars_add in cpu_value_add_obj.get(cpu, {}).items():
                             add_xml_par_plc_additional(name_group=sub_group,
                                                        sl_par=sl_pars_add,
@@ -1635,7 +1673,7 @@ try:
             # для каждого драйвера...
             for driver in return_ios_drv:
                 # print(objects[0], driver, set(return_ios_drv[driver].keys()) & set(sl_object_all[objects].keys()))
-                # создаём узлы драйверов, если в объекте есть контроллеры данного драйвреа
+                # создаём узлы драйверов, если в объекте есть контроллеры данного драйвера
                 if not (set(return_ios_drv[driver].keys()) & set(sl_object_all[objects].keys())):
                     continue
                 add_xml_par_ios(set_cpu_object=set(sl_object_all[objects].keys()),
@@ -1765,6 +1803,10 @@ try:
 
     book.close()
 
+    # for cc in sl_cpu_struct_number:
+    #     for structtt in sl_cpu_struct_number[cc]:
+    #         print(structtt, {i: name for i, name in enumerate(sl_cpu_struct_number[cc][structtt])})
+
     # Создаём карту индексов
     '''
     В СЛУЧАЕ, ЕСЛИ У CPU НЕТ ПЕРЕМЕННЫХ ДАННОГО ТИПА, ТО В СООТВЕТСТВУЮЩЕМ СЛОВАРЕ ЕГО(CPU) НЕ БУДЕТ
@@ -1847,7 +1889,10 @@ try:
                      sl_add_cpu_mko=sl_add_cpu_mko,
                      sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
                      sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars, sub_dict=return_sl_ai_add_pars),
-                     sl_need_add_pars_struct=sl_general_cpu_structur_tags)
+                     sl_need_add_pars_struct=sl_general_cpu_structur_tags,
+                     sl_cpu_struct_number=sl_cpu_struct_number,
+                     sl_type_cpu_from_settings=sl_type_cpu_from_settings
+                     )
         # создаём индексы добавленных контроллеров
         # Обрабатываем добавляемые извне структуры
         # return_sl_obj_add = {Объект: {cpu: узел/тип: {параметр: (тип в студии, ед. измерения, количество знаков, описание)}}}}
@@ -1887,7 +1932,9 @@ try:
                         sl_pru_config={cpu: tuple(sl_par.keys()) for cpu, sl_par in return_sl_pru.items()},
                         sl_need_add_pars=is_update_dict(main_dict=return_sl_all_add_pars,
                                                         sub_dict=return_sl_ai_add_pars),
-                        sl_need_add_pars_struct=sl_general_cpu_structur_tags
+                        sl_need_add_pars_struct=sl_general_cpu_structur_tags,
+                        sl_cpu_struct_number=sl_cpu_struct_number,
+                        sl_type_cpu_from_settings=sl_type_cpu_from_settings
                         )
 
     # print(return_alr)
@@ -1902,39 +1949,44 @@ try:
     # Если есть аналоговые параметры, то делаем шаблон Reports
     if return_sl_ai:
         # Пока заблокирована функция для новых репортов
-        # create_reports(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
-        #                sl_param=return_sl_ai)
-        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
-                           sl_param=return_sl_ai)
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
+                       sl_param=return_sl_ai, reports_protocol_version=reports_protocol_version)
+        # create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Измеряемые параметры', node_alg_name='AI',
+        #                    sl_param=return_sl_ai)
     # Если есть расчётные параметры, то делаем шаблон Reports
     if return_sl_ae:
         # Пока заблокирована функция для новых репортов
-        # create_reports(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
-        #                sl_param=return_sl_ae)
-        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
-                           sl_param=return_sl_ae)
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
+                       sl_param=return_sl_ae, reports_protocol_version=reports_protocol_version)
+        # create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Расчетные параметры', node_alg_name='AE',
+        #                    sl_param=return_sl_ae)
     # Если есть наработки, то делаем шаблон Reports
     if sl_cnt_xml:
         # Пока заблокирована функция для новых репортов
-        # create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
-        #                sl_param=sl_cnt_xml)
-        create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
-                           sl_param=sl_cnt_xml)
+        create_reports(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
+                       sl_param=sl_cnt_xml, reports_protocol_version=reports_protocol_version)
+        # create_reports_v80(sl_object_all=sl_object_all, node_param_rus='Наработки', node_alg_name='System.CNT',
+        #                    sl_param=sl_cnt_xml)
     # Если есть защиты, то делаем шаблон Reports
     if sl_pz_xml:
         # Пока заблокирована функция для новых репортов
-        # create_reports_pz(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
-        #                   node_alg_name='System.PZ', sl_param=sl_pz_xml)
-        create_reports_pz_v80(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
-                              node_alg_name='System.PZ', sl_param=sl_pz_xml)
+        create_reports_pz(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
+                          node_alg_name='System.PZ', sl_param=sl_pz_xml,
+                          reports_protocol_version=reports_protocol_version)
+        # create_reports_pz_v80(sl_object_all=sl_object_all, node_param_rus='Протокол проверки защит',
+        #                       node_alg_name='System.PZ', sl_param=sl_pz_xml)
 
     if return_sl_sday:
-        create_reports_sday(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость', sl_param=return_sl_sday)
+        create_reports_sday_old_format(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость', sl_param=return_sl_sday)
     else:
         try:
-            create_reports_sday_v80(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
-            create_reports_sday_v10(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
-            create_reports_sut_v80(sl_object_all=sl_object_all, node_param_rus='Суточная ведомость')
+            # create_reports_sday_v80(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
+            create_reports_sday(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость',
+                                reports_protocol_version=reports_protocol_version)
+            # create_reports_sday_v10(sl_object_all=sl_object_all, node_param_rus='Сменная ведомость')
+            # create_reports_sut_v80(sl_object_all=sl_object_all, node_param_rus='Суточная ведомость')
+            create_reports_sut(sl_object_all=sl_object_all, node_param_rus='Суточная ведомость',
+                               reports_protocol_version=reports_protocol_version)
         except (Exception, KeyError, IndexError):
             print('Файлы DailyList заполнены некорректно, обновите сменную ведомость')
 
@@ -2027,7 +2079,8 @@ try:
         # print(sl_type_drv)
         # print(dict(ChainMap(*return_ios_drv.values())).keys())
 
-        sl_mnemo_drv = {drv: {cpu: [i for i in sl_p] for cpu, sl_p in sl_d.items()} for drv, sl_d in return_ios_drv.items()}
+        sl_mnemo_drv = {drv: {cpu: [i for i in sl_p] for cpu, sl_p in sl_d.items()} for drv, sl_d in
+                        return_ios_drv.items()}
         # print(sl_mnemo_drv)
         # {cpu: [i for i in sl_p] for cpu, sl_p in sl_d.items}
 

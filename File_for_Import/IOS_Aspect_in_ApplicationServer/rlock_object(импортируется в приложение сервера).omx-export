@@ -5,45 +5,485 @@
     <ct:parameter name="High" type="uint64" direction="in" access-level="public"/>
     <ct:parameter name="Low" type="uint64" direction="in" access-level="public"/>
     <ct:parameter name="setUserAlarm" type="bool" direction="in" access-level="public"/>
-    <ct:parameter name="Low_Aoss_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:parameter name="High_Aoss_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:subject-ref name="KC1_Aoss_Arh_START" object="KC1.System.TS.Aoss_Arh_START" const-access="false" aspected="false"/>
-    <ct:subject-ref name="KC1_Aoss_Arh_STOP" object="KC1.System.TS.Aoss_Arh_STOP" const-access="false" aspected="false"/>
-    <ct:handler name="Aoss_Arh_Handler_START_KC1" source-code="if (KC1_Aoss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_Aoss_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
-      <ct:trigger on="KC1_Aoss_Arh_START.PLCSignals.Value" cause="change"/>
+    <ct:parameter name="Low_AOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_AOss_Arh_START" object="GPA1.System.TS.AOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_AOss_Arh_STOP" object="GPA1.System.TS.AOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AOss_Arh_Handler_START_GPA1" source-code="if (GPA1_AOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_AOss_Arh_START.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:handler name="Aoss_Arh_Handler_STOP_KC1" source-code="if (KC1_Aoss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 АОсс&quot;;&#10;&#9;commit High_Aoss_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_Aoss_ArhKC1_tmp;&#10;&#9;commit High = High_Aoss_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
-      <ct:trigger on="KC1_Aoss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    <ct:handler name="AOss_Arh_Handler_STOP_GPA1" source-code="if (GPA1_AOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 АОсс&quot;;&#10;&#9;commit High_AOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AOss_ArhGPA1_tmp;&#10;&#9;commit High = High_AOss_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_AOss_Arh_STOP.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:parameter name="Low_Aobs_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:parameter name="High_Aobs_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:subject-ref name="KC1_Aobs_Arh_START" object="KC1.System.TS.Aobs_Arh_START" const-access="false" aspected="false"/>
-    <ct:subject-ref name="KC1_Aobs_Arh_STOP" object="KC1.System.TS.Aobs_Arh_STOP" const-access="false" aspected="false"/>
-    <ct:handler name="Aobs_Arh_Handler_START_KC1" source-code="if (KC1_Aobs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_Aobs_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
-      <ct:trigger on="KC1_Aobs_Arh_START.PLCSignals.Value" cause="change"/>
+    <ct:parameter name="Low_AObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_AObs_Arh_START" object="GPA1.System.TS.AObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_AObs_Arh_STOP" object="GPA1.System.TS.AObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AObs_Arh_Handler_START_GPA1" source-code="if (GPA1_AObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_AObs_Arh_START.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:handler name="Aobs_Arh_Handler_STOP_KC1" source-code="if (KC1_Aobs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 АОбс&quot;;&#10;&#9;commit High_Aobs_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_Aobs_ArhKC1_tmp;&#10;&#9;commit High = High_Aobs_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
-      <ct:trigger on="KC1_Aobs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    <ct:handler name="AObs_Arh_Handler_STOP_GPA1" source-code="if (GPA1_AObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 АОбс&quot;;&#10;&#9;commit High_AObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AObs_ArhGPA1_tmp;&#10;&#9;commit High = High_AObs_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_AObs_Arh_STOP.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:parameter name="Low_MK_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:parameter name="High_MK_ArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:subject-ref name="KC1_MK_Arh_START" object="KC1.System.TS.MK_Arh_START" const-access="false" aspected="false"/>
-    <ct:subject-ref name="KC1_MK_Arh_STOP" object="KC1.System.TS.MK_Arh_STOP" const-access="false" aspected="false"/>
-    <ct:handler name="MK_Arh_Handler_START_KC1" source-code="if (KC1_MK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_MK_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
-      <ct:trigger on="KC1_MK_Arh_START.PLCSignals.Value" cause="change"/>
+    <ct:parameter name="Low_NOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_NOss_Arh_START" object="GPA1.System.TS.NOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_NOss_Arh_STOP" object="GPA1.System.TS.NOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NOss_Arh_Handler_START_GPA1" source-code="if (GPA1_NOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_NOss_Arh_START.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:handler name="MK_Arh_Handler_STOP_KC1" source-code="if (KC1_MK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 М-К&quot;;&#10;&#9;commit High_MK_ArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_MK_ArhKC1_tmp;&#10;&#9;commit High = High_MK_ArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
-      <ct:trigger on="KC1_MK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    <ct:handler name="NOss_Arh_Handler_STOP_GPA1" source-code="if (GPA1_NOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 НОcс&quot;;&#10;&#9;commit High_NOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NOss_ArhGPA1_tmp;&#10;&#9;commit High = High_NOss_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_NOss_Arh_STOP.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:parameter name="Low_UserArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:parameter name="High_UserArhKC1_tmp" type="uint64" direction="in" access-level="public"/>
-    <ct:subject-ref name="KC1_UserArh_START" object="KC1.System.TS.UserArh_START" const-access="false" aspected="false"/>
-    <ct:subject-ref name="KC1_UserArh_STOP" object="KC1.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
-    <ct:handler name="UserArh_Handler_START_KC1" source-code="if (KC1_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
-      <ct:trigger on="KC1_UserArh_START.PLCSignals.Value" cause="change"/>
+    <ct:parameter name="Low_NObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_NObs_Arh_START" object="GPA1.System.TS.NObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_NObs_Arh_STOP" object="GPA1.System.TS.NObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NObs_Arh_Handler_START_GPA1" source-code="if (GPA1_NObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_NObs_Arh_START.PLCSignals.Value" cause="change"/>
     </ct:handler>
-    <ct:handler name="UserArh_Handler_STOP_KC1" source-code="if (KC1_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;КЦ-1 Пользовательский&quot;;&#10;&#9;commit High_UserArhKC1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhKC1_tmp;&#10;&#9;commit High = High_UserArhKC1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
-      <ct:trigger on="KC1_UserArh_STOP.PLCSignals.Value" cause="change"/>
+    <ct:handler name="NObs_Arh_Handler_STOP_GPA1" source-code="if (GPA1_NObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 НОбс&quot;;&#10;&#9;commit High_NObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NObs_ArhGPA1_tmp;&#10;&#9;commit High = High_NObs_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_NObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VOss_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_VOss_Arh_START" object="GPA1.System.TS.VOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_VOss_Arh_STOP" object="GPA1.System.TS.VOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VOss_Arh_Handler_START_GPA1" source-code="if (GPA1_VOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_VOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VOss_Arh_Handler_STOP_GPA1" source-code="if (GPA1_VOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 ВОбс&quot;;&#10;&#9;commit High_VOss_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VOss_ArhGPA1_tmp;&#10;&#9;commit High = High_VOss_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_VOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VObs_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_VObs_Arh_START" object="GPA1.System.TS.VObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_VObs_Arh_STOP" object="GPA1.System.TS.VObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VObs_Arh_Handler_START_GPA1" source-code="if (GPA1_VObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_VObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VObs_Arh_Handler_STOP_GPA1" source-code="if (GPA1_VObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 ВОбс&quot;;&#10;&#9;commit High_VObs_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VObs_ArhGPA1_tmp;&#10;&#9;commit High = High_VObs_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_VObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_HP_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_HP_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_HP_Arh_START" object="GPA1.System.TS.HP_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_HP_Arh_STOP" object="GPA1.System.TS.HP_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="HP_Arh_Handler_START_GPA1" source-code="if (GPA1_HP_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_HP_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_HP_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="HP_Arh_Handler_STOP_GPA1" source-code="if (GPA1_HP_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 ХП&quot;;&#10;&#9;commit High_HP_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_HP_ArhGPA1_tmp;&#10;&#9;commit High = High_HP_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_HP_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_PM_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_PM_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_PM_Arh_START" object="GPA1.System.TS.PM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_PM_Arh_STOP" object="GPA1.System.TS.PM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="PM_Arh_Handler_START_GPA1" source-code="if (GPA1_PM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_PM_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_PM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="PM_Arh_Handler_STOP_GPA1" source-code="if (GPA1_PM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 Промывка&quot;;&#10;&#9;commit High_PM_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_PM_ArhGPA1_tmp;&#10;&#9;commit High = High_PM_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_PM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_KPK_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_KPK_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_KPK_Arh_START" object="GPA1.System.TS.KPK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_KPK_Arh_STOP" object="GPA1.System.TS.KPK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="KPK_Arh_Handler_START_GPA1" source-code="if (GPA1_KPK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_KPK_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_KPK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="KPK_Arh_Handler_STOP_GPA1" source-code="if (GPA1_KPK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 КПК&quot;;&#10;&#9;commit High_KPK_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_KPK_ArhGPA1_tmp;&#10;&#9;commit High = High_KPK_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_KPK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APK_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APK_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_APK_Arh_START" object="GPA1.System.TS.APK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_APK_Arh_STOP" object="GPA1.System.TS.APK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APK_Arh_Handler_START_GPA1" source-code="if (GPA1_APK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APK_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_APK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APK_Arh_Handler_STOP_GPA1" source-code="if (GPA1_APK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 АПК&quot;;&#10;&#9;commit High_APK_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APK_ArhGPA1_tmp;&#10;&#9;commit High = High_APK_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_APK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APM_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APM_ArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_APM_Arh_START" object="GPA1.System.TS.APM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_APM_Arh_STOP" object="GPA1.System.TS.APM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APM_Arh_Handler_START_GPA1" source-code="if (GPA1_APM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APM_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_APM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APM_Arh_Handler_STOP_GPA1" source-code="if (GPA1_APM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 АПМ&quot;;&#10;&#9;commit High_APM_ArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APM_ArhGPA1_tmp;&#10;&#9;commit High = High_APM_ArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_APM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_UserArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_UserArhGPA1_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA1_UserArh_START" object="GPA1.System.TS.UserArh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA1_UserArh_STOP" object="GPA1.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="UserArh_Handler_START_GPA1" source-code="if (GPA1_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA1_UserArh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="UserArh_Handler_STOP_GPA1" source-code="if (GPA1_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-11 Пользовательский&quot;;&#10;&#9;commit High_UserArhGPA1_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhGPA1_tmp;&#10;&#9;commit High = High_UserArhGPA1_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA1_UserArh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_AOss_Arh_START" object="GPA2.System.TS.AOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_AOss_Arh_STOP" object="GPA2.System.TS.AOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AOss_Arh_Handler_START_GPA2" source-code="if (GPA2_AOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_AOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AOss_Arh_Handler_STOP_GPA2" source-code="if (GPA2_AOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 АОсс&quot;;&#10;&#9;commit High_AOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AOss_ArhGPA2_tmp;&#10;&#9;commit High = High_AOss_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_AOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_AObs_Arh_START" object="GPA2.System.TS.AObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_AObs_Arh_STOP" object="GPA2.System.TS.AObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AObs_Arh_Handler_START_GPA2" source-code="if (GPA2_AObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_AObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AObs_Arh_Handler_STOP_GPA2" source-code="if (GPA2_AObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 АОбс&quot;;&#10;&#9;commit High_AObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AObs_ArhGPA2_tmp;&#10;&#9;commit High = High_AObs_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_AObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_NOss_Arh_START" object="GPA2.System.TS.NOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_NOss_Arh_STOP" object="GPA2.System.TS.NOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NOss_Arh_Handler_START_GPA2" source-code="if (GPA2_NOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_NOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NOss_Arh_Handler_STOP_GPA2" source-code="if (GPA2_NOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 НОcс&quot;;&#10;&#9;commit High_NOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NOss_ArhGPA2_tmp;&#10;&#9;commit High = High_NOss_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_NOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_NObs_Arh_START" object="GPA2.System.TS.NObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_NObs_Arh_STOP" object="GPA2.System.TS.NObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NObs_Arh_Handler_START_GPA2" source-code="if (GPA2_NObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_NObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NObs_Arh_Handler_STOP_GPA2" source-code="if (GPA2_NObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 НОбс&quot;;&#10;&#9;commit High_NObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NObs_ArhGPA2_tmp;&#10;&#9;commit High = High_NObs_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_NObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VOss_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_VOss_Arh_START" object="GPA2.System.TS.VOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_VOss_Arh_STOP" object="GPA2.System.TS.VOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VOss_Arh_Handler_START_GPA2" source-code="if (GPA2_VOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_VOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VOss_Arh_Handler_STOP_GPA2" source-code="if (GPA2_VOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 ВОбс&quot;;&#10;&#9;commit High_VOss_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VOss_ArhGPA2_tmp;&#10;&#9;commit High = High_VOss_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_VOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VObs_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_VObs_Arh_START" object="GPA2.System.TS.VObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_VObs_Arh_STOP" object="GPA2.System.TS.VObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VObs_Arh_Handler_START_GPA2" source-code="if (GPA2_VObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_VObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VObs_Arh_Handler_STOP_GPA2" source-code="if (GPA2_VObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 ВОбс&quot;;&#10;&#9;commit High_VObs_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VObs_ArhGPA2_tmp;&#10;&#9;commit High = High_VObs_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_VObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_HP_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_HP_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_HP_Arh_START" object="GPA2.System.TS.HP_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_HP_Arh_STOP" object="GPA2.System.TS.HP_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="HP_Arh_Handler_START_GPA2" source-code="if (GPA2_HP_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_HP_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_HP_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="HP_Arh_Handler_STOP_GPA2" source-code="if (GPA2_HP_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 ХП&quot;;&#10;&#9;commit High_HP_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_HP_ArhGPA2_tmp;&#10;&#9;commit High = High_HP_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_HP_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_PM_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_PM_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_PM_Arh_START" object="GPA2.System.TS.PM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_PM_Arh_STOP" object="GPA2.System.TS.PM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="PM_Arh_Handler_START_GPA2" source-code="if (GPA2_PM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_PM_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_PM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="PM_Arh_Handler_STOP_GPA2" source-code="if (GPA2_PM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 Промывка&quot;;&#10;&#9;commit High_PM_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_PM_ArhGPA2_tmp;&#10;&#9;commit High = High_PM_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_PM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_KPK_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_KPK_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_KPK_Arh_START" object="GPA2.System.TS.KPK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_KPK_Arh_STOP" object="GPA2.System.TS.KPK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="KPK_Arh_Handler_START_GPA2" source-code="if (GPA2_KPK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_KPK_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_KPK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="KPK_Arh_Handler_STOP_GPA2" source-code="if (GPA2_KPK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 КПК&quot;;&#10;&#9;commit High_KPK_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_KPK_ArhGPA2_tmp;&#10;&#9;commit High = High_KPK_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_KPK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APK_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APK_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_APK_Arh_START" object="GPA2.System.TS.APK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_APK_Arh_STOP" object="GPA2.System.TS.APK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APK_Arh_Handler_START_GPA2" source-code="if (GPA2_APK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APK_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_APK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APK_Arh_Handler_STOP_GPA2" source-code="if (GPA2_APK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 АПК&quot;;&#10;&#9;commit High_APK_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APK_ArhGPA2_tmp;&#10;&#9;commit High = High_APK_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_APK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APM_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APM_ArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_APM_Arh_START" object="GPA2.System.TS.APM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_APM_Arh_STOP" object="GPA2.System.TS.APM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APM_Arh_Handler_START_GPA2" source-code="if (GPA2_APM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APM_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_APM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APM_Arh_Handler_STOP_GPA2" source-code="if (GPA2_APM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 АПМ&quot;;&#10;&#9;commit High_APM_ArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APM_ArhGPA2_tmp;&#10;&#9;commit High = High_APM_ArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_APM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_UserArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_UserArhGPA2_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA2_UserArh_START" object="GPA2.System.TS.UserArh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA2_UserArh_STOP" object="GPA2.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="UserArh_Handler_START_GPA2" source-code="if (GPA2_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA2_UserArh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="UserArh_Handler_STOP_GPA2" source-code="if (GPA2_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-12 Пользовательский&quot;;&#10;&#9;commit High_UserArhGPA2_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhGPA2_tmp;&#10;&#9;commit High = High_UserArhGPA2_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA2_UserArh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_AOss_Arh_START" object="GPA3.System.TS.AOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_AOss_Arh_STOP" object="GPA3.System.TS.AOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AOss_Arh_Handler_START_GPA3" source-code="if (GPA3_AOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_AOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AOss_Arh_Handler_STOP_GPA3" source-code="if (GPA3_AOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 АОсс&quot;;&#10;&#9;commit High_AOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AOss_ArhGPA3_tmp;&#10;&#9;commit High = High_AOss_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_AOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_AObs_Arh_START" object="GPA3.System.TS.AObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_AObs_Arh_STOP" object="GPA3.System.TS.AObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AObs_Arh_Handler_START_GPA3" source-code="if (GPA3_AObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_AObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AObs_Arh_Handler_STOP_GPA3" source-code="if (GPA3_AObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 АОбс&quot;;&#10;&#9;commit High_AObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AObs_ArhGPA3_tmp;&#10;&#9;commit High = High_AObs_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_AObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_NOss_Arh_START" object="GPA3.System.TS.NOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_NOss_Arh_STOP" object="GPA3.System.TS.NOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NOss_Arh_Handler_START_GPA3" source-code="if (GPA3_NOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_NOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NOss_Arh_Handler_STOP_GPA3" source-code="if (GPA3_NOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 НОcс&quot;;&#10;&#9;commit High_NOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NOss_ArhGPA3_tmp;&#10;&#9;commit High = High_NOss_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_NOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_NObs_Arh_START" object="GPA3.System.TS.NObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_NObs_Arh_STOP" object="GPA3.System.TS.NObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NObs_Arh_Handler_START_GPA3" source-code="if (GPA3_NObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_NObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NObs_Arh_Handler_STOP_GPA3" source-code="if (GPA3_NObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 НОбс&quot;;&#10;&#9;commit High_NObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NObs_ArhGPA3_tmp;&#10;&#9;commit High = High_NObs_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_NObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VOss_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_VOss_Arh_START" object="GPA3.System.TS.VOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_VOss_Arh_STOP" object="GPA3.System.TS.VOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VOss_Arh_Handler_START_GPA3" source-code="if (GPA3_VOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_VOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VOss_Arh_Handler_STOP_GPA3" source-code="if (GPA3_VOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 ВОбс&quot;;&#10;&#9;commit High_VOss_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VOss_ArhGPA3_tmp;&#10;&#9;commit High = High_VOss_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_VOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VObs_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_VObs_Arh_START" object="GPA3.System.TS.VObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_VObs_Arh_STOP" object="GPA3.System.TS.VObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VObs_Arh_Handler_START_GPA3" source-code="if (GPA3_VObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_VObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VObs_Arh_Handler_STOP_GPA3" source-code="if (GPA3_VObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 ВОбс&quot;;&#10;&#9;commit High_VObs_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VObs_ArhGPA3_tmp;&#10;&#9;commit High = High_VObs_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_VObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_HP_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_HP_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_HP_Arh_START" object="GPA3.System.TS.HP_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_HP_Arh_STOP" object="GPA3.System.TS.HP_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="HP_Arh_Handler_START_GPA3" source-code="if (GPA3_HP_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_HP_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_HP_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="HP_Arh_Handler_STOP_GPA3" source-code="if (GPA3_HP_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 ХП&quot;;&#10;&#9;commit High_HP_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_HP_ArhGPA3_tmp;&#10;&#9;commit High = High_HP_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_HP_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_PM_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_PM_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_PM_Arh_START" object="GPA3.System.TS.PM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_PM_Arh_STOP" object="GPA3.System.TS.PM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="PM_Arh_Handler_START_GPA3" source-code="if (GPA3_PM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_PM_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_PM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="PM_Arh_Handler_STOP_GPA3" source-code="if (GPA3_PM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 Промывка&quot;;&#10;&#9;commit High_PM_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_PM_ArhGPA3_tmp;&#10;&#9;commit High = High_PM_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_PM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_KPK_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_KPK_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_KPK_Arh_START" object="GPA3.System.TS.KPK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_KPK_Arh_STOP" object="GPA3.System.TS.KPK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="KPK_Arh_Handler_START_GPA3" source-code="if (GPA3_KPK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_KPK_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_KPK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="KPK_Arh_Handler_STOP_GPA3" source-code="if (GPA3_KPK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 КПК&quot;;&#10;&#9;commit High_KPK_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_KPK_ArhGPA3_tmp;&#10;&#9;commit High = High_KPK_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_KPK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APK_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APK_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_APK_Arh_START" object="GPA3.System.TS.APK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_APK_Arh_STOP" object="GPA3.System.TS.APK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APK_Arh_Handler_START_GPA3" source-code="if (GPA3_APK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APK_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_APK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APK_Arh_Handler_STOP_GPA3" source-code="if (GPA3_APK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 АПК&quot;;&#10;&#9;commit High_APK_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APK_ArhGPA3_tmp;&#10;&#9;commit High = High_APK_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_APK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APM_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APM_ArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_APM_Arh_START" object="GPA3.System.TS.APM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_APM_Arh_STOP" object="GPA3.System.TS.APM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APM_Arh_Handler_START_GPA3" source-code="if (GPA3_APM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APM_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_APM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APM_Arh_Handler_STOP_GPA3" source-code="if (GPA3_APM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 АПМ&quot;;&#10;&#9;commit High_APM_ArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APM_ArhGPA3_tmp;&#10;&#9;commit High = High_APM_ArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_APM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_UserArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_UserArhGPA3_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA3_UserArh_START" object="GPA3.System.TS.UserArh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA3_UserArh_STOP" object="GPA3.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="UserArh_Handler_START_GPA3" source-code="if (GPA3_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA3_UserArh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="UserArh_Handler_STOP_GPA3" source-code="if (GPA3_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-13 Пользовательский&quot;;&#10;&#9;commit High_UserArhGPA3_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhGPA3_tmp;&#10;&#9;commit High = High_UserArhGPA3_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA3_UserArh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_AOss_Arh_START" object="GPA4.System.TS.AOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_AOss_Arh_STOP" object="GPA4.System.TS.AOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AOss_Arh_Handler_START_GPA4" source-code="if (GPA4_AOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_AOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AOss_Arh_Handler_STOP_GPA4" source-code="if (GPA4_AOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 АОсс&quot;;&#10;&#9;commit High_AOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AOss_ArhGPA4_tmp;&#10;&#9;commit High = High_AOss_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_AOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_AObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_AObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_AObs_Arh_START" object="GPA4.System.TS.AObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_AObs_Arh_STOP" object="GPA4.System.TS.AObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="AObs_Arh_Handler_START_GPA4" source-code="if (GPA4_AObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_AObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_AObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="AObs_Arh_Handler_STOP_GPA4" source-code="if (GPA4_AObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 АОбс&quot;;&#10;&#9;commit High_AObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_AObs_ArhGPA4_tmp;&#10;&#9;commit High = High_AObs_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_AObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_NOss_Arh_START" object="GPA4.System.TS.NOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_NOss_Arh_STOP" object="GPA4.System.TS.NOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NOss_Arh_Handler_START_GPA4" source-code="if (GPA4_NOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_NOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NOss_Arh_Handler_STOP_GPA4" source-code="if (GPA4_NOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 НОcс&quot;;&#10;&#9;commit High_NOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NOss_ArhGPA4_tmp;&#10;&#9;commit High = High_NOss_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_NOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_NObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_NObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_NObs_Arh_START" object="GPA4.System.TS.NObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_NObs_Arh_STOP" object="GPA4.System.TS.NObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="NObs_Arh_Handler_START_GPA4" source-code="if (GPA4_NObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_NObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_NObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="NObs_Arh_Handler_STOP_GPA4" source-code="if (GPA4_NObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 НОбс&quot;;&#10;&#9;commit High_NObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_NObs_ArhGPA4_tmp;&#10;&#9;commit High = High_NObs_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_NObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VOss_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_VOss_Arh_START" object="GPA4.System.TS.VOss_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_VOss_Arh_STOP" object="GPA4.System.TS.VOss_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VOss_Arh_Handler_START_GPA4" source-code="if (GPA4_VOss_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_VOss_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VOss_Arh_Handler_STOP_GPA4" source-code="if (GPA4_VOss_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 ВОбс&quot;;&#10;&#9;commit High_VOss_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VOss_ArhGPA4_tmp;&#10;&#9;commit High = High_VOss_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_VOss_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_VObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_VObs_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_VObs_Arh_START" object="GPA4.System.TS.VObs_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_VObs_Arh_STOP" object="GPA4.System.TS.VObs_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="VObs_Arh_Handler_START_GPA4" source-code="if (GPA4_VObs_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_VObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_VObs_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="VObs_Arh_Handler_STOP_GPA4" source-code="if (GPA4_VObs_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 ВОбс&quot;;&#10;&#9;commit High_VObs_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_VObs_ArhGPA4_tmp;&#10;&#9;commit High = High_VObs_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_VObs_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_HP_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_HP_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_HP_Arh_START" object="GPA4.System.TS.HP_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_HP_Arh_STOP" object="GPA4.System.TS.HP_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="HP_Arh_Handler_START_GPA4" source-code="if (GPA4_HP_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_HP_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_HP_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="HP_Arh_Handler_STOP_GPA4" source-code="if (GPA4_HP_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 ХП&quot;;&#10;&#9;commit High_HP_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_HP_ArhGPA4_tmp;&#10;&#9;commit High = High_HP_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_HP_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_PM_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_PM_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_PM_Arh_START" object="GPA4.System.TS.PM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_PM_Arh_STOP" object="GPA4.System.TS.PM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="PM_Arh_Handler_START_GPA4" source-code="if (GPA4_PM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_PM_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_PM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="PM_Arh_Handler_STOP_GPA4" source-code="if (GPA4_PM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 Промывка&quot;;&#10;&#9;commit High_PM_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_PM_ArhGPA4_tmp;&#10;&#9;commit High = High_PM_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_PM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_KPK_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_KPK_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_KPK_Arh_START" object="GPA4.System.TS.KPK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_KPK_Arh_STOP" object="GPA4.System.TS.KPK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="KPK_Arh_Handler_START_GPA4" source-code="if (GPA4_KPK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_KPK_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_KPK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="KPK_Arh_Handler_STOP_GPA4" source-code="if (GPA4_KPK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 КПК&quot;;&#10;&#9;commit High_KPK_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_KPK_ArhGPA4_tmp;&#10;&#9;commit High = High_KPK_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_KPK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APK_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APK_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_APK_Arh_START" object="GPA4.System.TS.APK_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_APK_Arh_STOP" object="GPA4.System.TS.APK_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APK_Arh_Handler_START_GPA4" source-code="if (GPA4_APK_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APK_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_APK_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APK_Arh_Handler_STOP_GPA4" source-code="if (GPA4_APK_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 АПК&quot;;&#10;&#9;commit High_APK_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APK_ArhGPA4_tmp;&#10;&#9;commit High = High_APK_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_APK_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_APM_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_APM_ArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_APM_Arh_START" object="GPA4.System.TS.APM_Arh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_APM_Arh_STOP" object="GPA4.System.TS.APM_Arh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="APM_Arh_Handler_START_GPA4" source-code="if (GPA4_APM_Arh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_APM_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_APM_Arh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="APM_Arh_Handler_STOP_GPA4" source-code="if (GPA4_APM_Arh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 АПМ&quot;;&#10;&#9;commit High_APM_ArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_APM_ArhGPA4_tmp;&#10;&#9;commit High = High_APM_ArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_APM_Arh_STOP.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:parameter name="Low_UserArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:parameter name="High_UserArhGPA4_tmp" type="uint64" direction="in" access-level="public"/>
+    <ct:subject-ref name="GPA4_UserArh_START" object="GPA4.System.TS.UserArh_START" const-access="false" aspected="false"/>
+    <ct:subject-ref name="GPA4_UserArh_STOP" object="GPA4.System.TS.UserArh_STOP" const-access="false" aspected="false"/>
+    <ct:handler name="UserArh_Handler_START_GPA4" source-code="if (GPA4_UserArh_START.PLCSignals.Value)&#10;{&#10;&#9;commit Low_UserArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;}">
+      <ct:trigger on="GPA4_UserArh_START.PLCSignals.Value" cause="change"/>
+    </ct:handler>
+    <ct:handler name="UserArh_Handler_STOP_GPA4" source-code="if (GPA4_UserArh_STOP.PLCSignals.Value)&#10;{&#10;&#9;commit setDescription.Value = &quot;ГПА-14 Пользовательский&quot;;&#10;&#9;commit High_UserArhGPA4_tmp = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Low_UserArhGPA4_tmp;&#10;&#9;commit High = High_UserArhGPA4_tmp;&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
+      <ct:trigger on="GPA4_UserArh_STOP.PLCSignals.Value" cause="change"/>
     </ct:handler>
     <ct:handler name="Hanlder_User_one" source-code="if (setUserAlarm.Value)&#10;{&#10;&#9;commit High = Variant.ToUint8(DateTime.UtcNow() + 18000000000,0);//Время после начала события - по + 18000000000,0 - 30 минут&#10;&#9;commit Low = Variant.ToUint8(DateTime.UtcNow() - 18000000000,0);//Время до начала события - по + 18000000000,0 - 30 минут&#10;&#9;commit setAlarm.Value = true;&#10;&#9;commit setAlarm.Value = false;&#10;}">
       <ct:trigger on="setUserAlarm" cause="change"/>

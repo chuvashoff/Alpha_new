@@ -2,13 +2,68 @@
   <srv:io-server name="Temporary_server" debug-output="false">
     <attribute type="unit.System.Attributes.Comment" value="Для временного использования и последующего копирования. Все элементы из данного временного сервера копируются в основной сервер, после чего данный сервер удаляется"/>
     <trei:unet-client name="UNET Client1" archives-path="./UNETClient" set-source-timestamp-when-quality-changed="true" dont-change-quality-at-archive-read="false" logging-required="false">
-      <trei:data-category-options name="DataCategory_KC_Arc" data-kind="archive-background-restore" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
-      <trei:data-category-options name="DataCategory_KC_NoArcAnalog" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
-      <trei:data-category-options name="DataCategory_KC_NoArcDiscrete" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
-      <trei:unet-server-link server="PLC_KC_1.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+      <trei:data-category-options name="DataCategory_GTU_Arc" data-kind="archive-background-restore" plc-update-rate="20" request-interval="35" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcAnalog" data-kind="operative" plc-update-rate="20" request-interval="470" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcDiscrete" data-kind="operative" plc-update-rate="20" request-interval="18" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GTU_1.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+      <trei:data-category-options name="DataCategory_GPA_Arc" data-kind="archive-background-restore" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcAnalog" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcDiscrete" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GPA_1.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
     </trei:unet-client>
-    <dp:ref-to module="PLC_KC_1.CPU.Tree">
+    <dp:ref-to module="PLC_GTU_1.CPU.Tree">
       <dp:deliver-with adapter="UNET Client1" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <dp:ref-to module="PLC_GPA_1.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client1" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <trei:unet-client name="UNET Client2" archives-path="./UNETClient" set-source-timestamp-when-quality-changed="true" dont-change-quality-at-archive-read="false" logging-required="false">
+      <trei:data-category-options name="DataCategory_GTU_Arc" data-kind="archive-background-restore" plc-update-rate="20" request-interval="35" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcAnalog" data-kind="operative" plc-update-rate="20" request-interval="470" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcDiscrete" data-kind="operative" plc-update-rate="20" request-interval="18" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GTU_2.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+      <trei:data-category-options name="DataCategory_GPA_Arc" data-kind="archive-background-restore" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcAnalog" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcDiscrete" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GPA_2.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+    </trei:unet-client>
+    <dp:ref-to module="PLC_GTU_2.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client2" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <dp:ref-to module="PLC_GPA_2.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client2" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <trei:unet-client name="UNET Client3" archives-path="./UNETClient" set-source-timestamp-when-quality-changed="true" dont-change-quality-at-archive-read="false" logging-required="false">
+      <trei:data-category-options name="DataCategory_GTU_Arc" data-kind="archive-background-restore" plc-update-rate="20" request-interval="35" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcAnalog" data-kind="operative" plc-update-rate="20" request-interval="470" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcDiscrete" data-kind="operative" plc-update-rate="20" request-interval="18" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GTU_3.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+      <trei:data-category-options name="DataCategory_GPA_Arc" data-kind="archive-background-restore" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcAnalog" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcDiscrete" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GPA_3.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+    </trei:unet-client>
+    <dp:ref-to module="PLC_GTU_3.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client3" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <dp:ref-to module="PLC_GPA_3.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client3" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <trei:unet-client name="UNET Client4" archives-path="./UNETClient" set-source-timestamp-when-quality-changed="true" dont-change-quality-at-archive-read="false" logging-required="false">
+      <trei:data-category-options name="DataCategory_GTU_Arc" data-kind="archive-background-restore" plc-update-rate="20" request-interval="35" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcAnalog" data-kind="operative" plc-update-rate="20" request-interval="470" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GTU_NoArcDiscrete" data-kind="operative" plc-update-rate="20" request-interval="18" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GTU_4.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+      <trei:data-category-options name="DataCategory_GPA_Arc" data-kind="archive-background-restore" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcAnalog" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:data-category-options name="DataCategory_GPA_NoArcDiscrete" data-kind="operative" plc-update-rate="100" request-interval="90" use-replication-for-requests-sync="false"/>
+      <trei:unet-server-link server="PLC_GPA_4.CPU.UnetServer" standby-mode="keep-connections-alive" timeout="1001" write-behavior-on-disconnect="dismiss-all" archive-read-with-bounds="true" archived-data-reading-mode="account-position-in-archive"/>
+    </trei:unet-client>
+    <dp:ref-to module="PLC_GTU_4.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client4" read-only="false" data-mapping-spec="all"/>
+    </dp:ref-to>
+    <dp:ref-to module="PLC_GPA_4.CPU.Tree">
+      <dp:deliver-with adapter="UNET Client4" read-only="false" data-mapping-spec="all"/>
     </dp:ref-to>
   </srv:io-server>
 </omx>

@@ -17,22 +17,22 @@
       </ct:handler>
     </ct:object>
     <ct:parameter name="ObjNam" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="КЦ-1"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="ГПА-11;ГПА-12;ГПА-13;ГПА-14"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="ObjAlg" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="KC1"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="GPA1;GPA2;GPA3;GPA4"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="ObjNum" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="1"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="4"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
     <ct:parameter name="SystemName" type="string" direction="out" access-level="public">
-      <attribute type="unit.System.Attributes.InitialValue" value="АСУТП Ковыктинского ГКМ"/>
+      <attribute type="unit.System.Attributes.InitialValue" value="Западно-Таркосалинское ГП"/>
       <attribute type="unit.Server.Attributes.InitialQuality" value="216"/>
       <attribute type="unit.Server.Attributes.Replicate" value="false"/>
     </ct:parameter>
@@ -50,30 +50,16 @@
     <ct:object name="Agregator_LessImportant_IOS" base-type="Types.MSG_Agregator.Agregator_LessImportant_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
     <ct:object name="Agregator_N_IOS" base-type="Types.MSG_Agregator.Agregator_N_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
     <ct:object name="Agregator_Repair_IOS" base-type="Types.MSG_Agregator.Agregator_Repair_IOS" aspect="Types.IOS_Aspect" access-level="public"/>
-    <ct:subject-ref name="_SNMP" object="Service.SNMP" const-access="false" aspected="false"/>
-    <ct:parameter name="Value" type="string" direction="out" access-level="public">
-      <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:1,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;Проверка1&quot;,&quot;Severity&quot;:1,&quot;Type&quot;:1}],&quot;Type&quot;:1}}"/>
-    </ct:parameter>
-    <ct:handler name="Handler_Value" source-code="commit Value = _SNMP.Value;">
-      <ct:trigger on="_SNMP.Value" cause="change"/>
-    </ct:handler>
-    <ct:parameter name="Value2" type="string" direction="out" access-level="public">
-      <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:1,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;Проверка1&quot;,&quot;Severity&quot;:1,&quot;Type&quot;:1}],&quot;Type&quot;:1}}"/>
-    </ct:parameter>
-    <ct:handler name="Handler_Value2" source-code="commit Value2 = _SNMP.Value2;">
-      <ct:trigger on="_SNMP.Value2" cause="change"/>
-    </ct:handler>
     <ct:object name="Diagnostic" access-level="public">
-      <ct:subject-ref name="_Database_Server-CDKS-1" object="Service.Modules.HistoryModule.Storages.Database_Server-CDKS-1.Database_Server-CDKS-1" const-access="false" aspected="false"/>
-      <ct:parameter name="Alarm_connectHistorian_Server-CDKS-1" type="bool" direction="out" access-level="public">
-        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА Server-CDKS-1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА Server-CDKS-1&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
+      <ct:subject-ref name="_Database" object="Service.Modules.HistoryModule.Storages.Database.Database" const-access="false" aspected="false"/>
+      <ct:parameter name="Alarm_connectHistorian" type="bool" direction="out" access-level="public">
+        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
       </ct:parameter>
-      <ct:bind source="_Database_Server-CDKS-1.Connected" target="Alarm_connectHistorian_Server-CDKS-1" action="set_all"/>
-      <ct:subject-ref name="_Database_Server-CDKS-2" object="Service.Modules.HistoryModule.Storages.Database_Server-CDKS-2.Database_Server-CDKS-2" const-access="false" aspected="false"/>
-      <ct:parameter name="Alarm_connectHistorian_Server-CDKS-2" type="bool" direction="out" access-level="public">
-        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА Server-CDKS-2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. НЕТ СВЯЗИ С СЕРВЕРОМ ИСТОРИИ НА Server-CDKS-2&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
+      <ct:bind source="_Database.Connected" target="Alarm_connectHistorian" action="set_all"/>
+      <ct:parameter name="Alarm_connectHistorian_ps90" type="bool" direction="out" access-level="public">
+        <attribute type="unit.Server.Attributes.Alarm" value="{&quot;Condition&quot;:{&quot;IsEnabled&quot;:&quot;true&quot;,&quot;Subconditions&quot;:[{&quot;AckStrategy&quot;:2,&quot;IsDeactivation&quot;:true,&quot;Message&quot;:&quot;. Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:2},{&quot;AckStrategy&quot;:2,&quot;IsEnabled&quot;:true,&quot;Message&quot;:&quot;. Отсутствует запись параметров в архив. ЭКСПЛУАТАЦИЯ ГТУ ЗАПРЕЩАЕТСЯ&quot;,&quot;Severity&quot;:40,&quot;Type&quot;:3}],&quot;Type&quot;:2}}"/>
       </ct:parameter>
-      <ct:bind source="_Database_Server-CDKS-2.Connected" target="Alarm_connectHistorian_Server-CDKS-2" action="set_all"/>
+      <ct:bind source="_Database.Connected" target="Alarm_connectHistorian_ps90" action="set_all"/>
     </ct:object>
   </ct:object>
 </omx>

@@ -1,5 +1,5 @@
 # import os
-import re
+# import re
 # import difflib
 # from string import Template
 # from my_func import *
@@ -21,6 +21,13 @@ def create_sl(text, str_check, str_check_block, par_config):
             elif str_ch in i and str_check_block in i and not (f'B{str_ch}' in i or f'{str_ch}Brk' in i) \
                     and i.find('[') > i.find(':='):
                 sl_tmp[i[:i.find(':=')].strip().replace('|', '_')] = int(i[i.rfind('[') + 1:i.rfind(']')])
+        # if i.startswith(str_check) and '(' in i and ')' in i:
+        #     tmp_str = i[:i.find('.')]
+        #     tmp_str = tmp_str[:tmp_str.find('(')]
+        #     # print(tmp_str, int(i[i.rfind('(') + 1:i.rfind(')')]))
+        #     sl_tmp[tmp_str] = int(i[i.rfind('(') + 1:i.rfind(')')])
+        # elif i.startswith(f'FAST|{str_check}') and str_check_block in i and '.Quality' not in i:
+        #     sl_tmp[i[:i.find(':=')].strip().replace('.Value', '')] = int(i[i.rfind('[') + 1:i.rfind(']')])
 
     sl_tmp = {key: value for key, value in sl_tmp.items() if f'FAST|{key}' not in sl_tmp}
     # В словаре sl_tmp лежит индекс массива: алг имя (в том числе FAST|+)
@@ -59,7 +66,24 @@ def create_sl_pz(text):
 
 
 def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_index, template_no_arc_index,
-                     pref_par, source):
+                     pref_par, source, sl_analys_quality: dict = '', sl_analys_quality_fast: dict = '', buff_size: int = 50):
+    # Объявляем темплейт для качества, пока тут локально
+    tmp_ind_no_arc_quality = '  <item Binding="Introduced">\n' \
+                             '    <node-path>$name_signal</node-path>\n' \
+                             '    <protocoltype>$type_signal</protocoltype>\n' \
+                             '    <index>$index</index>\n' \
+                             '    <with-quality>True</with-quality>\n' \
+                             '    <category>$data_category</category>\n' \
+                             '  </item>\n'
+    tmp_ind_arc_quality = '  <item Binding="Introduced">\n' \
+                          '    <node-path>$name_signal</node-path>\n' \
+                          '    <protocoltype>$type_signal</protocoltype>\n' \
+                          '    <index>$index</index>\n' \
+                          f'    <buffer-length>{buff_size}</buffer-length>\n' \
+                          '    <with-quality>True</with-quality>\n' \
+                          '    <archivation-period>1</archivation-period>\n' \
+                          '    <category>$data_category</category>\n' \
+                          '  </item>\n'
     sl_data_cat = {
         'real': 'Analog',
         'int': 'Analog',
@@ -76,7 +100,14 @@ def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_i
         tmp_sub_name = key[:key.find('[')]
         if tmp_i not in sl_local_par:
             continue
-        if 'FAST|' in sl_local_par[tmp_i] and re.fullmatch(r'Value', key[:key.find('[')]) and sl_global_fast.get(sl_local_par[tmp_i]):
+        a_check = sl_local_par[tmp_i][sl_local_par[tmp_i].find('|') + 1:]
+        if 'FAST' in sl_local_par[tmp_i] and re.fullmatch(r'Value', key[:key.find('[')]) \
+                and f'FAST_{a_check}.Value' in sl_analys_quality_fast and f'FAST_{a_check }.Quality' in sl_analys_quality_fast:
+            a = a_check
+            temp =  tmp_ind_arc_quality
+            pref_arc = 'Arc'
+            value[0] = sl_analys_quality_fast.get(f'FAST_{a_check}.Value')
+        elif 'FAST|' in sl_local_par[tmp_i] and re.fullmatch(r'Value', key[:key.find('[')]) and sl_global_fast.get(sl_local_par[tmp_i]):
             value[0] = sl_global_fast[sl_local_par[tmp_i]]
             a = sl_local_par[tmp_i][sl_local_par[tmp_i].find('|')+1:]
             temp = template_arc_index
@@ -85,6 +116,15 @@ def create_group_par(sl_global_par, sl_local_par, sl_global_fast, template_arc_i
             a = sl_local_par[tmp_i][sl_local_par[tmp_i].find('|')+1:]
             temp = template_no_arc_index
             pref_arc = f'NoArc{sl_data_cat[value[1]]}'
+            if re.fullmatch(r'Value', key[:key.find('[')]):
+                if a in sl_analys_quality:
+                    # print(f'У {a}.{tmp_sub_name} изменяется индекс с {value[0]} на {sl_analys_quality.get(a)}')
+                    value[0] = sl_analys_quality.get(a)
+                if f'{a}.Value' in sl_analys_quality and f'{a}.Quality' in sl_analys_quality:
+                    # print(a, sl_analys_quality.get(f'{a}.Value'))
+                    value[0] = sl_analys_quality.get(f'{a}.Value')
+                    temp = tmp_ind_no_arc_quality
+
         s_out += Template(temp).substitute(name_signal=f'{pref_par}.{a}.{tmp_sub_name}', type_signal=sl_type[value[1]],
                                            index=value[0], data_category=f'DataCategory_{source}_{pref_arc}')
     return s_out
@@ -364,9 +404,21 @@ def create_group_drv(drv_sl, template_no_arc_index, source, sl_global_fast, temp
 
 def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts, sl_sig_wrn, sl_pz, sl_cpu_spec,
                     sl_for_diag, sl_cpu_drv_signal, sl_grh, sl_sig_alr, choice_tr, sl_cpu_drv_iec,
-                    sl_ai_config, sl_ae_config, sl_di_config, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
+                    sl_ai_config: dict, sl_ae_config: dict, sl_di_config: dict, sl_set_config, sl_btn_config, sl_im_config, sl_cpu_path,
                     buff_size, sl_cpu_drv_signal_with_imit, sl_cpu_cdo, sl_cpu_res: dict, sl_add_cpu_mko: dict,
-                    sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict, sl_need_add_pars_struct: dict):
+                    sl_pru_config: dict, sl_need_add_pars: dict, sl_cpu_type_im: dict, sl_need_add_pars_struct: dict,
+                    sl_cpu_struct_number: dict[str, dict], sl_type_cpu_from_settings: dict):
+    sl_type_cpu_from_settings_signal_name_file = {
+        name_cpu: {
+            name_struct: param_struct.get('Signal_file', '') for name_struct, param_struct in sl_type_struct.items()
+            if param_struct.get('Signal_file')
+        }
+        for name_cpu, sl_type_struct in sl_type_cpu_from_settings.items()}
+    # print(sl_type_cpu_from_settings_signal_name_file)
+    # set_signal_file_from_special = set()
+    # for name_cpu in sl_type_cpu_from_settings_signal_name_file:
+    #     for _, file_name_special in sl_type_cpu_from_settings_signal_name_file[name_cpu].items():
+    #         set_signal_file_from_special.add(file_name_special)
 
     tmp_ind_arc = '  <item Binding="Introduced">\n' \
                   '    <node-path>$name_signal</node-path>\n' \
@@ -382,57 +434,87 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                      '    <index>$index</index>\n' \
                      '    <category>$data_category</category>\n' \
                      '  </item>\n'
-    lst_ae = tuple()
-    lst_ai = tuple()
-    lst_di = tuple()
-    lst_ai_di = tuple()
-    lst_im1x0 = tuple()
-    lst_im1x1 = tuple()
-    lst_im1x2 = tuple()
-    lst_im1x2pz = tuple()
-    lst_im2x2 = tuple()
-    lst_im_ao = tuple()
-    lst_btn = tuple()
-    lst_pz = tuple()
-    lst_set = tuple()
-    for file in ('Signal_ae', 'Signal_ai', 'Signal_di', 'Signal_ai_di', 'Signal_im1x0', 'Signal_im1x1', 'Signal_im1x2',
-                 'Signal_im2x2', 'Signal_imao', 'Signal_btn', 'Signal_pz', 'Signal_set', 'Signal_im1x2pz'):
-        if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'{file}')):
-            with open(os.path.join('Template_Alpha', 'Systemach', f'{file}'), 'r', encoding='UTF-8') as f_signal:
+
+    dict_signal_cpu_special = {name_cpu: {tipe: list() for tipe in sl_type_struct}
+                               for name_cpu, sl_type_struct in sl_type_cpu_from_settings_signal_name_file.items()}
+    for name_cpu, sl_type_struct in sl_type_cpu_from_settings_signal_name_file.items():
+        for name_struct, file_name_special in sl_type_struct.items():
+            if  os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'{file_name_special}')) and \
+                    os.path.isfile(os.path.join('Template_Alpha', 'Systemach', file_name_special)):
+                with open(os.path.join('Template_Alpha', 'Systemach', f'{file_name_special}'), 'r', encoding='UTF-8') as f_signal_special:
+                    for line in f_signal_special:
+                        if '#' in line:
+                            continue
+                        if not line.strip():
+                            break
+                        dict_signal_cpu_special[name_cpu][name_struct] += (line.strip(),)
+
+
+    dict_signal = dict()
+    for file_signal in os.listdir(os.path.join('Template_Alpha', 'Systemach')):
+        if file_signal.startswith('Signal_') and os.path.isfile(os.path.join('Template_Alpha', 'Systemach', file_signal)):
+            # print(file_signal.replace('Signal_', 'lst_'))
+            name_lst = file_signal.replace('Signal_', '').lower()
+            if name_lst not in dict_signal:
+                dict_signal[name_lst] = tuple()
+            with open(os.path.join('Template_Alpha', 'Systemach', f'{file_signal}'), 'r', encoding='UTF-8') as f_signal:
                 for line in f_signal:
                     if '#' in line:
                         continue
                     if not line.strip():
                         break
-                    if file == 'Signal_ae':
-                        lst_ae += (line.strip(),)
-                    elif file == 'Signal_ai':
-                        lst_ai += (line.strip(),)
-                    elif file == 'Signal_di':
-                        lst_di += (line.strip(),)
-                    elif file == 'Signal_ai_di':
-                        lst_ai_di += (line.strip(),)
-                    elif file == 'Signal_im1x0':
-                        lst_im1x0 += (line.strip(),)
-                    elif file == 'Signal_im1x1':
-                        lst_im1x1 += (line.strip(),)
-                    elif file == 'Signal_im1x2':
-                        lst_im1x2 += (line.strip(),)
-                    elif file == 'Signal_im1x2pz':
-                        lst_im1x2pz += (line.strip(),)
-                    elif file == 'Signal_im2x2':
-                        lst_im2x2 += (line.strip(),)
-                    elif file == 'Signal_imao':
-                        lst_im_ao += (line.strip(),)
-                    elif file == 'Signal_btn':
-                        lst_btn += (line.strip(),)
-                    elif file == 'Signal_pz':
-                        lst_pz += (line.strip(),)
-                    elif file == 'Signal_set':
-                        lst_set += (line.strip(),)
-        else:
-            print(f'Не найден файл сигналов Template_Alpha/Systemach/{file}, '
-                  'сигналы в карту адресов добавлены не будут')
+                    dict_signal[name_lst] += (line.strip(),)
+    # lst_ae = tuple()
+    # lst_ai = tuple()
+    # lst_di = tuple()
+    # lst_ai_di = tuple()
+    # lst_im1x0 = tuple()
+    # lst_im1x1 = tuple()
+    # lst_im1x2 = tuple()
+    # lst_im1x2pz = tuple()
+    # lst_im2x2 = tuple()
+    # lst_im_ao = tuple()
+    # lst_btn = tuple()
+    # lst_pz = tuple()
+    # lst_set = tuple()
+    # for file in ('Signal_ae', 'Signal_ai', 'Signal_di', 'Signal_ai_di', 'Signal_im1x0', 'Signal_im1x1', 'Signal_im1x2',
+    #              'Signal_im2x2', 'Signal_imao', 'Signal_btn', 'Signal_pz', 'Signal_set', 'Signal_im1x2pz'):
+    #     if os.path.exists(os.path.join('Template_Alpha', 'Systemach', f'{file}')):
+    #         with open(os.path.join('Template_Alpha', 'Systemach', f'{file}'), 'r', encoding='UTF-8') as f_signal:
+    #             for line in f_signal:
+    #                 if '#' in line:
+    #                     continue
+    #                 if not line.strip():
+    #                     break
+    #                 if file == 'Signal_ae':
+    #                     lst_ae += (line.strip(),)
+    #                 elif file == 'Signal_ai':
+    #                     lst_ai += (line.strip(),)
+    #                 elif file == 'Signal_di':
+    #                     lst_di += (line.strip(),)
+    #                 elif file == 'Signal_ai_di':
+    #                     lst_ai_di += (line.strip(),)
+    #                 elif file == 'Signal_im1x0':
+    #                     lst_im1x0 += (line.strip(),)
+    #                 elif file == 'Signal_im1x1':
+    #                     lst_im1x1 += (line.strip(),)
+    #                 elif file == 'Signal_im1x2':
+    #                     lst_im1x2 += (line.strip(),)
+    #                 elif file == 'Signal_im1x2pz':
+    #                     lst_im1x2pz += (line.strip(),)
+    #                 elif file == 'Signal_im2x2':
+    #                     lst_im2x2 += (line.strip(),)
+    #                 elif file == 'Signal_imao':
+    #                     lst_im_ao += (line.strip(),)
+    #                 elif file == 'Signal_btn':
+    #                     lst_btn += (line.strip(),)
+    #                 elif file == 'Signal_pz':
+    #                     lst_pz += (line.strip(),)
+    #                 elif file == 'Signal_set':
+    #                     lst_set += (line.strip(),)
+    #     else:
+    #         print(f'Не найден файл сигналов Template_Alpha/Systemach/{file}, '
+    #               'сигналы в карту адресов добавлены не будут')
 
     sl_module_diag_sig = {}
     sl_module_diag_sig_conform = {}
@@ -440,8 +522,11 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
     if os.path.exists(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha', 'Systemach', 'Module_diag_signal')):
         for file in os.listdir(os.path.join(os.path.abspath(os.curdir), 'Template_Alpha',
                                             'Systemach', 'Module_diag_signal')):
-            sl_module_diag_sig[file] = tuple()
-            sl_module_diag_sig_conform[file] = {}
+            if not file.endswith('_U2'):
+                continue
+            module_name = file.replace('_U2', '')
+            sl_module_diag_sig[module_name] = tuple()
+            sl_module_diag_sig_conform[module_name] = {}
             with open(os.path.join('Template_Alpha', 'Systemach', 'Module_diag_signal', file),
                       'r', encoding='UTF-8') as f_signal:
                 for line in f_signal:
@@ -450,13 +535,13 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                     if not line.strip():
                         break
                     if ':' not in line.strip():
-                        sl_module_diag_sig[file] += (line.strip(),)
+                        sl_module_diag_sig[module_name] += (line.strip(),)
                     else:
                         s = line.strip()
                         key = s[:s.find(':')].strip()
                         value = s[s.find(':')+1:].strip()
-                        sl_module_diag_sig[file] += (key,)
-                        sl_module_diag_sig_conform[file].update({key: value})
+                        sl_module_diag_sig[module_name] += (key,)
+                        sl_module_diag_sig_conform[module_name].update({key: value})
     else:
         print(f'Не найдена папка сигналов модулей Template_Alpha/Systemach/Module_diag_signal, '
               'сигналы модулей не будут добавлены в карту адресов')
@@ -540,6 +625,12 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
             sl_global_pru = {}
             sl_add_par = {}
             sl_add_par_struct = {}
+            sl_for_analysis_quality = {
+                'AI|': {},
+                'AE|': {},
+                'DI|': {},
+                'FAST|': {}
+            }
 
             if 'ТР' in sl_cpu_spec.get(line_source[0], 'бла') and os.path.exists(os.path.join('Template_Alpha', 'TR',
                                                                                               f'TR_par_{choice_tr}')):
@@ -601,83 +692,125 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                             sl_sar_tun[f"{line.strip().split(';')[0].lower()}.Reload"] = line.strip().split(';')[1]
 
             # Если есть файл аналогов
-            if sl_ai_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
-                with open(os.path.join(line_source[1], '0_par_A.st'), 'rt') as f_par_a:
-                    text = f_par_a.read().split('\n')
-                sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|', par_config=sl_ai_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_ai = {num: v for num, v in
+                         enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('AI', tuple()))}
+            # if sl_ai_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_A.st')):
+            #     with open(os.path.join(line_source[1], '0_par_A.st'), 'rt') as f_par_a:
+            #         text = f_par_a.read().split('\n')
+            #     sl_tmp_ai = create_sl(text, 'AI_', 'A_INP|', par_config=sl_ai_config.get(line_source[0], tuple()))
 
             # Если есть файл расчётных
-            if sl_ae_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
-                with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
-                    text = f_par_evl.read().split('\n')
-                sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_ae = {num: v for num, v in
+                         enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('AE', tuple()))}
+            # if sl_ae_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_Evl.st')):
+            #     with open(os.path.join(line_source[1], '0_par_Evl.st'), 'rt') as f_par_evl:
+            #         text = f_par_evl.read().split('\n')
+            #     sl_tmp_ae = create_sl(text, 'AE_', 'A_EVL|', par_config=sl_ae_config.get(line_source[0], tuple()))
 
             # Если есть файл дискретных
-            if sl_di_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
-                with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
-                    text = f_par_d.read().split('\n')
-                sl_tmp_di = create_sl(text, 'DI_', 'D_INP|', par_config=sl_di_config.get(line_source[0], tuple()))
-                sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|', par_config=sl_di_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_di = {num: v for num, v in
+                         enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('DI', tuple()))}
+            sl_tmp_ai_di = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('DI_AI', tuple()))}
+            # if sl_di_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_par_D.st')):
+            #     with open(os.path.join(line_source[1], '0_par_D.st'), 'rt') as f_par_d:
+            #         text = f_par_d.read().split('\n')
+            #     sl_tmp_di = create_sl(text, 'DI_', 'D_INP|', par_config=sl_di_config.get(line_source[0], tuple()))
+            #     sl_tmp_ai_di = create_sl(text, 'DI_', 'D_INP_AI|', par_config=sl_di_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x0
-            if {'IM1x0', 'IM1x0inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
-                with open(os.path.join(line_source[1], '0_IM_1x0.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im1x0, set_cnt_im1x0 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im1x0 = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х0', tuple()))}
+            set_cnt_im1x0 = set(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х0_CNT', tuple()))
+            # if {'IM1x0', 'IM1x0inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x0.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_1x0.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im1x0, set_cnt_im1x0 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x1
-            if {'IM1x1', 'IM1x1inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x1.st')):
-                with open(os.path.join(line_source[1], '0_IM_1x1.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im1x1, set_cnt_im1x1 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im1x1 = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х1', tuple()))}
+            set_cnt_im1x1 = set(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х1_CNT', tuple()))
+            # if {'IM1x1', 'IM1x1inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x1.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_1x1.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im1x1, set_cnt_im1x1 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x2
-            if {'IM1x2', 'IM1x2inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2.st')):
-                with open(os.path.join(line_source[1], '0_IM_1x2.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im1x2, set_cnt_im1x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im1x2 = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х2', tuple()))}
+            set_cnt_im1x2 = set(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х2_CNT', tuple()))
+            # if {'IM1x2', 'IM1x2inv'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_1x2.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im1x2, set_cnt_im1x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_1x2pz
-            if {'IM1x2pz'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2pz.st')):
-                with open(os.path.join(line_source[1], '0_IM_1x2pz.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im1x2pz, set_cnt_im1x2pz = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im1x2pz = {num: v for num, v in
+                              enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х2пз', tuple()))}
+            set_cnt_im1x2pz = set(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ1Х2пз_CNT', tuple()))
+            # if {'IM1x2pz'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_1x2pz.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_1x2pz.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im1x2pz, set_cnt_im1x2pz = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_2x2
-            if {'IM2x2', 'IM2x4', 'IM2x2PCH'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_2x2.st')):
-                with open(os.path.join(line_source[1], '0_IM_2x2.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im2x2, set_cnt_im2x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im2x2 = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ2Х2', tuple()))}
+            set_cnt_im2x2 = set(sl_cpu_struct_number.get(line_source[0], {}).get('ИМ2Х2_CNT', tuple()))
+            # if {'IM2x2', 'IM2x4', 'IM2x2PCH'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_2x2.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_2x2.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im2x2, set_cnt_im2x2 = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл ИМ_АО
-            if {'IM_AO'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_AO.st')):
-                with open(os.path.join(line_source[1], '0_IM_AO.st'), 'rt') as f_im:
-                    text = f_im.read().split('\n')
-                sl_tmp_im_ao, bla_ = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_im_ao = {num: v for num, v in
+                            enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('ИМАО', tuple()))}
+            # if {'IM_AO'} & sl_cpu_type_im.get(line_source[0], set()) and os.path.exists(os.path.join(line_source[1], '0_IM_AO.st')):
+            #     with open(os.path.join(line_source[1], '0_IM_AO.st'), 'rt') as f_im:
+            #         text = f_im.read().split('\n')
+            #     sl_tmp_im_ao, bla_ = create_sl_im(text, par_config=sl_im_config.get(line_source[0], tuple()))
 
             # Если есть файл кнопок
-            if sl_btn_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_BTN.st')):
-                with open(os.path.join(line_source[1], '0_BTN.st'), 'rt') as f_btn:
-                    text = f_btn.read().split('\n')
-                tuple_btn_config = sl_btn_config.get(line_source[0], tuple())
-                for i in text:
-                    if 'BTN_' in i and '(' in i:
-                        a = i.split(',')[0]
-                        par_btn = a[:a.find('(')].strip()
-                        if par_btn in tuple_btn_config:
-                            sl_tmp_btn[int(a[a.find('(')+1:].strip())] = par_btn
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_btn = {num: v for num, v in
+                         enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('BTN', tuple()))}
+            # if sl_btn_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_BTN.st')):
+            #     with open(os.path.join(line_source[1], '0_BTN.st'), 'rt') as f_btn:
+            #         text = f_btn.read().split('\n')
+            #     tuple_btn_config = sl_btn_config.get(line_source[0], tuple())
+            #     for i in text:
+            #         if 'BTN_' in i and '(' in i:
+            #             a = i.split(',')[0]
+            #             par_btn = a[:a.find('(')].strip()
+            #             if par_btn in tuple_btn_config:
+            #                 sl_tmp_btn[int(a[a.find('(')+1:].strip())] = par_btn
 
             # Если есть файл защит PZ
-            if os.path.exists(os.path.join(line_source[1], '0_PZ.st')):
-                with open(os.path.join(line_source[1], '0_PZ.st'), 'rt') as f_pz:
-                    text = f_pz.read().split('\n')
-                set_tmp_alr = create_sl_pz(text)
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            set_tmp_alr = set(sl_cpu_struct_number.get(line_source[0], {}).get('Защиты', tuple()))
+            # if os.path.exists(os.path.join(line_source[1], '0_PZ.st')):
+            #     with open(os.path.join(line_source[1], '0_PZ.st'), 'rt') as f_pz:
+            #         text = f_pz.read().split('\n')
+            #     set_tmp_alr = create_sl_pz(text)
 
             # Если есть файл уставок
-            if sl_set_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
-                with open(os.path.join(line_source[1], '0_Par_Set.st'), 'rt') as f_set:
-                    text = f_set.read().split('\n')
-                sl_tmp_set = create_sl(text, 'SP_', 'A_SET|', par_config=sl_set_config.get(line_source[0], tuple()))
+            # sl_cpu_struct_number {cpu: тип структуры: кортеж экземпляров в порядке их объявления в конфигураторе}
+            sl_tmp_set = {num: v for num, v in
+                         enumerate(sl_cpu_struct_number.get(line_source[0], {}).get('SET', tuple()))}
+            # if sl_set_config.get(line_source[0]) and os.path.exists(os.path.join(line_source[1], '0_Par_Set.st')):
+            #     with open(os.path.join(line_source[1], '0_Par_Set.st'), 'rt') as f_set:
+            #         text = f_set.read().split('\n')
+            #     sl_tmp_set = create_sl(text, 'SP_', 'A_SET|', par_config=sl_set_config.get(line_source[0], tuple()))
 
             # if os.path.exists(os.path.join(line_source[1], 'base.csv')):
             #     with open(os.path.join(line_source[1], 'base.csv'), 'rt') as f_global:
@@ -783,6 +916,25 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                             if tmp_var.replace('|', '_', 1) in sl_pru_config[line_source[0]]:
                                 index_par = current_dict_tag.get('Offset')
                                 sl_global_pru[tmp_var.replace('|', '_', 1)] = [index_par, current_dict_tag.get('Type')]
+
+                        for prefics, sl_config_pars in {
+                            'AI|': sl_ai_config.get(line_source[0], ''),
+                            'AE|': sl_ae_config.get(line_source[0], ''),
+                            'DI|': sl_di_config.get(line_source[0], ''),
+                            'FAST|': tuple('FAST_' + item for t in (sl_ai_config.get('KC', ''), sl_ae_config.get('KC', ''), sl_di_config.get('KC', '')) for item in t)
+                        }.items():
+                            if current_dict_tag.get('Name', '').startswith(prefics) \
+                                    and current_dict_tag.get('Offset') and current_dict_tag.get('Type'):
+                                name_tmp = current_dict_tag.get('Name', '').replace('|','_', 1)
+                                # Определяем по паттерну, что тег заканчивается на Value или Quality
+                                pattern = re.compile(r'^([^.]+)\.(Value|Quality)$')
+                                match = pattern.match(name_tmp)
+                                if match:
+                                    prefix = match.group(1)
+                                    if prefix in sl_config_pars:
+                                        sl_for_analysis_quality[prefics][name_tmp] = current_dict_tag.get('Offset')
+                                if name_tmp in sl_config_pars:
+                                    sl_for_analysis_quality[prefics][name_tmp] = current_dict_tag.get('Offset')
 
                         for pref_tag, struct_tag in {
                             'A_INP|': sl_global_ai,
@@ -990,8 +1142,8 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                                 # print(tmp_var, index_par, type_sig)
                                 sl_add_par[f'System.Pars.{tmp_var}'] = (index_par, type_sig)
 
-                        if 'FAST|' in current_dict_tag.get('Name', '') and current_dict_tag.get('Archive', '') == 'false':
-                            pass
+                        if current_dict_tag.get('Name', '').startswith('FAST|') and current_dict_tag.get('Archive', '') == 'false':
+                            print(f"ОШИБКА: У параметра {current_dict_tag.get('Name')} не установлен параметр архивации")
                             # ???
                             # print(f"Ошибка: В контроллере {line_source[0]} "
                             #       f"у переменной {current_dict_tag.get('Name', '')} не установлена архивация")
@@ -1002,7 +1154,8 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                             #                    f"не установлена архивация\n")
                         if current_dict_tag.get('Offset') and current_dict_tag.get('Archive', '') != 'false' \
                                 and current_dict_tag.get('Archive count', '') != '0' \
-                                and 'FAST|' in current_dict_tag.get('Name', ''):
+                                and current_dict_tag.get('Name', '').startswith('FAST|') \
+                                and not current_dict_tag.get('Type', '').endswith('_q'):
                             tmp_var = current_dict_tag.get('Name').replace('FAST|', '')
                             index_par = current_dict_tag.get('Offset')
                             # В словаре sl_global_fast лежит  алг имя(FAST|): индекс переменной
@@ -1018,8 +1171,14 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
             # В словаре sl_global_ai лежит подимя[индекс массива]: [индекс переменной, тип переменной(I, B, R)]
             # print("sl_global_ai", sl_global_ai)
             # print(lst_ai)
-            sl_global_ai = {key: value for key, value in sl_global_ai.items() if key[:key.find('[')] in lst_ai}
-            sl_global_ae = {key: value for key, value in sl_global_ae.items() if key[:key.find('[')] in lst_ae}
+            signal_ai_check = dict_signal_cpu_special.get(line_source[0],{}).get('AI', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('ai', '')
+            sl_global_ai = {key: value for key, value in sl_global_ai.items() if key[:key.find('[')] in signal_ai_check}
+
+            signal_ae_check = dict_signal_cpu_special.get(line_source[0], {}).get('AE', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('ae', '')
+            sl_global_ae = {key: value for key, value in sl_global_ae.items() if key[:key.find('[')] in signal_ae_check}
+
             for key, value in sl_global_di.items():
                 if 'ValueAlg' == key[:key.find('[')]:
                     var_ = sl_tmp_di.get(int(key[key.find('[')+1:key.find(']')]), 'bla')
@@ -1031,17 +1190,53 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                     if f"DI_{var_[var_.find('_')+1:]}" in sl_sig_wrn.get(line_source[0], 'бла'):
                         sl_wrn_di[f"DI_{var_[var_.find('_')+1:]}"] = value
 
-            sl_global_di = {key: value for key, value in sl_global_di.items() if key[:key.find('[')] in lst_di}
-            sl_global_ai_di = {key: value for key, value in sl_global_ai_di.items() if key[:key.find('[')] in lst_ai_di}
-            sl_global_im1x0 = {key: value for key, value in sl_global_im1x0.items() if key[:key.find('[')] in lst_im1x0}
-            sl_global_im1x1 = {key: value for key, value in sl_global_im1x1.items() if key[:key.find('[')] in lst_im1x1}
-            sl_global_im1x2 = {key: value for key, value in sl_global_im1x2.items() if key[:key.find('[')] in lst_im1x2}
-            sl_global_im1x2pz = {key: value for key, value in sl_global_im1x2pz.items() if key[:key.find('[')] in lst_im1x2pz}
-            sl_global_im2x2 = {key: value for key, value in sl_global_im2x2.items() if key[:key.find('[')] in lst_im2x2}
-            sl_global_im_ao = {key: value for key, value in sl_global_im_ao.items() if key[:key.find('[')] in lst_im_ao}
-            sl_global_btn = {key: value for key, value in sl_global_btn.items() if key[:key.find('[')] in lst_btn}
-            sl_global_pz = {key: value for key, value in sl_global_pz.items() if key[:key.find('[')] in lst_pz}
-            sl_global_set = {key: value for key, value in sl_global_set.items() if key[:key.find('[')] in lst_set}
+            signal_di_check = dict_signal_cpu_special.get(line_source[0], {}).get('DI', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('di', '')
+            sl_global_di = {key: value for key, value in sl_global_di.items() if key[:key.find('[')] in signal_di_check}
+
+            signal_di_ai_check = dict_signal_cpu_special.get(line_source[0], {}).get('DI_AI', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('ai_di', '')
+            sl_global_ai_di = {key: value for key, value in sl_global_ai_di.items() if key[:key.find('[')] in signal_di_ai_check}
+
+            signal_im1x0_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х0', list()) \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('im1x0', list())
+            signal_im1x0_check.extend(dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х0и', list()) )
+            sl_global_im1x0 = {key: value for key, value in sl_global_im1x0.items() if key[:key.find('[')] in set(signal_im1x0_check)}
+
+            signal_im1x1_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х1', list()) \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('im1x1', list())
+            signal_im1x1_check.extend(dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х1и', list()))
+            sl_global_im1x1 = {key: value for key, value in sl_global_im1x1.items() if key[:key.find('[')] in set(signal_im1x1_check)}
+
+            signal_im1x2_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х2', list()) \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('im1x2', list())
+            signal_im1x2_check.extend(dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х2и', list()))
+            sl_global_im1x2 = {key: value for key, value in sl_global_im1x2.items() if key[:key.find('[')] in set(signal_im1x2_check)}
+
+            signal_im1x2pz_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМ1Х2пз', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('im1x2pz', '')
+            sl_global_im1x2pz = {key: value for key, value in sl_global_im1x2pz.items() if key[:key.find('[')] in signal_im1x2pz_check}
+
+            signal_im2x2_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМ2Х2', list()) \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('im2x2', list())
+            signal_im2x2_check.extend(dict_signal_cpu_special.get(line_source[0], {}).get('ИМ2Х2с', list()))
+            signal_im2x2_check.extend(dict_signal_cpu_special.get(line_source[0], {}).get('ИМ2Х2ПЧ', list()))
+            sl_global_im2x2 = {key: value for key, value in sl_global_im2x2.items() if key[:key.find('[')] in set(signal_im2x2_check)}
+
+            signal_im_ao_check = dict_signal_cpu_special.get(line_source[0], {}).get('ИМАО', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('imao', '')
+            sl_global_im_ao = {key: value for key, value in sl_global_im_ao.items() if key[:key.find('[')] in signal_im_ao_check}
+
+            signal_btn_check = dict_signal_cpu_special.get(line_source[0], {}).get('BTN', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('btn', '')
+            sl_global_btn = {key: value for key, value in sl_global_btn.items() if key[:key.find('[')] in signal_btn_check}
+
+            sl_global_pz = {key: value for key, value in sl_global_pz.items() if key[:key.find('[')] in dict_signal.get('pz', '')}
+
+            signal_set_check = dict_signal_cpu_special.get(line_source[0], {}).get('SET', '') \
+                if dict_signal_cpu_special.get(line_source[0]) else dict_signal.get('set', '')
+            sl_global_set = {key: value for key, value in sl_global_set.items() if key[:key.find('[')] in signal_set_check}
+
             # отсюда и далее до нар ориентируемся на то, что есть в конфигураторе, так как в проекте может быть "мусор"
             # в данных словарях лежит alg имя: [индекс переменной, тип переменной(I, B, R)]
             sl_global_alg = {key: value for key, value in sl_global_alg.items()
@@ -1073,22 +1268,25 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
             # Обработка и запись в карту аналогов
             if sl_global_ai and sl_tmp_ai:
                 s_all += create_group_par(sl_global_ai, sl_tmp_ai, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
-                                          'AI', line_source[0])
+                                          'AI', line_source[0], sl_for_analysis_quality.get('AI|', ''),
+                                          sl_for_analysis_quality.get('FAST|', ''), buff_size=buff_size)
 
             # Обработка и запись в карту расчётных
             if sl_global_ae and sl_tmp_ae:
                 s_all += create_group_par(sl_global_ae, sl_tmp_ae, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
-                                          'AE', line_source[0])
+                                          'AE', line_source[0], sl_for_analysis_quality.get('AE|', ''),
+                                          sl_for_analysis_quality.get('FAST|', ''), buff_size=buff_size)
 
             # Обработка и запись в карту дискретных
             if sl_global_di and sl_tmp_di:
                 s_all += create_group_par(sl_global_di, sl_tmp_di, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
-                                          'DI', line_source[0])
+                                          'DI', line_source[0], sl_for_analysis_quality.get('DI|', ''),
+                                          sl_for_analysis_quality.get('FAST|', ''), buff_size=buff_size)
 
             # Обработка и запись в карту дискретных аналогов (ai_di)
             if sl_global_ai_di and sl_tmp_ai_di:
                 s_all += create_group_par(sl_global_ai_di, sl_tmp_ai_di, sl_global_fast, tmp_ind_arc, tmp_ind_no_arc,
-                                          'DI', line_source[0])
+                                          'DI', line_source[0], sl_for_analysis_quality.get('DI|', ''))
 
             # Обработка и запись в карту ИМ1x0
 
@@ -1161,8 +1359,8 @@ def create_index_u2(tuple_all_cpu, sl_sig_alg, sl_sig_mod, sl_sig_ppu, sl_sig_ts
                 s_all += create_group_system_sig('WRN', sl_global_wrn, tmp_ind_no_arc, line_source[0])
 
             # Обработка и запись в карту Защит(PZ)
-            if sl_global_pz and line_source[0] in sl_pz:
-                s_all += create_group_pz(sl_global_pz, lst_pz, sl_pz[line_source[0]], tmp_ind_no_arc,
+            if sl_global_pz and line_source[0] in sl_pz and dict_signal.get('pz'):
+                s_all += create_group_pz(sl_global_pz, dict_signal.get('pz', ''), sl_pz[line_source[0]], tmp_ind_no_arc,
                                          line_source[0])
 
             # Обработка и запись в карту уставок
